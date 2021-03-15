@@ -11,7 +11,7 @@ public class Test {
 	public String test() {
 		System.out.println("테스트");
 
-		return "test";
+		return "/mypage/mypage_prod/mypage_prod_form";
 	}
 	
 
