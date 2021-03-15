@@ -9,7 +9,8 @@ public class Test {
 
 	@RequestMapping(value="test", method= {RequestMethod.GET, RequestMethod.POST})
 	public String test() {
-		System.out.println("/hellospring/hello");
+		System.out.println("테스트");
+		
 		return "test";
 	}
 }
