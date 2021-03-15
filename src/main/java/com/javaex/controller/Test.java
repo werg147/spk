@@ -11,7 +11,7 @@ public class Test {
 	public String test() {
 		System.out.println("테스트");
 		System.out.println("테스트 장세림");
-		
+		System.out.println("테스트 이영훈");
 		return "test";
 	}
 }
