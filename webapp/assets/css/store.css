@@ -1,29 +1,5 @@
 @charset "UTF-8";
 
-/*스파링매치 스토어*/
-.header_menu {
-  width: 500px;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.header_menu #no1 {
-  margin: 30px 20px 0px 148px;
-}
-
-.header_menu #no2 {
-  margin: 29px 20px 0px 93px;
-}
-
-/*아이콘*/
-.header_icon {
-  width: 200px;
-  display: flex;
-}
-.header_icon img {
-  width: 30px;
-  margin: 20px 26px 0px 4px;
-}
 
 
 /* ///////////////////search//////////////// */

@@ -204,61 +204,6 @@ a:hover {
     cursor: pointer;
   }
 
-  .middle .booking_list .booking_list_elnt {
-    width: 800px;
-    height: 230px;
-    margin: 25px 0px 30px 0px;
-    border: 1px #dddfe1 solid;
-  }
-
-  .middle .booking_list .gym_image {
-    width: 260px;
-    height: 200px;
-    display: inline-block;
-  }
-
-  .middle .booking_list .gym_info{
-    display: flex;
-    flex-direction: row;
-    font-size: 14px;
-  }
-
-  .middle .booking_list .gym_info .gym_info_title_no {
-    font-weight: bold;
-  }
-
-  .middle .booking_list .gym_info .gym_image {
-      margin: 15px 20px 15px 20px;
-  }
-
-  .middle .booking_list .gym_info .gym_info_title {
-    margin: 90px 30px 0px 5px;
-  }
-
-  .middle .booking_list .gym_info .gym_info_detail {
-    margin: 90px 30px 0px 5px;
-  }
-
-  .middle .booking_list .gym_info .gym_info_btn_site {
-    margin: 190px 15px 0px 0px;
-  }
-
-  .middle .booking_list .gym_info .gym_info_btn_site .gym_info_btn {
-    border-radius: 5px;
-    color: #000000;
-    font-size: 12px;
-    background:#e3e3e3;
-    padding: 4px 3px 4px 3px;
-    text-decoration: none;
-    border: 0px;
-    cursor: pointer;
-  }
-
-  .middle .gym_info_btn:hover {
-    background: #d4d4d4;
-    text-decoration: none;
-  }
-
   /******체육관 등록******/
   .middle .gym_regi_form {
     font-size: 16px;
@@ -329,18 +274,43 @@ a:hover {
         text-decoration: none;
       }
 
+    .middle .regi_btn_site {
+      text-align: right;
+    }
+
+    .middle .regi_btn_site .regi_btn {
+      border-radius: 5px;
+      color: #000000;
+      font-size: 14px;
+      background:#e3e3e3;
+      padding: 6px 5px 6px 5px;
+      text-decoration: none;
+      border: 0px;
+      cursor: pointer;
+    }
+
+    .middle .regi_btn_site .regi_btn:hover {
+      background: #d4d4d4;
+      text-decoration: none;
+    }
+
 /******대관 등록******/
+/*
 .middle .booking_regi {
     display: flex;
     flex-direction: row;
 }
-
+*/
 .middle .booking_gym_info {
     font-size: 13px;
-    width: 340px;
+    width: 800px;
     margin-top: 20px;
     border: 1px #dddfe1 solid;
   }
+
+.middle .booking_gym_table {
+  padding-top: 10px;
+}
 
 .middle .booking_gym_info .gym_info_title {
     font-weight: bold;
@@ -353,34 +323,54 @@ a:hover {
 }
 
 .middle .booking_gym_info .gap {
-    height: 25px;
+    padding-bottom: 3px;
+    padding-top: 5px;
 }
 
 .middle .booking_gym_info .gap_info {
-    height: 50px;
+   padding-bottom: 10px;
 }
 
 .middle .booking_gym_info tr {
     vertical-align: top;
   }
 
-.middle .booking_regi .booking_regi_form {
+.middle .booking_regi_form {
     font-size: 15px;
     width: 460px;
     margin: 20px 0px 0px 10px;
 }
 
-.middle .booking_regi .booking_regi_form tr {
+.middle .booking_regi_form tr {
     height: 40px;
 }
 
-.middle .booking_regi .booking_regi_form .booking_regi_title {
+.middle .booking_regi_form .booking_regi_title {
     font-size: 20px;
     font-weight: bold;
     vertical-align: top;
 }
 
-.middle .booking_regi .booking_regi_form input {
+.middle .booking_regi_form .booking_regi_desc {
+  vertical-align: top;
+}
+
+.middle .booking_regi_form .calender {
+  width: 26px;
+  height: 26px;
+}
+
+.middle .booking_regi_form select {
+  width: 60px;
+  padding: 4px 3px;
+  font-family: inherit;
+  appearance: none;
+  border: 1px solid #dddfe1;
+  border-radius: 0px;
+  cursor: pointer;
+}
+
+.middle .booking_regi_form input {
     width: 130px;
     height: 10px;
     padding: 8px 6px;
@@ -390,13 +380,13 @@ a:hover {
 
 /*이용시간-대여요금 사이 띄어놓기*/
 
-.middle .booking_regi .booking_regi_form .booking_regi_btn_site {
+.middle .booking_regi_form .booking_regi_btn_site {
     text-align: center;
 }
 
 /*추가버튼 기술 찾거나 css로 만들거나*/
 
-.middle .booking_regi .booking_regi_form .booking_regi_btn {
+.middle .booking_regi_form .booking_regi_btn {
     border-radius: 0px;
     color: #000000;
     background-color: white;
@@ -410,7 +400,7 @@ a:hover {
     cursor: pointer;
 }
 
-.middle .booking_regi .booking_regi_form .booking_regi_btn:hover {
+.middle .booking_regi_form .booking_regi_btn:hover {
     background: #d4d4d4;
     text-decoration: none;
   }
@@ -504,6 +494,19 @@ a:hover {
     cursor: pointer;
   }
 
+  .middle .time_filter {
+    text-align: right;
+  }
+
+  .middle .time_filter input{
+    margin-bottom: 10px;
+    width: 100px;
+    height: 10px;
+    padding: 8px 6px;
+    border: 1px solid #dddfe1;
+    border-radius: 0px;
+  }
+
   .middle .booking_manage .booking_manage_list {
     width: 100%;
     text-align: center;
@@ -531,3 +534,64 @@ a:hover {
     border: 0px;
     cursor: pointer;
   }
+
+/******구매자 내 매치 보기******/
+.middle .match_list {
+  width: 800px;
+  height: 220px;
+  margin: 15px 0px 5px 0px;
+  border: 1px #dddfe1 solid;
+}
+
+.middle .match_list .match_list_elnt {
+  margin: 10px 0px 0px 10px;
+}
+
+.middle .match_list .match_list_elnt {
+  margin: 10px 0px 0px 10px;
+}
+
+.middle .match_list .match_list_elnt .tr_img{
+  width: 265px;
+}
+
+.middle .match_list .match_list_elnt span{
+  font-weight: bold;
+}
+
+.middle .match_list .match_list_elnt .td_width {
+  width: 510px;
+}
+
+.middle .match_list .match_list_elnt .bold {
+  font-weight: bold;
+}
+
+.middle .match_list .match_list_elnt .img_left{
+  text-align: right;
+}
+
+.middle .match_list .match_list_elnt .match_img{
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+}
+
+.middle .match_list .match_list_elnt .status {
+  display: inline-block;
+  border-radius: 10px;
+  text-align: center;
+  width: 60px;
+  background-color: #d4d4d4;
+}
+
+.middle .time_filter select {
+  margin-left: 40px;
+  width: 160px;
+  padding: 4px 3px;
+  font-family: inherit;
+  appearance: none;
+  border: 1px solid #dddfe1;
+  border-radius: 0px;
+  cursor: pointer;
+}

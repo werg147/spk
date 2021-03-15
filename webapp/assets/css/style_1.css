@@ -847,8 +847,6 @@ input:-ms-input-placeholder {
   border-bottom: 1px solid rgb(216, 216, 216);
 }
 .dae_map > div {
-  width: 600px;
-  height: 500px;
   background-color: rgb(216, 216, 216);
   border-radius: 10px;
   margin: 50px 225px 100px 225px;
