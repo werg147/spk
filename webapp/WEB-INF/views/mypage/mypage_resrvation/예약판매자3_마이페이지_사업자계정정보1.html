@@ -32,7 +32,13 @@
           <div class="side_menu_mypage">
             <span>마이페이지</span>
           </div>
-
+          <ul id="side_menu_booking">
+            <li class="title"><span class="menu">예약판매관리</span></li>
+            <li><a href="./예약판매자3_마이페이지_사업자계정정보1.html"><span class="menu">사업자계정 관리</span><span class="arrow">></span></a></li>
+            <li><a href="./예약판매자4_마이페이지_체육관관리1.html"><span class="menu">체육관관리</span><span class="arrow">></span></a></li>
+            <li><a href="./예약판매자7_마이페이지_예약관리1.html"><span class="menu">대관관리</span><span class="arrow">></span></a></li>
+            <li class="side_menu_last"><a href=""><span class="menu">수익관리</span><span class="arrow">></span></a></li>
+        </ul>
         <ul id="side_menu_user">
           <li><a href="./html/alarm.html"><span class="menu">알림</span><span class="arrow">></span></a></li>
           <li><a href="./html/cart.html"><span class="menu">장바구니</span><span class="arrow">></span></a></li>
@@ -40,10 +46,7 @@
           <li><a href=""><span class="menu">회원정보관리</span><span class="arrow">></span></a></li>
           <li class="side_menu_last"><a href="./html/matchinfo.html"><span class="menu">매칭프로필관리</span><span class="arrow">></span></a></li>
         </ul>
-        <ul id="side_menu_user">
-          <li class="side_menu_last"><a href=""><span class="menu">판매관리
-          </span></a></li>
-        </ul>
+
       </div>
       <!--//side_menu//-->
 
@@ -52,7 +55,7 @@
       <div class="content_seller">
         <div class="content_booking_header">
           <div> 
-              판매자 등록
+              사업자계정 관리
           </div>    
       </div>  <!--//content_delevery_product_header//-->      
       <div class="content_product_line"></div>
@@ -73,10 +76,7 @@
 
               <tr>
                 <td class="basic">사업자 번호</td>
-                <td>
-                  <input class="input_con" type="text" name="sellerNo" placeholder="번호를 입력해주세요">
-                  <div class="seller_alert">'-'와 공백을 제외하고 입력해주세요. (예: 1231212345)</div>
-                </td>
+                <td><input class="input_con" type="text" name="sellerNo" placeholder="번호를 입력해주세요"></td>
               </tr>
 
               <tr>
@@ -96,7 +96,6 @@
                   <div class="account_input">
                     <input class="input_con" type="text" name="sellerAcount" placeholder="계좌번호를 입력해주세요">
                   </div>
-                  <div class="seller_alert">'-'와 공백을 제외하고 입력해주세요. (예: 1234567890123)</div>
                 </td>
               </tr>
 
@@ -104,7 +103,7 @@
           </table>
           
           <div class="seller_regi_btn_site">
-            <button onclick="location.href='예약판매자3_마이페이지_사업자계정정보1.html'" class="seller_regi_btn" type="button">판매자 등록</button>
+            <button class="seller_regi_btn" type="button">사업자 정보 수정</button>
           </div>
         </form> <!--입력폼-->
         

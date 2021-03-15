@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>체육관 관리</title>
+    <link rel="stylesheet" href="../../../css/header.css">
+    <link rel="stylesheet" href="../../../css/booking.css">
+</head>
+<body> 
+    <div class="wrap">
+        <div class="container">
+          <div class="header">
+            <div class="header_logo"><a href=""><img src="../../../image/로고.png"></a></div>
+            <div class="header_menu">
+              <ul>
+                <li id="no1"><a href=""><span>스파링 매치</span></a></li>
+                <li id="no2"><a href=""><span>스토어</span></a></li>
+              </ul>
+            </div>
+            <div class="header_icon">
+              <div><a href=""><img src="../../../image/마이페이지 남성_글러브.png" ></a></div>
+              <div><a href=""><img src="../../../image/bell_2.png" ></a></div>
+              <div><a href=""><img src="../../../image/cart3.png" ></a></div>
+            </div>  
+        </div><!--//header//-->
+
+    <div class="middle">
+      <div class="side_menu">
+          <div class="side_menu_mypage">
+            <span>마이페이지</span>
+          </div>
+          <ul id="side_menu_user">
+            <li><a href="./html/alarm.html"><span class="menu">알림</span><span class="arrow">></span></a></li>
+            <li><a href="./html/cart.html"><span class="menu">장바구니</span><span class="arrow">></span></a></li>
+            <li><a href="./html/buylist.html"><span class="menu">구매내역</span><span class="arrow">></span></a></li>
+            <li><a href=""><span class="menu">회원정보관리</span><span class="arrow">></span></a></li>
+            <li class="side_menu_last"><a href="./html/matchinfo.html"><span class="menu">매칭프로필관리</span><span class="arrow">></span></a></li>
+          </ul>
+          <ul id="side_menu_user">
+            <li class="side_menu_last"><a href=""><span class="menu">판매관리
+            </span></a></li>
+          </ul>
+        </div>
+        <!--//side_menu//-->
+
+      <!--////////////////////////////////////////////-->
+
+      <div class="content_seller">
+        <div class="content_booking_header">
+          <div> 
+              내 매치 보기
+          </div>    
+      </div>  <!--//content_delevery_product_header//-->      
+      <div class="content_product_line"></div>
+            
+        <!--기간 필터-->
+        <div class="time_filter">
+            <input type="text" placeholder="기간필터">
+            ~
+            <input type="text" placeholder="기간필터">
+            <img name="calender" src="달력아이콘">
+
+            <select>
+                <option>전체</option>
+                <option>신청함</option>
+                <option>신청받음</option>
+            </select>
+        </div>
+
+
+          <!--반복 영역-->
+          <div class="match_list">
+            <table class="match_list_elnt">
+                <tr>
+                    <td class="tr_img" rowspan="6"><img name="스파링장" src="../../../image/스파링장.jpeg"></td>
+                    <td class="bottom bold">&nbsp&nbsp(체육관 이름 불러오기)</td>
+                    <td class="td_width img_left">
+                            <img class="match_img" name="sending" src="../../../image/blue.png">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="td_width">&nbsp&nbsp날짜&nbsp/&nbsp시간 (각각 불러오기)</td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td class="td_width">&nbsp&nbsp종목:&nbsp(불러오기)</td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td class="td_width bold">&nbsp&nbsp상대:&nbsp(불러오기)</td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td class="td_width">&nbsp&nbsp요금</td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td class="td_width">
+                        &nbsp&nbsp<div class="status">매치상태표시</div>
+                    </td>
+                    <td></td>
+                </tr>
+
+            </table>
+         </div> <!--//match_list (반복영역)-->
+
+          <!--반복 영역-->
+          <div class="match_list">
+            <table class="match_list_elnt">
+                <tr>
+                    <td class="tr_img" rowspan="6"><img name="스파링장" src="../../../image/스파링장.jpeg"></td>
+                    <td class="bottom bold">&nbsp&nbsp어쩌구 스파링장</td>
+                    <td class="td_width img_left">
+                            <img class="match_img" name="sending" src="../../../image/red.png">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="td_width">&nbsp&nbsp2021.03.10&nbsp/&nbsp13:00~15:00</td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td class="td_width">&nbsp&nbsp종목:&nbsp주짓수</td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td class="td_width bold">&nbsp&nbsp상대:&nbsp어쩌구불주먹</td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td class="td_width">&nbsp&nbsp50,000</td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td class="td_width">
+                        &nbsp&nbsp<div class="status">수락</div>
+                    </td>
+                    <td></td>
+                </tr>
+
+            </table>
+         </div> <!--//match_list (반복영역)-->
+
+
+    </div> <!--//middle-->
+  </div><!--//container-->
+</div><!--//wrap-->
+  
+</body>
+</html>
