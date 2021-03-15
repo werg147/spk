@@ -1,0 +1,32 @@
+.maching-table_sp {
+  margin: 0px 0px 0px 330px;
+}
+
+.product_insert_btn2 {
+}
+
+.product_insert_btn2 .insert_btn2,
+.product_insert_btn2 .product_delclose_btn2 {
+  border-radius: 0px;
+  color: #000000;
+  background-color: white;
+  font-size: 13px;
+  padding: 3px 2px 3px 2px;
+  margin: 0px 15px 0px 15px;
+  text-decoration: none;
+  border: 1px solid #dddfe1;
+  width: 130px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.product_insert_btn2 .insert_btn2:hover,
+.product_insert_btn2 .product_delclose_btn2:hover {
+  background: #d4d4d4;
+  text-decoration: none;
+}
+
+/* 버튼 위치조절 */
+.product_insert_btn2 {
+  margin: 30px 230px 70px 40px;
+}

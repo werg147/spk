@@ -1,0 +1,229 @@
+@charset "UTF-8";
+
+.middle .content_mypage {
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+}
+
+/*배송관리 페이지 여기부터*/
+.middle .content_matchingInfo_header {
+  display: flex;
+  flex-direction: row;
+  height: 30px;
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.middle .content_matchingInfo_header div {
+  width: 200px;
+  height: 30px;
+  justify-content: left;
+  font-size: 23px;
+  font-weight: bold;
+}
+
+/*타이틀 리스트 구분줄*/
+.line {
+  height: 2px;
+  width: 1000px;
+  margin: 35px 0px 5px 0px;
+  background-color: black;
+}
+
+/*이걸로 높이 조절하면됨*/
+.insert_matcingInfo {
+  font-size: 16px;
+  margin-top: 20px;
+  min-height: 600px;
+}
+
+.insert_matcingInfo tr td {
+  vertical-align: top;
+  text-align: left;
+}
+
+.insert_matcingInfo .basic {
+  height: 30px;
+}
+
+.insert_matcingInfo .plus {
+  height: 120px;
+}
+
+.insert_matcingInfo .large div {
+  display: flex;
+  height: 30px;
+}
+.insert_matcingInfo .large div p {
+  width: 180px;
+}
+.insert_matcingInfo .large div input {
+  width: 100px;
+}
+.insert_matcingInfo .basic input {
+  width: 146px;
+  height: 10px;
+  padding: 8px 6px;
+  border: 1px solid #dddfe1;
+  border-radius: 0px;
+}
+
+.product_insert_div_img img {
+  width: 100px;
+  height: 100px;
+}
+
+.product_insert_div_img input {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
+
+.product_insert_div_img input {
+  margin-right: 30px;
+}
+#sizecolor input {
+  width: 200px;
+  margin-right: 20px;
+}
+
+/*사이즈 색상 추가버튼*/
+/*버튼*/
+.basic button {
+  border-radius: 5px;
+  color: #000000;
+  background-color: dddfe1;
+  font-size: 20px;
+  text-decoration: none;
+  border: 1px solid #d4d4d4;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.basic button:hover {
+  background: #d4d4d4;
+  text-decoration: none;
+}
+
+/*판매자 마이페이지 상품등록*/
+/*운송장번호 셀렉트박스 여기부터*/
+
+.content_product_insert_select_box select {
+  width: 160px;
+  padding: 4px 3px;
+  font-family: inherit;
+  appearance: none;
+  border: 1px solid #dddfe1;
+  border-radius: 0px;
+  cursor: pointer;
+
+  background-image: linear-gradient(45deg, transparent 50%, gray 50%),
+    linear-gradient(135deg, gray 50%, transparent 50%);
+  background-position: calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px), calc(100% - 0.5em) 0.5em;
+  background-size: 5px 5px, 5px 5px, 1.5em 1.5em;
+  background-repeat: no-repeat;
+}
+
+.content_product_insert_select_box select::-ms-expand {
+  /* for IE 11 */
+  display: none;
+}
+/*셀렉트 박스 여기까지*/
+
+/*상품등록 이전페이지*/
+/*버튼*/
+
+.product_insert_btn {
+  display: flex;
+  overflow: hidden;
+  text-align: center;
+}
+
+.large div input,
+.product_insert_btn .insert_btn,
+.product_insert_btn .product_delclose_btn {
+  border-radius: 0px;
+  color: #000000;
+  background-color: white;
+  font-size: 13px;
+  padding: 3px 2px 3px 2px;
+  margin: 0px 15px 0px 15px;
+  text-decoration: none;
+  border: 1px solid #dddfe1;
+  width: 130px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.input-file-button:hover,
+.product_insert_btn .insert_btn:hover,
+.product_insert_btn .product_delclose_btn:hover {
+  background: #d4d4d4;
+  text-decoration: none;
+}
+
+.product_add_btn {
+  display: flex;
+  overflow: hidden;
+  text-align: center;
+  justify-content: center;
+}
+
+.product_add_btn .add_btn {
+  border-radius: 0px;
+  color: #000000;
+  background-color: white;
+  font-size: 13px;
+  padding: 3px 2px 3px 2px;
+  margin: 0px 15px 0px 15px;
+  text-decoration: none;
+  border: 1px solid #dddfe1;
+  width: 80px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.product_insert_btn .add_btn:hover {
+  background: #d4d4d4;
+  text-decoration: none;
+}
+
+/* 버튼 위치조절 */
+.product_insert_btn {
+  margin: 30px 230px 70px 230px;
+}
+
+.chk_box {
+  display: inline-block;
+  font-size: 12px;
+}
+
+.alert {
+  width: 500px;
+  height: 100px;
+  border: 2.5px red solid;
+  text-align: center;
+}
+
+.alert .question {
+  font-size: 20px;
+}
+
+.alert .question .point {
+  color: red;
+  font-size: 25px;
+}
+
+.alert .Sparring_chk {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.last_add div div {
+  border: 1px solid #dddfe1;
+  width: fit-content;
+  margin-bottom: 10px;
+}

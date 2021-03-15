@@ -1,0 +1,211 @@
+@charset "UTF-8";
+
+/***********공통*****************/
+body,
+div,
+ul,
+li,
+dl,
+dt,
+ol,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+fieldset,
+legend,
+p,
+select,
+table,
+th,
+td,
+tr,
+textarea,
+button,
+form {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font: 12px "맑은 고딕", 돋움, 굴림;
+}
+ul,
+ol {
+  list-style-type: none;
+}
+a:link {
+  text-decoration: none;
+  color: #000000;
+}
+a:visited {
+  text-decoration: none;
+  color: #000000;
+}
+a:active {
+  text-decoration: none;
+  color: #000000;
+}
+a:hover {
+  text-decoration: none;
+  color: #000000;
+}
+
+/****************공통******************/
+
+.wrap {
+  max-width: 100%;
+  overflow: hidden;
+}
+.wrap .container {
+  width: 1050px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.wrap .container .header {
+  width: 1050px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.wrap .container .header a {
+  overflow: hidden;
+  float: left;
+  height: 60px;
+  font-size: 16px;
+  color: #333;
+  line-height: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+/*헤더적용*/
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  height: 70px;
+}
+
+/*로고*/
+.header_logo {
+  width: 140px;
+}
+
+.header_logo img {
+  width: 140px;
+}
+
+/*스파링매치 스토어*/
+.header_menu {
+  width: 500px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.header_menu span {
+  width: 150px;
+  height: 80px;
+  display: block;
+}
+
+.header_menu a span:hover {
+  color: #e60012;
+}
+.header_menu a span:active {
+  color: #e60012;
+}
+
+.header_menu #no1 {
+  margin: 30px 10px 0px 115px;
+  color: #e60012;
+}
+
+.header_menu #no2 {
+  margin: 30px 20px 0px 18px;
+}
+
+/*아이콘*/
+.header_icon {
+  width: 200px;
+  display: flex;
+}
+.header_icon img {
+  width: 30px;
+  margin: 20px 0px 0px 30px;
+}
+
+/*마이페이지 사이드바*/
+
+/*상단 마이페이지 글자*/
+
+.middle {
+  width: 1050;
+  display: flex;
+  flex-direction: row;
+  margin-top: 80px;
+}
+.side_menu {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 230px;
+}
+.side_menu ul {
+  margin-bottom: 50px;
+}
+
+.side_menu_mypage {
+  margin-bottom: 25px;
+}
+
+.side_menu_mypage > span {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.side_menu #side_menu_booking li,
+.side_menu #side_menu_delivery li,
+.side_menu #side_menu_user li {
+  border-top: 1px solid #f2f2f2;
+  border-right: 1px solid #f2f2f2;
+  border-left: 1px solid #f2f2f2;
+  width: 180px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.side_menu ul .side_menu_last {
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.side_menu li a {
+  width: 180px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.side_menu li span {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.side_menu li div {
+  width: 16px;
+}
+
+/*메뉴 이름*/
+.side_menu li .menu {
+  display: inline-block;
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+/*메뉴 화살표*/
+.side_menu li .arrow {
+  display: inline-block;
+  margin-top: 15px;
+  margin-right: 15px;
+}

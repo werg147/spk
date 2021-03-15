@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="kor">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>매칭프로필관리</title>
+	<link rel="stylesheet" href="../../../css/header.css">
+	<link rel="stylesheet" href="../../../css/matchinfo.css">
+</head>
+
+<body>
+	<div class="wrap">
+		<div class="container">
+		  <div class="header">
+			<div class="header_logo"><a href=""><img src="../../../image/로고.png"></a></div>
+			<div class="header_menu">
+			  <ul>
+				<li id="no1"><a href="../../matching/스파링 매칭.html"><span>스파링 매치</span></a></li>
+				<li id="no2"><a href="../../store/storeList.html"><span>스토어</span></a></li>
+			  </ul>
+			</div>
+			<div class="header_icon">
+			  <div><a href="./buylist.html"><img src="../../../image/마이페이지 남성_글러브.png" ></a></div>
+			  <div><a href="./html/alarm.html"><img src="../../../image/bell_2.png" ></a></div>
+			  <div><a href="./html/cart.html"><img src="../../../image/cart3.png" ></a></div>
+			</div>  
+		</div><!--//header//-->
+		  <div class="middle">
+			<div class="side_menu">
+			  <div class="side_menu_mypage">
+				<span>마이페이지</span>
+			  </div>
+			  <ul id="side_menu_user">
+				<li><a href="./html/alarm.html"><span class="menu">알림</span><span class="arrow">></span></a></li>
+				<li><a href="./html/cart.html"><span class="menu">장바구니</span><span class="arrow">></span></a></li>
+				<li><a href="./html/buylist.html"><span class="menu">구매내역</span><span class="arrow">></span></a></li>
+				<li><a href=""><span class="menu">회원정보관리</span><span class="arrow">></span></a></li>
+				<li><a href="./html/matchinfo.html"><span class="menu">매칭프로필관리</span><span class="arrow">></span></a></li>
+				<li class="side_menu_last"><a href=""><span class="menu">판매관리
+					</span></a></li>
+			  </ul>
+			</div>
+			<!--//side_menu//-->
+
+				<div class="content_mypage">
+					<div class="content_matchingInfo_header">
+						<div>
+							매칭프로필관리
+						</div>
+					</div>
+					<!--//content_matchingInfo_header//-->
+					<div class="line"></div>
+					<div class="content_bottom">
+						<form>
+							<table class="insert_matcingInfo">
+								<colgroup>
+									<col style="width: 150px">
+									<col style="width: 150px">
+									<col style="width: 400px">
+								</colgroup>
+								<tr class="basic">
+									<td colspan="2"><label for="prod_cate">주특기</label></td>
+									<td>
+										<div class="content_product_insert_select_box">
+											<select id="prod_cate">
+												<option selected>주특기</option>
+												<option>복싱</option>
+												<option>킥복싱</option>
+												<option>종합격투기</option>
+											</select>
+										</div>
+									</td>
+								</tr>
+								<tr class="basic">
+									<td colspan="2"><label for="exer_cate">체급</label></td>
+									<td>
+										<div class="content_product_insert_select_box">
+											<select id="exer_cate">
+												<option selected>체급</option>
+												<option>헤비급</option>
+												<option>크루저급</option>
+												<option>미들급</option>
+												<option>웰터급</option>
+												<option>라이트급</option>
+												<option>페더급</option>
+												<option>밴텀급</option>
+												<option>플라이급</option>
+											</select>
+										</div>
+									</td>
+								</tr>
+								<tr class="basic">
+									<td colspan="2"><label for="prod_name">신장</label></td>
+									<td><input type="text" id="prod_name" placeholder="신장을 입력해주세요."></td>
+								</tr>
+								<tr class="basic">
+									<td colspan="2"><label for="prod_price">체중</label></td>
+									<td><input type="text" id="prod_price" placeholder="체중을 입력해주세요."></td>
+								</tr>
+								<tr class="basic">
+									<td colspan="2"><label for="brand_name">경력</label></td>
+									<td>
+										<div class="chk_box">
+											<input type='checkbox' id="pro_chk" name='pro' value='pro' />프로
+											<input type='checkbox' id="pro_chk" name='ama' value='ama' />아마추어
+										</div>
+									</td>
+								</tr>
+								<tr class="basic">
+									<td colspan="2"><label for="brand_name">전공</label></td>
+									<td>
+										<div class="chk_box">
+											<input type='checkbox' id="pro_chk" name='pro' value='pro' />무
+											<input type='checkbox' id="pro_chk" name='ama' value='ama' />유
+										</div>
+									</td>
+								</tr><tr class="basic">
+									<td colspan="2"><label for="brand_name">스파링경험</label></td>
+									<td>
+										<div class="chk_box">
+											<input type='checkbox' id="pro_chk" name='pro' value='pro' />
+										</div>
+									</td>
+								</tr>
+								<tr class="basic">
+									<td><label for="prod_cate">공식기록</label></td>
+									<td><label for="prod_cate">대회명</label></td>
+									<td>
+										<input type="text" id="prod_name" placeholder="대회명을 입력해주세요.">
+									</td>
+								</tr>
+
+								<tr class="basic">
+									<td><label for="prod_cate"></label></td>
+									<td><label for="prod_cate">종목</label></td>
+									<td>
+										<div class="content_product_insert_select_box">
+											<select id="prod_cate">
+												<option selected>종목</option>
+												<option>복싱</option>
+												<option>킥복싱</option>
+												<option>종합격투기</option>
+											</select>
+										</div>
+									</td>
+								</tr>
+
+								<tr class="basic">
+									<td><label for="prod_cate"></label></td>
+									<td><label for="prod_cate">출전연도</label></td>
+									<td>
+										<div class="content_product_insert_select_box">
+											<select id="prod_cate">
+												<option selected>출전연도</option>
+												<option>2021</option>
+												<option>2020</option>
+												<option>2019</option>
+											</select>
+										</div>
+									</td>
+								</tr>
+
+								<tr class="basic">
+									<td><label for="prod_cate"></label></td>
+									<td><label for="prod_cate">매치</label></td>
+									<td>
+										<div class="content_product_insert_select_box">
+											<select id="prod_cate">
+												<option selected>매치</option>
+												<option>일반매치</option>
+												<option>타이틀매치</option>
+
+											</select>
+										</div>
+									</td>
+								</tr>
+								<tr class="basic">
+									<td></td>
+									<td colspan="2">
+										<div>
+											<div class="product_add_btn">
+												<button class="add_btn">추가하기</button>											
+											</div>
+										</div>							
+									</td>
+								</tr>
+								<tr class="basic last_add" >
+									<td></td>
+									<td colspan="2">
+										<div>
+											<div>어떤대회 어떤종목 2020년 타이틀매치</div>
+											<div>어떤대회 어떤종목 2020년 타이틀매치</div>
+											<div>어떤대회 어떤종목 2020년 타이틀매치</div>
+											<div>어떤대회 어떤종목 2020년 타이틀매치</div>
+										</div>							
+									</td>
+								</tr>
+							</table>
+							<div class="product_insert_btn">
+								<button class="insert_btn">저장</button>
+								<button class="product_delclose_btn">취소</button>
+							</div>
+
+						</form>
+					</div>
+				</div>
+				<!--//delivery_info-->
+			</div>
+			<!--//content_product//-->
+
+
+</body>
+
+</html>

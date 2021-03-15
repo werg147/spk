@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사업자 계정</title>
+    <link rel="stylesheet" href="../../../css/header.css">
+    <link rel="stylesheet" href="../../../css/delivery.css">
+    <link rel="stylesheet" href="../../../css/booking.css">
+</head>
+<body>
+    
+  <div class="wrap">
+    <div class="container">
+      <div class="header">
+        <div class="header_logo"><a href=""><img src="../../../image/로고.png"></a></div>
+        <div class="header_menu">
+          <ul>
+            <li id="no1"><a href="../../matching/스파링 매칭.html"><span>스파링 매치</span></a></li>
+            <li id="no2"><a href="../../store/storeList.html"><span>스토어</span></a></li>
+          </ul>
+        </div>
+        <div class="header_icon">
+          <div><a href="../mypage_buy/buylist.html"><img src="../../../image/마이페이지 남성_글러브.png" ></a></div>
+          <div><a href="../mypage_buy/alarm.html"><img src="../../../image/bell_2.png" ></a></div>
+          <div><a href="../mypage_buy/cart.html"><img src="../../../image/cart3.png" ></a></div>
+        </div>  
+    </div><!--//header//-->
+        <div class="middle">
+            <div class="side_menu">
+                <div class="side_menu_mypage">
+                    <span>마이페이지</span>
+                </div>
+                <ul id="side_menu_delivery">
+                    <li><span class="menu">배송판매관리</span></li>
+                    <li><a href="./예약판매자2_마이페이지_사업자계정1.html"><span class="menu">사업자계정 관리</span><span class="arrow">></span></a></li>
+                    <li><a href="./배송판매자_마이페이지_상품관리.html"><span class="menu">상품관리</span><span class="arrow">></span></a></li>
+                    <li><a href="./배송판매자_마이페이지_배송관리.html"><span class="menu">배송관리</span><span class="arrow">></span></a></li>
+                    <li class="side_menu_last"><a href="./배송판매자_마이페이지_수익관리.html"><span class="menu">수익관리</span><span class="arrow">></span></a></li>
+                </ul>
+                <ul id="side_menu_user">
+                    <li><a href="../mypage_buy/alarm.html"><span class="menu">알림</span><span class="arrow">></span></a></li>
+                    <li><a href="../mypage_buy/cart.html"><span class="menu">장바구니</span><span class="arrow">></span></a></li>
+                    <li><a href="../mypage_buy/buylist.html"><span class="menu">구매내역</span><span class="arrow">></span></a></li>
+                    <li><a href="../mypage_buy/info_update.html"><span class="menu">회원정보관리</span><span class="arrow">></span></a></li>
+                    <li><a href="../mypage_buy/matchinfo.html"><span class="menu">매칭프로필관리</span><span class="arrow">></span></a></li>
+                    <li class="side_menu_last"><a href=""><span class="menu">판매관리
+                    </span></a></li>
+                </ul>
+            </div><!--//side_menu//-->
+
+      <!--////////////////////////////////////////////-->
+
+      <div class="content_seller">
+        <div class="content_booking_header">
+          <div> 
+              판매자 등록
+          </div>    
+      </div>  <!--//content_delevery_product_header//-->      
+      <div class="content_product_line"></div>
+
+      <div class="content_seller_regi">
+        <div class="seller_regi_title">사업자 정보</div>
+        <br>
+
+        <!--입력폼-->
+        <form action="" method="">
+          <table class="seller_regi_form">
+            <tbody>
+
+              <tr>
+                <td class="basic">판매자 유형</td>
+                <td id="checkbox">
+                  <div><input type="checkbox" name="sellerType" value="reservateion">대관판매<input type="checkbox" name="sellerType" value="reservateion">배송판매</div>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="basic">사업자 이름</td>
+                <td><input type="text" name="sellerName" placeholder="이름을 입력해주세요"></td>
+              </tr>
+
+              <tr>
+                <td class="basic">사업자 번호</td>
+                <td><input type="text" name="sellerNo" placeholder="번호를 입력해주세요"></td>
+              </tr>
+
+              <tr>
+                <td class="basic">사업자 주소</td>
+                <td><input type="text" name="sellerAd" placeholder="주소를 입력해주세요"></td>
+              </tr>
+
+              <tr>
+                <td class="basic">사업자 계좌번호</td>
+                <td>     
+                  <select>
+                    <option>은행 선택</option>
+                    <option>국민은행</option>
+                    <option>농협</option>
+                    <option>카카오뱅크</option>
+                  </select>
+                  <div class="account_input">
+                    <input type="text" name="sellerAcount" placeholder="계좌번호를 입력해주세요">
+                  </div>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+          
+          <div class="seller_regi_btn_site">
+            <button class="seller_regi_btn" type="submit">판매자 등록</button>
+          </div>
+        </form> <!--입력폼-->
+        
+      </div> <!--//content_seller_regi-->
+
+      </div> <!--//middle-->
+  </div><!--//container-->
+</div><!--//wrap-->
+  
+</body>
+</html>

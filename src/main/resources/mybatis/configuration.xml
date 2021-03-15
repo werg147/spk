@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!-- alias 영역-->
+	<!-- 
+    <typeAliases>
+    	<typeAlias alias="GuestVo" type="com.javaex.vo.GuestVo" />
+    </typeAliases> -->
+
+    <mappers>
+   		<mapper resource="mybatis/mappers/example.xml" /> <!-- 여기에 쿼리문xml 경로 추가-->
+    </mappers>
+</configuration>
