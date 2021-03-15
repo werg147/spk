@@ -85,12 +85,14 @@
 					</div>
 					<!--//content_seller_regi-->
 				</div>
-				<!--//middle-->
-				<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
-				<!--//footer//-->
+				<!-- //content_seller -->
 			</div>
-			<!--//container-->
+			<!--//middle-->
+			<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
+			<!--//footer//-->
 		</div>
-		<!--//wrap-->
+		<!--//container-->
+	</div>
+	<!--//wrap-->
 </body>
 </html>
