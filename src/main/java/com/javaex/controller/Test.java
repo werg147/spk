@@ -9,7 +9,13 @@ public class Test {
 
 	@RequestMapping(value="test", method= {RequestMethod.GET, RequestMethod.POST})
 	public String test() {
-		System.out.println("이다현 테스트");
-		return "test";
+
+		System.out.println("테스트");
+
+		return "/store/storeList";
+
 	}
+	
+
+	
 }
