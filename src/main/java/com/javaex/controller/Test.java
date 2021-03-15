@@ -10,6 +10,7 @@ public class Test {
 	@RequestMapping(value="test", method= {RequestMethod.GET, RequestMethod.POST})
 	public String test() {
 		System.out.println("테스트");
+		System.out.println("테스트 장세림");
 		
 		return "test";
 	}
