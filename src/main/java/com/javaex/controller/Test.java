@@ -12,9 +12,8 @@ public class Test {
 
 		System.out.println("테스트");
 
+
 		return "mypage/mypage_reservation/reservation";
-
-
 
 	}
 
