@@ -129,7 +129,7 @@ a:hover {
 
 /*아이콘*/
 .header_icon {
-  width: 200px;
+  width: fit-content;
   display: flex;
 }
 .header_icon img {
@@ -153,19 +153,25 @@ a:hover {
   flex-direction: column;
   width: 230px;
 }
+
+
 .side_menu ul {
   margin-bottom: 50px;
 }
 
-.side_menu_mypage {
+#side_menu_mypage {
   margin-bottom: 25px;
 }
 
-.side_menu_mypage > span {
+.side_menu #side_menu_mypage li{
   font-size: 25px;
   font-weight: bold;
 }
 
+.side_menu .title span{
+  font-weight: bold;
+  font-size: 16px;
+}
 .side_menu #side_menu_booking li,
 .side_menu #side_menu_delivery li,
 .side_menu #side_menu_user li {
@@ -208,4 +214,42 @@ a:hover {
   display: inline-block;
   margin-top: 15px;
   margin-right: 15px;
+}
+/*사이드메뉴 여기까지*/
+
+/*메인페이지*/
+.banner{
+  display: flex;
+  border: 1px solid black;
+  margin-top: 20px;
+  height: 250px;
+
+}
+.space{
+  margin-top:50px;
+}
+
+.banner{
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+
+}
+
+.banner div{
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.banner #main_3 a:hover{
+  color: #e60012;
+}
+
+.footer{
+  background-color:  #f2f2f2;
+  width: 100%;
+  height: 100px;
+  text-align : center;
+  font-size: 30px;
 }
