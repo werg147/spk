@@ -153,6 +153,12 @@ a:hover {
     cursor: pointer;
   }
 
+  .middle .seller_regi_form .seller_alert {
+    font-size: 12px;
+    color: #e60012;
+    padding-top: 2px;
+  }
+
   .middle .seller_regi_form .account_input {
       padding-top: 10px;
   }
