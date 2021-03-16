@@ -32,7 +32,7 @@
 					<div class="booking_gym_info">
 						<table class="booking_gym_table">
 							<tr>
-								<td rowspan="8"><img class="gym_info_img" name="스파링장" src="../../../image/스파링장.jpeg"></td>
+								<td rowspan="8"><img class="gym_info_img" name="스파링장" src="${pageContext.request.contextPath }/assets/image/스파링장.jpeg"></td>
 								<td class="gym_info_title gap">체육관 이름</td>
 							</tr>
 

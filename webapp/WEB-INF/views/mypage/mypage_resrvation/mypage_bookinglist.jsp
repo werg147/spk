@@ -31,7 +31,7 @@
 					<div class="booking_list_elnt">
 						<div class="gym_info">
 							<div class="gym_image">
-								<img name="스파링장" src="../../../image/스파링장.jpeg">
+								<img name="스파링장" src="${pageContext.request.contextPath }/assets/image/스파링장.jpeg">
 							</div>
 
 							<div class="gym_info_title">

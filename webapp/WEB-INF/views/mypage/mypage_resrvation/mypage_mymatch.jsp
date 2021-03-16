@@ -43,7 +43,7 @@
 					<div class="match_list">
 						<table class="match_list_elnt">
 							<tr>
-								<td class="tr_img" rowspan="6"><img name="스파링장" src="../../../image/스파링장.jpeg"></td>
+								<td class="tr_img" rowspan="6"><img name="스파링장" src="${pageContext.request.contextPath }/assets/image/스파링장.jpeg"></td>
 								<td class="bottom bold">&nbsp&nbsp(체육관 이름 불러오기)</td>
 								<td class="td_width img_left"><img class="match_img" name="sending"
 									src="../../../image/blue.png"></td>
@@ -84,10 +84,10 @@
 					<div class="match_list">
 						<table class="match_list_elnt">
 							<tr>
-								<td class="tr_img" rowspan="6"><img name="스파링장" src="../../../image/스파링장.jpeg"></td>
+								<td class="tr_img" rowspan="6"><img name="스파링장" src="${pageContext.request.contextPath }/assets/image/스파링장.jpeg"></td>
 								<td class="bottom bold">&nbsp&nbsp어쩌구 스파링장</td>
 								<td class="td_width img_left"><img class="match_img" name="sending"
-									src="../../../image/red.png"></td>
+									src="${pageContext.request.contextPath }/assets/image/red.png"></td>
 							</tr>
 
 							<tr>
