@@ -12,7 +12,9 @@ public class Test {
 
 		System.out.println("테스트");
 
-		return "/store/storeList";
+
+		return "mypage/mypage_prod/seller_manage";
+
 
 	}
 	
