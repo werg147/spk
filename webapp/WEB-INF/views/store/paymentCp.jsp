@@ -1,30 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../../css/header.css">
-    <link rel="stylesheet" href="../../css/store.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/store.css">
 </head>
+
 <body>
     
-    <div class="wrap">
-        <div class="container">
-          <div class="header">
-            <div class="header_logo"><a href=""><img src="../../image/로고.png"></a></div>
-            <div class="header_menu">
-              <ul>
-                <li id="no1"><a href="../matching/스파링 매칭.html"><span>스파링 매치</span></a></li>
-                <li id="no2"><a href="./storeList.html"><span>스토어</span></a></li>
-              </ul>
-            </div>
-            <div class="header_icon">
-              <div><a href="../mypage/mypage_buy/buylist.html"><img src="../../image/마이페이지 남성_글러브.png" ></a></div>
-              <div><a href="../mypage/mypage_buy/alarm.html"><img src="../../image/bell_2.png" ></a></div>
-              <div><a href="../mypage/mypage_buy/cart.html"><img src="../../image/cart3.png" ></a></div>
-            </div>  
-        </div><!--//header//-->
+<div class="wrap">
+    <div class="container">
+        
+		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
+	    <!--//header//-->
+
     </div><!--//container-->
 </div><!--//wrap-->
 
@@ -136,9 +131,9 @@
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 
+<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
+<!--//footer//-->
 
-
-    
 
 
 

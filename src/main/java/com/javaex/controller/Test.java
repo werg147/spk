@@ -10,8 +10,9 @@ public class Test {
 	@RequestMapping(value="test", method= {RequestMethod.GET, RequestMethod.POST})
 	public String test() {
 
-		System.out.println("개인브랜치 테스트");
-		return "test";
+		System.out.println("테스트");
+
+		return "mypage/mypage_prod/seller_manage";
 
 	}
 	
