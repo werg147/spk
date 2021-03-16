@@ -13,7 +13,7 @@ public class Test {
 		System.out.println("테스트");
 
 
-		return "mypage/mypage_prod/seller_manage";
+		return "mypage/mypage_prod/delivery_manage";
 
 	}
 
