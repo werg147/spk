@@ -11,6 +11,8 @@
 	href="${pageContext.request.contextPath }/assets/css/header.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/assets/css/delivery.css">
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
+
 </head>
 <body>
 	<div class="wrap">
@@ -69,12 +71,24 @@
 						</tr>
 						<tr class="product_insert_div_img">
 							<td>대표이미지</td>
-							<td><input type="image" id="main_img"></td>
+							<td>
+								<div id="main_img">
+									<P>이미지를 넣어주세요</P>
+								</div>
+							</td>
 						</tr>
 						<tr class="product_insert_div_img">
 							<td>추가이미지</td>
-							<td><input type="image" id="sub_img1"><img
-								src="${pageContext.request.contextPath }/assets/image/글러브.jpg"></td>
+							<td>
+								<div>
+									<div id="sub_img1">
+										<P>이미지를 넣어주세요</P>
+									</div>
+									<img
+										src="${pageContext.request.contextPath }/assets/image/글러브.jpg">
+								</div>
+							</td>
+
 						</tr>
 						<tr class="sizecolor_div">
 							<td>색상 및 사이즈</td>
@@ -111,10 +125,10 @@
 							<td>
 								<div>
 									<p>상세페이지 이미지등록</p>
-									<label class="input-file-button" for="input-file">업로드</label> <input
-										type="file" id="input-file" style="display: none;">
-								</div> <textarea id="prod_detail"></textarea>
-								</div>
+									<label class="input-file-button" for="input-file">업로드</label> 
+									<input type="file" id="input-file" style="display: none;">
+								</div> 
+								<textarea id="prod_detail"></textarea>
 							</td>
 						</tr>
 					</table>
@@ -136,4 +150,50 @@
 	<!--//wrap//-->
 
 </body>
+<script type="text/javascript">
+$('#main_img')
+  .on("dragover", dragOver)
+  .on("dragleave", dragOver)
+  .on("drop", uploadFiles);
+
+function dragOver(e){
+  e.stopPropagation();
+  e.preventDefault();
+  if (e.type == "dragover") {
+    $(e.target).css({
+      "background-color": "black",
+      "outline-offset": "-20px"
+    });
+  } else {
+      $(e.target).css({
+      "background-color": "gray",
+      "outline-offset": "-10px"
+    });
+    }
+}
+
+function uploadFiles(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    dragOver(e);
+  
+    e.dataTransfer = e.originalEvent.dataTransfer;
+    var files = e.target.files || e.dataTransfer.files;
+    if (files.length > 1) {
+        alert('하나만 올려라.');
+        return;
+    }
+    if (files[0].type.match(/image.*/)) {
+                $(e.target).css({
+            "background-image": "url(" + window.URL.createObjectURL(files[0]) + ")",
+            "outline": "none",
+            "background-size": "100% 100%"
+        });
+    }else{
+      alert('이미지가 아닙니다.');
+      return;
+    }
+}
+
+</script>
 </html>
