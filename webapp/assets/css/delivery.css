@@ -912,7 +912,6 @@ table {
   width: 160px;
   padding: 4px 3px;
   font-family: inherit;
-  appearance: none;
   border: 1px solid #dddfe1;
   border-radius: 0px;
   cursor: pointer;
@@ -923,6 +922,8 @@ table {
   display: none;
 }
 /*셀렉트 박스 여기까지*/
+
+
 
 /*상품등록 라인아래*/
 
@@ -966,42 +967,40 @@ table {
 }
 
 .product_insert_div_img img {
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
 }
 
-.product_insert_div_img #main_img, .product_insert_div_img #sub_img1{
+.product_insert_div_img .dropZone1, .product_insert_div_img .dropZone2{
 	dispaly : flex;
     outline: 1px dashed #878787 ;
     outline-offset:-10px;  
     text-align: center;
     transition: all .15s ease-in-out;
     width: 200px;
-    height: 100px;
+    height: 200px;
     background-color: #E3E3E3;
     margin-bottom: 5px;
 }
 
-.product_insert_div_img #main_img p, .product_insert_div_img #sub_img1 p{
-	padding-top: 37px;
-	width: 200px
-}
 
 
-.product_insert_div_img #main_img, .product_insert_div_img #sub_img1 {
+
+.product_insert_div_img .dropZone1 .product_insert_div_img .dropZone2{
   margin: 5px 30px 15px 5px;
 }
 
-.product_insert_div_img td > div, #main_img{
+.product_insert_div_img td > div, .dropZone1, .dropZone2{
 	display: flex;
 }
 
-.#main_img img, .#sub_img1 video{
-    width:100%;
-    height:100%;
-    display:none;
-}
 
+
+.product_insert_content #imgadd1, .product_insert_content #imgadd2{
+	display: flex;
+	width: 200px;
+	height: 200px;
+}
 
 #sizecolor > div {
   margin: 5px 0px 5px 0px;
@@ -1012,13 +1011,17 @@ table {
 
 #sizecolor > div div {
   margin: 5px 7px 5px 0px;
-  font-size: 15px;
+  font-size: 18px;
   width: fit-content;
   border: 1px solid #dddfe1;
   font-size: 12px;
 }
 
-#sizecolor input {
+#sizecolor input { 
+  height: 10px;
+  padding: 8px 6px;
+  border: 1px solid #dddfe1;
+  border-radius: 0px;
   width: 100px;
   margin-right: 20px;
   margin-bottom: 10px;
@@ -1033,7 +1036,7 @@ table {
   font-size: 20px;
   text-decoration: none;
   border: 1px solid #d4d4d4;
-  width: 25px;
+  width: 30px;
   height: 25px;
   cursor: pointer;
 }
