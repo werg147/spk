@@ -303,14 +303,14 @@
 									<!-- //공식기록 추가 -->
 									<!-- //공식기록 추가 -->
 									<label class="coment_title" for="word">상대에게 한마디</label><input class="coment_one" type="text" name="word">
-									
-
+										
+	
 									<div class="product_insert_btn">
 										<button class="insert_btn">저장</button>
 										<button class="product_delclose_btn">취소</button>
 									</div>
 									<!-- //product_insert_btn -->
-
+									<input type="hidden" name="userNo" value="1">
 								</form>
 								<!-- //입력폼 → 주문하기 -->
 
@@ -330,7 +330,7 @@
 
 	</div>
 	<!-- //wrap -->
-	<input type="hidden" name="userNo" value="1">
+	
 </body>
 
 </html>

@@ -1,19 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-	<!-- alias 영역-->
-	<!-- 
-    <typeAliases>
-    	<typeAlias alias="GuestVo" type="com.javaex.vo.GuestVo" />
-    </typeAliases> -->
     <typeAliases>
     	<typeAlias alias="ProfileVo" type="com.javaex.vo.ProfileVo" /> <!-- 영훈 SparringVo -->
     </typeAliases>
 
     <mappers>
-   		<mapper resource="mybatis/mappers/example.xml" /> <!-- 여기에 쿼리문xml 경로 추가-->
-   		<mapper resource="mybatis/mappers/profile.xml" /> <!-- 영훈 SparringVo-->
+        <mapper resource="mybatis/mappers/profile.xml" />
+        <!-- <mapper resource="mybatis/mappers/guestbook.xml" /> --> <!--사용할 mapper 파일경로 지정한다-->
     </mappers>
 </configuration>
