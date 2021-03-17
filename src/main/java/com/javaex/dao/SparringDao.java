@@ -15,8 +15,8 @@ public class SparringDao {
 	public void insertProfile(ProfileVo profileVo) {
 		System.out.println("[Dao] : insertProfile()");
 		System.out.println("vo :" + profileVo);
-		
-		int count = sqlSession.insert("ProfileVo.insertProfile",profileVo);
+		//profileVo.setAddress("서울");
+		int count = sqlSession.insert("profile.insertProfile",profileVo);
 		
 		System.out.println(count);
 	}
