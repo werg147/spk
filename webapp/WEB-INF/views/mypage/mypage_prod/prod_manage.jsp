@@ -53,8 +53,8 @@
 								<div class="table_box">
 									<table class="delevery_insert_table">
 										<colgroup>
-											<col style="width: 130px">
-											<col style="width: 500px">
+											<col style="width: 150px">
+											<col style="width: 480px">
 										</colgroup>
 										<tr>
 											<td>카테고리</td>
@@ -65,7 +65,7 @@
 											<td>gl12456874</td>
 										</tr>
 										<tr>
-											<td>색상|사이즈|재고</td>
+											<td>색상 | 사이즈 | 재고</td>
 											<td>
 												<div>
 													<div>블랙 | 5</div>
@@ -104,8 +104,8 @@
 								<div class="table_box">
 									<table class="delevery_insert_table">
 										<colgroup>
-											<col style="width: 130px">
-											<col style="width: 500px">
+											<col style="width: 150px">
+											<col style="width: 480px">
 										</colgroup>
 										<tr>
 											<td>카테고리</td>
@@ -116,7 +116,7 @@
 											<td>cl12456874</td>
 										</tr>
 										<tr>
-											<td>색상|사이즈|재고</td>
+											<td>색상 | 사이즈 | 재고</td>
 											<td>
 												<div>
 													<div>블루 | 95(M) | 5</div>
