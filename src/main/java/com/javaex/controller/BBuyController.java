@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping(value="/bbuy" , method= {RequestMethod.GET , RequestMethod.POST})
+@RequestMapping(value="/sparring" , method= {RequestMethod.GET , RequestMethod.POST})
 public class BBuyController {
 	
 	//스파링 리스트
@@ -22,5 +22,15 @@ public class BBuyController {
 		System.out.println("[Controller] : sparringMatch()");
 		System.out.println("bookingNo = "+ bookingNo);
 		return "matching/sparringMatch";
+	}
+	
+	
+	//대관 x 매칭신청만 할경우 입력폼
+	@RequestMapping(value="/writeForm" , method= {RequestMethod.GET , RequestMethod.POST})
+	public String profileWriteForm() {
+		System.out.println("[Controller] :+ profileWriteForm()");
+		
+		
+		return "matching/matchinfoForm";
 	}
 }
