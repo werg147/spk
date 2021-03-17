@@ -8,8 +8,12 @@
     <typeAliases>
     	<typeAlias alias="GuestVo" type="com.javaex.vo.GuestVo" />
     </typeAliases> -->
+    <typeAliases>
+    	<typeAlias alias="ProfileVo" type="com.javaex.vo.ProfileVo" /> <!-- 영훈 SparringVo -->
+    </typeAliases>
 
     <mappers>
    		<mapper resource="mybatis/mappers/example.xml" /> <!-- 여기에 쿼리문xml 경로 추가-->
+   		<mapper resource="mybatis/mappers/profile.xml" /> <!-- 영훈 SparringVo-->
     </mappers>
 </configuration>
