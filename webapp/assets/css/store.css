@@ -211,6 +211,10 @@ input:-ms-input-placeholder {
 
 
 /*/////////////////////상품 상세페이지///////////////////*/
+.proBody{
+	position: relative;
+}
+
 /*상단여백*/
 #sectionView{
   height: 800px;
@@ -415,6 +419,10 @@ select {
 }
 
 /*총 상품금액*/
+.price {
+	padding-top: 15px;
+}
+
 .price_total .total {
   text-align: right;
   padding-bottom: 30px;
@@ -1067,17 +1075,17 @@ h3 {
 }
 
 /*문의 버튼영역*/
-.group_btn {
+.group_btn_qna {
   overflow: hidden;
   padding-top: 50px;
   text-align: center;
 }
 
-.group_btn .inner_btn {
+.group_btn_qna .inner_btn {
   display: inline-block;
 }
 
-.group_btn .btn {
+.group_btn_qna .btn {
   float: left;
   width: 150px;
   height: 42px;

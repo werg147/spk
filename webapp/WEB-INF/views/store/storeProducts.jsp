@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/store.css">
 </head>
 
-<body>
+<body class="proBody">
     
 <div class="wrap">
     <div class="container">
@@ -172,19 +172,19 @@
 		<div class="layout_wrap goods_view_area">
 
 			<!--상세정보,상품정보,고객후기,상담문의 탭-->
-			<div class="goods_tab">
+			<div class="goods_tab" id="proDesc">
 				<ul class="goods_view_tab">
 					<li>
-						<a class="" href="">상품설명</a>
+						<a href="#proDesc">상품설명</a>
 					</li>
 					<li>
-						<a href="">상품정보</a>
+						<a href="#proInfo">상품정보</a>
 					</li>
 					<li>
-						<a href="">고객후기</a>
+						<a href="#proReview">고객후기</a>
 					</li>
 					<li>
-						<a href="">상담문의</a>
+						<a href="#proQna">상담문의</a>
 					</li>
 				</ul>
 			</div> <!--goods_tab-->
@@ -199,19 +199,19 @@
 
 
 			<!--상세정보,상품정보,고객후기,상담문의 탭-->
-			<div class="goods_tab">
+			<div class="goods_tab" id="proInfo">
 				<ul class="goods_view_tab">
 					<li>
-						<a href="">상품설명</a>
+						<a href="#proDesc">상품설명</a>
 					</li>
 					<li>
-						<a href="">상품정보</a>
+						<a href="#proInfo">상품정보</a>
 					</li>
 					<li>
-						<a href="">고객후기</a>
+						<a href="#proReview">고객후기</a>
 					</li>
 					<li>
-						<a href="">상담문의</a>
+						<a href="#proQna">상담문의</a>
 					</li>
 				</ul>
 			</div> <!--goods_tab-->
@@ -248,19 +248,19 @@
 				
 				
 			<!--상세정보,상품정보,고객후기,상담문의 탭-->
-			<div class="goods_tab">
+			<div class="goods_tab" id="proReview">
 				<ul class="goods_view_tab">
 					<li>
-						<a href="">상품설명</a>
+						<a href="#proDesc">상품설명</a>
 					</li>
 					<li>
-						<a href="">상품정보</a>
+						<a href="#proInfo">상품정보</a>
 					</li>
 					<li>
-						<a href="">고객후기</a>
+						<a href="#proReview">고객후기</a>
 					</li>
 					<li>
-						<a href="">상담문의</a>
+						<a href="#proQna">상담문의</a>
 					</li>
 				</ul>
 			</div> <!--goods_tab-->
@@ -517,21 +517,21 @@
 
 
 				<!--상세정보,상품정보,고객후기,상담문의 탭-->
-				<div class="goods_tab">
+				<div class="goods_tab" id="proQna">
 					<ul class="goods_view_tab">
-						<li>
-							<a href="">상품설명</a>
-						</li>
-						<li>
-							<a href="">상품정보</a>
-						</li>
-						<li>
-							<a href="">고객후기</a>
-						</li>
-						<li>
-							<a href="">상담문의</a>
-						</li>
-					</ul>
+					<li>
+						<a href="#proDesc">상품설명</a>
+					</li>
+					<li>
+						<a href="#proInfo">상품정보</a>
+					</li>
+					<li>
+						<a href="#proReview">고객후기</a>
+					</li>
+					<li>
+						<a href="#proQna">상담문의</a>
+					</li>
+				</ul>
 				</div> <!--goods_tab-->
 
 				<!--상담문의-->	
