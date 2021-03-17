@@ -216,7 +216,15 @@
 											</td>
 										</tr>
 										<!-- //최근운동 -->
-										
+										<!--스파링횟수-->
+										<tr class="basic">
+											<td colspan="2"><label for="exer_cate">실전 스파링횟수</label></td>
+											<td>
+												<div class="content_product_insert_select_box">
+													<input class="text_sparring_exp" type="text" name="exp"> 회
+												</div>
+											</td>
+										</tr>
 										<!-- 반복단 -->
 										<tr class="basic">
 											<td><label for="prod_cate">공식기록</label></td>
@@ -310,7 +318,7 @@
 										<button class="product_delclose_btn">취소</button>
 									</div>
 									<!-- //product_insert_btn -->
-									<input type="hidden" name="userNo" value="1">
+									<input type="hidden" name="userNo" value="2">
 								</form>
 								<!-- //입력폼 → 주문하기 -->
 
