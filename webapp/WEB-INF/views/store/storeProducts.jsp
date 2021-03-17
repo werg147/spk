@@ -36,7 +36,7 @@
 			<div id="sectionView">
 				
 
-					<img src="../../image/store_img/glove1.jpg" alt="상품 대표 이미지" class="bg" width="430" height="552"> <!--상품 대표 이미지-->
+					<img src="${pageContext.request.contextPath}/assets/image/store_img/glove1.jpg" alt="상품 대표 이미지" class="bg" width="430" height="552"> <!--상품 대표 이미지-->
 
 					<!--상품 정보,선택,가격,장바구니,구매 영역-->
 					<div class="goods_area"> 
@@ -191,7 +191,7 @@
 
 			<!--상세정보(이미지)-->
 			<div class="goods_view">
-				<img src="../../image/store_img/glove1-1.png" alt="상품 추가 이미지" class="bg"> <!--상품 추가 이미지-->
+				<img src="${pageContext.request.contextPath}/assets/image/store_img/glove1-1.png" alt="상품 추가 이미지" class="bg"> <!--상품 추가 이미지-->
 			</div>
 
 
@@ -300,8 +300,7 @@
 										<div class="sort" style="bottom:-9px">
 											<select class="sort_select" onchange="this.form.sort.value=this.value;this.form.submit()">
 												<option value="1">최근등록순</option>
-												<option value="2">좋아요많은순</option>
-												<option value="3">조회많은순</option>
+												<option value="2">조회많은순</option>
 											</select>
 										</div>
 									</div> <!--sort-wrap-->
