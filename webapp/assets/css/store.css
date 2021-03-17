@@ -136,17 +136,23 @@ input:-ms-input-placeholder {
 
 
 /*///////////////판매상품 리스트//////////////*/
+.wrap2 {
+  max-width: 100%;
+  overflow: hidden;
+}
+.wrap2 .container2 {
+  width: 1106px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
 
 .item {
   float: left;
   box-sizing: border-box;
-  padding: 25px 0px 0px 0px;
+  padding: 25px 32px 0px 28px;
 }
 
-#goodsList .left_item{
-  box-sizing: border-box;
-  padding: 25px 0px 0px 63px;
-}
 
 /*상품이름*/
 .info .name {
