@@ -22,5 +22,13 @@ public class StoreController {
 		
 		return "store/storeProducts";
 	}
+	
+	//스토어 결제 페이지(jsp수정필요)
+	@RequestMapping(value="/stopay")
+	public String stopay() {
+		System.out.println("[Controller] stopay()");
+		
+		return "store/storePayment";
+	}
 
 }

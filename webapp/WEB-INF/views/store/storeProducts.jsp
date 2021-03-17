@@ -84,9 +84,9 @@
 							</dl>
 							-->
 
-						<!--갯수--> 
+						<!--개수--> 
 							<dl class="list">
-								<dt class="tit">갯수</dt> <dd class="desc">1개</dd>
+								<dt class="tit">개수</dt> <dd class="desc">1개</dd>
 							</dl> <!----> <!----> <!----> <!----> <!---->  <!----> <!----> <!---->
 						</div>
 
@@ -97,8 +97,10 @@
 							<!--상품 선택-->
 							<div class="goods_info">
 								<dl class="list fst">
-									<dt class="tit">상품 선택</dt> 
+									<dt class="tit">선택 상품</dt> 
+									<!--
 									<dd class="desc">
+									
 										<select id="prod_cate">
 											<option selected>선택하기</option>
 											<option>펀치킹 레드</option>
@@ -106,6 +108,7 @@
 											<option>펀치킹 블랙</option>
 										</select>
 									</dd>
+									-->
 								</dl>
 							</div>
 							
