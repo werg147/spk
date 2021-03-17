@@ -9,5 +9,6 @@
     <mappers>
         <mapper resource="mybatis/mappers/profile.xml" />
         <!-- <mapper resource="mybatis/mappers/guestbook.xml" /> --> <!--사용할 mapper 파일경로 지정한다-->
+        <mapper resource="mybatis/mappers/prod.xml" />
     </mappers>
 </configuration>
