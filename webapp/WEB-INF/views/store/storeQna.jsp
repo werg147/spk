@@ -42,11 +42,13 @@
                 </ul>
                 </div>
 
-                <form name="frmQna" method="post" action="">
-                    <input type="hidden" name="mode" value="add_qna">
-                    <input type="hidden" name="goodsno" value="27449">
-                    <input type="hidden" name="sno" value="undefined">
-                    <input type="hidden" name="encode" value="">
+                <form name="formQna" method="post" action="${pageContext.request.contextPath}/store/qnaWrite" enctype="multipart/form-data">
+                	<input type="hidden" name="qna_no" value="10">
+                    <input type="hidden" name="prod_no" value="123">
+                    <input type="hidden" name="qna_date" value="">
+                    <input type="hidden" name="user_no" value="1">
+                    <input type="hidden" name="buy_no" value="44">
+              
                 
                     <table id="form" class="tbl tbl_type2">
                         <colgroup>
@@ -65,7 +67,7 @@
                                     <td>
                                         <input type="text" name="email" label="이메일" value="abc@naver.com" readonly="readonly" class="read_only">
                                         <label for="rcvEmail" class="label_check">                                            
-                                            <input type="checkbox" id="rcvEmail" name="rcv_email" value="1">                                          
+                                            <input type="checkbox" value="">                                          
                                             이메일로 답변을 받겠습니다.
                                         </label>
                                     </td>
@@ -73,9 +75,9 @@
                                 <tr>
                                     <th>핸드폰</th>
                                     <td>
-                                        <input type="text" name="phone" label="문자메시지" value="010-1234-5678" readonly="readonly" class="read_only">
+                                        <input type="text" name="phone" label="문자메시지" value="01012345678" readonly="readonly" class="read_only">
                                         <label for="rcvSms" class="label_check">
-                                            <input type="checkbox" id="rcvSms" name="rcv_sms" value="1">
+                                            <input type="checkbox" value="">
                                             문자로 답변을 받겠습니다.
                                         </label>
                                     </td>
@@ -83,8 +85,8 @@
                                 <tr>
                                     <th>비밀글</th>
                                     <td class="secret">
-                                        <label for="secret" class="label_check">
-                                            <input type="checkbox" id="secret" name="secret" value="1">
+                                        <label for="qna_type">
+                                            <input type="checkbox" id="secret" name="qna_type" value="qna_type">
                                             비밀글
                                         </label>
                                     </td>
@@ -92,7 +94,7 @@
                                 <tr>
                                     <th>제목</th>
                                     <td class="subject">
-                                        <input type="text" name="subject" required="" fld_esssential="" label="제목" value="">
+                                        <input type="text" name="qna_title" label="제목" value="">
                                     </td>
                                 </tr>
                                 <tr id="edits">
@@ -101,38 +103,38 @@
                                 </tr>                              
                             </tbody>
                     </table>
-                </form>
-            </div>
 
-            <!--파일첨부-->
-            <div class="file_up">
-                <!--input box-->
-                <input type="text" class="upload_text" readonly="readonly">
 
-                <!--button-->
-                <div class="upload-btn_wrap">
-                    <button type="button" title="파일찾기">
-                        <span>파일찾기</span>  
-                    </button>
-                    <input type="file" class="input_file" title="파일찾기">
-                </div>
-            </div>
-            
-            <!--입력란-->
-            <div>
-                <textarea class="textarea_size"></textarea>
-            </div>
-        
-    
-            <!--등록/취소 버튼-->
-            <div class="group_btn_qna">
-                <span class="inner_btn">
-                    <button type="button" onclick="history.back();return false;" class="btn">취소</button>
-                    <input type="submit" value="등록" class="btn btn_submit">
-                </span>
-            </div>
-
-        </div>
+		            <!--파일첨부-->
+		            
+			            <div class="file_up">
+			                <!--input box
+			                <input type="text" class="upload_text" readonly="readonly">-->
+			
+			                <!--button-->
+			                <div class="">
+			           
+			                    <input type="file" class="input_file"  name="file" title="파일찾기">
+			                </div>
+			            </div>
+		            
+		            <!--입력란-->
+		            <div>
+		                <textarea class="textarea_size" name="qna_content" value=""></textarea>
+		            </div>
+		        
+		    
+		            <!--등록/취소 버튼-->
+		            <div class="group_btn_qna">
+		                <span class="inner_btn">
+		                    <button type="button" onclick="history.back();return false;" class="btn">취소</button>
+		                    <button type="submit" value="등록" class="btn btn_submit">등록</button>
+		                </span>
+		            </div>
+		                    
+		     </form>
+		  </div>
+      </div>
 
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         

@@ -203,7 +203,7 @@ input:-ms-input-placeholder {
 	margin: 0px 8px 0px 8px;
 }
 
-#paging ul>li.active{
+#paging ul>li.active {
 	font-size: 14px;
 	font-weight: bold;
 }
@@ -409,19 +409,6 @@ select {
     border-radius: 3px;
 }
 
-.procount {
-    float: left;
-    width: 30px;
-    height: 30px;
-    margin-right: -1px;
-    padding: 0 0 4px;
-    border: 0;
-    background-color: #fff;
-    font-size: 14px;
-    color: #000;
-    line-height: 18px;
-    text-align: center;
-}
 
 #cartPut .list .option {
   padding-top: 8px;
@@ -1124,7 +1111,7 @@ h3 {
   background-color: #f9f9f9;
 }
 
-.section_prdwrite input[type="text"] {
+.section_prdwrite .tbl input[type="text"] {
   float: left;
   width: 200px;
   height: 40px;
@@ -1181,7 +1168,7 @@ h3 {
   letter-spacing: -0.6px;
 }
 
-.group_btn .btn_submit {
+.group_btn_qna .btn_submit {
   margin-right: 0;
   border: 1px solid #C51212;
   background-color: #C51212;

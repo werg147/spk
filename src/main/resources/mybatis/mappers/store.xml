@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace= "store">
+	
+	<resultMap id ="QnaVo" type="QnaVo">
+		<result column ="qna_no" property="qnaNo"/>
+		<result column ="prod_no" property="prodNo"/>
+		<result column ="qna_title" property="qnaTitle"/>
+		<result column ="qna_content" property="qnaContent"/>
+		<result column ="qna_date" property="qnaDate"/>
+		<result column ="Qna_type" property="QnaType"/>
+		<result column ="user_no" property="userNo"/>
+		<result column ="buy_no" property="buyNo"/>  
+	</resultMap>
+   
+</mapper>

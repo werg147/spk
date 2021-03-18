@@ -101,7 +101,7 @@
 								<!-- 수량, 총 금액 form -->
 								<form name="form" method="get">
 								<dl class="list">
-									<dt class="tit procount">
+									<dt class="tit">
 										수량 : <input type=hidden name="sell_price" value="153600">
 									</dt> 
 									<dd class="desc">
@@ -638,7 +638,7 @@
 									<div>
 										<table width="100%" class="xans-board-listheaderd">
 											<tbody>
-												<tr onmouseover="this.style.background='#F7F7F7'" onmouseout="this.style.background=''" onclick="view_content('15968', '1');" style="">
+												<tr>
 													<td width="70" align="center">
 														123
 													</td>
@@ -743,7 +743,7 @@
 						
 
 								<p class="btnArea after">
-									<a href="">
+									<a href="${pageContext.request.contextPath}/store/qnaForm">
 										<span class="bhs_button" style="line-height:30px; width:130px;">상품문의</span>
 									</a>
 								</p>
@@ -858,6 +858,13 @@
 		sum.value = (parseInt(hm.value) * sell_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
 	}
+	
+	
+	
+	
+	
+	//문의하기 버튼 클릭시
+	
 	
 	
 	

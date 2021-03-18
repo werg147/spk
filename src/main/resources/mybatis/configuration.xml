@@ -10,6 +10,7 @@
 		<typeAlias alias="GymVo" type="com.javaex.vo.GymVo" /> <!-- 다현 GymVo -->
     	<typeAlias alias="ConVo" type="com.javaex.vo.ConVo" /> <!-- 다현 ConVo -->
     	<typeAlias alias="GymImgVo" type="com.javaex.vo.GymImgVo" /> <!-- 다현 GymImgVo -->
+    	<typeAlias alias="QnaVo" type="com.javaex.vo.QnaVo" /> <!-- 세림 QnaVo -->
 	</typeAliases>
 
 	<mappers>
@@ -21,6 +22,7 @@
 		<mapper resource="mybatis/mappers/alarm.xml" />
 		<mapper resource="mybatis/mappers/user.xml" />
 		<mapper resource="mybatis/mappers/gym.xml" />
+		<mapper resource="mybatis/mappers/store.xml" /> <!-- 세림 -->
 	</mappers>
 </configuration>
 
