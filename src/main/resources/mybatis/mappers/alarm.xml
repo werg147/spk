@@ -8,14 +8,27 @@
 		<![CDATA[
 			SELECT  a.alarm_date,
         			u.user_id,
-        			a.sell_type,
-        			a.prod_state,
-        			a.alarm_content
-			FROM    alarm a, users u
+			        a.sell_type,
+			        b.buy_del_state,
+			        a.alarm_content,
+			        p.prod_name
+			FROM    alarm a, users u, buy b, product p
 			WHERE   a.from_user_no = u.user_no
-					and to_user_no = 1
-			ORDER BY a.alarm_no asc
+			        and u.user_no = b.user_no
+			        and b.prod_no = p.prod_no
 		]]>
 	</select>
+
+	<insert id="sendAlarm" parameterType="AlarmVo">
+		<![CDATA[
+			INSERT INTO alarm VALUES(seq_alarm_no.nextval, '2', '1', '1', '결제가 완료되었습니다.', '배송', sysdate, '결제완료')
+		]]>
+	</insert>
+
+	<insert id="updateAlarm" parameterType="AlarmVo">
+		<![CDATA[
+			INSERT INTO alarm VALUES(seq_alarm_no.nextval, '2', '1', '1', '배송이 준비중 입니다.', '배송', sysdate, '배송준비중')
+		]]>
+	</insert>
 
 </mapper>

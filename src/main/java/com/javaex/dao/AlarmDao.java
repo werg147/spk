@@ -26,4 +26,21 @@ public class AlarmDao {
 
 	}
 
+	public Object send(AlarmVo aVo) {
+
+		System.out.println("[Alarm Dao]: send(AlarmVo aVo) 실행");
+
+		return sql.insert("alarm.sendAlarm", aVo);
+
+	}
+
+	public Object update(AlarmVo aVo) {
+
+		System.out.println("[Alarm Dao]: update(AlarmVo aVo) 실행");
+
+		System.out.println("[Alarm Dao]: " + aVo.toString());
+
+		return sql.insert("alarm.updateAlarm", aVo);
+	}
+
 }

@@ -21,4 +21,20 @@ public class AlarmService {
 		return aDao.selectList();
 	}
 
+	public Object send(AlarmVo aVo) {
+
+		System.out.println("[Alarm Service]: send(AlarmVo aVo) 연결");
+
+		return aDao.send(aVo);
+
+	}
+
+	public Object update(AlarmVo aVo) {
+
+		System.out.println("[Alarm Service]: update(AlarmVo aVo) 연결");
+
+		return aDao.update(aVo);
+
+	}
+
 }

@@ -29,87 +29,98 @@
 
 					<!--등록폼-->
 					<div class="gym_regi_form">
-						<form action="" method="">
+						<form action="${pageContext.request.contextPath}/mypage/book/gymadd" method="post" enctype="multipart/form-data">
 							<table>
 								<tr>
 									<td class="basic">체육관 이름</td>
-									<td colspan="3"><input class="input_text" type="text"></td>
+									<td colspan="2"><input class="input_text" type="text" name="gym_name"> 
+									<!-- 테스트용 사업자번호 --><input type="hidden" name="sell_no" value="2"></td>
 								</tr>
 
 								<tr>
 									<td class="basic">체육관 주소</td>
-									<td colspan="3"><input class="input_text" type="text"></td>
+									<td colspan="2"><input class="input_text" type="text" name="gym_address"></td>
 								</tr>
 
 								<tr>
 									<td class="basic">체육관 전화번호</td>
-									<td colspan="3"><input class="input_text" type="text"></td>
+									<td colspan="2"><input class="input_text" type="text" name="gym_ph"></td>
 								</tr>
 
 								<tr class="input_plus">
 									<td>체육관 운영시간</td>
-									<td colspan="3"><textarea></textarea></td>
+									<td colspan="2"><textarea name="gym_time"></textarea></td>
 								</tr>
 
 								<tr class="basic_chk">
 									<td>체육관 주 종목</td>
-									<td colspan="3"></td>
+									<td colspan="2"></td>
 								</tr>
 
 								<tr>
-									<td class="basic_chk_padding"><input type="checkbox" name=""> 복싱</td>
-									<td class="basic_chk_padding"><input type="checkbox" name=""> 킥복싱</td>
-									<td class="basic_chk_padding"><input type="checkbox" name=""> 주짓수</td>
-									<td class="basic_chk_padding"><input type="checkbox" name=""> 종합격투기</td>
+									<td class="basic_chk_padding">
+										<input id="box" type="radio" name="gym_event" value="box"> <label for="box">복싱/킥복싱</label>
+									</td>
+									<td class="basic_chk_padding">
+										<input id="jiu" type="radio" name="gym_event" value="jiu"> <label for="jiu">주짓수</label>
+									</td>
+									<td class="basic_chk_padding">
+										<input id="mma" type="radio" name="gym_event" value="mma"> <label for="mma">종합격투기</label>
+									</td>
 								</tr>
 
 								<tr class="basic_chk">
 									<td>체육관 편의시설</td>
-									<td colspan="3"></td>
+									<td colspan="2"></td>
 								</tr>
 
 								<tr>
-									<td><input type="checkbox" name=""> 주차장</td>
-									<td><input type="checkbox" name=""> 샤워실</td>
-									<td colspan="2"><input type="checkbox" name=""> 수건</td>
+									<td><input id="park" type="checkbox" name="conve" value="park"> <label for="park">주차장</label></td>
+									<td><input id="shower" type="checkbox" name="conve" value="shower"> <label for="shower">샤워실</label></td>
+									<td><input id="towel" type="checkbox" name="conve" value="towel"> <label for="towel">수건</label></td>
 								</tr>
 
 								<tr>
-									<td class="basic_chk_padding"><input type="checkbox" name=""> 락커</td>
-									<td class="basic_chk_padding"><input type="checkbox" name=""> 글러브</td>
-									<td class="basic_chk_padding" colspan="2"><input type="checkbox" name=""> 운동복</td>
+									<td class="basic_chk_padding">
+										<input id="locker" type="checkbox" name="conve" value="locker"> <label for="locker">락커</label>
+									</td>
+									<td class="basic_chk_padding">
+										<input id="glove" type="checkbox" name="conve" value="glove"> <label for="glove">글러브</label>
+									</td>
+									<td class="basic_chk_padding" colspan="2">
+										<input id="wear" type="checkbox" name="conve" value="wear"> <label for="wear">운동복</label>
+									</td>
 								</tr>
 
 								<tr class="input_plus">
 									<td>공지사항</td>
-									<td colspan="3"><textarea></textarea></td>
+									<td colspan="2"><textarea name="gym_notice"></textarea></td>
 								</tr>
 
 
 
 								<tr>
 									<td class="basic">체육관 사진</td>
-									<td colspan="3"><input type="file"></td>
+									<td colspan="2"><input type="file"></td>
 								</tr>
 
 							</table>
 
 							<div class="gym_regi_btn_site">
-								<button onclick="location.href='예약판매자4_마이페이지_체육관관리1.html'" class="gym_regi_btn"
-									type="button">체육관 등록</button>
+								<button class="gym_regi_btn" type="submit">체육관 등록</button>
 							</div>
 
-						</form>
+						</form> <!-- //form -->
 					</div>
 					<!--//gym_regi_form-->
-
 				</div>
-				<!--//middle-->
-				<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
-				<!--//footer//-->
 			</div>
-			<!--//container-->
+			<!--//middle-->
+			<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
+			<!--//footer//-->
 		</div>
-		<!--//wrap-->
+		<!--//container-->
+	</div>
+	<!--//wrap-->
 </body>
 </html>

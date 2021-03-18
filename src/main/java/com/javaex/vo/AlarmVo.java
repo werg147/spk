@@ -8,15 +8,27 @@ public class AlarmVo {
 	public String alarm_content;
 	public String sell_type;
 	public String alarm_date;
-	public String prod_state;
 	public String user_id;
+	public String buy_del_state;
+	public String prod_name;
 
 	public AlarmVo() {
 		super();
 	}
 
+	public AlarmVo(String alarm_content, String sell_type, String alarm_date, String user_id, String buy_del_state,
+			String prod_name) {
+		super();
+		this.alarm_content = alarm_content;
+		this.sell_type = sell_type;
+		this.alarm_date = alarm_date;
+		this.user_id = user_id;
+		this.buy_del_state = buy_del_state;
+		this.prod_name = prod_name;
+	}
+
 	public AlarmVo(int alarm_no, int from_user_no, int to_user_no, String alarm_content, String sell_type,
-			String alarm_date, String prod_state, String user_id) {
+			String alarm_date, String user_id, String buy_del_state, String prod_name) {
 		super();
 		this.alarm_no = alarm_no;
 		this.from_user_no = from_user_no;
@@ -24,8 +36,9 @@ public class AlarmVo {
 		this.alarm_content = alarm_content;
 		this.sell_type = sell_type;
 		this.alarm_date = alarm_date;
-		this.prod_state = prod_state;
 		this.user_id = user_id;
+		this.buy_del_state = buy_del_state;
+		this.prod_name = prod_name;
 	}
 
 	public int getAlarm_no() {
@@ -76,14 +89,6 @@ public class AlarmVo {
 		this.alarm_date = alarm_date;
 	}
 
-	public String getProd_state() {
-		return prod_state;
-	}
-
-	public void setProd_state(String prod_state) {
-		this.prod_state = prod_state;
-	}
-
 	public String getUser_id() {
 		return user_id;
 	}
@@ -92,11 +97,20 @@ public class AlarmVo {
 		this.user_id = user_id;
 	}
 
-	@Override
-	public String toString() {
-		return "AlarmVo [alarm_no=" + alarm_no + ", from_user_no=" + from_user_no + ", to_user_no=" + to_user_no
-				+ ", alarm_content=" + alarm_content + ", sell_type=" + sell_type + ", alarm_date=" + alarm_date
-				+ ", prod_state=" + prod_state + "]";
+	public String getBuy_del_state() {
+		return buy_del_state;
+	}
+
+	public void setBuy_del_state(String buy_del_state) {
+		this.buy_del_state = buy_del_state;
+	}
+
+	public String getProd_name() {
+		return prod_name;
+	}
+
+	public void setProd_name(String prod_name) {
+		this.prod_name = prod_name;
 	}
 
 }

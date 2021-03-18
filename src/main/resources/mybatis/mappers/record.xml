@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace= "record">
+	
+
+   
+	  <insert id="insertRecord" parameterType="RecordVo">
+	  	<![CDATA[
+			insert into record
+			values( SEQ_RECORD_NO.nextval,
+					#{profileNo},
+					#{recordType},
+					#{recordName},
+					#{recordEvent},
+					#{recordDate},
+					#{recordMatch}
+			)	  	
+	  	]]>
+	  
+	  </insert>
+		
+		<select id="selectListRecord" parameterType="int" resultType="RecordVo">
+			<![CDATA[
+				select record_no as recordNo,
+				       profile_no as profileNo,
+				       record_type as recordType,
+				       record_name as recordName,
+				       record_event as recordEvent,
+				       record_date as recordDate,
+				       record_match as recordMatch
+				from record
+				WHERE PROFILE_NO = #{profileNo}
+				order by record_no asc			
+			]]>
+		</select>
+
+</mapper>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="gym">
+	
+	<!-- 체육관정보 불러오기 추후 조건 수정 : 사업자번호+체육관번호 -->
+	<select id="gymSelectOne" parameterType="int" resultType="GymVo">
+		<![CDATA[ 
+			SELECT  gym_no,
+			        sell_no,
+			        gym_name,
+			        gym_address,
+			        gym_ph,
+			        gym_time,
+			        gym_notice,
+			        gym_event,
+			        gym_date
+			FROM gym
+			where sell_no = #{gymno}
+		]]>
+	</select>
+	
+	<!-- 체육관 등록 -->
+	<insert id="gymInsert" parameterType="GymVo" >
+		<selectKey keyProperty="gym_no" resultType="Int" order="BEFORE">
+			select seq_gym_no.nextval from dual
+		</selectKey>
+		<![CDATA[ 
+			insert into gym
+			values(#{gym_no}, 
+			       #{sell_no}, 
+			       #{gym_name}, 
+			       #{gym_address}, 
+			       #{gym_ph}, 
+			       #{gym_time}, 
+			       #{gym_notice},
+			       #{gym_event}, 
+			       sysdate)
+		]]>
+	</insert>
+	
+	<!-- 편의시설 등록 -->
+	<insert id="conInsert" parameterType="ConVo" >
+		<![CDATA[ 
+			insert into convenience
+			values(seq_con_no.nextval, 
+			       #{gym_no}, 
+			       #{con_name}, 
+			       0)
+		]]>
+	</insert>
+	
+	<!-- 편의시설 상태 변경 -->
+	<update id="conUpdate" parameterType="ConVo">
+		<![CDATA[ 
+			update convenience
+			set con_state = 1
+			where gym_no = #{gym_no} 
+			and con_name = #{con_name}
+		]]>
+	</update>
+	
+	<!-- 체육관 이미지 등록 -->
+	<insert id="gimgInsert" parameterType="GymImgVo">
+		<![CDATA[ 
+		insert into gymimg
+		values(seq_gymimg_no.nextval, 
+		       #{gym_no}, 
+		       #{gym_img_savename}, 
+		       #{gym_img_name}, 
+		       'main')
+		]]>
+	</insert>
+
+</mapper>
