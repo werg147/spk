@@ -4,6 +4,8 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="ProfileVo" type="com.javaex.vo.ProfileVo" /> <!-- 영훈 SparringVo -->
+    	<typeAlias alias="EventVo" type="com.javaex.vo.EventVo" /> <!-- 영훈 SparringVo -->
+    	<typeAlias alias="RecordVo" type="com.javaex.vo.RecordVo" /> <!-- 영훈 SparringVo -->
 		<typeAlias alias="AlarmVo" type="com.javaex.vo.AlarmVo" />
 		<typeAlias alias="GymVo" type="com.javaex.vo.GymVo" /> <!-- 다현 GymVo -->
     	<typeAlias alias="ConVo" type="com.javaex.vo.ConVo" /> <!-- 다현 ConVo -->
@@ -11,7 +13,9 @@
 	</typeAliases>
 
 	<mappers>
-		<mapper resource="mybatis/mappers/profile.xml" />
+		<mapper resource="mybatis/mappers/event.xml" /> <!-- 영훈 -->
+        <mapper resource="mybatis/mappers/profile.xml" /> <!-- 영훈 -->
+        <mapper resource="mybatis/mappers/record.xml" /> <!-- 영훈 -->
 		<!-- <mapper resource="mybatis/mappers/guestbook.xml" /> --> <!--사용할 mapper 파일경로 지정한다 -->
 		<mapper resource="mybatis/mappers/prod.xml" />
 		<mapper resource="mybatis/mappers/alarm.xml" />
@@ -19,3 +23,4 @@
 		<mapper resource="mybatis/mappers/gym.xml" />
 	</mappers>
 </configuration>
+

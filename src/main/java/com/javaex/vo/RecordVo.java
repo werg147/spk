@@ -1,5 +1,7 @@
 package com.javaex.vo;
 
+import java.util.List;
+
 public class RecordVo {
 	
 	private int recordNo; //공식기록번호
@@ -10,15 +12,19 @@ public class RecordVo {
 	private String recordDate; //출전연도
 	private String recordMatch; //매치방식(일반,타이틀)
 	
+	private List<RecordVo> recordList;
 	
+
+
 	public RecordVo() {
 		super();
 	}
 
 
-	public RecordVo(int recordNo, int profileNo, String recordType, String recordName, String recordEvent,
-			String recordDate, String recordMatch) {
-		
+	
+	public RecordVo(int recordNo, int profileNo, String recordType, String recordName, String recordEvent, String recordDate, String recordMatch,
+			List<RecordVo> recordList) {
+		super();
 		this.recordNo = recordNo;
 		this.profileNo = profileNo;
 		this.recordType = recordType;
@@ -26,7 +32,25 @@ public class RecordVo {
 		this.recordEvent = recordEvent;
 		this.recordDate = recordDate;
 		this.recordMatch = recordMatch;
+		this.recordList = recordList;
 	}
+
+
+
+
+
+
+
+	public List<RecordVo> getRecordList() {
+		return recordList;
+	}
+
+
+
+	public void setRecordList(List<RecordVo> recordList) {
+		this.recordList = recordList;
+	}
+
 
 
 	public int getRecordNo() {

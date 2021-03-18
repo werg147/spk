@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace= "event">
+	
+	<insert id="insertEvent" parameterType="EventVo">
+		<![CDATA[
+			insert into event
+			values(SEQ_EVENT_NO.nextval,
+			       #{profileNo},
+			       #{eventName},
+			       '')		
+		
+		]]>
+	</insert>
+   
+	<select id="selectListEvent" parameterType="int" resultType="EventVo">
+		<![CDATA[
+			select event_name as eventName 
+			from event
+			WHERE PROFILE_NO = #{profileNo}
+		
+		]]>
+	
+	</select>
+   
+	
+
+</mapper>

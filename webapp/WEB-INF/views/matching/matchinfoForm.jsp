@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="kor">
 
@@ -7,6 +8,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>매칭프로필관리</title>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/header.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/style_1.css">
 </head>
@@ -75,7 +77,7 @@
 						<div class="con_match">
 
 
-							<div class="content_bottom">
+							<div id="form_submit" class="content_bottom">
 
 								<!-- 입력폼 → 매칭프로필저장 -->
 								<form action="${pageContext.request.contextPath}/sparring/write" method="post">
@@ -91,9 +93,11 @@
 											<td colspan="2"><label for="prod_cate">매치불러오기</label></td>
 											<td>
 												<div class="">
-													<select id="exer_cate">
+													<select  id="exer_cate">
 														<option selected>이전 매치</option>
-														<option>21/03/04</option>
+															<c:forEach items="${profileList}"  var="vo" varStatus="status">
+																<option id="before_item" data-no="${status.count}">${vo.profileDate}</option>
+															</c:forEach>
 													</select>
 												</div>
 											</td>
@@ -102,11 +106,12 @@
 
 										<!-- 대관없이 매칭글시에만 보임-->
 										<!-- 종목선택 -->
+										
 										<tr class="basic">
 											<td colspan="2"><label for="prod_cate">스파링종목</label></td>
 											<td>
-												<div class="">
-													<select id="exer_cate" name="profileGymEvent">
+												<div id="spa_event1" class="">
+													<select id="exer_cate1" name="profileGymEvent">
 														<option selected>종목 선택</option>
 														<option value="복싱">복싱</option>
 														<option value="킥복싱">킥복싱</option>
@@ -131,10 +136,10 @@
 											<td colspan="2"><label for="prod_cate">원하는 일시</label></td>
 											<td>
 												<div class="form_day_10">
-													<label for="day"></label><input class="day_textbox" type="text" placeholder="21/03/08" name="day" value="">
+													<label for="day"></label><input id="exer_cata2" class="day_textbox" type="text" placeholder="21/03/08" name="day" value="">
 												</div>
 												<div class="">
-													<select id="exer_cate" name="time">
+													<select id="exer_cate3" name="time">
 														<option selected>시간선택</option>
 														<option value="9:00~12:00">9:00~12:00</option>
 														<option value="12:00~15:00">12:00~15:00</option>
@@ -153,7 +158,7 @@
 										<tr class="basic">
 											<td colspan="2"><label for="prod_cate">주특기</label></td>
 											<td>
-												<div class="chk_box">
+												<div id="event_chked" class="chk_box">
 													<input type='checkbox' id="pro_chk" name='eventName' value='1' />복싱
 													<input type='checkbox' id="pro_chk" name='eventName' value='2' />킥복싱
 													<input type='checkbox' id="pro_chk" name='eventName' value='3' />종합격투기
@@ -165,13 +170,13 @@
 
 										<tr class="basic">
 											<td colspan="2"><label for="prod_name">신장</label></td>
-											<td><input type="text" id="prod_name" placeholder="신장을 입력해주세요." name="height"></td>
+											<td><input id="height_info"type="text" id="prod_name" placeholder="신장을 입력해주세요." name="height"></td>
 										</tr>
 										<!-- //신장 -->
 
 										<tr class="basic">
 											<td colspan="2"><label for="prod_price">체중</label></td>
-											<td><input type="text" id="prod_price" placeholder="체중을 입력해주세요."  name="weight"></td>
+											<td><input id="weight_info"type="text" id="prod_price" placeholder="체중을 입력해주세요."  name="weight"></td>
 										</tr>
 										<!-- //체중 -->
 
@@ -191,9 +196,9 @@
 											<td colspan="2"><label for="brand_name">전공</label></td>
 											<td>
 												<div class="chk_box">
-													<input type='radio' id="pro_chk" name='chk_major' value='pro' />무
-													<input type='radio' id="pro_chk" name='chk_major' value='ama' />유
-													<input type="text" id="prod_price" placeholder="전공을 입력해주세요." name="major" value="">
+													<input class="radio-value" id="major_empty" type='radio' id="pro_chk" name='chk_major' value='pro' />무
+													<input class="radio-value" type='radio' id="pro_chk" name='chk_major' value='ama' />유
+													<input class="radio-value" id="major_info" type="text" id="prod_price" placeholder="전공을 입력해주세요." name="major" value="">
 												</div>
 											</td>
 										</tr>
@@ -204,13 +209,13 @@
 											<td>
 												<div class="content_product_insert_select_box">
 													<select id="exer_cate" name="recentlyExer">
-														<option selected >최근운동</option>
-														<option value="주5회">주 5회 이상</option>
-														<option value="주3회">주 3회 이상</option>
-														<option value="주1회">주 1회 이상</option>
-														<option value="월1회">월 1회 이상</option>
-														<option value="3달">3달 이상 안함</option>
-														<option value="6달">6달 이상 안함</option>
+														<option >최근운동</option>
+														<option  value="주 5회 이상">주 5회 이상</option>
+														<option  value="주 3회 이상">주 3회 이상</option>
+														<option  value="주 1회 이상">주 1회 이상</option>
+														<option  value="월 1회 이상">월 1회 이상</option>
+														<option  value="3달 이상 안함">3달 이상 안함</option>
+														<option  value="6달 이상 안함">6달 이상 안함</option>
 													</select>
 												</div>
 											</td>
@@ -221,17 +226,18 @@
 											<td colspan="2"><label for="exer_cate">실전 스파링횟수</label></td>
 											<td>
 												<div class="content_product_insert_select_box">
-													<input class="text_sparring_exp" type="text" name="exp"> 회
+													<input id="exer_sparring_info" class="text_sparring_exp" type="text" name="exp"> 회
 												</div>
 											</td>
 										</tr>
 										<!-- 반복단 -->
-										<tr class="basic">
 											<td><label for="prod_cate">공식기록</label></td>
+										<tbody id="record_app">
+										<tr class="basic">
 											<td><label for="prod_cate">대회분류</label></td>
 											<td>
 												<div class="content_product_insert_select_box">
-													<select id="exer_cate" name="recordType">
+													<select id="cham_cate" name="recordList[0].recordType">
 														<option selected>대회분류</option>
 														<option value="지역">지역</option>
 														<option value="전국">전국</option>
@@ -244,10 +250,10 @@
 
 										<tr class="basic">
 											<td><label for="prod_cate"></label></td>
-											<td><label for="prod_cate">대회명</label></td>
+											<td><label for="cham_name">대회명</label></td>
 											<td>
 												<div class="content_product_insert_select_box">
-													<input type="text" id="prod_price" placeholder="대회명을 입력해주세요." name="recordName" >
+													<input type="text" id="cham_name" placeholder="대회명을 입력해주세요." name="recordList[0].recordName" >
 												</div>
 											</td>
 										</tr>
@@ -258,7 +264,7 @@
 											<td><label for="prod_cate">종목</label></td>
 											<td>
 												<div class="content_product_insert_select_box">
-													<select id="prod_cate" name="recordEvent">
+													<select id="even_cate" name="recordList[0].recordEvent">
 														<option selected>종목</option>
 														<option value="1">복싱</option>
 														<option value="2">킥복싱</option>
@@ -275,11 +281,11 @@
 											<td><label for="prod_cate">출전연도</label></td>
 											<td>
 												<div class="content_product_insert_select_box">
-													<select id="prod_cate" name="recordDate">
+													<select id="even_year" name="recordList[0].recordDate">
 														<option selected>출전연도</option>
-														<option value="">2021</option>
-														<option>2020</option>
-														<option>2019</option>
+														<option value="2021">2021</option>
+														<option value="2020">2020</option>
+														<option value="2019">2019</option>
 													</select>
 												</div>
 											</td>
@@ -291,7 +297,7 @@
 											<td><label for="prod_cate">매치</label></td>
 											<td>
 												<div class="content_product_insert_select_box">
-													<select id="prod_cate" name="recordMatch">
+													<select id="match_cate" name="recordList[0].recordMatch">
 														<option selected>매치</option>
 														<option value="일반매치">일반매치</option>
 														<option value="타이틀매치">타이틀매치</option>
@@ -300,13 +306,16 @@
 												</div>
 											</td>
 										</tr>
-										<!-- //공식기록 - 매치 -->
 										<!-- 반복단 end-->
+										
+										
+										</tbody>
+										<!-- //공식기록 - 매치 -->
 									</table>
 									<!-- //insert_matcingInfo -->
 
 									<div class="official_button">
-										<button class="official_button_plus" type="button">추가하기</button>
+										<button id="official_btn" class="official_button_plus" type="button">추가하기</button>
 									</div>
 									<!-- //공식기록 추가 -->
 									<!-- //공식기록 추가 -->
@@ -314,11 +323,12 @@
 										
 	
 									<div class="product_insert_btn">
-										<button class="insert_btn">저장</button>
+										<button id="info_subm" class="insert_btn">저장</button>
 										<button class="product_delclose_btn">취소</button>
 									</div>
 									<!-- //product_insert_btn -->
-									<input type="hidden" name="userNo" value="2">
+									<!-- session값 생겨도 히든으로 표시할 것 아이작스에서 쓰고있음 -->
+									<input id="session_user_no" type="hidden" name="userNo" value="2">
 								</form>
 								<!-- //입력폼 → 주문하기 -->
 
@@ -340,5 +350,369 @@
 	<!-- //wrap -->
 	
 </body>
+	<script type="text/javascript">
+	
+	$("document").ready(function(){
+		 num = 1
+		  
+	
+	})
+	
+	//프로필작성 경고문
+	
+	$('.radio-value').on('click', function() {
 
+    var valueCheck = $('.radio-value:checked').val(); // 체크된 Radio 버튼의 값을 가져옵니다.
+
+    if ( valueCheck == 'yes' ) {
+        $('.radio-value-detail').attr('disabled', false); // 과일 종류를 입력하는 input 을 활성화합니다.
+        $('.radio-value-detail').focus(); // 과일 종류를 입력하는 input 에 커서를 이동시킵니다.
+    } else {
+        $('.radio-value-detail').val(''); // 입력된 과일 종류 값이 있으면, 초기화합니다.
+        $('.radio-value-detail').attr('disabled', true); // 과일 종류를 입력하는 input 을 비활성화합니다.
+    }
+});
+		
+	
+
+	
+	
+	$("#form_submit").on("submit", function() {
+		console.log("확인");
+		console.log($("#exer_cate1 option:selected").val());
+		if($("#exer_cate1 option:selected").val() == "종목 선택"){
+			alert("스파링종목을 선택해주세요");
+			return false;
+		}
+		
+		if($("#exer_cata2").val()== ""){
+			alert("원하는 일시를 입력해주세요")
+			return false;
+		}
+		
+		if($("#exer_cate3 option:selected").val() == "시간선택"){
+			alert("원하는 시간을 선택해주세요")
+			return false;
+		}
+		
+		
+		var eventName2 = $("[name='eventName']:checked").val();
+		if(eventName2 == null){
+			alert("주특기를 1개 이상 체크해주세요");
+			return false;
+		}
+		
+		if($("#height_info").val() == ""){
+			alert("신장을 입력해주세요");
+			return false;
+		}
+		if($("#weight_info").val() == ""){
+			alert("체중을 입력해주세요");
+			return false;
+		}
+		
+		if(!$("input:radio[name=career]").is(':checked')){
+			alert("경력을 체크해주세요");
+		}
+		
+		
+		
+		/*
+		if($("#spa_event1").html() !=""){
+			console.log("값있어요");
+		};
+		*/
+		
+		
+		//패스워드체크wnsql
+		/*
+		var password = $("#input-pass").val();
+		
+		//약관동의 체크준비
+		var check = $("#chk-agree").is(":checked"); //true or false
+		console.log(check);
+		
+		//아이디 작성 여부 준비
+		var uid = $("#input-uid").val();
+		
+		//이름 작성여부준비
+		var name = $("#input-name").val();
+		
+		//성별체크 여부 준비
+		var gender = $("[name='gender']:checked").val();
+		
+		//아이디 작성여부
+		if(uid == ""){
+			alert("id를 입력해주세요");
+			return false;
+		}
+			//패스워드 체크 8글자 이상 통과
+		if(password.length<8){
+			//패스워드 체크 나머지 alert(패스워드는 8글자이상입니다)
+			alert("패스워드는 8글자 이상입니다.");
+			return false;			
+		}
+		
+		//이름 작성여부
+		if(name == ""){
+			$("#noName").text("이름을 기입해주세요");
+			return false;
+		}else{
+			$("#noName").text("");
+		}
+		
+		//성별 작성여부
+		if(gender == null){
+			alert("성별을 체크해주세요");
+			return false;
+		}
+		if (!check) {
+			//동의하기 checkbox가 체크되어 있으면 --> submit
+			alert("약관에 동의해주세요");
+		
+			return false;
+		}
+		*/
+		return false;
+	});
+	/* 버튼클릭시 date_no값 받아와서 날짜 얻어내기 */
+	$("#exer_cate").change("click",function(){
+				num= 0;
+				var rownum= $("select option:selected").data("no");
+				
+				
+				
+				var userNo=$("#session_user_no").val();
+				
+
+				$.ajax({
+
+					url : "${pageContext.request.contextPath }/sparring/api/selectdate", //컨트롤러의 url과 파라미터
+					type : "post", // 겟 포스트
+					//contentType : "application/json",
+					data : {
+						rownum : rownum,
+						userNo : userNo
+					},
+
+					//dataType : "json",
+					success : function(pMap) { //성공시
+						console.log(pMap.profileVo);
+						console.log(pMap.profileVo.recentlyExer);
+						
+						/* 프로필 */
+						$("#height_info").val(pMap.profileVo.height);
+						$("#weight_info").val(pMap.profileVo.weight);
+						$("#major_info").val(pMap.profileVo.major);
+						
+						$("#exer_sparring_info").val(pMap.profileVo.exp);
+						$('#exer_cate option[value="'+pMap.profileVo.recentlyExer+'"]').prop('selected', 'selected').change();
+						
+						/* 주특기 */
+						var size = $(pMap.eventList).length;
+						for(var i=0; i<size ;i++){
+
+							$('input:checkbox[value="'+pMap.eventList[i].eventName+'"]').attr('checked','checked').change();
+						}
+						
+						/* 공식기록 */
+						console.log($(pMap.recordList));
+						var recordList = $(pMap.recordList);
+						
+						if($(recordList).length == 0){
+							comments(num);
+							
+							num += 1
+						}else{
+							record(recordList);
+						}
+					},
+					error : function(XHR, status, error) { //실패
+						console.error(status + " : " + error);
+					}
+				});
+				
+			});
+
+			
+	
+	
+	$("#official_btn").on("click",function(){
+		console.log("버튼클릭");
+		
+		
+		console.log(num);
+		comments(num);
+		
+		num += 1
+	});
+	function record(recordList) {
+		
+		console.log("값이있음");
+		$("#record_app").html(" ");
+		var listSize = $(recordList).length;
+		
+		num=0;
+		
+		for(var i=0; i < listSize; i++){
+			
+			
+		
+		
+		str = "";
+		str += '<tr class="basic">';
+		
+		str += '<td><label for="prod_cate">대회분류</label></td>';
+		str += '	<td>';
+		str += '		<div class="content_product_insert_select_box">';
+		str += '			<select id="cham_cate'+i+'" name="recordList['+num+'].recordType">';
+		str += '				<option selected>대회분류</option>';
+		str += '				<option value="지역">지역</option>';
+		str += '				<option value="전국">전국</option>';
+		str += '				<option value="세계">세계</option>';
+		str += '			</select>';
+		str += '		</div>';
+		str += '	</td>';
+		str += '</tr>';
+		str += '<tr class="basic">';
+		str += '	<td><label for="prod_cate"></label></td>';
+		str += '	<td><label for="prod_cate">대회명</label></td>';
+		str += '	<td>';
+		str += '		<div class="content_product_insert_select_box">';
+		str += '			<input type="text" id="cham_name'+i+'" placeholder="대회명을 입력해주세요." name="recordList['+num+'].recordName" >';
+		str += '		</div>';
+		str += '	</td>';
+		str += '</tr>';
+		str += '<tr class="basic">';
+		str += '	<td><label for="prod_cate"></label></td>';
+		str += '	<td><label for="prod_cate">종목</label></td>';
+		str += '	<td>';
+		str += '		<div class="content_product_insert_select_box">';
+		str += '			<select id="even_cate'+i+'" name="recordList['+num+'].recordEvent">';
+		str += '				<option selected>종목</option>';
+		str += '				<option value="1">복싱</option>';
+		str += '				<option value="2">킥복싱</option>';
+		str += '				<option value="3">종합격투기</option>';
+		str += '				<option value="4">주짓수</option>';
+		str += '			</select>';
+		str += '		</div>';
+		str += '	</td>';
+		str += '</tr>';
+		str += '	<tr class="basic">';
+		str += '	<td><label for="prod_cate"></label></td>';
+		str += '	<td><label for="prod_cate">출전연도</label></td>';
+		str += '	<td>';
+		str += '	<div class="content_product_insert_select_box">';
+		str += '			<select id="even_year'+i+'" name="recordList['+num+'].recordDate">';
+		str += '				<option selected>출전연도</option>';
+		str += '				<option value="2021">2021</option>';
+		str += '				<option value="2020">2020</option>';
+		str += '				<option value="2019">2019</option>';
+		str += '			</select>';
+		str += '		</div>';
+		str += '	</td>';
+		str += '</tr>';
+		str += '<tr class="basic">';
+		str += '	<td><label for="prod_cate"></label></td>';
+		str += '	<td><label for="prod_cate">매치</label></td>';
+		str += '	<td>';
+		str += '		<div class="content_product_insert_select_box">';
+		str += '			<select id="match_cate'+i+'" name="recordList['+num+'].recordMatch">';
+		str += '				<option selected>매치</option>';
+		str += '				<option value="일반매치">일반매치</option>';
+		str += '				<option value="타이틀매치">타이틀매치</option>';
+		str += '			</select>';
+		str += '		</div>';
+		str += '	</td>';
+		str += '</tr>';
+		
+
+		$("#record_app").append(str);
+		
+		$("#cham_name"+i).val(recordList[i].recordName);
+		$('#cham_cate'+i+' option[value="'+recordList[i].recordType+'"]').prop('selected', 'selected').change();
+		$('#even_cate'+i+' option[value="'+recordList[i].recordEvent+'"]').prop('selected', 'selected').change();
+		$('#even_year'+i+' option[value="'+recordList[i].recordDate+'"]').prop('selected', 'selected').change();
+		$('#match_cate'+i+' option[value="'+recordList[i].recordMatch+'"]').prop('selected', 'selected').change();
+		
+		num += 1;	
+		}
+		
+		
+	}
+	
+	
+	function comments() {
+
+		str = "";
+		str += '<tr class="basic">';
+		
+		str += '<td><label for="prod_cate">대회분류</label></td>';
+		str += '	<td>';
+		str += '		<div class="content_product_insert_select_box">';
+		str += '			<select id="cham_cate" name="recordList['+num+'].recordType">';
+		str += '				<option selected>대회분류</option>';
+		str += '				<option value="지역">지역</option>';
+		str += '				<option value="전국">전국</option>';
+		str += '				<option value="세계">세계</option>';
+		str += '			</select>';
+		str += '		</div>';
+		str += '	</td>';
+		str += '</tr>';
+		str += '<tr class="basic">';
+		str += '	<td><label for="prod_cate"></label></td>';
+		str += '	<td><label for="prod_cate">대회명</label></td>';
+		str += '	<td>';
+		str += '		<div class="content_product_insert_select_box">';
+		str += '			<input type="text" id="cham_name" placeholder="대회명을 입력해주세요." name="recordList['+num+'].recordName" >';
+		str += '		</div>';
+		str += '	</td>';
+		str += '</tr>';
+		str += '<tr class="basic">';
+		str += '	<td><label for="prod_cate"></label></td>';
+		str += '	<td><label for="prod_cate">종목</label></td>';
+		str += '	<td>';
+		str += '		<div class="content_product_insert_select_box">';
+		str += '			<select id="even_cate" name="recordList['+num+'].recordEvent">';
+		str += '				<option selected>종목</option>';
+		str += '				<option value="1">복싱</option>';
+		str += '				<option value="2">킥복싱</option>';
+		str += '				<option value="3">종합격투기</option>';
+		str += '				<option value="4">주짓수</option>';
+		str += '			</select>';
+		str += '		</div>';
+		str += '	</td>';
+		str += '</tr>';
+		str += '	<tr class="basic">';
+		str += '	<td><label for="prod_cate"></label></td>';
+		str += '	<td><label for="prod_cate">출전연도</label></td>';
+		str += '	<td>';
+		str += '	<div class="content_product_insert_select_box">';
+		str += '			<select id="even_year" name="recordList['+num+'].recordDate">';
+		str += '				<option selected>출전연도</option>';
+		str += '				<option value="2021">2021</option>';
+		str += '				<option value="2020">2020</option>';
+		str += '				<option value="2019">2019</option>';
+		str += '			</select>';
+		str += '		</div>';
+		str += '	</td>';
+		str += '</tr>';
+		str += '<tr class="basic">';
+		str += '	<td><label for="prod_cate"></label></td>';
+		str += '	<td><label for="prod_cate">매치</label></td>';
+		str += '	<td>';
+		str += '		<div class="content_product_insert_select_box">';
+		str += '			<select id="match_cate" name="recordList['+num+'].recordMatch">';
+		str += '				<option selected>매치</option>';
+		str += '				<option value="일반매치">일반매치</option>';
+		str += '				<option value="타이틀매치">타이틀매치</option>';
+		str += '			</select>';
+		str += '		</div>';
+		str += '	</td>';
+		str += '</tr>';
+		
+
+		$("#record_app").append(str);
+	}
+	</script>
 </html>

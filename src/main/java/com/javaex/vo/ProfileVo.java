@@ -8,7 +8,7 @@ public class ProfileVo {
 	private String career; //경력
 	private String major;	//전공
 	private int exp;	//스파링경험
-	private int profileDate; //등록일자
+	private String profileDate; //등록일자
 	private String recentlyExer; //최근운동내역
 	private String word;	//상대에게 한마디
 	private String day;  	//원하는 날짜 대관x
@@ -19,7 +19,7 @@ public class ProfileVo {
 	private String profileGymEvent;
 
 	public ProfileVo(int profileNo, int userNo, int height, int weight, String career, String major, int exp,
-			int profileDate, String recentlyExer, String word, String day, String time, String address,
+			String profileDate, String recentlyExer, String word, String day, String time, String address,
 			String profileGymEvent) {
 		super();
 		this.profileNo = profileNo;
@@ -98,11 +98,13 @@ public class ProfileVo {
 		this.exp = exp;
 	}
 
-	public int getProfileDate() {
+	
+
+	public String getProfileDate() {
 		return profileDate;
 	}
 
-	public void setProfileDate(int profileDate) {
+	public void setProfileDate(String profileDate) {
 		this.profileDate = profileDate;
 	}
 
@@ -156,11 +158,12 @@ public class ProfileVo {
 
 	@Override
 	public String toString() {
-		return "ProfileVo [profileNo=" + profileNo + ", userNo=" + userNo + ", height=" + height + ", weight=" + weight
-				+ ", career=" + career + ", major=" + major + ", exp=" + exp + ", profileDate=" + profileDate
-				+ ", recentlyExer=" + recentlyExer + ", word=" + word + ", day=" + day + ", time=" + time + ", address="
-				+ address + ", profileGymEvent=" + profileGymEvent + "]";
+		return "ProfileVo [profileNo=" + profileNo + ", userNo=" + userNo + ", height=" + height + ", weight=" + weight + ", career=" + career + ", major="
+				+ major + ", exp=" + exp + ", profileDate=" + profileDate + ", recentlyExer=" + recentlyExer + ", word=" + word + ", day=" + day + ", time="
+				+ time + ", address=" + address + ", profileGymEvent=" + profileGymEvent + "]";
 	}
+
+	
 	
 	
 	

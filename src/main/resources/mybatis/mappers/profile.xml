@@ -4,12 +4,55 @@
 
 <mapper namespace= "profile">
 	
-
-   
+	 <resultMap id ="resultMapProfileVo" type="ProfileVo">
+      <result column ="profile_no" property="profileNo"/>
+      <result column ="user_no" property="userNo"/>
+      <result column ="height" property="height"/>
+      <result column ="weight" property="weight"/>
+      <result column ="career" property="career"/>
+      <result column ="major" property="major"/>
+      <result column ="exp" property="exp"/>
+      <result column ="profile_date" property="profileDate"/>
+      <result column ="recently_exer" property="recentlyExer"/>
+      <result column ="word" property="word"/>
+      <result column ="day" property="day"/>
+      <result column ="time" property="time"/>
+      <result column ="address" property="address"/>
+      <result column ="profile_gym_event" property="profileGymEvent"/>
+      
+   </resultMap>
+		
+		<select id="selectListProfile" parameterType="int" resultMap="resultMapProfileVo">
+			<![CDATA[
+				select profile_no,
+				       user_no,
+				       height,
+				       weight,
+				       career,
+				       major,
+				       exp,
+				       to_char(profile_date,'yyyy/mm/dd') as profile_date,
+				       recently_exer,
+				       word,
+				       profile_gym_event,
+				       day,
+				       time,
+				       address
+				from profile
+				where user_no = #{userNo}
+				order by profile_date desc		
+			
+			]]>
+		</select>
+   	
 	   <insert id="insertProfile" parameterType="ProfileVo" >
+	   		<selectKey keyProperty="profileNo" resultType="int" order="BEFORE">
+				select SEQ_PROFILE_NO.nextval
+				from dual
+			</selectKey>
       <![CDATA[
          insert into profile
-         values(SEQ_PROFILE_NO.nextval,
+         values( #{profileNo},
                  #{userNo},
                  #{height},
                  #{weight},
@@ -24,10 +67,65 @@
                  #{time},
                  #{address,jdbcType=VARCHAR}
                  )      
-               
+                 
       ]]>
    </insert>
    
+   <!-- api -->
+   <select id="selectOneProfileBydate" parameterType="map" resultMap="resultMapProfileVo">
+   		<![CDATA[
+				select o.rown,
+				       o.profile_no,
+				       o.user_no,
+				       o.height,
+				       o.weight,
+				       o.career,
+				       o.major,
+				       o.exp,
+				       o.profile_date,
+				       o.recently_exer,
+				       o.word,
+				       o.profile_gym_event,
+				       o.day,
+				       o.time,
+				       o.address
+				from(select rownum as rown,
+				            p.profile_no,
+				            p.user_no,
+				            p.height,
+				            p.weight,
+				            p.career,
+				            p.major,
+				            p.exp,
+				            p.profile_date,
+				            p.recently_exer,
+				            p.word,
+				            p.profile_gym_event,
+				            p.day,
+				            p.time,
+				            p.address
+				    from(select profile_no,
+				                user_no,
+				                height,
+				                weight,
+				                career,
+				                major,
+				                exp,
+				                to_char(profile_date,'yyyy/mm/dd') as profile_date,
+				                recently_exer,
+				                word,
+				                profile_gym_event,
+				                day,
+				                time,
+				                address
+				         from profile
+				         where user_no = #{userNo}
+				         order by profile_date desc) p) o
+				where rown = #{rownum}  		
+   		]]>
+   		
+   		
+   </select>
 	
 
 </mapper>
