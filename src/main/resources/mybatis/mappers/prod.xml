@@ -5,7 +5,7 @@
 <mapper namespace= "prod">
 	
 	
-   
+ 
 	   <insert id="insert" parameterType="com.javaex.vo.ProductVo" >
       <![CDATA[
          insert into product
@@ -23,13 +23,13 @@
                  #{prod_qual},
                  #{prod_detail},
                  #{prod_detail_img_name},
-                 #{prod_detail_img_savename },
+                 #{prod_detail_img_savename},
                  sysdate
                  )      
                
       ]]>
    </insert>
    
-	
+
 
 </mapper>

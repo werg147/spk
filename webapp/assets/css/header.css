@@ -136,7 +136,12 @@ a:hover {
   width: 30px;
   margin: 20px 0px 0px 30px;
 }
-
+#login {
+  display: flex;
+  margin-top: 30px;
+  width: 53px;
+  height: fit-content;
+}
 /*마이페이지 사이드바*/
 
 /*상단 마이페이지 글자*/
@@ -217,32 +222,31 @@ a:hover {
 }
 /*사이드메뉴 여기까지*/
 
+
 /*메인페이지*/
-.banner{
+.banner {
   display: flex;
-  border: 1px solid black;
   margin-top: 20px;
   height: 250px;
-
 }
-.space{
-  margin-top:50px;
+.space {
+  margin-top: 50px;
 }
 
-.banner{
+.banner {
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
-
+  border: 1px #dddfe1 solid;
 }
 
-.banner div{
+.banner div {
   text-align: center;
   font-size: 22px;
   font-weight: bold;
 }
 
-.banner #main_3 a:hover{
+.banner #main_3 a:hover {
   color: #e60012;
 }
 
@@ -253,3 +257,122 @@ a:hover {
   text-align : center;
   font-size: 30px;
 }
+
+
+/*로그인 페이지 추가*/
+/*타이틀 리스트 구분줄*/
+
+.line_1 {
+  height: 3px;
+  width: 1050px;
+  margin: 10px 0px 5px 0px;
+  background-color: black;
+}
+
+/*이걸로 높이 조절하면됨*/
+
+.loginform {
+  width: 525px;
+  margin-bottom: 80px
+}
+
+.login {
+  font-size: 16px;
+  margin-left: 80px;
+  margin-top: 120px;
+  min-height: 100px;
+}
+
+.login tr td {
+  vertical-align: top;
+  text-align: left;
+}
+
+.login .basic {
+  height: 30px;
+}
+
+.login .basic input {
+  width: 146px;
+  height: 10px;
+  padding: 8px 6px;
+  border: 1px solid #dddfe1;
+  border-radius: 0px;
+}
+
+/*버튼*/
+
+.login_btn {
+  display: flex;
+  overflow: hidden;
+  text-align: center;
+}
+
+.login_btn .login_insert_btn,
+.login_btn .join_btn {
+  border-radius: 0px;
+  color: #000000;
+  background-color: white;
+  font-size: 13px;
+  padding: 3px 2px 3px 2px;
+  margin: 0px 15px 0px 15px;
+  text-decoration: none;
+  border: 1px solid #dddfe1;
+  width: 130px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.login_btn .login_insert_btn:hover,
+.login_btn .join_btn:hover {
+  background: #d4d4d4;
+  text-decoration: none;
+}
+
+/* 버튼 위치조절 */
+.login_btn {
+  margin: 30px 100px 70px 50px;
+}
+
+.login_header {
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+  font-size: 23px;
+  font-weight: bold;
+}
+
+
+.login_notice_1 {
+  margin-left: 80px;
+}
+.login_middle_img {
+  display: flex;
+  margin-left: 40px;
+}
+.login_middle_glove {
+  width: 280px;
+}
+
+.login_notice_h2 {
+  font-size: 25px;
+  text-align: center;
+  margin-right: 100px;
+}
+.login_notice_h2 > span {
+  font-size: 35px;
+  color: #e60012;
+}
+.login_title {
+  font-size: 24px;
+  margin: 70px 0px 0px 0px;
+  font-weight: bold;
+}
+
+/*로그인실패 경고문구*/
+.loginform p {
+  font-size: 15px;
+  margin: 0px 0px 0px 40px;
+  color: #e60012;
+}
+

@@ -46,6 +46,6 @@ public class ProdController {
 	public String exam() {
 		
 		
-		return "mypage/mypage_prod/NewFile1";
+		return "main/loginform";
 	}
 }

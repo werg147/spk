@@ -30,7 +30,7 @@
 					</div>
 					<!--//content_delevery_product_header//-->
 					<div class="content_product_line"></div>
-					<form action="${pageContext.request.contextPath}/mypage/prod/write" name="uploadForm" id="uploadForm" method="get">
+					<form action="${pageContext.request.contextPath}/mypage/prod/write" id="uploadForm" method="get">
 						<table class="product_insert_content">
 							<colgroup>
 								<col style="width: 200px">
@@ -40,7 +40,7 @@
 								<td><label for="prod_cate">상품카테고리</label></td>
 								<td>
 									<div class="content_product_insert_select_box">
-										<select id="prod_cate">
+										<select name="prod_cate">
 											<option selected>운동용품</option>
 											<option>의류</option>
 											<option>잡화</option>
@@ -51,7 +51,7 @@
 							<tr class="basic">
 								<td><label for="exer_cate">종목카테고리</label></td>
 								<td><div class="content_product_insert_select_box">
-										<select id="exer_cate">
+										<select name="event_cate">
 											<option selected>종목</option>
 											<option>킥복싱</option>
 											<option>복싱</option>
@@ -61,15 +61,15 @@
 							</tr>
 							<tr class="basic">
 								<td><label for="prod_name">상품명</label></td>
-								<td><input type="text" id="prod_name"></td>
+								<td><input type="text" id="prod_name" name="prod_name"></td>
 							</tr>
 							<tr class="basic">
 								<td><label for="prod_price">제품가격</label></td>
-								<td><input type="text" id="prod_price"></td>
+								<td><input type="text" id="prod_price" name="prod_price"></td>
 							</tr>
 							<tr class="basic">
-								<td><label for="brand_name">브랜드명</label></td>
-								<td><input type="text" id="brand_name"></td>
+								<td><label for="prod_brand">브랜드명</label></td>
+								<td><input type="text" id="prod_brand" name="prod_brand"></td>
 							</tr>
 							<tr class="product_insert_div_img">
 								<td>대표이미지</td>
@@ -97,32 +97,35 @@
 							<tr class="sizecolor_div">
 								<td>색상 및 사이즈</td>
 								<div>
-									<td id=sizecolor><label for="color">색상</label> <input
-										type="text" id="color"> <label for="size">사이즈
-									</label> <input type="text" id="last"> <label for="size">재고
-									</label> <input type="last" id="size">
+									<td id=sizecolor><label for="color">색상</label> 
+									<input type="text" id="color" name="color">
+									<label for="size">사이즈</label> 
+									<input type="text" id="last" name="size"> 
+									<label for="stock">재고</label> 
+									<input type="text" id="stock" name="stock">
 										<button>+</button>
 										<div>
 											<div>블랙 55 35</div>
 											<div>블루 66 70</div>
-										</div></td>
+										</div>
+									</td>
 								</div>
 							</tr>
 							<tr class="plus">
-								<td><label for="prod_info">제품소개(성분)</label></td>
-								<td><textarea id="prod_info"></textarea></td>
+								<td><label for="prod_desc">제품소개(성분)</label></td>
+								<td><textarea id="prod_desc" name="prod_desc"></textarea></td>
 							</tr>
 							<tr class="plus">
-								<td><label for="prod_making">제조/수입내용</label></td>
-								<td><textarea id="prod_making"></textarea></td>
+								<td><label for="prod_from">제조/수입내용</label></td>
+								<td><textarea id="prod_from" name="prod_from"></textarea></td>
 							</tr>
 							<tr class="plus">
-								<td><label for="prod_notice">세탁방법 및 주의사항</label></td>
-								<td><textarea id="prod_notice"></textarea></td>
+								<td><label for="prod_wash">세탁방법 및 주의사항</label></td>
+								<td><textarea id="prod_wash" name="prod_wash"></textarea></td>
 							</tr>
 							<tr class="plus">
-								<td><label for="prod_guarantee">품질보증기준</label></td>
-								<td><textarea id="prod_guarantee"></textarea></td>
+								<td><label for="prod_qual">품질보증기준</label></td>
+								<td><textarea id="prod_qual" name="prod_qual"></textarea></td>
 							</tr>
 							<tr class="large">
 								<td><label for="prod_detail">상세페이지</label></td>
@@ -131,7 +134,7 @@
 										<p>상세페이지 이미지등록</p>
 										<label class="input-file-button" for="input-file">업로드</label>
 										<input type="file" id="input-file" style="display: none;">
-									</div> <textarea id="prod_detail"></textarea>
+									</div> <textarea id="prod_detail" name="prod_detail"></textarea>
 								</td>
 							</tr>
 						</table>
