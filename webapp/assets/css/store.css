@@ -317,6 +317,7 @@ div {
   border-top: 1px solid #f4f4f4;
 }
 
+
 /*상품 선택*/
 #cartPut .box_select .name {
   float: left;
@@ -382,7 +383,46 @@ select {
   text-indent: -9999px;
 }
 
+/*수량 수*/
+.amount {
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin-right: -1px;
+    padding: 0 0 4px;
+    border: 0;
+    background-color: #fff;
+    font-size: 14px;
+    color: #000;
+    line-height: 18px;
+    text-align: center;
+}
+
 /*수량버튼*/
+#countpm{
+    padding-top: 0;
+    overflow: hidden;
+    float: left;
+    width: 88px;
+    height: 30px;
+    border: 1px solid #dddfe1;
+    border-radius: 3px;
+}
+
+.procount {
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin-right: -1px;
+    padding: 0 0 4px;
+    border: 0;
+    background-color: #fff;
+    font-size: 14px;
+    color: #000;
+    line-height: 18px;
+    text-align: center;
+}
+
 #cartPut .list .option {
   padding-top: 8px;
 }
@@ -418,6 +458,35 @@ select {
   float: right;
 }
 
+/* - + */
+.countpm .count {
+    overflow: hidden;
+    float: left;
+    width: 88px;
+    height: 30px;
+    border: 1px solid #dddfe1;
+    border-radius: 3px;
+}
+
+.countpm .btn {
+	border: 0;
+	background-color: #fff;
+}
+
+.countpm .down{
+	overflow: hidden;
+    float: left;
+    width: 28px;
+    height: 28px;
+    border: 0;
+    font-size: 0;
+    line-height: 0;
+}
+
+.countpm .up {
+	font-size: 18px;
+}
+
 /*총 상품금액*/
 .price {
 	padding-top: 15px;
@@ -435,6 +504,11 @@ select {
   vertical-align: 2px;
 }
 
+.totit {
+	display: inline;
+	padding: 18px 0px 0px 200px;
+}
+
 /*상품금액수*/
 .price_total .total .num {
   padding-left: 8px;
@@ -442,6 +516,13 @@ select {
   font-size: 32px;
   line-height: 32px;
 }
+
+
+.price_total .num input[type=text]{
+  border:0;
+  text-align: right;
+  width: 150px;
+ }
 
 /*상품금액원*/
 .price_total .total .won {

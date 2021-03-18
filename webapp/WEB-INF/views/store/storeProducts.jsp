@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/store.css">
 </head>
 
-<body class="proBody">
+<body class="proBody" onload="init();">
     
 <div class="wrap">
     <div class="container">
@@ -84,21 +84,81 @@
 							</dl>
 							-->
 
-						<!--개수--> 
+						<!--개수 
 							<dl class="list">
 								<dt class="tit">개수</dt> <dd class="desc">1개</dd>
-							</dl> <!----> <!----> <!----> <!----> <!---->  <!----> <!----> <!---->
+							</dl>
+							
+							<div class="countpm">
+								<span class="count">
+									<button type="button" class="btn down on">수량내리기</button> 
+									<input type="number" readonly="readonly" onfocus="this.blur()" class="inp"> 
+									<button type="button" class="btn up on">수량올리기</button>
+								</span>
+							</div>
+						-->
+							
+								<!-- 수량, 총 금액 form -->
+								<form name="form" method="get">
+								<dl class="list">
+									<dt class="tit procount">
+										수량 : <input type=hidden name="sell_price" value="153600">
+									</dt> 
+									<dd class="desc">
+										<div class="countpm">
+											<span class="count">
+												<button type="button" class="btn down on" value=" - " onclick="del();">
+													<img src="${pageContext.request.contextPath}/assets/image/store_img/ico_minu.jpg">
+											    </button> 
+												<input type="text" class="amount" name="amount" value="1" size="3" onchange="change();">
+												<button type="button" class="btn up on" value=" + " onclick="add();">
+													<img src="${pageContext.request.contextPath}/assets/image/store_img/ico_plus.jpg">
+												</button>
+											</span>
+										</div>
+										
+									</dd>
+								</dl>
+									
+									
+
+									
+									<div class="price_total">
+										<!--총 금액-->
+										<div class="total">
+											<div class="price">
+												<strong class="tit totit">총 상품금액 :</strong> 
+												<span class="sum">
+												<span class="num"><input type="text" class="num" name="sum" size="11" readonly></span> <span class="won">원</span></span>
+											</div> 
+											<p class="txt_point">
+												<span class="ico">적립</span> 
+												<span class="no_login"> 
+													<span>로그인 후, 적립혜택 제공</span>
+												</span>
+											</p>
+										</div>
+			
+										<!--장바구니, 바로구매 버튼-->
+										<div class="group_btn">
+											<div class="view_function">
+												<button type="button" class="btn btn_buy"><a href="../영훈/결제하기.html" style="font-size: 16px; color: #ffffff;">바로 구매</a></button> 
+												<button type="button" class="btn btn_cart"><a href="../경환/cart.html" style="font-size: 16px; color: #C51212;">장바구니</a></button>
+											</div> 
+										</div>
+									</div>
+								</form>
+								
 						</div>
 
 
 
-						<!--상품선택-->
+						<!--상품선택
 						<div id="cartPut">
-							<!--상품 선택-->
 							<div class="goods_info">
 								<dl class="list fst">
 									<dt class="tit">선택 상품</dt> 
-									<!--
+									
 									<dd class="desc">
 									
 										<select id="prod_cate">
@@ -108,11 +168,11 @@
 											<option>펀치킹 블랙</option>
 										</select>
 									</dd>
-									-->
+									
 								</dl>
 							</div>
 							
-							<!--선택된 상품-->
+							선택된 상품
 							<div class="list_goods">
 								<ul class="list">
 									<li class="on">
@@ -134,26 +194,26 @@
 									</li>
 								</ul>
 							</div>
-						</div> <!--cartPut-->
+						</div>--> <!--cartPut-->
 
-
+						<!--
 						<div class="price_total">
-							<!--총 금액-->
+							<총 금액
 							<div class="total">
-								<div class="price"><!----> 
+								<div class="price">
 									<strong class="tit">총 상품금액 :</strong> 
 									<span class="sum">
 									<span class="num">153,600</span> <span class="won">원</span></span>
 								</div> 
 								<p class="txt_point">
 									<span class="ico">적립</span> 
-									<span class="no_login"><!----> 
+									<span class="no_login"> 
 										<span>로그인 후, 적립혜택 제공</span>
-									</span> <!---->
+									</span>
 								</p>
 							</div>
 
-							<!--장바구니, 바로구매 버튼-->
+							장바구니, 바로구매 버튼
 							<div class="group_btn">
 								<div class="view_function">
 									<button type="button" class="btn btn_buy"><a href="../영훈/결제하기.html" style="font-size: 16px; color: #ffffff;">바로 구매</a></button> 
@@ -161,7 +221,7 @@
 								</div> 
 							</div>
 						</div>
-
+						-->
 					</div> <!--goods_area-->
 			</div> <!--id sectionView-->
 		</div> <!--//section_view-->
@@ -748,10 +808,63 @@
 </div><!--//wrap-->
 
 
-
-
-
-
-
 </body>
+
+
+<script type="text/javascript">
+
+	
+	//수량에 따른 총 가격 계산하기
+	var sell_price;
+	var amount;
+
+	
+	function init () {
+		sell_price = document.form.sell_price.value;
+		amount = document.form.amount.value;
+		document.form.sum.value = sell_price;
+		
+		change();
+	}
+	
+	function add () {
+		hm = document.form.amount;
+		sum = document.form.sum;
+		hm.value ++ ;
+	
+		//가격 천의자리 수 마다 , 붙이기
+		sum.value = (parseInt(hm.value) * sell_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+	
+	function del () {
+		hm = document.form.amount;
+		sum = document.form.sum;
+			if (hm.value > 1) {
+				hm.value -- ;
+				//가격 천의자리 수 마다 , 붙이기
+				sum.value = (parseInt(hm.value) * sell_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			}
+	}
+	
+	function change () {
+		hm = document.form.amount;
+		sum = document.form.sum;
+	
+			if (hm.value < 0) {
+				hm.value = 0;
+			}
+			
+		//가격 천의자리 수 마다 , 붙이기
+		sum.value = (parseInt(hm.value) * sell_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+	}
+	
+	
+	
+	
+	
+	
+
+
+</script>
 </html>
