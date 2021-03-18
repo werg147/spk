@@ -14,5 +14,24 @@
 		<result column ="user_no" property="userNo"/>
 		<result column ="buy_no" property="buyNo"/>  
 	</resultMap>
+	
+	<!-- qna 인서트 -->
+	<insert id="qnaInsert" parameterType="QnaVo">
+		<![CDATA[
+			insert into qna
+            values(
+                #{qna_no},
+                #{prod_no},
+                #{qna_title},
+                #{qna_content},
+                sysdate,
+                #{qna_type},
+                #{user_no},
+                #{buy_no}
+            )
+		]]>
+	</insert>
+
+	
    
 </mapper>
