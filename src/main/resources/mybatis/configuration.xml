@@ -5,6 +5,9 @@
 	<typeAliases>
 		<typeAlias alias="ProfileVo" type="com.javaex.vo.ProfileVo" /> <!-- 영훈 SparringVo -->
 		<typeAlias alias="AlarmVo" type="com.javaex.vo.AlarmVo" />
+		<typeAlias alias="GymVo" type="com.javaex.vo.GymVo" /> <!-- 다현 GymVo -->
+    	<typeAlias alias="ConVo" type="com.javaex.vo.ConVo" /> <!-- 다현 ConVo -->
+    	<typeAlias alias="GymImgVo" type="com.javaex.vo.GymImgVo" /> <!-- 다현 GymImgVo -->
 	</typeAliases>
 
 	<mappers>
@@ -13,5 +16,6 @@
 		<mapper resource="mybatis/mappers/prod.xml" />
 		<mapper resource="mybatis/mappers/alarm.xml" />
 		<mapper resource="mybatis/mappers/user.xml" />
+		<mapper resource="mybatis/mappers/gym.xml" />
 	</mappers>
 </configuration>
