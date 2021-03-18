@@ -28,6 +28,16 @@ public class SparringService {
 		System.out.println("vo :" + profileVo);
 		//profile insert + 셀렉트 키로 profileNo 생성
 		
+		String major = profileVo.getMajor();
+		System.out.println("major"+major);
+		if(major == null) {
+			profileVo.setMajor("없음");
+		}
+		String word = profileVo.getWord();
+		System.out.println("word"+word);
+		if(word == "") {
+			profileVo.setWord("잘 부탁드립니다");
+		}
 		sparringDao.insertProfile(profileVo);
 		System.out.println("vo2 :" + profileVo);
 		
@@ -54,7 +64,10 @@ public class SparringService {
 		}
 		
 		/***********공식기록 record 인서트*********/
+		System.out.println("확인"+recordVo.getRecordList().get(0).getRecordName());
 		
+		if(recordVo.getRecordList().get(0).getRecordName() != ""
+				) {
 		for(int i=0; i<recordVo.getRecordList().size(); i++) {
 			System.out.println("??");
 			RecordVo rVo = recordVo.getRecordList().get(i);
@@ -66,7 +79,7 @@ public class SparringService {
 			sparringDao.insertRecord(rVo);
 			
 			}
-		
+		}
 		
 	}
 	

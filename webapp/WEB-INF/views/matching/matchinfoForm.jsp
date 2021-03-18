@@ -196,9 +196,9 @@
 											<td colspan="2"><label for="brand_name">전공</label></td>
 											<td>
 												<div class="chk_box">
-													<input class="radio-value" id="major_empty" type='radio' id="pro_chk" name='chk_major' value='pro' />무
-													<input class="radio-value" type='radio' id="pro_chk" name='chk_major' value='ama' />유
-													<input class="radio-value" id="major_info" type="text" id="prod_price" placeholder="전공을 입력해주세요." name="major" value="">
+													<input class="radio-value" type='radio' id="pro_chk" name='chk_major' value="no" />무
+													<input class="radio-value" type='radio' id="pro_chk" name='chk_major' value="yes"/>유
+													<input  id="major_info" type="text" id="prod_price" placeholder="전공을 입력해주세요." name="major" value="">
 												</div>
 											</td>
 										</tr>
@@ -208,8 +208,8 @@
 											<td colspan="2"><label for="exer_cate">최근운동</label></td>
 											<td>
 												<div class="content_product_insert_select_box">
-													<select id="exer_cate" name="recentlyExer">
-														<option >최근운동</option>
+													<select id="exer_cate4" name="recentlyExer">
+														<option selected>최근운동</option>
 														<option  value="주 5회 이상">주 5회 이상</option>
 														<option  value="주 3회 이상">주 3회 이상</option>
 														<option  value="주 1회 이상">주 1회 이상</option>
@@ -363,13 +363,13 @@
 	$('.radio-value').on('click', function() {
 
     var valueCheck = $('.radio-value:checked').val(); // 체크된 Radio 버튼의 값을 가져옵니다.
-
-    if ( valueCheck == 'yes' ) {
-        $('.radio-value-detail').attr('disabled', false); // 과일 종류를 입력하는 input 을 활성화합니다.
-        $('.radio-value-detail').focus(); // 과일 종류를 입력하는 input 에 커서를 이동시킵니다.
+	console.log(valueCheck);
+    if ( valueCheck == 'no' ) {
+        $('#major_info').attr('disabled', true); // 과일 종류를 입력하는 input 을 활성화합니다.
+        
     } else {
-        $('.radio-value-detail').val(''); // 입력된 과일 종류 값이 있으면, 초기화합니다.
-        $('.radio-value-detail').attr('disabled', true); // 과일 종류를 입력하는 input 을 비활성화합니다.
+        $('#major_info').val(''); // 입력된 과일 종류 값이 있으면, 초기화합니다.
+        $('#major_info').attr('disabled', false); // 과일 종류를 입력하는 input 을 비활성화합니다.
     }
 });
 		
@@ -413,67 +413,32 @@
 		
 		if(!$("input:radio[name=career]").is(':checked')){
 			alert("경력을 체크해주세요");
-		}
-		
-		
-		
-		/*
-		if($("#spa_event1").html() !=""){
-			console.log("값있어요");
-		};
-		*/
-		
-		
-		//패스워드체크wnsql
-		/*
-		var password = $("#input-pass").val();
-		
-		//약관동의 체크준비
-		var check = $("#chk-agree").is(":checked"); //true or false
-		console.log(check);
-		
-		//아이디 작성 여부 준비
-		var uid = $("#input-uid").val();
-		
-		//이름 작성여부준비
-		var name = $("#input-name").val();
-		
-		//성별체크 여부 준비
-		var gender = $("[name='gender']:checked").val();
-		
-		//아이디 작성여부
-		if(uid == ""){
-			alert("id를 입력해주세요");
 			return false;
 		}
-			//패스워드 체크 8글자 이상 통과
-		if(password.length<8){
-			//패스워드 체크 나머지 alert(패스워드는 8글자이상입니다)
-			alert("패스워드는 8글자 이상입니다.");
-			return false;			
-		}
 		
-		//이름 작성여부
-		if(name == ""){
-			$("#noName").text("이름을 기입해주세요");
-			return false;
-		}else{
-			$("#noName").text("");
-		}
-		
-		//성별 작성여부
-		if(gender == null){
-			alert("성별을 체크해주세요");
+		if(!$('input:radio[name=chk_major]').is(':checked')){
+			alert("전공을 체크해주세요")
 			return false;
 		}
-		if (!check) {
-			//동의하기 checkbox가 체크되어 있으면 --> submit
-			alert("약관에 동의해주세요");
+		if(!$('#major_info').is(":disabled")){
+			if($('#major_info').val()==""){
+				alert("전공을 입력해주세요")
+				return false;
+			}
+			
+		}
 		
+		if($("#exer_cate4 option:selected").val() == "최근운동"){
+			alert("최근 운동상태를 선택해주세요")
 			return false;
 		}
-		*/
-		return false;
+		
+		if($("#exer_sparring_info").val() == ""){
+			alert("실전 스파링횟수를 적어주세요");
+			return false;
+		}
+		
+		
 	});
 	/* 버튼클릭시 date_no값 받아와서 날짜 얻어내기 */
 	$("#exer_cate").change("click",function(){
@@ -504,9 +469,13 @@
 						$("#height_info").val(pMap.profileVo.height);
 						$("#weight_info").val(pMap.profileVo.weight);
 						$("#major_info").val(pMap.profileVo.major);
+						if(pMap.profileVo.major != ""){
+							$("input:radio[name='chk_major']:radio[value='yes']").prop('checked', true);
+						}
+						
 						
 						$("#exer_sparring_info").val(pMap.profileVo.exp);
-						$('#exer_cate option[value="'+pMap.profileVo.recentlyExer+'"]').prop('selected', 'selected').change();
+						$('#exer_cate4 option[value="'+pMap.profileVo.recentlyExer+'"]').prop('selected', 'selected').change();
 						
 						/* 주특기 */
 						var size = $(pMap.eventList).length;
