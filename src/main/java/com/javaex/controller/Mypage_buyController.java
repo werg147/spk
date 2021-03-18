@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -30,6 +31,17 @@ public class Mypage_buyController {
 		model.addAttribute("AlarmList", aList);
 
 		return "mypage/mypage_buy/alarm";
+
+	}
+
+	@RequestMapping(value = "/send_alarm", method = { RequestMethod.GET, RequestMethod.POST })
+	public String send_alarm(@ModelAttribute AlarmVo aVo) {
+
+		System.out.println("[Alarm Ctrl]: send_alarm 진입");
+
+		aS.send(aVo);
+
+		return "redirect:/mypage/list";
 
 	}
 

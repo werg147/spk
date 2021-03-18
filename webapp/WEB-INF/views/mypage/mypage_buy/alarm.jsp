@@ -49,7 +49,7 @@
 									<span><a class="Addr_goods" href="">${aList.user_id }</a></span>
 									<span class="Kind_goods">${aList.sell_type }</span>
 									<span class="Kind_goods_state">${aList.prod_state }</span>
-									<p class="Notice_alarm">${aList.alarm_content }</p>
+									<p class="Notice_alarm">주문하신 [<a href="">${aList.prod_name }</a>]의 ${aList.alarm_content }</p>
 								</div>
 							</div>
 						</c:forEach>
@@ -57,10 +57,18 @@
 
 					</div>
 					<!--//alram_list-->
+					<!-- //반복리스트 -->
+					
+					<form action="${pageContext.request.contextPath }/mypage/send_alarm" method="get">
+					<button type="submit">결제하기</button>
+					</form>
+					
+					<form action="${pageContext.request.contextPath }/mypage/update_alarm" method="get">
+					<button type="submit">주문확인</button>
+					</form>
 
 				</div>
 				<!-- //content -->
-				<!-- //반복리스트 -->
 
 			</div>
 			<!--//middle-->
