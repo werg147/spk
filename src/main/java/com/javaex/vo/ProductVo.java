@@ -4,7 +4,7 @@ public class ProductVo {
 
 
 	private String prod_no;
-	private int user_no;
+	private int sell_no;
 	private String prod_cate;
 	private String event_cate;
 	private String prod_name;
@@ -22,11 +22,11 @@ public class ProductVo {
 	public ProductVo() {
 	}
 
-	public ProductVo(String prod_no, int user_no, String prod_cate, String event_cate, String prod_name, int prod_price,
+	public ProductVo(String prod_no, int sell_no, String prod_cate, String event_cate, String prod_name, int prod_price,
 			String prod_brand, String prod_desc, String prod_from, String prod_wash, String prod_qual,
 			String prod_detail, String prod_detail_img_name, String prod_detail_img_savename, String prod_date) {
 		this.prod_no = prod_no;
-		this.user_no = user_no;
+		this.sell_no = sell_no;
 		this.prod_cate = prod_cate;
 		this.event_cate = event_cate;
 		this.prod_name = prod_name;
@@ -50,12 +50,12 @@ public class ProductVo {
 		this.prod_no = prod_no;
 	}
 
-	public int getUser_no() {
-		return user_no;
+	public int getSell_no() {
+		return sell_no;
 	}
 
-	public void setUser_no(int user_no) {
-		this.user_no = user_no;
+	public void setSell_no(int user_no) {
+		this.sell_no = user_no;
 	}
 
 	public String getProd_cate() {
@@ -164,7 +164,7 @@ public class ProductVo {
 
 	@Override
 	public String toString() {
-		return "ProductVo [prod_no=" + prod_no + ", user_no=" + user_no + ", prod_cate=" + prod_cate + ", event_cate="
+		return "ProductVo [prod_no=" + prod_no + ", sell_no=" + sell_no + ", prod_cate=" + prod_cate + ", event_cate="
 				+ event_cate + ", prod_name=" + prod_name + ", prod_price=" + prod_price + ", prod_brand=" + prod_brand
 				+ ", prod_desc=" + prod_desc + ", prod_from=" + prod_from + ", prod_wash=" + prod_wash + ", prod_qual="
 				+ prod_qual + ", prod_detail=" + prod_detail + ", prod_detail_img_name=" + prod_detail_img_name

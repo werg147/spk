@@ -30,7 +30,8 @@
 					</div>
 					<!--//content_delevery_product_header//-->
 					<div class="content_product_line"></div>
-					<form action="${pageContext.request.contextPath}/mypage/prod/write" id="uploadForm" method="get">
+					<form action="${pageContext.request.contextPath}/mypage/prod/write"
+						id="uploadForm" method="post" enctype="multipart/form-data">
 						<table class="product_insert_content">
 							<colgroup>
 								<col style="width: 200px">
@@ -97,18 +98,16 @@
 							<tr class="sizecolor_div">
 								<td>색상 및 사이즈</td>
 								<div>
-									<td id=sizecolor><label for="color">색상</label> 
-									<input type="text" id="color" name="color">
-									<label for="size">사이즈</label> 
-									<input type="text" id="last" name="size"> 
-									<label for="stock">재고</label> 
-									<input type="text" id="stock" name="stock">
+									<td id=sizecolor><label for="color">색상</label> <input
+										type="text" id="color" name="color"> <label for="size">사이즈</label>
+										<input type="text" id="last" name="size"> <label
+										for="stock">재고</label> <input type="text" id="stock"
+										name="stock">
 										<button>+</button>
 										<div>
 											<div>블랙 55 35</div>
 											<div>블루 66 70</div>
-										</div>
-									</td>
+										</div></td>
 								</div>
 							</tr>
 							<tr class="plus">
@@ -133,14 +132,14 @@
 									<div>
 										<p>상세페이지 이미지등록</p>
 										<label class="input-file-button" for="input-file">업로드</label>
-										<input type="file" id="input-file" style="display: none;">
+										<input type="file" name="file" id="uploadFile">
 									</div> <textarea id="prod_detail" name="prod_detail"></textarea>
 								</td>
 							</tr>
 						</table>
-
+						<input type="hidden" name="sell_no" value="${sessionScope.authUser.sell_no}">
 						<div class="product_insert_btn">
-							<button class="insert_btn" type="submit">상품등록</button>
+							<button class="insert_btn" >상품등록</button>
 							<button class="product_delclose_btn">상품목록으로</button>
 						</div>
 					</form>
@@ -160,7 +159,7 @@
 </body>
 
 <script type="text/javascript">
-// 파일 리스트 번호
+//파일 리스트 번호
 var fileIndex = 0;
 // 등록할 전체 파일 사이즈
 var totalFileSize = 0;
@@ -205,14 +204,10 @@ function fileDropDown(){
         // 드롭다운 영역 css
         dropZone1.css('background-color','#E3E3E3');
         var files = e.originalEvent.dataTransfer.files;//0
+        console.log('files'+files);
+        
         for (var i = 0; i < files.length; i++) {
 			var file = files[i];
-			var d = new Date();
-			var prod_img_name = files[i].name;
-			var prod_img_savename = files[i].name+files[i].size+d.getTime();
-			console.log('prod_img_name'+prod_img_name);
-			console.log('prod_img_savename'+prod_img_savename);
-
 			console.log(file);
 			var count = uploadFiles.push(file); //업로드 목록에 추가
 			preview(file, count - 1); //미리보기 만들기
@@ -238,10 +233,10 @@ function preview(file, idx) {
 		return function(e) {
 			var div = '<div class="thumb"> \
 				<img src="'
-											+ e.target.result
-											+ '" title="'
-											+ escape(f.name)
-											+ '"/> \
+                + e.target.result
+                + '" title="'
+                + escape(f.name)
+                + '"/> \
 				<div class="close" data-idx="' + idx + '">이미지삭제</div> \
 				</div>';
                        
@@ -251,14 +246,7 @@ function preview(file, idx) {
 	reader.readAsDataURL(file);
 }
 
-/*
-// 업로드 파일 삭제
-function deleteFile(fIndex){
-    // 전체 파일 사이즈 수정
-    totalFileSize -= fileSizeList[fIndex];
-    
-}
-*/
+
 
 $("#imgadd1").on("click", ".close", function(e) {
 	var $target = $(e.target);
@@ -270,58 +258,61 @@ $("#imgadd1").on("click", ".close", function(e) {
 
 
 
-
-
-
-
-/*(상품이미지번호, 상품품번, 등록명, 저장명, 옵션)*/
-$("#insert_btn").on("click", function() {
+$(".insert_btn").on("click", function() {
 	var formData = new FormData();
 	$.each(uploadFiles, function(i, file) {
 		if (file.upload != 'disable') //삭제하지 않은 이미지만 업로드 항목으로 추가
 			formData.append('upload-file', file, file.name);
 	});
 	$.ajax({
-		url : '/api/etc/file/upload',
+		url : '${pageContext.request.contextPath}/mypage/prod/imgwrite',
 		data : formData,
 		type : 'post',
+		enctype:'multipart/form-data',
+		dataType:'json',
 		contentType : false,
 		processData : false,
-		success : function(ret) {
-			alert("완료");
-		}
+		success:function(result){
+            if(result.data.length > 0){
+                alert("성공");
+                location.reload();
+            }else{
+                alert("실패");
+                location.reload();
+            }
+        }
 	});
 });
 
 
-// 파일 선택시
-function selectFile(files){
-    // 다중파일 등록
-    if(files != null){
-        for(var i = 0; i < files.length; i++){
-            // 파일 이름
-            var fileName = files[i].name;
-            var fileNameArr = fileName.split("\.");
-            // 확장자
-            var ext = fileNameArr[fileNameArr.length - 1];
-            // 파일 사이즈(단위 :MB)
-            var fileSize = files[i].size / 1024 / 1024;
-            
-            if($.inArray(ext, ['exe', 'bat', 'sh', 'java', 'jsp', 'html', 'js', 'css', 'xml', 'pdf']) >= 0){
-                // 확장자 체크
-                alert("등록 불가 확장자");
-                break;
-            }else if(fileSize > uploadSize){
-                // 파일 사이즈 체크
-                alert("용량 초과\n업로드 가능 용량 : " + uploadSize + " MB");
-                break;
-            }
-        }
-    }else{
-        alert("ERROR");
-    }
-}
 
+	  // 파일 선택시
+	  function selectFile(files){
+	      // 다중파일 등록
+	      if(files != null){
+	          for(var i = 0; i < files.length; i++){
+	              // 파일 이름
+	              var fileName = files[i].name;
+	              var fileNameArr = fileName.split("\.");
+	              // 확장자
+	              var ext = fileNameArr[fileNameArr.length - 1];
+	              // 파일 사이즈(단위 :MB)
+	              var fileSize = files[i].size / 1024 / 1024;
+	              
+	              if($.inArray(ext, ['exe', 'bat', 'sh', 'java', 'jsp', 'html', 'js', 'css', 'xml']) >= 0){
+	                  // 확장자 체크
+	                  alert("등록 불가 확장자");
+	                  break;
+	              }else if(fileSize > uploadSize){
+	                  // 파일 사이즈 체크
+	                  alert("용량 초과\n업로드 가능 용량 : " + uploadSize + " MB");
+	                  break;
+	              }
+	          }
+	      }else{
+	          alert("ERROR");
+	      }
+	  }
 
 </script>
 </html>

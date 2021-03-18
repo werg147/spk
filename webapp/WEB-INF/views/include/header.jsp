@@ -32,7 +32,7 @@
 		</c:choose>
 
 		<div>
-			<a href="./buylist.html"><img
+			<a href="${pageContext.request.contextPath}/mypage/prod"><img
 				src="${pageContext.request.contextPath }/assets/image/마이페이지 남성_글러브.png"></a>
 		</div>
 		<div>

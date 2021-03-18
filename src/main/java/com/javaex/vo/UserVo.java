@@ -28,6 +28,20 @@ public class UserVo {
 		this.nickname = nickname;
 	}
 
+	public UserVo(int user_no, String user_id, String user_name, String password, String nickname,
+			String address, String user_photo, int user_phone, int user_level, String user_date) {
+		this.user_no = user_no;
+		this.user_id = user_id;
+		this.user_name = user_name;
+		this.password = password;
+		this.nickname = nickname;
+		this.address = address;
+		this.user_photo = user_photo;
+		this.user_phone = user_phone;
+		this.user_level = user_level;
+		this.user_date = user_date;
+	}
+
 	public UserVo(int user_no, int sell_no, String user_id, String user_name, String password, String nickname,
 			String address, String user_photo, int user_phone, int user_level, String user_date) {
 		this.user_no = user_no;
@@ -42,7 +56,6 @@ public class UserVo {
 		this.user_level = user_level;
 		this.user_date = user_date;
 	}
-
 	public int getUser_no() {
 		return user_no;
 	}
