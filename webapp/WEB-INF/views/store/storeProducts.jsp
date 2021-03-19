@@ -110,7 +110,7 @@
 												<button type="button" class="btn down on" value=" - " onclick="del();">
 													<img src="${pageContext.request.contextPath}/assets/image/store_img/ico_minu.jpg">
 											    </button> 
-												<input type="text" class="amount" name="amount" value="1" size="3" onchange="change();">
+												<input type="text" class="amount read_only" name="amount" value="1" size="3" onchange="change();">
 												<button type="button" class="btn up on" value=" + " onclick="add();">
 													<img src="${pageContext.request.contextPath}/assets/image/store_img/ico_plus.jpg">
 												</button>

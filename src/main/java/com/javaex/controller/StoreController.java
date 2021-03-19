@@ -52,9 +52,13 @@ public class StoreController {
 	
 	//상품상세 - qna 작성하기
 	@RequestMapping(value="/qnaWrite")
-	public String qnaWrite(@RequestParam("file") MultipartFile file,
+	public String qnaWrite(@RequestParam(value="file") MultipartFile file,
 						   @ModelAttribute QnaVo qnaVo) {
 		System.out.println("[Controller] qnaWrite()");
+		
+		
+		//System.out.println(qnaVo);
+		//System.out.println(file);
 		
 		//System.out.println(file.getOriginalFilename());
 		//System.out.println(qnaVo.toString());

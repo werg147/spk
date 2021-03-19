@@ -43,11 +43,10 @@
                 </div>
 
                 <form name="formQna" method="post" action="${pageContext.request.contextPath}/store/qnaWrite" enctype="multipart/form-data">
-                	<input type="hidden" name="qna_no" value="10">
-                    <input type="hidden" name="prod_no" value="123">
+                    <input type="hidden" name="prod_no" value="상품번호">
                     <input type="hidden" name="qna_date" value="">
-                    <input type="hidden" name="user_no" value="1">
-                    <input type="hidden" name="buy_no" value="44">
+                    <input type="hidden" name="user_no" value="100">
+                    <input type="hidden" name="buy_no" value="300">
               
                 
                     <table id="form" class="tbl tbl_type2">
@@ -59,7 +58,7 @@
                                 <tr>
                                     <th>작성자</th>
                                     <td>
-                                        <input type="text" name="name" required="" fld_esssential="" label="작성자" value="작성자명" readonly="readonly" class="read_only">
+                                        <input type="text" name="name" required="" fld_esssential="" label="작성자" value="${authUser.nickname}" readonly="readonly" class="read_only">
                                     </td>
                                 </tr>
                                 <tr>
@@ -86,7 +85,7 @@
                                     <th>비밀글</th>
                                     <td class="secret">
                                         <label for="qna_type">
-                                            <input type="checkbox" id="secret" name="qna_type" value="qna_type">
+                                            <input type="checkbox" id="secret" name="qna_type" value="secret">
                                             비밀글
                                         </label>
                                     </td>

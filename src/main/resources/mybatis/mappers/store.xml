@@ -14,23 +14,31 @@
 		<result column ="user_no" property="userNo"/>
 		<result column ="buy_no" property="buyNo"/>  
 	</resultMap>
+
 	
 	<!-- qna 인서트 -->
 	<insert id="qnaInsert" parameterType="QnaVo">
 		<![CDATA[
 			insert into qna
             values(
-                #{qna_no},
+                SEQ_QNA_NO.nextval,
                 #{prod_no},
                 #{qna_title},
                 #{qna_content},
                 sysdate,
-                #{qna_type},
+                #{qna_type,jdbcType=VARCHAR},
                 #{user_no},
                 #{buy_no}
             )
 		]]>
 	</insert>
+	
+	<!-- qnaimg 인서트 -->
+	 <insert id="qnaimgInsert" parameterType="">
+	 	<![CDATA[
+	 		
+	 	]]>
+	 </insert>
 
 	
    
