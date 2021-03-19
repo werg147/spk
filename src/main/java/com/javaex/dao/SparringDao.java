@@ -1,6 +1,5 @@
 package com.javaex.dao;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.javaex.vo.EventVo;
+import com.javaex.vo.GymVo;
 import com.javaex.vo.ProfileVo;
 import com.javaex.vo.RecordVo;
 
@@ -84,5 +84,19 @@ public class SparringDao {
 		System.out.println("RecordList = "+ recordList);
 		
 		return recordList;
+	}
+
+	public List<GymVo> selectListGym() {
+		System.out.println("[Dao] : selectListGym()");
+		
+		return sqlSession.selectList("gym.selectListGym");
+		
+		
+	}
+
+	public void selectOneGym(int gymNo) {
+		System.out.println("[Dao] : selectOneGym()");
+		System.out.println(gymNo);
+		
 	}
 }

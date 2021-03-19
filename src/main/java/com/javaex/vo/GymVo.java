@@ -11,7 +11,17 @@ public class GymVo {
 	private String gym_notice;
 	private String gym_event;
 	private String gym_date;
-
+	
+	// 영훈
+	private int avgPrice;
+	private int avgOnePrice;
+	private String addressHalf;
+	private String gymImgSavename;
+	private String gymImgType;
+	
+	
+	private String money;
+	private String moneyHalf;
 	public GymVo() {
 	}
 
@@ -26,6 +36,84 @@ public class GymVo {
 		this.gym_notice = gym_notice;
 		this.gym_event = gym_event;
 		this.gym_date = gym_date;
+	}
+
+	
+	
+	public GymVo(int gym_no, int sell_no, String gym_name, String gym_address, String gym_ph, String gym_time,
+			String gym_notice, String gym_event, String gym_date, int avgPrice, int avgOnePrice, String addressHalf,
+			String gymImgSavename, String gymImgType) {
+		super();
+		this.gym_no = gym_no;
+		this.sell_no = sell_no;
+		this.gym_name = gym_name;
+		this.gym_address = gym_address;
+		this.gym_ph = gym_ph;
+		this.gym_time = gym_time;
+		this.gym_notice = gym_notice;
+		this.gym_event = gym_event;
+		this.gym_date = gym_date;
+		this.avgPrice = avgPrice;
+		this.avgOnePrice = avgOnePrice;
+		this.addressHalf = addressHalf;
+		this.gymImgSavename = gymImgSavename;
+		this.gymImgType = gymImgType;
+	}
+	
+	public String getMoney() {
+		return money;
+	}
+
+	public void setMoney(String money) {
+		this.money = money;
+	}
+
+	public String getMoneyHalf() {
+		return moneyHalf;
+	}
+
+	public void setMoneyHalf(String moneyHalf) {
+		this.moneyHalf = moneyHalf;
+	}
+
+	public String getGymImgSavename() {
+		return gymImgSavename;
+	}
+
+	public void setGymImgSavename(String gymImgSavename) {
+		this.gymImgSavename = gymImgSavename;
+	}
+
+	public String getGymImgType() {
+		return gymImgType;
+	}
+
+	public void setGymImgType(String gymImgType) {
+		this.gymImgType = gymImgType;
+	}
+
+	public int getAvgPrice() {
+		return avgPrice;
+	}
+
+	public void setAvgPrice(int avgPrice) {
+		this.avgPrice = avgPrice;
+	}
+
+	public int getAvgOnePrice() {
+		return avgOnePrice;
+	}
+
+	public void setAvgOnePrice(int avgOnePrice) {
+		this.avgOnePrice = avgOnePrice;
+	}
+	
+	public String getAddressHalf() {
+		return addressHalf;
+	}
+
+	public void setAddressHalf(String addressHalf) {
+		this.addressHalf = addressHalf;
 	}
 
 	public int getGym_no() {
@@ -104,7 +192,13 @@ public class GymVo {
 	public String toString() {
 		return "GymVo [gym_no=" + gym_no + ", sell_no=" + sell_no + ", gym_name=" + gym_name + ", gym_address="
 				+ gym_address + ", gym_ph=" + gym_ph + ", gym_time=" + gym_time + ", gym_notice=" + gym_notice
-				+ ", gym_event=" + gym_event + ", gym_date=" + gym_date + "]";
+				+ ", gym_event=" + gym_event + ", gym_date=" + gym_date + ", avgPrice=" + avgPrice + ", avgOnePrice="
+				+ avgOnePrice + ", addressHalf=" + addressHalf + ", gymImgSavename=" + gymImgSavename + ", gymImgType="
+				+ gymImgType + "]";
 	}
 
+	
+	
+
+	
 }

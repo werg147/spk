@@ -344,7 +344,7 @@
             <!-- map -->
             <section class="dae_map">
                 <h1>위치</h1>
-                <div></div>
+                <div id="map" style="width:500px;height:400px;"></div>
             </section>
             <!-- map end -->
             <!-- 버튼 -->
@@ -381,6 +381,51 @@
         });
 
     </script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5d61061c16087356c2dfec36676de88d">
+    </script>
+    
+    <script type="text/javascript">
+    	var mapContainer = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+    	mapOptions = { //지도를 생성할 때 필요한 기본 옵션
+    		center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+    		level: 4 //지도의 레벨(확대, 축소 정도)
+    	};
+
+    	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+    	
+    	 geocoder.addressSerch(
+    		//'주소'
+    		address,
+    		function(result,status){
+    			//정상적으로 검색이 완료됐으면
+    			if(status === kakao.maps.services.Status.OK) {
+    				var coords = new kakao.maps.LatLng(
+    						result[0].y,result[0].x);
+    				
+    				var content = '<div class="customoverlay">' 
+    				+ '   <span class="title">'
+    				+'<div style="font-style:normal; color:red; font-weight:bold; font-size:2.0em">'
+    				+number + '</div>' + '</span>'
+    				+'</div>';
+    				
+    				var position = new kakao.maps.LatLng(result[0].y,result[0].x);
+    				
+    				var customOverlay = new kakao.maps.CustomOverlay({
+    					map : map,
+    					position : position,
+    					coontent : content,
+    					yAnchor : 1
+    				});
+    				
+    				map.setCenter(coords);
+    			}
+    		});
+    	for(i=0; i<myAddress.length; i++){
+    		myMarker(i+1,myAddress[i]);
+    	}
+    	)
+    </script>
+    
 </body>
 
 </html>

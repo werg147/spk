@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javaex.service.SparringService;
+import com.javaex.vo.GymVo;
 import com.javaex.vo.ProfileVo;
 import com.javaex.vo.RecordVo;
 
@@ -41,6 +42,34 @@ public class SparringController {
 	}
 	
 	
+	
+	/**체육관 대관 쪽**/
+	
+	//체육관 리스트
+	@RequestMapping(value="/rent" , method= {RequestMethod.GET , RequestMethod.POST})
+	public String rent(Model model) {
+		System.out.println("[Controller] : rent()");
+		
+		
+		
+		List<GymVo> gymList = sparringService.rent();
+		System.out.println(gymList);
+		
+		model.addAttribute("gymList",gymList);
+		
+		return "matching/rent";
+	}
+	
+	@RequestMapping(value="/rentdetail" , method= {RequestMethod.GET , RequestMethod.POST})
+	public String rentDetail(@RequestParam(value="gymNo")int gymNo) {
+		System.out.println("[Controller] : rentDetail()");
+		sparringService.rentDetail(gymNo);
+		return "matching/rentdetail";
+	}
+	
+	
+	
+	/*****************************************************/
 	//대관 x 매칭신청만 할경우 입력폼
 	@RequestMapping(value="/writeForm" , method= {RequestMethod.GET , RequestMethod.POST})
 	public String profileWriteForm(Model model) {

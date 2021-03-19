@@ -488,10 +488,8 @@
 						console.log($(pMap.recordList));
 						var recordList = $(pMap.recordList);
 						
-						if($(recordList).length == 0){
-							comments(num);
+						if($(recordList).length == 0 ){
 							
-							num += 1
 						}else{
 							record(recordList);
 						}

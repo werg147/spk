@@ -77,17 +77,18 @@
                     <!-- rental -->
                     <section class="rental">
                         <!-- rental 1pc -->
-                        <a href="/view/matching/대관상세.html" class="rental_container">
-                            <div class="rental_img"><img class="rental_img" src="/image/img/rental.jpeg" alt=""></div>
+                        <c:forEach items="${gymList}" var = "vo" >
+                        <a href="${pageContext.request.contextPath }/sparring/rentdetail?gymNo=${vo.gym_no}" class="rental_container">
+                            <div class="rental_img"><img class="rental_img" src="${pageContext.request.contextPath }/upload/${vo.gymImgSavename }" alt=""></div>
                             <div class="rental_profile">
-                                <div class="rental_profile1 rental_profile_gim">상봉동 | 팀파이터</div>
+                                <div class="rental_profile1 rental_profile_gim">${vo.addressHalf} | ${vo.gym_name}</div>
                                 <div class="rental_profile1 rental_profile_address"><i
-                                        class="fas fa-map-marker-alt"></i>서울시 중랑구 상봉동</div>
-                                <div class="rental_profile1 rental_profile_skills">종합격투기</div>
-                                <div class="rental_profile1 rental_profile_price1">100,000원 / 2인</div>
+                                        class="fas fa-map-marker-alt"></i>${vo.gym_address}</div>
+                                <div class="rental_profile1 rental_profile_skills">${vo.gym_event }</div>
+                                <div class="rental_profile1 rental_profile_price1">${vo.money}원 / 2인</div>
                                 <div class="rental_profile1 rental_profile_price2">
                                     <span class="person">1인</span>
-                                    <span class="pay">50,000</span>
+                                    <span class="pay">${vo.moneyHalf}원</span>
                                     
                                 </div>
                                 
@@ -95,19 +96,20 @@
                             </div>
 
                         </a>
+                        </c:forEach>
                         <!-- rental 1px end -->
-                        <!-- rental 1pc -->
+                        <c:forEach items="${gymList}" var = "vo" >
                         <a href="/view/matching/대관상세.html" class="rental_container">
-                            <div class="rental_img"><img class="rental_img" src="/image/img/rental.jpeg" alt=""></div>
+                            <div class="rental_img"><img class="rental_img" src="${pageContext.request.contextPath }/upload/${vo.gymImgSavename }" alt=""></div>
                             <div class="rental_profile">
-                                <div class="rental_profile1 rental_profile_gim">상봉동 | 팀파이터</div>
+                                <div class="rental_profile1 rental_profile_gim">${vo.addressHalf} | ${vo.gym_name}</div>
                                 <div class="rental_profile1 rental_profile_address"><i
-                                        class="fas fa-map-marker-alt"></i>서울시 중랑구 상봉동</div>
-                                <div class="rental_profile1 rental_profile_skills">종합격투기</div>
-                                <div class="rental_profile1 rental_profile_price1">100,000원 / 2인</div>
+                                        class="fas fa-map-marker-alt"></i>${vo.gym_address}</div>
+                                <div class="rental_profile1 rental_profile_skills">${vo.gym_event }</div>
+                                <div class="rental_profile1 rental_profile_price1">${vo.money}원 / 2인</div>
                                 <div class="rental_profile1 rental_profile_price2">
                                     <span class="person">1인</span>
-                                    <span class="pay">50,000</span>
+                                    <span class="pay">${vo.moneyHalf}원</span>
                                     
                                 </div>
                                 
@@ -115,49 +117,8 @@
                             </div>
 
                         </a>
-                        <!-- rental 1px end -->
-                         
-                        <!-- rental 1pc -->
-                        <a href="/view/matching/대관상세.html" class="rental_container">
-                            <div class="rental_img"><img class="rental_img" src="/image/img/rental.jpeg" alt=""></div>
-                            <div class="rental_profile">
-                                <div class="rental_profile1 rental_profile_gim">상봉동 | 팀파이터</div>
-                                <div class="rental_profile1 rental_profile_address"><i
-                                        class="fas fa-map-marker-alt"></i>서울시 중랑구 상봉동</div>
-                                <div class="rental_profile1 rental_profile_skills">종합격투기</div>
-                                <div class="rental_profile1 rental_profile_price1">100,000원 / 2인</div>
-                                <div class="rental_profile1 rental_profile_price2">
-                                    <span class="person">1인</span>
-                                    <span class="pay">50,000</span>
-                                    
-                                </div>
-                                
-
-                            </div>
-
-                        </a>
-                        <!-- rental 1px end -->
-                         
-                        <!-- rental 1pc -->
-                        <a href="/view/matching/대관상세.html" class="rental_container">
-                            <div class="rental_img"><img class="rental_img" src="/image/img/rental.jpeg" alt=""></div>
-                            <div class="rental_profile">
-                                <div class="rental_profile1 rental_profile_gim">상봉동 | 팀파이터</div>
-                                <div class="rental_profile1 rental_profile_address"><i
-                                        class="fas fa-map-marker-alt"></i>서울시 중랑구 상봉동</div>
-                                <div class="rental_profile1 rental_profile_skills">종합격투기</div>
-                                <div class="rental_profile1 rental_profile_price1">100,000원 / 2인</div>
-                                <div class="rental_profile1 rental_profile_price2">
-                                    <span class="person">1인</span>
-                                    <span class="pay">50,000</span>
-                                    
-                                </div>
-                                
-
-                            </div>
-
-                        </a>
-                        <!-- rental 1px end -->
+                        </c:forEach>
+                        
                          
                          
                         

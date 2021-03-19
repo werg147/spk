@@ -1,5 +1,6 @@
 package com.javaex.service;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.javaex.dao.SparringDao;
 import com.javaex.vo.EventVo;
+import com.javaex.vo.GymVo;
 import com.javaex.vo.ProfileVo;
 import com.javaex.vo.RecordVo;
 
@@ -123,5 +125,59 @@ public class SparringService {
 		pMap.put("eventList",eventList);
 		pMap.put("recordList",recordList);
 		return pMap;
+	}
+
+	public List<GymVo> rent() {
+		System.out.println("[Service] : rent()");
+		
+		List<GymVo> gymList =  sparringDao.selectListGym();
+		DecimalFormat formatter = new DecimalFormat("###,###");
+		
+		System.out.println(gymList);
+		
+		
+		
+		for(int i = 0; i< gymList.size(); i++) {
+			
+			//평균 비용의 1인분 값구하기
+			int avgPrice = gymList.get(i).getAvgPrice();
+			
+			int avgOnePrice = (int)avgPrice / 2;
+			
+			System.out.println("avgOnePrice ="+ avgOnePrice);
+			//금액 사이에 쉼표넣기
+			gymList.get(i).setAvgOnePrice(avgOnePrice);
+			
+			String money= formatter.format(avgPrice);
+			String moneyHalf = formatter.format(avgOnePrice);
+			
+			gymList.get(i).setMoney(money);
+			gymList.get(i).setMoneyHalf(moneyHalf);
+			
+			System.out.println(money);
+			System.out.println(moneyHalf);
+			
+			// 주소의 2번째 값만 가지고 하프주소 넣어주기
+			
+			String[] addressHalf= gymList.get(i).getGym_address().split("\\s");
+			
+			gymList.get(i).setAddressHalf(addressHalf[1]);
+			
+			System.out.println(gymList.get(i).getAddressHalf());
+			
+			
+			
+		}
+		
+		
+		
+		return gymList;
+		
+	}
+
+	public void rentDetail(int gymNo) {
+		// TODO Auto-generated method stub
+		System.out.println("[Service] : rentDetail()");
+		sparringDao.selectOneGym(gymNo);
 	}
 }
