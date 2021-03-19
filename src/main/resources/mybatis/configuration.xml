@@ -11,7 +11,7 @@
     	<typeAlias alias="ConVo" type="com.javaex.vo.ConVo" /> <!-- 다현 ConVo -->
     	<typeAlias alias="GymImgVo" type="com.javaex.vo.GymImgVo" /> <!-- 다현 GymImgVo -->
     	<typeAlias alias="QnaVo" type="com.javaex.vo.QnaVo" /> <!-- 세림 QnaVo -->
-    	<typeAlias alias="QnaVo" type="com.javaex.vo.QnaimgVo" /> <!-- 세림 QnaVo -->
+    	<typeAlias alias="QnaimgVo" type="com.javaex.vo.QnaimgVo" /> <!-- 세림 QnaimgVo-->
 	</typeAliases>
 
 	<mappers>

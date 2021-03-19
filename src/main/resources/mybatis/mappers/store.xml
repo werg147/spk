@@ -34,11 +34,7 @@
 	</insert>
 	
 	<!-- qnaimg 인서트 -->
-	 <insert id="qnaimgInsert" parameterType="">
-	 	<![CDATA[
-	 		
-	 	]]>
-	 </insert>
+	
 
 	
    
