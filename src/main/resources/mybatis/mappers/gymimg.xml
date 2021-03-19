@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="gymimg">
+	<select id="selectListGymImg" parameterType="int" resultType="GymImgVo">
+		<![CDATA[
+			select gym_img_no,
+			       gym_img_savename, 
+			       gym_img_type,
+			CASE WHEN GYM_IMG_TYPE = 'main' THEN '1' ELSE'0' END DATE_PRIORITY
+			FROM GYMIMG
+			where gym_no= #{gymNo}
+			ORDER BY DATE_PRIORITY DESC
+		
+		]]>
+	
+	</select>
+
+</mapper>

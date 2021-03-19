@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.javaex.vo.EventVo;
+import com.javaex.vo.GymImgVo;
 import com.javaex.vo.GymVo;
 import com.javaex.vo.ProfileVo;
 import com.javaex.vo.RecordVo;
@@ -94,9 +95,17 @@ public class SparringDao {
 		
 	}
 
-	public void selectOneGym(int gymNo) {
+	public GymVo selectOneGym(int gymNo) {
 		System.out.println("[Dao] : selectOneGym()");
 		System.out.println(gymNo);
 		
+		return sqlSession.selectOne("gym.gymSelectOne",gymNo);
+		
+	}
+
+	public List<GymImgVo> selectListGymImg(int gymNo) {
+		System.out.println("[DAO] : selectListGymImg");
+		
+		return sqlSession.selectList("gymimg.selectListGymImg",gymNo);
 	}
 }

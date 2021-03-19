@@ -1,6 +1,7 @@
 package com.javaex.service;
 
 import java.text.DecimalFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.javaex.dao.SparringDao;
 import com.javaex.vo.EventVo;
+import com.javaex.vo.GymImgVo;
 import com.javaex.vo.GymVo;
 import com.javaex.vo.ProfileVo;
 import com.javaex.vo.RecordVo;
@@ -178,6 +180,44 @@ public class SparringService {
 	public void rentDetail(int gymNo) {
 		// TODO Auto-generated method stub
 		System.out.println("[Service] : rentDetail()");
-		sparringDao.selectOneGym(gymNo);
+		
+		//1.gymVo를 받는다
+		GymVo gymVo = sparringDao.selectOneGym(gymNo);
+		System.out.println("gymVo ="+ gymVo);
+		
+		//2.gymImgList를 받는다
+		List<GymImgVo> gymimgList = sparringDao.selectListGymImg(gymNo);
+		System.out.println("gymimgVo = "+ gymimgList);
+		
+		//3. 날짜 뿌리기전 오늘기준으로 10일째의 날짜와 요일을 구한다
+		Calendar cal = Calendar.getInstance();
+		 String[] weekDay = { "일", "월", "화", "수", "목", "금", "토" };  
+
+		for(int i = 0; i<10; i++) {
+			int year = cal.get(Calendar.YEAR);
+			int month = cal.get(Calendar.MONTH)+1;
+			int day = cal.get(Calendar.DAY_OF_MONTH)+i;
+			int dayofWeek = cal.get(Calendar.DAY_OF_WEEK)+i;
+			if(dayofWeek>7) {
+				if(dayofWeek >14) {
+					dayofWeek = dayofWeek - 14;
+				}else {
+					dayofWeek = dayofWeek - 7;
+				}
+			}
+			String today ="";
+			switch(dayofWeek) {
+			case 1: today = "일"; break;
+			case 2: today = "월";break;
+			case 3:today = "화";break;
+			case 4:today = "수";break;
+			case 5:today = "목";break;
+			case 6:today = "금";break;
+			case 7:today = "토";break;
+			}
+			
+		System.out.println(i+"="+ year + "." + month + "." + day+"."+today);
+		
+		}
 	}
 }
