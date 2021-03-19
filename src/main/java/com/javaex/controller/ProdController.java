@@ -44,28 +44,17 @@ public class ProdController {
 
 	// 상품등록
 	@RequestMapping(value = "/write", method = { RequestMethod.GET, RequestMethod.POST })
-	public void prodWrite(@ModelAttribute ProductVo prodvo, 
-			@RequestParam("file") MultipartFile file,
-			Model model) {
+	public String prodWrite(@ModelAttribute ProductVo prodvo, 
+						  MultipartHttpServletRequest request,
+						  @RequestParam("file") MultipartFile file) {
 		System.out.println("[cnt]상품등록" + prodvo + file);
 
-		prodservice.prodWrite(file, prodvo);
+		prodservice.prodWrite(file, prodvo, request);
 
-		
+		return "redirect:/mypage/prod/form";
 	}
 
-	// 상품이미지등록
-
-	@RequestMapping(value = "/imgwrite", method = { RequestMethod.GET, RequestMethod.POST })
-	public String prodImgWrite(MultipartHttpServletRequest request) {
-		System.out.println("[cnt]상품이미지등록");
-		System.out.println();
-		prodservice.prodImgWrite(request);
-		return "mypage/mypage_prod/prod_manage";
-     
-	       }
 	         
-
 
 
 	// 드롭다운 예제파일 실행

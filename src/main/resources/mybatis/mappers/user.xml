@@ -9,10 +9,10 @@
 		<![CDATA[
 			SELECT users.user_no,
 			       users.nickname,
-			       seller.sell_no
-			FROM users, seller
-			where seller.user_no = users.user_no
-			and users.user_id = #{user_id}
+				   seller.sell_no
+			FROM users left outer JOIN seller
+			on seller.user_no = users.user_no
+			where users.user_id = #{user_id}
 			and users.password = #{password}
 		]]>
 	</select>

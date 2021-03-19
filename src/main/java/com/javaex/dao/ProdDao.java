@@ -15,14 +15,19 @@ public class ProdDao {
 	
 
 	//상품등록
-	public void prodInsert(ProductVo prodvo) {
+	public String prodInsert(ProductVo prodvo) {
 		System.out.println("[Dao]상품등록");
 		System.out.println(prodvo);
 		sqlSession.insert("prod.insert", prodvo);
 		
-		prodvo.getProd_no();
+		return prodvo.getProd_no();
 	}
 	
+	//상품 이미지 등록
+	public void mainImgInsert(ProdimgVo imgvo) {
+		System.out.println("[Dao]이미지등록" + imgvo);
+		sqlSession.insert("prod.imgInsert", imgvo);
+	}
 
 	
 }

@@ -137,9 +137,10 @@
 								</td>
 							</tr>
 						</table>
-						<input type="hidden" name="sell_no" value="${sessionScope.authUser.sell_no}">
+						<input type="hidden" name="sell_no"
+							value="${sessionScope.authUser.sell_no}">
 						<div class="product_insert_btn">
-							<button class="insert_btn" >상품등록</button>
+							<button class="insert_btn" type="submit">상품등록</button>
 							<button class="product_delclose_btn">상품목록으로</button>
 						</div>
 					</form>
@@ -210,6 +211,10 @@ function fileDropDown(){
 			var file = files[i];
 			console.log(file);
 			var count = uploadFiles.push(file); //업로드 목록에 추가
+			console.log("/////////////")
+			for(let i=0; i<uploadFiles.length; i++){
+			console.log(uploadFiles[i])
+			}
 			preview(file, count - 1); //미리보기 만들기
 			console.log('count'+count);
         }
@@ -252,7 +257,14 @@ $("#imgadd1").on("click", ".close", function(e) {
 	var $target = $(e.target);
 	var idx = $target.attr('data-idx');
 	uploadFiles[idx].upload = 'disable'; //삭제된 항목은 업로드하지 않기 위해 플래그 생성
+	
+	console.log("/////////////")
+	for(let i=0; i<uploadFiles.length; i++){
+		console.log(uploadFiles[i])
+		}
+	
 	$target.parent().remove(); //프리뷰 삭제
+	
 });
 
 
@@ -261,9 +273,21 @@ $("#imgadd1").on("click", ".close", function(e) {
 $(".insert_btn").on("click", function() {
 	var formData = new FormData();
 	$.each(uploadFiles, function(i, file) {
+		for(let i=0; i<uploadFiles.length; i++){
 		if (file.upload != 'disable') //삭제하지 않은 이미지만 업로드 항목으로 추가
-			formData.append('upload-file', file, file.name);
+			formData.append('upload-file', file[i], file.name);
+		}
 	});
+	
+	console.log("/////////////")
+	for (var formData.keys()) {
+	console.log(key);
+	}
+
+	for (var formData.values()) {
+    console.log(value);
+	}
+	
 	$.ajax({
 		url : '${pageContext.request.contextPath}/mypage/prod/imgwrite',
 		data : formData,
@@ -282,6 +306,7 @@ $(".insert_btn").on("click", function() {
             }
         }
 	});
+	return false;
 });
 
 

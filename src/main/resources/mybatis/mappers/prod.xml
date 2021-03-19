@@ -8,12 +8,12 @@
 
 	<insert id="insert" parameterType="com.javaex.vo.ProductVo">
 		<selectKey keyProperty="prod_no" resultType="String" order="BEFORE">
-			select SEQ_prod_NO.nextval
+			select SEQ_prod_no.nextval
 			from dual
 		</selectKey>
       <![CDATA[
          insert into product
-         values( #{prod_NO},
+         values( #{prod_no},
                  #{sell_no},
                  #{prod_cate},
                  #{event_cate},
@@ -30,6 +30,16 @@
                  sysdate
                  )          
       ]]>
+	</insert>
+	
+	<insert id="imgInsert" parameterType="com.javaex.vo.ProdimgVo">
+	<![CDATA[
+		insert into prodimg values (SEQ_PROD_IMG_NO.nextval, 
+									#{prod_no}, 
+									#{prod_img_name}, 
+									#{prod_img_savename}, 
+									#{prod_img_type})
+	]]>
 	</insert>
 
 </mapper>

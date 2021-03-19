@@ -22,8 +22,7 @@ public class ProdService {
 	@Autowired
 	private ProdDao proddao;
 
-
-	public void prodWrite(MultipartFile file, ProductVo prodvo) {
+	public void prodWrite(MultipartFile file, ProductVo prodvo, MultipartHttpServletRequest request) {
 		String saveName;
 
 		if (file.getSize() != 0) {
@@ -61,13 +60,11 @@ public class ProdService {
 			prodvo.setProd_detail_img_savename(saveName);
 			prodvo.setProd_detail_img_name(orgName);
 
-			System.out.println("변경하면 : " + saveName);
+
 		}
-
-		 proddao.prodInsert(prodvo);
-	}
-
-	public void prodImgWrite(MultipartHttpServletRequest request) {
+		System.out.println("[service]상품등록" + prodvo);
+		proddao.prodInsert(prodvo);
+		
 
 		Iterator<String> itr = request.getFileNames();
 		System.out.println(itr);
@@ -78,8 +75,7 @@ public class ProdService {
 
 			MultipartFile mpf = request.getFile(itr.next());
 
-			String savename = System.currentTimeMillis() + UUID.randomUUID().toString()
-					+ mpf.getOriginalFilename(); // 파일명
+			String savename = System.currentTimeMillis() + UUID.randomUUID().toString() + mpf.getOriginalFilename(); // 파일명
 
 			String fileFullPath = filePath + "/" + savename; // 파일 전체 경로
 
@@ -96,9 +92,11 @@ public class ProdService {
 			imgvo.setProd_img_savename(savename);
 			imgvo.setProd_img_name(mpf.getOriginalFilename());
 			imgvo.setProd_img_type("main");
+			imgvo.setProd_no(prodvo.getProd_no());
 			
-			System.out.println(imgvo);
-			//proddao.mainImgInsert(imgvo);
+			System.out.println("[service]상품이미지등록" + imgvo);
+			proddao.mainImgInsert(imgvo);
 		}
 	}
+
 }
