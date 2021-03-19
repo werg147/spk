@@ -14,6 +14,14 @@
 		<result column ="user_no" property="userNo"/>
 		<result column ="buy_no" property="buyNo"/>  
 	</resultMap>
+	
+	<resultMap id ="QnaimgVo" type="QnaimgVo">
+		<result column ="qna_img_no" property="qnaImgNo"/>
+		<result column ="qna_no" property="qnaNo"/>
+		<result column ="qna_img_name" property="qnaImgName"/>
+		<result column ="qna_img_savename" property="qnaImgSavename"/>
+		<result column ="qna_img_type" property="qnaImgType"/>
+	</resultMap>
 
 	
 	<!-- qna 인서트 -->
