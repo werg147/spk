@@ -634,8 +634,11 @@
 									</table>
 
 									
-									<!--상담글 리스트-->
-									<div>
+									<!--상담글 리스트 출력-->
+									<div id="qnaListArea">
+										
+									</div>
+										<!--  	
 										<table width="100%" class="xans-board-listheaderd">
 											<tbody>
 												<tr>
@@ -643,7 +646,7 @@
 														123
 													</td>
 													<td width="134">
-														<a class="board_hidden"><!--히든--> </a>	
+														<a class="board_hidden"> </a>	
 													</td>
 													<td class="image" style="padding:22px 19px 23px; text-align:left;">
 														<div style="padding:3px 0px 0px 20px;">
@@ -657,14 +660,16 @@
 														2017-02-01
 													</td>
 												</tr>
-
-												<!-------반복영역------->
+											</tbody>
+										</table>
+										-->
+												<!-------반복영역
 												<tr onmouseover="this.style.background='#F7F7F7'" onmouseout="this.style.background=''" onclick="view_content('15968', '1');" style="">
 													<td width="70" align="center">
 														122
 													</td>
 													<td width="134">
-														<a class="board_hidden"><!--히든--> </a>	
+														<a class="board_hidden"></a>	
 													</td>
 													<td class="image" style="padding:22px 19px 23px; text-align:left;">
 														<div style="padding:3px 0px 0px 20px;">
@@ -683,7 +688,7 @@
 														121
 													</td>
 													<td width="134">
-														<a class="board_hidden"><!--히든--> </a>	
+														<a class="board_hidden"></a>	
 													</td>
 													<td class="image" style="padding:22px 19px 23px; text-align:left;">
 														<div style="padding:3px 0px 0px 20px;">
@@ -702,7 +707,7 @@
 														120
 													</td>
 													<td width="134">
-														<a class="board_hidden"><!--히든--> </a>	
+														<a class="board_hidden"> </a>	
 													</td>
 													<td class="image" style="padding:22px 19px 23px; text-align:left;">
 														<div style="padding:3px 0px 0px 20px;">
@@ -721,7 +726,7 @@
 														199
 													</td>
 													<td width="134">
-														<a class="board_hidden"><!--히든--> </a>	
+														<a class="board_hidden"> </a>	
 													</td>
 													<td class="image" style="padding:22px 19px 23px; text-align:left;">
 														<div style="padding:3px 0px 0px 20px;">
@@ -734,11 +739,9 @@
 													<td width="80" style="color:#939393">
 														2017-02-01
 													</td>
-												</tr>
+												</tr>------->
 
-											</tbody>
-										</table>
-									</div>									
+																			
 
 						
 
@@ -863,7 +866,27 @@
 	
 	
 	
-	//문의하기 버튼 클릭시
+	//DOM이 생성되면
+	$("document").ready(function(){
+		console.log("ready");
+		
+		//리스트 출력
+		fetchList();
+		
+	});
+	
+	
+	//qnaList 정보+ html조합해서 화면 출력
+	function
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

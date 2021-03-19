@@ -25,11 +25,15 @@
 
 	
 	<!-- qna 인서트 -->
+	<!-- qnaimg가 있을 경우 거의 동시에 인서트 되는데, qnaimg에서 qna_no가 필요하므로  selectKey 사용. 우선 입력한 값의 결과값을 다음 쿼리로 바로 return 시켜준다.-->
 	<insert id="qnaInsert" parameterType="QnaVo">
+		<selectKey keyProperty="qna_no" resultType="Int" order="BEFORE">
+			select SEQ_QNA_NO.nextval from dual
+		</selectKey>
 		<![CDATA[
 			insert into qna
             values(
-                SEQ_QNA_NO.nextval,
+                #{qna_no},
                 #{prod_no},
                 #{qna_title},
                 #{qna_content},
@@ -42,7 +46,18 @@
 	</insert>
 	
 	<!-- qnaimg 인서트 -->
-	
+	<insert id="qnaimgInsert" parameterType="QnaimgVo">
+		<![CDATA[
+			insert into qnaimg
+            values(
+                SEQ_QNA_IMG_NO.nextval,
+                #{qna_no},
+                #{qna_img_name},
+                #{qna_img_savename},
+                #{qna_img_type}
+            )
+		]]>
+	</insert>
 
 	
    
