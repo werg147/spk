@@ -172,6 +172,7 @@ var fileSizeList = new Array();
 var uploadSize = 50;
 // 등록 가능한 총 파일 사이즈 MB
 var maxUploadSize = 500;
+
 var uploadFiles = [];
 
 $(function (){
@@ -211,9 +212,17 @@ function fileDropDown(){
 			var file = files[i];
 			console.log(file);
 			var count = uploadFiles.push(file); //업로드 목록에 추가
+			
+            // 파일 배열에 넣기
+            fileList[count-1] = files[i];
+
+            for(let i=0; i<fileList.length; i++){
+            console.log('파일리스트 테스트' + fileList[i]);
+            }
+            
 			console.log("/////////////")
 			for(let i=0; i<uploadFiles.length; i++){
-			console.log(uploadFiles[i])
+			console.log(uploadFiles[i] + ", " + uploadFiles.length);
 			}
 			preview(file, count - 1); //미리보기 만들기
 			console.log('count'+count);
@@ -251,16 +260,39 @@ function preview(file, idx) {
 	reader.readAsDataURL(file);
 }
 
+// 파일 선택시
+function selectFile(files){
+    // 다중파일 등록
+    if(files != null){
+        for(var i = 0; i < files.length; i++){
+            // 파일 이름
+            var fileName = files[i].name;
+            var fileNameArr = fileName.split("\.");
+            // 확장자
+            var ext = fileNameArr[fileNameArr.length - 1];
+            // 파일 사이즈(단위 :MB)
+            var fileSize = files[i].size / 1024 / 1024;
+            
+            if($.inArray(ext, ['exe', 'bat', 'sh', 'java', 'jsp', 'html', 'js', 'css', 'xml']) >= 0){
+                // 확장자 체크
+                alert("등록 불가 확장자");
+                break;
+            }
+        }
+    }else{
+        alert("ERROR");
+    }
+}
 
 
 $("#imgadd1").on("click", ".close", function(e) {
 	var $target = $(e.target);
 	var idx = $target.attr('data-idx');
-	uploadFiles[idx].upload = 'disable'; //삭제된 항목은 업로드하지 않기 위해 플래그 생성
+	fileList[idx].upload = 'disable'; //삭제된 항목은 업로드하지 않기 위해 플래그 생성
 	
 	console.log("/////////////")
-	for(let i=0; i<uploadFiles.length; i++){
-		console.log(uploadFiles[i])
+	for(let i=0; i<fileList.length; i++){
+		console.log(fileList[i])
 		}
 	
 	$target.parent().remove(); //프리뷰 삭제
@@ -271,25 +303,26 @@ $("#imgadd1").on("click", ".close", function(e) {
 
 
 $(".insert_btn").on("click", function() {
+    
+    
+    // 파일이 있는지 체크
+    if(uploadFileList.length == 0){
+        // 파일등록 경고창
+        alert("파일이 없습니다.");
+        return;
+    }
+    // 등록할 파일 리스트
 	var formData = new FormData();
-	$.each(uploadFiles, function(i, file) {
-		for(let i=0; i<uploadFiles.length; i++){
-		if (file.upload != 'disable') //삭제하지 않은 이미지만 업로드 항목으로 추가
-			formData.append('upload-file', file[i], file.name);
+	$.each(uploadFileList, function(i, file) {
+		for(let i=0; i<uploadFileList.length; i++){
+			if (file.upload != 'disable') //삭제하지 않은 이미지만 업로드 항목으로 추가
+			formData.append('files', uploadFileList[i], uploadFileList.name);
 		}
 	});
-	
-	console.log("/////////////")
-	for (var formData.keys()) {
-	console.log(key);
-	}
 
-	for (var formData.values()) {
-    console.log(value);
-	}
-	
+
 	$.ajax({
-		url : '${pageContext.request.contextPath}/mypage/prod/imgwrite',
+		url : '${pageContext.request.contextPath}/mypage/prod/write',
 		data : formData,
 		type : 'post',
 		enctype:'multipart/form-data',
@@ -306,38 +339,10 @@ $(".insert_btn").on("click", function() {
             }
         }
 	});
-	return false;
 });
 
 
 
-	  // 파일 선택시
-	  function selectFile(files){
-	      // 다중파일 등록
-	      if(files != null){
-	          for(var i = 0; i < files.length; i++){
-	              // 파일 이름
-	              var fileName = files[i].name;
-	              var fileNameArr = fileName.split("\.");
-	              // 확장자
-	              var ext = fileNameArr[fileNameArr.length - 1];
-	              // 파일 사이즈(단위 :MB)
-	              var fileSize = files[i].size / 1024 / 1024;
-	              
-	              if($.inArray(ext, ['exe', 'bat', 'sh', 'java', 'jsp', 'html', 'js', 'css', 'xml']) >= 0){
-	                  // 확장자 체크
-	                  alert("등록 불가 확장자");
-	                  break;
-	              }else if(fileSize > uploadSize){
-	                  // 파일 사이즈 체크
-	                  alert("용량 초과\n업로드 가능 용량 : " + uploadSize + " MB");
-	                  break;
-	              }
-	          }
-	      }else{
-	          alert("ERROR");
-	      }
-	  }
 
 </script>
 </html>
