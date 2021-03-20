@@ -805,7 +805,7 @@ input:-ms-input-placeholder {
   padding: 25px 0px 10px 0px;
 }
 
-.hour_item > a > div {
+.hour_item > div > div {
   font-size: 15px;
 }
 
@@ -2601,8 +2601,8 @@ element.style {
   position: relative;
   right: 10px;
 }
-.box1 {
-  background-color: #e60012;
+
+.box10 {
   width: 100px;
   height: 50px;
   text-align: center;
@@ -2610,10 +2610,17 @@ element.style {
   border-radius: 30px;
   color: white;
   font-weight: bold;
+
 }
-.box1 > div {
+.box-color {
+  background-color: #e60012;
+
+
+}
+.box-color > div {
   color: rgb(245, 245, 245);
 }
+
 .rn_container {
   width: 950px;
   height: 100px;

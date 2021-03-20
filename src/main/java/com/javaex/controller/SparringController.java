@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javaex.service.SparringService;
+import com.javaex.vo.BookingVo;
 import com.javaex.vo.GymAssembleVo;
+import com.javaex.vo.GymImgVo;
 import com.javaex.vo.GymVo;
 import com.javaex.vo.ProfileVo;
 import com.javaex.vo.RecordVo;
@@ -71,7 +73,14 @@ public class SparringController {
 		return "matching/rentdetail";
 	}
 	
-	
+	/**결제하기**/
+	@RequestMapping(value="/payment" , method= {RequestMethod.GET , RequestMethod.POST})
+	public String payment(@RequestParam(value="bookingno")int bookingNo,
+						  @RequestParam(value="userno")int userNo) {
+		System.out.println(bookingNo);
+		System.out.println(userNo);
+		return "";
+	}
 	
 	/*****************************************************/
 	//대관 x 매칭신청만 할경우 입력폼
@@ -122,13 +131,40 @@ public class SparringController {
 		
 		return "";
 	}
+	
+	/***********************api*****************/
 	@ResponseBody
 	@RequestMapping(value="/api/selectdate" , method= {RequestMethod.GET , RequestMethod.POST})
 	public Map<String,Object> selectDate(@RequestParam(value="rownum")int rownum,
 						@RequestParam(value="userNo")int userNo) {
-		System.out.println("[Controller] : selectDate");
+		System.out.println("[Api Controller] : selectDate");
 		
 		
 		return sparringService.selectDate(rownum,userNo); 
+	}
+	
+	//체육관상세페이지 메인사진 바꾸기
+	@ResponseBody
+	@RequestMapping(value="/api/gymimgone" , method= {RequestMethod.GET , RequestMethod.POST})
+	public GymImgVo gymImgOne(@RequestParam(value="gymImgNo")int gymImgNo) {
+		System.out.println("[Api Controller] :");
+		System.out.println(gymImgNo);
+		
+		GymImgVo gIVo = sparringService.gymImgOne(gymImgNo);
+		
+		System.out.println("gIVo = "+ gIVo);
+		return gIVo;
+	}
+	
+	//체육관 booking 리스트 바꾸기
+	@ResponseBody
+	@RequestMapping(value="/api/bookinglist" , method= {RequestMethod.GET , RequestMethod.POST})
+	public List<BookingVo> bookingList(@RequestParam(value="date")String date,
+							  @RequestParam(value="gymNo")int gymNo) {
+		System.out.println("[Controller] : bookingList");
+		
+		List<BookingVo> bookingList = sparringService.bookingList(date,gymNo);
+		System.out.println(bookingList);
+		return bookingList;
 	}
 }

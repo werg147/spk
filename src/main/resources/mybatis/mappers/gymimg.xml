@@ -16,5 +16,14 @@
 		]]>
 	
 	</select>
-
+	
+	<select id="selectOneGymImg" parameterType="int" resultType="GymImgVo">
+		<![CDATA[
+			select gym_img_no,
+			       gym_img_savename 
+			from gymimg
+			where gym_img_no = #{gymImgNo}		
+		]]>
+	
+	</select>
 </mapper>

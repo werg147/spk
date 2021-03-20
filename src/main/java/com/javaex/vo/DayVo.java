@@ -6,6 +6,8 @@ public class DayVo {
 	private int month;
 	private int day;
 	private String today;
+	//전체날
+	private String date;
 	
 	
 	public DayVo() {
@@ -17,6 +19,22 @@ public class DayVo {
 		this.month = month;
 		this.day = day;
 		this.today = today;
+	}
+	
+	
+	public DayVo(int year, int month, int day, String today, String date) {
+		super();
+		this.year = year;
+		this.month = month;
+		this.day = day;
+		this.today = today;
+		this.date = date;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
 	}
 	public int getYear() {
 		return year;
@@ -44,9 +62,8 @@ public class DayVo {
 	}
 	@Override
 	public String toString() {
-		return "DayVo [year=" + year + ", month=" + month + ", day=" + day + ", today=" + today + "]";
+		return "DayVo [date=" + date + ", year=" + year + ", month=" + month + ", day=" + day + ", today=" + today + "]";
 	}
-	
 	
 	
 }

@@ -111,15 +111,6 @@ public class SparringDao {
 		return sqlSession.selectList("gymimg.selectListGymImg",gymNo);
 	}
 
-	public List<BookingVo> selectOneBooking(Map<String, Object> map) {
-		
-		System.out.println("[Dao] : selectOneBooking()");
-		
-		List<BookingVo> bList = sqlSession.selectList("booking.selectListBooking",map);
-		System.out.println(bList.toString());
-		
-		return bList;
-	}
 
 	public List<ConvenienceVo> selectListCon(int gymNo) {
 		System.out.println("[Dao] : selectListCon");
@@ -130,4 +121,23 @@ public class SparringDao {
 		
 		return conList;
 	}
+
+	public GymImgVo selectOneGymImg(int gymImgNo) {
+		System.out.println("[Dao] : selectOneGymImg");
+		
+		return sqlSession.selectOne("gymimg.selectOneGymImg",gymImgNo);
+		
+	}
+	//첫화면 리스트
+	public List<BookingVo> selectListBooking(Map<String, Object> map) {
+		
+		System.out.println("[Dao] : selectOneBooking()");
+		
+		List<BookingVo> bList = sqlSession.selectList("booking.selectListBooking",map);
+		System.out.println(bList.toString());
+		
+		return bList;
+	}
+	
+
 }

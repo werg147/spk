@@ -229,7 +229,16 @@ public class SparringService {
 			}
 			
 		System.out.println(i+"="+ year + "." + month + "." + day+"."+today);
-		DayVo dayVo = new DayVo(year,month,day,today);
+		
+		/***********변경할수있음**************/
+		//이렇게하는 이유는 검색을 03월 이렇게 되는데 month는 그냥 3 이기때문
+		String date = "";
+		if(month < 10) {
+			date = year + ".0" + month + "." + day;
+		} else {
+			date = year + "." + month + "." + day;	
+		}
+		DayVo dayVo = new DayVo(year,month,day,today,date);
 		dayList.add(dayVo);
 		}
 		
@@ -237,22 +246,14 @@ public class SparringService {
 		//4.오늘의 날짜로 대관 정보가 있는지 확인한후 하나의 vo를받는다
 		//(다른날짜에 대한 정보는  ajax로 처리하기 때문)
 		System.out.println("오늘 = "+ dayList.get(0));
-		String day1 = "";
-		if(dayList.get(0).getMonth() < 10) {
-		day1 = dayList.get(0).getYear() 
-					+".0"+dayList.get(0).getMonth()
-					+"."+dayList.get(0).getDay();
-		}else {
-			day1 = dayList.get(0).getYear() 
-					+"."+dayList.get(0).getMonth()
-					+"."+dayList.get(0).getDay();
-		}
+		String day1 = dayList.get(0).getDate();
+		
 		//셀렉트 웨어절 구문이 바뀔수 있음 ***************************************
 		Map<String, Object> map = new HashMap<String,Object>();
 		map.put("day",day1);
 		map.put("gymNo",gymNo);
 		
-		List<BookingVo> bookingList = sparringDao.selectOneBooking(map);
+		List<BookingVo> bookingList = sparringDao.selectListBooking(map);
 		
 		
 		//5.편의시설 리스트
@@ -262,5 +263,22 @@ public class SparringService {
 		GymAssembleVo gymAssembleVo = new GymAssembleVo(gymVo, gymimgList, dayList, bookingList, conList);
 	
 		return gymAssembleVo;
+	}
+
+	public GymImgVo gymImgOne(int gymImgNo) {
+		System.out.println("[Service] : gymImgOne");
+		
+		return sparringDao.selectOneGymImg(gymImgNo);
+		
+	}
+
+	public List<BookingVo> bookingList(String date, int gymNo) {
+		System.out.println("[Service] : bookingList");
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("day",date);
+		map.put("gymNo",gymNo);
+		
+		List<BookingVo> bookingList = sparringDao.selectListBooking(map);
+		return bookingList;
 	}
 }
