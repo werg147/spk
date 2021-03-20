@@ -98,26 +98,7 @@
                         </a>
                         </c:forEach>
                         <!-- rental 1px end -->
-                        <c:forEach items="${gymList}" var = "vo" >
-                        <a href="/view/matching/대관상세.html" class="rental_container">
-                            <div class="rental_img"><img class="rental_img" src="${pageContext.request.contextPath }/upload/${vo.gymImgSavename }" alt=""></div>
-                            <div class="rental_profile">
-                                <div class="rental_profile1 rental_profile_gim">${vo.addressHalf} | ${vo.gym_name}</div>
-                                <div class="rental_profile1 rental_profile_address"><i
-                                        class="fas fa-map-marker-alt"></i>${vo.gym_address}</div>
-                                <div class="rental_profile1 rental_profile_skills">${vo.gym_event }</div>
-                                <div class="rental_profile1 rental_profile_price1">${vo.money}원 / 2인</div>
-                                <div class="rental_profile1 rental_profile_price2">
-                                    <span class="person">1인</span>
-                                    <span class="pay">${vo.moneyHalf}원</span>
-                                    
-                                </div>
-                                
-
-                            </div>
-
-                        </a>
-                        </c:forEach>
+                        
                         
                          
                          

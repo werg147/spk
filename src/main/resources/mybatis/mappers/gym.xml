@@ -104,4 +104,19 @@
 		
 		]]>		
 	</select>
+	<select id="selectOneGym" parameterType="int" resultType="GymVo">
+		<![CDATA[
+			SELECT  gym_no,
+			        sell_no,
+			        gym_name,
+			        gym_address,
+			        gym_ph,
+			        gym_time,
+			        gym_notice,
+			        gym_event,
+			        gym_date
+			FROM gym
+			where gym_no = #{gymNo}		
+		]]>
+	</select>
 </mapper>

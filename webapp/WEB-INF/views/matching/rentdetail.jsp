@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,34 +44,17 @@
             <section class="detail_info">
 
                 <div class="detail_info_img">
-                    <div class="detail_info_first-img"><img class="detail_info_first-img_main" src="/image/img/rental.jpeg"
+                    <div class="detail_info_first-img"><img class="detail_info_first-img_main" src="${pageContext.request.contextPath}/upload/${gAVo.gymimgList[0].gym_img_savename}"
                             alt=""></div>
                     <div class="detail_info_sub-imgs">
                         <!-- **사진 총 6개만 받을 것 -->
                         <!-- sub img 1pc -->
-                        <a class="detail_info_sub-a" href=""><img class="detail_info_sub-img" src="/image/img/rental.jpeg"
+                        <c:forEach items="${gAVo.gymimgList}" var="vo">
+                        	<a class="detail_info_sub-a" href=""><img class="detail_info_sub-img" src="${pageContext.request.contextPath}/upload/${vo.gym_img_savename}"
                                 alt=""></a>
+                        </c:forEach>
                         <!-- sub img 1pc end-->
-                        <!-- sub img 1pc -->
-                        <a class="detail_info_sub-a" href=""><img class="detail_info_sub-img" src="/image/img/rental.jpeg"
-                                alt=""></a>
-                        <!-- sub img 1pc end-->
-                        <!-- sub img 1pc -->
-                        <a class="detail_info_sub-a" href=""><img class="detail_info_sub-img" src="/image/img/rental.jpeg"
-                                alt=""></a>
-                        <!-- sub img 1pc end-->
-                        <!-- sub img 1pc -->
-                        <a class="detail_info_sub-a" href=""><img class="detail_info_sub-img" src="/image/img/rental.jpeg"
-                                alt=""></a>
-                        <!-- sub img 1pc end-->
-                        <!-- sub img 1pc -->
-                        <a class="detail_info_sub-a" href=""><img class="detail_info_sub-img" src="/image/img/rental.jpeg"
-                                alt=""></a>
-                        <!-- sub img 1pc end-->
-                        <!-- sub img 1pc -->
-                        <a class="detail_info_sub-a" href=""><img class="detail_info_sub-img" src="/image/img/rental.jpeg"
-                                alt=""></a>
-                        <!-- sub img 1pc end-->
+                        
 
                     </div>
                 </div>
@@ -81,17 +65,17 @@
                            
                             <div class="amen_box">
                                 
-                                <p class="amenities_item1_title">팀파이터<span> 체육관</span></p>
-                                <div class="amenities_item1_skill">종합격투기</div>
+                                <p class="amenities_item1_title">${gAVo.gymVo.gym_name}<span></span></p>
+                                <div class="amenities_item1_skill">${gAVo.gymVo.gym_event}</div>
                             </div>
                             
                             <div class="amen_box2">
                                 <div>
-                                    <div class="amenities_item1_sub5">010-2725-7878</div>
+                                    <div class="amenities_item1_sub5">${gAVo.gymVo.gym_ph}</div>
                                     <!-- 주소 -->
                                     <div class="amenities_item1_sub">
-                                        <span class="amenities_item1_sub2"><i class="fas fa-map-marker-alt"></i>서울시 중랑구
-                                            상봉동</span>
+                                        <span class="amenities_item1_sub2">
+                                        <i class="fas fa-map-marker-alt"></i>${gAVo.gymVo.gym_address}</span>
                                     </div>
                                 </div>
                                 
@@ -100,42 +84,116 @@
                         </div>
                         <div class="amenities_item2">
                             <!-- 네글자만 쓰세요 -->
+                            <c:choose>
+                            <c:when test="${gAVo.conList[0].con_state eq '1'}">
                             <div class="amenities_item2_sub">
-                                <img class="amenities_item2_sub_img" src="/image/img/paking.png" alt="">
+                                <img class="amenities_item2_sub_img" src="${pageContext.request.contextPath}/upload/paking.png" alt="">
                                 <div class="amenities_item2_sub_title">
                                     <div>무료 주차</div>
                                 </div>
                             </div>
+                            </c:when>
+                            <c:otherwise>
+                            <div class="amenities_item2_sub" style="opacity:0.2">
+                                <img class="amenities_item2_sub_img" src="${pageContext.request.contextPath}/upload/paking.png" alt="">
+                                <div class="amenities_item2_sub_title">
+                                    <div>무료 주차</div>
+                                </div>
+                            </div>
+                            </c:otherwise>
+                            </c:choose>
+                            <c:choose>
+                            <c:when test="${gAVo.conList[1].con_state eq '1'}">
                             <div class="amenities_item2_sub">
-                                <img class="amenities_item2_sub_img" src="/image/img/shower.png" alt="">
+                                <img class="amenities_item2_sub_img" src="${pageContext.request.contextPath}/upload//shower.png" alt="">
                                 <div class="amenities_item2_sub_title">
                                     <div>샤워 가능</div>
                                 </div>
                             </div>
-                            <div class="amenities_item2_sub">
-                                <img class="amenities_item2_sub_img" src="/image/img/glove.png" alt="">
+                            </c:when>
+                            <c:otherwise>
+                            <div class="amenities_item2_sub" style="opacity:0.2">
+                                <img class="amenities_item2_sub_img" src="${pageContext.request.contextPath}/upload//shower.png" alt="">
                                 <div class="amenities_item2_sub_title">
-                                    <div>용품 대여</div>
+                                    <div>샤워 가능</div>
                                 </div>
                             </div>
+                            </c:otherwise>
+                            </c:choose>
+                            <c:choose>
+                            <c:when test="${gAVo.conList[2].con_state eq '1'}">
                             <div class="amenities_item2_sub">
-                                <img class="amenities_item2_sub_img" src="/image/img/wear.png" alt="">
+                                <img class="amenities_item2_sub_img" src="${pageContext.request.contextPath}/upload//glove.png" alt="">
+                                <div class="amenities_item2_sub_title">
+                                    <div>수건 대여</div>
+                                </div>
+                            </div>
+                            </c:when>
+                            <c:otherwise>
+                            <div class="amenities_item2_sub" style="opacity:0.2">
+                                <img class="amenities_item2_sub_img" src="${pageContext.request.contextPath}/upload//glove.png" alt="">
+                                <div class="amenities_item2_sub_title">
+                                    <div>수건 대여</div>
+                                </div>
+                            </div>
+                            </c:otherwise>
+                            </c:choose>
+                            <c:choose>
+                            <c:when test="${gAVo.conList[3].con_state eq '1'}">
+                            <div class="amenities_item2_sub">
+                                <img class="amenities_item2_sub_img" src="${pageContext.request.contextPath}/upload/lacker.png" alt="">
+                                <div class="amenities_item2_sub_title">
+                                    <div>락커 대여</div>
+                                </div>
+                            </div>
+                            </c:when>
+                            <c:otherwise>
+                            <div class="amenities_item2_sub" style="opacity:0.2">
+                                <img class="amenities_item2_sub_img" src="${pageContext.request.contextPath}/upload/lacker.png" alt="">
+                                <div class="amenities_item2_sub_title">
+                                    <div>락커 대여</div>
+                                </div>
+                            </div>
+                            </c:otherwise>
+                            </c:choose>
+                            <c:choose>
+                            <c:when test="${gAVo.conList[4].con_state eq '1'}">
+                            <div class="amenities_item2_sub">
+                                <img class="amenities_item2_sub_img" src="${pageContext.request.contextPath}/upload/glove.jpg" alt="">
+                                <div class="amenities_item2_sub_title">
+                                    <div>글러브대여</div>
+                                </div>
+                            </div>
+                            </c:when>
+                            <c:otherwise>
+                            <div class="amenities_item2_sub" style="opacity:0.2">
+                                <img class="amenities_item2_sub_img" src="${pageContext.request.contextPath}/upload/glove.jpg" alt="">
+                                <div class="amenities_item2_sub_title">
+                                    <div>글러브대여</div>
+                                </div>
+                            </div>
+                            </c:otherwise>
+                            </c:choose>
+                            <c:choose>
+                            <c:when test="${gAVo.conList[5].con_state eq '1'}">
+                            <div class="amenities_item2_sub">
+                                <img class="amenities_item2_sub_img" src="${pageContext.request.contextPath}/upload//wear.png" alt="">
                                 <div class="amenities_item2_sub_title">
                                     <div>운동복대여</div>
                                 </div>
                             </div>
-                            <div class="amenities_item2_sub">
-                                <img class="amenities_item2_sub_img" src="/image/img/wear.png" alt="">
+                            </c:when>
+                            <c:otherwise>
+                            <div class="amenities_item2_sub" style="opacity:0.2">
+                                <img class="amenities_item2_sub_img" src="${pageContext.request.contextPath}/upload//wear.png" alt="">
                                 <div class="amenities_item2_sub_title">
                                     <div>운동복대여</div>
                                 </div>
                             </div>
-                            <div class="amenities_item2_sub">
-                                <img class="amenities_item2_sub_img" src="/image/img/wear.png" alt="">
-                                <div class="amenities_item2_sub_title">
-                                    <div>운동복대여</div>
-                                </div>
-                            </div>
+                            </c:otherwise>
+                            </c:choose>
+                            
+                            
 
                         </div>
 
@@ -152,68 +210,23 @@
                         <div class="swiper-container rn_container">
 
                             <div class="swiper-wrapper rn_wrapper">
+                            
+                            
                                 <div class="swiper-slide  rn_slide">
                                     <div class="box1">
-                                        <div>1</div>
-                                        <div>월</div>
+                                        <div>${gAVo.dayList[0].day }</div>
+                                        <div>${gAVo.dayList[0].today }</div>
                                     </div>
                                 </div>
-
+							<c:forEach items="${gAVo.dayList }" var="vo" begin="1">
                                 <div class="swiper-slide rn_slide">
                                     <div>
-                                        <div>2</div>
-                                        <div>화</div>
+                                        <div>${vo.day }</div>
+                                        <div>${vo.today }</div>
                                     </div>
                                 </div>
-                                <div class="swiper-slide rn_slide">
-                                    <div>
-                                        <div>3</div>
-                                        <div>수</div>
-                                    </div>
-                                </div>
-
-                                <div class="swiper-slide rn_slide">
-                                    <div>
-                                        <div>4</div>
-                                        <div>목</div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide rn_slide">
-                                    <div>
-                                        <div>5</div>
-                                        <div>금</div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide rn_slide">
-                                    <div>
-                                        <div>6</div>
-                                        <div>토</div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide rn_slide">
-                                    <div>
-                                        <div>7</div>
-                                        <div>일</div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide rn_slide">
-                                    <div>
-                                        <div>8</div>
-                                        <div>월</div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide rn_slide">
-                                    <div>
-                                        <div>9</div>
-                                        <div>화</div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide rn_slide">
-                                    <div>
-                                        <div>10</div>
-                                        <div>수</div>
-                                    </div>
-                                </div>
+							</c:forEach>
+                                
                                
                             </div>
 
@@ -223,104 +236,43 @@
                     </div>
                     <!--스와이프 end-->
                 </div>
+                <form>
+              
                 <div class="reservation_hour">
                     <!-- hour_item 1pc -->
+                    <c:forEach items="${gAVo.bookingList }" var="vo">
                     <div class="hour_item">
                         <a href="">
                             <div class="hour_item_clock">
-                                18:00~20:00
+                                ${vo.booking_start}~${vo.booking_end}
                             </div>
                             <div class="hour_item_price">
-                                50,000원
+                            
+                            <fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.booking_price/2}"/> 원
                             </div>
                         </a>
                     </div>
+                    </c:forEach>
                     <!-- hour_item 1pc end -->
-                    <!-- hour_item 1pc -->
-                    <div class="hour_item">
-                        <a href="">
-                            <div class="hour_item_clock">
-                                18:00~20:00
-                            </div>
-                            <div class="hour_item_price">
-                                50,000원
-                            </div>
-                        </a>
-                    </div>
-                    <!-- hour_item 1pc end -->
-                    <!-- hour_item 1pc -->
-                    <div class="hour_item">
-                        <a href="">
-                            <div class="hour_item_clock">
-                                18:00~20:00
-                            </div>
-                            <div class="hour_item_price">
-                                50,000원
-                            </div>
-                        </a>
-                    </div>
-                    <!-- hour_item 1pc end -->
-                    <!-- hour_item 1pc -->
-                    <div class="hour_item">
-                        <a href="">
-                            <div class="hour_item_clock">
-                                18:00~20:00
-                            </div>
-                            <div class="hour_item_price">
-                                50,000원
-                            </div>
-                        </a>
-                    </div>
-                    <!-- hour_item 1pc end -->
-                    <!-- hour_item 1pc -->
-                    <div class="hour_item">
-                        <a href="">
-                            <div class="hour_item_clock">
-                                18:00~20:00
-                            </div>
-                            <div class="hour_item_price">
-                                50,000원
-                            </div>
-                        </a>
-                    </div>
-                    <!-- hour_item 1pc end -->
-                    <!-- hour_item 1pc -->
-                    <div class="hour_item">
-                        <a href="">
-                            <div class="hour_item_clock">
-                                18:00~20:00
-                            </div>
-                            <div class="hour_item_price">
-                                50,000원
-                            </div>
-                        </a>
-                    </div>
-                    <!-- hour_item 1pc end -->
-                    <!-- hour_item 1pc -->
-                    <div class="hour_item">
-                        <a href="">
-                            <div class="hour_item_clock">
-                                18:00~20:00
-                            </div>
-                            <div class="hour_item_price">
-                                50,000원
-                            </div>
-                        </a>
-                    </div>
-                    <!-- hour_item 1pc end -->
-                    <!-- hour_item 1pc -->
-                    <div class="hour_item">
-                        <a href="">
-                            <div class="hour_item_clock">
-                                18:00~20:00
-                            </div>
-                            <div class="hour_item_price">
-                                50,000원
-                            </div>
-                        </a>
-                    </div>
-                    <!-- hour_item 1pc end -->
+                   
                 </div>
+                <!-- 버튼 -->
+	            <div id="dae_footer">
+	
+	                <div>
+	                    <a href="/view/matching/matchinfo.html">
+	                        <button class="dae_button_item"><span class="dea_btn">대관하기</span></button>
+	                        
+	                    </a>
+	                    <a href="/view/matching/대관하기.html">
+	                        
+	                        <button class="dae_button_item3"><span class="dea_btn">돌아가기</span></button>
+	                    </a>
+	                </div>
+		
+	            </div>
+	            </form>
+            <!-- 버튼 end -->
             </section>
             <!-- reservation end -->
             <!-- notice -->
@@ -329,13 +281,10 @@
                     <h1>체육관 공지사항</h1>
                 </div>
                 <div class="notice_text">
-                    <p class="time_notice"> ◈ 체육관 운영시간은 09:00~22:00 입니다</p>
+                    <p class="time_notice"> ◈ 체육관 운영시간은 ${gAVo.gymVo.gym_time} 입니다</p>
                     <p>◈모든 매치는 현재 매치 중, 이동 시 마스크 필수 착용입니다</p>
-                    <p> ■매치 진행 중 마스크 착용 필수. 미착용 시 매치 참여 제한</p>
-                    <p> ■주차 : 무료(구장 앞에 꼬깔 치우고 **대각선**으로 주차)</p>
-                    <p>■흡연 : 구장 출입문 옆 흡연구역 외 절대 금연(흡연구역 외에서 흡연 적발 시 이후 서비스 이용에 제재가 있을 수 있습니다.</p>
-                    <p> ■글러브 대여, 음료 구입 시 칠판에 있는 계좌로 입금 해주세요.</p>
-                    <p>더 자세한 정보는 상봉 팀파이터의 시설 정보에서 확인하세요</p>
+                    <p> ■${gAVo.gymVo.gym_notice}</p>
+                    
                 </div>
                 <br>
 
@@ -347,22 +296,7 @@
                 <div id="map" style="width:500px;height:400px;"></div>
             </section>
             <!-- map end -->
-            <!-- 버튼 -->
-            <div id="dae_footer">
-
-                <div>
-                    <a href="/view/matching/matchinfo.html">
-                        <button class="dae_button_item"><span class="dea_btn">대관하기</span></button>
-                        
-                    </a>
-                    <a href="/view/matching/대관하기.html">
-                        
-                        <button class="dae_button_item3"><span class="dea_btn">돌아가기</span></button>
-                    </a>
-                </div>
-
-            </div>
-            <!-- 버튼 end -->
+            
     <c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 			<!--//footer//-->
         </div>

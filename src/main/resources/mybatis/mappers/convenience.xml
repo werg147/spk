@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="convenience">
+	<select id="selectListCon" parameterType="int" resultType="ConvenienceVo">
+	<![CDATA[
+		select con_name,
+		       con_state
+		from convenience
+		where gym_no = #{gymNo}
+		order by decode(con_name,'주차장',1,'샤워실',2,'수건',3,'락커',4,'글러브',5,'운동복',6)
+	]]>
+	
+	</select>
+</mapper>

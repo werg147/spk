@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="booking">
+	<select id="selectListBooking" parameterType="map" resultType="BookingVo">
+		<![CDATA[
+			select booking_no,
+			       booking_date,
+			       booking_start,
+			       booking_end,
+			       booking_price
+			from booking
+			where gym_no = #{gymNo}
+			and booking_state= '대기'
+			and booking_date = #{day}
+			order by booking_start asc		
+		
+		]]>
+	
+	</select>
+	
+</mapper>

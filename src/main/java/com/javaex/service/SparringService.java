@@ -1,6 +1,7 @@
 package com.javaex.service;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.javaex.dao.SparringDao;
+import com.javaex.vo.BookingVo;
+import com.javaex.vo.ConvenienceVo;
+import com.javaex.vo.DayVo;
 import com.javaex.vo.EventVo;
+import com.javaex.vo.GymAssembleVo;
 import com.javaex.vo.GymImgVo;
 import com.javaex.vo.GymVo;
 import com.javaex.vo.ProfileVo;
@@ -177,7 +182,7 @@ public class SparringService {
 		
 	}
 
-	public void rentDetail(int gymNo) {
+	public GymAssembleVo rentDetail(int gymNo) {
 		// TODO Auto-generated method stub
 		System.out.println("[Service] : rentDetail()");
 		
@@ -185,14 +190,21 @@ public class SparringService {
 		GymVo gymVo = sparringDao.selectOneGym(gymNo);
 		System.out.println("gymVo ="+ gymVo);
 		
+		//1end
 		//2.gymImgList를 받는다
 		List<GymImgVo> gymimgList = sparringDao.selectListGymImg(gymNo);
 		System.out.println("gymimgVo = "+ gymimgList);
 		
+		//2end
+		
 		//3. 날짜 뿌리기전 오늘기준으로 10일째의 날짜와 요일을 구한다
 		Calendar cal = Calendar.getInstance();
-		 String[] weekDay = { "일", "월", "화", "수", "목", "금", "토" };  
-
+		String[] weekDay = { "일", "월", "화", "수", "목", "금", "토" };  
+		 
+		//뿌리기용 날짜 리스트
+		List<DayVo> dayList = new ArrayList<DayVo>();
+		
+		//오늘부터 10일 날짜구하기
 		for(int i = 0; i<10; i++) {
 			int year = cal.get(Calendar.YEAR);
 			int month = cal.get(Calendar.MONTH)+1;
@@ -217,7 +229,38 @@ public class SparringService {
 			}
 			
 		System.out.println(i+"="+ year + "." + month + "." + day+"."+today);
-		
+		DayVo dayVo = new DayVo(year,month,day,today);
+		dayList.add(dayVo);
 		}
+		
+		//오늘부터 10일 날짜구하기 end
+		//4.오늘의 날짜로 대관 정보가 있는지 확인한후 하나의 vo를받는다
+		//(다른날짜에 대한 정보는  ajax로 처리하기 때문)
+		System.out.println("오늘 = "+ dayList.get(0));
+		String day1 = "";
+		if(dayList.get(0).getMonth() < 10) {
+		day1 = dayList.get(0).getYear() 
+					+".0"+dayList.get(0).getMonth()
+					+"."+dayList.get(0).getDay();
+		}else {
+			day1 = dayList.get(0).getYear() 
+					+"."+dayList.get(0).getMonth()
+					+"."+dayList.get(0).getDay();
+		}
+		//셀렉트 웨어절 구문이 바뀔수 있음 ***************************************
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("day",day1);
+		map.put("gymNo",gymNo);
+		
+		List<BookingVo> bookingList = sparringDao.selectOneBooking(map);
+		
+		
+		//5.편의시설 리스트
+		
+		List<ConvenienceVo> conList = sparringDao.selectListCon(gymNo);
+		
+		GymAssembleVo gymAssembleVo = new GymAssembleVo(gymVo, gymimgList, dayList, bookingList, conList);
+	
+		return gymAssembleVo;
 	}
 }

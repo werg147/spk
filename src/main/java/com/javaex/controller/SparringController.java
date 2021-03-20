@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javaex.service.SparringService;
+import com.javaex.vo.GymAssembleVo;
 import com.javaex.vo.GymVo;
 import com.javaex.vo.ProfileVo;
 import com.javaex.vo.RecordVo;
@@ -61,9 +62,12 @@ public class SparringController {
 	}
 	
 	@RequestMapping(value="/rentdetail" , method= {RequestMethod.GET , RequestMethod.POST})
-	public String rentDetail(@RequestParam(value="gymNo")int gymNo) {
+	public String rentDetail(@RequestParam(value="gymNo")int gymNo,Model model) {
 		System.out.println("[Controller] : rentDetail()");
-		sparringService.rentDetail(gymNo);
+		GymAssembleVo gymAssembleVo = sparringService.rentDetail(gymNo);
+		
+		model.addAttribute("gAVo",gymAssembleVo);
+		
 		return "matching/rentdetail";
 	}
 	

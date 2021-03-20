@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.javaex.vo.BookingVo;
+import com.javaex.vo.ConvenienceVo;
 import com.javaex.vo.EventVo;
 import com.javaex.vo.GymImgVo;
 import com.javaex.vo.GymVo;
@@ -99,7 +101,7 @@ public class SparringDao {
 		System.out.println("[Dao] : selectOneGym()");
 		System.out.println(gymNo);
 		
-		return sqlSession.selectOne("gym.gymSelectOne",gymNo);
+		return sqlSession.selectOne("gym.selectOneGym",gymNo);
 		
 	}
 
@@ -107,5 +109,25 @@ public class SparringDao {
 		System.out.println("[DAO] : selectListGymImg");
 		
 		return sqlSession.selectList("gymimg.selectListGymImg",gymNo);
+	}
+
+	public List<BookingVo> selectOneBooking(Map<String, Object> map) {
+		
+		System.out.println("[Dao] : selectOneBooking()");
+		
+		List<BookingVo> bList = sqlSession.selectList("booking.selectListBooking",map);
+		System.out.println(bList.toString());
+		
+		return bList;
+	}
+
+	public List<ConvenienceVo> selectListCon(int gymNo) {
+		System.out.println("[Dao] : selectListCon");
+		
+		List<ConvenienceVo>conList = sqlSession.selectList("convenience.selectListCon",gymNo);
+		
+		System.out.println(conList);
+		
+		return conList;
 	}
 }
