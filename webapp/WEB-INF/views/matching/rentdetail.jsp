@@ -237,7 +237,7 @@
 					</div>
 					<!--스와이프 end-->
 				</div>
-				<form action="${pageContext.request.contextPath }/sparring/payment" method="get">
+				<form action="${pageContext.request.contextPath }/sparring/writeForm" method="get">
 
 					<div id="booking_list_0" class="reservation_hour">
 						<!-- hour_item 1pc -->
@@ -262,21 +262,23 @@
 					<div id="dae_footer">
 
 						<div>
-							<a href="/view/matching/matchinfo.html">
-								<button class="dae_button_item">
+
+								<button id="sbm_btn1" class="dae_button_item" type="submit">
 									<span class="dea_btn">대관하기</span>
 								</button>
 
-							</a> <a href="/view/matching/대관하기.html">
+							<a href="/view/matching/대관하기.html">
 
-								<button class="dae_button_item3">
+								<button class="dae_button_item3" type="button">
 									<span class="dea_btn">돌아가기</span>
 								</button>
 							</a>
 						</div>
 
 					</div>
-					<div id="hidden12"></div>
+					<div id="hidden12">
+						<input type="hidden" name="bookingno" value="0">
+					</div>
 					<input type="hidden" name="userno" value="2">
 				</form>
 				<!-- 버튼 end -->
@@ -328,6 +330,20 @@
 
 </body>
 <script type="text/javascript">
+	//대관선택 안하고 버튼클리시 경고
+	$("#sbm_btn1").on("click",function(){
+		
+		var bookingno = $("[name='bookingno'").val();
+		
+		if(bookingno == 0){
+			alert("대관 시간을 선택해주세요");
+			
+			return false;
+		}
+		return true;
+	});
+	
+	
 	
 	//대관하나 클릭하면 색깔변경
 	$(".reservation_hour").on("click",".hour_item",function(){

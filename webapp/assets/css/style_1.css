@@ -799,6 +799,7 @@ input:-ms-input-placeholder {
   text-align: center;
   border-radius: 10px;
   margin: 0px 10px 0px 0px;
+  cursor:pointer;
 }
 
 .hour_item_clock {
@@ -2610,6 +2611,7 @@ element.style {
   border-radius: 30px;
   color: white;
   font-weight: bold;
+  cursor:pointer;
 
 }
 .box-color {
