@@ -5,7 +5,7 @@
 <mapper namespace="gym">
 	
 	<!-- 체육관정보 불러오기 추후 조건 수정 : 사업자번호+체육관번호 -->
-	<select id="gymSelectOne" parameterType="int" resultType="GymVo">
+	<select id="gymSelectOne" parameterType="Int" resultType="GymVo">
 		<![CDATA[ 
 			SELECT  gym_no,
 			        sell_no,
@@ -17,7 +17,7 @@
 			        gym_event,
 			        gym_date
 			FROM gym
-			where sell_no = #{gymno}
+			where gym_no = #{gymno}
 		]]>
 	</select>
 	

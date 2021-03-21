@@ -35,7 +35,7 @@
 						</a>
 					</div>
 
-					<!-- <div>탭부분(여러 체육관이 있을 경우 여기로 구분함)</div> -->
+					<!-- <div>탭부분(다수 체육관 소유 시)</div> -->
 					<div class="own_gym">
 						<ul class="own_gym_list">
 							<li>체육관1</li>

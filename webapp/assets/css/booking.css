@@ -210,10 +210,28 @@ a:hover {
     cursor: pointer;
   }
   
-  .middle .own_gym .own_gym_list {
-  	display: flex;
+  .middle .own_gym {
+  	margin: 10px 0px 10px 0px;
+  }
 
-  	align-items: center;
+  .middle .own_gym .own_gym_list li {
+  	border-radius: 10px;
+  	padding-top: 10px;
+  	margin-right: 10px;
+  	float:left; 
+	display: table; 
+	width: 150px; 
+	height: 30px; 
+	border:1px solid #dfdfdf; 
+	font-size:14px;
+	text-align: center;
+	cursor: pointer;
+  }
+  
+    .middle .own_gym .own_gym_list li:hover {
+    background: #e60012;
+    text-decoration: none;
+    color: #ffffff;
   }
 
   /******체육관 등록******/
