@@ -71,8 +71,8 @@
 
 						<div class="sparring_ex_box">
 							<h2 class="sparring_ex_title">스파링 경험이 5회 이상이십니까?</h2>
-							<input class="sparring_ex"  id="co" type="radio" name="sparring_ex" value="네"> <label for="co">네</label>
-							<input class="sparring_ex2" id="co2" type="radio" name="sparring_ex"><label for="co2"> 아니요</label>
+							<input class="sparring_ex ex_01"  id="co" type="radio" name="sparring_ex" value="yes" checked="checked"> <label for="co">네</label>
+							<input class="sparring_ex2 ex_01" id="co2" type="radio" name="sparring_ex" value="no"><label for="co2"> 아니요</label>
 						</div>
 						<div class="con_match">
 
@@ -107,6 +107,7 @@
 										<!-- 대관없이 매칭글시에만 보임-->
 										<!-- 종목선택 -->
 										
+										<c:if test="${param.bookingno == 0}">
 										<tr class="basic">
 											<td colspan="2"><label for="prod_cate">스파링종목</label></td>
 											<td>
@@ -152,6 +153,7 @@
 												</div>
 											</td>
 										</tr>
+										</c:if>
 										<!-- 원하는 시간 입력 end -->
 										<!-- 종목선택 end -->
 										<!-- 대관없이 매칭글시에만 보임 end-->
@@ -323,12 +325,20 @@
 										
 	
 									<div class="product_insert_btn">
-										<button id="info_subm" class="insert_btn">저장</button>
-										<button class="product_delclose_btn">취소</button>
+										<c:choose>
+											<c:when test="${param.bookingno == 0 }">
+												<button id="info_subm" class="insert_btn" type="submit">매칭글 등록</button>
+											</c:when>
+											<c:otherwise>
+												<button id="info_subm" class="insert_btn" type="submit">결제후 등록</button>
+											</c:otherwise>
+										</c:choose>
+										<a href=""><button class="product_delclose_btn">취소</button></a>
 									</div>
 									<!-- //product_insert_btn -->
 									<!-- session값 생겨도 히든으로 표시할 것 아이작스에서 쓰고있음 -->
 									<input id="session_user_no" type="hidden" name="userNo" value="2">
+									<input type="hidden" name="bookingno" value="${param.bookingno}">
 								</form>
 								<!-- //입력폼 → 주문하기 -->
 
@@ -337,6 +347,9 @@
 						<!-- //content_bottom -->
 					</div>
 					<!--form 컨테이너-->
+									<div id="hideMsg1">
+										
+									</div>
 				</div>
 				<!--//content_mypage-->
 
@@ -357,9 +370,34 @@
 		  
 	
 	})
+	//스파링 5회 이상 체크
+	$(".ex_01").on("click",function(){
+		var spaFive = $('.ex_01:checked').val();
+		console.log(spaFive); 
+		
+		if(spaFive == 'no'){
+			$(".con_match").hide();
+			msg('1');
+		}else{
+			$(".con_match").show();
+			msg('0');
+		}
+		
+	});
+	
+	function msg(msgone){
+		str = "<div class='hide-text'>5회 이하는 매칭이 불가능 합니다</div>";
+		str += '<a href=""><button type="button" class="product_delclose_btn">돌아가기</button></a>'
+		if(msgone == '1'){
+		$("#hideMsg1").append(str);
+			
+		}else{
+			$("#hideMsg1").html("");
+		}
+	}
+	
 	
 	//프로필작성 경고문
-	
 	$('.radio-value').on('click', function() {
 
     var valueCheck = $('.radio-value:checked').val(); // 체크된 Radio 버튼의 값을 가져옵니다.

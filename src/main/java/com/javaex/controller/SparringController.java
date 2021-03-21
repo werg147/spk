@@ -120,14 +120,22 @@ public class SparringController {
 	 * record는 여러개의 select를 받아와야하는데 수가 늘어날수있기 때문에 1번 vo안에 리스트를 만들었다
 	 */
 	@RequestMapping(value = "/write", method = { RequestMethod.GET, RequestMethod.POST })
-	public String profileWrite(@ModelAttribute ProfileVo profileVo, HttpServletRequest request, @ModelAttribute RecordVo recordVo) {
+	public String profileWrite(@ModelAttribute ProfileVo profileVo, HttpServletRequest request, @ModelAttribute RecordVo recordVo,
+							   @RequestParam(value="bookingno",required=false,defaultValue="0")int bookingNo) {
 		System.out.println("[Controller] : profileWrite");
 
 		String[] eventName = request.getParameterValues("eventName");
 
 		sparringService.profileWrite(profileVo, eventName, recordVo);
-
-		return "";
+		
+		if(bookingNo == 0 ) {
+			//매칭글 확인하러 가기
+			return "";
+		}else {
+			return "matching/payment";
+			
+		}
+		
 	}
 
 	/*********************** api *****************/

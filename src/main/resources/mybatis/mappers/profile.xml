@@ -62,9 +62,9 @@
                  sysdate,
                  #{recentlyExer},
                  #{word},
-                 #{profileGymEvent},
-                 #{day},
-                 #{time},
+                 #{profileGymEvent,jdbcType=VARCHAR},
+                 #{day,jdbcType=VARCHAR},
+                 #{time,jdbcType=VARCHAR},
                  #{address,jdbcType=VARCHAR}
                  )      
                  

@@ -2451,7 +2451,7 @@ element.style {
   border: 1px solid black;
 }
 .product_insert_btn {
-  margin: 30px 0px 30px 180px;
+  margin: 30px 0px 30px 150px;
 }
 .insert_btn {
   padding: 5px 15px 5px 15px;
@@ -2594,7 +2594,15 @@ element.style {
   display: inline-block;
   font-size: 12px;
 }
+#hideMsg1{
+	text-align : center;
+}
 
+.hide-text{
+	font-size:15px;
+	color : #e60012;
+	font-weight:bold
+}
 /*******************rentswipe***********************/
 .sp_box {
   width: 1400px;
