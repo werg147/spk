@@ -146,7 +146,7 @@ public class SparringController {
 			//매칭글 확인하러 가기
 			return "";
 		}else {
-			return "redirect:/sparring/payment?bookingno="+bookingNo+userNo;
+			return "redirect:/sparring/payment?bookingno="+bookingNo+"&userno="+userNo;
 			
 		}
 		
