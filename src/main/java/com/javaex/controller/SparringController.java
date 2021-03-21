@@ -72,9 +72,22 @@ public class SparringController {
 	/** 결제하기 **/
 	@RequestMapping(value = "/payment", method = { RequestMethod.GET, RequestMethod.POST })
 	public String payment(@RequestParam(value = "bookingno", required = false, defaultValue = "0") int bookingNo,
-			@RequestParam(value = "userno", required = false, defaultValue = "0") int userNo) {
+						  @RequestParam(value = "userno", required = false, defaultValue = "0") int userNo,
+						  Model model) {
 		System.out.println(bookingNo);
 		System.out.println(userNo);
+		/*임의로 설정한 userNo 지워야함*/
+		userNo = 2;
+		
+		Map<String,Object> map = sparringService.payment(bookingNo,userNo);
+		
+		model.addAttribute("map",map);
+		return "matching/payment";
+	}
+	
+	@RequestMapping(value = "/pay", method = { RequestMethod.GET, RequestMethod.POST })
+	public String pay() {
+		
 		return "";
 	}
 
@@ -121,7 +134,8 @@ public class SparringController {
 	 */
 	@RequestMapping(value = "/write", method = { RequestMethod.GET, RequestMethod.POST })
 	public String profileWrite(@ModelAttribute ProfileVo profileVo, HttpServletRequest request, @ModelAttribute RecordVo recordVo,
-							   @RequestParam(value="bookingno",required=false,defaultValue="0")int bookingNo) {
+							   @RequestParam(value="bookingno",required=false,defaultValue="0")int bookingNo,
+							   @RequestParam(value="userno",required=false,defaultValue="0")int userNo) {
 		System.out.println("[Controller] : profileWrite");
 
 		String[] eventName = request.getParameterValues("eventName");
@@ -132,7 +146,7 @@ public class SparringController {
 			//매칭글 확인하러 가기
 			return "";
 		}else {
-			return "matching/payment";
+			return "redirect:/sparring/payment?bookingno="+bookingNo+userNo;
 			
 		}
 		

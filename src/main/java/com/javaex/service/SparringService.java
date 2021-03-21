@@ -20,6 +20,7 @@ import com.javaex.vo.GymImgVo;
 import com.javaex.vo.GymVo;
 import com.javaex.vo.ProfileVo;
 import com.javaex.vo.RecordVo;
+import com.javaex.vo.UserVo;
 
 @Service
 public class SparringService {
@@ -280,5 +281,30 @@ public class SparringService {
 		
 		List<BookingVo> bookingList = sparringDao.selectListBooking(map);
 		return bookingList;
+	}
+	
+	
+	//결제하기
+	public Map<String,Object> payment(int bookingNo, int userNo) {
+		System.out.println("[Service] : payment()");
+		//DecimalFormat formatter = new DecimalFormat("###,###");
+		BookingVo bookingVo = sparringDao.selectOneBooking(bookingNo);
+		
+		System.out.println(bookingVo);
+		
+		//int price  = bookingVo.getBooking_price();
+		
+		UserVo userVo = sparringDao.selectAddressUser(userNo);
+		
+		System.out.println(userVo);
+		
+		//vo를 Map으로 묶는다
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("bookingVo",bookingVo);
+		map.put("userVo",userVo);
+		
+		return map;
+		
 	}
 }

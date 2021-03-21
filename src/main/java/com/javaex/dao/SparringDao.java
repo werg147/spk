@@ -14,6 +14,7 @@ import com.javaex.vo.GymImgVo;
 import com.javaex.vo.GymVo;
 import com.javaex.vo.ProfileVo;
 import com.javaex.vo.RecordVo;
+import com.javaex.vo.UserVo;
 
 @Repository
 public class SparringDao {
@@ -137,6 +138,20 @@ public class SparringDao {
 		System.out.println(bList.toString());
 		
 		return bList;
+	}
+
+	public BookingVo selectOneBooking(int bookingNo) {
+		System.out.println("[Dao] : selectOneBooking()");
+		
+		 return sqlSession.selectOne("booking.selectOneBooking",bookingNo);
+		
+	}
+
+	public UserVo selectAddressUser(int userNo) {
+		System.out.println("[Dao] : selectOneUser()");
+		
+		return sqlSession.selectOne("user.selectOneUserAddress",userNo);
+		
 	}
 	
 

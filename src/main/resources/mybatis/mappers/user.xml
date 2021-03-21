@@ -17,5 +17,13 @@
 		]]>
 	</select>
 	
+	<select id="selectOneUserAddress" parameterType="int" resultType="UserVo">
+		<![CDATA[
+			select address
+			from users
+			where user_no = #{userNo}
+		]]>
+	
+	</select>
 	
 </mapper>

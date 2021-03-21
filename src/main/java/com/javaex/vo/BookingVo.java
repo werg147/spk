@@ -10,7 +10,13 @@ public class BookingVo {
 	private int booking_price;
 	private String booking_state;
 	private String booking_reg_date;
-
+	
+	//gym
+	private String gym_name;
+	
+	//gymImg
+	private String gym_img_savename;
+	
 	public BookingVo() {
 	}
 
@@ -24,6 +30,39 @@ public class BookingVo {
 		this.booking_price = booking_price;
 		this.booking_state = booking_state;
 		this.booking_reg_date = booking_reg_date;
+	}
+	
+	public BookingVo(int booking_no, int gym_no, String booking_date, String booking_start, String booking_end,
+			int booking_price, String booking_state, String booking_reg_date, String gym_name,
+			String gym_img_savename) {
+		super();
+		this.booking_no = booking_no;
+		this.gym_no = gym_no;
+		this.booking_date = booking_date;
+		this.booking_start = booking_start;
+		this.booking_end = booking_end;
+		this.booking_price = booking_price;
+		this.booking_state = booking_state;
+		this.booking_reg_date = booking_reg_date;
+		this.gym_name = gym_name;
+		this.gym_img_savename = gym_img_savename;
+	}
+	
+	
+	public String getGym_name() {
+		return gym_name;
+	}
+
+	public void setGym_name(String gym_name) {
+		this.gym_name = gym_name;
+	}
+
+	public String getGym_img_savename() {
+		return gym_img_savename;
+	}
+
+	public void setGym_img_savename(String gym_img_savename) {
+		this.gym_img_savename = gym_img_savename;
 	}
 
 	public int getBooking_no() {
@@ -94,7 +133,10 @@ public class BookingVo {
 	public String toString() {
 		return "BookingVo [booking_no=" + booking_no + ", gym_no=" + gym_no + ", booking_date=" + booking_date
 				+ ", booking_start=" + booking_start + ", booking_end=" + booking_end + ", booking_price="
-				+ booking_price + ", booking_state=" + booking_state + ", booking_reg_date=" + booking_reg_date + "]";
+				+ booking_price + ", booking_state=" + booking_state + ", booking_reg_date=" + booking_reg_date
+				+ ", gym_name=" + gym_name + ", gym_img_savename=" + gym_img_savename + "]";
 	}
+
+	
 
 }

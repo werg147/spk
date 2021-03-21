@@ -4,6 +4,8 @@
 <configuration>
 	<typeAliases>
 		
+		<typeAlias alias="UserVo" type="com.javaex.vo.UserVo" /> <!-- 영훈 SparringVo -->
+		<typeAlias alias="BBuyVo" type="com.javaex.vo.BBuyVo" /> <!-- 영훈 SparringVo -->
 		<typeAlias alias="ConvenienceVo" type="com.javaex.vo.ConvenienceVo" /> <!-- 영훈 SparringVo -->
 		<typeAlias alias="BookingVo" type="com.javaex.vo.BookingVo" /> <!-- 영훈 SparringVo -->
 		<typeAlias alias="ProfileVo" type="com.javaex.vo.ProfileVo" /> <!-- 영훈 SparringVo -->
@@ -19,6 +21,7 @@
 
 	<mappers>
 	
+		<mapper resource="mybatis/mappers/bbuy.xml" /> <!-- 영훈 -->
 		<mapper resource="mybatis/mappers/convenience.xml" /> <!-- 영훈 -->
 		<mapper resource="mybatis/mappers/booking.xml" /> <!-- 영훈 -->
 		<mapper resource="mybatis/mappers/gymimg.xml" /> <!-- 영훈 -->

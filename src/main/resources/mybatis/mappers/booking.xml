@@ -19,6 +19,22 @@
 		]]>
 	
 	</select>
-	
+	<select id="selectOneBooking" parameterType="int" resultType="BookingVo">
+			<![CDATA[
+				select b.booking_no,
+				       b.gym_no,
+				       b.booking_date,
+				       b.booking_start,
+				       b.booking_end,
+				       b.booking_price,
+				       g.gym_name,
+				       i.gym_img_savename
+				from booking b , gym g ,gymimg i
+				where b.gym_no = g.gym_no
+				and g.gym_no = i.gym_no
+				and i.gym_img_type = 'main'
+				and b.booking_no = #{bookingNo}
+			]]>
+	</select>
 	
 </mapper>

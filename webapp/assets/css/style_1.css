@@ -10,7 +10,9 @@
   max-width: 100%;
   overflow: hidden;
 }
-
+.pay_form_01{
+	margin:auto;
+}
 .container {
   width: 1050px;
   margin: auto;
