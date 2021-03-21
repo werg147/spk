@@ -3,31 +3,33 @@
 
 <configuration>
 	<typeAliases>
-		
+
 		<typeAlias alias="UserVo" type="com.javaex.vo.UserVo" /> <!-- 영훈 SparringVo -->
 		<typeAlias alias="BBuyVo" type="com.javaex.vo.BBuyVo" /> <!-- 영훈 SparringVo -->
 		<typeAlias alias="ConvenienceVo" type="com.javaex.vo.ConvenienceVo" /> <!-- 영훈 SparringVo -->
 		<typeAlias alias="BookingVo" type="com.javaex.vo.BookingVo" /> <!-- 영훈 SparringVo -->
 		<typeAlias alias="ProfileVo" type="com.javaex.vo.ProfileVo" /> <!-- 영훈 SparringVo -->
-    	<typeAlias alias="EventVo" type="com.javaex.vo.EventVo" /> <!-- 영훈 SparringVo -->
-    	<typeAlias alias="RecordVo" type="com.javaex.vo.RecordVo" /> <!-- 영훈 SparringVo -->
+		<typeAlias alias="EventVo" type="com.javaex.vo.EventVo" /> <!-- 영훈 SparringVo -->
+		<typeAlias alias="RecordVo" type="com.javaex.vo.RecordVo" /> <!-- 영훈 SparringVo -->
 		<typeAlias alias="AlarmVo" type="com.javaex.vo.AlarmVo" />
 		<typeAlias alias="GymVo" type="com.javaex.vo.GymVo" /> <!-- 다현 GymVo -->
-    	<typeAlias alias="ConVo" type="com.javaex.vo.ConVo" /> <!-- 다현 ConVo -->
-    	<typeAlias alias="GymImgVo" type="com.javaex.vo.GymImgVo" /> <!-- 다현 GymImgVo -->
-    	<typeAlias alias="QnaVo" type="com.javaex.vo.QnaVo" /> <!-- 세림 QnaVo -->
-    	<typeAlias alias="QnaimgVo" type="com.javaex.vo.QnaimgVo" /> <!-- 세림 QnaimgVo-->
+		<typeAlias alias="ConVo" type="com.javaex.vo.ConVo" /> <!-- 다현 ConVo -->
+		<typeAlias alias="GymImgVo" type="com.javaex.vo.GymImgVo" /> <!-- 다현 GymImgVo -->
+		<typeAlias alias="QnaVo" type="com.javaex.vo.QnaVo" /> <!-- 세림 QnaVo -->
+		<typeAlias alias="QnaimgVo" type="com.javaex.vo.QnaimgVo" /> <!-- 세림 QnaimgVo -->
+		<typeAlias alias="BuyVo" type="com.javaex.vo.BuyVo" />
+		<typeAlias alias="BbuyVo" type="com.javaex.vo.BbuyVo" />
 	</typeAliases>
 
 	<mappers>
-	
+
 		<mapper resource="mybatis/mappers/bbuy.xml" /> <!-- 영훈 -->
 		<mapper resource="mybatis/mappers/convenience.xml" /> <!-- 영훈 -->
 		<mapper resource="mybatis/mappers/booking.xml" /> <!-- 영훈 -->
 		<mapper resource="mybatis/mappers/gymimg.xml" /> <!-- 영훈 -->
 		<mapper resource="mybatis/mappers/event.xml" /> <!-- 영훈 -->
-        <mapper resource="mybatis/mappers/profile.xml" /> <!-- 영훈 -->
-        <mapper resource="mybatis/mappers/record.xml" /> <!-- 영훈 -->
+		<mapper resource="mybatis/mappers/profile.xml" /> <!-- 영훈 -->
+		<mapper resource="mybatis/mappers/record.xml" /> <!-- 영훈 -->
 		<!-- <mapper resource="mybatis/mappers/guestbook.xml" /> --> <!--사용할 mapper 파일경로 지정한다 -->
 		<mapper resource="mybatis/mappers/prod.xml" />
 		<mapper resource="mybatis/mappers/alarm.xml" />

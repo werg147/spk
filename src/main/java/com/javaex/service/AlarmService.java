@@ -21,19 +21,93 @@ public class AlarmService {
 		return aDao.selectList();
 	}
 
-	public Object send(AlarmVo aVo) {
+	public Object payment_complete(AlarmVo aVo) {
 
-		System.out.println("[Alarm Service]: send(AlarmVo aVo) 연결");
+		System.out.println("[Alarm Service]: payment_complete(AlarmVo aVo) 연결");
 
-		return aDao.send(aVo);
+		aDao.payment_complete(aVo);
+
+		return aDao.product_alarm(aVo);
 
 	}
 
-	public Object update(AlarmVo aVo) {
+	public Object delivery_ready(AlarmVo aVo) {
 
-		System.out.println("[Alarm Service]: update(AlarmVo aVo) 연결");
+		System.out.println("[Alarm Service]: delivery_ready(AlarmVo aVo) 연결");
 
-		return aDao.update(aVo);
+		aDao.delivery_ready(aVo);
+
+		return aDao.product_alarm(aVo);
+
+	}
+
+	public Object delivery_ing(AlarmVo aVo) {
+
+		System.out.println("[Alarm Service]: delivery_ing(AlarmVo aVo) 연결");
+
+		aDao.delivery_ing(aVo);
+
+		return aDao.product_alarm(aVo);
+
+	}
+
+	public Object delivery_complete(AlarmVo aVo) {
+
+		System.out.println("[Alarm Service]: delivery_complete(AlarmVo aVo) 연결");
+
+		aDao.delivery_complete(aVo);
+
+		return aDao.product_alarm(aVo);
+
+	}
+
+	public Object matching_registration(AlarmVo aVo) {
+
+		System.out.println("[Alarm Service]: matching_registration(AlarmVo aVo) 연결");
+
+		aDao.matching_registration(aVo);
+
+		return aDao.matching_alarm(aVo);
+
+	}
+
+	public Object getMatch_application(AlarmVo aVo) {
+
+		System.out.println("[Alarm Service]: getMatch_application(AlarmVo aVo) 연결");
+
+		aDao.getMatch_application(aVo);
+
+		return aDao.matching_alarm(aVo);
+
+	}
+
+	public Object getMatching_refused(AlarmVo aVo) {
+
+		System.out.println("[Alarm Service]: getMatching_refused(AlarmVo aVo) 연결");
+
+		aDao.getMatching_refused(aVo);
+
+		return aDao.matching_alarm(aVo);
+
+	}
+
+	public Object matching_accept(AlarmVo aVo) {
+
+		System.out.println("[Alarm Service]: matching_accept(AlarmVo aVo) 연결");
+
+		aDao.matching_accept(aVo);
+
+		return aDao.matching_alarm(aVo);
+
+	}
+
+	public Object matching_complete(AlarmVo aVo) {
+
+		System.out.println("[Alarm Service]: matching_complete(AlarmVo aVo) 연결");
+
+		aDao.matching_complete(aVo);
+
+		return aDao.matching_alarm(aVo);
 
 	}
 

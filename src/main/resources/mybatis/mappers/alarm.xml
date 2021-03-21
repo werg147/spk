@@ -7,28 +7,87 @@
 	<select id="selectAlarm" resultType="AlarmVo">
 		<![CDATA[
 			SELECT  a.alarm_date,
-        			u.user_id,
-			        a.sell_type,
+			        u.user_id,
+			        b.b_buy_player_state,
 			        b.buy_del_state,
+			        u.user_id,
+			        g.gym_name,
+			        p.prod_name,
 			        a.alarm_content,
-			        p.prod_name
-			FROM    alarm a, users u, buy b, product p
+			        a.alarm_no,
+			        a.from_user_no,
+			        a.to_user_no,
+			        a.sell_type
+			FROM    alarm a, users u, bbuy b, gym g, buy b, product p
 			WHERE   a.from_user_no = u.user_no
-			        and u.user_no = b.user_no
-			        and b.prod_no = p.prod_no
+			ORDER BY a.alarm_no desc
 		]]>
 	</select>
 
-	<insert id="sendAlarm" parameterType="AlarmVo">
+	<insert id="send_product_alarm" parameterType="AlarmVo">
 		<![CDATA[
-			INSERT INTO alarm VALUES(seq_alarm_no.nextval, '2', '1', '1', '결제가 완료되었습니다.', '배송', sysdate, '결제완료')
+			INSERT INTO alarm VALUES(seq_alarm_no.nextval, #{from_user_no}, '2',  #{alarm_content}, '배송', sysdate)
 		]]>
 	</insert>
 
-	<insert id="updateAlarm" parameterType="AlarmVo">
+	<update id="payment_complete" parameterType="BuyVo">
 		<![CDATA[
-			INSERT INTO alarm VALUES(seq_alarm_no.nextval, '2', '1', '1', '배송이 준비중 입니다.', '배송', sysdate, '배송준비중')
+			UPDATE buy SET buy_del_state = '결제완료' WHERE buy_no = 1
+		]]>
+	</update>
+
+	<update id="delivery_ready" parameterType="BuyVo">
+		<![CDATA[
+			UPDATE buy SET buy_del_state = '배송준비중' WHERE buy_no = 1
+		]]>
+	</update>
+
+	<update id="delivery_ing" parameterType="BuyVo">
+		<![CDATA[
+			UPDATE buy SET buy_del_state = '배송중' WHERE buy_no = 1
+		]]>
+	</update>
+
+	<update id="delivery_complete" parameterType="BuyVo">
+		<![CDATA[
+			UPDATE buy SET buy_del_state = '배송완료' WHERE buy_no = 1
+		]]>
+	</update>
+
+	<insert id="send_matching_alarm" parameterType="AlarmVo">
+		<![CDATA[
+			INSERT INTO alarm VALUES(seq_alarm_no.nextval, #{from_user_no}, '4',  #{alarm_content}, '매칭', sysdate)
 		]]>
 	</insert>
+
+	<update id="matching_registration" parameterType="BbuyVo">
+		<![CDATA[
+			UPDATE bbuy SET b_buy_player_state = '매칭대기 중' WHERE b_buy_no = '1'
+		]]>
+	</update>
+
+	<update id="getMatch_application" parameterType="BbuyVo">
+		<![CDATA[
+			UPDATE bbuy SET b_buy_player_state = '수락대기 중' WHERE b_buy_no = '1'
+		]]>
+	</update>
+
+	<update id="getMatching_refused" parameterType="BbuyVo">
+		<![CDATA[
+			UPDATE bbuy SET b_buy_player_state = '매칭종료' WHERE b_buy_no = '1'
+		]]>
+	</update>
+
+	<update id="matching_accept" parameterType="BbuyVo">
+		<![CDATA[
+			UPDATE bbuy SET b_buy_player_state = '메치진행 중' WHERE b_buy_no = '1'
+		]]>
+	</update>
+
+	<update id="matching_complete" parameterType="BbuyVo">
+		<![CDATA[
+			UPDATE bbuy SET b_buy_player_state = '매칭종료' WHERE b_buy_no = '1'
+		]]>
+	</update>
 
 </mapper>
