@@ -29,7 +29,7 @@
 		<mapper resource="mybatis/mappers/prod.xml" />
 		<mapper resource="mybatis/mappers/alarm.xml" />
 		<mapper resource="mybatis/mappers/user.xml" />
-		<mapper resource="mybatis/mappers/gym.xml" />
+		<mapper resource="mybatis/mappers/gym.xml" /> <!-- 다현 -->
 		<mapper resource="mybatis/mappers/store.xml" /> <!-- 세림 -->
 	</mappers>
 </configuration>

@@ -209,6 +209,12 @@ a:hover {
     height: 30px;
     cursor: pointer;
   }
+  
+  .middle .own_gym .own_gym_list {
+  	display: flex;
+
+  	align-items: center;
+  }
 
   /******체육관 등록******/
   .middle .gym_regi_form {

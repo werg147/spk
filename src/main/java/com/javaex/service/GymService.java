@@ -3,7 +3,9 @@ package com.javaex.service;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +24,17 @@ public class GymService {
 	private GymDao gymDao;
 	
 	//체육관 정보 불러오기
-	public GymVo gymInfo(int gymno) {
+	public Map<String, Object> gymInfo(int gymno) {
 		System.out.println("[GymService] gymInfo()");
-		return gymDao.gymSelectOne(gymno);
+		
+		GymVo gymVo = gymDao.gymSelectOne(gymno);
+		List<ConVo> conList = gymDao.conSelectList(gymno);
+		
+		Map<String, Object> gymMap = new HashMap<String, Object>();
+		gymMap.put("gymVo", gymVo);
+		gymMap.put("conList", conList);
+		
+		return gymMap;
 	}
 	
 	//체육관 등록 (체육관, 체크박스값, 파일 등록)

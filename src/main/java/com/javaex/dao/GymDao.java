@@ -1,5 +1,7 @@
 package com.javaex.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -29,6 +31,16 @@ public class GymDao {
 		System.out.println("[GymDao] gymInsert()");
 		
 		sqlSession.insert("gym.gymInsert", gymVo);
+	}
+	
+	//편의시설 불러오기
+	public List<ConVo> conSelectList(int gymno) {
+		System.out.println("[GymDao] conSelect()");
+		
+		List<ConVo> conList = sqlSession.selectList("gym.conSelectList", gymno);
+		System.out.println("[GymDao] >>> "+conList);
+		
+		return conList;
 	}
 	
 	//편의시설 등록

@@ -23,13 +23,16 @@ public class GymController {
 	
 	//체육관 관리
 	@RequestMapping(value="/gym", method= {RequestMethod.GET , RequestMethod.POST})
-	public String gymInfo(@RequestParam("gymno") int gymno, Model model) { //사업자번호여야됨
+	public String gymInfo(@RequestParam("gymno") int gymno, Model model) { 
+		//사업자번호를 조건으로 체육관을 리스트로 가져온 후 각탭에 체육관 번호 넣기
 		System.out.println("[GymController] gymInfo()");
 		
+		model.addAttribute("gymMap", gymService.gymInfo(gymno));
+		/*
 		GymVo gymVo = gymService.gymInfo(gymno);
 		System.out.println(gymVo);
 		model.addAttribute("gymVo", gymVo);
-		
+		*/
 		return "mypage/mypage_resrvation/mypage_gyminfo";
 	}
 	

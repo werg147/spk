@@ -101,7 +101,7 @@
 
 								<tr>
 									<td class="basic">체육관 사진</td>
-									<td colspan="2"><input type="file"></td>
+									<td colspan="2"><input type="file" name="file"></td>
 								</tr>
 
 							</table>

@@ -40,6 +40,18 @@
 		]]>
 	</insert>
 	
+	<!-- 체육관별로 편의시설 불러오기 -->
+	<select id="conSelectList" parameterType="int" resultType="ConVo">
+		<![CDATA[ 
+			SELECT  con_no,
+			        gym_no,
+			        con_name,
+			        con_state
+			FROM convenience
+			where gym_no = #{gymno}
+		]]>
+	</select>
+	
 	<!-- 편의시설 등록 -->
 	<insert id="conInsert" parameterType="ConVo" >
 		<![CDATA[ 
