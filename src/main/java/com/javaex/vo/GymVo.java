@@ -25,6 +25,9 @@ public class GymVo {
 	private String money;
 	private String moneyHalf;
 	
+	
+	
+	
 	//리스트
 	//2.gymImg 정보
 		private List<GymImgVo> gymimgList;
@@ -76,6 +79,8 @@ public class GymVo {
 		this.gymImgSavename = gymImgSavename;
 		this.gymImgType = gymImgType;
 	}
+	
+	
 	
 	public List<GymImgVo> getGymimgList() {
 		return gymimgList;

@@ -31,9 +31,13 @@ public class SparringController {
 	SparringService sparringService;
 
 	// 스파링 리스트
-	@RequestMapping(value = "/bbuyList", method = { RequestMethod.GET, RequestMethod.POST })
-	public String sparringList() {
-		System.out.println("[Controller] : sparringList()");
+	@RequestMapping(value = "/match", method = { RequestMethod.GET, RequestMethod.POST })
+	public String match(Model model) {
+		System.out.println("[Controller] : match()");
+		
+		List<BBuyVo> bBuyList = sparringService.match();
+		model.addAttribute("bBuyList",bBuyList);
+		
 		return "matching/sparringList";
 	}
 
@@ -99,12 +103,14 @@ public class SparringController {
 	}
 
 	/*****************************************************/
-	// 대관 x 매칭신청만 할경우 입력폼
+	// bookingno == 0 이면 대관x 신청만
 	@RequestMapping(value = "/writeForm", method = { RequestMethod.GET, RequestMethod.POST })
-	public String profileWriteForm(Model model, @RequestParam(value = "bookingno", required = false, defaultValue = "0") int bookingNo,
-			@RequestParam(value = "userno", required = false, defaultValue = "0") int userNo) {
+	public String profileWriteForm(Model model, 
+			@RequestParam(value = "bookingno", required = false, defaultValue = "0") int bookingno,
+			@RequestParam(value = "userno", required = false, defaultValue = "0") int userNo,
+			@RequestParam(value = "mainnum", required = false, defaultValue = "0") int mainnum) {
 		System.out.println("[Controller] : profileWriteForm()");
-		System.out.println(bookingNo);
+		System.out.println(bookingno);
 		// 유저no는 현재 대관하기에서 세션값 으로 쓸 임의의 번호를 보내고 있음 지워야댐
 		if (userNo == 0) {
 			// 사용자가 없음 잘못된 접근 메인으로
@@ -113,7 +119,7 @@ public class SparringController {
 			List<ProfileVo> profileList = sparringService.profileWriteForm(userNo);
 
 			model.addAttribute("profileList", profileList);
-
+			model.addAttribute("bookingno", bookingno);
 			return "matching/matchinfoForm";
 		}
 	}
@@ -142,15 +148,17 @@ public class SparringController {
 	@RequestMapping(value = "/write", method = { RequestMethod.GET, RequestMethod.POST })
 	public String profileWrite(@ModelAttribute ProfileVo profileVo, HttpServletRequest request, @ModelAttribute RecordVo recordVo,
 							   @RequestParam(value="bookingno",required=false,defaultValue="0")int bookingNo,
-							   @RequestParam(value="userNo",required=false,defaultValue="0")int userNo) {
+							   @RequestParam(value="userNo",required=false,defaultValue="0")int userNo,
+							   @RequestParam(value="subnum",required=false,defaultValue="0")int subNum) {
 		System.out.println("[Controller] : profileWrite");
 
 		String[] eventName = request.getParameterValues("eventName");
 
 		sparringService.profileWrite(profileVo, eventName, recordVo);
 		
-		if(bookingNo == 0 ) {
-			//매칭글 확인하러 가기
+		if(bookingNo == 0 || subNum ==1) {
+			
+			sparringService.insertBBuy(bookingNo,subNum,userNo,profileVo);
 			return "";
 		}else {
 			return "redirect:/sparring/payment?bookingno="+bookingNo+"&userno="+userNo+"&profileno="+profileVo.getProfileNo();

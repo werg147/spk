@@ -199,6 +199,7 @@ input:-ms-input-placeholder {
   background-color: #dadada;
   color: gray;
   font-weight: bold;
+  cursor:pointer;
 }
 .list2_btn2 > div {
   padding: 16px 0px 0px 0px;

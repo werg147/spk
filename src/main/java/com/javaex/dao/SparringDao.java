@@ -162,6 +162,23 @@ public class SparringDao {
 		
 		System.out.println(count);
 	}
+
+	public List<BBuyVo> selectBBuyList() {
+		System.out.println("[Dao] : selectBBuyList");
+		
+		return sqlSession.selectList("bbuy.selectListBBuy");
+		
+		
+	}
+
+	public void insertBBuy2(BBuyVo bBuyVo) {
+		System.out.println("[Dao] : insertBBuy2");
+		
+		int count = sqlSession.insert("bbuy.insertBBuy2",bBuyVo);
+		
+		System.out.println(count);
+		
+	}
 	
 
 }

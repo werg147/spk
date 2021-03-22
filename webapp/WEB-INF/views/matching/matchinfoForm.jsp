@@ -58,6 +58,7 @@
 					<div class="form2_container">
 
 						<div class="sparring_ex_box">
+										
 							<h2 class="sparring_ex_title">스파링 경험이 5회 이상이십니까?</h2>
 							<input class="sparring_ex ex_01"  id="co" type="radio" name="sparring_ex" value="yes" checked="checked"> <label for="co">네</label>
 							<input class="sparring_ex2 ex_01" id="co2" type="radio" name="sparring_ex" value="no"><label for="co2"> 아니요</label>
@@ -95,7 +96,7 @@
 										<!-- 대관없이 매칭글시에만 보임-->
 										<!-- 종목선택 -->
 										
-										<c:if test="${param.bookingno == 0}">
+										<c:if test="${bookingno == 0}">
 										<tr class="basic">
 											<td colspan="2"><label for="prod_cate">스파링종목</label></td>
 											<td>
@@ -327,6 +328,7 @@
 									<!-- session값 생겨도 히든으로 표시할 것 아이작스에서 쓰고있음 -->
 									<input id="session_user_no" type="hidden" name="userNo" value="2">
 									<input type="hidden" name="bookingno" value="${param.bookingno}">
+									<input type="text" name="mainnum" value="${param.mainnum }">
 								</form>
 								<!-- //입력폼 → 주문하기 -->
 

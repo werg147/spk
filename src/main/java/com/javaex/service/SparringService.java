@@ -167,9 +167,19 @@ public class SparringService {
 			
 			// 주소의 2번째 값만 가지고 하프주소 넣어주기
 			
+			
+			/*주소 api 끝나면 살리기
 			String[] addressHalf= gymList.get(i).getGym_address().split("\\s");
 			
-			gymList.get(i).setAddressHalf(addressHalf[1]);
+			if(addressHalf.length <2) {
+				gymList.get(i).setAddressHalf(addressHalf[1]);
+			}else {
+				gymList.get(i).setAddressHalf(addressHalf[0]);
+			}
+			*/
+			gymList.get(i).setAddressHalf(gymList.get(i).getGym_address());
+			//여기까지포함
+			
 			
 			System.out.println(gymList.get(i).getAddressHalf());
 			
@@ -336,6 +346,7 @@ public class SparringService {
 			if(bBuyVo.getBooking_no()!=0) {
 				//subNum 이 0(시합등록자)이면서 대관을 하는 경우
 				bBuyVo.setB_buy_state("결제완료");
+				sparringDao.insertBBuy(bBuyVo);
 			}
 			//else subNum 이 0(시합등록자)이면서 스파링신청만 하는경우
 			
@@ -351,6 +362,74 @@ public class SparringService {
 		}
 		
 		sparringDao.insertBBuy(bBuyVo);
+		
+	}
+
+	public List<BBuyVo> match() {
+		System.out.println("[Service] : match");
+		
+		List<BBuyVo> bBuyList = sparringDao.selectBBuyList();
+		
+		
+		System.out.println(bBuyList);
+		
+		for(int i = 0 ; i<bBuyList.size(); i++) {
+			int profileNo = bBuyList.get(i).getProfile_no();
+			
+			/*api 주소 부분 생기면 수정해야할 부분
+			String[] addressHalf= bBuyList.get(i).getGym_address().split("\\s");
+			
+			bBuyList.get(i).setAddressHalf(addressHalf[1]);
+			
+			*/
+			bBuyList.get(i).setAddressHalf(bBuyList.get(i).getGym_address());
+			//여기까지임
+			List<EventVo> eventList = sparringDao.selectListEvent(profileNo);
+			
+			bBuyList.get(i).setEventList(eventList);
+			
+		}
+		
+		return bBuyList;
+		
+	}
+	
+	
+	//대관구매를 하지 않는 경우 사용
+	public void insertBBuy(int bookingNo, int subNum,int userNo, ProfileVo profileVo) {
+		System.out.println("[Service]: insertBBuy");
+		BBuyVo bBuyVo = new BBuyVo();
+		
+		if(subNum == 1) {
+			bBuyVo.setB_buy_player_state("신청자");
+			//결제안하고 신청한 상태에서 상대가 선택하면 결제
+			
+		}else {
+			bBuyVo.setB_buy_player_state("시합등록자");
+		}
+		int profileNo = profileVo.getProfileNo();
+		String event = profileVo.getProfileGymEvent();
+		String time = profileVo.getTime();
+		String day = profileVo.getDay();
+		
+		//api만들면 바꿔야함
+		String address = profileVo.getAddress();
+		
+		bBuyVo.setBooking_no(bookingNo);
+		bBuyVo.setUser_no(userNo);
+		bBuyVo.setProfile_no(profileNo);
+		bBuyVo.setB_buy_event(event);
+		bBuyVo.setB_buy_time(time);
+		bBuyVo.setB_buy_day(day);
+		bBuyVo.setB_buy_address("서울 중랑구");
+		
+		System.out.println("event = " + event);
+		System.out.println("time = " + time);
+		System.out.println("day  = " + day );
+		System.out.println("address = " + address);
+	
+		
+		sparringDao.insertBBuy2(bBuyVo);
 		
 	}
 }

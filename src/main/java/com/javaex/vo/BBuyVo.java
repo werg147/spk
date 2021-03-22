@@ -1,5 +1,7 @@
 package com.javaex.vo;
 
+import java.util.List;
+
 public class BBuyVo {
 	private int b_buy_no;
 	private int user_no;
@@ -10,6 +12,34 @@ public class BBuyVo {
 	private String b_buy_state;
 	private String b_buy_player_state;
 	private String b_buy_date;
+	
+	// 대관x일 경우
+	private String b_buy_address;
+	private String b_buy_event;
+	private String b_buy_time;
+	private String b_buy_day;
+	
+	//users
+	private String nickname;
+	private String career;
+	
+	//gym
+	private String gym_name;
+	private String gym_address;
+	private String gym_event;
+	private String gym_img_savename;
+	
+	private String addressHalf;
+	//bookingDate
+	private String booking_date;
+	private String booking_start;
+	private String booking_end;
+	
+	
+	
+	//EventList
+	
+	List<EventVo> eventList;
 	
 	///
 	private String checkAll;
@@ -37,11 +67,119 @@ public class BBuyVo {
 		this.checkAll = checkAll;
 		this.chkItem = chkItem;
 	}
+	
+	
 	public BBuyVo() {
 		super();
 	}
 
 	
+	public String getB_buy_address() {
+		return b_buy_address;
+	}
+
+
+	public void setB_buy_address(String b_buy_address) {
+		this.b_buy_address = b_buy_address;
+	}
+
+
+	public String getB_buy_event() {
+		return b_buy_event;
+	}
+
+
+	public void setB_buy_event(String b_buy_event) {
+		this.b_buy_event = b_buy_event;
+	}
+
+
+	public String getB_buy_time() {
+		return b_buy_time;
+	}
+
+
+	public void setB_buy_time(String b_buy_time) {
+		this.b_buy_time = b_buy_time;
+	}
+
+
+	public String getB_buy_day() {
+		return b_buy_day;
+	}
+
+
+	public void setB_buy_day(String b_buy_day) {
+		this.b_buy_day = b_buy_day;
+	}
+
+
+	public String getAddressHalf() {
+		return addressHalf;
+	}
+	public void setAddressHalf(String addressHalf) {
+		this.addressHalf = addressHalf;
+	}
+	public List<EventVo> getEventList() {
+		return eventList;
+	}
+	public void setEventList(List<EventVo> eventList) {
+		this.eventList = eventList;
+	}
+	public String getGym_img_savename() {
+		return gym_img_savename;
+	}
+	public void setGym_img_savename(String gym_img_savename) {
+		this.gym_img_savename = gym_img_savename;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public String getCareer() {
+		return career;
+	}
+	public void setCareer(String career) {
+		this.career = career;
+	}
+	public String getGym_name() {
+		return gym_name;
+	}
+	public void setGym_name(String gym_name) {
+		this.gym_name = gym_name;
+	}
+	public String getGym_address() {
+		return gym_address;
+	}
+	public void setGym_address(String gym_address) {
+		this.gym_address = gym_address;
+	}
+	public String getGym_event() {
+		return gym_event;
+	}
+	public void setGym_event(String gym_event) {
+		this.gym_event = gym_event;
+	}
+	public String getBooking_date() {
+		return booking_date;
+	}
+	public void setBooking_date(String booking_date) {
+		this.booking_date = booking_date;
+	}
+	public String getBooking_start() {
+		return booking_start;
+	}
+	public void setBooking_start(String booking_start) {
+		this.booking_start = booking_start;
+	}
+	public String getBooking_end() {
+		return booking_end;
+	}
+	public void setBooking_end(String booking_end) {
+		this.booking_end = booking_end;
+	}
 	public int getSubNum() {
 		return subNum;
 	}
@@ -142,14 +280,20 @@ public class BBuyVo {
 	public void setB_buy_date(String b_buy_date) {
 		this.b_buy_date = b_buy_date;
 	}
+
+
 	@Override
 	public String toString() {
 		return "BBuyVo [b_buy_no=" + b_buy_no + ", user_no=" + user_no + ", booking_no=" + booking_no + ", profile_no=" + profile_no + ", b_buy_paytype="
 				+ b_buy_paytype + ", b_buy_price=" + b_buy_price + ", b_buy_state=" + b_buy_state + ", b_buy_player_state=" + b_buy_player_state
-				+ ", b_buy_date=" + b_buy_date + ", checkAll=" + checkAll + ", chkItem=" + chkItem + ", price=" + price + ", subNum=" + subNum + "]";
+				+ ", b_buy_date=" + b_buy_date + ", b_buy_address=" + b_buy_address + ", b_buy_event=" + b_buy_event + ", b_buy_time=" + b_buy_time
+				+ ", b_buy_day=" + b_buy_day + ", nickname=" + nickname + ", career=" + career + ", gym_name=" + gym_name + ", gym_address=" + gym_address
+				+ ", gym_event=" + gym_event + ", gym_img_savename=" + gym_img_savename + ", addressHalf=" + addressHalf + ", booking_date=" + booking_date
+				+ ", booking_start=" + booking_start + ", booking_end=" + booking_end + ", checkAll=" + checkAll + ", chkItem=" + chkItem + ", price=" + price
+				+ ", subNum=" + subNum + "]";
 	}
 	
-
+	
 	
 	
 }

@@ -11,6 +11,8 @@ public class ProfileVo {
 	private String profileDate; //등록일자
 	private String recentlyExer; //최근운동내역
 	private String word;	//상대에게 한마디
+	
+	//
 	private String day;  	//원하는 날짜 대관x
 	private String time;	//원하는 시간 대관x
 	private String address;	//원하는 장소 대관 x
