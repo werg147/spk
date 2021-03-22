@@ -62,7 +62,7 @@
             	and prod.prod_name like '%' || #{search} || '%'
             </if>
         <![CDATA[   
-            order by prod_date desc
+            order by prod_date asc
 		]]>
 	</select>
 

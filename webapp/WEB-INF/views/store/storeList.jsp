@@ -11,6 +11,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/store.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css">
+   
 </head>
 
 <body>
@@ -82,12 +83,12 @@
 	          <input type="hidden" name="prod_cate" value="${stoVo.prod_cate}">
 	          <input type="hidden" name="event_cate" value="${stoVo.event_cate}">
 	          <div class="item">
-	              <a class="img" style="background-image: url();" href="">
+	              <a class="img" href="${pageContext.request.contextPath}/store/read?prodNo=${stoVo.prod_no}">
 	                <img src="${pageContext.request.contextPath}/upload/${stoVo.prod_img_savename}"  width="308" height="396">
 	              </a> 
 	
 	              <div>
-	                <a class="info" href="">
+	                <a class="info" href="${pageContext.request.contextPath}/store/read?${stoVo.prod_no}">
 	                  <span class="name">[${stoVo.prod_brand}]${stoVo.prod_name}</span>
 	                  <span class="price"><fmt:formatNumber value="${stoVo.prod_price}" pattern="#,###"/>원</span>
 	                  <span class="desc"></span>
@@ -130,7 +131,10 @@
       
       <div class="clear"></div>
     </div>
-      
+    
+    
+	
+     
 
     <br><br><br><br><br><br><br><br><br><br><br><br>
 
@@ -147,6 +151,12 @@
 
 
 </body>
+
+<script type="text/javascript">
+
+
+
+</script>
 
 
 </html>
