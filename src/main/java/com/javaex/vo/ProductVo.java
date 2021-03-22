@@ -22,6 +22,14 @@ public class ProductVo {
 	private String prod_detail_img_name;
 	private String prod_detail_img_savename;
 	private String prod_date;
+	
+	private String prod_img_name;
+	private String prod_img_savename;
+	
+	
+	private List<ProductVo> storeList;
+	
+	private List<ProdimgVo> pimgList;
 
 	private List<ColorsizeVo> cssList;
 
@@ -59,6 +67,12 @@ public class ProductVo {
 		this.detailfile = detailfile;
 	}
 
+	public ProductVo(List<ProductVo> storeList, List<ProdimgVo> pimgList) {
+		super();
+		this.storeList = storeList;
+		this.pimgList = pimgList;
+	}
+	
 	public String getProd_no() {
 		return prod_no;
 	}
@@ -193,6 +207,40 @@ public class ProductVo {
 	public void setCssList(List<ColorsizeVo> cssList) {
 		this.cssList = cssList;
 	}
+	
+
+	public List<ProdimgVo> getPimgList() {
+		return pimgList;
+	}
+
+	public void setPimgList(List<ProdimgVo> pimgList) {
+		this.pimgList = pimgList;
+	}
+	
+
+	public List<ProductVo> getStoreList() {
+		return storeList;
+	}
+
+	public void setStoreList(List<ProductVo> storeList) {
+		this.storeList = storeList;
+	}
+
+	public String getProd_img_name() {
+		return prod_img_name;
+	}
+
+	public void setProd_img_name(String prod_img_name) {
+		this.prod_img_name = prod_img_name;
+	}
+
+	public String getProd_img_savename() {
+		return prod_img_savename;
+	}
+
+	public void setProd_img_savename(String prod_img_savename) {
+		this.prod_img_savename = prod_img_savename;
+	}
 
 	@Override
 	public String toString() {
@@ -200,9 +248,12 @@ public class ProductVo {
 				+ event_cate + ", prod_name=" + prod_name + ", prod_price=" + prod_price + ", prod_brand=" + prod_brand
 				+ ", prod_desc=" + prod_desc + ", prod_from=" + prod_from + ", prod_wash=" + prod_wash + ", prod_qual="
 				+ prod_qual + ", prod_detail=" + prod_detail + ", prod_detail_img_name=" + prod_detail_img_name
-				+ ", prod_detail_img_savename=" + prod_detail_img_savename + ", prod_date=" + prod_date + ", cssList="
-				+ cssList + ", mainfile=" + mainfile + ", subfile=" + Arrays.toString(subfile) + ", detailfile="
-				+ detailfile + "]";
+				+ ", prod_detail_img_savename=" + prod_detail_img_savename + ", prod_date=" + prod_date
+				+ ", prod_img_name=" + prod_img_name + ", prod_img_savename=" + prod_img_savename + ", storeList="
+				+ storeList + ", pimgList=" + pimgList + ", cssList=" + cssList + ", mainfile=" + mainfile
+				+ ", subfile=" + Arrays.toString(subfile) + ", detailfile=" + detailfile + "]";
 	}
+
+	
 
 }

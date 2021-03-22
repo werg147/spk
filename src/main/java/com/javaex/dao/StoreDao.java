@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.javaex.vo.ProdimgVo;
 import com.javaex.vo.ProductVo;
 import com.javaex.vo.QnaVo;
 import com.javaex.vo.QnaimgVo;
@@ -16,12 +17,13 @@ public class StoreDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	//storeList
+	//storeList 상품정보 가져오기
 	public List<ProductVo> selectStoList(String search) {
 		System.out.println("[StoreDao] selectStoList()");
 		
 		return sqlSession.selectList("store.selectStoList", search);
 	}
+	
 	
 	
 	//qna 작성 내용 인서트

@@ -45,7 +45,6 @@
             <option value="2">킥복싱</option>
             <option value="3">주짓수</option>
             <option value="4">종합격투기</option>
-            <option value="5">기타종목</option>
           </select>
         </div>
 
@@ -53,6 +52,7 @@
           <span class="tit" id="on">전체보기</span>
           <span class="tit">운동용품</span>
           <span class="tit">의류</span>
+          <span class="tit">잡화</span>
         </div>
         
         <!-- 스토어 검색 -->

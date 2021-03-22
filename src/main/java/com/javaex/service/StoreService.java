@@ -13,6 +13,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.dao.StoreDao;
+import com.javaex.vo.ProdimgVo;
 import com.javaex.vo.ProductVo;
 import com.javaex.vo.QnaVo;
 import com.javaex.vo.QnaimgVo;
@@ -26,8 +27,8 @@ public class StoreService {
 	//storeList 가져오기
 	public List<ProductVo> storeList(String search) {
 		System.out.println("[Service] storeList()");
-		
-		return storeDao.selectStoList(search);
+			
+		return storeDao.selectStoList(search);	
 	}
 	
 	

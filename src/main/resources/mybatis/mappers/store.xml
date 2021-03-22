@@ -20,9 +20,6 @@
 		<result column ="prod_detail_img_name" property="prodDetailImgName"/>
 		<result column ="prod_detail_img_savename" property="prodDetailImgSavename"/>
 		<result column ="prod_date" property="prodDate"/>
-		<result column ="prod_img_no" property="prodImgNo"/>
-		<result column ="prod_img_savename" property="prodImgSavename"/>
-		<result column ="prod_type" property="prodType"/>
 	</resultMap>
 	
 	<resultMap id ="QnaVo" type="QnaVo">
@@ -52,9 +49,7 @@
                    prod.sell_no,
                    prod.prod_cate,
                    prod.event_cate,
-                   pimg.prod_img_no,
                    pimg.prod_img_savename,
-                   pimg.prod_img_type,
                    prod.prod_brand,
                    prod.prod_name,
                    prod.prod_price,

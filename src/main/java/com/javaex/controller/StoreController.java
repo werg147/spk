@@ -28,7 +28,7 @@ public class StoreController {
 		System.out.println("search: " + search);
 		
 		List<ProductVo> storeList = storeService.storeList(search);
-		System.out.println(storeList.toString());
+		System.out.println("컨트롤러" + storeList.toString());
 		
 		model.addAttribute("storeList", storeList);
 		
