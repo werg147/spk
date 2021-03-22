@@ -18,9 +18,10 @@
 		<typeAlias alias="QnaVo" type="com.javaex.vo.QnaVo" /> <!-- 세림 QnaVo -->
 		<typeAlias alias="QnaimgVo" type="com.javaex.vo.QnaimgVo" /> <!-- 세림 QnaimgVo -->
 		<typeAlias alias="BuyVo" type="com.javaex.vo.BuyVo" />
-		<typeAlias alias="ProductVo" type="com.javaex.vo.ProductVo" /> <!-- 세림 ProductVo-->
-    	<typeAlias alias="ProdimgVo" type="com.javaex.vo.ProdimgVo" /> <!-- 세림 ProdimgVo-->
-		
+		<typeAlias alias="ProductVo" type="com.javaex.vo.ProductVo" /> <!-- 세림 ProductVo -->
+		<typeAlias alias="ProdimgVo" type="com.javaex.vo.ProdimgVo" /> <!-- 세림 ProdimgVo -->
+		<typeAlias alias="CartVo" type="com.javaex.vo.CartVo" />
+		<typeAlias alias="CartInfoVo" type="com.javaex.vo.CartInfoVo" />
 	</typeAliases>
 
 	<mappers>
@@ -38,6 +39,7 @@
 		<mapper resource="mybatis/mappers/user.xml" />
 		<mapper resource="mybatis/mappers/gym.xml" /> <!-- 다현 -->
 		<mapper resource="mybatis/mappers/store.xml" /> <!-- 세림 -->
+		<mapper resource="mybatis/mappers/cart.xml" />
 	</mappers>
 </configuration>
 

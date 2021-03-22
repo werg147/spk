@@ -17,9 +17,11 @@
 			        a.alarm_no,
 			        a.from_user_no,
 			        a.to_user_no,
-			        a.sell_type
+			        a.sell_type,
+			        u.user_no
 			FROM    alarm a, users u, bbuy b, gym g, buy b, product p
 			WHERE   a.from_user_no = u.user_no
+					and u.user_no = 1
 			ORDER BY a.alarm_no desc
 		]]>
 	</select>

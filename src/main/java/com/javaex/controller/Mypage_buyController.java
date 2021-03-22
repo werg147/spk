@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.javaex.service.AlarmService;
+import com.javaex.service.CartService;
 import com.javaex.vo.AlarmContentVo;
 import com.javaex.vo.AlarmVo;
 import com.javaex.vo.BuyVo;
@@ -27,7 +28,10 @@ public class Mypage_buyController {
 	@Autowired
 	public AlarmService aS;
 
-	@RequestMapping(value = "/list", method = { RequestMethod.GET, RequestMethod.POST })
+	@Autowired
+	public CartService cS;
+
+	@RequestMapping(value = "/alarm", method = { RequestMethod.GET, RequestMethod.POST })
 	public String list(Model model) {
 
 		System.out.println("[Alarm Ctrl]: list 진입");
@@ -59,7 +63,7 @@ public class Mypage_buyController {
 
 		aS.payment_complete(aVo);
 
-		return "redirect:/mypage/list";
+		return "redirect:/mypage/alarm";
 
 	}
 
@@ -80,7 +84,7 @@ public class Mypage_buyController {
 
 		aS.delivery_ready(aVo);
 
-		return "redirect:/mypage/list";
+		return "redirect:/mypage/alarm";
 
 	}
 
@@ -101,7 +105,7 @@ public class Mypage_buyController {
 
 		aS.delivery_ing(aVo);
 
-		return "redirect:/mypage/list";
+		return "redirect:/mypage/alarm";
 
 	}
 
@@ -122,7 +126,7 @@ public class Mypage_buyController {
 
 		aS.delivery_complete(aVo);
 
-		return "redirect:/mypage/list";
+		return "redirect:/mypage/alarm";
 
 	}
 
@@ -143,7 +147,7 @@ public class Mypage_buyController {
 
 		aS.matching_registration(aVo);
 
-		return "redirect:/mypage/list";
+		return "redirect:/mypage/alarm";
 
 	}
 
@@ -164,7 +168,7 @@ public class Mypage_buyController {
 
 		aS.getMatch_application(aVo);
 
-		return "redirect:/mypage/list";
+		return "redirect:/mypage/alarm";
 
 	}
 
@@ -185,7 +189,7 @@ public class Mypage_buyController {
 
 		aS.getMatching_refused(aVo);
 
-		return "redirect:/mypage/list";
+		return "redirect:/mypage/alarm";
 
 	}
 
@@ -206,7 +210,7 @@ public class Mypage_buyController {
 
 		aS.matching_accept(aVo);
 
-		return "redirect:/mypage/list";
+		return "redirect:/mypage/alarm";
 
 	}
 
@@ -227,7 +231,24 @@ public class Mypage_buyController {
 
 		aS.matching_complete(aVo);
 
-		return "redirect:/mypage/list";
+		return "redirect:/mypage/alarm";
+
+	}
+
+	@RequestMapping(value = "/cart", method = { RequestMethod.GET, RequestMethod.POST })
+	public String cart(Model model, HttpSession session) {
+
+		System.out.println("[Cart Ctrl]: cart 진입");
+
+		UserVo authUser = (UserVo) session.getAttribute("authUser");
+
+		authUser = cS.list(authUser.getUser_no());
+
+		System.out.println(authUser);
+
+		model.addAttribute("CartList", authUser);
+
+		return "mypage/mypage_buy/cart";
 
 	}
 

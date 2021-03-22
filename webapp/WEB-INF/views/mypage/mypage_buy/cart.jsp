@@ -12,6 +12,7 @@
 <title>알림</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/header.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/mypage_buy.css">
+
 </head>
 
 <body>
@@ -37,7 +38,7 @@
 					<!-- //line -->
 
 					<!-- 입력폼 → 주문하기 -->
-					<form>
+					<form action="${pageContext.request.contextPath }/mypage/order" method="get">
 
 						<div id="cartItemList" class="only_pc">
 
@@ -55,87 +56,56 @@
 									<!-- //cart_select -->
 
 									<!-- 반복리스트 -->
-									<div class="box room">
+									<c:forEach items="${requestScope.CartList }" var="cList">
+										<div class="box room">
 
-										<ul class="list">
+											<ul class="list">
 
-											<li>
-												<div class="item">
+												<li>
+													<div class="item">
 
-													<label class="check" for=""> <input type="checkbox" id="" name="chkItem" data-item-id="" data-item-no="" data-item-parent-no="" checked> <span class="ico"></span>
-													</label>
-													<!-- //check -->
+														<label class="check" for=""> <input type="checkbox" id="" name="chkItem" data-item-id="" data-item-no="" data-item-parent-no="" checked> <span class="ico"></span>
+														</label>
+														<!-- //check -->
 
-													<div class="name">
-														<div class="inner_name">
-															<a href="" class="package">권투글러브</a>
-															<div class="info"></div>
-														</div>
-													</div>
-													<!-- //name -->
-
-													<div class="goods">
-
-														<a href="" class="thumb" style="background-image: url(${pageContext.request.contextPath}/assets/image/글러브.jpg);"> 상품이미지 </a>
-														<!-- //thumb -->
-
-														<div class="price">
-															<div class="in_price">
-																<span class="selling">25,000 <span class="won">원</span>
-																</span> <span class="cost"> 25,000 <span class="won">원</span>
-																</span>
-
-																<p class="noti">주의사항 이건 뭐지? 마켓컬리에서 쓰는거(용도는 모르겠음..)</p>
-																<!-- //noti -->
-
+														<div class="name">
+															<div class="inner_name">
+																<a href="" class="package">${cList.prod_name }, ${cList.prod_size }, ${cList.color }</a>
+																<div class="info"></div>
 															</div>
 														</div>
-														<!-- //price -->
+														<!-- //name -->
 
-													</div>
-													<!-- //goods -->
+														<div class="goods">
 
-													<button type="button" class="btn_delete" data-item-id="" data-item-no="" data-type="">상품삭제</button>
-													<!-- //btn_delete -->
+															<a href="" class="thumb" style="background-image: url(${pageContext.request.contextPath}/assets/image/글러브.jpg);"> 상품이미지 </a>
+															<!-- //thumb -->
 
-												</div> <!-- //item -->
+															<div class="price">
+																<div class="in_price">
+																	<span class="selling">${cList.prod_price } <span class="won">원</span>
+																	</span> <span class="cart_count">${cList.count } <span class="won">EA</span>
+																	</span>
+																</div>
+															</div>
+															<!-- //price -->
 
-											</li>
+														</div>
+														<!-- //goods -->
 
-										</ul>
+														<button type="button" class="btn_delete" data-item-id="" data-item-no="" data-type="">상품삭제</button>
+														<!-- //btn_delete -->
 
-									</div>
+													</div> <!-- //item -->
+
+												</li>
+
+											</ul>
+
+										</div>
+									</c:forEach>
 									<!-- //box room -->
 									<!-- //반복리스트 -->
-
-									<div class="box room">
-										<ul class="list">
-											<li>
-												<div class="item">
-													<label class="check" for=""> <input type="checkbox" id="" name="chkItem" data-item-id="" data-item-no="" data-item-parent-no="" checked> <span class="ico"></span>
-													</label>
-													<div class="name">
-														<div class="inner_name">
-															<a href="" class="package">유니폼</a>
-															<div class="info"></div>
-														</div>
-													</div>
-													<div class="goods">
-														<a href="" class="thumb" style="background-image: url(${pageContext.request.contextPath}/assets/image/복싱복.jpg);">상품이미지</a>
-														<div class="price">
-															<div class="in_price">
-																<span class="selling">25,000 <span class="won">원</span>
-																</span> <span class="cost"> 25,000 <span class="won">원</span>
-																</span>
-																<p class="noti"></p>
-															</div>
-														</div>
-													</div>
-													<button type="button" class="btn_delete" data-item-id="" data-item-no="" data-type="">상품삭제</button>
-												</div>
-											</li>
-										</ul>
-									</div>
 
 								</div>
 								<!-- //cart_item -->
@@ -145,7 +115,7 @@
 										<div class="cart_delivery">
 											<h3 class="tit">배송지</h3>
 											<div class="address">
-												<p class="addr">서울시 강남구</p>
+												<p class="addr">${CartList[0].buy_address}</p>
 												<a href="" class="btn_default">배송지 변경</a>
 											</div>
 										</div>
@@ -154,28 +124,21 @@
 											<dl class="amount">
 												<dt class="tit">상품금액</dt>
 												<dd class="price">
-													<span class="num">25,000</span> <span class="won">원</span>
-												</dd>
-											</dl>
-
-											<dl class="amount">
-												<dt class="tit">할인금액</dt>
-												<dd class="price">
-													<span class="num minus">0</span> <span class="won">원</span>
+													<span class="num">${CartList[0].prod_price}</span> <span class="won">원</span>
 												</dd>
 											</dl>
 
 											<dl class="amount">
 												<dt class="tit">배송비</dt>
 												<dd class="price">
-													<span class="num">3,000</span> <span class="won">원</span>
+													<span class="num">무료배송</span>
 												</dd>
 											</dl>
 
 											<dl class="amount lst">
 												<dt class="tit">결제금액</dt>
 												<dd class="price">
-													<span class="num">28,000</span> <span class="won">원</span>
+													<span class="num">결제금액 * count + 배송비</span> <span class="won">원</span>
 												</dd>
 											</dl>
 
