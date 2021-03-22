@@ -44,4 +44,15 @@ public class UserController {
 			return "redirect:/";
 		}
 	}
+	
+	//로그아웃하기
+	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
+	public String logout(HttpSession session) {
+		System.out.println("로그아웃");
+		
+		session.removeAttribute("authUser");
+		session.invalidate();
+
+		return "redirect:/";
+	}
 }

@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,9 +11,11 @@
 	href="${pageContext.request.contextPath }/assets/css/header.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/assets/css/delivery.css">
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
 </head>
 </head>
 <body>
+
 	<div class="wrap">
 		<div class="container">
 			<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
@@ -43,12 +45,15 @@
 
 					<div class="content_product_line"></div>
 					<div class="content_product_list">
+					
+					<c:forEach items="${prodList}" var="prodvo">
+					
 						<div class="list">
-							<div class="product_name">[에버레스트] 글러브</div>
+							<div class="product_name">[${prodvo.prod_brand}] ${prodvo.prod_name}</div>
 							<div class="list_line"></div>
 							<div class="product_content">
 								<div>
-									<img src="${pageContext.request.contextPath}/assets/image/글러브.jpg">
+									<img src="${pageContext.request.contextPath}/upload/${prodvo.prod_img_savename}">
 								</div>
 								<div class="table_box">
 									<table class="delevery_insert_table">
@@ -58,27 +63,29 @@
 										</colgroup>
 										<tr>
 											<td>카테고리</td>
-											<td>의류</td>
+											<td>${prodvo.event_cate}</td>
 										</tr>
 										<tr>
 											<td>상품품번</td>
-											<td>gl12456874</td>
+											<td>${prodvo.prod_no}</td>
 										</tr>
 										<tr>
 											<td>색상 | 사이즈 | 재고</td>
 											<td>
 												<div>
-													<div>블랙 | 5</div>
+													<c:forEach items="${prodvo.cssList}" var="cssvo">
+														<div>${cssvo.color} | ${cssvo.prod_size} | ${cssvo.stock}</div>
+													</c:forEach>
 												</div>
 											</td>
 										</tr>
 										<tr>
 											<td>가격</td>
-											<td>38,000원</td>
+											<td>${prodvo.prod_price}원</td>
 										</tr>
 										<tr>
 											<td>등록일자</td>
-											<td>2020/03/01</td>
+											<td>${prodvo.prod_date}</td>
 										</tr>
 									</table>
 									<div class="product_content_btn">
@@ -90,60 +97,14 @@
 								</div>
 								<!--//table_box-->
 							</div>
+							<!-- //product_content -->
 						</div>
 						<!--//list//-->
-
-						<!--list 배치확인용 중복중복중복중복-->
-						<div class="list">
-							<div class="product_name">[아디다스] 복싱복</div>
-							<div class="list_line"></div>
-							<div class="product_content">
-								<div>
-									<img src="${pageContext.request.contextPath }/assets/image/복싱복.jpg">
-								</div>
-								<div class="table_box">
-									<table class="delevery_insert_table">
-										<colgroup>
-											<col style="width: 150px">
-											<col style="width: 480px">
-										</colgroup>
-										<tr>
-											<td>카테고리</td>
-											<td>의류</td>
-										</tr>
-										<tr>
-											<td>상품품번</td>
-											<td>cl12456874</td>
-										</tr>
-										<tr>
-											<td>색상 | 사이즈 | 재고</td>
-											<td>
-												<div>
-													<div>블루 | 95(M) | 5</div>
-													<div>블루 | 100(L) | 13</div>
-													<div>블루 | 105(LX) | 78</div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>가격</td>
-											<td>60,000원</td>
-										</tr>
-										<tr>
-											<td>등록일자</td>
-											<td>2020/03/01</td>
-										</tr>
-									</table>
-									<div class="product_content_btn">
-										<button class="product_modify_btn">수정하기</button>
-										<button class="product_delete_btn">삭제하기</button>
-									</div>
-								</div>
-								<!--//table_box-->
-							</div>
-						</div>
-						<!--//list//여기까지 중복중복중복중복-->
+						</c:forEach>
+						<!-- 여기까지 반복 -->
+						
 					</div>
+					<!-- //content_product_list -->
 				</div>
 				<!--//content_product//-->
 			</div>

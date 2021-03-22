@@ -19,28 +19,51 @@
 		<c:choose>
 			<c:when test="${sessionScope.authUser == null}">
 				<div>
-					<a href="${pageContext.request.contextPath}/user/loginform"><div id="login">Login</div></a>
+					<a href="${pageContext.request.contextPath}/user/loginform">
+						<div id="login">Login</div>
+					</a>
 				</div>
 			</c:when>
 
 			<c:otherwise>
 				<div>
-					<a href=""><div id="login">Logout</div></a>
+					<a href="${pageContext.request.contextPath}/user/logout">
+						<div id="login">Logout</div>
+					</a>
 				</div>
 			</c:otherwise>
 
 		</c:choose>
 
-		<div>
-			<a href="${pageContext.request.contextPath}/mypage/prod"><img
+		<div><!-- 
+			<c:choose>
+				<c:when test="${sessionScope.authUser == null}">
+					<a href="${pageContext.request.contextPath}/user/loginform">
+				</c:when>
+				
+				<c:when test="${sessionScope.authUser.sellTypeList.sell_type == '예약'}">
+					<a href="${pageContext.request.contextPath}/mypage/book/gymaddform">
+				</c:when>
+				<c:when test="${sessionScope.authUser.sellTypeList.sell_type == '배송'}">
+
+				</c:when>
+				
+				<c:otherwise>
+					<a href="${pageContext.request.contextPath}/mypage/alarm">
+				</c:otherwise>
+
+			</c:choose>
+			 -->
+			 <a href="${pageContext.request.contextPath}/mypage/prod">
+			<img
 				src="${pageContext.request.contextPath }/assets/image/마이페이지 남성_글러브.png"></a>
 		</div>
 		<div>
-			<a href="./html/alarm.html"><img
+			<a href="./html/alarm.html"> <img
 				src="${pageContext.request.contextPath }/assets/image/bell_2.png"></a>
 		</div>
 		<div>
-			<a href="./html/cart.html"><img
+			<a href="./html/cart.html"> <img
 				src="${pageContext.request.contextPath }/assets/image/cart3.png"></a>
 		</div>
 	</div>

@@ -63,7 +63,6 @@
 			       p.prod_price,
 			       p.prod_date,
 			       i.prod_img_no,
-			       i.prod_img_name,
 			       i.prod_img_savename,
 			       i.prod_img_type
 			FROM product p, prodimg i

@@ -1,19 +1,10 @@
 package com.javaex.service;
-
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-
 import com.javaex.dao.ProdDao;
 import com.javaex.vo.ColorsizeVo;
 import com.javaex.vo.ProdimgVo;
@@ -26,13 +17,11 @@ public class ProdService {
 	private ProdDao proddao;
 	
 	//상품관리페이지
-	public void prodList(UserVo authUser) {
+	public List<ProductVo> prodList(UserVo authUser) {
 		System.out.println("[service] 상품관리");
-		
-		int sell_no = authUser.getSell_no();
-		
-		
-		List<ProductVo> prodcutlist = proddao.prodSelectList(sell_no);
+			
+
+		List<ProductVo> prodcutlist = proddao.prodSelectList(authUser.getSell_no());
 		
 
 		System.out.println(prodcutlist);
@@ -43,6 +32,9 @@ public class ProdService {
 			System.out.println("===상품관리==== 항목추가 확인");
 			System.out.println(prodcutlist);
 		}
+		return prodcutlist;
+
+			
 	}
 	
 	
