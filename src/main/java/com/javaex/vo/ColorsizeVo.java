@@ -11,7 +11,6 @@ public class ColorsizeVo {
 	public ColorsizeVo() {}
 
 	public ColorsizeVo(int colorsize_no, String prod_no, String prod_size, String color, int stock) {
-		super();
 		this.colorsize_no = colorsize_no;
 		this.prod_no = prod_no;
 		this.prod_size = prod_size;
@@ -64,7 +63,8 @@ public class ColorsizeVo {
 		return "ColorsizeVo [colorsize_no=" + colorsize_no + ", prod_no=" + prod_no + ", prod_size=" + prod_size
 				+ ", color=" + color + ", stock=" + stock + "]";
 	}
-	
+
+
 	
 
 }

@@ -1,8 +1,12 @@
 package com.javaex.vo;
 
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 public class ProductVo {
 
-	//product
 	private String prod_no;
 	private int sell_no;
 	private String prod_cate;
@@ -18,18 +22,22 @@ public class ProductVo {
 	private String prod_detail_img_name;
 	private String prod_detail_img_savename;
 	private String prod_date;
-	
-	//prodimg
-	private int prod_img_no;
-	private String prod_img_savename;
-	private String prod_img_type;
+
+	private List<ColorsizeVo> cssList;
+
+	private MultipartFile mainfile;
+
+	private MultipartFile[] subfile;
+
+	private MultipartFile detailfile;
 
 	public ProductVo() {
 	}
 
 	public ProductVo(String prod_no, int sell_no, String prod_cate, String event_cate, String prod_name, int prod_price,
 			String prod_brand, String prod_desc, String prod_from, String prod_wash, String prod_qual,
-			String prod_detail, String prod_detail_img_name, String prod_detail_img_savename, String prod_date) {
+			String prod_detail, String prod_detail_img_name, String prod_detail_img_savename, String prod_date,
+			List<ColorsizeVo> cssList, MultipartFile mainfile, MultipartFile[] subfile, MultipartFile detailfile) {
 		this.prod_no = prod_no;
 		this.sell_no = sell_no;
 		this.prod_cate = prod_cate;
@@ -45,9 +53,12 @@ public class ProductVo {
 		this.prod_detail_img_name = prod_detail_img_name;
 		this.prod_detail_img_savename = prod_detail_img_savename;
 		this.prod_date = prod_date;
+		this.cssList = cssList;
+		this.mainfile = mainfile;
+		this.subfile = subfile;
+		this.detailfile = detailfile;
 	}
-	
-	
+
 	public String getProd_no() {
 		return prod_no;
 	}
@@ -167,31 +178,20 @@ public class ProductVo {
 	public void setProd_date(String prod_date) {
 		this.prod_date = prod_date;
 	}
-	
-	
 
-	public int getProd_img_no() {
-		return prod_img_no;
+	public ProductVo(MultipartFile mainfile, MultipartFile[] subfile, MultipartFile detailfile) {
+		super();
+		this.mainfile = mainfile;
+		this.subfile = subfile;
+		this.detailfile = detailfile;
 	}
 
-	public void setProd_img_no(int prod_img_no) {
-		this.prod_img_no = prod_img_no;
+	public List<ColorsizeVo> getCssList() {
+		return cssList;
 	}
 
-	public String getProd_img_savename() {
-		return prod_img_savename;
-	}
-
-	public void setProd_img_savename(String prod_img_savename) {
-		this.prod_img_savename = prod_img_savename;
-	}
-
-	public String getProd_img_type() {
-		return prod_img_type;
-	}
-
-	public void setProd_img_type(String prod_img_type) {
-		this.prod_img_type = prod_img_type;
+	public void setCssList(List<ColorsizeVo> cssList) {
+		this.cssList = cssList;
 	}
 
 	@Override
@@ -200,14 +200,9 @@ public class ProductVo {
 				+ event_cate + ", prod_name=" + prod_name + ", prod_price=" + prod_price + ", prod_brand=" + prod_brand
 				+ ", prod_desc=" + prod_desc + ", prod_from=" + prod_from + ", prod_wash=" + prod_wash + ", prod_qual="
 				+ prod_qual + ", prod_detail=" + prod_detail + ", prod_detail_img_name=" + prod_detail_img_name
-				+ ", prod_detail_img_savename=" + prod_detail_img_savename + ", prod_date=" + prod_date
-				+ ", prod_img_no=" + prod_img_no + ", prod_img_savename=" + prod_img_savename + ", prod_img_type="
-				+ prod_img_type + "]";
+				+ ", prod_detail_img_savename=" + prod_detail_img_savename + ", prod_date=" + prod_date + ", cssList="
+				+ cssList + ", mainfile=" + mainfile + ", subfile=" + Arrays.toString(subfile) + ", detailfile="
+				+ detailfile + "]";
 	}
 
-	
-
-	
-	
-	
 }

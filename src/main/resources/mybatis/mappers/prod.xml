@@ -41,5 +41,15 @@
 									#{prod_img_type})
 	]]>
 	</insert>
+	
+		<insert id="imgColorSize" parameterType="com.javaex.vo.ColorsizeVo">
+	<![CDATA[
+		insert into colorsize VALUES(seq_colorsize_no.nextval, 
+		                             #{prod_no}, 
+		                             #{prod_size}, 
+		                             #{color}, 
+		                             #{stock})
+	]]>
+	</insert>
 
 </mapper>

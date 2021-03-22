@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Iterator;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.javaex.dao.ProdDao;
+import com.javaex.vo.ColorsizeVo;
 import com.javaex.vo.ProdimgVo;
 import com.javaex.vo.ProductVo;
 
@@ -22,81 +24,107 @@ public class ProdService {
 	@Autowired
 	private ProdDao proddao;
 
-	public void prodWrite(MultipartFile file, ProductVo prodvo, MultipartHttpServletRequest request) {
-		String saveName;
+	//상품등록
+	public String prodWrite(ProductVo prodvo, 
+							MultipartFile mainfile, 
+							MultipartFile[] subfile,
+							MultipartFile detailfile) {
 
-		if (file.getSize() != 0) {
-			// db 저장할 정보 수집
-			String saveDir = "C:\\javaStudy\\upload";
+		System.out.println("[service] 상품등록");
 
-			// 오리지널 파일이름
-			String orgName = file.getOriginalFilename();
+		String detailfilePath = "C:\\javaStudy\\upload"; // 설정파일로 뺀다.
+		String detailfileOriginName = detailfile.getOriginalFilename();
 
-			// 확장자
-			String exName = orgName.substring(orgName.lastIndexOf("."));
+		System.out.println("상세페이지 파일 기존 파일명 : " + detailfileOriginName);
 
-			// 서버 저장 파일 이름
-			saveName = System.currentTimeMillis() + UUID.randomUUID().toString() + exName;
+		String detailsavename = System.currentTimeMillis() + UUID.randomUUID().toString() + detailfileOriginName; // 파일명
+		String detailfileFullPath = detailfilePath + "/" + detailsavename; // 파일 전체 경로
+		System.out.println("originalFilename:" + detailsavename + ", fileFullPath:" + detailfileFullPath);
 
-			// 서버 파일 패스 --> 저장경로
-			String filePath = saveDir + "\\" + saveName;
+		try {
+			// 파일 저장
+			detailfile.transferTo(new File(detailfileFullPath));
+			prodvo.setProd_detail_img_name(detailfileOriginName);
+			prodvo.setProd_detail_img_savename(detailsavename);
+			proddao.prodInsert(prodvo);
 
-			// 파일 사이즈
-			long fileSize = file.getSize();
+			String mainfilePath = "C:\\javaStudy\\upload"; // 설정파일로 뺀다.
+			String mainfileOriginName = mainfile.getOriginalFilename();
 
-			// 서버하드디스크 파일저장
-			try {
-				byte[] fileData = file.getBytes();
-				OutputStream out = new FileOutputStream(filePath);
-				BufferedOutputStream bos = new BufferedOutputStream(out);
+			System.out.println("기존 파일명 : " + mainfileOriginName);
 
-				bos.write(fileData);
-				bos.close();
+			String mainsavename = System.currentTimeMillis() + UUID.randomUUID().toString() + mainfileOriginName; // 파일명
+			String mainfileFullPath = mainfilePath + "/" + mainsavename; // 파일 전체 경로
+			System.out.println("originalFilename:" + mainsavename + ", fileFullPath:" + mainfileFullPath);
 
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			prodvo.setProd_detail_img_savename(saveName);
-			prodvo.setProd_detail_img_name(orgName);
-
-
-		}
-		System.out.println("[service]상품등록" + prodvo);
-		proddao.prodInsert(prodvo);
-		
-
-		Iterator<String> itr = request.getFileNames();
-		System.out.println(itr);
-
-		String filePath = "C:\\javaStudy\\upload"; // 설정파일로 뺀다.
-
-		while (itr.hasNext()) { // 받은 파일들을 모두 돌린다.
-
-			MultipartFile mpf = request.getFile(itr.next());
-
-			String savename = System.currentTimeMillis() + UUID.randomUUID().toString() + mpf.getOriginalFilename(); // 파일명
-
-			String fileFullPath = filePath + "/" + savename; // 파일 전체 경로
-
-			System.out.println("originalFilename:" + savename + ", fileFullPath:" + fileFullPath);
-			try {
-				// 파일 저장
-				mpf.transferTo(new File(fileFullPath));
-
-			} catch (Exception e) {
-				System.out.println("postTempFile_ERROR======>" + fileFullPath);
-				e.printStackTrace();
-			}
+			System.out.println("메인이미지 등록 여기까지 오니?");
 			ProdimgVo imgvo = new ProdimgVo();
-			imgvo.setProd_img_savename(savename);
-			imgvo.setProd_img_name(mpf.getOriginalFilename());
+			imgvo.setProd_img_savename(mainsavename);
+			imgvo.setProd_img_name(mainfileOriginName);
 			imgvo.setProd_img_type("main");
+			System.out.println("메인이미지 등록 상품번호 도착했니? " + prodvo.getProd_no());
 			imgvo.setProd_no(prodvo.getProd_no());
-			
-			System.out.println("[service]상품이미지등록" + imgvo);
-			proddao.mainImgInsert(imgvo);
+
+			System.out.println("[service]상품이미지등록 출발" + imgvo);
+			proddao.ImgInsert(imgvo);
+
+			// 파일 저장
+			mainfile.transferTo(new File(mainfileFullPath));
+
+			for (int i = 0; i < subfile.length; i++) {
+
+				String subfilePath = "C:\\javaStudy\\upload"; // 설정파일로 뺀다.
+				String subfileOriginName = subfile[i].getOriginalFilename();
+
+				System.out.println("서브이미지 등록 기존 파일명 : " + subfileOriginName);
+
+				String subsavename = System.currentTimeMillis() + UUID.randomUUID().toString() + subfileOriginName; // 파일명
+				String subfileFullPath = subfilePath + "/" + subsavename; // 파일 전체 경로
+				System.out.println("originalFilename:" + subsavename + ", fileFullPath:" + subfileFullPath);
+
+				System.out.println("서브이미지 등록 여기까지 오니?");
+				ProdimgVo imgvo2 = new ProdimgVo();
+				imgvo2.setProd_img_savename(subsavename);
+				imgvo2.setProd_img_name(subfileOriginName);
+				imgvo2.setProd_img_type("sub");
+				System.out.println("서브이미지 등록 상품번호 도착했니? " + prodvo.getProd_no());
+				imgvo2.setProd_no(prodvo.getProd_no());
+
+				System.out.println("[service]상품이미지등록 출발" + imgvo2);
+				proddao.ImgInsert(imgvo2);
+
+				// 파일 저장
+				subfile[i].transferTo(new File(subfileFullPath));
+
+			}
+
+		} catch (Exception e) {
+			System.out.println("postTempFile_ERROR======>");
+
+			e.printStackTrace();
 		}
+
+
+		return prodvo.getProd_no();
+
+	}
+	
+	//사이즈등록
+	public int prodSizeWrite(ProductVo prodvo) {
+		System.out.println("[service] 상품사이즈등록");
+		List<ColorsizeVo> cssList = prodvo.getCssList();
+		System.out.println(cssList);
+		int count=0;
+		
+		for(int i=0; i<cssList.size(); i++) {
+			cssList.get(i).setProd_no(prodvo.getProd_no());
+			proddao.colorsoizeInsert(cssList.get(i));
+		
+			System.out.println("사이즈등록"+ i + "번째: " + cssList.get(i));
+			count++;
+		}
+		return count;
+
 	}
 
 }
