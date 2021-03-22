@@ -18,12 +18,34 @@ import com.javaex.dao.ProdDao;
 import com.javaex.vo.ColorsizeVo;
 import com.javaex.vo.ProdimgVo;
 import com.javaex.vo.ProductVo;
+import com.javaex.vo.UserVo;
 
 @Service
 public class ProdService {
 	@Autowired
 	private ProdDao proddao;
+	
+	//상품관리페이지
+	public void prodList(UserVo authUser) {
+		System.out.println("[service] 상품관리");
+		
+		int sell_no = authUser.getSell_no();
+		
+		
+		List<ProductVo> prodcutlist = proddao.prodSelectList(sell_no);
+		
 
+		System.out.println(prodcutlist);
+		for(int i=0; i<prodcutlist.size(); i++) {
+			String prod_no = prodcutlist.get(i).getProd_no();
+			List<ColorsizeVo> cssList = proddao.colorsizeSelectList(prod_no);
+			prodcutlist.get(i).setCssList(cssList);
+			System.out.println("===상품관리==== 항목추가 확인");
+			System.out.println(prodcutlist);
+		}
+	}
+	
+	
 	//상품등록
 	public String prodWrite(ProductVo prodvo, 
 							MultipartFile mainfile, 
@@ -118,8 +140,8 @@ public class ProdService {
 		
 		for(int i=0; i<cssList.size(); i++) {
 			cssList.get(i).setProd_no(prodvo.getProd_no());
-			proddao.colorsoizeInsert(cssList.get(i));
-		
+			proddao.colorsizeInsert(cssList.get(i));
+			
 			System.out.println("사이즈등록"+ i + "번째: " + cssList.get(i));
 			count++;
 		}

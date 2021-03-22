@@ -1066,16 +1066,7 @@ table {
 	resize: none;
 }
 
-/*파일업로드 버튼*/
-.input-file-button {
-	height: 20px;
-	font-size: 14px;
-	padding: 3px 10px 1px 10px;
-	border: solid 1px #dddfe1;
-	border-radius: 0px;
-	color: #000000;
-	cursor: pointer;
-}
+
 
 /*textarea 설정(상품상세페이지)*/
 .product_insert_content .large textarea {
@@ -1110,6 +1101,11 @@ table {
 	.product_insert_btn .product_delclose_btn:hover {
 	background: #d4d4d4;
 	text-decoration: none;
+}
+
+.product_insert_content #detailfile{
+	width: 320px;
+	border: none;
 }
 
 /*버튼 위치조절*/

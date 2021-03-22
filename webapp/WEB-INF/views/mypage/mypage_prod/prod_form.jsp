@@ -96,7 +96,7 @@
 							</tr>
 							<tr class="sizecolor_div">
 								<td>색상 및 사이즈</td>
-								<div>
+								
 									<td id=sizecolor>
 										<label for="color">색상</label> 
 										<input type="text" id="color" name="color"> 
@@ -104,13 +104,12 @@
 										<input type="text" id="prod_size" name="prod_size"> 
 										<label for="stock">재고</label> 
 										<input type="text" id="stock" name="stock">
-										<button id="sizecolor_btn" type="button">+</button>
-										
+										<button id="sizecolor_btn" type="button">등록</button>
 										<div class="colorsizestocktab">
 											<div id="sizebox"></div>
 										</div>
 									</td>
-								</div>
+							
 							</tr>
 							<tr class="plus">
 								<td><label for="prod_desc">제품소개(성분)</label></td>
@@ -133,7 +132,7 @@
 								<td>
 									<div>
 										<p>상세페이지 이미지등록</p>
-										<label class="input-file-button" for="input-file">업로드</label>
+										<label class="input-file-button" for="input-file"></label>
 										<input type="file" name="detailfile" id="detailfile">
 									</div> <textarea id="prod_detail" name="prod_detail"></textarea>
 								</td>
@@ -142,7 +141,7 @@
 						<div class="product_insert_btn">
 							<input type="hidden" name="sell_no" value="${sessionScope.authUser.sell_no}">
 							<button class="insert_btn" type="button">상품등록</button>
-							<button class="product_delclose_btn">상품목록으로</button>
+							<button class="product_delclose_btn" type="reset"><a href="${pageContext.request.contextPath}/mypage/prod">상품목록으로</a></button>
 						</div>
 					</form>
 				</div>
