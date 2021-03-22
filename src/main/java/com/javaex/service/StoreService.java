@@ -4,6 +4,7 @@ import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.dao.StoreDao;
+import com.javaex.vo.ProductVo;
 import com.javaex.vo.QnaVo;
 import com.javaex.vo.QnaimgVo;
 
@@ -20,6 +22,15 @@ public class StoreService {
 	
 	@Autowired
 	private StoreDao storeDao;
+	
+	//storeList 가져오기
+	public List<ProductVo> storeList(String search) {
+		System.out.println("[Service] storeList()");
+		
+		return storeDao.selectStoList(search);
+	}
+	
+	
 	
 	//qna 작성내용 인서트
 	public void qnaWrite(QnaVo qnaVo, MultipartFile file) {

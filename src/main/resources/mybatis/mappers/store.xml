@@ -3,6 +3,27 @@
 
 
 <mapper namespace= "store">
+
+	<resultMap id ="ProductVo" type="ProductVo">
+		<result column ="prod_no" property="prodNo"/>
+		<result column ="sell_no" property="sellNo"/>
+		<result column ="prod_cate" property="prodCate"/>
+		<result column ="event_cate" property="eventCate"/>
+		<result column ="prod_name" property="prodName"/>
+		<result column ="prod_price" property="prodPrice"/>
+		<result column ="prod_brand" property="prodBrand"/>
+		<result column ="prod_desc" property="prodDesc"/>
+		<result column ="prod_from" property="prodFrom"/>
+		<result column ="prod_wash" property="prodWash"/>
+		<result column ="prod_qual" property="prodQual"/>
+		<result column ="prod_detail" property="prodDetail"/>
+		<result column ="prod_detail_img_name" property="prodDetailImgName"/>
+		<result column ="prod_detail_img_savename" property="prodDetailImgSavename"/>
+		<result column ="prod_date" property="prodDate"/>
+		<result column ="prod_img_no" property="prodImgNo"/>
+		<result column ="prod_img_savename" property="prodImgSavename"/>
+		<result column ="prod_type" property="prodType"/>
+	</resultMap>
 	
 	<resultMap id ="QnaVo" type="QnaVo">
 		<result column ="qna_no" property="qnaNo"/>
@@ -22,6 +43,34 @@
 		<result column ="qna_img_savename" property="qnaImgSavename"/>
 		<result column ="qna_img_type" property="qnaImgType"/>
 	</resultMap>
+
+
+	<!-- storeList 우선 date 기준으로 뿌리기로.. -->
+	<select id="selectStoList" parameterType="String" resultType="ProductVo">
+		<![CDATA[
+	 		select prod.prod_no,
+                   prod.sell_no,
+                   prod.prod_cate,
+                   prod.event_cate,
+                   pimg.prod_img_no,
+                   pimg.prod_img_savename,
+                   pimg.prod_img_type,
+                   prod.prod_brand,
+                   prod.prod_name,
+                   prod.prod_price,
+                   prod.prod_date
+            from product prod, prodimg pimg
+            where prod.prod_no = pimg.prod_no
+            and pimg.prod_img_type = 'main'
+         ]]>
+            <if test="  value != null and value !=''  ">
+            	and prod.prod_name like '%' || #{search} || '%'
+            </if>
+        <![CDATA[   
+            order by prod_date desc
+		]]>
+	</select>
+
 
 	
 	<!-- qna 인서트 -->

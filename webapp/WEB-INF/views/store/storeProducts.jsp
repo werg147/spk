@@ -875,9 +875,7 @@
 		
 	});
 	
-	
-	//qnaList 정보+ html조합해서 화면 출력
-	function
+
 	
 	
 	

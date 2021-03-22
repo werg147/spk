@@ -1,13 +1,17 @@
 package com.javaex.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.service.StoreService;
+import com.javaex.vo.ProductVo;
 import com.javaex.vo.QnaVo;
 
 @Controller
@@ -19,8 +23,14 @@ public class StoreController {
 	
 	//스토어 상품 리스트
 	@RequestMapping(value="/list")
-	public String list() {
-		System.out.println("[StoreController] list()");
+	public String storeList(Model model, @RequestParam(value="search", required = false, defaultValue = "") String search) {
+		System.out.println("[StoreController] storeList()");
+		System.out.println("search: " + search);
+		
+		List<ProductVo> storeList = storeService.storeList(search);
+		System.out.println(storeList.toString());
+		
+		model.addAttribute("storeList", storeList);
 		
 		return "store/storeList";
 	}
