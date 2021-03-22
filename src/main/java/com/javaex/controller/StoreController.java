@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,8 +38,9 @@ public class StoreController {
 	
 	//스토어 상품 상세페이지 (read?키=값)
 	@RequestMapping(value="/read")
-	public String read() {
+	public String read(@RequestParam("prodNo") String prodNo) {
 		System.out.println("[Controller] read()");
+		System.out.println(prodNo);
 		
 		return "store/storeProducts";
 	}
