@@ -66,17 +66,17 @@
 
 							<div class="amen_box">
 
-								<p class="amenities_item1_title">${gAVo.gymVo.gym_name}<span></span>
+								<p class="amenities_item1_title">${gAVo.gym_name}<span></span>
 								</p>
-								<div class="amenities_item1_skill">${gAVo.gymVo.gym_event}</div>
+								<div class="amenities_item1_skill">${gAVo.gym_event}</div>
 							</div>
 
 							<div class="amen_box2">
 								<div>
-									<div class="amenities_item1_sub5">${gAVo.gymVo.gym_ph}</div>
+									<div class="amenities_item1_sub5">${gAVo.gym_ph}</div>
 									<!-- 주소 -->
 									<div class="amenities_item1_sub">
-										<span class="amenities_item1_sub2"> <i class="fas fa-map-marker-alt"></i>${gAVo.gymVo.gym_address}</span>
+										<span class="amenities_item1_sub2"> <i class="fas fa-map-marker-alt"></i>${gAVo.gym_address}</span>
 									</div>
 								</div>
 
@@ -214,14 +214,14 @@
 
 
 								<div id="swiper-con" class="swiper-slide  rn_slide ">
-									<div class="swiper-color box10 box-color" data-no="${gAVo.gymVo.gym_no}" data-date="${gAVo.dayList[0].date}">
+									<div class="swiper-color box10 box-color" data-no="${gAVo.gym_no}" data-date="${gAVo.dayList[0].date}">
 										<div>${gAVo.dayList[0].day }</div>
 										<div>${gAVo.dayList[0].today }</div>
 									</div>
 								</div>
 								<c:forEach items="${gAVo.dayList }" var="vo" begin="1">
 									<div id="swiper-con" class="swiper-slide rn_slide ">
-										<div class="swiper-color box10" data-no="${gAVo.gymVo.gym_no}" data-date="${vo.date }">
+										<div class="swiper-color box10" data-no="${gAVo.gym_no}" data-date="${vo.date }">
 											<div>${vo.day }</div>
 											<div>${vo.today }</div>
 										</div>
@@ -290,9 +290,9 @@
 					<h1>체육관 공지사항</h1>
 				</div>
 				<div class="notice_text">
-					<p class="time_notice">◈ 체육관 운영시간은 ${gAVo.gymVo.gym_time} 입니다</p>
+					<p class="time_notice">◈ 체육관 운영시간은 ${gAVo.gym_time} 입니다</p>
 					<p>◈모든 매치는 현재 매치 중, 이동 시 마스크 필수 착용입니다</p>
-					<p>■${gAVo.gymVo.gym_notice}</p>
+					<p>■${gAVo.gym_notice}</p>
 
 				</div>
 				<br>

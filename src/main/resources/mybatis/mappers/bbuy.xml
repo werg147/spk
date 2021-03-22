@@ -4,5 +4,20 @@
 
 <mapper namespace="bbuy">
 	
+	<insert id="insertBBuy">
+	 <![CDATA[
+			insert into bbuy
+			values( seq_bbuy_no.nextval,
+			        #{user_no},
+			        #{booking_no},
+			        #{profile_no},
+			        #{b_buy_paytype},
+			        #{price},
+			        #{b_buy_state},
+			        #{b_buy_player_state},
+			        sysdate)	 	
+	 
+	 ]]>
+	</insert>
 	
 </mapper>

@@ -11,11 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.javaex.dao.SparringDao;
+import com.javaex.vo.BBuyVo;
 import com.javaex.vo.BookingVo;
 import com.javaex.vo.ConvenienceVo;
 import com.javaex.vo.DayVo;
 import com.javaex.vo.EventVo;
-import com.javaex.vo.GymAssembleVo;
 import com.javaex.vo.GymImgVo;
 import com.javaex.vo.GymVo;
 import com.javaex.vo.ProfileVo;
@@ -183,7 +183,7 @@ public class SparringService {
 		
 	}
 
-	public GymAssembleVo rentDetail(int gymNo) {
+	public GymVo rentDetail(int gymNo) {
 		// TODO Auto-generated method stub
 		System.out.println("[Service] : rentDetail()");
 		
@@ -261,11 +261,20 @@ public class SparringService {
 		
 		List<ConvenienceVo> conList = sparringDao.selectListCon(gymNo);
 		
-		GymAssembleVo gymAssembleVo = new GymAssembleVo(gymVo, gymimgList, dayList, bookingList, conList);
-	
-		return gymAssembleVo;
+		 //gymimgList, dayList, bookingList, conList
+		gymVo.setGymimgList(gymimgList);
+		gymVo.setDayList(dayList);
+		gymVo.setBookingList(bookingList);
+		gymVo.setConList(conList);
+		
+		return gymVo;
 	}
 
+	
+	
+	
+	
+	
 	public GymImgVo gymImgOne(int gymImgNo) {
 		System.out.println("[Service] : gymImgOne");
 		
@@ -305,6 +314,43 @@ public class SparringService {
 		map.put("userVo",userVo);
 		
 		return map;
+		
+	}
+
+	public void pay(BBuyVo bBuyVo) {
+		System.out.println("[Service] : pay()");
+		int num = bBuyVo.getB_buy_price().lastIndexOf(".");
+		
+		String str=bBuyVo.getB_buy_price().substring(0, num);
+		System.out.println(str);
+		int price = Integer.parseInt(str);
+		bBuyVo.setPrice(price);
+		
+		System.out.println(bBuyVo.getBooking_no());
+		//먼저 bbuy를 셀렉트 문으로 꺼내서 
+		
+		//subNum이 0이면 시합등록자 1이면 신청자 
+		if(bBuyVo.getSubNum() == 0) {
+			bBuyVo.setB_buy_player_state("시합등록자");
+			
+			if(bBuyVo.getBooking_no()!=0) {
+				//subNum 이 0(시합등록자)이면서 대관을 하는 경우
+				bBuyVo.setB_buy_state("결제완료");
+			}
+			//else subNum 이 0(시합등록자)이면서 스파링신청만 하는경우
+			
+		}else if (bBuyVo.getSubNum() == 1) {
+			bBuyVo.setB_buy_player_state("신청자");
+			
+			if(bBuyVo.getBooking_no()!=0) {
+				//subNum이 1(신청자)면서 대관후에 신청하는 경우
+				
+				bBuyVo.setB_buy_state("결제완료");
+			}
+				//subNum이 1(신청자)면서 상대에게 신청만하는경우
+		}
+		
+		sparringDao.insertBBuy(bBuyVo);
 		
 	}
 }

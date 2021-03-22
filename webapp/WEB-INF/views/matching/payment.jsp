@@ -33,7 +33,7 @@
 	<!-- wrap -->
 	<div class="wrap">
 		<div class="container">
-				<form class="sf_form form_20">
+				<form action="${pageContext.request.contextPath}/sparring/pay" method="get" class="sf_form form_20">
 				<div class="sm">
 					<h1 class="sm_title">주문서</h1>
 				</div>
@@ -50,7 +50,7 @@
 									<div class="cart_select">
 										<div class="inner_select">
 											<label class="check"> <input type="checkbox"
-												name="checkAll" checked> <span class="ico"></span>
+												name="" checked> <span class="ico"></span>
 												전체선택
 											</label> <a href="" class="btn_delete"> 선택삭제 </a>
 										</div>
@@ -61,7 +61,7 @@
 											<li>
 												<div class="item_13">
 													<label class="check" for=""> <input type="checkbox"
-														id="" name="chkItem" data-item-id="" data-item-no=""
+														id="" name="" data-item-id="" data-item-no=""
 														data-item-parent-no="" checked> <span class="ico"></span>
 													</label>
 
@@ -203,10 +203,11 @@
 						<table class="paykind_table">
 							<tr>
 								<th>카드결제</th>
-								<td class="table_card"><input class="table_pay-radio0"
-									type="radio" name="paymod">
+								<td class="table_card"><input id="" class="table_pay-radio0"
+									type="radio" name="b_buy_paytype" value="card">
 									<div class="table_pay-radio_select">
 										<select name="" id="">
+											<option >카드선택</option>
 											<option value="shinhan">신한카드</option>
 											<option value="woori">우리카드</option>
 											<option value="Corporate">기업카드</option>
@@ -215,19 +216,19 @@
 							</tr>
 							<tr>
 								<th>토스결제</th>
-								<td><input class="table_pay-radio" type="radio" name="paymod"
+								<td><input class="table_pay-radio" type="radio" name="b_buy_paytype"
 									value="toss"> <img
 									src="${pageContext.request.contextPath }/upd/toss.png" alt="">
 								</td>
 							</tr>
 							<tr>
 								<th>카카오페이</th>
-								<td><input class="table_pay-radio" type="radio" name="paymod"
+								<td><input class="table_pay-radio" type="radio" name="b_buy_paytype"
 									value="kakao"> kakao</td>
 							</tr>
 							<tr>
 								<th>휴대폰결제</th>
-								<td><input class="table_pay-radio" type="radio" name="paymod"
+								<td><input class="table_pay-radio" type="radio" name="b_buy_paytype"
 									value="phone"> 휴대폰</td>
 	
 							</tr>
@@ -241,8 +242,10 @@
 								</button>
 							</a>
 						</div>
-						
-					<input type="hidden" name="price" value="${map.bookingVo.booking_price/2}">
+					<input type="text" name="profile_no" value="${param.profileno}"> 
+					<input type="text" name="user_no" value="${param.userno}"> 
+					<input type="text" name="b_buy_price" value="${map.bookingVo.booking_price/2}">
+					<input type="text" name="booking_no" value="${map.bookingVo.booking_no }">
 				</section>
 			</form>
 			
@@ -261,5 +264,10 @@
 	</div>
 	<!-- wrap end -->
 </body>
+<script type="text/javascript">
+
+
+</script>
+
 
 </html>

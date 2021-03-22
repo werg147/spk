@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.javaex.vo.BBuyVo;
 import com.javaex.vo.BookingVo;
 import com.javaex.vo.ConvenienceVo;
 import com.javaex.vo.EventVo;
@@ -152,6 +153,14 @@ public class SparringDao {
 		
 		return sqlSession.selectOne("user.selectOneUserAddress",userNo);
 		
+	}
+
+	public void insertBBuy(BBuyVo bBuyVo) {
+		System.out.println("[Dao] : inserBBuy");
+		System.out.println(bBuyVo);
+		int count = sqlSession.insert("bbuy.insertBBuy",bBuyVo);
+		
+		System.out.println(count);
 	}
 	
 

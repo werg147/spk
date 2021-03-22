@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javaex.service.SparringService;
+import com.javaex.vo.BBuyVo;
 import com.javaex.vo.BookingVo;
-import com.javaex.vo.GymAssembleVo;
+
 import com.javaex.vo.GymImgVo;
 import com.javaex.vo.GymVo;
 import com.javaex.vo.ProfileVo;
@@ -62,9 +63,9 @@ public class SparringController {
 	@RequestMapping(value = "/rentdetail", method = { RequestMethod.GET, RequestMethod.POST })
 	public String rentDetail(@RequestParam(value = "gymNo") int gymNo, Model model) {
 		System.out.println("[Controller] : rentDetail()");
-		GymAssembleVo gymAssembleVo = sparringService.rentDetail(gymNo);
+		GymVo gymVo = sparringService.rentDetail(gymNo);
 
-		model.addAttribute("gAVo", gymAssembleVo);
+		model.addAttribute("gAVo", gymVo);
 
 		return "matching/rentdetail";
 	}
@@ -73,6 +74,7 @@ public class SparringController {
 	@RequestMapping(value = "/payment", method = { RequestMethod.GET, RequestMethod.POST })
 	public String payment(@RequestParam(value = "bookingno", required = false, defaultValue = "0") int bookingNo,
 						  @RequestParam(value = "userno", required = false, defaultValue = "0") int userNo,
+						  @RequestParam(value = "profileno", required = false, defaultValue = "0") int profileNo,
 						  Model model) {
 		System.out.println(bookingNo);
 		System.out.println(userNo);
@@ -84,11 +86,16 @@ public class SparringController {
 		model.addAttribute("map",map);
 		return "matching/payment";
 	}
-	
+	/**결제**/
 	@RequestMapping(value = "/pay", method = { RequestMethod.GET, RequestMethod.POST })
-	public String pay() {
+	public String pay(@ModelAttribute BBuyVo bBuyVo) {
+		System.out.println("[Controller] : pay()");
 		
-		return "";
+		System.out.println(bBuyVo);
+		
+		sparringService.pay(bBuyVo);
+		
+		return "store/paymentCp";
 	}
 
 	/*****************************************************/
@@ -135,7 +142,7 @@ public class SparringController {
 	@RequestMapping(value = "/write", method = { RequestMethod.GET, RequestMethod.POST })
 	public String profileWrite(@ModelAttribute ProfileVo profileVo, HttpServletRequest request, @ModelAttribute RecordVo recordVo,
 							   @RequestParam(value="bookingno",required=false,defaultValue="0")int bookingNo,
-							   @RequestParam(value="userno",required=false,defaultValue="0")int userNo) {
+							   @RequestParam(value="userNo",required=false,defaultValue="0")int userNo) {
 		System.out.println("[Controller] : profileWrite");
 
 		String[] eventName = request.getParameterValues("eventName");
@@ -146,7 +153,7 @@ public class SparringController {
 			//매칭글 확인하러 가기
 			return "";
 		}else {
-			return "redirect:/sparring/payment?bookingno="+bookingNo+"&userno="+userNo;
+			return "redirect:/sparring/payment?bookingno="+bookingNo+"&userno="+userNo+"&profileno="+profileVo.getProfileNo();
 			
 		}
 		
