@@ -18,7 +18,7 @@
 		<typeAlias alias="QnaVo" type="com.javaex.vo.QnaVo" /> <!-- 세림 QnaVo -->
 		<typeAlias alias="QnaimgVo" type="com.javaex.vo.QnaimgVo" /> <!-- 세림 QnaimgVo -->
 		<typeAlias alias="BuyVo" type="com.javaex.vo.BuyVo" />
-		<typeAlias alias="BbuyVo" type="com.javaex.vo.BbuyVo" />
+		
 	</typeAliases>
 
 	<mappers>

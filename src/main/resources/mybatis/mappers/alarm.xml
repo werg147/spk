@@ -60,34 +60,6 @@
 		]]>
 	</insert>
 
-	<update id="matching_registration" parameterType="BbuyVo">
-		<![CDATA[
-			UPDATE bbuy SET b_buy_player_state = '매칭대기 중' WHERE b_buy_no = '1'
-		]]>
-	</update>
-
-	<update id="getMatch_application" parameterType="BbuyVo">
-		<![CDATA[
-			UPDATE bbuy SET b_buy_player_state = '수락대기 중' WHERE b_buy_no = '1'
-		]]>
-	</update>
-
-	<update id="getMatching_refused" parameterType="BbuyVo">
-		<![CDATA[
-			UPDATE bbuy SET b_buy_player_state = '매칭종료' WHERE b_buy_no = '1'
-		]]>
-	</update>
-
-	<update id="matching_accept" parameterType="BbuyVo">
-		<![CDATA[
-			UPDATE bbuy SET b_buy_player_state = '메치진행 중' WHERE b_buy_no = '1'
-		]]>
-	</update>
-
-	<update id="matching_complete" parameterType="BbuyVo">
-		<![CDATA[
-			UPDATE bbuy SET b_buy_player_state = '매칭종료' WHERE b_buy_no = '1'
-		]]>
-	</update>
+	
 
 </mapper>
