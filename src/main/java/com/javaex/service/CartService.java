@@ -16,28 +16,25 @@ public class CartService {
 	@Autowired
 	private CartDao cDao;
 
-	public UserVo list(int user_no) {
+	public CartInfoVo list(int user_no) {
 
 		System.out.println("[Cart Service]: list(int user_no) 연결");
 
 		CartInfoVo ciVo = new CartInfoVo();
 
+		// 회원정보 가져오기
 		UserVo uVo = cDao.selectOneUser(user_no);
-		ciVo.setUserVo(uVo);
+		ciVo.setuVo(uVo);
 
-		List<CartVo> cList = cDao.slectCartList(user_no);
+		// 장바구니에 담아둔 데이터 가져오기
+		List<CartVo> cList = cDao.selectCartList(user_no);
 		ciVo.setcList(cList);
 
-		System.out.println("setcList 성공");
-
+		// 장바구니 상품 합계 가져오기
 		int totalPrice = cDao.selectOneTotalPrice(user_no);
 		ciVo.setTotalPrice(totalPrice);
 
-		System.out.println(ciVo);
-
-		System.out.println("setTotalPrice 실패");
-
-		return null;
+		return ciVo;
 
 	}
 

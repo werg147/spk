@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 
@@ -56,7 +57,7 @@
 									<!-- //cart_select -->
 
 									<!-- 반복리스트 -->
-									<c:forEach items="${requestScope.CartList }" var="cList">
+									<c:forEach items="${cartInfoVo.cList }" var="cList">
 										<div class="box room">
 
 											<ul class="list">
@@ -115,7 +116,7 @@
 										<div class="cart_delivery">
 											<h3 class="tit">배송지</h3>
 											<div class="address">
-												<p class="addr">${CartList[0].buy_address}</p>
+												<p class="addr">${cList.buy_address}</p>
 												<a href="" class="btn_default">배송지 변경</a>
 											</div>
 										</div>
@@ -124,7 +125,10 @@
 											<dl class="amount">
 												<dt class="tit">상품금액</dt>
 												<dd class="price">
-													<span class="num">${CartList[0].prod_price}</span> <span class="won">원</span>
+													<span class="num">
+													<fmt:formatNumber type="number" maxFractionDigits="3" value="${cartInfoVo.totalPrice}" /></span>
+													<span class="won"></span>
+													<span class="won">원</span>
 												</dd>
 											</dl>
 
@@ -138,7 +142,9 @@
 											<dl class="amount lst">
 												<dt class="tit">결제금액</dt>
 												<dd class="price">
-													<span class="num">결제금액 * count + 배송비</span> <span class="won">원</span>
+													<span class="num"><fmt:formatNumber type="number" maxFractionDigits="3" value="${cartInfoVo.totalPrice}" /></span>
+													<span class="won"></span>
+													<span class="won">원</span>
 												</dd>
 											</dl>
 

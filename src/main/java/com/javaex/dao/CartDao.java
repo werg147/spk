@@ -20,7 +20,7 @@ public class CartDao {
 		return sql.selectOne("cart.selectOneUser", user_no);
 	}
 
-	public List<CartVo> slectCartList(int user_no) {
+	public List<CartVo> selectCartList(int user_no) {
 
 		return sql.selectList("cart.selectCartList", user_no);
 	}

@@ -13,13 +13,14 @@ public class CartVo {
 	private int prod_price;
 
 	private String prod_size;
+	private String color;
 
 	public CartVo() {
 		super();
 	}
 
 	public CartVo(int cart_no, int user_no, String prod_no, int colorsize_no, int count,
-			String prod_detail_img_savename, String prod_name, int prod_price, String prod_size) {
+			String prod_detail_img_savename, String prod_name, int prod_price, String prod_size, String color) {
 		super();
 		this.cart_no = cart_no;
 		this.user_no = user_no;
@@ -30,6 +31,7 @@ public class CartVo {
 		this.prod_name = prod_name;
 		this.prod_price = prod_price;
 		this.prod_size = prod_size;
+		this.color = color;
 	}
 
 	public int getCart_no() {
@@ -104,11 +106,20 @@ public class CartVo {
 		this.prod_size = prod_size;
 	}
 
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
 	@Override
 	public String toString() {
 		return "CartVo [cart_no=" + cart_no + ", user_no=" + user_no + ", prod_no=" + prod_no + ", colorsize_no="
 				+ colorsize_no + ", count=" + count + ", prod_detail_img_savename=" + prod_detail_img_savename
-				+ ", prod_name=" + prod_name + ", prod_price=" + prod_price + ", prod_size=" + prod_size + "]";
+				+ ", prod_name=" + prod_name + ", prod_price=" + prod_price + ", prod_size=" + prod_size + ", color="
+				+ color + "]";
 	}
 
 }

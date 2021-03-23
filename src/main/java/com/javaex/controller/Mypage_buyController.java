@@ -16,6 +16,8 @@ import com.javaex.service.CartService;
 import com.javaex.vo.AlarmContentVo;
 import com.javaex.vo.AlarmVo;
 import com.javaex.vo.BuyVo;
+import com.javaex.vo.CartInfoVo;
+import com.javaex.vo.CartVo;
 import com.javaex.vo.UserVo;
 
 @Controller
@@ -26,17 +28,17 @@ public class Mypage_buyController {
 	BuyVo bVo = new BuyVo();
 
 	@Autowired
-	public AlarmService aS;
+	public AlarmService aServ;
 
 	@Autowired
-	public CartService cS;
+	public CartService cServ;
 
 	@RequestMapping(value = "/alarm", method = { RequestMethod.GET, RequestMethod.POST })
 	public String list(Model model) {
 
 		System.out.println("[Alarm Ctrl]: list 진입");
 
-		List<AlarmVo> aList = aS.list();
+		List<AlarmVo> aList = aServ.list();
 
 		System.out.println("[Alarm Ctrl]: " + aList.toString());
 
@@ -61,7 +63,7 @@ public class Mypage_buyController {
 
 		aVo.setAlarm_content(content);
 
-		aS.payment_complete(aVo);
+		aServ.payment_complete(aVo);
 
 		return "redirect:/mypage/alarm";
 
@@ -82,7 +84,7 @@ public class Mypage_buyController {
 
 		aVo.setAlarm_content(content);
 
-		aS.delivery_ready(aVo);
+		aServ.delivery_ready(aVo);
 
 		return "redirect:/mypage/alarm";
 
@@ -103,7 +105,7 @@ public class Mypage_buyController {
 
 		aVo.setAlarm_content(content);
 
-		aS.delivery_ing(aVo);
+		aServ.delivery_ing(aVo);
 
 		return "redirect:/mypage/alarm";
 
@@ -124,7 +126,7 @@ public class Mypage_buyController {
 
 		aVo.setAlarm_content(content);
 
-		aS.delivery_complete(aVo);
+		aServ.delivery_complete(aVo);
 
 		return "redirect:/mypage/alarm";
 
@@ -145,7 +147,7 @@ public class Mypage_buyController {
 
 		aVo.setAlarm_content(content);
 
-		aS.matching_registration(aVo);
+		aServ.matching_registration(aVo);
 
 		return "redirect:/mypage/alarm";
 
@@ -166,7 +168,7 @@ public class Mypage_buyController {
 
 		aVo.setAlarm_content(content);
 
-		aS.getMatch_application(aVo);
+		aServ.getMatch_application(aVo);
 
 		return "redirect:/mypage/alarm";
 
@@ -187,7 +189,7 @@ public class Mypage_buyController {
 
 		aVo.setAlarm_content(content);
 
-		aS.getMatching_refused(aVo);
+		aServ.getMatching_refused(aVo);
 
 		return "redirect:/mypage/alarm";
 
@@ -208,7 +210,7 @@ public class Mypage_buyController {
 
 		aVo.setAlarm_content(content);
 
-		aS.matching_accept(aVo);
+		aServ.matching_accept(aVo);
 
 		return "redirect:/mypage/alarm";
 
@@ -229,7 +231,7 @@ public class Mypage_buyController {
 
 		aVo.setAlarm_content(content);
 
-		aS.matching_complete(aVo);
+		aServ.matching_complete(aVo);
 
 		return "redirect:/mypage/alarm";
 
@@ -241,12 +243,23 @@ public class Mypage_buyController {
 		System.out.println("[Cart Ctrl]: cart 진입");
 
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
+		int userNo = authUser.getUser_no(); // 로그인한 사용자의 userNo
 
-		authUser = cS.list(authUser.getUser_no());
+		CartInfoVo cartInfoVo = cServ.list(userNo); // userNo주면 cartInfoVo: 회원정보, 카트에 있는 살품리스트, 상품총가격
 
-		System.out.println(authUser);
+		UserVo userVo = cartInfoVo.getuVo(); // cartInfoVo 회원정보
 
-		model.addAttribute("CartList", authUser);
+		List<CartVo> list = cartInfoVo.getcList();
+
+		int total = cartInfoVo.getTotalPrice();
+
+		System.out.println("ctrl: " + cartInfoVo);
+		System.out.println("ctrl: " + userVo);
+		System.out.println("ctrl: " + list);
+		System.out.println("ctrl: " + total);
+
+		//model.addAttribute("cartInfoVo", list);
+		model.addAttribute("cartInfoVo", cartInfoVo);
 
 		return "mypage/mypage_buy/cart";
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 public class CartInfoVo {
 
-	private UserVo userVo;
+	private UserVo uVo;
 	private int totalPrice;
 	private List<CartVo> cList;
 
@@ -12,19 +12,19 @@ public class CartInfoVo {
 		super();
 	}
 
-	public CartInfoVo(UserVo userVo, int totalPrice, List<CartVo> cList) {
+	public CartInfoVo(UserVo uVo, int totalPrice, List<CartVo> cList) {
 		super();
-		this.userVo = userVo;
+		this.uVo = uVo;
 		this.totalPrice = totalPrice;
 		this.cList = cList;
 	}
 
-	public UserVo getUserVo() {
-		return userVo;
+	public UserVo getuVo() {
+		return uVo;
 	}
 
-	public void setUserVo(UserVo userVo) {
-		this.userVo = userVo;
+	public void setuVo(UserVo uVo) {
+		this.uVo = uVo;
 	}
 
 	public int getTotalPrice() {
@@ -45,7 +45,7 @@ public class CartInfoVo {
 
 	@Override
 	public String toString() {
-		return "CartInfoVo [userVo=" + userVo + ", totalPrice=" + totalPrice + ", cList=" + cList + "]";
+		return "CartInfoVo [uVo=" + uVo + ", totalPrice=" + totalPrice + ", cList=" + cList + "]";
 	}
 
 }

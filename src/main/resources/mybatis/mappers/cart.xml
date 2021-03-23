@@ -6,22 +6,25 @@
 
 	<select id="selectCartList" resultType="CartVo">
 		<![CDATA[
-			SELECT  c.cart_no,
-			        u.user_no,
-			        u.user_id,
-			        p.prod_detail_img_savename,
+			SELECT  p.prod_detail_img_savename,
 			        p.prod_name,
+			        cs.prod_size,
+			        cs.color,
 			        p.prod_price,
-			        b.buy_address,
-			        cr.color,
-			        cr.prod_size,
-			        c.count
-			FROM    cart c, users u, product p, buy b, colorsize cr
-			WHERE   c.user_no = #{user_no}
+			        c.count,
+			        c.cart_no,
+			        c.user_no,
+			        p.prod_no,
+			        cs.colorsize_no
+			FROM    cart c, product p, colorsize cs
+			WHERE   c.prod_no = p.prod_no
+			        and c.colorsize_no = cs.colorsize_no
+			        and c.user_no = #{user_no}
 		]]>
 	</select>
 
-	<select id="selectOneUser" parameterType="UserVo" resultType="UserVo">
+	<select id="selectOneUser" parameterType="UserVo"
+		resultType="UserVo">
 	<![CDATA[
 		SELECT	user_no,
 				user_name
@@ -30,9 +33,10 @@
 	]]>
 	</select>
 
-	<select id="selectOneTotalPrice" resultType="CartInfoVo">
+	<select id="selectOneTotalPrice" parameterType="int"
+		resultType="int">
 		<![CDATA[
-			SELECT  sum(p.prod_price)
+			SELECT  sum(p.prod_price*c.count)
 			FROM    cart c, product p
 			WHERE   c.prod_no = p.prod_no
 			        and user_no = #{user_no}
