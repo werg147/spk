@@ -4,7 +4,7 @@
 	<ul id="side_menu_mypage">
 		<li>마이페이지</li>
 	</ul>
-	<c:if test="${sessionScope.authUser.sell_type == '1' || sessionScope.authUser.sell_type == '3'}">
+	<c:if test="${authUser.prod_type == 1}">
 		<ul id="side_menu_booking">
 			<li class="title"><span class="menu">예약판매관리</span></li>
 			<li><a href="./예약판매자2_마이페이지_사업자계정1.html"><span class="menu">사업자계정
@@ -17,7 +17,7 @@
 					class="menu">수익관리</span><span class="arrow">></span></a></li>
 		</ul>
 	</c:if>
-	<c:if test="${sessionScope.authUser.sell_type == '2' || sessionScope.authUser.sell_type == '3'}">
+	<c:if test="${authUser.book_type == 1}">
 		<ul id="side_menu_delivery">
 			<li class="title"><span class="menu">배송판매관리</span></li>
 			<li><a href="./예약판매자2_마이페이지_사업자계정정보1.html"><span class="menu">사업자계정
@@ -30,7 +30,7 @@
 					class="menu">수익관리</span><span class="arrow">></span></a></li>
 		</ul>
 	</c:if>
-	<c:if test="${sessionScope.authUser != null}">
+	<c:if test="${authUser != null}">
 		<ul id="side_menu_user">
 			<li><a href="../mypage_buy/alarm.html"><span class="menu">알림</span><span
 					class="arrow">></span></a></li>
@@ -46,33 +46,12 @@
 	</c:if>
 	
 		
-	<c:if test="${sessionScope.authUser.sell_type != '3'}">
-		<c:choose>
-		<%-- 구매자에서 판매자로 전환하는 상황으로 sell_type checkbox넣기선택하도록 --%>
-			<c:when test="${sessionScope.authUser.sell_type != '0'}">
-				<ul id="side_menu_user">
-					<li class="side_menu_last"><a
-						href="../mypage_resrvation/예약판매자2_마이페이지_사업자계정1.html"><span
-							class="menu">판매자등록</span><span class="arrow">></span></a></li>
-				</ul>
-			</c:when>
-			<%-- 대관판매자에서 배송판매자로 추가등록 상황으로 sell_type=3으로 변경 하도록 --%>
-			<c:when test="${sessionScope.authUser.sell_type != '1'}">
-				<ul id="side_menu_user">
-					<li class="side_menu_last"><a
-						href="../mypage_resrvation/예약판매자2_마이페이지_사업자계정1.html"><span
-							class="menu">판매자등록</span><span class="arrow">></span></a></li>
-				</ul>
-			</c:when>
-			<%-- 배송판매자에서 대관판매자로 추가등록 상황으로 sell_type=3으로 변경 하도록 --%>
-			<c:when test="${sessionScope.authUser.sell_type != '2'}">
-				<ul id="side_menu_user">
-					<li class="side_menu_last"><a
-						href="../mypage_resrvation/예약판매자2_마이페이지_사업자계정1.html">
-						<span class="menu">판매자등록</span><span class="arrow">></span></a></li>
-				</ul>
-			</c:when>
-		</c:choose>
+	<c:if test="${authUser.book_type != 1 && authUser.prod_type != 1}">
+		<ul id="side_menu_user">
+			<li class="side_menu_last"><a
+				href="${pageContext.request.contextPath}/user/notice"><span
+					class="menu">판매자등록</span><span class="arrow">></span></a></li>
+		</ul>
 	</c:if>
 </div>
 <!--//side_menu//-->

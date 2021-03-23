@@ -31,19 +31,29 @@ public class ProdController {
 		System.out.println("[cnt]상품관리페이지");
 		UserVo authUser = (UserVo)session.getAttribute("authUser");
 		
-		
 		List<ProductVo> prodList = prodservice.prodList(authUser);
 		model.addAttribute("prodList", prodList);
 
 		return "mypage/mypage_prod/prod_manage";
-
+	}
+	
+	//상품정보 수정하기
+	
+	@RequestMapping(value = "/prodmodify", method = { RequestMethod.GET, RequestMethod.POST })
+	public String prodModify(@RequestParam ("prod_no") String prod_no,
+							  Model model){
+		System.out.println("[cnt]상품정보 수정하기" + prod_no);	
+		ProductVo prodvo = prodservice.selectPord(prod_no);
+		
+		model.addAttribute("prodvo", prodvo);
+		
+		return "mypage/mypage_prod/prod_modify_form";
 	}
 
 	// 상품등록페이지
 	@RequestMapping(value = "/form", method = { RequestMethod.GET, RequestMethod.POST })
 	public String prodForm() {
 		System.out.println("[cnt]상품등록페이지");
-		
 		
 		return "mypage/mypage_prod/prod_form";
 	}
@@ -80,6 +90,6 @@ public class ProdController {
 	@RequestMapping(value = "/exam", method = { RequestMethod.GET, RequestMethod.POST })
 	public String exam() {
 
-		return "mypage/mypage_prod/NewFile1";
+		return "mypage/mypage_seller/seller_profit";
 	}
 }

@@ -61,7 +61,7 @@
 			       p.prod_name,
 			       p.prod_brand,
 			       p.prod_price,
-			       p.prod_date,
+			       to_char(p.prod_date, 'yyyy-mm-dd') prod_date,
 			       i.prod_img_no,
 			       i.prod_img_savename,
 			       i.prod_img_type
@@ -72,6 +72,25 @@
 		]]>
 	</select>
 	
+	<select id="prodSelectOne" parameterType="String" resultType="com.javaex.vo.ProductVo">
+		<![CDATA[
+			select prod_no,
+			       prod_cate,
+			       event_cate,
+			       prod_name,
+			       prod_price,
+			       prod_brand,
+			       prod_desc,
+			       prod_from,
+			       prod_wash,
+			       prod_qual,
+			       prod_detail,
+			       prod_detail_img_name,
+			       prod_detail_img_savename
+			from product
+			where prod_no = #{prod_no}	
+		]]>
+	</select>
 
 	<select id="colorsizeSelectList" parameterType="String" resultType="com.javaex.vo.ColorsizeVo">
 		<![CDATA[
@@ -81,6 +100,17 @@
 			       prod_size,
 			       stock
 			FROM colorsize
+			where prod_no = #{prod_no}
+		]]>
+	</select>
+	
+	<select id="imgSelectList" parameterType="String" resultType="com.javaex.vo.ProdimgVo">
+		<![CDATA[
+			select prod_no,
+			       prod_img_no,
+			       prod_img_name,
+			       prod_img_savename
+			from prodimg
 			where prod_no = #{prod_no}
 		]]>
 	</select>

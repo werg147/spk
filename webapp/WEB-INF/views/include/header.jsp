@@ -40,11 +40,11 @@
 					<a href="${pageContext.request.contextPath}/user/loginform">
 				</c:when>
 				
-				<c:when test="${sessionScope.authUser.sell_type == '1' || sessionScope.authUser.sell_type == '3'}">
+				<c:when test="${authUser.book_type == 1}">
 					<a href="${pageContext.request.contextPath}/mypage/book/gymaddform">
 				</c:when>
-				<c:when test="${sessionScope.authUser.sell_type == '2'}">
-					<a href="${pageContext.request.contextPath}/mypage/prod">
+				<c:when test="${authUser.prod_type == 1}">
+					<a href="${pageContext.request.contextPath}/mypage/mypage_prod/prod_form">
 				</c:when>
 	
 				<c:otherwise>

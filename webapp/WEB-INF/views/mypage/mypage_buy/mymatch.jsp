@@ -1,12 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>내 매치보기</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/header.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/booking.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/assets/css/header.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/assets/css/booking.css">
 </head>
 <body>
 
@@ -30,8 +33,9 @@
 
 					<!--기간 필터-->
 					<div class="time_filter">
-						<input type="text" placeholder="기간필터"> ~ <input type="text" placeholder="기간필터">
-						<img name="calender" src="달력아이콘"> <select>
+						<input type="text" placeholder="기간필터"> ~ <input
+							type="text" placeholder="기간필터"> <img name="calender"
+							src="달력아이콘"> <select>
 							<option>전체</option>
 							<option>신청함</option>
 							<option>신청받음</option>
@@ -43,10 +47,11 @@
 					<div class="match_list">
 						<table class="match_list_elnt">
 							<tr>
-								<td class="tr_img" rowspan="6"><img name="스파링장" src="${pageContext.request.contextPath }/assets/image/스파링장.jpeg"></td>
+								<td class="tr_img" rowspan="6"><img name="스파링장"
+									src="${pageContext.request.contextPath }/assets/image/스파링장.jpeg"></td>
 								<td class="bottom bold">&nbsp&nbsp(체육관 이름 불러오기)</td>
-								<td class="td_width img_left"><img class="match_img" name="sending"
-									src="../../../image/blue.png"></td>
+								<td class="td_width img_left"><img class="match_img"
+									name="sending" src="../../../image/blue.png"></td>
 							</tr>
 
 							<tr>
@@ -84,9 +89,11 @@
 					<div class="match_list">
 						<table class="match_list_elnt">
 							<tr>
-								<td class="tr_img" rowspan="6"><img name="스파링장" src="${pageContext.request.contextPath }/assets/image/스파링장.jpeg"></td>
+								<td class="tr_img" rowspan="6"><img name="스파링장"
+									src="${pageContext.request.contextPath }/assets/image/스파링장.jpeg"></td>
 								<td class="bottom bold">&nbsp&nbsp어쩌구 스파링장</td>
-								<td class="td_width img_left"><img class="match_img" name="sending"
+								<td class="td_width img_left"><img class="match_img"
+									name="sending"
 									src="${pageContext.request.contextPath }/assets/image/red.png"></td>
 							</tr>
 
@@ -121,15 +128,15 @@
 					</div>
 					<!--//match_list (반복영역)-->
 
-
 				</div>
-				<!--//middle-->
-				
-				<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
-				<!--//footer//-->
 			</div>
-			<!--//container-->
+			<!--//middle-->
+
+			<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
+			<!--//footer//-->
 		</div>
-		<!--//wrap-->
+		<!--//container-->
+	</div>
+	<!--//wrap-->
 </body>
 </html>

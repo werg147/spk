@@ -18,14 +18,27 @@ public class ProdDao {
 	
 	//상품리스트 조회
 	public List<ProductVo> prodSelectList(int sell_no) {
-		System.out.println("[Dao]상품조회" + sell_no);
+		System.out.println("[Dao]상품조회(리스트)" + sell_no);
 		return sqlSession.selectList("prod.prodSelectList", sell_no);
+	}
+	
+	//상품조회
+	public ProductVo prodSelectOne(String prod_no) {
+		System.out.println("[Dao]상품수정 정보조회" + prod_no);
+		return sqlSession.selectOne("prod.prodSelectOne", prod_no);
 	}
 	
 	//사이즈 조회
 	public List<ColorsizeVo> colorsizeSelectList(String prod_no){
 		System.out.println("[Dao]상품컬러사이즈조회" + prod_no);
 		return sqlSession.selectList("prod.colorsizeSelectList", prod_no);
+	}
+	
+	//이미지 조회
+	public List<ProdimgVo> imgSelectList(String prod_no){
+		System.out.println("[Dao]상품이미지조회" + prod_no);
+		return sqlSession.selectList("prod.imgSelectList", prod_no);
+		
 	}
 	
 	//상품등록

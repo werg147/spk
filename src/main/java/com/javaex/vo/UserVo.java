@@ -13,7 +13,8 @@ public class UserVo {
 	private int user_phone;
 	private int user_level;
 	private String user_date;
-	private String sell_type;
+	private int prod_type;
+	private int book_type;
 
 	public UserVo() {
 	}
@@ -23,12 +24,17 @@ public class UserVo {
 		this.password = password;
 	}
 
-	public UserVo(int user_no, int sell_no, String nickname, String sell_type) {
+	
+	public UserVo(int user_no, int sell_no, String nickname, int prod_type, int book_type) {
+		super();
 		this.user_no = user_no;
 		this.sell_no = sell_no;
 		this.nickname = nickname;
-		this.sell_type = sell_type;
+		this.prod_type = prod_type;
+		this.book_type = book_type;
 	}
+
+
 
 	public UserVo(int user_no, String user_id, String user_name, String password, String nickname,
 			String address, String user_photo, int user_phone, int user_level, String user_date) {
@@ -147,12 +153,21 @@ public class UserVo {
 	}
 	
 
-	public String getSell_type() {
-		return sell_type;
+
+	public int getProd_type() {
+		return prod_type;
 	}
 
-	public void setSell_type(String sell_type) {
-		this.sell_type = sell_type;
+	public void setProd_type(int prod_type) {
+		this.prod_type = prod_type;
+	}
+
+	public int getBook_type() {
+		return book_type;
+	}
+
+	public void setBook_type(int book_type) {
+		this.book_type = book_type;
 	}
 
 	@Override
@@ -160,7 +175,8 @@ public class UserVo {
 		return "UserVo [user_no=" + user_no + ", sell_no=" + sell_no + ", user_id=" + user_id + ", user_name="
 				+ user_name + ", password=" + password + ", nickname=" + nickname + ", address=" + address
 				+ ", user_photo=" + user_photo + ", user_phone=" + user_phone + ", user_level=" + user_level
-				+ ", user_date=" + user_date + ", sell_type=" + sell_type + "]";
+				+ ", user_date=" + user_date + ", , prod_type=" + prod_type + ", book_type="
+				+ book_type + "]";
 	}
 
 }

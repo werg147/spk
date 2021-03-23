@@ -10,7 +10,8 @@
 			SELECT users.user_no,
 			       users.nickname,
 				   seller.sell_no,
-				   seller.sell_type
+				   seller.book_type,
+				   seller.prod_type
 			FROM users left outer JOIN seller
 			on seller.user_no = users.user_no
 			where users.user_id = #{user_id}
@@ -27,4 +28,69 @@
 	
 	</select>
 	
+	<insert id="sellerBookInsert" parameterType="com.javaex.vo.SellerVo">
+		<![CDATA[
+			insert into seller (sell_no, 
+								  user_no, 
+								  book_type,
+								  book_sell_name, 
+								  book_business_no, 
+								  book_sell_address, 
+								  book_sell_bank, 
+								  book_sell_account
+								  )
+							VALUES(seq_sell_no.nextval, 
+								  #{user_no}, 
+								  #{book_type},
+								  #{book_sell_name}, 
+								  #{book_business_no}, 
+								  #{book_sell_address}, 
+								  #{book_sell_bank}, 
+								  #{book_sell_account}
+								  )
+		]]>
+	</insert>
+	
+		<insert id="sellerProdInsert" parameterType="com.javaex.vo.SellerVo">
+		<![CDATA[
+			insert into seller (sell_no, 
+								  user_no, 
+								  prod_type, 
+								  pord_sell_name, 
+								  pord_business_no, 
+								  pord_sell_address, 
+								  pord_sell_bank, 
+								  pord_sell_account
+								  )
+			  	    VALUES(seq_sell_no.nextval, 
+								  #{user_no}, 
+								  #{prod_type}, 
+								  #{pord_sell_name}, 
+								  #{pord_business_no}, 
+								  #{pord_sell_address}, 
+								  #{pord_sell_bank}, 
+								  #{pord_sell_account}
+								  )
+		]]>
+	</insert>
+	
+	<update id="sellerUpdate" parameterType="com.javaex.vo.SellerVo">
+		<![CDATA[
+			update seller
+			set book_type = #{book_type},
+				prod_type = #{prod_type}, 
+				book_sell_name = #{book_sell_name}, 
+				book_business_no = #{book_business_no}, 
+				book_sell_address = #{book_sell_address}, 
+				book_sell_bank = #{book_sell_bank}, 
+				book_sell_account = #{book_sell_account},
+				pord_sell_name = #{pord_sell_name}, 
+				pord_business_no = #{pord_business_no}, 
+				pord_sell_address = #{pord_sell_address}, 
+				pord_sell_bank = #{pord_sell_bank}, 
+				pord_sell_account = #{pord_sell_account}
+			where user_no = #{user_no}	
+		]]>
+	</update>
 </mapper>
+

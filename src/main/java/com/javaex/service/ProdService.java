@@ -32,11 +32,28 @@ public class ProdService {
 			System.out.println("===상품관리==== 항목추가 확인");
 			System.out.println(prodcutlist);
 		}
-		return prodcutlist;
-
-			
+		return prodcutlist;		
 	}
 	
+	
+	//상품수정
+	public ProductVo selectPord(String prod_no) {
+		System.out.println("[service] 상품수정 정보가져오기");
+		ProductVo prodvo = proddao.prodSelectOne(prod_no);
+		System.out.println("[service] 상품정보 가져온 내용" + prodvo);
+		
+		//컬러사이즈 정보추가
+		List<ColorsizeVo> cssList = proddao.colorsizeSelectList(prod_no);
+		prodvo.setCssList(cssList);
+		System.out.println("[service] 상품정보 (사이즈추가 가져온 내용" + prodvo);
+		
+		//이미지정보 추가
+		List<ProdimgVo> pimgList = proddao.imgSelectList(prod_no);
+		prodvo.setPimgList(pimgList);
+		System.out.println("[service] 상품정보 (이미지추가 가져온 내용" + prodvo);
+		
+		return prodvo;
+	}
 	
 	//상품등록
 	public String prodWrite(ProductVo prodvo, 

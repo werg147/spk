@@ -68,6 +68,7 @@
 							<td>0원</td>
 						</tr>
 					</table>
+					<div id="space"></div>
 				</div>
 			</div>
 			<!--//middle//-->

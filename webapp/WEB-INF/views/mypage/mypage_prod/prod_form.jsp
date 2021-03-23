@@ -182,12 +182,9 @@ var uploadFiles2 = [];
 $(function (){
     // 파일 드롭 다운
     fileDropDown1();
-});
-$(function (){
-    // 파일 드롭 다운
     fileDropDown2();
 });
-// 파일 드롭 다운
+
 function fileDropDown1(){
     var dropZone1 = $(".dropZone1");
     //Drag기능 
@@ -457,12 +454,12 @@ function add(color, prod_size, stock, listnum) {
 function deletedata(listnum){
 
     // 파일 배열에서 삭제
-    delete css[listnum];
+    delete cssVo[listnum];
 
     
     // 업로드 파일 테이블 목록에서 삭제
     $("#"+listnum).remove();
-    console.log("delete" + css[listnum]);
+    console.log("delete" + cssVo[listnum]);
 
 }
 
