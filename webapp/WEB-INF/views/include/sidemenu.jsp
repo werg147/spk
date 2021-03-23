@@ -48,7 +48,7 @@
 		
 	<c:if test="${sessionScope.authUser.sell_type != '3'}">
 		<c:choose>
-		<!-- 구매자에서 판매자로 전환하는 상황으로 sell_type checkbox넣기선택하도록 -->
+		<%-- 구매자에서 판매자로 전환하는 상황으로 sell_type checkbox넣기선택하도록 --%>
 			<c:when test="${sessionScope.authUser.sell_type != '0'}">
 				<ul id="side_menu_user">
 					<li class="side_menu_last"><a
@@ -56,7 +56,7 @@
 							class="menu">판매자등록</span><span class="arrow">></span></a></li>
 				</ul>
 			</c:when>
-			<!-- 대관판매자에서 배송판매자로 추가등록 상황으로 sell_type=3으로 변경 하도록 -->
+			<%-- 대관판매자에서 배송판매자로 추가등록 상황으로 sell_type=3으로 변경 하도록 --%>
 			<c:when test="${sessionScope.authUser.sell_type != '1'}">
 				<ul id="side_menu_user">
 					<li class="side_menu_last"><a
@@ -64,7 +64,7 @@
 							class="menu">판매자등록</span><span class="arrow">></span></a></li>
 				</ul>
 			</c:when>
-			<!-- 배송판매자에서 대관판매자로 추가등록 상황으로 sell_type=3으로 변경 하도록 -->
+			<%-- 배송판매자에서 대관판매자로 추가등록 상황으로 sell_type=3으로 변경 하도록 --%>
 			<c:when test="${sessionScope.authUser.sell_type != '2'}">
 				<ul id="side_menu_user">
 					<li class="side_menu_last"><a
