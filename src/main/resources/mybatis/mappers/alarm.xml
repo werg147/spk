@@ -7,22 +7,16 @@
 	<select id="selectAlarm" resultType="AlarmVo">
 		<![CDATA[
 			SELECT  a.alarm_date,
-			        u.user_id,
-			        b.b_buy_player_state,
-			        b.buy_del_state,
-			        u.user_id,
-			        g.gym_name,
 			        p.prod_name,
+			        a.sell_type,
 			        a.alarm_content,
 			        a.alarm_no,
 			        a.from_user_no,
 			        a.to_user_no,
-			        a.sell_type,
 			        u.user_no
-			FROM    alarm a, users u, bbuy b, gym g, buy b, product p
+			FROM    alarm a, users u, product p
 			WHERE   a.from_user_no = u.user_no
-					and u.user_no = 1
-			ORDER BY a.alarm_no desc
+			        and u.user_no = 2
 		]]>
 	</select>
 
@@ -62,6 +56,6 @@
 		]]>
 	</insert>
 
-	
+
 
 </mapper>

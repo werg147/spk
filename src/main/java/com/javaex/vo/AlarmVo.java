@@ -2,34 +2,23 @@ package com.javaex.vo;
 
 public class AlarmVo {
 
-	public int alarm_no;
-	public int from_user_no;
-	public int to_user_no;
-	public String alarm_content;
-	public String sell_type;
-	public String alarm_date;
-	public String user_id;
-	public String buy_del_state;
-	public String prod_name;
-	public String gym_name;
+	private int alarm_no;
+	private int from_user_no;
+	private int to_user_no;
+	private String alarm_content;
+	private String sell_type;
+	private String alarm_date;
+
+	private String prod_name;
+
+	private int user_no;
 
 	public AlarmVo() {
 		super();
 	}
 
-	public AlarmVo(String alarm_content, String sell_type, String alarm_date, String user_id, String buy_del_state,
-			String prod_name) {
-		super();
-		this.alarm_content = alarm_content;
-		this.sell_type = sell_type;
-		this.alarm_date = alarm_date;
-		this.user_id = user_id;
-		this.buy_del_state = buy_del_state;
-		this.prod_name = prod_name;
-	}
-
 	public AlarmVo(int alarm_no, int from_user_no, int to_user_no, String alarm_content, String sell_type,
-			String alarm_date, String user_id, String buy_del_state, String prod_name) {
+			String alarm_date, String prod_name, int user_no) {
 		super();
 		this.alarm_no = alarm_no;
 		this.from_user_no = from_user_no;
@@ -37,24 +26,8 @@ public class AlarmVo {
 		this.alarm_content = alarm_content;
 		this.sell_type = sell_type;
 		this.alarm_date = alarm_date;
-		this.user_id = user_id;
-		this.buy_del_state = buy_del_state;
 		this.prod_name = prod_name;
-	}
-
-	public AlarmVo(int alarm_no, int from_user_no, int to_user_no, String alarm_content, String sell_type,
-			String alarm_date, String user_id, String buy_del_state, String prod_name, String gym_name) {
-		super();
-		this.alarm_no = alarm_no;
-		this.from_user_no = from_user_no;
-		this.to_user_no = to_user_no;
-		this.alarm_content = alarm_content;
-		this.sell_type = sell_type;
-		this.alarm_date = alarm_date;
-		this.user_id = user_id;
-		this.buy_del_state = buy_del_state;
-		this.prod_name = prod_name;
-		this.gym_name = gym_name;
+		this.user_no = user_no;
 	}
 
 	public int getAlarm_no() {
@@ -105,22 +78,6 @@ public class AlarmVo {
 		this.alarm_date = alarm_date;
 	}
 
-	public String getUser_id() {
-		return user_id;
-	}
-
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
-	}
-
-	public String getBuy_del_state() {
-		return buy_del_state;
-	}
-
-	public void setBuy_del_state(String buy_del_state) {
-		this.buy_del_state = buy_del_state;
-	}
-
 	public String getProd_name() {
 		return prod_name;
 	}
@@ -129,20 +86,19 @@ public class AlarmVo {
 		this.prod_name = prod_name;
 	}
 
-	public String getGym_name() {
-		return gym_name;
+	public int getUser_no() {
+		return user_no;
 	}
 
-	public void setGym_name(String gym_name) {
-		this.gym_name = gym_name;
+	public void setUser_no(int user_no) {
+		this.user_no = user_no;
 	}
 
 	@Override
 	public String toString() {
 		return "AlarmVo [alarm_no=" + alarm_no + ", from_user_no=" + from_user_no + ", to_user_no=" + to_user_no
 				+ ", alarm_content=" + alarm_content + ", sell_type=" + sell_type + ", alarm_date=" + alarm_date
-				+ ", user_id=" + user_id + ", buy_del_state=" + buy_del_state + ", prod_name=" + prod_name
-				+ ", gym_name=" + gym_name + "]";
+				+ ", prod_name=" + prod_name + ", user_no=" + user_no + "]";
 	}
 
 }

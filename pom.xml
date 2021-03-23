@@ -69,7 +69,8 @@
 			<version>1.2.0</version>
 		</dependency>
 
-		<!-- MappingJacksonHttpMessageConverter : jackson jackson core library 추가 -->
+		<!-- MappingJacksonHttpMessageConverter : jackson jackson core library 
+			추가 -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
