@@ -42,9 +42,9 @@
 									<div class="content_product_insert_select_box">
 										<select id="prod_cate" name="prod_cate">
 										
-											<option value="health" ${prodvo.event_cate == 'health' ? 'selected="selected"' : ''}>운동용품</option>
-											<option value="clothes"${prodvo.event_cate == 'clothes' ? 'selected="selected"' : ''}>의류</option>
-											<option value="goods"${prodvo.event_cate == 'goods' ? 'selected="selected"' : ''}>잡화</option>
+											<option value="운동용품" ${prodvo.event_cate == '운동용품' ? 'selected="selected"' : ''}>운동용품</option>
+											<option value="의류"${prodvo.event_cate == '의류' ? 'selected="selected"' : ''}>의류</option>
+											<option value="잡화"${prodvo.event_cate == '잡화' ? 'selected="selected"' : ''}>잡화</option>
 										
 										</select>
 									</div>
@@ -54,10 +54,10 @@
 								<td><label for="event_cate">종목카테고리</label></td>
 								<td><div class="content_product_insert_select_box">
 										<select id="event_cate" name ="event_cate">
-											<option value="kick" ${prodvo.prod_cate == 'kick' ? 'selected="selected"' : ''}>킥복싱</option>
-											<option value="box" ${prodvo.prod_cate == 'box' ? 'selected="selected"' : ''}>복싱</option>
-											<option value="jiujitsu" ${prodvo.prod_cate == 'jiujitsu' ? 'selected="selected"' : ''}>주지수</option>
-											<option value="mma" ${prodvo.prod_cate == 'mma' ? 'selected="selected"' : ''}>종합격투기</option>
+											<option value="킥복싱" ${prodvo.prod_cate == '킥복싱' ? 'selected="selected"' : ''}>킥복싱</option>
+											<option value="복싱" ${prodvo.prod_cate == '복싱' ? 'selected="selected"' : ''}>복싱</option>
+											<option value="주지수" ${prodvo.prod_cate == '주지수' ? 'selected="selected"' : ''}>주지수</option>
+											<option value="종합격투기" ${prodvo.prod_cate == '종합격투기' ? 'selected="selected"' : ''}>종합격투기</option>
 										</select>
 									</div></td>
 							</tr>

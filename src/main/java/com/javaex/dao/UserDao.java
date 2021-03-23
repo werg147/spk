@@ -31,8 +31,23 @@ public class UserDao {
 		return sqlSession.insert("user.sellerProdInsert", sellervo);
 	}
 	
+	//배송판매자 계정변경
+	public void prodSellerUpdate(SellerVo sellervo) {
+		sqlSession.update("user.prodSellerUpdate", sellervo);
+	}
+	
+	//대관 판매자 계정 변경
+	public void bookSellerUpdate(SellerVo sellervo) {
+		sqlSession.update("user.bookSellerUpdate", sellervo);
+	}
+	
 	//판매자 계정 변경
 	public void sellerUpdate(SellerVo sellervo) {
 		sqlSession.update("user.sellerUpdate", sellervo);
+	}
+	
+	//판매자 계정 정보가져오기
+	public SellerVo sellerSelectOne(int sell_no) {
+		return sqlSession.selectOne("user.sellerSelectOne", sell_no);
 	}
 }

@@ -2,6 +2,8 @@ package com.javaex.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.service.GymService;
 import com.javaex.vo.GymVo;
+import com.javaex.vo.SellerVo;
+import com.javaex.vo.UserVo;
 
 @Controller
 @RequestMapping(value="/mypage/book", method= {RequestMethod.GET , RequestMethod.POST})
@@ -57,4 +61,61 @@ public class GymController {
 		
 		return "";
 	}
+	
+
+	// 대관판매자 계정등록 폼
+	@RequestMapping(value = "/bookselleraddform", method = { RequestMethod.GET, RequestMethod.POST })
+	public String bookDellerAddForm(Model model, HttpSession session) {
+		System.out.println("[cnt] 대관판매자 계정등록폼");
+		UserVo authUser = (UserVo) session.getAttribute("authUser");
+
+		model.addAttribute("authUser", authUser);
+
+		return "mypage/mypage_seller/book_seller_add";
+	}
+
+	// 대관판매자 대관계정 등록
+	@RequestMapping(value = "/bookselleradd", method = { RequestMethod.GET, RequestMethod.POST })
+	public String bookSellerAdd(@ModelAttribute SellerVo sellervo, HttpSession session) {
+		System.out.println("[cnt] 대관판매자 계정 등록");
+
+		gymService.bookSellerAdd(sellervo);
+		System.out.println("돌아옴");
+
+		UserVo authUser = (UserVo) session.getAttribute("authUser");
+		authUser.setBook_type(sellervo.getBook_type());
+
+		return "mypage/mypage_resrvation/mypage_gyminfo";
+
+	}
+
+	// 대관판매자계정관리 페이지
+	@RequestMapping(value = "/bookmanageform", method = { RequestMethod.GET, RequestMethod.POST })
+	public String bookManageForm(HttpSession session, Model model) {
+		System.out.println("[cnt] 판매자계정수정 페이지");
+
+		UserVo authUser = (UserVo) session.getAttribute("authUser");
+		int sell_no = authUser.getSell_no();
+
+		SellerVo sellervo = gymService.selectUser(sell_no);
+		System.out.println("[cnt]판매자정보" + sellervo);
+		model.addAttribute("sellervo", sellervo);
+
+		return "mypage/mypage_seller/book_manage";
+	}
+
+	// 대관판매자 대관 계정 수정
+	@RequestMapping(value = "/booksellermodify", method = { RequestMethod.GET, RequestMethod.POST })
+	public String bookSellerModify(@ModelAttribute SellerVo sellervo, HttpSession session) {
+		System.out.println("[cnt] 대관판매자 계정 수정" + sellervo);
+
+		gymService.bookSellerModify(sellervo);
+		
+		UserVo authUser = (UserVo) session.getAttribute("authUser");
+		authUser.setBook_type(sellervo.getBook_type());
+
+		System.out.println("[cnt] 대관판매자 계정 수정완료" + sellervo);
+		return "redirect:/mypage/book/gymaddform";
+	}
+
 }

@@ -13,15 +13,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.dao.GymDao;
+import com.javaex.dao.UserDao;
 import com.javaex.vo.ConVo;
 import com.javaex.vo.GymImgVo;
 import com.javaex.vo.GymVo;
+import com.javaex.vo.SellerVo;
 
 @Service
 public class GymService {
 
 	@Autowired
 	private GymDao gymDao;
+	
+	@Autowired
+	private UserDao userdao;
 	
 	//체육관 정보 불러오기
 	public Map<String, Object> gymInfo(int gymno) {
@@ -134,5 +139,22 @@ public class GymService {
 		GymImgVo gimgVo = new GymImgVo(gymNo, imgFile, orgName); 
 		gymDao.gimgInsert(gimgVo);
 
+	}
+	
+	//대관판매자계정등록
+	public void bookSellerAdd(SellerVo sellervo) {
+		userdao.sellerBookInsert(sellervo);
+	}
+	
+	
+	//판매자 정보 가져오기
+	public SellerVo selectUser(int sell_no) {
+		return userdao.sellerSelectOne(sell_no);
+	}
+
+	
+	//대관 판매자 계정 수정
+	public void bookSellerModify(SellerVo sellervo) {
+		userdao.bookSellerUpdate(sellervo);
 	}
 }

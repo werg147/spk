@@ -67,50 +67,6 @@ public class UserController {
 		return "mypage/mypage_seller/seller_notice";
 	}
 
-	// 대관판매자 계정등록 폼
-	@RequestMapping(value = "/bookselleraddform", method = { RequestMethod.GET, RequestMethod.POST })
-	public String bookDellerAddForm(Model model, HttpSession session) {
-		System.out.println("[cnt] 대관판매자 계정등록폼");
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
 
-		model.addAttribute("authUser", authUser);
-
-		return "mypage/mypage_seller/book_seller_add";
-	}
-
-	// 대관판매자 대관계정 등록
-	@RequestMapping(value = "/bookselleradd", method = { RequestMethod.GET, RequestMethod.POST })
-	public String bookSellerAdd(@ModelAttribute SellerVo sellervo) {
-		System.out.println("[cnt] 대관판매자 계정 등록");
-
-		userservice.bookSellerAdd(sellervo);
-		System.out.println("돌아옴");
-
-		return "mypage/mypage_resrvation/mypage_gyminfo";
-
-	}
-
-	// 배송판매자 계정등록 폼
-	@RequestMapping(value = "/prodselleraddform", method = { RequestMethod.GET, RequestMethod.POST })
-	public String prodDellerAddForm(Model model, HttpSession session) {
-		System.out.println("[cnt] 배송판매자 계정등록폼");
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
-
-		model.addAttribute("authUser", authUser);
-
-		return "mypage/mypage_seller/prod_seller_add";
-	}
-
-	// 배송판매자 대관계정 등록
-	@RequestMapping(value = "/prodselleradd", method = { RequestMethod.GET, RequestMethod.POST })
-	public String prodSellerAdd(@ModelAttribute SellerVo sellervo) {
-		System.out.println("[cnt] 배송판매자 계정 등록");
-
-		userservice.sellerProdAdd(sellervo);
-		System.out.println("돌아옴");
-
-		return "mypage/mypage_prod/prod_manage";
-
-	}
 
 }

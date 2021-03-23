@@ -63,6 +63,16 @@ a:hover {
     font-size: 23px;
     font-weight: bold;
   }
+  
+  .middle .content_booking_header_fx {
+    display: flex;
+    width : 500px;
+    flex-direction: row;
+    height: 30px;
+    font-size: 23px;
+    font-weight: bold;
+    
+  }
 
   .middle .content_booking_header div {
     width: 150px;

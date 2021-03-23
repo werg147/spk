@@ -20,14 +20,5 @@ public class UserService {
 		return userdao.selectUser(uservo);
 	}
 	
-	//대관판매자계정등록
-	public void bookSellerAdd(SellerVo sellervo) {
-		userdao.sellerBookInsert(sellervo);
-	
-	}
-	//배송판매자계정등록
-	public void sellerProdAdd(SellerVo sellervo) {
-		userdao.sellerProdInsert(sellervo);
-	
-	}
+
 }

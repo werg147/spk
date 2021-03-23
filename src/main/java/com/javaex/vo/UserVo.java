@@ -4,6 +4,8 @@ public class UserVo {
 
 	private int user_no;
 	private int sell_no;
+	private int prod_type;
+	private int book_type;
 	private String user_id;
 	private String user_name;
 	private String password;
@@ -13,8 +15,7 @@ public class UserVo {
 	private int user_phone;
 	private int user_level;
 	private String user_date;
-	private int prod_type;
-	private int book_type;
+
 
 	public UserVo() {
 	}
@@ -64,6 +65,26 @@ public class UserVo {
 		this.user_level = user_level;
 		this.user_date = user_date;
 	}
+	
+	
+	public UserVo(int user_no, int sell_no, int prod_type, int book_type, String user_id, String user_name,
+			String password, String nickname, String address, String user_photo, int user_phone, int user_level,
+			String user_date) {
+		this.user_no = user_no;
+		this.sell_no = sell_no;
+		this.prod_type = prod_type;
+		this.book_type = book_type;
+		this.user_id = user_id;
+		this.user_name = user_name;
+		this.password = password;
+		this.nickname = nickname;
+		this.address = address;
+		this.user_photo = user_photo;
+		this.user_phone = user_phone;
+		this.user_level = user_level;
+		this.user_date = user_date;
+	}
+
 	public int getUser_no() {
 		return user_no;
 	}

@@ -6,15 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import com.javaex.dao.ProdDao;
+import com.javaex.dao.UserDao;
 import com.javaex.vo.ColorsizeVo;
 import com.javaex.vo.ProdimgVo;
 import com.javaex.vo.ProductVo;
+import com.javaex.vo.SellerVo;
 import com.javaex.vo.UserVo;
 
 @Service
 public class ProdService {
 	@Autowired
 	private ProdDao proddao;
+	
+	@Autowired
+	private UserDao userdao;
 	
 	//상품관리페이지
 	public List<ProductVo> prodList(UserVo authUser) {
@@ -157,5 +162,23 @@ public class ProdService {
 		return count;
 
 	}
+	
+
+	//배송판매자계정등록
+	public void sellerProdAdd(SellerVo sellervo) {
+		userdao.sellerProdInsert(sellervo);
+	}
+	
+	//판매자 정보 가져오기
+	public SellerVo selectUser(int sell_no) {
+		return userdao.sellerSelectOne(sell_no);
+	}
+	
+	
+	//배송판매자 계정 수정
+	public void prodSellerModify(SellerVo sellervo) {
+		userdao.prodSellerUpdate(sellervo);
+	}
+	
 
 }

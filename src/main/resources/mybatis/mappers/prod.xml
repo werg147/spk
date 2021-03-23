@@ -6,7 +6,7 @@
 
 
 
-	<insert id="insert" parameterType="com.javaex.vo.ProductVo">
+	<insert id="insert" parameterType="com.javaex.vo.ProductVo" >
 		<selectKey keyProperty="prod_no" resultType="String" order="BEFORE">
 			select SEQ_prod_no.nextval
 			from dual

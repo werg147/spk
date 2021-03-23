@@ -44,7 +44,7 @@
 					<a href="${pageContext.request.contextPath}/mypage/book/gymaddform">
 				</c:when>
 				<c:when test="${authUser.prod_type == 1}">
-					<a href="${pageContext.request.contextPath}/mypage/mypage_prod/prod_form">
+					<a href="${pageContext.request.contextPath}/mypage/prod">
 				</c:when>
 	
 				<c:otherwise>

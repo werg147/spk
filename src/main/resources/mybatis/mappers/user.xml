@@ -33,7 +33,8 @@
 			insert into seller (sell_no, 
 								  user_no, 
 								  book_type,
-								  book_sell_name, 
+								  book_sell_name,
+								  book_com_name,
 								  book_business_no, 
 								  book_sell_address, 
 								  book_sell_bank, 
@@ -42,7 +43,8 @@
 							VALUES(seq_sell_no.nextval, 
 								  #{user_no}, 
 								  #{book_type},
-								  #{book_sell_name}, 
+								  #{book_sell_name},
+								  #{book_com_name}, 
 								  #{book_business_no}, 
 								  #{book_sell_address}, 
 								  #{book_sell_bank}, 
@@ -56,23 +58,76 @@
 			insert into seller (sell_no, 
 								  user_no, 
 								  prod_type, 
-								  pord_sell_name, 
-								  pord_business_no, 
-								  pord_sell_address, 
-								  pord_sell_bank, 
-								  pord_sell_account
+								  prod_sell_name,
+								  prod_com_name, 
+								  prod_business_no, 
+								  prod_sell_address, 
+								  prod_sell_bank, 
+								  prod_sell_account
 								  )
 			  	    VALUES(seq_sell_no.nextval, 
 								  #{user_no}, 
 								  #{prod_type}, 
-								  #{pord_sell_name}, 
-								  #{pord_business_no}, 
-								  #{pord_sell_address}, 
-								  #{pord_sell_bank}, 
-								  #{pord_sell_account}
+								  #{prod_sell_name}, 
+								  #{prod_com_name},
+								  #{prod_business_no}, 
+								  #{prod_sell_address}, 
+								  #{prod_sell_bank}, 
+								  #{prod_sell_account}
 								  )
 		]]>
 	</insert>
+	
+	<select id="sellerSelectOne" parameterType="int" resultType="com.javaex.vo.SellerVo">
+		<![CDATA[
+			select sell_no,
+			       user_no,
+			       book_type,
+			       prod_type,
+			       book_sell_name,
+			       book_com_name,
+			       book_business_no,
+			       book_sell_address,
+			       book_sell_bank,
+			       book_sell_account,
+			       prod_sell_name,
+			       prod_business_no,
+			       prod_sell_address,
+			       prod_sell_bank,
+			       prod_sell_account,
+			       prod_com_name
+			from seller
+			where sell_no = #{sell_no}
+		]]>
+	</select>
+	
+	<update id="prodSellerUpdate" parameterType="com.javaex.vo.SellerVo">
+		<![CDATA[
+			update seller
+			set prod_type = #{prod_type}, 
+				prod_sell_name = #{prod_sell_name}, 
+				prod_com_name = #{prod_com_name},
+				prod_business_no = #{prod_business_no}, 
+				prod_sell_address = #{prod_sell_address}, 
+				prod_sell_bank = #{prod_sell_bank}, 
+				prod_sell_account = #{prod_sell_account}
+			where sell_no = #{sell_no}	
+		]]>
+	</update>
+	
+	<update id="bookSellerUpdate" parameterType="com.javaex.vo.SellerVo">
+		<![CDATA[
+			update seller
+			set book_type = #{book_type},
+				book_sell_name = #{book_sell_name}, 
+				book_com_name = #{book_com_name},
+				book_business_no = #{book_business_no}, 
+				book_sell_address = #{book_sell_address}, 
+				book_sell_bank = #{book_sell_bank}, 
+				book_sell_account = #{book_sell_account}
+			where sell_no = #{sell_no}	
+			]]>
+	</update>
 	
 	<update id="sellerUpdate" parameterType="com.javaex.vo.SellerVo">
 		<![CDATA[
@@ -80,15 +135,17 @@
 			set book_type = #{book_type},
 				prod_type = #{prod_type}, 
 				book_sell_name = #{book_sell_name}, 
+				book_com_name = #{book_com_name},
 				book_business_no = #{book_business_no}, 
 				book_sell_address = #{book_sell_address}, 
 				book_sell_bank = #{book_sell_bank}, 
 				book_sell_account = #{book_sell_account},
-				pord_sell_name = #{pord_sell_name}, 
-				pord_business_no = #{pord_business_no}, 
-				pord_sell_address = #{pord_sell_address}, 
-				pord_sell_bank = #{pord_sell_bank}, 
-				pord_sell_account = #{pord_sell_account}
+				prod_sell_name = #{prod_sell_name}, 
+				prod_com_name = #{prod_com_name},
+				prod_business_no = #{prod_business_no}, 
+				prod_sell_address = #{prod_sell_address}, 
+				prod_sell_bank = #{prod_sell_bank}, 
+				prod_sell_account = #{prod_sell_account}
 			where user_no = #{user_no}	
 		]]>
 	</update>

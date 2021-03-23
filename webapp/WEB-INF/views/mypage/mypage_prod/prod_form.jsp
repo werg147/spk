@@ -41,9 +41,9 @@
 								<td>
 									<div class="content_product_insert_select_box">
 										<select id="prod_cate" name="prod_cate">
-											<option value="health" selected>운동용품</option>
-											<option value="clothes">의류</option>
-											<option value="goods">잡화</option>
+											<option value="운동용품" selected>운동용품</option>
+											<option value="의류">의류</option>
+											<option value="잡화">잡화</option>
 										</select>
 									</div>
 								</td>
@@ -53,9 +53,10 @@
 								<td><div class="content_product_insert_select_box">
 										<select id="event_cate" name ="event_cate">
 											<option selected>종목</option>
-											<option value="kick">킥복싱</option>
-											<option value="box">복싱</option>
-											<option value="jiujitsu">주지수</option>
+											<option value="킥복싱">킥복싱</option>
+											<option value="복싱">복싱</option>
+											<option value="주지수">주지수</option>
+											<option value="종합격투기">종합격투기</option>
 										</select>
 									</div></td>
 							</tr>
