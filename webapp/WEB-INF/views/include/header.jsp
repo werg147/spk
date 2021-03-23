@@ -35,28 +35,27 @@
 
 		</c:choose>
 
-		<div><!-- 
+		<div>
 			<c:choose>
 				<c:when test="${sessionScope.authUser == null}">
 					<a href="${pageContext.request.contextPath}/user/loginform">
 				</c:when>
 				
-				<c:when test="${sessionScope.authUser.sellTypeList.sell_type == '예약'}">
+				<c:when test="${sessionScope.authUser.sell_type == '1' || sessionScope.authUser.sell_type == '3'}">
 					<a href="${pageContext.request.contextPath}/mypage/book/gymaddform">
 				</c:when>
-				<c:when test="${sessionScope.authUser.sellTypeList.sell_type == '배송'}">
-
+				<c:when test="${sessionScope.authUser.sell_type == '2'}">
+					<a href="${pageContext.request.contextPath}/mypage/prod">
 				</c:when>
-				
+	
 				<c:otherwise>
 					<a href="${pageContext.request.contextPath}/mypage/alarm">
 				</c:otherwise>
 
 			</c:choose>
-			 -->
-			 <a href="${pageContext.request.contextPath}/mypage/prod">
-			<img
-				src="${pageContext.request.contextPath }/assets/image/마이페이지 남성_글러브.png"></a>
+			 
+			 
+			<img src="${pageContext.request.contextPath }/assets/image/마이페이지 남성_글러브.png"></a>
 		</div>
 		<div>
 			<a href="./html/alarm.html"> <img

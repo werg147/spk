@@ -39,6 +39,7 @@ public class UserController {
 			return "redirect:/user/loginform?result=fail";
 		} else {
 			System.out.println("로그인성공");
+			System.out.println("로그인정보: " + authUser);
 			session.setAttribute("authUser", authUser);
 
 			return "redirect:/";

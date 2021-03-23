@@ -13,6 +13,7 @@ public class UserVo {
 	private int user_phone;
 	private int user_level;
 	private String user_date;
+	private String sell_type;
 
 	public UserVo() {
 	}
@@ -22,10 +23,11 @@ public class UserVo {
 		this.password = password;
 	}
 
-	public UserVo(int user_no, int sell_no, String nickname) {
+	public UserVo(int user_no, int sell_no, String nickname, String sell_type) {
 		this.user_no = user_no;
 		this.sell_no = sell_no;
 		this.nickname = nickname;
+		this.sell_type = sell_type;
 	}
 
 	public UserVo(int user_no, String user_id, String user_name, String password, String nickname,
@@ -143,13 +145,22 @@ public class UserVo {
 	public void setUser_date(String user_date) {
 		this.user_date = user_date;
 	}
+	
+
+	public String getSell_type() {
+		return sell_type;
+	}
+
+	public void setSell_type(String sell_type) {
+		this.sell_type = sell_type;
+	}
 
 	@Override
 	public String toString() {
 		return "UserVo [user_no=" + user_no + ", sell_no=" + sell_no + ", user_id=" + user_id + ", user_name="
 				+ user_name + ", password=" + password + ", nickname=" + nickname + ", address=" + address
 				+ ", user_photo=" + user_photo + ", user_phone=" + user_phone + ", user_level=" + user_level
-				+ ", user_date=" + user_date + "]";
+				+ ", user_date=" + user_date + ", sell_type=" + sell_type + "]";
 	}
 
 }

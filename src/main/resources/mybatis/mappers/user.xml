@@ -9,7 +9,8 @@
 		<![CDATA[
 			SELECT users.user_no,
 			       users.nickname,
-				   seller.sell_no
+				   seller.sell_no,
+				   seller.sell_type
 			FROM users left outer JOIN seller
 			on seller.user_no = users.user_no
 			where users.user_id = #{user_id}
