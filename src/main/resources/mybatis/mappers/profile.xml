@@ -40,7 +40,7 @@
 				       address
 				from profile
 				where user_no = #{userNo}
-				order by profile_date desc		
+				order by profile_no desc		
 			
 			]]>
 		</select>
@@ -120,7 +120,7 @@
 				                address
 				         from profile
 				         where user_no = #{userNo}
-				         order by profile_date desc) p) o
+				         order by profile_no desc) p) o
 				where rown = #{rownum}  		
    		]]>
    		

@@ -102,15 +102,19 @@
 			<section class="mach-card">
 				<!-- card 1ex -->
 				<c:forEach items="${bBuyList}" var="vo">
+				<a href="${pageContext.request.contextPath }/sparring/matchdetail?bbuyno=${vo.b_buy_no}&userno=${vo.user_no}">
+				<!-- 
+				 <a href="${pageContext.request.contextPath }/sparring/matchdetail?bbuyno=${vo.b_buy_no}&userno=${vo.user_no}">
+				 -->
 				<div class="card_container">
 					<div class="card">
 					<c:choose>
 						<c:when test="${vo.gym_img_savename == null}">
-							<a class="card1" href="/view/matching/스파링신청서.html"> <img
+							<img
 								class="card_img" src="${pageContext.request.contextPath}/upload/0.jpg" alt="">
 						</c:when>
 						<c:otherwise>
-							<a class="card1" href="/view/matching/스파링신청서.html"> <img
+							<img
 								class="card_img" src="${pageContext.request.contextPath}/upload/${vo.gym_img_savename}" alt="">
 						</c:otherwise>
 					</c:choose>
@@ -122,7 +126,7 @@
 									<c:choose>
 						<c:when test="${vo.gym_name == null}">
 										<p>${vo.b_buy_address} 장소미정</p>
-										<div class="user_text">${vo.b_buy_day} | ${vo.b_buy_day }</div>
+										<div class="user_text">${vo.b_buy_day} | ${vo.b_buy_time}</div>
 							
 						</c:when>
 						<c:otherwise>
@@ -198,6 +202,7 @@
 
 					</div>
 				</div>
+				</a>
 				</c:forEach>
 				<!-- card end -->
 				

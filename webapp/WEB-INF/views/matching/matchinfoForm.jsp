@@ -69,7 +69,9 @@
 							<div id="form_submit" class="content_bottom">
 
 								<!-- 입력폼 → 매칭프로필저장 -->
+								
 								<form action="${pageContext.request.contextPath}/sparring/write" method="get">
+								
 
 									<table class="insert_matcingInfo">
 										<colgroup>
@@ -326,9 +328,14 @@
 									</div>
 									<!-- //product_insert_btn -->
 									<!-- session값 생겨도 히든으로 표시할 것 아이작스에서 쓰고있음 -->
-									<input id="session_user_no" type="hidden" name="userNo" value="2">
-									<input type="hidden" name="bookingno" value="${param.bookingno}">
-									<input type="text" name="mainnum" value="${param.mainnum }">
+									<input id="session_user_no" type="text" name="userNo" value="${authUser.user_no}">
+									<input type="text" name="subnum" value="${param.subnum}">
+									<c:if test="${param.booking_no != 0}">
+										<input type="text" name="bookingno" value="${param.booking_no}">
+										<input type="text" name="bbuyno" value="${param.bbuyno}">
+										<input type="text" name="bbuyuser" value="${param.bbuyuser }">
+									</c:if>
+									
 								</form>
 								<!-- //입력폼 → 주문하기 -->
 
@@ -356,7 +363,7 @@
 	<script type="text/javascript">
 	
 	$("document").ready(function(){
-		 num = 1
+		 num = 0
 		  
 	
 	})
@@ -470,7 +477,7 @@
 	});
 	/* 버튼클릭시 date_no값 받아와서 날짜 얻어내기 */
 	$("#exer_cate").change("click",function(){
-				num= 0;
+				
 				var rownum= $("select option:selected").data("no");
 				
 				
@@ -536,11 +543,13 @@
 		console.log("버튼클릭");
 		
 		
+		
 		console.log(num);
 		comments(num);
 		
-		num += 1
 	});
+	
+	
 	function record(recordList) {
 		
 		console.log("값이있음");
@@ -638,7 +647,9 @@
 	
 	
 	function comments() {
-
+		if( num == 0){
+			num+=1;
+		}
 		str = "";
 		str += '<tr class="basic">';
 		
@@ -708,6 +719,8 @@
 		
 
 		$("#record_app").append(str);
+		
+		num+=1;
 	}
 	</script>
 </html>

@@ -1,5 +1,6 @@
 package com.javaex.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +32,7 @@ public class SparringDao {
 		
 		int count = sqlSession.insert("profile.insertProfile",profileVo);
 		
-		System.out.println(count);
+		System.out.println("profile"+count);
 		
 	}
 	
@@ -41,7 +42,7 @@ public class SparringDao {
 		System.out.println("[Dao] : insertEvent");
 		
 		int count = sqlSession.insert("event.insertEvent",eventVo);
-		System.out.println(count);
+		System.out.println("event" + count);
 	}
 
 	public void insertRecord(RecordVo recordVo) {
@@ -170,6 +171,23 @@ public class SparringDao {
 		
 		
 	}
+	
+	//신청자구하기
+	public void selectBBuyList2(int bookingNo) {
+		System.out.println("[Dao] : selectBBuyList");
+		
+		List<BBuyVo> bbuyList = sqlSession.selectList("bbuy.selectListBBuy2",bookingNo);
+		
+		System.out.println(bbuyList);
+	}
+	
+	public BBuyVo selectOneBBuy(BBuyVo bBuyVo) {
+		System.out.println("[Dao] : selectOneBBuy");
+		
+		return sqlSession.selectOne("bbuy.selectOneBBuy",bBuyVo);
+		
+		//no로 등록자불러오기
+	}
 
 	public void insertBBuy2(BBuyVo bBuyVo) {
 		System.out.println("[Dao] : insertBBuy2");
@@ -179,6 +197,15 @@ public class SparringDao {
 		System.out.println(count);
 		
 	}
+
+	public BBuyVo selectOneMatchScore(int userNo) {
+		System.out.println("[Dao] : selectOneMatchScore()");
+		
+		return sqlSession.selectOne("bbuy.selectOneMatchScore" , userNo);
 	
+		
+	
+	}
+
 
 }

@@ -50,7 +50,7 @@
             <div class="rule">
                 <h3 class="rule_info">Rule</h3>
                 <!-- 룰 정보 여기넣기 -->
-                <h1 class="">종합격투기</h1>
+                <h1 class="">대관정보에서 넣기</h1>
             </div>
             <!-- rule end -->
             <!-- post_host -->
@@ -62,24 +62,44 @@
                             <!-- 글주인 이름 -->
                             <h1 class="post_host_item1">
                                 <span>
-                                    방배동불주먹
+                                    ${map.bBuyVo.nickname}
                                 </span>
                             </h1>
                             <!-- 글주인이름 end -->
                             <div class="post_host_item2">
                                 <div class="post_host_item2_1">
                                     <div class="post_host_imgbox">
-                                        <img src="/image/img/vv.png" alt="">
+                                        <img src="${pageContext.request.contextPath }/upload/${map.bBuyVo.user_photo }.jpg" alt="">
 
                                     </div>
                                     <div class="post_host_spa-profile">
-                                        <p class="post_host_spa-profile_coment">"연습 많이했습니다 잘부탁드려요 언제나 최선을 다합니다"</p>
+                                        <p class="post_host_spa-profile_coment">"${map.bBuyVo.word }"</p>
                                         <div class="post_host_spa-profile_spa">
-                                            주특기는 <span>킥복싱,복싱,주짓수</span> 입니다
+                                            주특기는 
+                                            <span>
+                                            <c:forEach items="${map.bBuyVo.eventList}" var="eventvo">
+                                            	<c:choose>
+                                            		<c:when test="${eventvo.eventName == 1 }">
+                                            				복싱
+                                            		</c:when>
+                                            		<c:when test="${eventvo.eventName == 2 }">
+                                            				,킥복싱
+                                            		</c:when>
+                                            		<c:when test="${eventvo.eventName == 3 }">
+                                            				,종합격투기
+                                            		</c:when>
+                                            		<c:when test="${eventvo.eventName == 4 }">
+                                            				,주짓수
+                                            		</c:when>
+                                            	</c:choose>
+                                            </c:forEach>
+                                            
+                                            </span> 
+                                            입니다
                                             <br>
                                             <span>스파클링</span>에서
-                                            <span>23번의 스파링</span>을 했고
-                                            <span>56% 승률</span>을 자랑합니다
+                                            <span>${map.bBuyVo.scoreCount}번의 스파링</span>을 했고
+                                            <span>${map.bBuyVo.rate}% 승률</span>을 자랑합니다
                                         </div>
                                     </div>
                                 </div>
@@ -87,21 +107,47 @@
                                     <div class="post_host_spac">
                                         <h3>프로필</h3>
                                         <div class="post_host_spac_profile">
-                                            <p>아마추어</p>
+                                            <p>${map.bBuyVo.career}</p>
                                             <p>라이트 헤비급</p>
 
-                                            <p>180cm</p>
-                                            <p>70kg</p>
-                                            <p>전공: 체육학</p>
+                                            <p>${map.bBuyVo.height}cm</p>
+                                            <p>${map.bBuyVo.weight}kg</p>
+                                            <p>전공: ${map.bBuyVo.major}</p>
                                             <!-- 경력 for문 -->
-                                            <p>아마추어선수권 금메달</p>
-                                            <p>청소년 대회 입상</p>
-                                            <p>동네 권투대회 3위</p>
+                                            <c:forEach items="${map.bBuyVo.recordList }" var="recordvo">
+	                                            <p>${recordvo.recordType}</p>
+	                                            <p>${recordvo.recordDate}
+	                                            <c:choose>
+                                            		<c:when test="${recordvo.recordEvent == 1 }">
+                                            				복싱
+                                            		</c:when>
+                                            		<c:when test="${recordvo.recordEvent == 2 }">
+                                            				,킥복싱
+                                            		</c:when>
+                                            		<c:when test="${recordvo.recordEvent == 3 }">
+                                            				,종합격투기
+                                            		</c:when>
+                                            		<c:when test="${recordvo.recordEvent == 4 }">
+                                            				,주짓수
+                                            		</c:when>
+                                            	</c:choose>
+	                                             ${recordvo.recordName}</p>
+	                                           
+                                            </c:forEach>
                                             <!-- 대관 x -->
-                                            <p class="p_dae">원하는 장소 : 중랑구 상봉동</p>
+                                            <c:if test="${map.bBuyVo.booking_no == 0}">
+                                            	<p class="p_dae">원하는 장소 : 중랑구 상봉동</p>
+                                            </c:if>
                                             <!-- 대관 x end -->
                                         </div>
-                                        <a href="matchinfo 신청자.html"><button class="dae_button_item2"><span class="dea_btn2">대결신청</span></button></a>
+                                        <c:choose>
+	                                        <c:when test="${map.bBuyVo.booking_no == 0 }">
+	                                        	<a href="${pageContext.request.contextPath }/sparring/rent"><button class="dae_button_item2"><span class="dea_btn2">대관후 대결신청</span></button></a>
+	                                        </c:when>
+	                                        <c:otherwise>
+	                                       	 	<a href="${pageContext.request.contextPath }/sparring/writeForm?user_no=${authUser.user_no}&booking_no=${map.bBuyVo.booking_no}&subnum=1&bbuyno=${map.bBuyVo.b_buy_no}&bbuyuser=${param.userno}"><button class="dae_button_item2"><span class="dea_btn2">대결신청</span></button></a>
+	                                        </c:otherwise>
+                                        </c:choose>
                                     </div>
                                 </div>
                             </div>

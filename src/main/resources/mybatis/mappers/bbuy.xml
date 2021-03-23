@@ -4,6 +4,12 @@
 
 <mapper namespace="bbuy">
 	
+	
+	 <resultMap type="map" id="scoreMap">
+        <result column="sumscore" property="sumScore"/>
+        <result column="sumwin" property="sumWin"/>
+    </resultMap>
+    
 	<insert id="insertBBuy" parameterType="BBuyVo">
 	 <![CDATA[
 			insert into bbuy
@@ -29,26 +35,75 @@
 		insert into bbuy
 		values( seq_bbuy_no.nextval,
 		        #{user_no},
-		        null,
+	]]>
+		<choose>
+		        <when test="booking_no != null and booking_no != 0 ">
+					${booking_no},
+				</when>
+				<otherwise>
+		        		null,
+				</otherwise>
+		</choose>
 		        #{profile_no},
 		        null,
 		        null,
 		        null,
-		        #{b_buy_player_state},
-		        #{b_buy_address},
-		        #{b_buy_event},
-		        #{b_buy_time},
-		        #{b_buy_day},
+		        <choose>
+		        	<when test="b_buy_player_state != null and b_buy_player_state != '' ">
+		        	#{b_buy_player_state},
+					
+					</when>
+					<otherwise>
+		        		null,
+				</otherwise>
+				</choose>
+				 <choose>
+		        	<when test="b_buy_address != null and b_buy_address != '' ">
+		        	
+		       			 #{b_buy_address},
+					
+					</when>
+					<otherwise>
+		        		null,
+				</otherwise>
+				</choose>
+				<choose>
+		        	<when test="b_buy_event != null and b_buy_event != '' ">
+		        	
+		        		#{b_buy_event},
+					</when>
+					<otherwise>
+		        		null,
+				</otherwise>
+				</choose>
+				<choose>
+		        	<when test="b_buy_time != null and b_buy_time!= '' ">
+		        	
+		        		#{b_buy_time},
+					</when>
+					<otherwise>
+		        		null,
+				</otherwise>
+				</choose>
+				<choose>
+		        	<when test="b_buy_day != null and b_buy_day!= '' ">
+		        	
+		       			 #{b_buy_day},
+					</when>
+					<otherwise>
+		        		null,
+				</otherwise>
+				</choose>
 		        sysdate
 		        )		
 	
-	]]>
 	</insert>
 	
 	<select id="selectListBBuy" resultType="BBuyVo">
 		<![CDATA[
 			select b.b_buy_no,
 			       b.profile_no,
+			       b.user_no,
 			       p.nickname,
 			       p.career,
 			       b.b_buy_price,
@@ -91,5 +146,72 @@
 		
 		]]>	
 
+	</select>
+	<select id="selectOneBBuy" parameterType="BBuyVo" resultType="BBuyVo">
+		<![CDATA[
+			select  b.b_buy_no,
+			        b.user_no,
+			        b.booking_no,
+			        b.profile_no,
+			        b.booking_no,
+			        b.b_buy_player_state,
+			        b.b_buy_address,
+			        b.b_buy_event,
+			        b.b_buy_time,
+			        b.b_buy_day,
+			        u.nickname,
+			        u.user_photo,
+			        p.height,
+			        p.weight,
+			        p.career,
+			        p.major,
+			        p.word,
+			        m.scorecount
+			from bbuy b , users u , profile p , (select count(*) as scorecount
+			                                     from matchscore
+			                                     where user_no =#{user_no})m
+			where b.user_no =u.user_no
+			and b.profile_no = p.profile_no
+			and b_buy_player_state = '시합등록자'
+			and b_buy_no = #{b_buy_no}
+			
+		]]>
+	
+	</select>
+	<select id="selectOneMatchScore" parameterType="int" resultType="BBuyVo">
+		<![CDATA[
+			select  sum(score) as sumScore,
+			        sum(win) as sumWin
+			from matchscore
+			where user_no = #{user_no}
+		]]>	
+	</select>
+	<select id="selectListBBuy2" parameterType="int" resultType="BBuyVo">
+	<![CDATA[
+			select b.b_buy_no,
+			       b.booking_no,
+			       b.profile_no,
+			       b.user_no,
+			       b.b_buy_player_state,
+			       p.word,
+			       p.career,
+			       p.height,
+			       p.weight,
+			       p.major,
+			       u.nickname,
+			       u.user_photo,
+			       m.scoreCount
+			from bbuy b, profile p , users u ,(select user_no,
+			                                          count(*)as scorecount
+			                                   from matchscore
+			                                   group by user_no) m
+			where b.profile_no = p.profile_no
+			and b.user_no = u.user_no
+			and m.user_no = b.user_no
+			and b.b_buy_player_state = '신청자'
+			and b.booking_no = #{booking_no}
+	
+	]]>
+	
 	</select>
 </mapper>

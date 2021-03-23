@@ -432,4 +432,64 @@ public class SparringService {
 		sparringDao.insertBBuy2(bBuyVo);
 		
 	}
+
+	public Map<String,Object> MatchDetail(int bBuyNo, int userNo) {
+		System.out.println("[Service] : bBuyNo");
+		
+		BBuyVo bBuyVo = new BBuyVo();
+		bBuyVo.setB_buy_no(bBuyNo);
+		bBuyVo.setUser_no(userNo);
+		
+		
+		//시합등록자구하기
+		BBuyVo vo = sparringDao.selectOneBBuy(bBuyVo);
+		
+		System.out.println(vo);
+		// 시합등록자 구하기END
+		
+		//시합 등록자의 승률구하기
+		BBuyVo scoreVo = sparringDao.selectOneMatchScore(userNo);
+		
+		double sumScore = scoreVo.getSumScore();
+		double sumWin = scoreVo.getSumWin();
+		System.out.println(sumScore+ "," + sumWin);
+		
+		int rate = (int) ((sumWin /sumScore)*100);
+		System.out.println("승률 : "+ rate);
+		
+		vo.setRate(rate);
+		//시합 등록자의 승률구하기END
+		
+		/**경력리스트,주특기 리스트 구하기**/
+		int profileNo = vo.getProfile_no();
+		
+		List<EventVo> eventList = sparringDao.selectListEvent(profileNo);
+		
+		//경력리스트
+		List<RecordVo> recordList = sparringDao.selectListRecord(profileNo);
+		
+		vo.setEventList(eventList);
+		vo.setRecordList(recordList);
+		
+		//*****상대방구하기****//
+		//상대방을 페이지에서 받아올수있는 bookingno로 구하지않고 불러와서 구하는 이유는
+		//대관구매하지 않은 시합등록자는 bookingno가 없어 상대를 불러올수없고
+		//두번째로 대관구매하지않은 시합등록자에게 시합신청할때 대관구매하는
+		//신청자의 bookingno를 시합등록자에게 update로 넣을 예정이기에
+		// 누군가 신청한 후에 상대가 표시 되기때문에 불러와서 넣는 구조로한다
+		//if(vo.getBooking_no() != 0) {
+		int bookingNo = vo.getBooking_no();
+			System.out.println(bookingNo);
+			
+			sparringDao.selectBBuyList2(bookingNo);
+		
+		
+		//MAP에 넣기
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("bBuyVo", vo);
+		
+		//
+		
+		return map;
+	}
 }

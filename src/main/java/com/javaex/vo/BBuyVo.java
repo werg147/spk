@@ -22,7 +22,12 @@ public class BBuyVo {
 	//users
 	private String nickname;
 	private String career;
-	
+	private String user_photo;
+	//profile
+	private String word;
+	private String height;
+	private String weight;
+	private String major;
 	//gym
 	private String gym_name;
 	private String gym_address;
@@ -41,6 +46,9 @@ public class BBuyVo {
 	
 	List<EventVo> eventList;
 	
+	//RecordList
+	
+	List<RecordVo> recordList;
 	///
 	private String checkAll;
 	private String chkItem;
@@ -51,6 +59,14 @@ public class BBuyVo {
 	
 	//플레이어상태를 위한 파라미터값 subNum
 	private int subNum;
+	
+	
+	//matchScore
+	
+	private int scoreCount; //스파클링 이용횟수(결과작성)
+	private int rate;//승률
+	private int sumScore;
+	private int sumWin;
 	
 	public BBuyVo(int b_buy_no, int user_no, int booking_no, int profile_no, String b_buy_paytype, String b_buy_price, String b_buy_state,
 			String b_buy_player_state, String b_buy_date, String checkAll, String chkItem) {
@@ -74,6 +90,107 @@ public class BBuyVo {
 	}
 
 	
+	
+	public String getUser_photo() {
+		return user_photo;
+	}
+
+
+	public void setUser_photo(String user_photo) {
+		this.user_photo = user_photo;
+	}
+
+
+	public List<RecordVo> getRecordList() {
+		return recordList;
+	}
+
+
+	public void setRecordList(List<RecordVo> recordList) {
+		this.recordList = recordList;
+	}
+
+
+	public String getMajor() {
+		return major;
+	}
+
+
+	public void setMajor(String major) {
+		this.major = major;
+	}
+
+
+	public String getWord() {
+		return word;
+	}
+
+
+	public String getHeight() {
+		return height;
+	}
+
+
+	public void setHeight(String height) {
+		this.height = height;
+	}
+
+
+	public String getWeight() {
+		return weight;
+	}
+
+
+	public void setWeight(String weight) {
+		this.weight = weight;
+	}
+
+
+	public void setWord(String word) {
+		this.word = word;
+	}
+
+
+	public int getSumScore() {
+		return sumScore;
+	}
+
+
+	public void setSumScore(int sumScore) {
+		this.sumScore = sumScore;
+	}
+
+
+	public int getSumWin() {
+		return sumWin;
+	}
+
+
+	public void setSumWin(int sumWin) {
+		this.sumWin = sumWin;
+	}
+
+
+	public int getScoreCount() {
+		return scoreCount;
+	}
+
+
+	public void setScoreCount(int scoreCount) {
+		this.scoreCount = scoreCount;
+	}
+
+
+	public int getRate() {
+		return rate;
+	}
+
+
+	public void setRate(int rate) {
+		this.rate = rate;
+	}
+
+
 	public String getB_buy_address() {
 		return b_buy_address;
 	}
@@ -284,14 +401,20 @@ public class BBuyVo {
 
 	@Override
 	public String toString() {
-		return "BBuyVo [b_buy_no=" + b_buy_no + ", user_no=" + user_no + ", booking_no=" + booking_no + ", profile_no=" + profile_no + ", b_buy_paytype="
-				+ b_buy_paytype + ", b_buy_price=" + b_buy_price + ", b_buy_state=" + b_buy_state + ", b_buy_player_state=" + b_buy_player_state
-				+ ", b_buy_date=" + b_buy_date + ", b_buy_address=" + b_buy_address + ", b_buy_event=" + b_buy_event + ", b_buy_time=" + b_buy_time
-				+ ", b_buy_day=" + b_buy_day + ", nickname=" + nickname + ", career=" + career + ", gym_name=" + gym_name + ", gym_address=" + gym_address
-				+ ", gym_event=" + gym_event + ", gym_img_savename=" + gym_img_savename + ", addressHalf=" + addressHalf + ", booking_date=" + booking_date
-				+ ", booking_start=" + booking_start + ", booking_end=" + booking_end + ", checkAll=" + checkAll + ", chkItem=" + chkItem + ", price=" + price
-				+ ", subNum=" + subNum + "]";
+		return "BBuyVo [b_buy_no=" + b_buy_no + ", user_no=" + user_no + ", booking_no=" + booking_no + ", profile_no="
+				+ profile_no + ", b_buy_paytype=" + b_buy_paytype + ", b_buy_price=" + b_buy_price + ", b_buy_state="
+				+ b_buy_state + ", b_buy_player_state=" + b_buy_player_state + ", b_buy_date=" + b_buy_date
+				+ ", b_buy_address=" + b_buy_address + ", b_buy_event=" + b_buy_event + ", b_buy_time=" + b_buy_time
+				+ ", b_buy_day=" + b_buy_day + ", nickname=" + nickname + ", career=" + career + ", gym_name="
+				+ gym_name + ", gym_address=" + gym_address + ", gym_event=" + gym_event + ", gym_img_savename="
+				+ gym_img_savename + ", addressHalf=" + addressHalf + ", booking_date=" + booking_date
+				+ ", booking_start=" + booking_start + ", booking_end=" + booking_end + ", eventList=" + eventList
+				+ ", checkAll=" + checkAll + ", chkItem=" + chkItem + ", price=" + price + ", subNum=" + subNum
+				+ ", scoreCount=" + scoreCount + ", rate=" + rate + "]";
 	}
+
+
+	
 	
 	
 	
