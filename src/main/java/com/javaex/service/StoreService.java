@@ -13,10 +13,13 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.dao.StoreDao;
-import com.javaex.vo.ProdimgVo;
+import com.javaex.vo.ColorsizeVo;
 import com.javaex.vo.ProductVo;
 import com.javaex.vo.QnaVo;
 import com.javaex.vo.QnaimgVo;
+import com.javaex.vo.ReviewVo;
+import com.javaex.vo.ReviewimgVo;
+import com.javaex.vo.UserVo;
 
 @Service
 public class StoreService {
@@ -32,6 +35,46 @@ public class StoreService {
 	}
 	
 	
+	//상품 상세페이지 리스트
+	public ProductVo product(String prod_no) {
+		System.out.println("[Service] product()");
+		
+		//1. 상품정보
+		ProductVo productVo = storeDao.selectProduct(prod_no);
+		System.out.println("상품정보: " + productVo.toString());
+		
+		//2. 상품옵션 리스트
+		List<ColorsizeVo> cssList = storeDao.selectCsList(prod_no);
+		System.out.println("상품옵션 리스트: " + cssList.toString());
+		
+		//3. 리뷰게시글 리스트
+		//게시글 -- 쿼리문 거의나왔음 (고민중)
+		List<ReviewVo> revList = storeDao.selectReList(prod_no);
+		System.out.println("리뷰게시글: " + revList.toString());
+		
+		
+		//4. 문의게시글 리스트
+		
+		//묶기
+		productVo.setCssList(cssList);
+		System.out.println(productVo.toString());
+		
+		return productVo;
+	}
+	
+	
+	
+	
+	
+	
+	///////////////////////////////////////////////////////////////
+	//qna form 유저정보 가져오기
+	public UserVo getUser(int user_no) {
+		System.out.println("[Service] getUser()");
+		//System.out.println(user_no);
+		
+		return storeDao.selectUser(user_no);
+	}
 	
 	//qna 작성내용 인서트
 	public void qnaWrite(QnaVo qnaVo, MultipartFile file) {
@@ -105,7 +148,73 @@ public class StoreService {
 			
 		}
 		
+	}
+		
+	//review 작성내용 인서트
+	public void reviewWrite(ReviewVo reviewVo, MultipartFile file) {
+		System.out.println("[Service] reviewWrite()");
+		
+		System.out.println(reviewVo);
+		//System.out.println(file);
+				
 
+		//작성 내용 인서트
+		storeDao.reviewInsert(reviewVo);
+		
+		///////이미지 파일 인서트//////
+		//db저장할 정보 수집
+		String saveDir = "C:\\javastudy\\upload";
+		
+		//오리지널 파일 이름
+		String review_img_name = file.getOriginalFilename();
+
+		
+		if(ObjectUtils.isEmpty(review_img_name)) {
+			System.out.println("선택된 파일이 없습니다.");
+		} else {
+			//확장자
+			String exName = review_img_name.substring(review_img_name.lastIndexOf("."));
+			System.out.println("exName: " + exName);
+			
+			//서버 저장파일 이름 (문의이미지 저장명 qna_img_savename)
+			String review_img_savename = System.currentTimeMillis() + UUID.randomUUID().toString() + exName;
+			System.out.println("review_img_savename: " + review_img_savename);
+			
+			//서버 파일패스 (저장경로)
+			String filePath = saveDir + "\\" + review_img_savename;
+			System.out.println("filePath: " + filePath);
+			
+			
+			//서버 하드디스크 파일저장
+			try {
+				byte[] fileData = file.getBytes();
+				
+				OutputStream out = new FileOutputStream(filePath);
+				BufferedOutputStream bos = new BufferedOutputStream(out);
+				
+				bos.write(fileData);
+				bos.close();
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			
+			//db저장
+			//문의 옵션 임의로 넣어줌
+			String review_img_type = "main";
+			
+			ReviewimgVo reviewimgVo = new ReviewimgVo();
+			
+			reviewimgVo.setReview_no(reviewVo.getReview_no());
+			reviewimgVo.setReview_img_name(review_img_name);
+			reviewimgVo.setReview_img_savename(review_img_savename);
+			reviewimgVo.setReview_img_type(review_img_type);
+			
+			storeDao.reviewimgInsert(reviewimgVo);
+			
+		}
+		
 
 	}
 	

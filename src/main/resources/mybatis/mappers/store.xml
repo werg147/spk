@@ -65,8 +65,70 @@
             order by prod_date asc
 		]]>
 	</select>
+	
+	<!-- 상품상세 /정보 가져오기 -->
+	<select id="selectProduct" parameterType="String" resultType="ProductVo">
+		<![CDATA[
+			select pimg.prod_img_savename,
+                   prod.prod_brand,
+                   prod.prod_name,
+                   prod.prod_price,
+                   prod.prod_detail_img_savename,
+                   prod.event_cate,
+                   prod.prod_desc,
+                   prod.prod_from,
+                   prod.prod_wash,
+                   prod.prod_qual,
+                   prod.prod_date
+            from product prod, prodimg pimg
+            where prod.prod_no = pimg.prod_no
+            and prod.prod_no = #{prod_no}
+            and pimg.prod_img_type = 'main'
+		]]>
+	</select>
+
+	<!-- 상품상세 /상품옵션 리스트 -->
+	<select id="selectCsList" parameterType="String" resultType="com.javaex.vo.ColorsizeVo">
+		<![CDATA[
+			select colorsize_no,
+                   prod_no,
+                   prod_size,
+                   color,
+                   stock
+            from colorsize
+            where prod_no = #{prod_no}
+		]]>
+	</select>
+
+	<!-- 상품상세 /리뷰게시글 리스트 -->
+	<select id="selectReList" parameterType="String" resultType="ReviewVo">
+		<![CDATA[
+			select re.review_no,
+                   re.review_title,
+                   us.nickname,
+                   re.review_date,
+                   re.review_hit
+            from review re, users us
+            where re.user_no = us.user_no
+		]]>
+	</select>
 
 
+
+
+
+
+
+
+
+	<!-- qna form 유저정보 -->
+	<select id="selectUser" parameterType="int" resultType="UserVo">
+		<![CDATA[
+			select user_phone 
+            from users
+            where user_no = #{user_no}
+		]]>
+	</select>
 	
 	<!-- qna 인서트 -->
 	<!-- qnaimg가 있을 경우 거의 동시에 인서트 되는데, qnaimg에서 qna_no가 필요하므로  selectKey 사용. 우선 입력한 값의 결과값을 다음 쿼리로 바로 return 시켜준다.-->
@@ -84,7 +146,7 @@
                 sysdate,
                 #{qna_type,jdbcType=VARCHAR},
                 #{user_no},
-                #{buy_no}
+                #{buy_no,jdbcType=VARCHAR}
             )
 		]]>
 	</insert>
@@ -103,6 +165,41 @@
 		]]>
 	</insert>
 
+	<!-- review 인서트 -->
+	<insert id="reviewInsert" parameterType="ReviewVo">
+		<selectKey keyProperty="review_no" resultType="Int" order="BEFORE">
+			select SEQ_REVIEW_NO.nextval from dual
+		</selectKey>
+		<![CDATA[
+			insert into review
+            values(
+                #{review_no},
+                #{prod_no},
+                #{review_title},
+                #{review_content},
+                sysdate,
+				#{buy_no,jdbcType=VARCHAR},
+                #{user_no},
+                0
+            )
+		]]>
+	</insert>
+	
+	<!-- reviewimg 인서트 -->
+	<insert id="reviewimgInsert" parameterType="ReviewimgVo">
+		<![CDATA[
+			insert into reviewimg
+            values(
+                SEQ_REVIEW_IMG_NO.nextval,
+                #{review_no},
+                #{review_img_name},
+                #{review_img_savename},
+                #{review_img_type}
+            )
+		]]>
+	</insert>
+	
+	
 	
    
 </mapper>

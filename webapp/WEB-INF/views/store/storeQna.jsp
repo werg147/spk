@@ -38,14 +38,14 @@
 
                 <ul class="list_type1 old">
                     <li><span class="ico"></span><p class="txt">상품에 대한 문의를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로 이동될 수 있습니다.</p></li>
-                    <li><span class="ico"></span><p class="txt">배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 마이컬리 내 <a class="emph" href="/shop/mypage/mypage_qna.php">1:1 문의</a>에 남겨주세요.</p></li>
+                    <li><span class="ico"></span><p class="txt">배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 마이컬리 내 1:1 문의에 남겨주세요.</p></li>
                 </ul>
                 </div>
 
                 <form name="formQna" method="post" action="${pageContext.request.contextPath}/store/qnaWrite" enctype="multipart/form-data">
-                    <input type="hidden" name="prod_no" value="상품번호">
+                	<input type="hidden" name="prod_no" value="${param.prodNo}">
                     <input type="hidden" name="qna_date" value="">
-                    <input type="hidden" name="user_no" value="100">
+                    <input type="hidden" name="user_no" value="${authUser.user_no}">
                     <input type="hidden" name="buy_no" value="300">
               
                 
@@ -61,20 +61,11 @@
                                         <input type="text" name="name" required="" fld_esssential="" label="작성자" value="${authUser.nickname}" readonly="readonly" class="read_only">
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th>이메일</th>
-                                    <td>
-                                        <input type="text" name="email" label="이메일" value="abc@naver.com" readonly="readonly" class="read_only">
-                                        <label for="rcvEmail" class="label_check">                                            
-                                            <input type="checkbox" value="">                                          
-                                            이메일로 답변을 받겠습니다.
-                                        </label>
-                                    </td>
-                                </tr>
+                               
                                 <tr>
                                     <th>핸드폰</th>
                                     <td>
-                                        <input type="text" name="phone" label="문자메시지" value="01012345678" readonly="readonly" class="read_only">
+                                        <input type="text" name="phone" label="문자메시지" value="${userVo.user_phone}" readonly="readonly" class="read_only">
                                         <label for="rcvSms" class="label_check">
                                             <input type="checkbox" value="">
                                             문자로 답변을 받겠습니다.

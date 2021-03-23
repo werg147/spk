@@ -33,10 +33,7 @@ public class ProductVo {
 
 	private List<ColorsizeVo> cssList;
 
-
-	public ProductVo() {
-	}
-
+	public ProductVo() {}
 
 	public ProductVo(String prod_no, int sell_no, String prod_cate, String event_cate, String prod_name, int prod_price,
 			String prod_brand, String prod_desc, String prod_from, String prod_wash, String prod_qual,

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -7,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>store</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/store.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css">
 </head>
@@ -36,36 +37,39 @@
 			<div id="sectionView">
 				
 
-					<img src="${pageContext.request.contextPath}/assets/image/store_img/glove1.jpg" alt="상품 대표 이미지" class="bg" width="430" height="552"> <!--상품 대표 이미지-->
+					<img src="${pageContext.request.contextPath}/upload/${productVo.prod_img_savename}" alt="상품 대표 이미지" class="bg" width="430" height="552"> <!--상품 대표 이미지-->
 
 					<!--상품 정보,선택,가격,장바구니,구매 영역-->
 					<div class="goods_area"> 
 
 						<!--[브랜드명] 상품명-->
 						<div class="goods_name">
-							<strong class="name">[에버라스트] 복싱 백글러브</strong>
+							<strong class="name">[${productVo.prod_brand}] ${productVo.prod_name}</strong>
 						</div> 
 					
 						<!--상품 가격-->
 						<div class="goods_price">
 							<span class="position">
-									<span class="price">153,600<span class="won">원</span></span>
+									<span class="price"><fmt:formatNumber value="${productVo.prod_price}" pattern="#,###"/><span class="won">원</span></span>
 									<div>
 										<span class="not_login">로그인 후, 적립혜택이 제공됩니다.</span>
 									</div>
 							</span>
 						</div>
 						
-						<!--색상 (있을때)-->
+						<!--색상 (있을때)--><!--사이즈(없을때)--> 
+						
 						<div class="goods_info">
-							<dl class="list fst">
-								<dt class="tit">색상</dt> <dd class="desc">기본</dd>
-							</dl> 
-
-						<!--사이즈(없을때)--> 
-							<dl class="list">
-								<dt class="tit">사이즈</dt> <!----> <dd class="desc">Free</dd>
-							</dl>
+							
+							
+								<dl class="list fst">
+									<dt class="tit">색상</dt> <dd class="desc">${productVo.cssList[0].color}</dd>
+								</dl> 
+	
+							
+								<dl class="list">
+									<dt class="tit">사이즈</dt> <!----> <dd class="desc">${productVo.cssList[0].prod_size}</dd>
+								</dl>
 							
 							
 							<!--사이즈 (있을때)-->
@@ -102,7 +106,7 @@
 								<form name="form" method="get">
 								<dl class="list">
 									<dt class="tit">
-										수량 : <input type=hidden name="sell_price" value="153600">
+										수량 : <input type=hidden name="sell_price" value="${productVo.prod_price}">
 									</dt> 
 									<dd class="desc">
 										<div class="countpm">
@@ -254,7 +258,7 @@
 
 			<!--상세정보(이미지)-->
 			<div class="goods_view">
-				<img src="${pageContext.request.contextPath}/assets/image/store_img/glove1-1.png" alt="상품 추가 이미지" class="bg"> <!--상품 추가 이미지-->
+				<img src="${pageContext.request.contextPath}/upload/${productVo.prod_detail_img_savename}" alt="상품 추가 이미지" class="bg">
 			</div>
 
 
@@ -285,24 +289,12 @@
 				<table width="100%" border="0" cellpadding="0" cellspacing="1" class="extra-information">
 					<tbody>
 						<tr>
-							<th scope="row" class="goods-view-form-table-heading">제품명</th><td>상품 설명 및 상품 이미지 참조</td>
-							<th scope="row" class="goods-view-form-table-heading">식품의 유형</th><td>상품 설명 및 상품 이미지 참조</td>
+							<th scope="row" class="goods-view-form-table-heading">제품소개</th><td>${productVo.prod_desc}</td>
+							<th scope="row" class="goods-view-form-table-heading">제조,수입내용</th><td>${productVo.prod_from}</td>
 						</tr>
 						<tr>
-							<th scope="row" class="goods-view-form-table-heading">제조원 및 생산자</th><td>상품 설명 및 상품 이미지 참조</td>
-							<th scope="row" class="goods-view-form-table-heading">소재지</th><td>상품 설명 및 상품 이미지 참조</td>
-						</tr>
-						<tr>
-							<th scope="row" class="goods-view-form-table-heading">제조일/유통기한</th><td>상세정보 및 제품 별도라벨 표기</td>
-							<th scope="row" class="goods-view-form-table-heading">중량 및 구성</th><td>상품 설명 및 상품 이미지 참조</td>
-						</tr>
-						<tr>
-							<th scope="row" class="goods-view-form-table-heading">원재료 및 함량</th><td>상품 설명 및 상품 이미지 참조</td>
-							<th scope="row" class="goods-view-form-table-heading">보관방법</th><td>상품 설명 및 상품 이미지 참조</td>
-						</tr>
-						<tr>
-							<th scope="row" class="goods-view-form-table-heading">영양성분</th><td>상품 설명 및 상품 이미지 참조</td>
-							<th scope="row" class="goods-view-form-table-heading">소비자상담실 전화번호</th><td>마켓컬리 고객행복센터 (1644-1107)</td>
+							<th scope="row" class="goods-view-form-table-heading">세탁방법주의</th><td>${productVo.prod_wash}</td>
+							<th scope="row" class="goods-view-form-table-heading">품질보증기준</th><td>${productVo.prod_qual}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -547,8 +539,12 @@
 
 							
 							<p class="btnArea after">
-								<a href="#none" onclick="popup_register( 'add_review', '4416' )"><span class="bhs_button" style="line-height:30px; width:130px;">후기쓰기</span></a>
+								<a href="${pageContext.request.contextPath}/store/reviewForm?prodNo=${param.prodNo}">
+									<span class="bhs_button" style="line-height:30px; width:130px;">후기쓰기</span>
+								</a>
 							</p>
+							
+				
 						
 
 						</div> <!--board-->
@@ -746,8 +742,8 @@
 						
 
 								<p class="btnArea after">
-									<a href="${pageContext.request.contextPath}/store/qnaForm">
-										<span class="bhs_button" style="line-height:30px; width:130px;">상품문의</span>
+									<a href="${pageContext.request.contextPath}/store/qnaForm?prodNo=${param.prodNo}">
+										<span class="bhs_button" onclick="javascript:btn()" style="line-height:30px; width:130px;">상품문의</span>
 									</a>
 								</p>
 
@@ -796,7 +792,7 @@
 		</div> <!--layout_wrap goods_view_area-->
 		
 		
-		
+		<input type="text" id="authuser" value="${authUser.user_no}">
 
 
 
@@ -863,30 +859,16 @@
 	}
 	
 	
+	//session값 가져오기 --> 이 방식으로는 오류 Uncaught ReferenceError: $ is not defined
+	//일단 넘어가고 나중에 걸러주기로
+	var authuser = $("#authuser").val();
+	console.log(authuser);
 	
-	
-	
-	//DOM이 생성되면
-	$("document").ready(function(){
-		console.log("ready");
+	function btn(){ 
 		
-		//리스트 출력
-		fetchList();
-		
-	});
-	
+		alert('로그인 후 작성 가능합니다.'); 
+	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

@@ -22,6 +22,9 @@
 		<typeAlias alias="ProdimgVo" type="com.javaex.vo.ProdimgVo" /> <!-- 세림 ProdimgVo -->
 		<typeAlias alias="CartVo" type="com.javaex.vo.CartVo" />
 		<typeAlias alias="CartInfoVo" type="com.javaex.vo.CartInfoVo" />
+		<typeAlias alias="ColorsizeVo" type="com.javaex.vo.ColorsizeVo" /> <!-- 세림 ProdimgVo -->
+		<typeAlias alias="ReviewVo" type="com.javaex.vo.ReviewVo" /> <!-- 세림 ProductVo -->
+		<typeAlias alias="ReviewimgVo" type="com.javaex.vo.ReviewimgVo" /> <!-- 세림 ProdimgVo -->
 	</typeAliases>
 
 	<mappers>
