@@ -104,7 +104,7 @@ public class GymController {
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 		authUser.setBook_type(sellervo.getBook_type());
 
-		return "mypage/mypage_resrvation/mypage_gyminfo";
+		return "redirect:/mypage/book/gymaddform";
 
 	}
 

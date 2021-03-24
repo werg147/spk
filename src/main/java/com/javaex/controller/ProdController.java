@@ -106,7 +106,7 @@ public class ProdController {
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 		authUser.setProd_type(sellervo.getProd_type());
 
-		return "mypage/mypage_prod/prod_manage";
+		return "redirect:/mypage/prod";
 	}
 
 	// 배송판매자 계정관리 페이지
