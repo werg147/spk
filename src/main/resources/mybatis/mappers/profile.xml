@@ -127,5 +127,15 @@
    		
    </select>
 	
+	<select id="selectProfileEvent" parameterType="int" resultType="profileVo">
+	<![CDATA[
+                select profile_no,
+                       profile_gym_event  as profileGymEvent
+                from profile
+                where profile_no= #{profileNo}
+	
+	]]>
+	
+	</select>
 
 </mapper>

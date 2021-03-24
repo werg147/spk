@@ -15,6 +15,15 @@
   width: 1050px;
   margin: auto;
 }
+#no_here_box{
+	margin:135px 0px 0px 20px;
+}
+#no_select_here_img{
+	width:150px;
+}
+#no_select_here{
+	
+}
 .p_dae {
   font-size: 17px;
   color: #e60012;
@@ -1165,6 +1174,7 @@ input:-ms-input-placeholder {
 
   justify-content: center; /* 좌우 기준 중앙정렬 */
   font-size: 15px;
+  cursor:pointer;
 }
 
 .swiper-slide img {
@@ -1918,6 +1928,24 @@ form {
   text-decoration: line-through;
   vertical-align: 1px;
 }
+
+/*상품결제에서 쓰려고 안겹치게 추가합니다*/
+.only_pc .box .list li .goods .price .in_price .cost2 {
+    display: block;
+    padding-top: 4px;
+    line-height: 24px;
+    text-align: right;
+}
+
+.box .list li .goods .price .cost2 {
+    padding-left: 6px;
+    font-size: 14px;
+    color: #999;
+    line-height: 20px;
+    word-break: break-all;
+    vertical-align: 1px;
+}
+/*****************************************/
 
 .only_pc .box .list li .goods .price .in_price .noti {
   height: auto;

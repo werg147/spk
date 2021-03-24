@@ -28,6 +28,7 @@
 				       b.booking_end,
 				       b.booking_price,
 				       g.gym_name,
+				       g.gym_event,
 				       i.gym_img_savename
 				from booking b , gym g ,gymimg i
 				where b.gym_no = g.gym_no
@@ -36,5 +37,13 @@
 				and b.booking_no = #{bookingNo}
 			]]>
 	</select>
+	<update id="updateBooking" parameterType="int">
+	<![CDATA[
+			update booking
+			set booking_state = '예약'
+			where booking_no = #{bookingNo}	
+	]]>
 	
+	
+	</update>
 </mapper>

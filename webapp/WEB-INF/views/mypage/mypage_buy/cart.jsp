@@ -10,6 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
 <title>알림</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/header.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/mypage_buy.css">
@@ -57,54 +58,56 @@
 									<!-- //cart_select -->
 
 									<!-- 반복리스트 -->
-									<c:forEach items="${cartInfoVo.cList }" var="cList">
-										<div class="box room">
+									<div id="cartList">
+										<c:forEach items="${cartInfoVo.cList }" var="cList">
+											<div class="box room Cartitem${cList.cart_no }">
 
-											<ul class="list">
+												<ul class="list">
 
-												<li>
-													<div class="item">
+													<li>
+														<div class="item">
 
-														<label class="check" for=""> <input type="checkbox" id="" name="chkItem" data-item-id="" data-item-no="" data-item-parent-no="" checked> <span class="ico"></span>
-														</label>
-														<!-- //check -->
+															<label class="check" for=""> <input type="checkbox" id="" name="chkItem" data-item-id="" data-item-no="" data-item-parent-no="" checked> <span class="ico"></span>
+															</label>
+															<!-- //check -->
 
-														<div class="name">
-															<div class="inner_name">
-																<a href="" class="package">${cList.prod_name }, ${cList.prod_size }, ${cList.color }</a>
-																<div class="info"></div>
-															</div>
-														</div>
-														<!-- //name -->
-
-														<div class="goods">
-
-															<a href="" class="thumb" style="background-image: url(${pageContext.request.contextPath}/assets/image/글러브.jpg);"> 상품이미지 </a>
-															<!-- //thumb -->
-
-															<div class="price">
-																<div class="in_price">
-																	<span class="selling">${cList.prod_price } <span class="won">원</span>
-																	</span> <span class="cart_count">${cList.count } <span class="won">EA</span>
-																	</span>
+															<div class="name">
+																<div class="inner_name">
+																	<a href="" class="package">${cList.prod_name }, ${cList.prod_size }, ${cList.color }</a>
+																	<div class="info"></div>
 																</div>
 															</div>
-															<!-- //price -->
+															<!-- //name -->
 
-														</div>
-														<!-- //goods -->
+															<div class="goods">
 
-														<button type="button" class="btn_delete" data-item-id="" data-item-no="" data-type="">상품삭제</button>
-														<!-- //btn_delete -->
+																<a href="" class="thumb" style="background-image: url(${pageContext.request.contextPath}/assets/image/글러브.jpg);"> 상품이미지 </a>
+																<!-- //thumb -->
 
-													</div> <!-- //item -->
+																<div class="price">
+																	<div class="in_price">
+																		<span class="selling">${cList.prod_price } <span class="won">원</span>
+																		</span> <span class="cart_count">${cList.count } <span class="won">EA</span>
+																		</span>
+																	</div>
+																</div>
+																<!-- //price -->
 
-												</li>
+															</div>
+															<!-- //goods -->
 
-											</ul>
+															<button type="button" class="btn_delete" data-no="${cList.cart_no }" data-userno=${cList.user_no }>상품삭제</button>
+															<!-- //btn_delete -->
 
-										</div>
-									</c:forEach>
+														</div> <!-- //item -->
+
+													</li>
+
+												</ul>
+
+											</div>
+										</c:forEach>
+									</div>
 									<!-- //box room -->
 									<!-- //반복리스트 -->
 
@@ -124,11 +127,8 @@
 										<div class="amount_view">
 											<dl class="amount">
 												<dt class="tit">상품금액</dt>
-												<dd class="price">
-													<span class="num">
-													<fmt:formatNumber type="number" maxFractionDigits="3" value="${cartInfoVo.totalPrice}" /></span>
-													<span class="won"></span>
-													<span class="won">원</span>
+												<dd class="price" id="priceTotal">
+													<span class="num"> <fmt:formatNumber type="number" maxFractionDigits="3" value="${cartInfoVo.totalPrice}" /></span> <span class="won"></span> <span class="won">원</span>
 												</dd>
 											</dl>
 
@@ -141,10 +141,8 @@
 
 											<dl class="amount lst">
 												<dt class="tit">결제금액</dt>
-												<dd class="price">
-													<span class="num"><fmt:formatNumber type="number" maxFractionDigits="3" value="${cartInfoVo.totalPrice}" /></span>
-													<span class="won"></span>
-													<span class="won">원</span>
+												<dd class="price" id="priceTotal2">
+													<span class="num"><fmt:formatNumber type="number" maxFractionDigits="3" value="${cartInfoVo.totalPrice}" /></span> <span class="won"></span> <span class="won">원</span>
 												</dd>
 											</dl>
 
@@ -182,5 +180,61 @@
 	<!--//wrap-->
 
 </body>
+
+<!-- 삭제버튼 클릭시 삭제 -->
+<script type="text/javascript">
+	console.log("콘솔")
+
+	$(".btn_delete").on("click", function() {
+		console.log("삭제버튼을 누르면..")
+
+		var no = $(this).data("no");
+		var userno = $(this).data("userno");
+
+		console.log(no)
+
+		$.ajax({
+			url : "${pageContext.request.contextPath }/mypage/remove",
+			type : "post",
+			// contentType : "application/json",
+			data : {
+				no : no,
+				userno : userno
+			},
+			dataType : "json",
+			success : function(priceAll) {
+				console.log(priceAll);
+
+				$(".Cartitem" + no).html(" ");
+
+				price(priceAll);
+
+			},
+
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+
+		});
+
+	})
+
+	function price(priceAll) {
+		console.log(priceAll)
+
+		var str01 = '<span class="num">'
+				+ priceAll
+				+ '</span> <span class="won"></span> <span class="won">원</span>';
+		$("#priceTotal").html(" ");
+		$("#priceTotal").append(str01);
+
+		var str02 = '<span class="num">'
+				+ priceAll
+				+ '</span> <span class="won"></span> <span class="won">원</span>';
+		$('#priceTotal2').html(" ");
+		$('#priceTotal2').append(str02);
+	}
+</script>
+<!-- //삭제버튼 클릭시 삭제 -->
 
 </html>

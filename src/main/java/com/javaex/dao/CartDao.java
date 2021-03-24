@@ -30,4 +30,9 @@ public class CartDao {
 		return sql.selectOne("cart.selectOneTotalPrice", user_no);
 	}
 
+	public int remove(int cart_no) {
+
+		return sql.delete("cart.removeCartList", cart_no);
+	}
+
 }

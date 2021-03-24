@@ -279,7 +279,7 @@
 					<div id="hidden12">
 						<input type="hidden" name="bookingno" value="0">
 					</div>
-					<input type="hidden" name="userno" value="2">
+					<input type="hidden" name="user_no" value="${authUser.user_no }">
 				</form>
 				<!-- 버튼 end -->
 			</section>
@@ -483,7 +483,7 @@
     function hiddenBookingNo(bookingNo1){
     	$("#hidden12").html(" ");
     	
-    	str='<input type="hidden" name="bookingno" value="'+bookingNo1+'"/>'
+    	str='<input type="hidden" name="booking_no" value="'+bookingNo1+'"/>'
     	
     	$("#hidden12").append(str);
     }

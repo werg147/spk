@@ -383,6 +383,8 @@
 	});
 	
 	function msg(msgone){
+		$("#hideMsg1").html("");
+		
 		str = "<div class='hide-text'>5회 이하는 매칭이 불가능 합니다</div>";
 		str += '<a href=""><button type="button" class="product_delclose_btn">돌아가기</button></a>'
 		if(msgone == '1'){

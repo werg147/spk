@@ -64,11 +64,7 @@ public class StoreService {
 		
 		return productVo;
 	}
-	
-	
-	
-	
-	
+
 	
 	///////////////////////////////////////////////////////////////
 	//qna form 유저정보 가져오기
@@ -219,6 +215,15 @@ public class StoreService {
 		}
 		
 
+	}
+	
+	
+	
+	//결제하기 폼
+	public List<ProductVo> payform(int user_no) {
+		System.out.println("[Service] payform()");
+		
+		return storeDao.selectPayList(user_no);
 	}
 	
 	

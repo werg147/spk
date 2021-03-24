@@ -86,7 +86,7 @@
 								</div>
 								<div class="mach_box2">
 									<div class="mach_box_sub">프로필을 공개하고 상대를 기다려보세요.</div>
-									<a href="${pageContext.request.contextPath }/sparring/writeForm?mainnum=1">
+									<a href="${pageContext.request.contextPath }/sparring/writeForm?user_no=${authUser.user_no}">
 										<button class="mach_box_sub_btn">대관없이 매치만들기</button>
 									</a>
 								</div>

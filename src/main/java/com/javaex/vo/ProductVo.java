@@ -26,6 +26,8 @@ public class ProductVo {
 	private String prod_img_name;
 	private String prod_img_savename;
 
+	private int count;
+	
 	private List<ReviewVo> reList;
 
 	private List<QnaVo> qnaList;
@@ -42,7 +44,7 @@ public class ProductVo {
 	public ProductVo(String prod_no, int sell_no, String prod_cate, String event_cate, String prod_name, int prod_price,
 			String prod_brand, String prod_desc, String prod_from, String prod_wash, String prod_qual,
 			String prod_detail, String prod_detail_img_name, String prod_detail_img_savename, String prod_date,
-			String prod_img_name, String prod_img_savename, List<ReviewVo> reList, List<QnaVo> qnaList,
+			String prod_img_name, String prod_img_savename, int count, List<ReviewVo> reList, List<QnaVo> qnaList,
 			List<ProductVo> storeList, List<ProdimgVo> pimgList, List<ColorsizeVo> cssList) {
 		super();
 		this.prod_no = prod_no;
@@ -62,6 +64,7 @@ public class ProductVo {
 		this.prod_date = prod_date;
 		this.prod_img_name = prod_img_name;
 		this.prod_img_savename = prod_img_savename;
+		this.count = count;
 		this.reList = reList;
 		this.qnaList = qnaList;
 		this.storeList = storeList;
@@ -245,6 +248,14 @@ public class ProductVo {
 		this.qnaList = qnaList;
 	}
 
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
 	@Override
 	public String toString() {
 		return "ProductVo [prod_no=" + prod_no + ", sell_no=" + sell_no + ", prod_cate=" + prod_cate + ", event_cate="
@@ -252,9 +263,9 @@ public class ProductVo {
 				+ ", prod_desc=" + prod_desc + ", prod_from=" + prod_from + ", prod_wash=" + prod_wash + ", prod_qual="
 				+ prod_qual + ", prod_detail=" + prod_detail + ", prod_detail_img_name=" + prod_detail_img_name
 				+ ", prod_detail_img_savename=" + prod_detail_img_savename + ", prod_date=" + prod_date
-				+ ", prod_img_name=" + prod_img_name + ", prod_img_savename=" + prod_img_savename + ", reList=" + reList
-				+ ", qnaList=" + qnaList + ", storeList=" + storeList + ", pimgList=" + pimgList + ", cssList="
-				+ cssList + "]";
+				+ ", prod_img_name=" + prod_img_name + ", prod_img_savename=" + prod_img_savename + ", count=" + count
+				+ ", reList=" + reList + ", qnaList=" + qnaList + ", storeList=" + storeList + ", pimgList=" + pimgList
+				+ ", cssList=" + cssList + "]";
 	}
 
 }
