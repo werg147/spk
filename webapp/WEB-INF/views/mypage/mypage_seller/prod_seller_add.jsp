@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/assets/css/header.css">
 <link rel="stylesheet"
@@ -38,10 +40,10 @@
 						<!--입력폼 (추후 form 추가)-->
 						<c:choose>
 							<c:when test="${authUser.book_type == 0}">
-								<form action="${pageContext.request.contextPath}/mypage/prod/prodselleradd" method="get">
+								<form id="addForm" action="${pageContext.request.contextPath}/mypage/prod/prodselleradd" method="get">
 							</c:when>
 							<c:otherwise>
-								<form action="${pageContext.request.contextPath}/mypage/prod/prodsellermodify" method="get">
+								<form id="addForm" action="${pageContext.request.contextPath}/mypage/prod/prodsellermodify" method="get">
 								<input type="hidden" name="sell_no" value="${authUser.sell_no}">
 							</c:otherwise>
 						</c:choose>
@@ -63,7 +65,7 @@
 										<td class="basic">사업자 번호</td>
 										<td><input class="input_con" type="text" name="prod_business_no"
 											placeholder="번호를 입력해주세요">
-											<div class="seller_alert">'-'와 공백을 제외하고 입력해주세요. (예:
+											<div class="seller_alert">'-'와 공백을 제외하고 숫자만 입력해주세요. (예:
 												1231212345)</div></td>
 									</tr>
 
@@ -76,7 +78,7 @@
 									<tr>
 										<td class="basic" >사업자 계좌번호</td>
 										<td><select name="prod_sell_bank">
-												<option>은행 선택</option>
+												<option disabled>은행 선택</option>
 												<option>국민은행</option>
 												<option>신한은행</option>
 												<option>우리은행</option>
@@ -89,7 +91,7 @@
 												<input class="input_con" type="text" name="prod_sell_account"
 													placeholder="계좌번호를 입력해주세요">
 											</div>
-											<div class="seller_alert">'-'와 공백을 제외하고 입력해주세요. (예:
+											<div class="seller_alert">'-'와 공백을 제외하고 숫자만 입력해주세요. (예:
 												1234567890123)</div></td>
 									</tr>
 									<input type="hidden" name="prod_type" value="1">
@@ -115,4 +117,34 @@
 	</div>
 	<!--//wrap-->
 </body>
+
+<script type="text/javascript">
+
+	$("#addForm").on("submit", function() {
+	
+		var name = $("[name='prod_sell_name']").val();
+
+		var comName = $("[name='prod_com_name']").val();
+
+		var no = $("[name='prod_business_no']").val();
+		
+		var address = $("[name='prod_sell_address']").val();
+		
+		var bank = $("[name='prod_sell_bank']").val();
+		
+		var acc = $("[name='prod_sell_account']").val();
+
+		var formArr = new Array(name, comName, no, address, bank, acc);
+		
+		for(var i=0; i<formArr.length; i++){
+			if(!formArr[i]){
+				alert("모든 정보를 입력해 주세요");
+				return false;
+			};
+		}
+		
+		return true;
+		
+	});
+</script>
 </html>
