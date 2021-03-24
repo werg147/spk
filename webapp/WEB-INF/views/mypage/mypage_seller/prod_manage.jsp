@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>사업자 계정</title>
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/assets/css/header.css">
 <link rel="stylesheet"
@@ -36,7 +38,7 @@
 						<br>
 
 						<!--입력폼 (추후 form 추가)-->
-						<form action="${pageContext.request.contextPath}/mypage/prod/prodsellermodify" method="get">
+						<form id="addForm" action="${pageContext.request.contextPath}/mypage/prod/prodsellermodify" method="get">
 						<input type="hidden" name="sell_no" value="${authUser.sell_no}">
 							<table class="seller_regi_form">
 								<tbody>
@@ -68,7 +70,8 @@
 									<tr>
 										<td class="basic" >사업자 계좌번호</td>
 										<td><select name="prod_sell_bank">
-											<option value="국민은행" ${sellervo.prod_sell_bank == '국민은행' ? 'selected="selected"' : ''}>국민은행</option>
+												<option disabled>은행 선택</option>
+												<option value="국민은행" ${sellervo.prod_sell_bank == '국민은행' ? 'selected="selected"' : ''}>국민은행</option>
 												<option value="신한은행" ${sellervo.prod_sell_bank == '신한은행' ? 'selected="selected"' : ''}>신한은행</option>
 												<option value="우리은행" ${sellervo.prod_sell_bank == '우리은행' ? 'selected="selected"' : ''}>우리은행</option>
 												<option value="하나은행" ${sellervo.prod_sell_bank == '하나은행' ? 'selected="selected"' : ''}>하나은행</option>
@@ -107,4 +110,34 @@
 	</div>
 	<!--//wrap-->
 </body>
+
+<script type="text/javascript">
+
+	$("#addForm").on("submit", function() {
+	
+		var name = $("[name='prod_sell_name']").val();
+
+		var comName = $("[name='prod_com_name']").val();
+
+		var no = $("[name='prod_business_no']").val();
+		
+		var address = $("[name='prod_sell_address']").val();
+		
+		var bank = $("[name='prod_sell_bank']").val();
+		
+		var acc = $("[name='prod_sell_account']").val();
+
+		var formArr = new Array(name, comName, no, address, bank, acc);
+		
+		for(var i=0; i<formArr.length; i++){
+			if(!formArr[i]){
+				alert("모든 정보를 입력해 주세요");
+				return false;
+			};
+		}
+		
+		return true;
+		
+	});
+</script>
 </html>
