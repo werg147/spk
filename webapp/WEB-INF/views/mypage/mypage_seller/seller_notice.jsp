@@ -34,11 +34,11 @@
 						<div class="not_seller_phrase2">사장님이신가요? 판매자 등록을 해 주세요!</div>
 						
 						<c:if test="${authUser.book_type == 0}">						
-							<a href="${pageContext.request.contextPath}/user/bookselleraddform"><button  class="seller_btn" type="button">대관상품 등록하기</button></a>
+							<a href="${pageContext.request.contextPath}/mypage/book/bookselleraddform"><button  class="seller_btn" type="button">대관상품 등록하기</button></a>
 						</c:if>
 						
 						<c:if test="${authUser.prod_type == 0}">
-							<a href="${pageContext.request.contextPath}/user/prodselleraddform"><button  class="seller_btn" type="button">배송상품판매자 등록하기</button></a>
+							<a href="${pageContext.request.contextPath}/mypage/prod/prodselleraddform"><button  class="seller_btn" type="button">배송상품판매자 등록하기</button></a>
 						</c:if>
 						<div id="space"></div>
 					</div>

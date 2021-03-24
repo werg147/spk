@@ -141,6 +141,6 @@ public class ProdController {
 	@RequestMapping(value = "/exam", method = { RequestMethod.GET, RequestMethod.POST })
 	public String exam() {
 
-		return "mypage/mypage_seller/seller_profit";
+		return "mypage/mypage_buy/buylist";
 	}
 }
