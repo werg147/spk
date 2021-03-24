@@ -1,6 +1,5 @@
 package com.javaex.controller;
 import java.util.List;
-
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,6 +49,16 @@ public class ProdController {
 		return "mypage/mypage_prod/prod_modify_form";
 	}
 
+	//상품정보 삭제하기
+	@RequestMapping(value = "/prodremove", method = { RequestMethod.GET, RequestMethod.POST })
+	public String prodRemove(@RequestParam ("prod_no") String prod_no){
+		System.out.println("[cnt]상품정보 수정하기" + prod_no);	
+		prodservice.prodRemove(prod_no);
+
+		return "redirect:/mypage/prod";
+	}
+	
+	
 	// 상품등록페이지
 	@RequestMapping(value = "/form", method = { RequestMethod.GET, RequestMethod.POST })
 	public String prodForm() {
@@ -83,6 +92,18 @@ public class ProdController {
 		return prodservice.prodSizeWrite(prodvo);	
 
 	}
+	
+	//배송관리 페이지 열기
+	@RequestMapping(value = "/delmanage", method = { RequestMethod.GET, RequestMethod.POST })
+	public String delmanage() {
+		System.out.println("[cnt] 배송관리페이지");
+		
+		return "mypage/mypage_seller/prod_seller_add";
+	}
+
+	
+	
+	
 
 	// 배송판매자 계정등록 폼
 	@RequestMapping(value = "/prodselleraddform", method = { RequestMethod.GET, RequestMethod.POST })
@@ -92,7 +113,7 @@ public class ProdController {
 
 		model.addAttribute("authUser", authUser);
 
-		return "mypage/mypage_seller/prod_seller_add";
+		return "mypage/mypage_prod/delivery_manage";
 	}
 
 	// 배송판매자 대관계정 등록

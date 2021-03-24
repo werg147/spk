@@ -60,6 +60,12 @@ public class ProdService {
 		return prodvo;
 	}
 	
+	//상품 삭제
+	public void prodRemove(String prodRemove) {
+		System.out.println("[service] 상품삭제하기");
+		
+	}
+	
 	//상품등록
 	public String prodWrite(ProductVo prodvo, 
 							MultipartFile mainfile, 
@@ -179,6 +185,7 @@ public class ProdService {
 	public void prodSellerModify(SellerVo sellervo) {
 		userdao.prodSellerUpdate(sellervo);
 	}
+	
 	
 
 }
