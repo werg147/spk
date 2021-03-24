@@ -29,6 +29,10 @@
 	</select>
 	
 	<insert id="sellerBookInsert" parameterType="com.javaex.vo.SellerVo">
+			<selectKey keyProperty="sell_no" resultType="int" order="BEFORE">
+				select seq_sell_no.nextval
+				from dual
+			</selectKey>
 		<![CDATA[
 			insert into seller (sell_no, 
 								  user_no, 
@@ -40,7 +44,7 @@
 								  book_sell_bank, 
 								  book_sell_account
 								  )
-							VALUES(seq_sell_no.nextval, 
+							VALUES(#{sell_no}, 
 								  #{user_no}, 
 								  #{book_type},
 								  #{book_sell_name},
@@ -54,6 +58,10 @@
 	</insert>
 	
 		<insert id="sellerProdInsert" parameterType="com.javaex.vo.SellerVo">
+			<selectKey keyProperty="sell_no" resultType="int" order="BEFORE">
+				select seq_sell_no.nextval
+				from dual
+			</selectKey>
 		<![CDATA[
 			insert into seller (sell_no, 
 								  user_no, 
@@ -65,16 +73,16 @@
 								  prod_sell_bank, 
 								  prod_sell_account
 								  )
-			  	    VALUES(seq_sell_no.nextval, 
-								  #{user_no}, 
-								  #{prod_type}, 
-								  #{prod_sell_name}, 
-								  #{prod_com_name},
-								  #{prod_business_no}, 
-								  #{prod_sell_address}, 
-								  #{prod_sell_bank}, 
-								  #{prod_sell_account}
-								  )
+			  	    VALUES(#{sell_no}, 
+						  #{user_no}, 
+						  #{prod_type}, 
+						  #{prod_sell_name}, 
+						  #{prod_com_name},
+						  #{prod_business_no}, 
+						  #{prod_sell_address}, 
+						  #{prod_sell_bank}, 
+						  #{prod_sell_account}
+						  )
 		]]>
 	</insert>
 	
