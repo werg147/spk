@@ -57,11 +57,11 @@
 			<img src="${pageContext.request.contextPath }/assets/image/마이페이지 남성_글러브.png"></a>
 		</div>
 		<div>
-			<a href="./html/alarm.html"> <img
+			<a href="${pageContext.request.contextPath}/mypage_buy/alarm"> <img
 				src="${pageContext.request.contextPath }/assets/image/bell_2.png"></a>
 		</div>
 		<div>
-			<a href="./html/cart.html"> <img
+			<a href="${pageContext.request.contextPath}/mypage_buy/cart"> <img
 				src="${pageContext.request.contextPath }/assets/image/cart3.png"></a>
 		</div>
 	</div>

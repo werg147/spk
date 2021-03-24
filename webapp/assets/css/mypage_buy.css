@@ -61,14 +61,20 @@ overflow: hidden;
 
 .Box_alarm .Addr_goods{
     color: gray;
+    font-size: 16px;
 }
 
 .Box_alarm .Kind_goods{
     color: white;
-    background-color: red;
-    width: 30px;
+    background-color: #e60012;
+    width: 60px;
     text-align: center;
     margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.Box_alarm .Notice_alarm{
+	font-size: 14px;
 }
 
 .Box_alarm .Kind_goods_state{

@@ -6,108 +6,123 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.javaex.dao.AlarmDao;
+import com.javaex.vo.AlarmContentVo;
 import com.javaex.vo.AlarmVo;
 
 @Service
 public class AlarmService {
 
+	AlarmContentVo alarmcVo = new AlarmContentVo();
+
+	AlarmVo alarmVo = new AlarmVo();
+
 	@Autowired
 	private AlarmDao aDao;
 
-	public List<AlarmVo> list() {
+	// 알림 리스트 불러오기
+	public List<AlarmVo> list(int user_no) {
 
 		System.out.println("[Alarm Service]: list() 연결");
 
-		return aDao.selectList();
+		return aDao.selectList(user_no);
+
 	}
 
-	public Object payment_complete(AlarmVo aVo) {
+	// 결제완료 알림 발송
+	public void paymentComplete(int buy_no) {
 
 		System.out.println("[Alarm Service]: payment_complete(AlarmVo aVo) 연결");
 
-		aDao.payment_complete(aVo);
+		List<AlarmVo> alarmList = aDao.prodSelectList(buy_no);
 
-		return aDao.product_alarm(aVo);
+		System.out.println("결제알람 발송 내용 서비스" + alarmList);
 
-	}
+		if (alarmList.size() > 1) {
 
-	public Object delivery_ready(AlarmVo aVo) {
+			alarmVo = alarmList.get(0);
 
-		System.out.println("[Alarm Service]: delivery_ready(AlarmVo aVo) 연결");
+			System.out.println("상품 여러개 보내기" + alarmVo);
 
-		aDao.delivery_ready(aVo);
+			String name = alarmVo.getProd_name();
 
-		return aDao.product_alarm(aVo);
+			int num = alarmList.size() + 1;
 
-	}
+			String prod_name = name + " 외 " + num + "개";
 
-	public Object delivery_ing(AlarmVo aVo) {
+			alarmVo.setProd_name(prod_name);
 
-		System.out.println("[Alarm Service]: delivery_ing(AlarmVo aVo) 연결");
+		} else {
 
-		aDao.delivery_ing(aVo);
+			alarmVo = alarmList.get(0);
 
-		return aDao.product_alarm(aVo);
+		}
 
-	}
+		// 구매자에게 보내는 알람
+		alarmVo.setAlarm_content(alarmcVo.getPayment_complete());
 
-	public Object delivery_complete(AlarmVo aVo) {
+		aDao.insertProdAlarm(alarmVo);
 
-		System.out.println("[Alarm Service]: delivery_complete(AlarmVo aVo) 연결");
+		for (int i = 0; i < alarmList.size(); i++) {
 
-		aDao.delivery_complete(aVo);
+			alarmVo = alarmList.get(i);
 
-		return aDao.product_alarm(aVo);
+			int user_no = alarmList.get(i).getSell_no();
 
-	}
+			alarmList.get(i).setUser_no(user_no);
 
-	public Object matching_registration(AlarmVo aVo) {
+		}
 
-		System.out.println("[Alarm Service]: matching_registration(AlarmVo aVo) 연결");
+		// 판매자에게 보내는 알람
+		alarmVo.setAlarm_content(alarmcVo.getPayment_complete());
 
-		aDao.matching_registration(aVo);
+		System.out.println(alarmVo);
 
-		return aDao.matching_alarm(aVo);
-
-	}
-
-	public Object getMatch_application(AlarmVo aVo) {
-
-		System.out.println("[Alarm Service]: getMatch_application(AlarmVo aVo) 연결");
-
-		aDao.getMatch_application(aVo);
-
-		return aDao.matching_alarm(aVo);
+		aDao.insertProdAlarm(alarmVo);
 
 	}
 
-	public Object getMatching_refused(AlarmVo aVo) {
+	// 배송준비 중 알림 발송
+	public void deliveryReady(int buyprod_no) {
 
-		System.out.println("[Alarm Service]: getMatching_refused(AlarmVo aVo) 연결");
+		System.out.println("[Alarm Service]: payment_complete(AlarmVo aVo) 연결");
 
-		aDao.getMatching_refused(aVo);
+		alarmVo = aDao.prodSelect(buyprod_no);
 
-		return aDao.matching_alarm(aVo);
+		alarmVo.setAlarm_content(alarmcVo.getDelivery_ready());
 
-	}
+		System.out.println(alarmVo);
 
-	public Object matching_accept(AlarmVo aVo) {
-
-		System.out.println("[Alarm Service]: matching_accept(AlarmVo aVo) 연결");
-
-		aDao.matching_accept(aVo);
-
-		return aDao.matching_alarm(aVo);
+		aDao.insertProdAlarm(alarmVo);
 
 	}
 
-	public Object matching_complete(AlarmVo aVo) {
+	// 배송시작
+	public void delStart(int buyprod_no) {
 
-		System.out.println("[Alarm Service]: matching_complete(AlarmVo aVo) 연결");
+		System.out.println("[Alarm Service]: delStart(AlarmVo aVo) 연결");
 
-		aDao.matching_complete(aVo);
+		alarmVo = aDao.prodSelect(buyprod_no);
 
-		return aDao.matching_alarm(aVo);
+		alarmVo.setAlarm_content(alarmcVo.getDelivery_ing());
+
+		System.out.println(alarmVo);
+
+		aDao.insertProdAlarm(alarmVo);
+
+	}
+
+	// 베송완료
+	public void delcomplete(int buyprod_no) {
+
+		System.out.println("[Alarm Service]: delcomplete(AlarmVo aVo) 연결");
+
+		alarmVo = aDao.prodSelect(buyprod_no);
+
+		alarmVo.setAlarm_content(alarmcVo.getDelivery_complete());
+
+		System.out.println(alarmVo);
+
+		aDao.insertProdAlarm(alarmVo);
 
 	}
 

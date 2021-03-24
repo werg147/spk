@@ -105,7 +105,7 @@ public class ProdController {
 
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 		authUser.setSell_no(sellervo.getSell_no());
-		authUser.setProd_type(sellervo.getProd_type());
+		authUser.setProd_type(sellervo.getProd_type());	
 
 		return "redirect:/mypage/prod";
 	}

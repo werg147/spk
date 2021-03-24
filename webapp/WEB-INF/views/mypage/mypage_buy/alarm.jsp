@@ -44,14 +44,16 @@
 								<h3 class="Order_date">${aList.alarm_date }</h3>
 								<div class="Box_alarm">
 									<c:choose>
-										<c:when test="${aList.sell_type.equals('배송') }">
-											<span><a class="Addr_goods" href="">${aList.prod_name }</a></span>
+										<c:when test="${aList.buy_type == 1 }">
+											<span class="Kind_goods">배송상품</span>
+											<span><a class="Addr_goods" href="${pageContext.request.contextPath }/WEB-INF/views/mypage/mypage_buy/buylist">${aList.alarm_title}</a></span>
 										</c:when>
 										<c:otherwise>
+											<span class="Kind_goods">매칭상품</span>
 											<span><a class="Addr_goods" href="">${aList.gym_name }</a></span>
 										</c:otherwise>
 									</c:choose>
-									<span class="Kind_goods">${aList.sell_type }</span>
+
 									<p class="Notice_alarm">${aList.alarm_content }</p>
 								</div>
 							</div>
@@ -62,40 +64,24 @@
 					<!--//alram_list-->
 					<!-- //반복리스트 -->
 
-					<form action="${pageContext.request.contextPath }/mypage/payment_complete" method="get">
-						<button type="submit">결제하기</button>
+					<form action="${pageContext.request.contextPath }/mypage/productBuy" method="get">
+						<input type="text" name="buy_no" value="1">
+						<button type="submit">주문하기</button>
 					</form>
 
-					<form action="${pageContext.request.contextPath }/mypage/delivery_ready" method="get">
-						<button type="submit">주문확인</button>
+					<form action="${pageContext.request.contextPath }/mypage/delReady" method="get">
+						<input type="text" name="buyprod_no" value="1">
+						<button type="submit">배송준비 중</button>
 					</form>
 
-					<form action="${pageContext.request.contextPath }/mypage/delivery_ing" method="get">
-						<button type="submit">발송하기</button>
+					<form action="${pageContext.request.contextPath }/mypage/delStart" method="get">
+						<input type="text" name="buyprod_no" value="1">
+						<button type="submit">배송시작</button>
 					</form>
 
-					<form action="${pageContext.request.contextPath }/mypage/delivery_complete" method="get">
+					<form action="${pageContext.request.contextPath }/mypage/delcomplete" method="get">
+						<input type="text" name="buyprod_no" value="1">
 						<button type="submit">배송완료</button>
-					</form>
-
-					<form action="${pageContext.request.contextPath }/mypage/matching_registration" method="get">
-						<button type="submit">매칭등록</button>
-					</form>
-
-					<form action="${pageContext.request.contextPath }/mypage/matching_application" method="get">
-						<button type="submit">매칭신청</button>
-					</form>
-
-					<form action="${pageContext.request.contextPath }/mypage/matching_refused" method="get">
-						<button type="submit">거절하기</button>
-					</form>
-
-					<form action="${pageContext.request.contextPath }/mypage/matching_accept " method="get">
-						<button type="submit">수락하기</button>
-					</form>
-
-					<form action="${pageContext.request.contextPath }/mypage/matching_complete " method="get">
-						<button type="submit">파트너평가</button>
 					</form>
 
 				</div>

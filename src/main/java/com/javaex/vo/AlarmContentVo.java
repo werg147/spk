@@ -2,10 +2,11 @@ package com.javaex.vo;
 
 public class AlarmContentVo {
 
-	public String payment_complete = "[결제완료] 결제가 완료되었습니다";
-	public String delivery_ready = "[배송준비 중] 주문하신 상품의 배송을 준비 중 입니다.";
-	public String delivery_ing = "[배송 중] 주문하신 상품을 고객님께 배송 중 입니다.";
-	public String delivery_complete = "[배송완료] 주문하신 상품의 배송이 완료되었습니다.";
+	public String payment_complete = "<b>[결제완료]</b> 결제가 완료되었습니다.";
+	public String delivery_ready = "<b>[배송준비 중]</b> 주문하신 상품의 배송을 준비 중 입니다.";
+	public String delivery_ing = "<b>[배송 중]</b> 주문하신 상품을 고객님께 배송 중 입니다.";
+	public String delivery_complete = "<b>[배송완료]</b> 주문하신 상품의 배송이 완료되었습니다.";
+
 	public String match_registration = "[매칭대기 중] 매칭이 등록되었습니다.";
 	public String match_application = "[수락대기 중] 매치를 신청하였습니다.";
 	public String matching_refused = "[매칭종료] 매치신청이 거절되었습니다.";

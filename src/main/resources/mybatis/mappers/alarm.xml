@@ -4,58 +4,65 @@
 
 <mapper namespace="alarm">
 
-	<select id="selectAlarm" resultType="AlarmVo">
+	<select id="selectAlarm" parameterType="int" resultType="AlarmVo">
 		<![CDATA[
-			SELECT  a.alarm_date,
-			        p.prod_name,
-			        a.sell_type,
-			        a.alarm_content,
-			        a.alarm_no,
-			        a.from_user_no,
-			        a.to_user_no,
-			        u.user_no
-			FROM    alarm a, users u, product p
-			WHERE   a.from_user_no = u.user_no
-			        and u.user_no = 2
+			SELECT  alarm_no,
+			        from_user_no,
+			        to_user_no,
+			        alarm_content,
+			        alarm_date,
+			        sell_no,
+			        alarm_title,
+			        buy_type
+			FROM    alarm
+			WHERE   to_user_no = #{user_no}
+			order by alarm_date desc
 		]]>
 	</select>
 
-	<insert id="send_product_alarm" parameterType="AlarmVo">
+	<!-- 배송준비 중 -->
+	<select id="prodSelect" parameterType="int" resultType="AlarmVo">
 		<![CDATA[
-			INSERT INTO alarm VALUES(seq_alarm_no.nextval, #{from_user_no}, '2',  #{alarm_content}, '배송', sysdate)
+			SELECT  bp.prod_no,
+			        p.prod_name,
+			        p.sell_no,
+			        b.user_no,
+			        bp.buy_del_state
+			FROM    buyproduct bp, product p, buy b
+			WHERE   bp.prod_no = p.prod_no
+			        and b.buyprod_no = bp.prod_no
+			        and bp.buyprod_no = #{buyprod_no}
+		]]>
+	</select>
+
+	<!-- 결제완료 -->
+	<select id="prodSelectList" parameterType="int" resultType="AlarmVo">
+		<![CDATA[
+			SELECT  bp.prod_no,
+			        p.prod_name,
+			        p.sell_no,
+			        b.user_no,
+			        bp.buy_del_state
+			FROM    buyproduct bp, product p, buy b
+			WHERE   bp.prod_no = p.prod_no
+			        and b.buyprod_no = bp.prod_no
+			        and b.buy_no = #{buy_no}
+		]]>
+	</select>
+
+	<!-- 상품인서트 -->
+	<insert id="insertProdAlarm" parameterType="AlarmVo">
+		<![CDATA[
+			INSERT INTO alarm VALUES(seq_alarm_no.nextval,
+									0,
+									#{user_no},
+									#{alarm_content},
+									sysdate,
+									#{sell_no},
+									#{prod_name},
+									1
+									)
 		]]>
 	</insert>
-
-	<update id="payment_complete" parameterType="BuyVo">
-		<![CDATA[
-			UPDATE buy SET buy_del_state = '결제완료' WHERE buy_no = 1
-		]]>
-	</update>
-
-	<update id="delivery_ready" parameterType="BuyVo">
-		<![CDATA[
-			UPDATE buy SET buy_del_state = '배송준비중' WHERE buy_no = 1
-		]]>
-	</update>
-
-	<update id="delivery_ing" parameterType="BuyVo">
-		<![CDATA[
-			UPDATE buy SET buy_del_state = '배송중' WHERE buy_no = 1
-		]]>
-	</update>
-
-	<update id="delivery_complete" parameterType="BuyVo">
-		<![CDATA[
-			UPDATE buy SET buy_del_state = '배송완료' WHERE buy_no = 1
-		]]>
-	</update>
-
-	<insert id="send_matching_alarm" parameterType="AlarmVo">
-		<![CDATA[
-			INSERT INTO alarm VALUES(seq_alarm_no.nextval, #{from_user_no}, '4',  #{alarm_content}, '매칭', sysdate)
-		]]>
-	</insert>
-
-
 
 </mapper>
