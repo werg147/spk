@@ -31,9 +31,16 @@
 	</insert>
 	
 	<insert id="insertBBuy2" parameterType="BBuyVo">
+	
+			<selectKey keyProperty="b_buy_no" resultType="int" order="BEFORE">
+				select seq_bbuy_no.nextval
+				from dual
+			</selectKey>
+
+	
 	<![CDATA[
 		insert into bbuy
-		values( seq_bbuy_no.nextval,
+		values( #{b_buy_no},
 		        #{user_no},
 	]]>
 		<choose>
@@ -94,9 +101,11 @@
 		        		null,
 				</otherwise>
 				</choose>
+	<![CDATA[
 		        sysdate
 		        )		
-	
+	]]>
+		
 	</insert>
 	
 	<select id="selectListBBuy" resultType="BBuyVo">
@@ -165,11 +174,8 @@
 			        p.weight,
 			        p.career,
 			        p.major,
-			        p.word,
-			        m.scorecount
-			from bbuy b , users u , profile p , (select count(*) as scorecount
-			                                     from matchscore
-			                                     where user_no =#{user_no})m
+			        p.word
+			from bbuy b , users u , profile p 
 			where b.user_no =u.user_no
 			and b.profile_no = p.profile_no
 			and b_buy_player_state = '시합등록자'
@@ -188,6 +194,8 @@
 	</select>
 	<select id="selectListBBuy2" parameterType="int" resultType="BBuyVo">
 	<![CDATA[
+	
+	
 			select b.b_buy_no,
 			       b.booking_no,
 			       b.profile_no,
@@ -199,19 +207,49 @@
 			       p.weight,
 			       p.major,
 			       u.nickname,
-			       u.user_photo,
-			       m.scoreCount
-			from bbuy b, profile p , users u ,(select user_no,
-			                                          count(*)as scorecount
-			                                   from matchscore
-			                                   group by user_no) m
+			       u.user_photo
+			from bbuy b, profile p , users u
 			where b.profile_no = p.profile_no
 			and b.user_no = u.user_no
-			and m.user_no = b.user_no
 			and b.b_buy_player_state = '신청자'
 			and b.booking_no = #{booking_no}
-	
+			order by b.b_buy_no desc
 	]]>
+
 	
 	</select>
+	<select id="selectOnebbuy2" parameterType="BBuyVo" resultType="BBuyVo">
+	
+		<![CDATA[
+			select  b.b_buy_no,
+			        b.user_no,
+			        b.booking_no,
+			        b.profile_no,
+			        b.booking_no,
+			        b.b_buy_player_state,
+			        b.b_buy_address,
+			        b.b_buy_event,
+			        b.b_buy_time,
+			        b.b_buy_day,
+			        u.nickname,
+			        u.user_photo,
+			        p.height,
+			        p.weight,
+			        p.career,
+			        p.major,
+			        p.word,
+			        m.scorecount
+			from bbuy b , users u , profile p , (select count(*) as scorecount
+			                                     from matchscore
+			                                     where user_no =#{user_no})m
+			where b.user_no =u.user_no
+			and b.profile_no = p.profile_no
+			and b_buy_player_state = '신청자'
+			and b_buy_no = #{b_buy_no}
+		
+		
+		]]>
+	
+	</select>
+	
 </mapper>

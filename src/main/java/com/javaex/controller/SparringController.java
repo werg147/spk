@@ -81,33 +81,6 @@ public class SparringController {
 		return "matching/rentdetail";
 	}
 
-	/** 결제하기 **/
-	@RequestMapping(value = "/payment", method = { RequestMethod.GET, RequestMethod.POST })
-	public String payment(@RequestParam(value = "bookingno", required = false, defaultValue = "0") int bookingNo,
-						  @RequestParam(value = "userno", required = false, defaultValue = "0") int userNo,
-						  @RequestParam(value = "profileno", required = false, defaultValue = "0") int profileNo,
-						  Model model) {
-		System.out.println(bookingNo);
-		System.out.println(userNo);
-		/*임의로 설정한 userNo 지워야함*/
-		userNo = 2;
-		
-		Map<String,Object> map = sparringService.payment(bookingNo,userNo);
-		
-		model.addAttribute("map",map);
-		return "matching/payment";
-	}
-	/**결제**/
-	@RequestMapping(value = "/pay", method = { RequestMethod.GET, RequestMethod.POST })
-	public String pay(@ModelAttribute BBuyVo bBuyVo) {
-		System.out.println("[Controller] : pay()");
-		
-		System.out.println(bBuyVo);
-		
-		sparringService.pay(bBuyVo);
-		
-		return "store/paymentCp";
-	}
 
 	/*****************************************************/
 	// bookingno == 0 이면 대관x 신청만
@@ -172,8 +145,11 @@ public class SparringController {
 		
 		if(bookingNo == 0 || subNum ==1) {
 			
-			sparringService.insertBBuy(bookingNo,subNum,userNo,profileVo);
-			return "redirect:/sparring/matchdetail?bbuyno="+bbuyno+"&userno="+bbuyuser;
+			BBuyVo bBuyVo = sparringService.insertBBuy(bookingNo,subNum,userNo,profileVo);
+			bbuyno = bBuyVo.getB_buy_no();
+			
+			
+			return "redirect:/sparring/matchdetail?bbuyno="+bbuyno+"&userno="+userNo;
 		}else {
 			return "redirect:/sparring/payment?bookingno="+bookingNo+"&userno="+userNo+"&profileno="+profileVo.getProfileNo();
 			
@@ -181,6 +157,34 @@ public class SparringController {
 		
 	}
 
+	/** 결제하기 **/
+	@RequestMapping(value = "/payment", method = { RequestMethod.GET, RequestMethod.POST })
+	public String payment(@RequestParam(value = "bookingno", required = false, defaultValue = "0") int bookingNo,
+			@RequestParam(value = "userno", required = false, defaultValue = "0") int userNo,
+			@RequestParam(value = "profileno", required = false, defaultValue = "0") int profileNo,
+			Model model) {
+		System.out.println(bookingNo);
+		System.out.println(userNo);
+		/*임의로 설정한 userNo 지워야함*/
+		userNo = 2;
+		
+		Map<String,Object> map = sparringService.payment(bookingNo,userNo);
+		
+		model.addAttribute("map",map);
+		return "matching/payment";
+	}
+	/**결제**/
+	@RequestMapping(value = "/pay", method = { RequestMethod.GET, RequestMethod.POST })
+	public String pay(@ModelAttribute BBuyVo bBuyVo) {
+		System.out.println("[Controller] : pay()");
+		
+		System.out.println(bBuyVo);
+		
+		sparringService.pay(bBuyVo);
+		
+		return "store/paymentCp";
+	}
+	
 	/*********************** api *****************/
 	@ResponseBody
 	@RequestMapping(value = "/api/selectdate", method = { RequestMethod.GET, RequestMethod.POST })
@@ -212,5 +216,17 @@ public class SparringController {
 		List<BookingVo> bookingList = sparringService.bookingList(date, gymNo);
 		System.out.println(bookingList);
 		return bookingList;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/api/bbuyone", method = { RequestMethod.GET, RequestMethod.POST })
+	public BBuyVo  bbuyOne(@RequestParam(value= "bbuyNo") int  bbuyNo,
+						   @RequestParam(value= "userNo") int  userNo) {
+		System.out.println("[Controller] : bbuyOne()");
+		System.out.println( bbuyNo);
+		
+		BBuyVo bbuyVo = sparringService.bbuyOne( bbuyNo,userNo);
+		
+		return bbuyVo;
 	}
 }

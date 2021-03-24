@@ -68,6 +68,11 @@ public class BBuyVo {
 	private int sumScore;
 	private int sumWin;
 	
+	//체급
+	
+	private String weightC;
+	
+	
 	public BBuyVo(int b_buy_no, int user_no, int booking_no, int profile_no, String b_buy_paytype, String b_buy_price, String b_buy_state,
 			String b_buy_player_state, String b_buy_date, String checkAll, String chkItem) {
 		super();
@@ -91,6 +96,20 @@ public class BBuyVo {
 
 	
 	
+
+
+
+
+	public String getWeightC() {
+		return weightC;
+	}
+
+
+	public void setWeightC(String weightC) {
+		this.weightC = weightC;
+	}
+
+
 	public String getUser_photo() {
 		return user_photo;
 	}

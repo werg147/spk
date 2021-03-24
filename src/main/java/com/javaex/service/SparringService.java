@@ -343,26 +343,20 @@ public class SparringService {
 		if(bBuyVo.getSubNum() == 0) {
 			bBuyVo.setB_buy_player_state("시합등록자");
 			
-			if(bBuyVo.getBooking_no()!=0) {
-				//subNum 이 0(시합등록자)이면서 대관을 하는 경우
 				bBuyVo.setB_buy_state("결제완료");
 				sparringDao.insertBBuy(bBuyVo);
-			}
-			//else subNum 이 0(시합등록자)이면서 스파링신청만 하는경우
+		
 			
 		}else if (bBuyVo.getSubNum() == 1) {
 			bBuyVo.setB_buy_player_state("신청자");
+			bBuyVo.setB_buy_state("결제완료");
 			
-			if(bBuyVo.getBooking_no()!=0) {
-				//subNum이 1(신청자)면서 대관후에 신청하는 경우
-				
-				bBuyVo.setB_buy_state("결제완료");
-			}
-				//subNum이 1(신청자)면서 상대에게 신청만하는경우
+				sparringDao.insertBBuy(bBuyVo);
 		}
 		
-		sparringDao.insertBBuy(bBuyVo);
-		
+		//대관한 부킹정보는 예약으로 변경
+		int bookingNo = bBuyVo.getBooking_no();
+		sparringDao.updateBooking(bookingNo);
 	}
 
 	public List<BBuyVo> match() {
@@ -396,16 +390,19 @@ public class SparringService {
 	
 	
 	//대관구매를 하지 않는 경우 사용
-	public void insertBBuy(int bookingNo, int subNum,int userNo, ProfileVo profileVo) {
+	public BBuyVo insertBBuy(int bookingNo, int subNum,int userNo, ProfileVo profileVo) {
 		System.out.println("[Service]: insertBBuy");
 		BBuyVo bBuyVo = new BBuyVo();
 		
 		if(subNum == 1) {
+			
 			bBuyVo.setB_buy_player_state("신청자");
 			//결제안하고 신청한 상태에서 상대가 선택하면 결제
 			
 		}else {
+			
 			bBuyVo.setB_buy_player_state("시합등록자");
+			
 		}
 		int profileNo = profileVo.getProfileNo();
 		String event = profileVo.getProfileGymEvent();
@@ -431,11 +428,13 @@ public class SparringService {
 		
 		sparringDao.insertBBuy2(bBuyVo);
 		
+		return bBuyVo;
 	}
 
 	public Map<String,Object> MatchDetail(int bBuyNo, int userNo) {
 		System.out.println("[Service] : bBuyNo");
 		
+		Map<String,Object> map = new HashMap<String,Object>();
 		BBuyVo bBuyVo = new BBuyVo();
 		bBuyVo.setB_buy_no(bBuyNo);
 		bBuyVo.setUser_no(userNo);
@@ -443,22 +442,63 @@ public class SparringService {
 		
 		//시합등록자구하기
 		BBuyVo vo = sparringDao.selectOneBBuy(bBuyVo);
+		int event = 0;
+		String WC= "";
 		
+		//체급구하기
+		if(vo.getBooking_no() == 0) {
+			int profileNo1 = vo.getProfile_no();
+			ProfileVo profileVo = sparringDao.selectProfileEvent(profileNo1);
+			
+			String gymEvent = profileVo.getProfileGymEvent();
+			if(gymEvent.equals("복싱")) {
+				event = 1;
+			}else if(gymEvent.equals("킥복싱")) {
+				event = 2;
+			}else if(gymEvent.equals("종합격투기")) {
+				event = 3;
+			}else if(gymEvent.equals("주짓수")) {
+				event = 4;
+			}
+			int weight = Integer.parseInt(vo.getWeight());
+			WC = weightClass(event,weight);
+			
+		}else {
+			BookingVo bookingVo = sparringDao.selectOneBooking(vo.getBooking_no());
+			String gymEvent = bookingVo.getGym_event();
+			if(gymEvent.equals("복싱")) {
+				event = 1;
+			}else if(gymEvent.equals("킥복싱")) {
+				event = 2;
+			}else if(gymEvent.equals("종합격투기")) {
+				event = 3;
+			}else if(gymEvent.equals("주짓수")) {
+				event = 4;
+			}
+			int weight = Integer.parseInt(vo.getWeight());
+			WC = weightClass(event,weight);
+			
+		}
 		System.out.println(vo);
+		System.out.println("시합등록자 :" + WC);
+		vo.setWeightC(WC);
 		// 시합등록자 구하기END
 		
 		//시합 등록자의 승률구하기
 		BBuyVo scoreVo = sparringDao.selectOneMatchScore(userNo);
+		if(scoreVo != null) {
 		
-		double sumScore = scoreVo.getSumScore();
-		double sumWin = scoreVo.getSumWin();
-		System.out.println(sumScore+ "," + sumWin);
-		
-		int rate = (int) ((sumWin /sumScore)*100);
-		System.out.println("승률 : "+ rate);
-		
-		vo.setRate(rate);
-		//시합 등록자의 승률구하기END
+			
+			double sumScore = scoreVo.getSumScore();
+			double sumWin = scoreVo.getSumWin();
+			System.out.println(sumScore+ "," + sumWin);
+			
+			int rate = (int) ((sumWin /sumScore)*100);
+			System.out.println("승률 : "+ rate);
+			
+			vo.setRate(rate);
+			//시합 등록자의 승률구하기END
+		}
 		
 		/**경력리스트,주특기 리스트 구하기**/
 		int profileNo = vo.getProfile_no();
@@ -478,18 +518,376 @@ public class SparringService {
 		//신청자의 bookingno를 시합등록자에게 update로 넣을 예정이기에
 		// 누군가 신청한 후에 상대가 표시 되기때문에 불러와서 넣는 구조로한다
 		//if(vo.getBooking_no() != 0) {
+		
 		int bookingNo = vo.getBooking_no();
-			System.out.println(bookingNo);
+		System.out.println(bookingNo);
 			
-			sparringDao.selectBBuyList2(bookingNo);
+		List<BBuyVo> bbuyList = sparringDao.selectBBuyList2(bookingNo);
 		
 		
+		System.out.println(bbuyList);
+		
+		
+		/*주특기와 공식기록 찾기*/
+		if(!bbuyList.isEmpty()) {
+			
+			
+			
+			BBuyVo vo2=bbuyList.get(0);
+			
+			int event1 = 0;
+			String WC2= "";
+		
+			
+			int profileNo2 = bbuyList.get(0).getProfile_no();
+			
+			List<EventVo> eventList2 = sparringDao.selectListEvent(profileNo2);
+			List<RecordVo> recordList2 = sparringDao.selectListRecord(profileNo2);
+			
+			
+			bbuyList.get(0).setEventList(eventList2);
+			bbuyList.get(0).setRecordList(recordList2);
+			//신청자의 승률구하기
+			int userNo2 = bbuyList.get(0).getUser_no();
+			
+			BBuyVo scoreVo2 = sparringDao.selectOneMatchScore(userNo2);
+			
+			if(scoreVo2 != null) {
+				double sumScore2 = scoreVo2.getSumScore();
+				double sumWin2 = scoreVo2.getSumWin();
+				System.out.println("신청자:"+sumScore2+ "," + sumWin2);
+				
+				int rate2 = (int) ((sumWin2 /sumScore2)*100);
+				System.out.println("신청자 승률 : "+ rate2);
+				
+				bbuyList.get(0).setRate(rate2);
+				//시합 등록자의 승률구하기END
+			}
+			map.put("bBuyList",bbuyList);
+			
+			
+			//체급구하기
+			BookingVo bookingVo2 = sparringDao.selectOneBooking(vo2.getBooking_no());
+			String gymEvent = bookingVo2.getGym_event();
+			if(gymEvent.equals("복싱")) {
+				event1 = 1;
+			}else if(gymEvent.equals("킥복싱")) {
+				event1 = 2;
+			}else if(gymEvent.equals("종합격투기")) {
+				event1 = 3;
+			}else if(gymEvent.equals("주짓수")) {
+				event1 = 4;
+			}
+			int weight2 = Integer.parseInt(vo2.getWeight());
+			WC2 = weightClass(event1,weight2);
+			
+		
+			System.out.println(vo);
+			System.out.println("신청자 :" + WC2);
+			vo2.setWeightC(WC2);
+			// 시합등록자 구하기END
+		}
+		
+		/*********대관정보구하기**********/
+		if(bookingNo != 0) {
+			BookingVo bookingVo = sparringDao.selectOneBooking(bookingNo);
+			
+			int gymNo = bookingVo.getGym_no();
+			//1.gymVo를 받는다
+			GymVo gymVo = sparringDao.selectOneGym(gymNo);
+			System.out.println("gymVo ="+ gymVo);
+					
+			//1end
+			//2.gymImgList를 받는다
+			
+			List<GymImgVo> gymimgList = sparringDao.selectListGymImg(gymNo);
+			System.out.println("gymimgVo = "+ gymimgList);
+					
+			//2end
+			//
+			//5.편의시설 리스트
+			
+			List<ConvenienceVo> conList = sparringDao.selectListCon(gymNo);
+			
+			gymVo.setGymimgList(gymimgList);
+			gymVo.setConList(conList);
+			/*********대관정보 구하기 end**********/
+			
+			map.put("gAVo",gymVo);
+		}
 		//MAP에 넣기
-		Map<String,Object> map = new HashMap<String,Object>();
+				
+				
+				
+				
 		map.put("bBuyVo", vo);
-		
-		//
 		
 		return map;
 	}
+
+	public BBuyVo  bbuyOne(int  bbuyNo, int userNo) {
+		System.out.println("[Service] : bbuyOne");
+		
+		
+		BBuyVo bbuyVo = new BBuyVo();
+		
+		bbuyVo.setB_buy_no(bbuyNo);
+		bbuyVo.setUser_no(userNo);
+		BBuyVo vo =sparringDao.selectOnebbuy2(bbuyVo);
+
+		System.out.println(vo);
+		
+		//체급구하기
+
+		int event1 = 0;
+		String WC2= "";
+		
+		//체급구하기
+			BookingVo bookingVo2 = sparringDao.selectOneBooking(vo.getBooking_no());
+			String gymEvent = bookingVo2.getGym_event();
+			if(gymEvent.equals("복싱")) {
+				event1 = 1;
+			}else if(gymEvent.equals("킥복싱")) {
+				event1 = 2;
+			}else if(gymEvent.equals("종합격투기")) {
+				event1 = 3;
+			}else if(gymEvent.equals("주짓수")) {
+				event1 = 4;
+			}
+			int weight2 = Integer.parseInt(vo.getWeight());
+			WC2 = weightClass(event1,weight2);
+			
+		
+		System.out.println(vo);
+		System.out.println("신청자 :" + WC2);
+		vo.setWeightC(WC2);
+		//체급
+		
+		//신청자 의 승률구하기 (등록자랑 같은거사용)
+		if(bbuyVo.getScoreCount() != 0) {
+			BBuyVo scoreVo = sparringDao.selectOneMatchScore(userNo);
+			
+			double sumScore = scoreVo.getSumScore();
+			double sumWin = scoreVo.getSumWin();
+			System.out.println(sumScore+ "," + sumWin);
+			
+			int rate = (int) ((sumWin /sumScore)*100);
+			System.out.println("승률 : "+ rate);
+			
+			vo.setRate(rate);
+			//시합 등록자의 승률구하기END
+		}
+		/**경력리스트,주특기 리스트 구하기**/
+		int profileNo = vo.getProfile_no();
+		
+		List<EventVo> eventList = sparringDao.selectListEvent(profileNo);
+		
+		//경력리스트
+		List<RecordVo> recordList = sparringDao.selectListRecord(profileNo);
+		
+		vo.setEventList(eventList);
+		vo.setRecordList(recordList);
+		
+		return vo;
+	}
+	
+	
+	/****/
+	
+	public String weightClass(int event , int weight) {
+		
+		String wc = "";
+		/* 복싱  = 1 킥복싱 = 2 종합격투기 =3 주짓수 = 4 */
+
+		if (event == 1) {
+
+			if (weight <= 46) {
+				wc = "라이트미니엄";
+
+			}
+
+			if (46 < weight && weight <= 48) {
+				wc = "미니멈급";
+
+			}
+
+			if (48 < weight && weight <= 49) {
+				wc = "라이트플라이급";
+
+			}
+			if (49 < weight && weight <= 51) {
+				wc = "플라이급";
+			}
+			if (51 < weight && weight <= 52) {
+				wc = "슈퍼플라이급";
+
+			}
+			if (51 < weight && weight <= 52) {
+				wc = "슈퍼플라이급";
+			}
+			if (52 < weight && weight <= 54) {
+				wc = "밴텀급";
+			}
+			if (54 < weight && weight <= 55) {
+				wc = "슈퍼밴텀급";
+			}
+			if (55 < weight && weight <= 57) {
+				wc = "페더급";
+			}
+			if (57 < weight && weight <= 59) {
+				wc = "슈퍼페더급급";
+			}
+			if (59 < weight && weight <= 61) {
+				wc = "라이트급";
+			}
+
+			if (bool(weight, 61, 63)) {
+				wc = "슈퍼라이트급";
+			}
+			if (bool(weight, 63, 67)) {
+				wc = "웰터급";
+
+			}
+			if (bool(weight, 67, 70)) {
+				wc = "슈퍼웰터급";
+			}
+			if (bool(weight, 70, 73)) {
+				wc = "미들급";
+			}
+			if (bool(weight, 73, 76)) {
+				wc = "슈퍼미들급";
+			}
+			if (bool(weight, 76, 79)) {
+				wc = "라이트헤비급";
+			}
+			if (bool(weight, 79, 91)) {
+				wc = "크루저급";
+			}
+			if (91 < weight) {
+				wc = "헤비급";
+			}
+
+		}else if(event == 2) {
+			if(weight<=50) {
+				wc="플라이급";
+			}
+			if (bool(weight,50,55)) {
+				wc="벤텀급";
+			}
+			if (bool(weight,55,60)) {
+				wc="페더급";
+			}
+			if (bool(weight,60,65)) {
+				wc="라이트급";
+			}
+			if (bool(weight,65,70)) {
+				wc="웹터급";
+			}
+			if (bool(weight,70,75)) {
+				wc="미들급";
+			}
+			if (bool(weight,75,80)) {
+				wc="라이트 헤비급";
+			}
+			if (bool(weight,80,85)) {
+				wc="헤비급";
+			}
+			if (bool(weight,85,89)) {
+				wc="슈퍼헤비급";
+			}
+			if (90<= weight) {
+				wc="무제한급";
+				}
+		
+		}else if(event == 3) {
+			if(weight <=52) {
+				wc="스트로급";
+			}
+			if (bool(weight,52,57)) {
+				wc="플라이급";
+			}
+			if (bool(weight,57,61)) {
+				wc="팬텀급";
+			}
+			if (bool(weight,61,66)) {
+				wc="페터급";
+			}
+			if (bool(weight,66,70)) {
+				wc="라이트급";
+			}
+			if (bool(weight,70,75)) {
+				wc="슈퍼라이트급";
+			}
+			if (bool(weight,75,77)) {
+				wc="웹터급";
+			}
+			if (bool(weight,77,79)) {
+				wc="슈퍼웰터급";
+			}
+			
+			if (bool(weight,79,84)) {
+				wc="미들급";
+			}
+			if (bool(weight,84,86)) {
+				wc="슈퍼미들급";
+			}
+			if (bool(weight,86,93)) {
+				wc="라이트헤비급";
+			}
+			if (bool(weight,93,102)) {
+				wc="크루저급";
+			}
+			if (bool(weight,102,120)) {
+				wc="헤비급";
+			}
+			if (120<weight) {
+				wc="슈퍼헤비급";
+			}
+		}else if(event ==4) {
+			
+			if(weight <=58) {
+				wc="루스터급";
+			}
+			
+			if (bool(weight,59,64)) {
+				wc="라이트 페더급";
+			}
+			
+			if (bool(weight,64,70)) {
+				wc="페더급";
+			}
+			
+			if (bool(weight,70,76)) {
+				wc="라이트급";
+			}
+			if (bool(weight,76,82)) {
+				wc="미들급";
+			}
+			if (bool(weight,82,88)) {
+				wc="미디엄헤비급";
+			}
+			if (bool(weight,88,94)) {
+				wc="헤비급";
+			}
+			if (bool(weight,94,101)) {
+				wc="수퍼헤비";
+			}
+			if (102<=weight) {
+				wc="울트라헤비";
+			}
+		}
+		
+
+		System.out.println("체급 : " + wc);
+		
+		return wc;
+		
+	}
+	public static boolean bool(int weight, int low, int high) {
+
+		boolean tf = (low < weight && weight <= high);
+
+		return tf;
+	}
+	
 }

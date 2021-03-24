@@ -173,12 +173,14 @@ public class SparringDao {
 	}
 	
 	//신청자구하기
-	public void selectBBuyList2(int bookingNo) {
+	public List<BBuyVo> selectBBuyList2(int bookingNo) {
 		System.out.println("[Dao] : selectBBuyList");
 		
 		List<BBuyVo> bbuyList = sqlSession.selectList("bbuy.selectListBBuy2",bookingNo);
 		
-		System.out.println(bbuyList);
+		System.out.println("신청자 :" + bbuyList);
+		
+		return bbuyList;
 	}
 	
 	public BBuyVo selectOneBBuy(BBuyVo bBuyVo) {
@@ -205,6 +207,27 @@ public class SparringDao {
 	
 		
 	
+	}
+
+	public void updateBooking(int bookingNo) {
+		System.out.println("[Dao] : updateBBuy");
+		
+		int count= sqlSession.update("booking.updateBooking",bookingNo);
+		
+		System.out.println("예약으로 변경되었습니다 : " + count);
+	}
+
+	public BBuyVo selectOnebbuy2(BBuyVo  bbuyVo) {
+		System.out.println("[Dao] : selectOnebbuy");
+		
+		return sqlSession.selectOne("bbuy.selectOnebbuy2", bbuyVo);
+		
+	}
+
+	public ProfileVo selectProfileEvent(int profileNo) {
+		System.out.println("[Dao] : selectProfileEvent");
+		
+		return sqlSession.selectOne("profile.selectProfileEvent",profileNo);
 	}
 
 

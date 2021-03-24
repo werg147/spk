@@ -15,6 +15,15 @@
   width: 1050px;
   margin: auto;
 }
+#no_here_box{
+	margin:135px 0px 0px 20px;
+}
+#no_select_here_img{
+	width:150px;
+}
+#no_select_here{
+	
+}
 .p_dae {
   font-size: 17px;
   color: #e60012;
@@ -1165,6 +1174,7 @@ input:-ms-input-placeholder {
 
   justify-content: center; /* 좌우 기준 중앙정렬 */
   font-size: 15px;
+  cursor:pointer;
 }
 
 .swiper-slide img {

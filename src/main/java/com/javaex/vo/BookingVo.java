@@ -13,7 +13,7 @@ public class BookingVo {
 	
 	//gym
 	private String gym_name;
-	
+	private String gym_event;
 	//gymImg
 	private String gym_img_savename;
 	
@@ -49,6 +49,14 @@ public class BookingVo {
 	}
 	
 	
+	public String getGym_event() {
+		return gym_event;
+	}
+
+	public void setGym_event(String gym_event) {
+		this.gym_event = gym_event;
+	}
+
 	public String getGym_name() {
 		return gym_name;
 	}
