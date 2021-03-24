@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.dao.GymDao;
 import com.javaex.dao.UserDao;
+import com.javaex.vo.BookingVo;
 import com.javaex.vo.ConVo;
 import com.javaex.vo.GymImgVo;
 import com.javaex.vo.GymVo;
@@ -139,6 +140,12 @@ public class GymService {
 		GymImgVo gimgVo = new GymImgVo(gymNo, imgFile, orgName); 
 		gymDao.gimgInsert(gimgVo);
 
+	}
+
+	//대관 등록
+	public void bookAdd(BookingVo bookVo) {
+		System.out.println("[GymService] bookAdd()");
+		
 	}
 	
 	//대관판매자계정등록

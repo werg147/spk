@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.service.GymService;
+import com.javaex.vo.BookingVo;
 import com.javaex.vo.GymVo;
 import com.javaex.vo.SellerVo;
 import com.javaex.vo.UserVo;
@@ -62,7 +63,25 @@ public class GymController {
 		return "";
 	}
 	
-
+	//대관 등록폼
+	@RequestMapping(value="/bookaddform", method= {RequestMethod.GET , RequestMethod.POST})
+	public String bookAddForm() {
+		System.out.println("[GymController] bookAddForm()");
+		
+		return "mypage/mypage_resrvation/mypage_bookingadd";
+	}
+	
+	//대관 등록
+	@RequestMapping(value="/bookadd", method= {RequestMethod.GET , RequestMethod.POST})
+	public String bookAdd(@ModelAttribute BookingVo bookVo) {
+		System.out.println("[GymController] bookAdd()");
+		
+		System.out.println("[GymController] bookAdd()>>> "+bookVo);
+		gymService.bookAdd(bookVo);
+		
+		return "";
+	}
+	
 	// 대관판매자 계정등록 폼
 	@RequestMapping(value = "/bookselleraddform", method = { RequestMethod.GET, RequestMethod.POST })
 	public String bookDellerAddForm(Model model, HttpSession session) {
