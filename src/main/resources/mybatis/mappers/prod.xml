@@ -114,4 +114,87 @@
 			where prod_no = #{prod_no}
 		]]>
 	</select>
+	
+	<select id="delmanageselectList" parameterType="int" resultType="com.javaex.vo.ProdBuyForVo">
+		<![CDATA[
+			select bp.buy_del_state,
+			       bp.buyprod_no,
+			       bp.buy_no,
+			       b.buy_price,
+			       to_char(b.buy_date, 'yyyy-mm-dd') buy_date,
+			       bp.buyprod_price,
+			       bp.buy_delivery,
+			       bp.buy_del_no,
+			       p.prod_no,
+			       p.prod_brand,
+			       p.prod_name,
+			       p.prod_cate,
+			       p.sell_no,
+			       c.color,
+			       c.prod_size,
+			       bp.count,
+			       i.prod_img_savename,
+			       i.prod_img_type
+			from buyproduct bp, buy b, product p, colorsize c, prodimg i
+			where bp.buy_no = b.buy_no
+			and bp.prod_no = p.prod_no
+			and bp.colorsize_no = c.colorsize_no
+			and bp.prod_no = i.prod_no
+			and i.prod_img_type = 'main'
+			and sell_no = #{sell_no}
+			order by b.buy_date desc, buy_no desc
+		]]>
+	</select>
+	
+	<select id="delformselectList" parameterType="com.javaex.vo.ProdBuyForVo" resultType="com.javaex.vo.ProdBuyForVo">
+		<![CDATA[
+			select bp.buy_del_state,
+			       bp.buyprod_no,
+			       bp.buy_no,
+			       b.buy_price,
+			       to_char(b.buy_date, 'yyyy-mm-dd') buy_date,
+			       b.buy_name,
+			       b.buy_address,
+			       b.buy_ph,
+			       bp.buyprod_price,
+			       bp.buy_delivery,
+			       bp.buy_del_no,
+			       p.prod_no,
+			       p.prod_brand,
+			       p.prod_name,
+			       p.prod_cate,
+			       p.sell_no,
+			       c.color,
+			       c.prod_size,
+			       bp.count,
+			       i.prod_img_savename,
+			       i.prod_img_type
+			from buyproduct bp, buy b, product p, colorsize c, prodimg i
+			where bp.buy_no = b.buy_no
+			and bp.prod_no = p.prod_no
+			and bp.colorsize_no = c.colorsize_no
+			and bp.prod_no = i.prod_no
+			and i.prod_img_type = 'main'
+			and p.sell_no = #{sell_no}
+			and b.buy_no = #{buy_no}
+		]]>
+	</select>
+
+	<update id="delStateUpdate" parameterType="com.javaex.vo.ProdBuyForVo">
+		<![CDATA[
+			update buyproduct
+			set buy_del_state= #{buy_del_state}
+			where buyprod_no = #{buyprod_no}
+		]]>
+	</update>
+	
+	<update id="delinfoUpdate" parameterType="com.javaex.vo.ProdBuyForVo">
+		<![CDATA[
+			update buyproduct
+			set buy_del_state= '배송중',
+			    buy_delivery = #{buy_delivery},
+			    buy_del_no =#{buy_del_no}
+			where buyprod_no = #{buyprod_no}
+		]]>
+	</update>
 </mapper>

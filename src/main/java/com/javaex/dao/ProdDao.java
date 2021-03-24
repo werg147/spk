@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.javaex.vo.ColorsizeVo;
+import com.javaex.vo.ProdBuyForVo;
 import com.javaex.vo.ProdimgVo;
 import com.javaex.vo.ProductVo;
 
@@ -63,4 +64,27 @@ public class ProdDao {
 		return count;
 	}
 	
+	//배송리스트 조회
+	public List<ProdBuyForVo> delmanageselectList(int sell_no){
+		System.out.println("[Dao]배송리스트 조회" + sell_no);
+		
+		return sqlSession.selectList("prod.delmanageselectList", sell_no);
+	}
+	
+	//배송정보 가져오기
+	public List<ProdBuyForVo> delformselectOne(ProdBuyForVo pvo) {
+		System.out.println("[Dao]배송리스트 조회" + pvo);
+		
+		return sqlSession.selectList("prod.delformselectList", pvo);
+	}
+	
+	//배송상태 수정
+	public void delStateUpdate(ProdBuyForVo pvo) {
+		sqlSession.update("prod.delStateUpdate", pvo);
+	}
+	
+	//배송정보 수정
+	public void delinfoUpdate(ProdBuyForVo pvo) {
+		sqlSession.update("prod.delinfoUpdate", pvo);
+	}
 }

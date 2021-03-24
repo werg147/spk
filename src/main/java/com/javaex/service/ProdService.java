@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.javaex.dao.ProdDao;
 import com.javaex.dao.UserDao;
 import com.javaex.vo.ColorsizeVo;
+import com.javaex.vo.ProdBuyForVo;
 import com.javaex.vo.ProdimgVo;
 import com.javaex.vo.ProductVo;
 import com.javaex.vo.SellerVo;
@@ -169,7 +170,55 @@ public class ProdService {
 
 	}
 	
+	
+	//배송관리 리스트 가져오기
+	public List<ProdBuyForVo> delmanage(int sell_no){
+		System.out.println("[service] 상품사이즈등록");
+		return proddao.delmanageselectList(sell_no);
+	}
+	
+	//배송정보 불러오기
+	public List<ProdBuyForVo> delform(ProdBuyForVo pvo) {
+		System.out.println("[service] 배송정보 불러오기");
+		return proddao.delformselectOne(pvo);
+	}
+	
+	//배송준비중
+	public void delStart(int buyprod_no) {
+		System.out.println("[service] 배송상태 수정");
 
+		ProdBuyForVo pvo = new ProdBuyForVo();
+		pvo.setBuyprod_no(buyprod_no);
+		pvo.setBuy_del_state("배송준비중");
+
+		proddao.delStateUpdate(pvo);
+
+	}
+	
+	//배송불가
+	public void delNo(ProdBuyForVo pvo) {
+		System.out.println("[service] 배송상태 수정");
+			
+		if(pvo.getBuy_del_state() !="배송중" && pvo.getBuy_del_state() != "배송완료") {
+			pvo.setBuy_del_state("판매불가");
+			proddao.delStateUpdate(pvo);
+		} else {
+			System.out.println("배송중이거나 배송완료된 상품으로 판매불가 전환이 불가합니다.");
+		}
+		
+		
+		
+
+
+	}
+
+	//배송정보 수정
+		public void delModify(ProdBuyForVo pvo) {
+			System.out.println("[service] 배송상태 수정");
+			proddao.delinfoUpdate(pvo);
+		}
+		
+		
 	//배송판매자계정등록
 	public void sellerProdAdd(SellerVo sellervo) {
 		userdao.sellerProdInsert(sellervo);
@@ -185,6 +234,8 @@ public class ProdService {
 	public void prodSellerModify(SellerVo sellervo) {
 		userdao.prodSellerUpdate(sellervo);
 	}
+	
+	
 	
 	
 

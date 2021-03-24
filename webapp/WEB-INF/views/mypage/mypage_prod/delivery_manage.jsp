@@ -37,13 +37,16 @@
 
 					<div class="content_delevery_product_line"></div>
 					<div class="content_delevery_product_list">
+					
+					
+					<c:forEach items="${delList}" var="delvo">
 						<div class="delevery_list">
-							<div class="product_name">[에버레스트] 글러브</div>
+							<div class="product_name">[${delvo.prod_brand}] ${delvo.prod_name}</div>
 							<div class="list_line"></div>
 							<div class="delevery_product_content">
 								<div>
 									<img
-										src="${pageContext.request.contextPath }/assets/image/글러브.jpg">
+										src="${pageContext.request.contextPath}/upload/${delvo.prod_img_savename}">
 								</div>
 								<div class="table_box">
 									<table class="delevery_insert_table">
@@ -53,38 +56,40 @@
 										</colgroup>
 										<tr>
 											<td>주문번호</td>
-											<td>15678654</td>
+											<td>${delvo.buy_no}</td>
 										</tr>
 										<tr>
 											<td>상품품번</td>
-											<td>gl12456874</td>
+											<td>${delvo.prod_no}</td>
 										</tr>
 										<tr>
-											<td>색상|사이즈|개수</td>
-											<td>블랙 | 2</td>
+											<td>색상 | 사이즈 | 개수</td>
+											<td id="sizeboxadd"><div>${delvo.color} | ${delvo.prod_size} | ${delvo.count}</div></td>
 										</tr>
 										<tr>
 											<td>카테고리</td>
-											<td>운동용품</td>
+											<td>${delvo.prod_cate}</td>
 										</tr>
 										<tr>
 											<td>가격</td>
-											<td>38,000원</td>
+											<td>${delvo.buyprod_price}원</td>
 										</tr>
 										<tr>
 											<td>판매일자</td>
-											<td>2020/03/01</td>
+											<td>${delvo.buy_date}</td>
 										</tr>
 										<tr>
-											<td>배송중</td>
-											<td>결제완료</td>
+											<td>배송상태</td>
+											<td>${delvo.buy_del_state}</td>
 										</tr>
 									</table>
 									<div class="delevery_product_content_btn">
 										<button class="product_delinfo_btn">
-											<a href="./배송판매자_마이페이지_배송관리_배송정보입력.html">배송정보등록</a>
+											<a href="${pageContext.request.contextPath}/mypage/prod/delform?buy_no=${delvo.buy_no}&sell_no=${delvo.sell_no}">배송정보등록</a>
 										</button>
-										<button class="product_nosale_btn">판매불가</button>
+										<button class="product_nosale_btn">
+											<a href="${pageContext.request.contextPath}/mypage/prod/delno?buyprod_no=${delvo.buyprod_no}&buy_del_state=${delvo.buy_del_state}">판매불가</a>
+										</button>
 									</div>
 								</div>
 								<!--//table_box-->
@@ -92,66 +97,15 @@
 							<!--//delevery_product_content-->
 						</div>
 						<!--//list//-->
-						<!--list 배치확인용 중복중복중복중복-->
-						<div class="delevery_list">
-							<div class="product_name">[아디다스] 복싱복</div>
-							<div class="list_line"></div>
-							<div class="delevery_product_content">
-								<div>
-									<img
-										src="${pageContext.request.contextPath }/assets/image/복싱복.jpg">
-								</div>
-								<div class="table_box">
-									<table class="delevery_insert_table">
-										<colgroup>
-											<col style="width: 150px">
-											<col style="width: 280px">
-										</colgroup>
-										<tr>
-											<td>주문번호</td>
-											<td>15678654</td>
-										</tr>
-										<tr>
-											<td>상품품번</td>
-											<td>cl12456874</td>
-										</tr>
-										<tr>
-											<td>색상|사이즈|개수</td>
-											<td>블루95(M) | 2</td>
-										</tr>
-										<tr>
-											<td>카테고리</td>
-											<td>의류</td>
-										</tr>
-										<tr>
-											<td>가격</td>
-											<td>60,000원</td>
-										</tr>
-										<tr>
-											<td>판매일자</td>
-											<td>2020/03/01</td>
-										</tr>
-										<tr>
-											<td>배송상태</td>
-											<td>결제완료</td>
-										</tr>
-									</table>
-									<div class="delevery_product_content_btn">
-										<button class="product_delinfo_btn">
-											<a href="./배송판매자_마이페이지_배송관리_배송정보입력.html">배송정보등록</a>
-										</button>
-										<button class="product_nosale_btn">판매불가</button>
-									</div>
-								</div>
-								<!--//table_box-->
-							</div>
-							<!--//delevery_product_content-->
-						</div>
-						<!--//ldelevery_list//여기까지 중복중복중복중복-->
+					</c:forEach>
+						
+
 					</div>
 					<!--//content_delevery_product_list-->
+					<div id="space"></div>
 				</div>
 				<!--//content_product//-->
+									
 			</div>
 			<!--//middle//-->
 			<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>

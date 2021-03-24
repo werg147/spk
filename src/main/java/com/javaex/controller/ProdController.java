@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.javaex.service.ProdService;
+import com.javaex.vo.ProdBuyForVo;
 import com.javaex.vo.ProductVo;
 import com.javaex.vo.SellerVo;
 import com.javaex.vo.UserVo;
@@ -90,20 +91,63 @@ public class ProdController {
 
 		System.out.println("[cnt]상품사이즈등록" + prodvo);	
 		return prodservice.prodSizeWrite(prodvo);	
-
 	}
 	
 	//배송관리 페이지 열기
 	@RequestMapping(value = "/delmanage", method = { RequestMethod.GET, RequestMethod.POST })
-	public String delmanage() {
+	public String delmanage(HttpSession session,
+							Model model) {
 		System.out.println("[cnt] 배송관리페이지");
 		
-		return "mypage/mypage_seller/prod_seller_add";
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		List<ProdBuyForVo> delList = prodservice.delmanage(authUser.getSell_no());
+		model.addAttribute("delList", delList);
+		
+		return "mypage/mypage_prod/delivery_manage";
+	}
+	
+	//배송정보 폼 열기
+	@RequestMapping(value = "/delform", method = { RequestMethod.GET, RequestMethod.POST })
+	public String delForm(@ModelAttribute ProdBuyForVo pvo,
+						  Model model) {
+		System.out.println("[cnt] 배송정보 입력 페이지");
+
+		List<ProdBuyForVo> delList = prodservice.delform(pvo);
+		ProdBuyForVo delfound = delList.get(0);
+		model.addAttribute("delList", delList);
+		model.addAttribute("delfound", delfound);
+		
+		return "mypage/mypage_prod/delivery_form";
 	}
 
+	//배송준비중
+	@RequestMapping(value = "/delstatechange", method = { RequestMethod.GET, RequestMethod.POST })
+	public String delstart(@RequestParam("buyprod_no") int buyprod_no) {
+		System.out.println("[cnt] 배송준비중");
+		prodservice.delStart(buyprod_no);
+		return "redirect:/mypage/prod/delmanage";
+	}
 	
+	//배송불가
+	@RequestMapping(value = "/delno", method = { RequestMethod.GET, RequestMethod.POST })
+	public String delNo(@ModelAttribute ProdBuyForVo pvo) {
+		System.out.println("[cnt] 배송불가");
+		
+		prodservice.delNo(pvo);
+		
+		return "redirect:/mypage/prod/delmanage";
+	}
 	
+	//배송정보변경
+	@RequestMapping(value = "/delmodify", method = { RequestMethod.GET, RequestMethod.POST })
+	public String delModify(@ModelAttribute ProdBuyForVo pvo) {
+		System.out.println("[cnt] 배송정보 변경" + pvo);
+		prodservice.delModify(pvo);
+		
+		return "redirect:/mypage/prod/delmanage";
+	}
 	
+
 
 	// 배송판매자 계정등록 폼
 	@RequestMapping(value = "/prodselleraddform", method = { RequestMethod.GET, RequestMethod.POST })
@@ -113,7 +157,7 @@ public class ProdController {
 
 		model.addAttribute("authUser", authUser);
 
-		return "mypage/mypage_prod/delivery_manage";
+		return "mypage/mypage_seller/prod_seller_add";
 	}
 
 	// 배송판매자 대관계정 등록
@@ -126,7 +170,7 @@ public class ProdController {
 
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 		authUser.setSell_no(sellervo.getSell_no());
-		authUser.setProd_type(sellervo.getProd_type());	
+		authUser.setProd_type(sellervo.getProd_type());
 
 		return "redirect:/mypage/prod";
 	}

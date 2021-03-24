@@ -237,7 +237,6 @@ table {
 	width: 160px;
 	padding: 8px 6px;
 	font-family: inherit;
-	appearance: none;
 	border: 1px solid #dddfe1;
 	border-radius: 0px;
 	cursor: pointer;
@@ -300,6 +299,13 @@ table {
 .delevery_product_content .table_box .delevery_insert_table tr {
 	vertical-align: top;
 	height: 30px;
+}
+
+.delevery_insert_table tr #sizeboxadd div {
+	border: 1px #dddfe1 solid;
+	display: flex;
+	padding: 1px 5px 1px 5px;
+	width: fit-content;
 }
 
 /*버튼*/
@@ -484,7 +490,6 @@ table {
 	width: 160px;
 	padding: 8px 6px;
 	font-family: inherit;
-	appearance: none;
 	border: 1px solid #dddfe1;
 	border-radius: 0px;
 	cursor: pointer;
