@@ -126,5 +126,24 @@ public class StoreController {
 		return "";
 	}
 	
+	//상품결제페이지 (user_no넣어서 임시로 테스트) (주소 vo에 추가 안하려면 다른 방법으로 가져와야겠음.. map으로 묶는다거나)
+	@RequestMapping(value="/payform")
+	public String pay(Model model) {
+		System.out.println("[Controller] payform()");
+		
+		int user_no = 100;
+		
+		List<ProductVo> payList = storeService.payform(user_no);
+		System.out.println(payList.toString());
+		
+		model.addAttribute("payList", payList);
+		
+		return "store/storePayment";
+	}
+	
+	
+	
+	
+	
 
 }

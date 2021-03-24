@@ -1929,6 +1929,24 @@ form {
   vertical-align: 1px;
 }
 
+/*상품결제에서 쓰려고 안겹치게 추가합니다*/
+.only_pc .box .list li .goods .price .in_price .cost2 {
+    display: block;
+    padding-top: 4px;
+    line-height: 24px;
+    text-align: right;
+}
+
+.box .list li .goods .price .cost2 {
+    padding-left: 6px;
+    font-size: 14px;
+    color: #999;
+    line-height: 20px;
+    word-break: break-all;
+    vertical-align: 1px;
+}
+/*****************************************/
+
 .only_pc .box .list li .goods .price .in_price .noti {
   height: auto;
 }

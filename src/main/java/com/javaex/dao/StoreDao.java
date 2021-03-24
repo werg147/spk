@@ -104,5 +104,16 @@ public class StoreDao {
 		
 		sqlSession.insert("store.reviewimgInsert", reviewimgVo);
 	}	
+	
+	
+	//결제폼 리스트
+	public List<ProductVo> selectPayList(int user_no) {
+		System.out.println("[StoreDao] selectPayList()");
+		
+		return sqlSession.selectList("store.selectPayList", user_no);
+	}
+	
+	
+	
 
 }
