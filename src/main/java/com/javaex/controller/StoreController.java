@@ -62,7 +62,7 @@ public class StoreController {
 		return "store/storePayment";
 	}
 	
-	//상품상세 - qna 작성폼
+	//상품상세 - qna 작성폼 (로그인 안하면 오류남)
 	@RequestMapping(value="/qnaForm")
 	public String qnaForm(HttpSession session, Model model) {
 		System.out.println("[Controller] qnaForm()");
@@ -97,7 +97,7 @@ public class StoreController {
 		return "";
 	}
 	
-	//상품리뷰 - review작성폼
+	//상품리뷰 - review작성폼 (로그인 안하면 오류남)
 	@RequestMapping(value="/reviewForm")
 	public String reviewForm(HttpSession session, Model model) {
 		System.out.println("[Controller] reviewForm()");

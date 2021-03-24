@@ -48,15 +48,18 @@ public class StoreService {
 		System.out.println("상품옵션 리스트: " + cssList.toString());
 		
 		//3. 리뷰게시글 리스트
-		//게시글 -- 쿼리문 거의나왔음 (고민중)
-		List<ReviewVo> revList = storeDao.selectReList(prod_no);
-		System.out.println("리뷰게시글: " + revList.toString());
-		
+		List<ReviewVo> reList = storeDao.selectReList(prod_no);
+		System.out.println("리뷰게시글: " + reList.toString());
 		
 		//4. 문의게시글 리스트
+		List<QnaVo> qnaList = storeDao.selectQnaList(prod_no);
+		System.out.println("문의게시글: " + qnaList.toString());
 		
 		//묶기
 		productVo.setCssList(cssList);
+		productVo.setReList(reList);
+		productVo.setQnaList(qnaList);
+		
 		System.out.println(productVo.toString());
 		
 		return productVo;

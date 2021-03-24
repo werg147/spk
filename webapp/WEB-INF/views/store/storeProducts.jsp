@@ -11,6 +11,7 @@
     <title>store</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/store.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css">
+    <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
 </head>
 
 <body class="proBody" onload="init();">
@@ -28,6 +29,7 @@
 
 <div class="wrap">
   <div class="container">
+  
 
 		<!--상단여백-->
 		<div class="searching_item"><!----></div>
@@ -326,10 +328,7 @@
 					<div class="xans-element- xans-product xans-product-additional detail_board  ">
 						<div class="board">
 							<span class="line"></span>
-							<form name="frmList">
-								<input type="hidden" name="sort" value="">
-								<input type="hidden" name="page_num" value="">
-								<input type="hidden" name="goodsno" value="4416">
+							
 
 								<div class="title_txt">
 									<h2>PRODUCT REVIEW</h2>
@@ -389,153 +388,69 @@
 
 								
 								<!--리뷰글 리스트-->
-								<div class="tr_line">
-									<table class="xans-board-listheaderd tbl_newtype1" width="100%" cellpadding="0" cellspacing="0" onclick="view_content(this,event,'notice')">
-
-									<caption style="display:none">구매후기 내용</caption>
-										<colgroup>
-											<col style="width:70px;">
-											<col style="width:auto;">
-											<col style="width:51px;">
-											<col style="width:117px;">
-											<col style="width:100px;">
-											<col style="width:80px;">
-										</colgroup>
-
-									<tbody>
-										<tr>
+								<c:forEach items="${productVo.reList}" var="reVo">
+									<div class="tr_line">
+										<table class="xans-board-listheaderd tbl_newtype1" width="100%" cellpadding="0" cellspacing="0" onclick="view_content(this,event,'notice')">
+	
+										<caption style="display:none">구매후기 내용</caption>
+											<colgroup>
+												<col style="width:70px;">
+												<col style="width:auto;">
+												<col style="width:51px;">
+												<col style="width:117px;">
+												<col style="width:100px;">
+												<col style="width:80px;">
+											</colgroup>
+	
+										<tbody>
+										
+										
+											<tr>
+												<td align="center" class="reviewNo">
+													${reVo.review_no}
+												</td>
+												<td class="subject">
+													<div>${reVo.review_title}</div>
+												</td>
+												<td class="user_grade grade_comm">
+													<a class="board_hidden"> </a>
+												</td>
+												<td class="user_grade">
+													${reVo.nickname}
+												</td>
+												<td class="time">
+													${reVo.review_date}
+												</td>
+												<td>
+													<span class="review-hit-cnt" data-sno="6412655">${reVo.review_hit}</span>
+												</td>
+											</tr>
+										
 											
+										</tbody>
+									</table>
+							
+				 					<!-- review_content -->
+									<div class="review_view" style="display: none;">
+										<div class="inner_review">
+											<div class="name_purchase">
+												<strong class="name"></strong>
+												<p class="package"></p>
+											</div>
 											
-											<td align="center">
-												17
-											</td>
-											<td class="subject">
-												<div>손에 착 감깁니다.</div>
-											</td>
-											<td class="user_grade grade_comm">
-												<a class="board_hidden"><!--히든--> </a>
-											</td>
-											<td class="user_grade">
-												불주먹은나야
-											</td>
-											<td class="time">
-												2021-03-11
-											</td>
-											<td>
-												<span class="review-hit-cnt" data-sno="6412655">282397</span>
-											</td>
-										</tr>
-
-										<!-------반복영역------->
-										<tr>
-											<input type="hidden" name="index" value="-1">
-											<input type="hidden" name="image" value="">
-											<input type="hidden" name="grade" value="0">
-											<input type="hidden" name="best" value="false">
-											<input type="hidden" name="pNo" value="">
-											
-											<td align="center">
-												17
-											</td>
-											<td class="subject">
-												<div>손에 착 감깁니다.</div>
-											</td>
-											<td class="user_grade grade_comm">
-												<a class="board_hidden"><!--히든--> </a>
-											</td>
-											<td class="user_grade">
-												불주먹은나야
-											</td>
-											<td class="time">
-												2021-03-11
-											</td>
-											<td>
-												<span class="review-hit-cnt" data-sno="6412655">282397</span>
-											</td>
-										</tr>
-										<tr>
-											<input type="hidden" name="index" value="-1">
-											<input type="hidden" name="image" value="">
-											<input type="hidden" name="grade" value="0">
-											<input type="hidden" name="best" value="false">
-											<input type="hidden" name="pNo" value="">
-											
-											<td align="center">
-												17
-											</td>
-											<td class="subject">
-												<div>손에 착 감깁니다.</div>
-											</td>
-											<td class="user_grade grade_comm">
-												<a class="board_hidden"><!--히든--> </a>
-											</td>
-											<td class="user_grade">
-												불주먹은나야
-											</td>
-											<td class="time">
-												2021-03-11
-											</td>
-											<td>
-												<span class="review-hit-cnt" data-sno="6412655">282397</span>
-											</td>
-										</tr>
-										<tr>
-											<input type="hidden" name="index" value="-1">
-											<input type="hidden" name="image" value="">
-											<input type="hidden" name="grade" value="0">
-											<input type="hidden" name="best" value="false">
-											<input type="hidden" name="pNo" value="">
-											
-											<td align="center">
-												17
-											</td>
-											<td class="subject">
-												<div>손에 착 감깁니다.</div>
-											</td>
-											<td class="user_grade grade_comm">
-												<a class="board_hidden"><!--히든--> </a>
-											</td>
-											<td class="user_grade">
-												불주먹은나야
-											</td>
-											<td class="time">
-												2021-03-11
-											</td>
-											<td>
-												<span class="review-hit-cnt" data-sno="6412655">282397</span>
-											</td>
-										</tr>
-										<tr>
-											<input type="hidden" name="index" value="-1">
-											<input type="hidden" name="image" value="">
-											<input type="hidden" name="grade" value="0">
-											<input type="hidden" name="best" value="false">
-											<input type="hidden" name="pNo" value="">
-											
-											<td align="center">
-												17
-											</td>
-											<td class="subject">
-												<div>손에 착 감깁니다.</div>
-											</td>
-											<td class="user_grade grade_comm">
-												<a class="board_hidden"><!--히든--> </a>
-											</td>
-											<td class="user_grade">
-												불주먹은나야
-											</td>
-											<td class="time">
-												2021-03-11
-											</td>
-											<td>
-												<span class="review-hit-cnt" data-sno="6412655">282397</span>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-
-								
-							</form> <!--frmList-->
+											<c:if test="${not empty reVo.review_img_savename}">
+												<div class="review_photo">
+													<img src="${pageContext.request.contextPath}/upload/${reVo.review_img_savename}" border="0"><br><br>
+												</div>
+											</c:if>
+												
+											<div>
+												${reVo.review_content}
+											</div>
+										</div>
+									</div>
+								</div>
+							</c:forEach>
 
 							
 							<p class="btnArea after">
@@ -543,11 +458,10 @@
 									<span class="bhs_button" style="line-height:30px; width:130px;">후기쓰기</span>
 								</a>
 							</p>
-							
-				
-						
 
 						</div> <!--board-->
+						
+		
 
 						<!-- 페이징 버튼 영역 -->
 						<div id="paging">
@@ -573,7 +487,7 @@
 				</div> <!--.goods_view_board #goods_board-->
 
 
-
+				<div class="tab_padding"></div>
 
 				<!--상세정보,상품정보,고객후기,상담문의 탭-->
 				<div class="goods_tab" id="proQna">
@@ -615,131 +529,80 @@
 											</li>
 										</ul>
 									</div>
-
-									<table class="xans-board-listheader" width="100%" border="0" cellpadding="0" cellspacing="0">
-										<tbody>
-											<tr>
-												<th width="70" scope="col" class="input_txt">번호</th>
-												<th width="134" scope="col" class="input_txt board_hidden">
-												</th>
-												<th width="631" scope="col" class="input_txt">제목</th>
-												<th width="80" scope="col" class="input_txt">작성자</th>
-												<th width="80" scope="col" class="input_txt">작성일</th>
-											</tr>
-										</tbody>
-									</table>
-
 									
-									<!--상담글 리스트 출력-->
-									<div id="qnaListArea">
+									
+									
+										<table class="xans-board-listheader" width="100%" border="0" cellpadding="0" cellspacing="0">
 										
-									</div>
-										<!--  	
-										<table width="100%" class="xans-board-listheaderd">
 											<tbody>
 												<tr>
-													<td width="70" align="center">
-														123
-													</td>
-													<td width="134">
-														<a class="board_hidden"> </a>	
-													</td>
-													<td class="image" style="padding:22px 19px 23px; text-align:left;">
-														<div style="padding:3px 0px 0px 20px;">
-															<p class="subject">판매 (일시)중단 제품 안내 (21.3.5 업데이트)</p>
-														</div>
-													</td>
-													<td width="80">
-														Marketkurly
-													</td>
-													<td width="80" style="color:#939393">
-														2017-02-01
-													</td>
+													<th width="70" scope="col" class="input_txt">번호</th>
+													<th width="134" scope="col" class="input_txt board_hidden">
+													</th>
+													<th width="631" scope="col" class="input_txt">제목</th>
+													<th width="80" scope="col" class="input_txt">작성자</th>
+													<th width="80" scope="col" class="input_txt">작성일</th>
 												</tr>
 											</tbody>
 										</table>
-										-->
-												<!-------반복영역
-												<tr onmouseover="this.style.background='#F7F7F7'" onmouseout="this.style.background=''" onclick="view_content('15968', '1');" style="">
-													<td width="70" align="center">
-														122
-													</td>
-													<td width="134">
-														<a class="board_hidden"></a>	
-													</td>
-													<td class="image" style="padding:22px 19px 23px; text-align:left;">
-														<div style="padding:3px 0px 0px 20px;">
-															<p class="subject">판매 (일시)중단 제품 안내 (21.3.5 업데이트)</p>
+	
+										
+										<!--상담글 리스트 출력-->
+										<div id="qnaListArea">
+											
+										</div>
+										
+										<c:forEach items="${productVo.qnaList}" var="qnaVo">
+										<div class="tr_line">										  	
+											<table width="100%" class="xans-board-listheaderd">
+												<tbody>
+														<input type="hidden" name="qnaType" value="${qnaVo.qna_type}">
+														<tr>
+															<td width="70" align="center">
+																${qnaVo.qna_no}
+															</td>
+															<td width="134">
+																<a class="board_hidden"> </a>	
+															</td>
+															<td class="image" style="padding:22px 19px 23px; text-align:left;">
+																<div style="padding:3px 0px 0px 20px;">
+																	<p class="subject">${qnaVo.qna_title}</p>
+																</div>
+															</td>
+															<td width="80">
+																작성자
+															</td>
+															<td width="80" style="color:#939393">
+																${qnaVo.qna_date}
+															</td>
+														</tr>
+													
+													
+												</tbody>
+											</table>
+											
+											<!-- qna_content (리뷰와 같아서 이름겹치게 둠)-->
+											<div class="review_view" style="display: none;">
+												<div class="inner_review">
+													<div class="name_purchase">
+														<strong class="name"></strong>
+														<p class="package"></p>
+													</div>
+													
+													<c:if test="${not empty qnaVo.qna_img_savename}">
+														<div class="review_photo">
+															<img src="${pageContext.request.contextPath}/upload/${qnaVo.qna_img_savename}" border="0"><br><br>
 														</div>
-													</td>
-													<td width="80">
-														Marketkurly
-													</td>
-													<td width="80" style="color:#939393">
-														2017-02-01
-													</td>
-												</tr>
-												<tr onmouseover="this.style.background='#F7F7F7'" onmouseout="this.style.background=''" onclick="view_content('15968', '1');" style="">
-													<td width="70" align="center">
-														121
-													</td>
-													<td width="134">
-														<a class="board_hidden"></a>	
-													</td>
-													<td class="image" style="padding:22px 19px 23px; text-align:left;">
-														<div style="padding:3px 0px 0px 20px;">
-															<p class="subject">판매 (일시)중단 제품 안내 (21.3.5 업데이트)</p>
-														</div>
-													</td>
-													<td width="80">
-														Marketkurly
-													</td>
-													<td width="80" style="color:#939393">
-														2017-02-01
-													</td>
-												</tr>
-												<tr onmouseover="this.style.background='#F7F7F7'" onmouseout="this.style.background=''" onclick="view_content('15968', '1');" style="">
-													<td width="70" align="center">
-														120
-													</td>
-													<td width="134">
-														<a class="board_hidden"> </a>	
-													</td>
-													<td class="image" style="padding:22px 19px 23px; text-align:left;">
-														<div style="padding:3px 0px 0px 20px;">
-															<p class="subject">판매 (일시)중단 제품 안내 (21.3.5 업데이트)</p>
-														</div>
-													</td>
-													<td width="80">
-														Marketkurly
-													</td>
-													<td width="80" style="color:#939393">
-														2017-02-01
-													</td>
-												</tr>
-												<tr onmouseover="this.style.background='#F7F7F7'" onmouseout="this.style.background=''" onclick="view_content('15968', '1');" style="">
-													<td width="70" align="center">
-														199
-													</td>
-													<td width="134">
-														<a class="board_hidden"> </a>	
-													</td>
-													<td class="image" style="padding:22px 19px 23px; text-align:left;">
-														<div style="padding:3px 0px 0px 20px;">
-															<p class="subject">판매 (일시)중단 제품 안내 (21.3.5 업데이트)</p>
-														</div>
-													</td>
-													<td width="80">
-														Marketkurly
-													</td>
-													<td width="80" style="color:#939393">
-														2017-02-01
-													</td>
-												</tr>------->
-
-																			
-
-						
+													</c:if>
+														
+													<div>
+														${qnaVo.qna_content}
+													</div>
+												</div>
+											</div>
+										</div>
+									</c:forEach>	
+				
 
 								<p class="btnArea after">
 									<a href="${pageContext.request.contextPath}/store/qnaForm?prodNo=${param.prodNo}">
@@ -792,12 +655,11 @@
 		</div> <!--layout_wrap goods_view_area-->
 		
 		
-		<input type="text" id="authuser" value="${authUser.user_no}">
+		<!-- <input type="text" id="authuser" value="${authUser.user_no}"> -->
 
-
-
-
+		<a id="back-to-top"><img src="${pageContext.request.contextPath}/assets/image/store_img/up.png"></a>
 		<br><br><br><br><br><br><br><br><br>
+		
 		
 		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 		<!--//footer//-->
@@ -811,6 +673,20 @@
 
 
 <script type="text/javascript">
+
+
+	//리뷰보기
+	$(document).ready(function(){
+		
+		$(".tr_line").click(function(){
+			
+			$(this).find(".review_view").toggle();
+			
+			
+		});
+	});
+	
+	
 
 	
 	//수량에 따른 총 가격 계산하기
@@ -869,6 +745,21 @@
 		alert('로그인 후 작성 가능합니다.'); 
 	}
 
+	
+	$(function(){
+		  $('#back-to-top').on('click',function(e){
+		      e.preventDefault();
+		      $('html,body').animate({scrollTop:0},600);
+		  });
+		  
+		  $(window).scroll(function() {
+		    if ($(document).scrollTop() > 100) {
+		      $('#back-to-top').addClass('show');
+		    } else {
+		      $('#back-to-top').removeClass('show');
+		    }
+		  });
+		});
 	
 	
 	

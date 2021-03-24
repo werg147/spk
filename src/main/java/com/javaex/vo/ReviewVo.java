@@ -10,11 +10,15 @@ public class ReviewVo {
 	private int buy_no;
 	private int user_no;
 	private int review_hit;
-	
-	public ReviewVo() {}
-	
+
+	private String review_img_savename;
+	private String nickname;
+
+	public ReviewVo() {
+	}
+
 	public ReviewVo(int review_no, String prod_no, String review_title, String review_content, String review_date,
-			int buy_no, int user_no, int review_hit) {
+			int buy_no, int user_no, int review_hit, String review_img_savename, String nickname) {
 		super();
 		this.review_no = review_no;
 		this.prod_no = prod_no;
@@ -24,6 +28,8 @@ public class ReviewVo {
 		this.buy_no = buy_no;
 		this.user_no = user_no;
 		this.review_hit = review_hit;
+		this.review_img_savename = review_img_savename;
+		this.nickname = nickname;
 	}
 
 	public int getReview_no() {
@@ -90,13 +96,28 @@ public class ReviewVo {
 		this.review_hit = review_hit;
 	}
 
+	public String getReview_img_savename() {
+		return review_img_savename;
+	}
+
+	public void setReview_img_savename(String review_img_savename) {
+		this.review_img_savename = review_img_savename;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
 	@Override
 	public String toString() {
 		return "ReviewVo [review_no=" + review_no + ", prod_no=" + prod_no + ", review_title=" + review_title
 				+ ", review_content=" + review_content + ", review_date=" + review_date + ", buy_no=" + buy_no
-				+ ", user_no=" + user_no + ", review_hit=" + review_hit + "]";
+				+ ", user_no=" + user_no + ", review_hit=" + review_hit + ", review_img_savename=" + review_img_savename
+				+ ", nickname=" + nickname + "]";
 	}
-	
-	
-	
+
 }

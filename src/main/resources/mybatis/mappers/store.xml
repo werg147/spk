@@ -106,14 +106,44 @@
 			select re.review_no,
                    re.review_title,
                    us.nickname,
-                   re.review_date,
-                   re.review_hit
-            from review re, users us
-            where re.user_no = us.user_no
+                          to_char(re.review_date,'YYYY-MM-DD') review_date,
+                          re.review_hit,
+                          re.review_content,
+                          img.review_img_savename
+                   from review re, users us, (select rimg.review_img_savename,
+                                                     rimg.review_no
+                                              from review re, reviewimg rimg
+                                              where re.review_no = rimg.review_no(+)) img
+                   where re.user_no = us.user_no
+                   and re.review_no = img.review_no(+)
+                   and re.prod_no = #{prod_no}
+                   order by review_date desc
 		]]>
 	</select>
 
-
+	<!-- 상품상세 /qna게시글 리스트 -->
+	<select id="selectQnaList" parameterType="String" resultType="QnaVo">
+		<![CDATA[
+			select us.nickname,
+                   q.qna_no,
+                   q.prod_no,
+                   q.qna_title,
+                   q.qna_content,
+                   to_char(q.qna_date, 'YYYY-MM-DD') qna_date,
+                   q.qna_type,
+                   q.user_no,
+                   q.buy_no,
+                   qimg.qna_img_savename
+            from qna q, users us, (select qimg.qna_img_savename,
+                                          qimg.qna_no
+                                   from qna q, qnaimg qimg
+                                   where q.qna_no = qimg.qna_no(+)) qimg
+            where q.user_no = us.user_no
+            and q.qna_no = qimg.qna_no(+)
+            and q.prod_no = #{prod_no}
+            order by qna_date desc
+		]]>
+	</select>
 
 
 
