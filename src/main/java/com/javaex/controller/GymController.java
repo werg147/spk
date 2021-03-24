@@ -102,6 +102,7 @@ public class GymController {
 		System.out.println("돌아옴");
 
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
+		authUser.setSell_no(sellervo.getSell_no());
 		authUser.setBook_type(sellervo.getBook_type());
 
 		return "redirect:/mypage/book/gymaddform";

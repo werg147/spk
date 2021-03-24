@@ -104,6 +104,7 @@ public class ProdController {
 		System.out.println("돌아옴");
 
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
+		authUser.setSell_no(sellervo.getSell_no());
 		authUser.setProd_type(sellervo.getProd_type());
 
 		return "redirect:/mypage/prod";
