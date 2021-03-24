@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javaex.service.AlarmService;
 import com.javaex.service.CartService;
@@ -117,6 +118,22 @@ public class Mypage_buyController {
 		model.addAttribute("cartInfoVo", cartInfoVo);
 
 		return "mypage/mypage_buy/cart";
+
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/remove", method = { RequestMethod.GET, RequestMethod.POST })
+	public int remove(@RequestParam("no") int cart_no, @RequestParam("userno") int user_no) {
+
+		System.out.println("[Cart Ctrl]: remove 진입");
+
+		System.out.println(cart_no);
+
+		int priceAll = cServ.remove(cart_no, user_no);
+
+		System.out.println(priceAll);
+
+		return priceAll;
 
 	}
 

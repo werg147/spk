@@ -38,4 +38,14 @@ public class CartService {
 
 	}
 
+	public int remove(int cart_no, int user_no) {
+
+		System.out.println("[Cart Service]: list(int user_no) 연결");
+
+		cDao.remove(cart_no);
+
+		return cDao.selectOneTotalPrice(user_no);
+
+	}
+
 }
