@@ -32,9 +32,9 @@
 	</c:if>
 	<c:if test="${authUser != null}">
 		<ul id="side_menu_user">
-			<li><a href="../mypage_buy/alarm.html"><span class="menu">알림</span><span
+			<li><a href="${pageContext.request.contextPath}/mypage/alarm"><span class="menu">알림</span><span
 					class="arrow">></span></a></li>
-			<li><a href="../mypage_buy/cart.html"><span class="menu">장바구니</span><span
+			<li><a href="${pageContext.request.contextPath}/mypage/cart"><span class="menu">장바구니</span><span
 					class="arrow">></span></a></li>
 			<li><a href="../mypage_buy/buylist.html"><span class="menu">구매내역</span><span
 					class="arrow">></span></a></li>

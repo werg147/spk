@@ -14,11 +14,11 @@ public class AlarmDao {
 	@Autowired
 	private SqlSession sql;
 
-	public List<AlarmVo> selectList() {
+	public List<AlarmVo> selectList(int user_no) {
 
 		System.out.println("[Alarm Dao]: selectList() 실행");
 
-		List<AlarmVo> aList = sql.selectList("alarm.selectAlarm");
+		List<AlarmVo> aList = sql.selectList("alarm.selectAlarm", user_no);
 
 		System.out.println("[Alarm Dao]: " + aList.toString());
 
@@ -26,91 +26,31 @@ public class AlarmDao {
 
 	}
 
-	public Object product_alarm(AlarmVo aVo) {
+	// 알람 보내기
+	public void insertProdAlarm(AlarmVo alarmVo) {
 
-		System.out.println("[Alarm Dao]: sellAlarm(AlarmVo aVo) 실행");
+		System.out.println("[Alarm Dao]: insertAlarm(AlarmVo aVo) 실행");
 
-		return sql.insert("alarm.send_product_alarm", aVo);
+		System.out.println(alarmVo);
 
-	}
-
-	public Object payment_complete(AlarmVo aVo) {
-
-		System.out.println("[Alarm Dao]: payment_complete(AlarmVo aVo) 실행");
-
-		return sql.update("alarm.payment_complete", aVo);
+		sql.insert("alarm.insertProdAlarm", alarmVo);
 
 	}
 
-	public Object delivery_ready(AlarmVo aVo) {
+	// 결제완료 - 리스트 가져오기
+	public List<AlarmVo> prodSelectList(int buy_no) {
 
-		System.out.println("[Alarm Dao]: delivery_ready(AlarmVo aVo) 실행");
+		System.out.println("[Alarm Dao]: prodSelect(AlarmVo aVo) 실행");
 
-		return sql.update("alarm.delivery_ready", aVo);
-
+		return sql.selectList("alarm.prodSelectList", buy_no);
 	}
 
-	public Object delivery_ing(AlarmVo aVo) {
+	// 배송준비 중 - 리스트 가져오기
+	public AlarmVo prodSelect(int buyprod_no) {
 
-		System.out.println("[Alarm Dao]: delivery_ing(AlarmVo aVo) 실행");
+		System.out.println("[Alarm Dao]: prodSelect(AlarmVo aVo) 실행");
 
-		return sql.update("alarm.delivery_ing", aVo);
-
-	}
-
-	public Object delivery_complete(AlarmVo aVo) {
-
-		System.out.println("[Alarm Dao]: delivery_complete(AlarmVo aVo) 실행");
-
-		return sql.update("alarm.delivery_complete", aVo);
-
-	}
-
-	public Object matching_alarm(AlarmVo aVo) {
-
-		System.out.println("[Alarm Dao]: matching_alarm(AlarmVo aVo) 실행");
-
-		return sql.insert("alarm.send_matching_alarm", aVo);
-	}
-
-	public Object matching_registration(AlarmVo aVo) {
-
-		System.out.println("[Alarm Dao]: matching_registration(AlarmVo aVo) 실행");
-
-		return sql.update("alarm.matching_registration", aVo);
-
-	}
-
-	public Object getMatch_application(AlarmVo aVo) {
-
-		System.out.println("[Alarm Dao]: getMatch_application(AlarmVo aVo) 실행");
-
-		return sql.update("alarm.getMatch_application", aVo);
-
-	}
-
-	public Object getMatching_refused(AlarmVo aVo) {
-
-		System.out.println("[Alarm Dao]: getMatching_refused(AlarmVo aVo) 실행");
-
-		return sql.update("alarm.getMatching_refused", aVo);
-
-	}
-
-	public Object matching_accept(AlarmVo aVo) {
-
-		System.out.println("[Alarm Dao]: matching_accept(AlarmVo aVo) 실행");
-
-		return sql.update("alarm.matching_accept", aVo);
-
-	}
-
-	public Object matching_complete(AlarmVo aVo) {
-
-		System.out.println("[Alarm Dao]: matching_complete(AlarmVo aVo) 실행");
-
-		return sql.update("alarm.matching_complete", aVo);
-
+		return sql.selectOne("alarm.prodSelect", buyprod_no);
 	}
 
 }

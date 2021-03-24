@@ -49,12 +49,13 @@ public class StoreDao {
 		return sqlSession.selectList("store.selectReList", prod_no);
 	}
 	
-	//상품 살세페이지 리뷰이미지 리스트
-	public void selectReimgList(String prod_no) {
-		System.out.println("[StoreDao] selectReimgList()");
+	//상품 상세페이지 문의리스트
+	public List<QnaVo> selectQnaList(String prod_no){
+		System.out.println("[StoreDao] selectQnaList()");
 		
-		sqlSession.selectList("store.selectReimgList", prod_no);
+		return sqlSession.selectList("store.selectQnaList", prod_no);
 	}
+
 	
 	
 	

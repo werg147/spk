@@ -212,6 +212,47 @@ input:-ms-input-placeholder {
 
 
 /*/////////////////////상품 상세페이지///////////////////*/
+/* 맨위로 가기 */
+#back-to-top {
+  display: inline-block;
+  background-color: #C51212;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 4px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  transition: background-color .3s, 
+    opacity .5s, visibility .5s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+}
+
+#back-to-top::after {
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 2em;
+  line-height: 50px;
+  color: #fff;
+}
+
+#back-to-top:hover {
+  cursor: pointer;
+  background-color: #333;
+}
+
+#back-to-top:active {
+  background-color: #555;
+}
+
+#back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+}
+
 .proBody{
 	position: relative;
 }
@@ -631,6 +672,12 @@ select {
     vertical-align: top;
 }
 
+.tab_padding {
+	width: 1050px;
+	height: 50px;
+	padding-bottom: 50px;
+}
+
 /*상세정보/////*/
 /*이미지*/
 .goods_view {
@@ -789,6 +836,38 @@ select {
   text-align: left;
 }
 
+/* 리뷰컨텐츠 */
+.goods_board .review_view {
+    display: none;
+    padding: 10px 10px 11px;
+    border-top: 1px solid #e3e3e3;
+}
+
+.goods_board .review_view .inner_review {
+    width: 100%;
+    padding: 20px 9px 9px;
+    line-height: 25px;
+}
+
+.goods_board .name_purchase .name {
+    display: block;
+    font-weight: 700;
+    font-size: 12px;
+    color: #514859;
+    line-height: 18px;
+}
+
+.goods_board .review_photo {
+    padding-top: 30px;
+    line-height: 16px;
+}
+
+.review_photo img {
+    display: block;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
 /*후기쓰기 버튼 영역*/
 .xans-product-additional div.board .btnArea {
   padding: 10px 0;
@@ -825,6 +904,8 @@ element.style {
 .board_hidden{
   color: #fff;
 }
+
+
 
 
 /*///////////////////결제완료 페이지///////////////////*/

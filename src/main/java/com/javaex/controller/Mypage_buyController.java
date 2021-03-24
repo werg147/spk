@@ -7,9 +7,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.javaex.service.AlarmService;
 import com.javaex.service.CartService;
@@ -33,12 +33,17 @@ public class Mypage_buyController {
 	@Autowired
 	public CartService cServ;
 
+	// 알람리스트 출력
 	@RequestMapping(value = "/alarm", method = { RequestMethod.GET, RequestMethod.POST })
-	public String list(Model model) {
+	public String list(Model model, HttpSession session) {
 
 		System.out.println("[Alarm Ctrl]: list 진입");
 
-		List<AlarmVo> aList = aServ.list();
+		UserVo authUser = (UserVo) session.getAttribute("authUser");
+
+		int user_no = authUser.getUser_no();
+
+		List<AlarmVo> aList = aServ.list(user_no);
 
 		System.out.println("[Alarm Ctrl]: " + aList.toString());
 
@@ -48,192 +53,42 @@ public class Mypage_buyController {
 
 	}
 
-	@RequestMapping(value = "/payment_complete", method = { RequestMethod.GET, RequestMethod.POST })
-	public String payment_complete(@ModelAttribute AlarmVo aVo, HttpSession session) {
+	// 결제완료 알람 발송
+	@RequestMapping(value = "/productBuy", method = { RequestMethod.GET, RequestMethod.POST })
+	public void productBuy(@RequestParam("buy_no") int buy_no) {
 
-		System.out.println("[Alarm Ctrl]: payment_complete 진입");
+		aServ.paymentComplete(buy_no);
 
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
-
-		int user_no = authUser.getUser_no();
-
-		aVo.setFrom_user_no(user_no);
-
-		String content = acVo.getPayment_complete();
-
-		aVo.setAlarm_content(content);
-
-		aServ.payment_complete(aVo);
-
-		return "redirect:/mypage/alarm";
+		// 포워드 할 페이지
 
 	}
 
-	@RequestMapping(value = "/delivery_ready", method = { RequestMethod.GET, RequestMethod.POST })
-	public String delivery_ready(@ModelAttribute AlarmVo aVo, HttpSession session) {
+	// 배송준비 중 알람 발송
 
-		System.out.println("[Alarm Ctrl]: delivery_ready 진입");
+	@RequestMapping(value = "/delReady", method = { RequestMethod.GET, RequestMethod.POST })
+	public void delReady(@RequestParam("buyprod_no") int buyprod_no) {
 
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
+		aServ.deliveryReady(buyprod_no);
 
-		int user_no = authUser.getUser_no();
-
-		aVo.setFrom_user_no(user_no);
-
-		String content = acVo.getDelivery_ready();
-
-		aVo.setAlarm_content(content);
-
-		aServ.delivery_ready(aVo);
-
-		return "redirect:/mypage/alarm";
+		// 포워드 할 페이지
 
 	}
 
-	@RequestMapping(value = "/delivery_ing", method = { RequestMethod.GET, RequestMethod.POST })
-	public String delivery_ing(@ModelAttribute AlarmVo aVo, HttpSession session) {
+	@RequestMapping(value = "/delStart", method = { RequestMethod.GET, RequestMethod.POST })
+	public void delStart(@RequestParam("buyprod_no") int buyprod_no) {
 
-		System.out.println("[Alarm Ctrl]: delivery_ing 진입");
+		aServ.delStart(buyprod_no);
 
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
-
-		int user_no = authUser.getUser_no();
-
-		aVo.setFrom_user_no(user_no);
-
-		String content = acVo.getDelivery_ing();
-
-		aVo.setAlarm_content(content);
-
-		aServ.delivery_ing(aVo);
-
-		return "redirect:/mypage/alarm";
+		// 포워드 할 페이지
 
 	}
 
-	@RequestMapping(value = "/delivery_complete", method = { RequestMethod.GET, RequestMethod.POST })
-	public String delivery_complete(@ModelAttribute AlarmVo aVo, HttpSession session) {
+	@RequestMapping(value = "/delcomplete", method = { RequestMethod.GET, RequestMethod.POST })
+	public void delcomplete(@RequestParam("buyprod_no") int buyprod_no) {
 
-		System.out.println("[Alarm Ctrl]: delivery_complete 진입");
+		aServ.delcomplete(buyprod_no);
 
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
-
-		int user_no = authUser.getUser_no();
-
-		aVo.setFrom_user_no(user_no);
-
-		String content = acVo.getDelivery_complete();
-
-		aVo.setAlarm_content(content);
-
-		aServ.delivery_complete(aVo);
-
-		return "redirect:/mypage/alarm";
-
-	}
-
-	@RequestMapping(value = "/matching_registration", method = { RequestMethod.GET, RequestMethod.POST })
-	public String matching_registration(@ModelAttribute AlarmVo aVo, HttpSession session) {
-
-		System.out.println("[Alarm Ctrl]: payment_complete 진입");
-
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
-
-		int user_no = authUser.getUser_no();
-
-		aVo.setFrom_user_no(user_no);
-
-		String content = acVo.getMatch_registration();
-
-		aVo.setAlarm_content(content);
-
-		aServ.matching_registration(aVo);
-
-		return "redirect:/mypage/alarm";
-
-	}
-
-	@RequestMapping(value = "/matching_application", method = { RequestMethod.GET, RequestMethod.POST })
-	public String matching_application(@ModelAttribute AlarmVo aVo, HttpSession session) {
-
-		System.out.println("[Alarm Ctrl]: payment_complete 진입");
-
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
-
-		int user_no = authUser.getUser_no();
-
-		aVo.setFrom_user_no(user_no);
-
-		String content = acVo.getMatch_application();
-
-		aVo.setAlarm_content(content);
-
-		aServ.getMatch_application(aVo);
-
-		return "redirect:/mypage/alarm";
-
-	}
-
-	@RequestMapping(value = "/matching_refused", method = { RequestMethod.GET, RequestMethod.POST })
-	public String matching_refused(@ModelAttribute AlarmVo aVo, HttpSession session) {
-
-		System.out.println("[Alarm Ctrl]: payment_complete 진입");
-
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
-
-		int user_no = authUser.getUser_no();
-
-		aVo.setFrom_user_no(user_no);
-
-		String content = acVo.getMatching_refused();
-
-		aVo.setAlarm_content(content);
-
-		aServ.getMatching_refused(aVo);
-
-		return "redirect:/mypage/alarm";
-
-	}
-
-	@RequestMapping(value = "/matching_accept", method = { RequestMethod.GET, RequestMethod.POST })
-	public String matching_accept(@ModelAttribute AlarmVo aVo, HttpSession session) {
-
-		System.out.println("[Alarm Ctrl]: payment_complete 진입");
-
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
-
-		int user_no = authUser.getUser_no();
-
-		aVo.setFrom_user_no(user_no);
-
-		String content = acVo.getMatching_accept();
-
-		aVo.setAlarm_content(content);
-
-		aServ.matching_accept(aVo);
-
-		return "redirect:/mypage/alarm";
-
-	}
-
-	@RequestMapping(value = "/matching_complete", method = { RequestMethod.GET, RequestMethod.POST })
-	public String matching_complete(@ModelAttribute AlarmVo aVo, HttpSession session) {
-
-		System.out.println("[Alarm Ctrl]: payment_complete 진입");
-
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
-
-		int user_no = authUser.getUser_no();
-
-		aVo.setFrom_user_no(user_no);
-
-		String content = acVo.getMatching_complete();
-
-		aVo.setAlarm_content(content);
-
-		aServ.matching_complete(aVo);
-
-		return "redirect:/mypage/alarm";
+		// 포워드 할 페이지
 
 	}
 
@@ -258,7 +113,7 @@ public class Mypage_buyController {
 		System.out.println("ctrl: " + list);
 		System.out.println("ctrl: " + total);
 
-		//model.addAttribute("cartInfoVo", list);
+		// model.addAttribute("cartInfoVo", list);
 		model.addAttribute("cartInfoVo", cartInfoVo);
 
 		return "mypage/mypage_buy/cart";
