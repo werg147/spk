@@ -11,7 +11,7 @@
     <title>store</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/store.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css">
-    <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>   
 </head>
 
 <body class="proBody" onload="init();">
@@ -58,20 +58,6 @@
 									</div>
 							</span>
 						</div>
-						
-						<!--색상 (있을때)--><!--사이즈(없을때)--> 
-						
-						<div class="goods_info">
-							
-							
-								<dl class="list fst">
-									<dt class="tit">색상</dt> <dd class="desc">${productVo.cssList[0].color}</dd>
-								</dl> 
-	
-							
-								<dl class="list">
-									<dt class="tit">사이즈</dt> <!----> <dd class="desc">${productVo.cssList[0].prod_size}</dd>
-								</dl>
 							
 							
 							<!--사이즈 (있을때)-->
@@ -103,12 +89,25 @@
 								</span>
 							</div>
 						-->
-							
+						
+						<div class="goods_info">	
+						
 								<!-- 수량, 총 금액 form -->
-								<form name="form" method="get">
+								<form name="form" method="get" action="${productVo.prod_price}/mypage/cart">
+								
+								<!--색상 (있을때)--><!--사이즈(없을때)--> 		
+								<dl class="list fst">
+									<dt class="tit">색상</dt> <dd class="desc">${productVo.cssList[0].color}</dd>
+								</dl> 
+	
+							
+								<dl class="list">
+									<dt class="tit">사이즈</dt> <!----> <dd class="desc">${productVo.cssList[0].prod_size}</dd>
+								</dl>
+								
 								<dl class="list">
 									<dt class="tit">
-										수량 : <input type=hidden name="sell_price" value="${productVo.prod_price}">
+										수량 : <input type=hidden name="prod_price" value="${productVo.prod_price}">
 									</dt> 
 									<dd class="desc">
 										<div class="countpm">
@@ -116,7 +115,7 @@
 												<button type="button" class="btn down on" value=" - " onclick="del();">
 													<img src="${pageContext.request.contextPath}/assets/image/store_img/ico_minu.jpg">
 											    </button> 
-												<input type="text" class="amount read_only" name="amount" value="1" size="3" onchange="change();">
+												<input type="text" class="amount read_only" name="count" value="1" size="3" onchange="change();">
 												<button type="button" class="btn up on" value=" + " onclick="add();">
 													<img src="${pageContext.request.contextPath}/assets/image/store_img/ico_plus.jpg">
 												</button>
@@ -125,37 +124,42 @@
 										
 									</dd>
 								</dl>
-									
-									
-
-									
-									<div class="price_total">
-										<!--총 금액-->
-										<div class="total">
-											<div class="price">
-												<strong class="tit totit">총 상품금액 :</strong> 
-												<span class="sum">
-												<span class="num"><input type="text" class="num" name="sum" size="11" readonly></span> <span class="won">원</span></span>
-											</div> 
-											<p class="txt_point">
-												<span class="ico">적립</span> 
-												<span class="no_login"> 
-													<span>로그인 후, 적립혜택 제공</span>
-												</span>
-											</p>
-										</div>
 			
-										<!--장바구니, 바로구매 버튼-->
-										<div class="group_btn">
-											<div class="view_function">
-												<button type="button" class="btn btn_buy"><a href="../영훈/결제하기.html" style="font-size: 16px; color: #ffffff;">바로 구매</a></button> 
-												<button type="button" class="btn btn_cart"><a href="../경환/cart.html" style="font-size: 16px; color: #C51212;">장바구니</a></button>
-											</div> 
-										</div>
+								<div class="price_total">
+									<!--총 금액-->
+									<div class="total">
+										<div class="price">
+											<strong class="tit totit">총 상품금액 :</strong> 
+											<span class="sum">
+											<span class="num"><input type="text" class="num" name="sum" size="11" readonly></span> <span class="won">원</span></span>
+										</div> 
+										<p class="txt_point">
+											<span class="ico">적립</span> 
+											<span class="no_login"> 
+												<span>로그인 후, 적립혜택 제공</span>
+											</span>
+										</p>
 									</div>
-								</form>
+		
+									<!--장바구니, 바로구매 버튼-->
+									<div class="group_btn">
+										<div class="view_function">
+											<button type="button" class="btn_form btn_buy" formaction="" 
+											onclick="btn_click('buy');" style="font-size: 16px; color: #ffffff;">바로 구매</button> 
+											<button type="submit" class="btn_form btn_cart" formaction="${pageContext.request.contextPath}/store/test"
+											onclick="btn_click('cart');" style="font-size: 16px; color: #C51212;">장바구니</button>
+										</div> 
+									</div>
+								</div>
 								
-						</div>
+								<input type="hidden" name="prod_no" value="${productVo.prod_no}">
+								<input type="hidden" name="colorsize_no" value="${productVo.cssList[0].colorsize_no}">
+								<input type="hidden" name="color" value="${productVo.cssList[0].color}">
+								<input type="hidden" name="prod_size" value="${productVo.cssList[0].prod_size}">
+								
+							</form> <!-- 수량, 총 금액 form -->
+							
+					</div>
 
 
 
@@ -690,39 +694,39 @@
 
 	
 	//수량에 따른 총 가격 계산하기
-	var sell_price;
-	var amount;
+	var prod_price;
+	var count;
 
 	
 	function init () {
-		sell_price = document.form.sell_price.value;
-		amount = document.form.amount.value;
-		document.form.sum.value = sell_price;
+		prod_price = document.form.prod_price.value;
+		count = document.form.count.value;
+		document.form.sum.value = prod_price;
 		
 		change();
 	}
 	
 	function add () {
-		hm = document.form.amount;
+		hm = document.form.count;
 		sum = document.form.sum;
 		hm.value ++ ;
 	
 		//가격 천의자리 수 마다 , 붙이기
-		sum.value = (parseInt(hm.value) * sell_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		sum.value = (parseInt(hm.value) * prod_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
 	
 	function del () {
-		hm = document.form.amount;
+		hm = document.form.count;
 		sum = document.form.sum;
 			if (hm.value > 1) {
 				hm.value -- ;
 				//가격 천의자리 수 마다 , 붙이기
-				sum.value = (parseInt(hm.value) * sell_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+				sum.value = (parseInt(hm.value) * prod_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 			}
 	}
 	
 	function change () {
-		hm = document.form.amount;
+		hm = document.form.count;
 		sum = document.form.sum;
 	
 			if (hm.value < 0) {
@@ -730,7 +734,7 @@
 			}
 			
 		//가격 천의자리 수 마다 , 붙이기
-		sum.value = (parseInt(hm.value) * sell_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		sum.value = (parseInt(hm.value) * prod_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
 	}
 	
@@ -745,7 +749,7 @@
 		alert('로그인 후 작성 가능합니다.'); 
 	}
 
-	
+	//맨 위로 가기 버튼
 	$(function(){
 		  $('#back-to-top').on('click',function(e){
 		      e.preventDefault();
@@ -760,6 +764,8 @@
 		    }
 		  });
 		});
+	
+	
 	
 	
 	

@@ -69,7 +69,8 @@
 	<!-- 상품상세 /정보 가져오기 -->
 	<select id="selectProduct" parameterType="String" resultType="ProductVo">
 		<![CDATA[
-			select pimg.prod_img_savename,
+			select prod.prod_no,
+				   pimg.prod_img_savename,
                    prod.prod_brand,
                    prod.prod_name,
                    prod.prod_price,

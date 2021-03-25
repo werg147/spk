@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.service.StoreService;
+import com.javaex.vo.CartVo;
 import com.javaex.vo.ProductVo;
 import com.javaex.vo.QnaVo;
 import com.javaex.vo.ReviewVo;
@@ -140,6 +141,18 @@ public class StoreController {
 		model.addAttribute("pmap", pmap);
 		
 		return "store/storePayment";
+	}
+	
+	
+	
+	//카트테스트
+	@RequestMapping("/test")
+	public String test(@ModelAttribute CartVo cartVo) {
+		System.out.println("카트 데이터 테스트");
+		
+		System.out.println(cartVo.toString());
+		
+		return "";
 	}
 	
 	
