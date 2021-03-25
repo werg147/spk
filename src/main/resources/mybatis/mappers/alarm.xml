@@ -4,7 +4,8 @@
 
 <mapper namespace="alarm">
 
-	<select id="selectAlarm" parameterType="int" resultType="AlarmVo">
+	<select id="selectAlarm" parameterType="int"
+		resultType="AlarmVo">
 		<![CDATA[
 			SELECT  alarm_no,
 			        from_user_no,
@@ -20,6 +21,22 @@
 		]]>
 	</select>
 
+	<!-- 결제완료 -->
+	<select id="prodSelectList" parameterType="int"
+		resultType="AlarmVo">
+		<![CDATA[
+			SELECT  bp.prod_no,
+			        p.prod_name,
+			        p.sell_no,
+			        b.user_no,
+			        bp.buy_del_state
+			FROM    buyproduct bp, product p, buy b
+			WHERE   bp.prod_no = p.prod_no
+			        and b.buy_no = bp.buy_no
+			        and b.buy_no = #{buy_no}
+		]]>
+	</select>
+
 	<!-- 배송준비 중 -->
 	<select id="prodSelect" parameterType="int" resultType="AlarmVo">
 		<![CDATA[
@@ -30,38 +47,15 @@
 			        bp.buy_del_state
 			FROM    buyproduct bp, product p, buy b
 			WHERE   bp.prod_no = p.prod_no
-			        and b.buyprod_no = bp.prod_no
+			        and b.buy_no = bp.buy_no
 			        and bp.buyprod_no = #{buyprod_no}
-		]]>
-	</select>
-
-	<!-- 결제완료 -->
-	<select id="prodSelectList" parameterType="int" resultType="AlarmVo">
-		<![CDATA[
-			SELECT  bp.prod_no,
-			        p.prod_name,
-			        p.sell_no,
-			        b.user_no,
-			        bp.buy_del_state
-			FROM    buyproduct bp, product p, buy b
-			WHERE   bp.prod_no = p.prod_no
-			        and b.buyprod_no = bp.prod_no
-			        and b.buy_no = #{buy_no}
 		]]>
 	</select>
 
 	<!-- 상품인서트 -->
 	<insert id="insertProdAlarm" parameterType="AlarmVo">
 		<![CDATA[
-			INSERT INTO alarm VALUES(seq_alarm_no.nextval,
-									0,
-									#{user_no},
-									#{alarm_content},
-									sysdate,
-									#{sell_no},
-									#{prod_name},
-									1
-									)
+			INSERT INTO alarm VALUES(seq_alarm_no.nextval, 0, #{user_no}, #{alarm_content}, sysdate, #{sell_no}, #{prod_name}, 1)
 		]]>
 	</insert>
 
