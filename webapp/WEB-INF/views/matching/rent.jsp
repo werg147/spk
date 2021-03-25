@@ -78,7 +78,7 @@
                     <section class="rental">
                         <!-- rental 1pc -->
                         <c:forEach items="${gymList}" var = "vo" >
-                        <a href="${pageContext.request.contextPath }/sparring/rentdetail?gymNo=${vo.gym_no}" class="rental_container">
+                        <a href="${pageContext.request.contextPath }/sparring/rentdetail?gymNo=${vo.gym_no}&subnum=${param.subnum}&bbuyno=${param.bbuyno}" class="rental_container">
                             <div class="rental_img"><img class="rental_img" src="${pageContext.request.contextPath }/upload/${vo.gymImgSavename }" alt=""></div>
                             <div class="rental_profile">
                                 <div class="rental_profile1 rental_profile_gim">${vo.addressHalf} | ${vo.gym_name}</div>

@@ -8,7 +8,7 @@
 	<div class="header_menu">
 		<ul>
 			<li id="no1"><a
-				href="${pageContext.request.contextPath }/views/matching/스파링 매칭.html"><span>스파링
+				href="${pageContext.request.contextPath }/sparring/match"><span>스파링
 						매치</span></a></li>
 			<li id="no2"><a
 				href="${pageContext.request.contextPath}/store/list"><span>스토어</span></a></li>

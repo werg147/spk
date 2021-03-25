@@ -140,7 +140,7 @@
 											<c:if test="${authUser.user_no != map.bBuyVo.user_no }">
 												<c:choose>
 													<c:when test="${map.bBuyVo.booking_no == 0 }">
-														<a href="${pageContext.request.contextPath }/sparring/rent"><button class="dae_button_item2">
+														<a href="${pageContext.request.contextPath }/sparring/rent?subnum=1&bbuyno=${map.bBuyVo.b_buy_no}"><button class="dae_button_item2">
 																<span class="dea_btn2">대관후 대결신청</span>
 															</button></a>
 													</c:when>

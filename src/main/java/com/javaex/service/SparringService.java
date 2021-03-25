@@ -304,7 +304,7 @@ public class SparringService {
 	
 	
 	//결제하기
-	public Map<String,Object> payment(int bookingNo, int userNo) {
+	public Map<String,Object> payment(int bookingNo, int userNo, int subnum) {
 		System.out.println("[Service] : payment()");
 		//DecimalFormat formatter = new DecimalFormat("###,###");
 		BookingVo bookingVo = sparringDao.selectOneBooking(bookingNo);
@@ -323,11 +323,12 @@ public class SparringService {
 		map.put("bookingVo",bookingVo);
 		map.put("userVo",userVo);
 		
+	
 		return map;
 		
 	}
 
-	public void pay(BBuyVo bBuyVo) {
+	public void pay(BBuyVo bBuyVo , int subnum , int bbuyno) {
 		System.out.println("[Service] : pay()");
 		int num = bBuyVo.getB_buy_price().lastIndexOf(".");
 		
@@ -340,14 +341,14 @@ public class SparringService {
 		//먼저 bbuy를 셀렉트 문으로 꺼내서 
 		
 		//subNum이 0이면 시합등록자 1이면 신청자 
-		if(bBuyVo.getSubNum() == 0) {
+		if(subnum == 0) {
 			bBuyVo.setB_buy_player_state("시합등록자");
 			
 				bBuyVo.setB_buy_state("결제완료");
 				sparringDao.insertBBuy(bBuyVo);
 		
 			
-		}else if (bBuyVo.getSubNum() == 1) {
+		}else if (subnum == 1) {
 			bBuyVo.setB_buy_player_state("신청자");
 			bBuyVo.setB_buy_state("결제완료");
 			
@@ -357,6 +358,17 @@ public class SparringService {
 		//대관한 부킹정보는 예약으로 변경
 		int bookingNo = bBuyVo.getBooking_no();
 		sparringDao.updateBooking(bookingNo);
+		
+		
+		//신청자의 경우 등록자에게 부킹번호 대여 
+		if(subnum == 1) {
+			BBuyVo vo = new BBuyVo();
+			vo.setBooking_no(bookingNo);
+			vo.setB_buy_no(bbuyno);
+			
+			sparringDao.updateBBuy(vo);
+		}
+		
 	}
 
 	public List<BBuyVo> match() {

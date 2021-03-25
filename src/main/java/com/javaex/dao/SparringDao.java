@@ -230,5 +230,12 @@ public class SparringDao {
 		return sqlSession.selectOne("profile.selectProfileEvent",profileNo);
 	}
 
+	public void updateBBuy(BBuyVo bbuyVo) {
+		System.out.println("[Dao] : updateBBuy");
+		
+		
+		sqlSession.update("bbuy.updateBBuy",bbuyVo);
+	}
+
 
 }

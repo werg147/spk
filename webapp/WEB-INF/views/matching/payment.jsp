@@ -246,6 +246,8 @@
 					<input type="text" name="user_no" value="${param.userno}"> 
 					<input type="text" name="b_buy_price" value="${map.bookingVo.booking_price/2}">
 					<input type="text" name="booking_no" value="${map.bookingVo.booking_no }">
+					<input type="text" name="subnum" value="${param.subnum }">
+					<input type="text" name="bbuyno" value="${param.bbuyno }">
 				</section>
 			</form>
 			

@@ -251,5 +251,13 @@
 		]]>
 	
 	</select>
+	<update id="updateBBuy" parameterType="BBuyVo">
+	<![CDATA[
+			  update bbuy
+			   set booking_no = #{booking_no}
+			   where b_buy_no = #{b_buy_no}	
+	]]>
+	
+	</update>
 	
 </mapper>

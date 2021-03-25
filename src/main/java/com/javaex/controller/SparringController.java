@@ -60,7 +60,9 @@ public class SparringController {
 
 	// 체육관 리스트
 	@RequestMapping(value = "/rent", method = { RequestMethod.GET, RequestMethod.POST })
-	public String rent(Model model) {
+	public String rent(Model model,
+					  @RequestParam(value = "subnum" , required=false, defaultValue="0") int subnum,
+					  @RequestParam(value = "bbuyno" , required=false, defaultValue="0") int bbuyno) {
 		System.out.println("[Controller] : rent()");
 
 		List<GymVo> gymList = sparringService.rent();
@@ -72,7 +74,9 @@ public class SparringController {
 	}
 
 	@RequestMapping(value = "/rentdetail", method = { RequestMethod.GET, RequestMethod.POST })
-	public String rentDetail(@RequestParam(value = "gymNo") int gymNo, Model model) {
+	public String rentDetail(@RequestParam(value = "gymNo") int gymNo, Model model,
+							@RequestParam(value = "subnum" , required=false, defaultValue="0") int subnum,
+							 @RequestParam(value = "bbuyno" , required=false, defaultValue="0") int bbuyno) {
 		System.out.println("[Controller] : rentDetail()");
 		GymVo gymVo = sparringService.rentDetail(gymNo);
 
@@ -102,7 +106,7 @@ public class SparringController {
 			return "";
 		} else {
 			List<ProfileVo> profileList = sparringService.profileWriteForm(userNo);
-
+			
 			model.addAttribute("profileList", profileList);
 			model.addAttribute("bookingno", bookingno);
 			return "matching/matchinfoForm";
@@ -134,7 +138,7 @@ public class SparringController {
 	public String profileWrite(@ModelAttribute ProfileVo profileVo, HttpServletRequest request, @ModelAttribute RecordVo recordVo,
 							   @RequestParam(value="bookingno",required=false,defaultValue="0")int bookingNo,
 							   @RequestParam(value="userNo",required=false,defaultValue="0")int userNo,
-							   @RequestParam(value="subnum",required=false,defaultValue="0")int subNum,
+							   @RequestParam(value="subnum",required=false,defaultValue="0")int subnum,
 							   @RequestParam(value="bbuyno",required=false,defaultValue="0")int bbuyno,
 							   @RequestParam(value="bbuyuser",required=false,defaultValue="0")int bbuyuser) {
 		System.out.println("[Controller] : profileWrite");
@@ -143,15 +147,15 @@ public class SparringController {
 
 		sparringService.profileWrite(profileVo, eventName, recordVo);
 		
-		if(bookingNo == 0 || subNum ==1) {
+		if(bookingNo == 0) {
 			
-			BBuyVo bBuyVo = sparringService.insertBBuy(bookingNo,subNum,userNo,profileVo);
+			BBuyVo bBuyVo = sparringService.insertBBuy(bookingNo,subnum,userNo,profileVo);
 			bbuyno = bBuyVo.getB_buy_no();
 			
 			
 			return "redirect:/sparring/matchdetail?bbuyno="+bbuyno+"&userno="+userNo;
 		}else {
-			return "redirect:/sparring/payment?bookingno="+bookingNo+"&userno="+userNo+"&profileno="+profileVo.getProfileNo();
+			return "redirect:/sparring/payment?bookingno="+bookingNo+"&userno="+userNo+"&profileno="+profileVo.getProfileNo()+"&subnum="+subnum+"&bbuyno="+bbuyno;
 			
 		}
 		
@@ -162,25 +166,31 @@ public class SparringController {
 	public String payment(@RequestParam(value = "bookingno", required = false, defaultValue = "0") int bookingNo,
 			@RequestParam(value = "userno", required = false, defaultValue = "0") int userNo,
 			@RequestParam(value = "profileno", required = false, defaultValue = "0") int profileNo,
+			@RequestParam(value="subnum",required=false,defaultValue="0")int subnum,
+			@RequestParam(value="bbuyno",required=false,defaultValue="0")int bbuyno,
 			Model model) {
 		System.out.println(bookingNo);
 		System.out.println(userNo);
+		System.out.println("시합등록자 0 신청자 1 : " + subnum);
 		/*임의로 설정한 userNo 지워야함*/
 		userNo = 2;
 		
-		Map<String,Object> map = sparringService.payment(bookingNo,userNo);
+		Map<String,Object> map = sparringService.payment(bookingNo,userNo,subnum);
 		
 		model.addAttribute("map",map);
 		return "matching/payment";
 	}
 	/**결제**/
 	@RequestMapping(value = "/pay", method = { RequestMethod.GET, RequestMethod.POST })
-	public String pay(@ModelAttribute BBuyVo bBuyVo) {
+	public String pay(@ModelAttribute BBuyVo bBuyVo,
+			@RequestParam(value="subnum",required=false,defaultValue="0")int subnum,
+			@RequestParam(value="bbuyno",required=false,defaultValue="0")int bbuyno
+						) {
 		System.out.println("[Controller] : pay()");
 		
 		System.out.println(bBuyVo);
 		
-		sparringService.pay(bBuyVo);
+		sparringService.pay(bBuyVo,subnum,bbuyno);
 		
 		return "store/paymentCp";
 	}
