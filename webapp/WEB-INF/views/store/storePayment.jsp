@@ -57,7 +57,7 @@
 									</div>
 									<!-- 아이템 1개 -->
 									
-									<c:forEach items="${payList}" var="payVo">
+									<c:forEach items="${pmap.payList}" var="payVo">
 										<div class="box room">
 											<ul class="list">
 												<li>
@@ -72,7 +72,7 @@
 																<a
 																	href="${pageContext.request.contextPath }/store/read?prodNo=${payVo.prod_no}" class="package">
 																	<p>[${payVo.prod_brand}]${payVo.prod_name}</p>
-																	<!-- 대관시에만 사용 -->
+																	
 																</a>
 																<div class="info"></div>
 															</div>
@@ -94,7 +94,7 @@
 																		class="won">원</span>
 																	</span>
 	
-																	<!-- 대관시 총 가격 -->
+																	<!-- 수량 -->
 																	<span class="cost2"> 총 <fmt:formatNumber
 																			type="number" maxFractionDigits="3"
 																			value="${payVo.count}" /> <span
@@ -132,7 +132,7 @@
 									<i class="modal_icon fas fa-map-marker-alt"></i>배송지
 								</h3>
 								<div class="sf_address_item2">
-									<p class="sf_address_item2_text">배송주소여기</p>
+									<p class="sf_address_item2_text">${pmap.userVo.address}</p>
 									<a href="" class="sf_address_item2_fix">배송지 변경</a>
 								</div>
 							</div>
@@ -143,10 +143,14 @@
 									<div class="sf_amount">
 										<dt class="sf_tit">상품금액</dt>
 										<dd class="price_sf">
+									
+										
 											<span class="num"><fmt:formatNumber type="number"
-													maxFractionDigits="3"
-													value="${map.bookingVo.booking_price/2}" /></span> <span
+													id="total" maxFractionDigits="3"
+													value="" /></span> <span
 												class="won">원</span>
+										
+												
 										</dd>
 									</div>
 									<div class="sf_amount">

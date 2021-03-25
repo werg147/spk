@@ -4,7 +4,9 @@ import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -220,10 +222,24 @@ public class StoreService {
 	
 	
 	//결제하기 폼
-	public List<ProductVo> payform(int user_no) {
+	public Map<String,Object> payform(int user_no) {
 		System.out.println("[Service] payform()");
 		
-		return storeDao.selectPayList(user_no);
+		//유저정보 가져오기
+		UserVo userVo = storeDao.selectUser(user_no);
+		System.out.println(userVo.toString());
+		
+		//상품리스트
+		List<ProductVo> payList = storeDao.selectPayList(user_no);
+		System.out.println(payList.toString());
+		
+		Map<String,Object> pmap = new HashMap<String,Object>();
+		pmap.put("userVo", userVo);
+		pmap.put("payList", payList);
+		
+		System.out.println("맵에 담기: " + pmap.toString());
+		
+		return pmap;
 	}
 	
 	

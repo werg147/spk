@@ -1,6 +1,7 @@
 package com.javaex.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -133,10 +134,10 @@ public class StoreController {
 		
 		int user_no = 100;
 		
-		List<ProductVo> payList = storeService.payform(user_no);
-		System.out.println(payList.toString());
+		//상품정보,유저정보 가져오기
+		Map<String,Object> pmap = storeService.payform(user_no);
 		
-		model.addAttribute("payList", payList);
+		model.addAttribute("pmap", pmap);
 		
 		return "store/storePayment";
 	}

@@ -227,11 +227,10 @@
 	</insert>
 	
 	
-	<!-- 결제하기 폼 리스트 -->
+	<!-- 결제하기 폼 상품리스트-->
 	<select id="selectPayList" parameterType="int" resultType="ProductVo">
 		<![CDATA[
-			select us.address,
-				   p.prod_no,
+			select p.prod_no,
                    p.prod_brand,
                    p.prod_name,
                    p.prod_price,
