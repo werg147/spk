@@ -93,7 +93,7 @@
 						<div class="goods_info">	
 						
 								<!-- 수량, 총 금액 form -->
-								<form name="form" method="get" action="${productVo.prod_price}/mypage/cart">
+								<form name="proform" method="get">
 								
 								<!--색상 (있을때)--><!--사이즈(없을때)--> 		
 								<dl class="list fst">
@@ -146,7 +146,7 @@
 										<div class="view_function">
 											<button type="button" class="btn_form btn_buy" formaction="" 
 											onclick="btn_click('buy');" style="font-size: 16px; color: #ffffff;">바로 구매</button> 
-											<button type="submit" class="btn_form btn_cart" formaction="${pageContext.request.contextPath}/store/test"
+											<button type="button" class="btn_form btn_cart" formaction="${pageContext.request.contextPath}/store/test"
 											onclick="btn_click('cart');" style="font-size: 16px; color: #C51212;">장바구니</button>
 										</div> 
 									</div>
@@ -699,16 +699,16 @@
 
 	
 	function init () {
-		prod_price = document.form.prod_price.value;
-		count = document.form.count.value;
-		document.form.sum.value = prod_price;
+		prod_price = document.proform.prod_price.value;
+		count = document.proform.count.value;
+		document.proform.sum.value = prod_price;
 		
 		change();
 	}
 	
 	function add () {
-		hm = document.form.count;
-		sum = document.form.sum;
+		hm = document.proform.count;
+		sum = document.proform.sum;
 		hm.value ++ ;
 	
 		//가격 천의자리 수 마다 , 붙이기
@@ -716,8 +716,8 @@
 	}
 	
 	function del () {
-		hm = document.form.count;
-		sum = document.form.sum;
+		hm = document.proform.count;
+		sum = document.proform.sum;
 			if (hm.value > 1) {
 				hm.value -- ;
 				//가격 천의자리 수 마다 , 붙이기
@@ -726,8 +726,8 @@
 	}
 	
 	function change () {
-		hm = document.form.count;
-		sum = document.form.sum;
+		hm = document.proform.count;
+		sum = document.proform.sum;
 	
 			if (hm.value < 0) {
 				hm.value = 0;
@@ -742,7 +742,6 @@
 	//session값 가져오기 --> 이 방식으로는 오류 Uncaught ReferenceError: $ is not defined
 	//일단 넘어가고 나중에 걸러주기로
 	var authuser = $("#authuser").val();
-	console.log(authuser);
 	
 	function btn(){ 
 		
@@ -766,7 +765,17 @@
 		});
 	
 	
-	
+	//form submit 두개
+	function btn_click(str){
+		if(str == "buy"){
+			console.log("바이 버튼");
+			document.proform.action='${pageContext.request.contextPath}/store/payform';
+		} else if(str == "cart"){
+			document.proform.action='${pageContext.request.contextPath}/mypage/cart';
+		}
+		
+		document.proform.submit();
+	}
 	
 	
 	
