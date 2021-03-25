@@ -38,7 +38,7 @@
 						<br>
 
 						<!--입력폼 (추후 form 추가)-->
-						<form id="addForm" action="${pageContext.request.contextPath}/mypage/prod/prodsellermodify" method="get">
+						<form id="addForm" action="${pageContext.request.contextPath}/mypage/prod/prodsellermodify" method="post">
 						<input type="hidden" name="sell_no" value="${authUser.sell_no}">
 							<table class="seller_regi_form">
 								<tbody>

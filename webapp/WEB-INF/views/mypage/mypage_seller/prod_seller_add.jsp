@@ -40,10 +40,10 @@
 						<!--입력폼 (추후 form 추가)-->
 						<c:choose>
 							<c:when test="${authUser.book_type == 0}">
-								<form id="addForm" action="${pageContext.request.contextPath}/mypage/prod/prodselleradd" method="get">
+								<form id="addForm" action="${pageContext.request.contextPath}/mypage/prod/prodselleradd" method="post">
 							</c:when>
 							<c:otherwise>
-								<form id="addForm" action="${pageContext.request.contextPath}/mypage/prod/prodsellermodify" method="get">
+								<form id="addForm" action="${pageContext.request.contextPath}/mypage/prod/prodsellermodify" method="post">
 								<input type="hidden" name="sell_no" value="${authUser.sell_no}">
 							</c:otherwise>
 						</c:choose>
