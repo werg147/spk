@@ -30,14 +30,16 @@ public class GymService {
 	private UserDao userdao;
 	
 	//체육관 정보 불러오기
-	public Map<String, Object> gymInfo(int gymno) {
+	public Map<String, Object> gymInfo(int sellNo, int gymNo) {
 		System.out.println("[GymService] gymInfo()");
 		
-		GymVo gymVo = gymDao.gymSelectOne(gymno);
-		List<ConVo> conList = gymDao.conSelectList(gymno);
+		List<GymVo> gymList = gymDao.gymSelectList(sellNo);
+		GymVo gymVo = gymDao.gymSelectOne(gymNo);
+		List<ConVo> conList = gymDao.conSelectList(gymNo);
+		
 		
 		Map<String, Object> gymMap = new HashMap<String, Object>();
-		gymMap.put("gymVo", gymVo);
+		gymMap.put("gymList", gymList);
 		gymMap.put("conList", conList);
 		
 		return gymMap;
@@ -145,8 +147,11 @@ public class GymService {
 	//대관 등록
 	public void bookAdd(BookingVo bookVo) {
 		System.out.println("[GymService] bookAdd()");
+		gymDao.bookInsert(bookVo);
 		
 	}
+	
+	/////////////////////////////////////////////////
 	
 	//대관판매자계정등록
 	public void bookSellerAdd(SellerVo sellervo) {

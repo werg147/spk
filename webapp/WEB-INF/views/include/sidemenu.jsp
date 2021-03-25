@@ -9,11 +9,11 @@
 			<li class="title"><span class="menu">예약판매관리</span></li>
 			<li><a href="${pageContext.request.contextPath}/mypage/book/bookmanageform"><span class="menu">사업자계정
 						관리</span><span class="arrow">></span></a></li>
-			<li><a href="./예약판매자3_마이페이지_체육관관리_리스트1.html"><span
+			<li><a href="${pageContext.request.contextPath}/mypage/book/gym"><span
 					class="menu">체육관관리</span><span class="arrow">></span></a></li>
-			<li><a href="./예약판매자6_마이페이지_대관관리1.html"><span class="menu">대관관리</span><span
+			<li><a href="${pageContext.request.contextPath}/mypage/book/bookmanage"><span class="menu">대관관리</span><span
 					class="arrow">></span></a></li>
-			<li class="side_menu_last"><a href="./예약판매자8_마이페이지_수익관리1.html"><span
+			<li class="side_menu_last"><a href="${pageContext.request.contextPath}/mypage/"><span
 					class="menu">수익관리</span><span class="arrow">></span></a></li>
 		</ul>
 	</c:if>

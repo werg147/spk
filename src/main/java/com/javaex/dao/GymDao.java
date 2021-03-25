@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.javaex.vo.BookingVo;
 import com.javaex.vo.ConVo;
 import com.javaex.vo.GymImgVo;
 import com.javaex.vo.GymVo;
@@ -16,12 +17,21 @@ public class GymDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	//소유 체육관 리스트
+	public List<GymVo> gymSelectList(int sellNo) {
+		System.out.println("[GymDao] gymSelectList()");
+		
+		List<GymVo> gymList = sqlSession.selectList("gym.gymSelectList", sellNo);
+		System.out.println("[GymDao]>>> "+gymList);
+		
+		return gymList;
+	}
+	
 	//체육관 정보 불러오기
-	public GymVo gymSelectOne(int gymno) {
+	public GymVo gymSelectOne(int gymNo) {
 		System.out.println("[GymDao] gymSelectOne()");
 		
-		GymVo gymVo = sqlSession.selectOne("gym.gymSelectOne", gymno);
-		System.out.println("[GymDao]>>> "+gymVo);
+		GymVo gymVo = sqlSession.selectOne("gym.gymSelectOne", gymNo);
 		
 		return gymVo;
 	}
@@ -62,5 +72,11 @@ public class GymDao {
 		System.out.println("[GymDao] gimgInsert()");
 		
 		sqlSession.insert("gym.gimgInsert", gimgVo);
+	}
+	
+	//대관 등록
+	public void bookInsert(BookingVo bookVo) {
+		System.out.println("[GymDao] bookInsert()");
+		sqlSession.insert("gym.bookInsert", bookVo);
 	}
 }
