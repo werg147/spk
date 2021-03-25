@@ -33,13 +33,15 @@ public class GymService {
 	public Map<String, Object> gymInfo(int sellNo, int gymNo) {
 		System.out.println("[GymService] gymInfo()");
 		
+		//소유 체육관
 		List<GymVo> gymList = gymDao.gymSelectList(sellNo);
+		//체육관 하나 정보 불러오기
 		GymVo gymVo = gymDao.gymSelectOne(gymNo);
 		List<ConVo> conList = gymDao.conSelectList(gymNo);
 		
-		
 		Map<String, Object> gymMap = new HashMap<String, Object>();
 		gymMap.put("gymList", gymList);
+		gymMap.put("gymVo", gymVo);
 		gymMap.put("conList", conList);
 		
 		return gymMap;

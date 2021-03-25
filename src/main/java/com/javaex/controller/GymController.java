@@ -30,9 +30,13 @@ public class GymController {
 	@RequestMapping(value="/gym", method= {RequestMethod.GET , RequestMethod.POST})
 	public String gymInfo(@RequestParam("no") int sellNo, 
 						  @RequestParam(value="gymno", required=false) int gymNo,
+						  HttpSession session,
 						  Model model) { 
 		//사업자번호를 조건으로 체육관을 리스트로 가져온 후 각탭에 체육관 번호 넣기
 		System.out.println("[GymController] gymInfo()");
+		
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		//int sellNo
 		
 		model.addAttribute("gymMap", gymService.gymInfo(sellNo, gymNo));
 		/*
@@ -80,8 +84,10 @@ public class GymController {
 	
 	//대관 등록폼
 	@RequestMapping(value="/bookaddform", method= {RequestMethod.GET , RequestMethod.POST})
-	public String bookAddForm() {
+	public String bookAddForm(@RequestParam("gymno") int gymNo) {
 		System.out.println("[GymController] bookAddForm()");
+		
+		//대관 등록할 체육관 정보 불러오기
 		
 		return "mypage/mypage_resrvation/mypage_bookingadd";
 	}
@@ -101,6 +107,12 @@ public class GymController {
 	@RequestMapping(value="/bookmanage", method= {RequestMethod.GET , RequestMethod.POST})
 	public String bookManage() {
 		return "mypage/mypage_resrvation/mypage_bookinglist";
+	}
+	
+	//수익관리
+	@RequestMapping(value="/profit", method= {RequestMethod.GET , RequestMethod.POST})
+	public String profit() {
+		return "mypage/mypage_seller/seller_profit";
 	}
 	
 	/////////////////////////////////////////////////////////////////////

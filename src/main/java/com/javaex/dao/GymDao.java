@@ -22,7 +22,7 @@ public class GymDao {
 		System.out.println("[GymDao] gymSelectList()");
 		
 		List<GymVo> gymList = sqlSession.selectList("gym.gymSelectList", sellNo);
-		System.out.println("[GymDao]>>> "+gymList);
+		System.out.println("[GymDao] gymList>>> "+gymList);
 		
 		return gymList;
 	}
@@ -32,6 +32,7 @@ public class GymDao {
 		System.out.println("[GymDao] gymSelectOne()");
 		
 		GymVo gymVo = sqlSession.selectOne("gym.gymSelectOne", gymNo);
+		System.out.println("[GymDao] gymList>>> "+gymVo);
 		
 		return gymVo;
 	}
@@ -48,7 +49,7 @@ public class GymDao {
 		System.out.println("[GymDao] conSelect()");
 		
 		List<ConVo> conList = sqlSession.selectList("gym.conSelectList", gymno);
-		System.out.println("[GymDao] >>> "+conList);
+		System.out.println("[GymDao] conList>>> "+conList);
 		
 		return conList;
 	}

@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/header.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/booking.css">
+
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
 </head>
 
 <body>
@@ -39,7 +41,9 @@
 					<div class="own_gym_tab">
 						<ul>
 						<c:forEach var="vo" items="${gymMap.gymList }">
-							<a href="${pageContext.request.contextPath}/mypage/book/gym?no=${vo.sell_no}&${vo.gym_no}"><li>${vo.gym_name }</li></a>
+							<a href="${pageContext.request.contextPath}/mypage/book/gym?no=${vo.sell_no}&gymno=${vo.gym_no}">
+							<input type="hidden" name="gym_no" value="${vo.gym_no}">
+							<li id="tab">${vo.gym_name }</li></a>
 						</c:forEach>
 						</ul>										
 					</div>
@@ -47,12 +51,12 @@
 
 					<!-- 대관 등록 버튼 -->
 					<div class="regi_btn_site">
-						<a href="${pageContext.request.contextPath}/mypage/book/gymaddform"><button type="button" class="regi_btn">대관 등록</button></a>
+						<a href="${pageContext.request.contextPath}/mypage/book/gymaddform?gymno=${gymMap.gymVo.gym_no}"><button type="button" class="regi_btn">대관 등록</button></a>
 					</div>
 
 					<!--체육관 정보-->
 					<div class="gym_regi_form">
-						<form action="${pageContext.request.contextPath}/mypage/book/gymmodify" method="get"
+						<form action="${pageContext.request.contextPath}/mypage/book/gymmodify" method="post"
 							enctype="multipart/form-data">
 							<table>
 								<tr>
@@ -265,4 +269,31 @@
 	<!--//wrap-->
 	</div>
 </body>
+
+<script type="text/javascript">
+
+	//url에서 파라미터값 가져오는 함수 --> getParameterByName('함수명');
+	function getParameterByName(name) {
+	    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+	    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+	        results = regex.exec(location.search);
+	    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	}
+	
+	//체육관 버튼 색변경 이벤트 유지 --> gymNo값을 다른 방식으로 가져와야 됨
+	window.onload=function(){
+		
+		var paramNo = getParameterByName('gymno');
+		var gymNo = $("[name='gym_no']").val();
+		console.log(paramNo);
+		console.log(gymNo);
+		
+		if(gymNo == paramNo){
+			console.log("색변경");
+			$("#tab").css("color", "#ffffff");
+			$("#tab").css("background", "#e60012");
+		}
+	}
+
+</script>
 </html>
