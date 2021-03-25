@@ -113,7 +113,19 @@ public class StoreDao {
 		return sqlSession.selectList("store.selectPayList", user_no);
 	}
 	
+	//결제폼 총액
+	public int selectTotal(int user_no) {
+		System.out.println("[StoreDao] selectTotal()");
 	
+		return sqlSession.selectOne("store.selectTotal", user_no);
+	}
+	
+	//결제폼 삭제
+	public void deletePay(int cart_no) {
+		System.out.println("[StoreDao] deletePay()");
+		
+		sqlSession.delete("store.deletePay", cart_no);
+	}
 	
 
 }

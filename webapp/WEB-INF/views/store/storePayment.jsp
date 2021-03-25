@@ -10,12 +10,10 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/header.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/style_1.css">
-<script src="https://kit.fontawesome.com/5a9452f10d.js"
-	crossorigin="anonymous"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style_1.css">
+<script src="https://kit.fontawesome.com/5a9452f10d.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
 <title>Document</title>
 </head>
 
@@ -33,7 +31,7 @@
 	<!-- wrap -->
 	<div class="wrap">
 		<div class="container">
-				<form action="${pageContext.request.contextPath}/sparring/pay" method="get" class="sf_form form_20">
+				<form action="${pageContext.request.contextPath}/" method="get" class="sf_form form_20">
 				<div class="sm">
 					<h1 class="sm_title">주문서</h1>
 				</div>
@@ -58,7 +56,7 @@
 									<!-- 아이템 1개 -->
 									
 									<c:forEach items="${pmap.payList}" var="payVo">
-										<div class="box room">
+										<div class="box room payitem${payVo.cart_no}">
 											<ul class="list">
 												<li>
 													<div class="item_13">
@@ -107,8 +105,8 @@
 															</div>
 														</div>
 														
-															<button type="button" class="btn_delete" data-item-id=""
-																data-item-no="" data-type="">상품삭제</button>
+															<button type="button" class="btn_delete" data-cartno="${payVo.cart_no}"
+																data-userno="${pmap.userVo.user_no}">상품삭제</button>
 														
 													</div>
 												</li>
@@ -142,28 +140,17 @@
 								<div class="sf_price">
 									<div class="sf_amount">
 										<dt class="sf_tit">상품금액</dt>
-										<dd class="price_sf">
-									
-										
-											<span class="num"><fmt:formatNumber type="number"
-													id="total" maxFractionDigits="3"
-													value="" /></span> <span
-												class="won">원</span>
-										
-												
+										<dd class="price_sf" id="total">
+											<span class="num">
+												<fmt:formatNumber type="number" maxFractionDigits="3" value="${pmap.total}" />
+											</span> 
+											<span class="won">원</span>
 										</dd>
-									</div>
-									<div class="sf_amount">
-										<dt class="sf_tit">할인금액</dt>
-										<dd class="price_sf">
-											<span class="num minus">0</span> <span class="won">원</span>
-										</dd>
-									</div>
-
+									</div>								
 									<div class="sf_amount">
 										<dt class="sf_tit">배송비</dt>
 										<dd class="price_sf">
-											<span class="num">0</span> <span class="won">원</span>
+											<span class="num">무료배송</span>
 										</dd>
 									</div>
 
@@ -172,11 +159,11 @@
 
 								<div class="sf_amount_lst">
 									<dt class="sf_tit sf_tit_lst">결제금액</dt>
-									<dd class="price_sf price_sf_lst">
-										<span class="num"><fmt:formatNumber type="number"
-												maxFractionDigits="3"
-												value="${map.bookingVo.booking_price/2}" /></span> <span
-											class="won">원</span>
+									<dd class="price_sf price_sf_lst" id="total2">
+										<span class="num">
+											<fmt:formatNumber type="number" maxFractionDigits="3" value="${pmap.total}" />
+										</span> 
+										<span class="won">원</span>
 									</dd>
 								</div>
 							</div>
@@ -253,6 +240,63 @@
 	<!-- wrap end -->
 </body>
 <script type="text/javascript">
+
+	$(".btn_delete").on("click", function(){
+		console.log("삭제버튼 클릭");
+		
+		var cartno = $(this).data("cartno");
+		var userno = $(this).data("userno");
+		console.log(cartno);
+		console.log(userno);
+		
+		//데이터 보내서 삭제
+		$.ajax({
+			url : "${pageContext.request.contextPath}/store/payform/remove",
+			type : "post",
+			// contentType : "application/json",
+			data : {
+				cartno : cartno,
+				userno : userno
+			},
+			dataType : "json",
+			success : function(total) {
+				console.log(total);
+
+				$(".payitem" + cartno).html(" ");
+
+				price(total);
+
+			},
+
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+
+		});
+	
+	});
+	
+	//삭제하면 가격바뀜.. -> ,사라짐
+	function price(total){
+		console.log(total);
+		
+		var str01 = '<span class="num">'
+			+ total
+			+ '</span> <span class="won"></span> <span class="won">원</span>';
+		$("#total").html(" ");
+		$("#total").append(str01);
+	
+		var str02 = '<span class="num">'
+			+ total
+			+ '</span> <span class="won"></span> <span class="won">원</span>';
+		$('#total2').html(" ");
+		$('#total2').append(str02);
+	}
+	
+	
+	
+	
+	
 
 
 </script>

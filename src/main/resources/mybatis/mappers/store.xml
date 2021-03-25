@@ -237,7 +237,8 @@
                    p.prod_price,
                    p.event_cate,
                    p.prod_img_savename,
-                   ca.count
+                   ca.count,
+                   ca.cart_no
             from cart ca, users us , (select prod.prod_no,
                                              prod.prod_brand,
                                              prod.prod_name,
@@ -254,6 +255,23 @@
             and us.user_no = #{user_no}
 		]]>
 	</select>
+	
+	<!-- 결제하기 총액 -->
+	<select id="selectTotal" parameterType="int" resultType="int">
+		<![CDATA[
+			select sum(prod.prod_price * ca.count) as buy_price
+            from product prod, cart ca
+            where prod.prod_no = ca.prod_no
+		]]>
+	</select>
+	
+	<!-- 상품결제 카트삭제 -->
+	<delete id="deletePay" parameterType="int">
+		<![CDATA[
+			delete from cart
+			where cart_no = #{cart_no}
+		]]>
+	</delete>
 	
 	
 	

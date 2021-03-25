@@ -233,14 +233,31 @@ public class StoreService {
 		List<ProductVo> payList = storeDao.selectPayList(user_no);
 		System.out.println(payList.toString());
 		
+		//총액
+		int total = storeDao.selectTotal(user_no);
+		System.out.println("총액:" + total);
+		
 		Map<String,Object> pmap = new HashMap<String,Object>();
 		pmap.put("userVo", userVo);
 		pmap.put("payList", payList);
+		pmap.put("total", total);
 		
 		System.out.println("맵에 담기: " + pmap.toString());
 		
 		return pmap;
 	}
+	
+	//결제하기 삭제
+	public int removePay(int cart_no, int user_no) {
+		System.out.println("[Service] remove()");
+		
+		//카드넘버로 카트 리스트에서 삭제
+		storeDao.deletePay(cart_no);
+		
+		//유저넘버로 총액 다시가져와서 ajax보내기
+		return storeDao.selectTotal(user_no);
+	}
+	
 	
 	
 	

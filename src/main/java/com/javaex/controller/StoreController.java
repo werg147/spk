@@ -11,10 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.service.StoreService;
-import com.javaex.vo.CartVo;
 import com.javaex.vo.ProductVo;
 import com.javaex.vo.QnaVo;
 import com.javaex.vo.ReviewVo;
@@ -128,14 +128,14 @@ public class StoreController {
 		return "";
 	}
 	
-	//상품결제페이지 (user_no넣어서 임시로 테스트) (주소 vo에 추가 안하려면 다른 방법으로 가져와야겠음.. map으로 묶는다거나)
+	//장바구니->상품결제페이지 (user_no넣어서 임시로 테스트)
 	@RequestMapping(value="/payform")
 	public String pay(Model model) {
 		System.out.println("[Controller] payform()");
 		
 		int user_no = 100;
 		
-		//상품정보,유저정보 가져오기
+		//상품정보,유저정보,총액 가져오기
 		Map<String,Object> pmap = storeService.payform(user_no);
 		
 		model.addAttribute("pmap", pmap);
@@ -143,16 +143,19 @@ public class StoreController {
 		return "store/storePayment";
 	}
 	
-	
-	
-	//카트테스트
-	@RequestMapping("/test")
-	public String test(@ModelAttribute CartVo cartVo) {
-		System.out.println("카트 데이터 테스트");
+	//장바구니->상품결제 상품삭제
+	@ResponseBody
+	@RequestMapping(value="/payform/remove")
+	public int remove(@RequestParam("cartno") int cart_no, @RequestParam("userno") int user_no) {
+		System.out.println("[Controller] remove()");
+		System.out.println(cart_no);
+		System.out.println(user_no);
 		
-		System.out.println(cartVo.toString());
+		int total = storeService.removePay(cart_no, user_no);
+		System.out.println(total);
 		
-		return "";
+		return total;
+		
 	}
 	
 	
