@@ -41,7 +41,7 @@
 	</insert>
 	
 	<!-- 체육관별로 편의시설 불러오기 -->
-	<select id="conSelectList" parameterType="int" resultType="ConVo">
+	<select id="conSelectList" parameterType="Int" resultType="ConVo">
 		<![CDATA[ 
 			SELECT  con_no,
 			        gym_no,
