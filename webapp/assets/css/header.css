@@ -376,3 +376,11 @@ a:hover {
   color: #e60012;
 }
 
+/*로그인 잘못된 접근시*/
+.error_login {
+	margin-left : 30px;
+  	font-size: 30px;
+     font-weight: bold;
+     color: #e60012;
+  }
+

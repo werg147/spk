@@ -83,7 +83,7 @@ public class ProdDao {
 		sqlSession.update("prod.delStateUpdate", pvo);
 	}
 	
-	//배송정보 수정
+	//택배사 운송장 정보입력(수정)
 	public void delinfoUpdate(ProdBuyForVo pvo) {
 		sqlSession.update("prod.delinfoUpdate", pvo);
 	}

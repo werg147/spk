@@ -102,7 +102,6 @@ table {
 	width: 160px;
 	padding: 8px 6px;
 	font-family: inherit;
-	appearance: none;
 	border: 1px solid #dddfe1;
 	border-radius: 0px;
 	cursor: pointer;
@@ -360,7 +359,6 @@ table {
 	width: 160px;
 	padding: 8px 6px;
 	font-family: inherit;
-	appearance: none;
 	border: 1px solid #dddfe1;
 	border-radius: 0px;
 	cursor: pointer;
@@ -1124,6 +1122,15 @@ table {
 	width: 40px;
 	margin-top: 4px;
 }
+
+/*타이틀 리스트 구분줄*/
+.content_delevery_product_line {
+	background-color : black;
+	width: 1050px;
+	height: 2px;
+	margin: 35px 0px 5px 0px;
+}
+
 
 #space {
 	height : 100px;

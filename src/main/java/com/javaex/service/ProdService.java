@@ -205,17 +205,20 @@ public class ProdService {
 		} else {
 			System.out.println("배송중이거나 배송완료된 상품으로 판매불가 전환이 불가합니다.");
 		}
-		
-		
-		
-
 
 	}
 
-	//배송정보 수정
+	//택배사 운송장 정보입력(수정)
 		public void delModify(ProdBuyForVo pvo) {
-			System.out.println("[service] 배송상태 수정");
-			proddao.delinfoUpdate(pvo);
+			System.out.println("[service] 택배사 운송장 정보입력(수정)");
+			
+				List<ProdBuyForVo> pList = pvo.getPlist();
+				for(int i =0; i<pList.size(); i++) {
+					pvo.setBuyprod_no(pList.get(i).getBuyprod_no());
+					proddao.delinfoUpdate(pvo);
+					System.out.println("사이즈등록"+ i + "번째: " + pList.get(i));
+				}
+
 		}
 		
 		

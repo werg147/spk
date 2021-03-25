@@ -102,7 +102,7 @@ public class ProdController {
 		UserVo authUser = (UserVo)session.getAttribute("authUser");
 		List<ProdBuyForVo> delList = prodservice.delmanage(authUser.getSell_no());
 		model.addAttribute("delList", delList);
-		
+		System.out.println("배송 관리 내역" + delList);
 		return "mypage/mypage_prod/delivery_manage";
 	}
 	
@@ -116,6 +116,7 @@ public class ProdController {
 		ProdBuyForVo delfound = delList.get(0);
 		model.addAttribute("delList", delList);
 		model.addAttribute("delfound", delfound);
+		System.out.println("[cnt] 배송정보 보기" + delfound + delList);
 		
 		return "mypage/mypage_prod/delivery_form";
 	}
@@ -138,10 +139,10 @@ public class ProdController {
 		return "redirect:/mypage/prod/delmanage";
 	}
 	
-	//배송정보변경
+	//택배사 운송장 정보입력(수정)
 	@RequestMapping(value = "/delmodify", method = { RequestMethod.GET, RequestMethod.POST })
 	public String delModify(@ModelAttribute ProdBuyForVo pvo) {
-		System.out.println("[cnt] 배송정보 변경" + pvo);
+		System.out.println("[cnt] 택배사 운송장 정보입력(수정)" + pvo);
 		prodservice.delModify(pvo);
 		
 		return "redirect:/mypage/prod/delmanage";

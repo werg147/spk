@@ -89,7 +89,7 @@ a:hover {
   }
 
   .content_product_line {
-    width: 800px;
+    width: 1050px;
     height: 2px;
     margin: 35px 0px 5px 0px;
     background-color: black;
@@ -157,7 +157,6 @@ a:hover {
     width: 160px;
     padding: 4px 3px;
     font-family: inherit;
-    appearance: none;
     border: 1px solid #dddfe1;
     border-radius: 0px;
     cursor: pointer;
@@ -639,3 +638,26 @@ a:hover {
 #space {
 	height : 100px;
 }
+
+
+.middle .error_box {
+	width : fit-content;
+    text-align: left;
+    padding-top: 20px;
+    margin-left : 10px
+    
+  }
+  .middle .error_title {
+      font-size: 60px;
+      font-weight: bold;
+      color: #e60012;
+  }
+
+  .middle .error_content {
+ 	width : 1000px;
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 5px;
+  }
+  
+
