@@ -144,9 +144,9 @@
 									<!--장바구니, 바로구매 버튼-->
 									<div class="group_btn">
 										<div class="view_function">
-											<button type="button" class="btn_form btn_buy" formaction="" 
+											<button type="button" class="btn_form btn_buy"
 											onclick="btn_click('buy');" style="font-size: 16px; color: #ffffff;">바로 구매</button> 
-											<button type="button" class="btn_form btn_cart" formaction="${pageContext.request.contextPath}/store/test"
+											<button type="button" class="btn_form btn_cart"
 											onclick="btn_click('cart');" style="font-size: 16px; color: #C51212;">장바구니</button>
 										</div> 
 									</div>
