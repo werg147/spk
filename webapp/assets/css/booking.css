@@ -220,11 +220,11 @@ a:hover {
     cursor: pointer;
   }
   
-  .middle .own_gym {
+  .middle .own_gym_tab {
   	margin: 10px 0px 10px 0px;
   }
 
-  .middle .own_gym .own_gym_list li {
+  .middle .own_gym_tab li {
   	border-radius: 10px;
   	padding-top: 10px;
   	margin-right: 10px;
@@ -238,7 +238,7 @@ a:hover {
 	cursor: pointer;
   }
   
-    .middle .own_gym .own_gym_list li:hover {
+    .middle .own_gym_tab li:hover {
     background: #e60012;
     text-decoration: none;
     color: #ffffff;

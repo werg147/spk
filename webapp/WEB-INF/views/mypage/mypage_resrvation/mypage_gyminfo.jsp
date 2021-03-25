@@ -36,17 +36,18 @@
 					</div>
 
 					<!-- <div>탭부분(다수 체육관 소유 시)</div> -->
-					<div class="own_gym">
-						<ul class="own_gym_list">
-							<li>체육관1</li>
-							<li>체육관2</li>
+					<div class="own_gym_tab">
+						<ul>
+						<c:forEach var="vo" items="${gymMap.gymList }">
+							<a href="${pageContext.request.contextPath}/mypage/book/gym?no=${vo.sell_no}&${vo.gym_no}"><li>${vo.gym_name }</li></a>
+						</c:forEach>
 						</ul>										
 					</div>
 
 
 					<!-- 대관 등록 버튼 -->
 					<div class="regi_btn_site">
-						<button type="button" class="regi_btn" onClick="location.href='#'">대관 등록</button>
+						<a href="${pageContext.request.contextPath}/mypage/book/gymaddform"><button type="button" class="regi_btn">대관 등록</button></a>
 					</div>
 
 					<!--체육관 정보-->
@@ -254,6 +255,8 @@
 				<!-- //content_seller -->
 			</div>
 			<!--//middle-->
+
+		
 			<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 			<!--//footer//-->
 		</div>

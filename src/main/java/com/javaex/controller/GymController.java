@@ -28,11 +28,13 @@ public class GymController {
 	
 	//체육관 관리
 	@RequestMapping(value="/gym", method= {RequestMethod.GET , RequestMethod.POST})
-	public String gymInfo(@RequestParam("gymno") int gymno, Model model) { 
+	public String gymInfo(@RequestParam("no") int sellNo, 
+						  @RequestParam(value="gymno", required=false) int gymNo,
+						  Model model) { 
 		//사업자번호를 조건으로 체육관을 리스트로 가져온 후 각탭에 체육관 번호 넣기
 		System.out.println("[GymController] gymInfo()");
 		
-		model.addAttribute("gymMap", gymService.gymInfo(gymno));
+		model.addAttribute("gymMap", gymService.gymInfo(sellNo, gymNo));
 		/*
 		GymVo gymVo = gymService.gymInfo(gymno);
 		System.out.println(gymVo);
@@ -53,14 +55,27 @@ public class GymController {
 	@RequestMapping(value="/gymadd", method= {RequestMethod.GET , RequestMethod.POST})
 	public String gymAdd(@ModelAttribute GymVo gymVo,
 					@RequestParam("conve") List<String> conve,
-					@RequestParam(value="file", required=false) MultipartFile file) { //사업자번호 추후 세션으로 추가
+					@RequestParam(value="file", required=false) MultipartFile file,
+					HttpSession session) {
 		System.out.println("[GymController] gymAdd()");
 		System.out.println(gymVo);
 		System.out.println(conve);
-				
-		gymService.gymAdd(gymVo, conve, file);
 		
-		return "";
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		
+		//대관판매자인지 검사
+		int bookType = authUser.getBook_type();
+		int sellNo = authUser.getSell_no();
+		System.out.println("사업자번호>>> "+sellNo);
+		
+		if(bookType == 1) {			
+			gymVo.setSell_no(sellNo);
+			
+			gymService.gymAdd(gymVo, conve, file);
+		}
+		int gymNo = gymVo.getGym_no();
+		
+		return "redirect:/mypage/book/gym?no="+sellNo+"&gymno="+gymNo;
 	}
 	
 	//대관 등록폼
@@ -77,10 +92,12 @@ public class GymController {
 		System.out.println("[GymController] bookAdd()");
 		
 		System.out.println("[GymController] bookAdd()>>> "+bookVo);
-		gymService.bookAdd(bookVo);
+		//gymService.bookAdd(bookVo);
 		
 		return "";
 	}
+	
+	/////////////////////////////////////////////////////////////////////
 	
 	// 대관판매자 계정등록 폼
 	@RequestMapping(value = "/bookselleraddform", method = { RequestMethod.GET, RequestMethod.POST })
