@@ -18,7 +18,7 @@ public class CartService {
 
 	public CartInfoVo list(int user_no) {
 
-		System.out.println("[Cart Service]: list(int user_no) 연결");
+		System.out.println("[Cart Service]: list 연결");
 
 		CartInfoVo ciVo = new CartInfoVo();
 
@@ -40,11 +40,20 @@ public class CartService {
 
 	public int remove(int cart_no, int user_no) {
 
-		System.out.println("[Cart Service]: list(int user_no) 연결");
+		System.out.println("[Cart Service]: remove 연결");
 
 		cDao.remove(cart_no);
 
 		return cDao.selectOneTotalPrice(user_no);
+
+	}
+
+	/* 장바구니에 담기 */
+	public void gotoCart(CartVo cartVo) {
+
+		System.out.println("[Cart Service]: gotoCart 연결");
+
+		cDao.gotoCart(cartVo);
 
 	}
 

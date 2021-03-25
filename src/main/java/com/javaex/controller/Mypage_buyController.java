@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +17,7 @@ import com.javaex.service.AlarmService;
 import com.javaex.service.CartService;
 import com.javaex.vo.AlarmContentVo;
 import com.javaex.vo.AlarmVo;
+import com.javaex.vo.BuyProductVo;
 import com.javaex.vo.BuyVo;
 import com.javaex.vo.CartInfoVo;
 import com.javaex.vo.CartVo;
@@ -27,6 +29,7 @@ public class Mypage_buyController {
 
 	AlarmContentVo acVo = new AlarmContentVo();
 	BuyVo bVo = new BuyVo();
+	BuyProductVo bprodVo = new BuyProductVo();
 
 	@Autowired
 	public AlarmService aServ;
@@ -137,4 +140,31 @@ public class Mypage_buyController {
 
 	}
 
+	@RequestMapping(value = "/gotoCart", method = { RequestMethod.GET, RequestMethod.POST })
+	public String gotoCart(@RequestParam("prod_no") String prod_no, @RequestParam("colorsize_no") int colorsize_no,
+			@RequestParam("count") int count, HttpSession session, @ModelAttribute CartVo cartVo) {
+
+		System.out.println("[Cart Ctrl]: gotoCart 진입");
+
+		UserVo authUser = (UserVo) session.getAttribute("authUser");
+
+		int user_no = authUser.getUser_no();
+
+		cartVo.setUser_no(user_no);
+
+		cartVo.setProd_no(prod_no);
+		// cartVo.setProd_no("1");
+
+		cartVo.setColorsize_no(colorsize_no);
+		// cartVo.setColorsize_no(1);
+
+		cartVo.setCount(count);
+
+		System.out.println(cartVo);
+
+		cServ.gotoCart(cartVo);
+
+		return "redirect:/mypage/cart";
+
+	}
 }

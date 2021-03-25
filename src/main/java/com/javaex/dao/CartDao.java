@@ -17,22 +17,38 @@ public class CartDao {
 
 	public UserVo selectOneUser(int user_no) {
 
+		System.out.println("[Cart Dao]: selectOneUser 연결");
+
 		return sql.selectOne("cart.selectOneUser", user_no);
 	}
 
 	public List<CartVo> selectCartList(int user_no) {
+
+		System.out.println("[Cart Dao]: selectCartList 연결");
 
 		return sql.selectList("cart.selectCartList", user_no);
 	}
 
 	public int selectOneTotalPrice(int user_no) {
 
+		System.out.println("[Cart Dao]: selectOneTotalPrice 연결");
+
 		return sql.selectOne("cart.selectOneTotalPrice", user_no);
 	}
 
 	public int remove(int cart_no) {
 
+		System.out.println("[Cart Dao]: remove 연결");
+
 		return sql.delete("cart.removeCartList", cart_no);
+	}
+
+	public void gotoCart(CartVo cartVo) {
+
+		System.out.println("[Cart Dao]: gotoCart 연결");
+
+		sql.insert("cart.gotoCart", cartVo);
+
 	}
 
 }

@@ -153,9 +153,7 @@
 								</div>
 								
 								<input type="hidden" name="prod_no" value="${productVo.prod_no}">
-								<input type="hidden" name="colorsize_no" value="${productVo.cssList[0].colorsize_no}">
-								<input type="hidden" name="color" value="${productVo.cssList[0].color}">
-								<input type="hidden" name="prod_size" value="${productVo.cssList[0].prod_size}">
+								<input type="hidden" name="colorsize_no" value="${productVo.cssList[0].colorsize_no}">								
 								
 							</form> <!-- 수량, 총 금액 form -->
 							
@@ -771,7 +769,7 @@
 			console.log("바이 버튼");
 			document.proform.action='${pageContext.request.contextPath}/store/payform';
 		} else if(str == "cart"){
-			document.proform.action='${pageContext.request.contextPath}/mypage/cart';
+			document.proform.action='${pageContext.request.contextPath}/mypage/gotoCart';
 		}
 		
 		document.proform.submit();
