@@ -97,6 +97,12 @@ public class GymController {
 		return "";
 	}
 	
+	//대관 관리 페이지
+	@RequestMapping(value="/bookmanage", method= {RequestMethod.GET , RequestMethod.POST})
+	public String bookManage() {
+		return "mypage/mypage_resrvation/mypage_bookinglist";
+	}
+	
 	/////////////////////////////////////////////////////////////////////
 	
 	// 대관판매자 계정등록 폼

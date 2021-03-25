@@ -13,7 +13,14 @@
 		<div class="container">
 			<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 			<!--//header//-->
+	<!--//header//-->
+		</div>
+	</div>
+	<!-- Header end -->
 
+	<!-- wrap -->
+	<div class="wrap">
+		<div class="container">
 			<div class="middle">
 				<c:import url="/WEB-INF/views/include/sidemenu.jsp"></c:import>
 				<!--//side_menu//-->
@@ -47,10 +54,10 @@
 							</div>
 
 							<div class="gym_info_btn_site">
-								<button onclick="location.href='예약판매자5_마이페이지_체육관등록1.html'" class="gym_info_btn"
+								<button class="gym_info_btn"
 									type="button">체육관 정보</button>
-								<button onclick="location.href='예약판매자6_마이페이지_대관등록1.html'" class="gym_info_btn" type="button">대관
-									등록</button>
+								<a href="${pageContext.request.contextPath }/mypage/book/bookaddform"><button class="gym_info_btn" type="button">대관
+									등록</button></a>
 							</div>
 						</div>
 						<!--//gym_info-->
@@ -104,7 +111,7 @@
 						</table>
 					</div>
 					<!--//booking_manage-->
-
+				</div>
 				</div>
 				<!--//middle-->
 				<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>

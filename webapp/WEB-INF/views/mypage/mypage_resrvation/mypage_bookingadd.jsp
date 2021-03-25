@@ -44,7 +44,14 @@ body {
 		<div class="container">
 			<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 			<!--//header//-->
+	<!--//header//-->
+		</div>
+	</div>
+	<!-- Header end -->
 
+	<!-- wrap -->
+	<div class="wrap">
+		<div class="container">
 			<div class="middle">
 				<c:import url="/WEB-INF/views/include/sidemenu.jsp"></c:import>
 				<!--//side_menu//-->
