@@ -65,7 +65,7 @@
 					<!-- //반복리스트 -->
 
 					<form action="${pageContext.request.contextPath }/mypage/productBuy" method="get">
-						<input type="text" name="buy_no" value="4">
+						<input type="text" name="buy_no" value="1">
 						<button type="submit">주문하기</button>
 					</form>
 
@@ -82,6 +82,11 @@
 					<form action="${pageContext.request.contextPath }/mypage/delcomplete" method="get">
 						<input type="text" name="buyprod_no" value="1">
 						<button type="submit">배송완료</button>
+					</form>
+					
+					<form action="${pageContext.request.contextPath }/mypage/delcomplete" method="get">
+						<input type="text" name="bbuy_no" value="1">
+						<button type="submit">수락하기</button>
 					</form>
 
 				</div>

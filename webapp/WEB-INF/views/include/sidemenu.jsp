@@ -36,7 +36,7 @@
 					class="arrow">></span></a></li>
 			<li><a href="${pageContext.request.contextPath}/mypage/cart"><span class="menu">장바구니</span><span
 					class="arrow">></span></a></li>
-			<li><a href="../mypage_buy/buylist.html"><span class="menu">구매내역</span><span
+			<li><a href="${pageContext.request.contextPath}/mypage/buylist"><span class="menu">구매내역</span><span
 					class="arrow">></span></a></li>
 			<li><a href="../mypage_buy/info_update.html"><span
 					class="menu">회원정보관리</span><span class="arrow">></span></a></li>

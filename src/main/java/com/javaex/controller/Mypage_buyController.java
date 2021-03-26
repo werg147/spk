@@ -14,9 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javaex.service.AlarmService;
+import com.javaex.service.BuyListService;
 import com.javaex.service.CartService;
 import com.javaex.vo.AlarmContentVo;
 import com.javaex.vo.AlarmVo;
+import com.javaex.vo.BBuyVo;
+import com.javaex.vo.BookingVo;
+import com.javaex.vo.BuyListVo;
 import com.javaex.vo.BuyProductVo;
 import com.javaex.vo.BuyVo;
 import com.javaex.vo.CartInfoVo;
@@ -37,7 +41,10 @@ public class Mypage_buyController {
 	@Autowired
 	public CartService cServ;
 
-	// 알람리스트 출력
+	@Autowired
+	public BuyListService blServ;
+
+	/* 알람 리스트 */
 	@RequestMapping(value = "/alarm", method = { RequestMethod.GET, RequestMethod.POST })
 	public String list(Model model, HttpSession session) {
 
@@ -57,7 +64,7 @@ public class Mypage_buyController {
 
 	}
 
-	// 결제완료 알람 발송
+	/* 결제완료 알람 */
 	@RequestMapping(value = "/productBuy", method = { RequestMethod.GET, RequestMethod.POST })
 	public void productBuy(@RequestParam("buy_no") int buy_no) {
 
@@ -67,8 +74,7 @@ public class Mypage_buyController {
 
 	}
 
-	// 배송준비 중 알람 발송
-
+	/* 배송준비 중 알람 */
 	@RequestMapping(value = "/delReady", method = { RequestMethod.GET, RequestMethod.POST })
 	public void delReady(@RequestParam("buyprod_no") int buyprod_no) {
 
@@ -78,6 +84,7 @@ public class Mypage_buyController {
 
 	}
 
+	/* 배송시작 알람 */
 	@RequestMapping(value = "/delStart", method = { RequestMethod.GET, RequestMethod.POST })
 	public void delStart(@RequestParam("buyprod_no") int buyprod_no) {
 
@@ -87,6 +94,7 @@ public class Mypage_buyController {
 
 	}
 
+	/* 배송완료 알람 */
 	@RequestMapping(value = "/delcomplete", method = { RequestMethod.GET, RequestMethod.POST })
 	public void delcomplete(@RequestParam("buyprod_no") int buyprod_no) {
 
@@ -96,6 +104,7 @@ public class Mypage_buyController {
 
 	}
 
+	/* 장바구니 리스트 */
 	@RequestMapping(value = "/cart", method = { RequestMethod.GET, RequestMethod.POST })
 	public String cart(Model model, HttpSession session) {
 
@@ -124,6 +133,7 @@ public class Mypage_buyController {
 
 	}
 
+	/* 장바구니 삭제 */
 	@ResponseBody
 	@RequestMapping(value = "/remove", method = { RequestMethod.GET, RequestMethod.POST })
 	public int remove(@RequestParam("no") int cart_no, @RequestParam("userno") int user_no) {
@@ -140,6 +150,7 @@ public class Mypage_buyController {
 
 	}
 
+	/* 장바구니에 담기 */
 	@RequestMapping(value = "/gotoCart", method = { RequestMethod.GET, RequestMethod.POST })
 	public String gotoCart(@RequestParam("prod_no") String prod_no, @RequestParam("colorsize_no") int colorsize_no,
 			@RequestParam("count") int count, HttpSession session, @ModelAttribute CartVo cartVo) {
@@ -167,4 +178,44 @@ public class Mypage_buyController {
 		return "redirect:/mypage/cart";
 
 	}
+
+	/* 구매내역 출력 */
+	/* #1. 배송상품내역 */
+	/* #2. 대관상품내역 */
+	/* #3. 매칭상품내역 */
+	@RequestMapping(value = "/buylist", method = { RequestMethod.GET, RequestMethod.POST })
+	public String buylist(Model model, HttpSession session) {
+
+		System.out.println("[Alarm Ctrl]: list 진입");
+
+		UserVo authUser = (UserVo) session.getAttribute("authUser");
+
+		int user_no = authUser.getUser_no();
+
+		/* #1. 배송상품내역 */
+		List<BuyListVo> buyList = blServ.buylist(user_no);
+
+		System.out.println("[BuyList Ctrl]: " + buyList.toString());
+
+		/* #2. 대관상품내역 */
+		List<BookingVo> bookingList = blServ.bookinglist(user_no);
+
+		System.out.println("[BuyList Ctrl]: " + bookingList.toString());
+
+		/* #3. 매칭상품내역 */
+		List<BBuyVo> bbuyList = blServ.bbuylist(user_no);
+
+		/* #1. 배송상품내역 */
+		model.addAttribute("BuyList", buyList);
+
+		/* #2. 대관상품내역 */
+		model.addAttribute("BookingList", bookingList);
+
+		/* #3. 매칭상품내역 */
+		model.addAttribute("BbuyList", bbuyList);
+
+		return "mypage/mypage_buy/buylist";
+
+	}
+
 }

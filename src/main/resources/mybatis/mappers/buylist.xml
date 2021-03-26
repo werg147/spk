@@ -4,6 +4,57 @@
 
 <mapper namespace="buylist">
 
+	<!-- 배송상품 구매내역 -->
+	<select id="selectBuyList" parameterType="int" resultType="BuyListVo">
+		<![CDATA[
+			SELECT  p.prod_detail_img_savename,
+			        p.prod_name,
+			        p.prod_price,
+			        b.buy_date,
+			        bp.buy_del_state
+			FROM    users u, product p, buyproduct bp, buy b
+			WHERE   u.user_no = b.user_no
+			        and b.buy_no = bp.buy_no
+			        and bp.prod_no = p.prod_no
+			        and u.user_no = #{user_no}
+			ORDER BY b.buy_date desc
+		]]>
+	</select>
 
+	<!-- 대관상품 구매내역 -->
+	<select id="selectBookingList" parameterType="int" resultType="BookingVo">
+		<![CDATA[
+			SELECT  gi.gym_img_savename,
+			        g.gym_name,
+			        b.booking_price,
+			        b.booking_date,
+			        bb.b_buy_state,
+			        b.booking_state
+			FROM    users u, gym g, bbuy bb, booking b, gymimg gi
+			WHERE   u.user_no = bb.user_no
+			        and b.booking_no = bb.booking_no
+			        and g.gym_no = b.gym_no
+			        and g.gym_no = gi.gym_img_no
+			        and bb.b_buy_state = '결제완료'
+			        and u.user_no = #{user_no}
+			ORDER BY b.booking_date desc
+		]]>
+	</select>
+
+	<!-- 매칭상품 구매내역 -->
+	<select id="selectBBuyList" parameterType="int" resultType="BBuyVo">
+		<![CDATA[
+			SELECT  gi.gym_img_savename,
+			        g.gym_name,
+			        bb.b_buy_price,
+			        bb.b_buy_date,
+			        bb.b_buy_player_state
+			FROM    users u, gym g, gymimg gi, bbuy bb
+			WHERE   u.user_no = bb.user_no
+			        and g.gym_no = gi.gym_no
+			        and u.user_no = #{user_no}
+			ORDER BY bb.b_buy_date desc
+		]]>
+	</select>
 
 </mapper>

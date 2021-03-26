@@ -10,13 +10,21 @@ public class BookingVo {
 	private int booking_price;
 	private String booking_state;
 	private String booking_reg_date;
-	
-	//gym
+
+	// gym
 	private String gym_name;
 	private String gym_event;
-	//gymImg
+	// gymImg
 	private String gym_img_savename;
-	
+
+	/* 2021. 03. 26 추가 <조경환> */
+	/* gyimg */
+	private int gym_img_no;
+	/* users */
+	private int user_no;
+	/* bbuy */
+	private String b_buy_state;
+
 	public BookingVo() {
 	}
 
@@ -31,7 +39,7 @@ public class BookingVo {
 		this.booking_state = booking_state;
 		this.booking_reg_date = booking_reg_date;
 	}
-	
+
 	public BookingVo(int booking_no, int gym_no, String booking_date, String booking_start, String booking_end,
 			int booking_price, String booking_state, String booking_reg_date, String gym_name,
 			String gym_img_savename) {
@@ -47,8 +55,28 @@ public class BookingVo {
 		this.gym_name = gym_name;
 		this.gym_img_savename = gym_img_savename;
 	}
-	
-	
+
+	/* 2021. 03. 26 추가 <조경환> */
+	public BookingVo(int booking_no, int gym_no, String booking_date, String booking_start, String booking_end,
+			int booking_price, String booking_state, String booking_reg_date, String gym_name, String gym_event,
+			String gym_img_savename, int gym_img_no, int user_no, String b_buy_state) {
+		super();
+		this.booking_no = booking_no;
+		this.gym_no = gym_no;
+		this.booking_date = booking_date;
+		this.booking_start = booking_start;
+		this.booking_end = booking_end;
+		this.booking_price = booking_price;
+		this.booking_state = booking_state;
+		this.booking_reg_date = booking_reg_date;
+		this.gym_name = gym_name;
+		this.gym_event = gym_event;
+		this.gym_img_savename = gym_img_savename;
+		this.gym_img_no = gym_img_no;
+		this.user_no = user_no;
+		this.b_buy_state = b_buy_state;
+	}
+
 	public String getGym_event() {
 		return gym_event;
 	}
@@ -137,14 +165,39 @@ public class BookingVo {
 		this.booking_reg_date = booking_reg_date;
 	}
 
+	/* 2021. 03. 26 추가 <조경환> */
+	public int getGym_img_no() {
+		return gym_img_no;
+	}
+
+	public void setGym_img_no(int gym_img_no) {
+		this.gym_img_no = gym_img_no;
+	}
+
+	public int getUser_no() {
+		return user_no;
+	}
+
+	public void setUser_no(int user_no) {
+		this.user_no = user_no;
+	}
+
+	public String getB_buy_state() {
+		return b_buy_state;
+	}
+
+	public void setB_buy_state(String b_buy_state) {
+		this.b_buy_state = b_buy_state;
+	}
+
+	/* 2021. 03. 26 수정 <조경환> */
 	@Override
 	public String toString() {
 		return "BookingVo [booking_no=" + booking_no + ", gym_no=" + gym_no + ", booking_date=" + booking_date
 				+ ", booking_start=" + booking_start + ", booking_end=" + booking_end + ", booking_price="
 				+ booking_price + ", booking_state=" + booking_state + ", booking_reg_date=" + booking_reg_date
-				+ ", gym_name=" + gym_name + ", gym_img_savename=" + gym_img_savename + "]";
+				+ ", gym_name=" + gym_name + ", gym_event=" + gym_event + ", gym_img_savename=" + gym_img_savename
+				+ ", gym_img_no=" + gym_img_no + ", user_no=" + user_no + ", b_buy_state=" + b_buy_state + "]";
 	}
-
-	
 
 }

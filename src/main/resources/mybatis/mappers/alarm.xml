@@ -48,7 +48,7 @@
 			FROM    buyproduct bp, product p, buy b
 			WHERE   bp.prod_no = p.prod_no
 			        and b.buy_no = bp.buy_no
-			        and bp.buyprod_no = #{buyprod_no}
+			        and b.buy_no = #{buy_no}
 		]]>
 	</select>
 
