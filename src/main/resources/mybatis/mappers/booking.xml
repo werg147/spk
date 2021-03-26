@@ -55,4 +55,23 @@
 	
 	
 	</update>
+	<update id="updateBooking3" parameterType="int">
+	<![CDATA[
+			update booking
+			set booking_state = '결제완료'
+			where booking_no = #{bookingNo}	
+	]]>
+	
+	
+	</update>
+	
+	<select id="selectOnebookingNo" parameterType="int" resultType="BookingVo">
+		<![CDATA[
+			select booking_no,
+			       booking_state 
+			from booking
+			where booking_no = #{bookingNo}		
+		]]>	
+	
+	</select>
 </mapper>

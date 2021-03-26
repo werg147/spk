@@ -48,6 +48,8 @@ public class SparringService {
 		if(word == "") {
 			profileVo.setWord("잘 부탁드립니다");
 		}
+		
+		
 		sparringDao.insertProfile(profileVo);
 		System.out.println("vo2 :" + profileVo);
 		
@@ -333,7 +335,9 @@ public class SparringService {
 		int num = bBuyVo.getB_buy_price().lastIndexOf(".");
 		
 		String str=bBuyVo.getB_buy_price().substring(0, num);
+		
 		System.out.println(str);
+		
 		int price = Integer.parseInt(str);
 		bBuyVo.setPrice(price);
 		
@@ -373,6 +377,8 @@ public class SparringService {
 			vo.setB_buy_no(bbuyno);
 			
 			sparringDao.updateBBuy(vo);
+			
+			//시합등록자에게 알람보내기 
 		}
 		
 	}
@@ -464,44 +470,47 @@ public class SparringService {
 		String WC= "";
 		
 		//체급구하기
-		if(vo.getBooking_no() == 0) {
-			int profileNo1 = vo.getProfile_no();
-			ProfileVo profileVo = sparringDao.selectProfileEvent(profileNo1);
-			
-			String gymEvent = profileVo.getProfileGymEvent();
-			if(gymEvent.equals("복싱")) {
-				event = 1;
-			}else if(gymEvent.equals("킥복싱")) {
-				event = 2;
-			}else if(gymEvent.equals("종합격투기")) {
-				event = 3;
-			}else if(gymEvent.equals("주짓수")) {
-				event = 4;
+		if(vo != null) {
+			if(vo.getBooking_no() == 0) {
+				int profileNo1 = vo.getProfile_no();
+				ProfileVo profileVo = sparringDao.selectProfileEvent(profileNo1);
+				
+				String gymEvent = profileVo.getProfileGymEvent();
+				if(gymEvent.equals("복싱")) {
+					event = 1;
+				}else if(gymEvent.equals("킥복싱")) {
+					event = 2;
+				}else if(gymEvent.equals("종합격투기")) {
+					event = 3;
+				}else if(gymEvent.equals("주짓수")) {
+					event = 4;
+				}
+				int weight = Integer.parseInt(vo.getWeight());
+				WC = weightClass(event,weight);
+				
+			}else {
+				BookingVo bookingVo = sparringDao.selectOneBooking(vo.getBooking_no());
+				String gymEvent = bookingVo.getGym_event();
+				if(gymEvent.equals("복싱")) {
+					event = 1;
+				}else if(gymEvent.equals("킥복싱")) {
+					event = 2;
+				}else if(gymEvent.equals("종합격투기")) {
+					event = 3;
+				}else if(gymEvent.equals("주짓수")) {
+					event = 4;
+				}
+				int weight = Integer.parseInt(vo.getWeight());
+				WC = weightClass(event,weight);
+				
 			}
-			int weight = Integer.parseInt(vo.getWeight());
-			WC = weightClass(event,weight);
-			
-		}else {
-			BookingVo bookingVo = sparringDao.selectOneBooking(vo.getBooking_no());
-			String gymEvent = bookingVo.getGym_event();
-			if(gymEvent.equals("복싱")) {
-				event = 1;
-			}else if(gymEvent.equals("킥복싱")) {
-				event = 2;
-			}else if(gymEvent.equals("종합격투기")) {
-				event = 3;
-			}else if(gymEvent.equals("주짓수")) {
-				event = 4;
-			}
-			int weight = Integer.parseInt(vo.getWeight());
-			WC = weightClass(event,weight);
-			
 		}
 		System.out.println(vo);
 		System.out.println("시합등록자 :" + WC);
-		vo.setWeightC(WC);
+		if(vo != null) {
+			vo.setWeightC(WC);
 		// 시합등록자 구하기END
-		
+		}
 		//시합 등록자의 승률구하기
 		BBuyVo scoreVo = sparringDao.selectOneMatchScore(userNo);
 		if(scoreVo != null) {
@@ -513,9 +522,11 @@ public class SparringService {
 			
 			int rate = (int) ((sumWin /sumScore)*100);
 			System.out.println("승률 : "+ rate);
-			
+			if(vo != null) {
 			vo.setRate(rate);
 			//시합 등록자의 승률구하기END
+			vo.setScoreCount(scoreVo.getScoreCount());
+			}
 		}
 		
 		/**경력리스트,주특기 리스트 구하기**/
@@ -526,9 +537,10 @@ public class SparringService {
 		//경력리스트
 		List<RecordVo> recordList = sparringDao.selectListRecord(profileNo);
 		
-		vo.setEventList(eventList);
-		vo.setRecordList(recordList);
-		
+		if(vo != null) {
+			vo.setEventList(eventList);
+			vo.setRecordList(recordList);
+		}
 		//*****상대방구하기****//
 		//상대방을 페이지에서 받아올수있는 bookingno로 구하지않고 불러와서 구하는 이유는
 		//대관구매하지 않은 시합등록자는 bookingno가 없어 상대를 불러올수없고
@@ -635,6 +647,8 @@ public class SparringService {
 		}
 		//MAP에 넣기
 		
+		
+		
 		//이미등록한 신청자 확인
 		Map<String,Object> userMap = new HashMap<String,Object>();
 		userMap.put("bookingNo",bookingNo);
@@ -645,8 +659,32 @@ public class SparringService {
 		if(bbuyVoUser != null) {
 			map.put("bbuyVoUser",bbuyVoUser);	
 		}
-		map.put("bBuyVo", vo);
 		
+		///*********대관한 대관정보가 예약중인지 가져오기*********/////
+		
+		BookingVo bookingVo = sparringDao.selectOnebookingNo(bookingNo);
+		if(bookingVo != null) {
+			
+			System.out.println(bookingVo.getBooking_state());
+			map.put("booking_state",bookingVo.getBooking_state());
+		}
+		
+		
+		////*********************************************///
+		
+		
+		//*****수락하기 나누기 ******///
+		// 시합 등록자가 결제 완료의경우 (직접대관을 한 경우) 상대에게 결제알람을 보낸다
+		// 시합 등록자가 결제완료인지 확인
+		
+		
+		
+		// 시합등록자가 대관하지 않고 신청자가 먼저 대관을 한경우 수락 하기 버튼을 누르면
+		// 해당 bookingNo를 결제한다
+		
+		
+		
+		map.put("bBuyVo", vo);
 		return map;
 	}
 
@@ -913,6 +951,124 @@ public class SparringService {
 		boolean tf = (low < weight && weight <= high);
 
 		return tf;
+	}
+
+	public void insertBBuy2(int userNo,int profileNo,int bookingNo) {
+		System.out.println("[Service] : insertBBuy2");
+		BBuyVo bbuyVo = new BBuyVo();
+		bbuyVo.setUser_no(userNo);
+		bbuyVo.setProfile_no(profileNo);
+		bbuyVo.setBooking_no(bookingNo);
+		
+		sparringDao.insertBBuyForm(bbuyVo);
+		
+		
+	}
+
+	public void accept(int partnerUserNo, int bookingNo) {
+		System.out.println("[Dao]: accept()");
+		
+		//일단 다 예정자로 만든다 (대기자로 만드는 이유는 이후에 상대가 수락이아닌 거절을 할경우)
+		//다시 신청자로 돌려주기 위함인데 그전에 거절한 사용자는 아예 탈락자로 보내기위함
+		sparringDao.updateAcceptBBuyfail(bookingNo);
+		
+		//파트너만 선택자로 바꾼다
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("bookingNo",bookingNo);
+		map.put("userNo",partnerUserNo);
+		sparringDao.updateAcceptBBuysucc(map);
+		
+		
+	}
+
+	public void acceptpayment(int partnerUserNo, int bookingNo) {
+		System.out.println("[Dao]: accept() : acceptpayment");
+		
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("bookingNo",bookingNo);
+		map.put("userNo",partnerUserNo);
+		
+		sparringDao.updateAcceptBBuysucc(map);
+		
+	}
+
+	public void acceptpay(BBuyVo bBuyVo, int bbuyno , int bookingNo) {
+		System.out.println("[Dao]: accept() : acceptpay");
+		
+		
+		int num = bBuyVo.getB_buy_price().lastIndexOf(".");
+		
+		String str=bBuyVo.getB_buy_price().substring(0, num);
+		
+		System.out.println(str);
+		
+		int price = Integer.parseInt(str);
+		bBuyVo.setPrice(price);
+		
+		bBuyVo.setB_buy_player_state("시합결정자");
+		
+		//부킹 결제완료로 바꿔주기
+		sparringDao.updateBooking3(bookingNo);
+		
+		bBuyVo.setB_buy_no(bbuyno);
+		bBuyVo.setBooking_no(bookingNo);
+		sparringDao.updateBBuy2(bBuyVo);
+		
+	}
+
+	public void acceptPartner(int partneruserno, int bookingNo, BBuyVo bBuyVo, int bbuyno, int bookingNo2, int mybbuyno) {
+		System.out.println("[Service] : acceptPartner");
+		
+		int num = bBuyVo.getB_buy_price().lastIndexOf(".");
+		
+		String str=bBuyVo.getB_buy_price().substring(0, num);
+		
+		System.out.println(str);
+		
+		int price = Integer.parseInt(str);
+		bBuyVo.setPrice(price);
+		//상대 player_state (시합등록자)변경해주기
+		bBuyVo.setB_buy_player_state("시합결정자");
+		bBuyVo.setB_buy_no(bbuyno);
+		bBuyVo.setBooking_no(bookingNo);
+		sparringDao.updateBBuy3(bBuyVo);
+		
+		//일단 다 대기자로 만든다 (대기자로 만드는 이유는 이후에 상대가 수락이아닌 거절을 할경우)
+		//다시 신청자로 돌려주기 위함인데 그전에 거절한 사용자는 아예 탈락자로 보내기위함
+		sparringDao.updateAcceptBBuyfail(bookingNo);
+				
+		
+		//내 결제상태 바꾸기
+		bBuyVo.setB_buy_no(mybbuyno);
+		System.out.println(bBuyVo.getB_buy_no());
+		
+		sparringDao.updateBBuy4(bBuyVo);
+		
+		//부킹 결제완료로 바꿔주기
+		sparringDao.updateBooking3(bookingNo);
+		
+		
+	}
+
+	public void refuse(int bbuyNo) {
+		System.out.println("[Service] : refuse()");
+		System.out.println(bbuyNo);
+		sparringDao.updateBBuyrefuse(bbuyNo);
+		
+	}
+
+	public void cancel(int bbuyno, int bookingno) {
+		System.out.println("[Service] : cancel");
+		System.out.println(bbuyno);
+		System.out.println(bookingno);
+		//취소한 사용자 삭제
+		sparringDao.removeBBuy(bbuyno);
+		
+		//대기자를 다시 신청자로 변경
+		sparringDao.updatebbuyBack(bookingno);
+		
 	}
 	
 }

@@ -99,6 +99,7 @@
 										<!-- 종목선택 -->
 										
 										<c:if test="${bookingno == 0}">
+										<c:if test="${selectbooking_no == 0}">
 										<tr class="basic">
 											<td colspan="2"><label for="prod_cate">스파링종목</label></td>
 											<td>
@@ -144,6 +145,7 @@
 												</div>
 											</td>
 										</tr>
+										</c:if>
 										</c:if>
 										<!-- 원하는 시간 입력 end -->
 										<!-- 종목선택 end -->
@@ -330,6 +332,7 @@
 									<!-- session값 생겨도 히든으로 표시할 것 아이작스에서 쓰고있음 -->
 									<input id="session_user_no" type="text" name="userNo" value="${authUser.user_no}">
 									<input type="text" name="subnum" value="${param.subnum}">
+									<input type="text" name="selectbooking_no" value="${param.selectbooking_no}">
 									<c:if test="${param.booking_no != 0}">
 										<input type="text" name="bookingno" value="${param.booking_no}">
 										<input type="text" name="bbuyno" value="${param.bbuyno}">

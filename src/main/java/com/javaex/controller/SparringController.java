@@ -96,11 +96,10 @@ public class SparringController {
 			@RequestParam(value = "user_no", required = false, defaultValue = "0") int userNo,
 			@RequestParam(value ="bbuyno" , required = false, defaultValue="0") int bbuyno,
 			@RequestParam(value="subnum",required=false,defaultValue="0")int subNum,
-			@RequestParam(value="bbuyuser",required=false,defaultValue="0")int bbuyuser) {
+			@RequestParam(value="bbuyuser",required=false,defaultValue="0")int bbuyuser,
+			@RequestParam(value="selectbooking_no",required=false,defaultValue="0")int selectbooking_no) {
 		System.out.println("[Controller] : profileWriteForm()");
-		System.out.println(bookingno);
-		System.out.println(userNo);
-		System.out.println("bbuyNo" + bbuyno);
+	
 		
 		// 유저no는 현재 대관하기에서 세션값 으로 쓸 임의의 번호를 보내고 있음 지워야댐
 		if (userNo == 0) {
@@ -111,6 +110,7 @@ public class SparringController {
 			
 			model.addAttribute("profileList", profileList);
 			model.addAttribute("bookingno", bookingno);
+			model.addAttribute("selectbooking_no",selectbooking_no);
 			return "matching/matchinfoForm";
 		}
 	}
@@ -142,32 +142,46 @@ public class SparringController {
 							   @RequestParam(value="userNo",required=false,defaultValue="0")int userNo,
 							   @RequestParam(value="subnum",required=false,defaultValue="0")int subnum,
 							   @RequestParam(value="bbuyno",required=false,defaultValue="0")int bbuyno,
-							   @RequestParam(value="bbuyuser",required=false,defaultValue="0")int bbuyuser) {
+							   @RequestParam(value="bbuyuser",required=false,defaultValue="0")int bbuyuser,
+							   @RequestParam(value="selectbooking_no",required=false,defaultValue="0")int selectbooking_no) {
 		System.out.println("[Controller] : profileWrite");
 
 		String[] eventName = request.getParameterValues("eventName");
 
-		
+		//셀렉트키로 바로 profileNo 사용가능
 		sparringService.profileWrite(profileVo, eventName, recordVo);
-		if(bookingNo == 0 && subnum ==0) {
-			System.out.println("대관 x 시합등록자"); //o
+		
+		if(bookingNo == 0 &&selectbooking_no == 0 &&subnum ==0) {
+			System.out.println("대관 x 시합등록자");//0
 			BBuyVo bBuyVo = sparringService.insertBBuy(bookingNo,subnum,userNo,profileVo);
 			
 			int bbNo = bBuyVo.getB_buy_no();
-			return "redirect:/sparring/matchdetail?bbuyno="+bbNo+"&userno="+bbuyuser+"&bookingno="+0;
-		}else if(bookingNo == 0 && subnum == 1) { //x
-			System.out.println("대관 o 시합등록자 글의 신청자");
-			return "redirect:/sparring/matchdetail?bbuyno="+bbuyno+"&userno="+userNo;
 			
-			
-			
-		}else if (bookingNo != 0 && subnum ==0){
-			System.out.println("대관 o 시합등록자");//O
-			return "redirect:/sparring/payment?bookingno="+bookingNo+"&userno="+userNo+"&profileno="+profileVo.getProfileNo()+"&subnum="+subnum+"&bbuyno="+bbuyno;
+			return "redirect:/sparring/matchdetail?bbuyno="+bbNo+"&userno="+userNo+"&sessionuser="+userNo;
 		
-		}else if(bookingNo !=0 && subnum==1) {
+		
+		}else if(bookingNo != 0 &&selectbooking_no == 0 && subnum == 1) { 
+			System.out.println("대관 o 시합등록자 글의 신청자");
+			
+			//bbuyuser로 신청자에게 알람
+			
+			sparringService.insertBBuy2(userNo,profileVo.getProfileNo(),bookingNo);
+			
+			//bbuyno 통한  bookingno로 등록
+			return "redirect:/sparring/matchdetail?bbuyno="+bbuyno+"&userno="+bbuyuser+"&sessionuser="+userNo;
+			
+			
+			
+		}else if (bookingNo == 0 &&selectbooking_no != 0 && subnum ==0){
+			System.out.println("대관 o 시합등록자");//0
+			return "redirect:/sparring/payment?bookingno="+selectbooking_no+"&userno="+userNo+"&profileno="+profileVo.getProfileNo()+"&subnum="+subnum;
+		
+			
+			
+		}else if(bookingNo == 0&&selectbooking_no !=0 && subnum==1) {
 			System.out.println("대관 x 시합등록자 글의  신청자");
-			return "redirect:/sparring/payment?bookingno="+bookingNo+"&userno="+userNo+"&profileno="+profileVo.getProfileNo()+"&subnum="+subnum+"&bbuyno="+bbuyno;
+			
+			return "redirect:/sparring/payment?bookingno="+selectbooking_no+"&userno="+userNo+"&profileno="+profileVo.getProfileNo()+"&subnum="+subnum+"&bbuyno="+bbuyno;
 		
 		}else {
 			System.out.println("잘못된 페이지");
@@ -176,15 +190,18 @@ public class SparringController {
 	}
 	/** 결제하기 **/
 	@RequestMapping(value = "/payment", method = { RequestMethod.GET, RequestMethod.POST })
-	public String payment(@RequestParam(value = "bookingno", required = false, defaultValue = "0") int bookingNo,
+	public String payment(@RequestParam(value="partneruserno", required = false, defaultValue = "0")int partneruserno,
+			@RequestParam(value = "bookingno", required = false, defaultValue = "0") int bookingNo,
 			@RequestParam(value = "userno", required = false, defaultValue = "0") int userNo,
-			@RequestParam(value = "profileno", required = false, defaultValue = "0") int profileNo,
+			@RequestParam(value = "profileno", required = false, defaultValue = "0") int profileno,
 			@RequestParam(value="subnum",required=false,defaultValue="0")int subnum,
 			@RequestParam(value="bbuyno",required=false,defaultValue="0")int bbuyno,
+			@RequestParam(value="mainnum",required=false, defaultValue="0")int mainnum,
 			Model model) {
 		System.out.println(bookingNo);
 		System.out.println(userNo);
 		System.out.println("시합등록자 0 신청자 1 : " + subnum);
+		System.out.println("profileno ="+ profileno);
 		/*임의로 설정한 userNo 지워야함*/
 		userNo = 2;
 		
@@ -196,16 +213,91 @@ public class SparringController {
 	/**결제**/
 	@RequestMapping(value = "/pay", method = { RequestMethod.GET, RequestMethod.POST })
 	public String pay(@ModelAttribute BBuyVo bBuyVo,
+			@RequestParam(value="partneruserno", required = false, defaultValue = "0")int partneruserno,
+			@RequestParam(value="booking_no", required = false, defaultValue = "0") int bookingNo,
 			@RequestParam(value="subnum",required=false,defaultValue="0")int subnum,
-			@RequestParam(value="bbuyno",required=false,defaultValue="0")int bbuyno
+			@RequestParam(value="bbuyno",required=false,defaultValue="0")int bbuyno,
+			@RequestParam(value="mainnum",required=false, defaultValue="0")int mainnum,
+			@RequestParam(value = "mybbuyno", required = false, defaultValue = "0") int mybbuyno
 						) {
 		System.out.println("[Controller] : pay()");
 		
 		System.out.println(bBuyVo);
+		if(mainnum == 1) {
+			sparringService.accept(partneruserno,bookingNo);
+			sparringService.acceptpay(bBuyVo, bbuyno,bookingNo);
+			
+			return "store/paymentCp";
+		}else if(mainnum == 2){
+			
+			sparringService.acceptPartner(partneruserno,bookingNo,bBuyVo, bbuyno,bookingNo,mybbuyno);
+			return "store/paymentCp";
+		}else {
+			sparringService.pay(bBuyVo,subnum,bbuyno);
 		
-		sparringService.pay(bBuyVo,subnum,bbuyno);
+			return "store/paymentCp";
+		}
+	}
+	
+	//수락하기버튼
+	@RequestMapping(value = "/accept", method = { RequestMethod.GET, RequestMethod.POST })
+	public String accept(@RequestParam(value="partneruserno")int partnerUserNo,
+						 @RequestParam(value="bookingNo")int bookingNo,
+						 @RequestParam(value="userNo")int userNo,
+						 @RequestParam(value="bbuyno")int bbuyNo,
+						 @RequestParam(value="mainnum",required=false, defaultValue="0")int mainnum,
+						 @RequestParam(value = "profileno", required = false, defaultValue = "0") int profileno,
+						 @RequestParam(value = "mybbuyno", required = false, defaultValue = "0") int mybbuyno) {
+		System.out.println("[Controller] : accept()");
+		System.out.println("파트너의userNo :"+partnerUserNo);
+		System.out.println("bookingNo = " + bookingNo);
+		System.out.println("profileno= "+profileno);
+		//선택한 파트너는 선택자로 나머지는 탈락자로 바꾸기
 		
-		return "store/paymentCp";
+		if(mainnum ==1) {
+			//대관 x 시합등록자가 상대를 결정했을경우
+			
+			return "redirect:/sparring/payment?mainnum="+mainnum+"&bookingno="+bookingNo+"&userno="+userNo+"&bbuyno="+bbuyNo+"&partneruserno="+partnerUserNo+"&profileno="+profileno;
+		}else if(mainnum==2){
+			//대관 o 시합등록자가 상대를 결정하고 그 상대가 결제버튼을 눌렀을경우
+			
+			return "redirect:/sparring/payment?mainnum="+mainnum+"&bookingno="+bookingNo+"&userno="+userNo+"&bbuyno="+bbuyNo+"&partneruserno="+partnerUserNo+"&profileno="+profileno+"&mybbuyno="+mybbuyno;
+		}else {
+			//대관 o시합등록자가 상대를 결정했을경우
+			
+			sparringService.accept(partnerUserNo,bookingNo);
+			return "redirect:/sparring/matchdetail?bookingno="+bookingNo+"&userno="+userNo+"&bbuyno="+bbuyNo;
+		}
+	}
+	
+	//선택자가 거절
+	@RequestMapping(value = "/cancel", method = { RequestMethod.GET, RequestMethod.POST })
+	public String cancel(@RequestParam(value = "bbuyno", required = false, defaultValue = "0") int bbuyno,
+						@RequestParam(value = "bookingno", required = false, defaultValue = "0") int bookingno	) {
+		System.out.println("[Controller] : cancel()");
+		
+		sparringService.cancel(bbuyno,bookingno);
+		
+		return "redirect:/";
+	}
+	
+	
+	//신청자를  거절
+	@RequestMapping(value = "/refuse", method = { RequestMethod.GET, RequestMethod.POST })
+	public String refuse(@RequestParam(value="partneruserno")int partnerUserNo,
+			 @RequestParam(value="bookingNo")int bookingNo,
+			 @RequestParam(value="userNo")int userNo,
+			 @RequestParam(value="bbuyno")int bbuyNo,
+			 @RequestParam(value="mybbuyno")int mybbuyNo,
+			 @RequestParam(value="mainnum",required=false, defaultValue="0")int mainnum,
+			 @RequestParam(value = "profileno", required = false, defaultValue = "0") int profileno,
+			 @RequestParam(value = "mybbuyno", required = false, defaultValue = "0") int mybbuyno,
+			 @RequestParam(value = "sessionuserno", required = false, defaultValue = "0") int sessionuserno) {
+		System.out.println("[Controller] : refuse()");
+		
+		sparringService.refuse(mybbuyNo);
+		
+		return "redirect:/sparring/matchdetail?bookingno="+bookingNo+"&userno="+userNo+"&bbuyno="+bbuyNo+"&sessionuser="+sessionuserno;
 	}
 	
 	/*********************** api *****************/
@@ -251,5 +343,10 @@ public class SparringController {
 		BBuyVo bbuyVo = sparringService.bbuyOne( bbuyNo,userNo);
 		
 		return bbuyVo;
+	}
+	@RequestMapping(value = "/arl", method = { RequestMethod.GET, RequestMethod.POST })
+	public void arl() {
+		System.out.println("arl 테스트입니다");
+		
 	}
 }

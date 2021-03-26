@@ -60,7 +60,7 @@ public class SparringDao {
 		List profileList = sqlSession.selectList("profile.selectListProfile",userNo);
 		
 		for(int i = 0; i < profileList.size(); i++) {
-			System.out.println(profileList.get(i));
+			
 		}
 		
 		return profileList;
@@ -254,6 +254,81 @@ public class SparringDao {
 		BBuyVo bbuyVo = sqlSession.selectOne("bbuy.selectOneBBuyuser",userMap);
 		
 		return bbuyVo;
+	}
+
+	public void insertBBuyForm(BBuyVo bbuyVo) {
+		System.out.println("[Dao] : insertBBuyForm");
+		
+		sqlSession.insert("bbuy.insertBBuyForm",bbuyVo);
+		
+	}
+
+	public BookingVo selectOnebookingNo(int bookingNo) {
+		System.out.println("[Dao] : selectOnebookingNo");
+		
+		return sqlSession.selectOne("booking.selectOnebookingNo",bookingNo);
+		
+	}
+
+	public void updateAcceptBBuyfail(int bookingNo) {
+		System.out.println("[Dao] : updateAcceptBBuy()");
+		
+		sqlSession.update("bbuy.updateAcceptBBuyfail",bookingNo);
+	}
+
+	public void updateAcceptBBuysucc(Map map) {
+		System.out.println("[Dao] : updateAcceptBBuysucc()");
+		
+		sqlSession.update("bbuy.updateAcceptBBuysucc",map);
+	
+	}
+
+	public void updateBooking3(int bookingNo) {
+		System.out.println("[Dao] : updateBooking3()");
+		
+		sqlSession.update("booking.updateBooking3",bookingNo);
+	}
+
+	public void updateBBuy2(BBuyVo bBuyVo) {
+		System.out.println("[Dao] : updateBBuy2()");
+		
+		sqlSession.update("bbuy.updateBBuy2",bBuyVo);
+	}
+
+	public void updateBBuy3(BBuyVo bBuyVo) {
+	
+		
+		System.out.println("[Dao] : updateBBuy3()");
+		
+		sqlSession.update("bbuy.updateBBuy3",bBuyVo);
+		
+	}
+
+	public void updateBBuy4(BBuyVo bBuyVo) {
+		// TODO Auto-generated method stub
+		
+		System.out.println("[Dao] : updateBBuy4()");
+		
+		sqlSession.update("bbuy.updateBBuy4",bBuyVo);
+		
+	}
+
+	public void updateBBuyrefuse(int bbuyNo) {
+		System.out.println("[Dao] : updateBBuyrefuse");
+		
+		sqlSession.update("bbuy.updateBBuyrefuse",bbuyNo);
+	}
+
+	public void removeBBuy(int bbuyno) {
+		System.out.println("[Dao] : removeBBuy");
+		
+		sqlSession.delete("bbuy.deleteBBuy",bbuyno);
+	}
+
+	public void updatebbuyBack(int bookingno) {
+		System.out.println("[Dao] : updatebbuyBack");
+		
+		sqlSession.update("bbuy.updatebbuyBack",bookingno);
 	}
 
 

@@ -486,7 +486,7 @@
     function hiddenBookingNo(bookingNo1){
     	$("#hidden12").html(" ");
     	
-    	str='<input type="hidden" name="booking_no" value="'+bookingNo1+'"/>'
+    	str='<input type="hidden" name="selectbooking_no" value="'+bookingNo1+'"/>'
     	
     	$("#hidden12").append(str);
     }

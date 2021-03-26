@@ -162,12 +162,12 @@
 			        b.user_no,
 			        b.booking_no,
 			        b.profile_no,
-			        b.booking_no,
 			        b.b_buy_player_state,
 			        b.b_buy_address,
 			        b.b_buy_event,
 			        b.b_buy_time,
 			        b.b_buy_day,
+			        b.b_buy_state,
 			        u.nickname,
 			        u.user_photo,
 			        p.height,
@@ -178,7 +178,7 @@
 			from bbuy b , users u , profile p 
 			where b.user_no =u.user_no
 			and b.profile_no = p.profile_no
-			and b_buy_player_state = '시합등록자'
+			and (b_buy_player_state = '시합등록자' or b_buy_player_state = '시합결정자')
 			and b_buy_no = #{b_buy_no}
 			
 		]]>
@@ -187,15 +187,14 @@
 	<select id="selectOneMatchScore" parameterType="int" resultType="BBuyVo">
 		<![CDATA[
 			select  sum(score) as sumScore,
-			        sum(win) as sumWin
+			        sum(win) as sumWin,
+			        count(*) as scoreCount
 			from matchscore
 			where user_no = #{user_no}
 		]]>	
 	</select>
 	<select id="selectListBBuy2" parameterType="int" resultType="BBuyVo">
 	<![CDATA[
-	
-	
 			select b.b_buy_no,
 			       b.booking_no,
 			       b.profile_no,
@@ -207,13 +206,16 @@
 			       p.weight,
 			       p.major,
 			       u.nickname,
-			       u.user_photo
-			from bbuy b, profile p , users u
+			       u.user_photo,
+                   k.booking_state
+			from bbuy b, profile p , users u ,booking k
 			where b.profile_no = p.profile_no
 			and b.user_no = u.user_no
-			and b.b_buy_player_state = '신청자'
+            and b.booking_no = k.booking_no
+			and (b.b_buy_player_state = '신청자' or b.b_buy_player_state='선택자')
 			and b.booking_no = #{booking_no}
 			order by b.b_buy_no desc
+			
 	]]>
 
 	
@@ -266,10 +268,134 @@
 			       user_no 
 			FROM bbuy
 			where booking_no = #{bookingNo}
-			and user_no = #{sessionuser}	
+			and user_no = #{sessionuser}
+			and b_buy_player_state = '신청자'	
+			
+	
+	]]>
+	
+	
+	
+	</select>
+	
+	<insert id="insertBBuyForm" parameterType="BBuyVo">
+		<![CDATA[
+			insert into bbuy
+			values( seq_bbuy_no.nextval,
+			        #{user_no},  /*유저넘*/
+			        #{booking_no}, /*널가능부킹노*/
+			        #{profile_no}, /*프로필*/
+			        null,
+			        null,
+			        '예약대기',
+			        '신청자',
+			        null,
+			        null,
+			        null,
+			        null,
+			        sysdate)
+				
+		]]>
+		
+	
+	</insert>
+	
+	<update id="updateAcceptBBuyfail" parameterType="int">
+	<![CDATA[
+		update bbuy
+		set b_buy_player_state = '대기자'
+		where booking_no= #{bookingNo}
+		and b_buy_player_state = '신청자'		
+	
+	]]>
+	</update>
+	
+	<update id="updateAcceptBBuysucc" parameterType="map">
+	<![CDATA[
+		update bbuy
+		set b_buy_player_state = '선택자'
+		where user_no = #{userNo}
+		and booking_no = #{bookingNo}
+	
+	
+	]]>	
+	
+	</update>
+	
+	<update id="updateBBuy2" parameterType="BBuyVo">
+	
+	<![CDATA[
+		UPDATE BBUY
+		set b_buy_paytype= #{b_buy_paytype}, 
+		    b_buy_price = #{price}, 
+		    b_buy_state ='결제완료',
+		    b_buy_player_state = '시합결정자'
+		where b_buy_no = #{b_buy_no}
+		and booking_no = #{booking_no}	
+	
+	]]>
+	
+	</update>
+	
+	<update id="updateBBuy3" parameterType="BBuyVo">
+	
+	<![CDATA[
+		UPDATE BBUY
+		set  b_buy_player_state = '시합결정자'
+		where b_buy_no = #{b_buy_no}
+		and booking_no = #{booking_no}	
+	
+	]]>
+	
+	</update>
+	<update id="updateBBuy4" parameterType="BBuyVo">
+	
+	<![CDATA[
+		UPDATE BBUY
+		set b_buy_paytype= #{b_buy_paytype}, 
+		    b_buy_price = #{price}, 
+		    b_buy_state ='결제완료',
+		    b_buy_player_state = '선택자'
+		where b_buy_no = #{b_buy_no}
+		and booking_no = #{booking_no}	
+	
+	]]>
+	
+	
+	</update>
+	
+	<update id="updateBBuyrefuse" parameterType="int">
+	
+	<![CDATA[
+		update bbuy
+		set b_buy_player_state = '탈락자'
+		where b_buy_no = #{bbuyNo}	
+	
+	]]>
+	
+	</update>
+	<delete id="deleteBBuy" parameterType="int">
+	<![CDATA[
+	
+	DELETE FROM BBUY
+        WHERE B_BUY_NO = #{bbuyno}
+	
+	]]>
+	
+	</delete>
+	
+	<update id="updatebbuyBack" parameterType="int">
+	
+	<![CDATA[
+		update bbuy
+		set b_buy_player_state = '신청자'
+		where booking_no= #{bookingNo}
+		and b_buy_player_state = '대기자'			
 	
 	
 	]]>
 	
-	</select>
+	
+	</update>
+	
 </mapper>

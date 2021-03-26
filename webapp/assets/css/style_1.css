@@ -15,6 +15,11 @@
   width: 1050px;
   margin: auto;
 }
+
+#conment_10{
+	color:#e60012;
+	font-weight : bold;
+}
 #no_here_box{
 	margin:135px 0px 0px 20px;
 }
@@ -872,6 +877,7 @@ input:-ms-input-placeholder {
 /* 버튼 */
 
 #dae_footer {
+  
   position: fixed;
   left: 0px;
   bottom: 0px;
@@ -930,9 +936,21 @@ input:-ms-input-placeholder {
   cursor: pointer;
   height: 30px;
   font-size: 15px;
-  margin-top: 10px;
+  margin: 10px 5px 0px 5px;
   padding: 10px 30px 30px 30px;
-
+  
+  outline: none;
+}
+.dae_button_item_2 {
+  background: #e60012;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  height: 30px;
+  font-size: 15px;
+  margin: 10px 5px 0px 5px;
+  padding: 10px 30px 30px 30px;
+  
   outline: none;
 }
 .dae_button_item10 {
@@ -945,6 +963,22 @@ input:-ms-input-placeholder {
 }
 .dea_btn2 {
   color: #fff;
+}
+
+.dea_btn_2 {
+  color: #fff;
+  font-size : 20px;
+  
+}
+.dea_btn_3 {
+  color: #fff;
+  font-size : 20px;
+  
+}
+
+.dae_foo{
+	display:flex;
+	  justify-content: center;
 }
 
 /********sparringpost*******/

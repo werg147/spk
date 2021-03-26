@@ -40,7 +40,7 @@ public class BBuyVo {
 	private String booking_start;
 	private String booking_end;
 	
-	
+	private String booking_state;
 	
 	//EventList
 	
@@ -98,6 +98,16 @@ public class BBuyVo {
 	
 
 
+
+
+	public String getBooking_state() {
+		return booking_state;
+	}
+
+
+	public void setBooking_state(String booking_state) {
+		this.booking_state = booking_state;
+	}
 
 
 	public String getWeightC() {

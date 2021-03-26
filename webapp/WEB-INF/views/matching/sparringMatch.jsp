@@ -51,7 +51,7 @@
 			<div class="rule">
 				<h3 class="rule_info">Rule</h3>
 				<!-- 룰 정보 여기넣기 -->
-				
+
 				<h1 class="">${empty map.gAVo ? map.bBuyVo.b_buy_event : map.gAVo.gym_event}</h1>
 			</div>
 			<!-- rule end -->
@@ -136,24 +136,44 @@
 											</c:if>
 											<!-- 대관 x end -->
 										</div>
-										<c:if test="${authUser.user_no != null }">
-											<c:if test="${authUser.user_no != map.bBuyVo.user_no }">
-												<c:if test="${authUser.user_no != map.bbuyVoUser.user_no }">
-												<c:choose>
-													<c:when test="${map.bBuyVo.booking_no == 0 }">
-														<a href="${pageContext.request.contextPath }/sparring/rent?subnum=1&bbuyno=${map.bBuyVo.b_buy_no}"><button class="dae_button_item2">
-																<span data-no=""${map.bBuyVo.booking_no} class="dea_btn2">대관후 대결신청</span>
-															</button></a>
-													</c:when>
-													<c:otherwise>
-														<a href="${pageContext.request.contextPath }/sparring/writeForm?user_no=${authUser.user_no}&booking_no=${map.bBuyVo.booking_no}&subnum=1&bbuyno=${map.bBuyVo.b_buy_no}&bbuyuser=${param.userno}"><button class="dae_button_item2">
-																<span data-no=""${map.bBuyVo.booking_no} class="dea_btn2">대결신청</span>
-															</button></a>
-													</c:otherwise>
-												</c:choose>
+										<c:if test="${!map.bBuyList[0].booking_state eq '결제완료' }">
+											<c:if test="${authUser.user_no != null }">
+												<c:if test="${map.booking_state eq '예약중' }">
+													<p id="conment_10">상대가 대관했거나 수락된 글 입니다</p>
+												</c:if>
+												<c:if test="${authUser.user_no == map.bbuyVoUser.user_no }">
+													<p id="conment_10">이미 신청한 글 입니다</p>
 												</c:if>
 											</c:if>
 										</c:if>
+
+										<c:choose>
+											<c:when test="${map.booking_state eq '예약중' }">
+
+											</c:when>
+											<c:otherwise>
+												<c:if test="${authUser.user_no != null }">
+													<c:if test="${authUser.user_no != map.bBuyVo.user_no }">
+														<c:if test="${authUser.user_no != map.bbuyVoUser.user_no }">
+															<c:if test="${empty map.bBuyList[0] || map.bBuyList[0].b_buy_player_state eq '신청자' }">
+																<c:choose>
+																	<c:when test="${map.bBuyVo.booking_no == 0 }">
+																		<a href="${pageContext.request.contextPath }/sparring/rent?subnum=1&bbuyno=${map.bBuyVo.b_buy_no}"><button class="dae_button_item2">
+																				<span data-no="" ${map.bBuyVo.booking_no} class="dea_btn2">대관후 대결신청</span>
+																			</button></a>
+																	</c:when>
+																	<c:otherwise>
+																		<a href="${pageContext.request.contextPath }/sparring/writeForm?user_no=${authUser.user_no}&booking_no=${map.bBuyVo.booking_no}&subnum=1&bbuyno=${map.bBuyVo.b_buy_no}&bbuyuser=${param.userno}"><button class="dae_button_item2">
+																				<span data-no="" ${map.bBuyVo.booking_no} class="dea_btn2">대결신청</span>
+																			</button></a>
+																	</c:otherwise>
+																</c:choose>
+															</c:if>
+														</c:if>
+													</c:if>
+												</c:if>
+											</c:otherwise>
+										</c:choose>
 									</div>
 								</div>
 							</div>
@@ -189,8 +209,8 @@
 							<!---->
 
 							<c:choose>
-									<c:when test="${map.bBuyList[0]!= null}">
-								<div class="post_host_item2">
+								<c:when test="${map.bBuyList[0]!= null}">
+									<div class="post_host_item2">
 										<div class="post_host_item2_1">
 											<div class="post_host_imgbox">
 												<img src="${pageContext.request.contextPath }/upload/${map.bBuyList[0].user_photo}.jpg" alt="">
@@ -257,24 +277,50 @@
 													<!-- 대관 x end -->
 												</div>
 
-												<c:if test="${authUser.user_no == param.userno }">
-													<a href=""><button class="dae_button_item2">
-															<span class="dea_btn2">수락하기</span>
-														</button></a>
 
-													<a href=""><button class="dae_button_item3">
-															<span class="dea_btn2">거절하기</span>
-														</button></a>
-												</c:if>
+												<c:choose>
+													<c:when test="${ map.bBuyList[0].b_buy_player_state eq '선택자'}">
+														<p id="conment_10">상대의 수락 및 결제를 기다리고 있습니다</p>
+
+													</c:when>
+													<c:otherwise>
+														<c:if test="${authUser.user_no == param.userno }">
+
+															<c:choose>
+																<c:when test="${map.bBuyVo.b_buy_state == null && map.bBuyVo.booking_no != 0}">
+																<div id="accept_pay_btn">
+																	<a href="${pageContext.request.contextPath }/sparring/accept?partneruserno=${map.bBuyList[0].user_no}&bookingNo=${map.bBuyVo.booking_no}&userNo=${map.bBuyVo.user_no}&bbuyno=${map.bBuyVo.b_buy_no}&mainnum=1&profileno=${map.bBuyVo.profile_no}"><button class="dae_button_item2">
+																			<span class="dea_btn2">수락하고 결제하기</span>
+																		</button></a>
+																</div>
+																		
+																</c:when>
+																<c:otherwise>
+																<div id="accept_btn">
+																	<a href="${pageContext.request.contextPath }/sparring/accept?partneruserno=${map.bBuyList[0].user_no}&bookingNo=${map.bBuyVo.booking_no}&userNo=${map.bBuyVo.user_no}&bbuyno=${map.bBuyVo.b_buy_no}"><button class="dae_button_item2">
+																			<span class="dea_btn2">수락하기</span>
+																		</button></a>
+																</div>
+																		
+																</c:otherwise>
+															</c:choose>
+																<div id="refuse_btn">
+																	<a href="${pageContext.request.contextPath }/sparring/refuse?mybbuyno=${map.bBuyList[0].b_buy_no}&partneruserno=${map.bBuyList[0].user_no}&bookingNo=${map.bBuyVo.booking_no}&userNo=${map.bBuyVo.user_no}&bbuyno=${map.bBuyVo.b_buy_no}&sessionuserno=${authUser.user_no}"><button class="dae_button_item3">
+																			<span class="dea_btn2">거절하기</span>
+																	</button></a>
+																</div>
+														</c:if>
+													</c:otherwise>
+												</c:choose>
 
 
 											</div>
 										</div>
-								</div>
-									</c:when>
+									</div>
+								</c:when>
 								<c:otherwise>
 									<div class="post_host_item2">
-									
+
 										<div id="no_here_box">
 											<div>
 												<img id="no_select_here_img" alt="" src="${pageContext.request.contextPath }/upload/glove.jpg">
@@ -288,26 +334,28 @@
 							</c:choose>
 
 							<c:if test="${map.bBuyList[0]!= null}">
-								<div class="chell">
-									<div class="ss_box">
-										<div class="swiper-button-prev ss_prev"></div>
-										<div class="swiper-container ss_con">
-											<div class="swiper-wrapper ss_wrapper">
-												<c:forEach items="${map.bBuyList}" var="bBuyVo">
-													<div class="swiper-slide ss_slide" data-userno="${bBuyVo.user_no }" data-no="${bBuyVo.b_buy_no}">
-														<div>
-															<i class="fas fa-user"></i>
+								<c:if test="${empty map.bBuyList[0] || map.bBuyList[0].b_buy_player_state eq '신청자' }">
+									<div class="chell">
+										<div class="ss_box">
+											<div class="swiper-button-prev ss_prev"></div>
+											<div class="swiper-container ss_con">
+												<div class="swiper-wrapper ss_wrapper">
+													<c:forEach items="${map.bBuyList}" var="bBuyVo">
+														<div class="swiper-slide ss_slide" data-userno="${bBuyVo.user_no }" data-no="${bBuyVo.b_buy_no}">
+															<div>
+																<i class="fas fa-user"></i>
+															</div>
+															<div>${bBuyVo.nickname}</div>
 														</div>
-														<div>${bBuyVo.nickname}</div>
-													</div>
-												</c:forEach>
+													</c:forEach>
 
+												</div>
 											</div>
-										</div>
 
-										<div class="swiper-button-next ss_next"></div>
+											<div class="swiper-button-next ss_next"></div>
+										</div>
 									</div>
-								</div>
+								</c:if>
 							</c:if>
 						</div>
 
@@ -315,6 +363,7 @@
 					<!--  -->
 				</div>
 			</section>
+			
 			<!-- post_host end-->
 			<!-- detail -->
 			<c:if test="${!empty map.gAVo}">
@@ -501,6 +550,23 @@
 				<!-- 버튼 -->
 			</c:if>
 			<div id="dae_footer">
+				<c:if test="${map.bBuyList[0].b_buy_player_state eq '선택자' && map.bBuyList[0].user_no == authUser.user_no }">
+					<div class="dae_foo">
+						<div>
+							<a href="${pageContext.request.contextPath }/sparring/accept?partneruserno=${map.bBuyVo.user_no}&bookingNo=${map.bBuyVo.booking_no}&userNo=${map.bBuyList[0].user_no}&bbuyno=${map.bBuyVo.b_buy_no}&mybbuyno=${map.bBuyList[0].b_buy_no}&mainnum=2&profileno=${map.bBuyList[0].profile_no}">
+								<button class="dae_button_item_2">
+									<span class="dea_btn_2">결제하기</span>
+								</button>
+							</a>
+						</div>
+						<div>
+							<a href="${pageContext.request.contextPath }/sparring/cancel?bbuyno=${ map.bBuyList[0].b_buy_no}&bookingno=${map.bBuyVo.booking_no}">
+								<button class="dae_button_item3">
+									<span class="dea_btn_3">취소하기</span>
+								</button>
+							</a>
+						</div>
+				</c:if>
 
 				<div>
 					<a href="${pageContext.request.contextPath }/">
@@ -509,13 +575,19 @@
 						</button>
 					</a>
 				</div>
-
 			</div>
-			<!-- 버튼 end -->
-			<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
-			<!--//footer//-->
+
 		</div>
+		<!-- 버튼 end -->
+		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
+		<!--//footer//-->
 	</div>
+	</div>
+	<input id="bookingno" data-bookingno="${map.bBuyVo.booking_no }" type="" name ="" value="">
+	<input id="userno" data-userno="${map.bBuyVo.user_no }" type="" name ="" value="">
+	<input id="bbuyno" data-bbuyno="${map.bBuyVo.b_buy_no }" type="" name ="" value="">
+	<input id="profileno" data-profileno="${map.bBuyVo.profile_no }" type="" name ="" value="">
+	<input id="sessionuser" data-sessionuser="${authUser.user_no}" type="" name ="" value="">
 	<script>
 		var mySwiper = new Swiper('.swiper-container', {
 			slidesPerView : 2,
@@ -532,9 +604,16 @@
 </body>
 <script type="text/javascript">
 	//메인 사진 변경
+
+	
+	
 	$(".detail_info_sub-a").on("click", function() {
 		console.log("클릭");
 		var gymImgNo = $(this).data("no");
+		
+		
+		
+		
 
 		$.ajax({
 
@@ -574,6 +653,16 @@
 		console.log(bbuyNo);
 		var userNo = $(this).data("userno");
 		console.log(userNo);
+		var bookingno = $("#bookingno").data("bookingno");
+		console.log(bookingno);
+		var userno = $("#userno").data("userno");
+		console.log(userno);
+		var bbuyno = $("#bbuyno").data("bbuyno");
+		console.log(bbuyno);
+		var profileno = $("#profileno").data("profileno");
+		console.log(profileno);
+		var sessionuserno = $("#sessionuser").data("sessionuser");
+		console.log(sessionuserno);
 		$.ajax({
 
 			url : "${pageContext.request.contextPath }/sparring/api/bbuyone", //컨트롤러의 url과 파라미터
@@ -591,7 +680,9 @@
 				addprofile(bbuyVo);
 				nick(bbuyVo)
 				addprofile2(bbuyVo)
-
+				
+				accept(bbuyVo,bookingno,userno,bbuyno,profileno);
+				refuse(bbuyVo,bookingno,userno,bbuyno,profileno,sessionuser);
 			},
 			error : function(XHR, status, error) { //실패
 				console.error(status + " : " + error);
@@ -678,6 +769,29 @@
 		str += '</div>';
 		$("#spac_pro").append(str);
 
+	}
+	
+	function accept(bbuyVo,bookingno,userno,bbuyno,profileno){
+		$("#accept_btn").html(" ");
+		
+		str="";
+		str += '<a href="${pageContext.request.contextPath }/sparring/accept?partneruserno='+bbuyVo.user_no+'&bookingNo='+bookingno+'&userNo='+userno+'&bbuyno='+bbuyno+'">'
+		str += '<button class="dae_button_item2">';
+		str += '<span class="dea_btn2">수락하기</span>';
+		str += '</button></a>';
+		$("#accept_btn").append(str);
+	}
+	
+	function refuse(bbuyVo,bookingno,userno,bbuyno,profileno){
+		
+		$("#refuse_btn").html(" ");
+		str="";
+		str += '<a href="${pageContext.request.contextPath }/sparring/refuse?bbuyno='+bbuyno+'&mybbuyno='+bbuyVo.b_buy_no+'&partneruserno='+bbuyVo.user_no+'&bookingNo='+bookingno+'&userNo='+userno+'">'
+		str += '<button class="dae_button_item3">';
+		str += '<span class="dea_btn2">거절하기</span>';
+		str += '</button></a>';
+		
+		$("#refuse_btn").append(str);
 	}
 </script>
 
