@@ -55,7 +55,14 @@
 	<!-- 상품인서트 -->
 	<insert id="insertProdAlarm" parameterType="AlarmVo">
 		<![CDATA[
-			INSERT INTO alarm VALUES(seq_alarm_no.nextval, 0, #{user_no}, #{alarm_content}, sysdate, #{sell_no}, #{prod_name}, 1)
+			INSERT INTO alarm VALUES(seq_alarm_no.nextval, 
+									 0, 
+									 #{user_no}, 
+									 #{alarm_content}, 
+									 sysdate, 
+								 	 #{sell_no}, 
+									 #{prod_name}, 
+									 1)
 		]]>
 	</insert>
 
