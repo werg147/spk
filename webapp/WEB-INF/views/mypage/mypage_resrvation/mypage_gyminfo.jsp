@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,10 +41,11 @@
 					<!-- <div>탭부분(다수 체육관 소유 시)</div> -->
 					<div class="own_gym_tab">
 						<ul>
+						
 						<c:forEach var="vo" items="${gymMap.gymList }">
 							<a href="${pageContext.request.contextPath}/mypage/book/gym?no=${vo.sell_no}&gymno=${vo.gym_no}">
 							<input type="hidden" name="gym_no" value="${vo.gym_no}">
-							<li id="tab">${vo.gym_name }</li></a>
+							<li id="tab${vo.gym_no}">${vo.gym_name }</li></a>
 						</c:forEach>
 						</ul>										
 					</div>
@@ -280,19 +282,33 @@
 	    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 	}
 	
-	//체육관 버튼 색변경 이벤트 유지 --> gymNo값을 다른 방식으로 가져와야 됨
+	//체육관 버튼 색변경 이벤트 유지
 	window.onload=function(){
 		
 		var paramNo = getParameterByName('gymno');
 		var gymNo = $("[name='gym_no']").val();
-		console.log(paramNo);
-		console.log(gymNo);
+		var gymArr = [];
 		
-		if(gymNo == paramNo){
-			console.log("색변경");
-			$("#tab").css("color", "#ffffff");
-			$("#tab").css("background", "#e60012");
-		}
+		//jstl과 js 혼용
+		<c:forEach var="vo" items="${gymMap.gymList}">
+			gymArr.push("${vo.gym_no}");
+		</c:forEach>
+		
+		console.log("체육관번호 배열 "+gymArr);
+		
+		//색 유지
+ 		for(var i=0; i<gymArr.length; i++){
+		
+			gymNo = gymArr[i];
+			console.log("체육관번호 "+gymNo);
+			
+			if(gymNo == paramNo){
+				console.log("색변경");
+				$("#tab"+gymNo).css("color", "#ffffff");
+				$("#tab"+gymNo).css("background", "#e60012");
+			}
+		} 
+
 	}
 
 </script>

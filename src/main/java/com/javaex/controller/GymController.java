@@ -36,7 +36,8 @@ public class GymController {
 		System.out.println("[GymController] gymInfo()");
 		
 		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		//int sellNo
+		
+		//세션으로 사업자 번호 int sellNo 받아서 사업자만 접근 가능하게 만들기
 		
 		model.addAttribute("gymMap", gymService.gymInfo(sellNo, gymNo));
 		/*
