@@ -355,12 +355,18 @@ public class SparringService {
 				sparringDao.insertBBuy(bBuyVo);
 		}
 		
-		//대관한 부킹정보는 예약으로 변경
 		int bookingNo = bBuyVo.getBooking_no();
-		sparringDao.updateBooking(bookingNo);
+		//대관한 부킹정보는 예약으로 변경
+		if(subnum ==0) {
+			//시합등록자가 대관할경우 예약대기중
+			sparringDao.updateBooking(bookingNo);
+		}else if(subnum == 1) {
+			//신청자가 대관할 경우 예약중
+			sparringDao.updateBooking2(bookingNo);
+		}
 		
 		
-		//신청자의 경우 등록자에게 부킹번호 대여 
+		//신청자의 경우 등록자에게 부킹번호 주기
 		if(subnum == 1) {
 			BBuyVo vo = new BBuyVo();
 			vo.setBooking_no(bookingNo);
@@ -443,7 +449,7 @@ public class SparringService {
 		return bBuyVo;
 	}
 
-	public Map<String,Object> MatchDetail(int bBuyNo, int userNo) {
+	public Map<String,Object> MatchDetail(int bBuyNo, int userNo ,int sessionuser,int bookingno) {
 		System.out.println("[Service] : bBuyNo");
 		
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -628,10 +634,17 @@ public class SparringService {
 			map.put("gAVo",gymVo);
 		}
 		//MAP에 넣기
-				
-				
-				
-				
+		
+		//이미등록한 신청자 확인
+		Map<String,Object> userMap = new HashMap<String,Object>();
+		userMap.put("bookingNo",bookingNo);
+		userMap.put("sessionuser",sessionuser);
+		BBuyVo bbuyVoUser = sparringDao.selectOneBBuy(userMap);
+		
+		System.out.println();
+		if(bbuyVoUser != null) {
+			map.put("bbuyVoUser",bbuyVoUser);	
+		}
 		map.put("bBuyVo", vo);
 		
 		return map;

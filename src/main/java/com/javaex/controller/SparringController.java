@@ -45,11 +45,13 @@ public class SparringController {
 	@RequestMapping(value = "/matchdetail", method = { RequestMethod.GET, RequestMethod.POST })
 	public String MatchDetail(@RequestParam(value="bbuyno")int bBuyNo,
 							  @RequestParam(value="userno")int userNo,
+							  @RequestParam(value="sessionuser", required=false, defaultValue="0")int sessionuser,
+							  @RequestParam(value="bookingno", required=false, defaultValue="0")int bookingNo,
 							  Model model
 							 ) {
 		System.out.println("[Controller] : sparringMatch()");
-		
-		Map<String,Object>  map = sparringService.MatchDetail(bBuyNo,userNo);
+		System.out.println("sessionuser :" + sessionuser);
+		Map<String,Object>  map = sparringService.MatchDetail(bBuyNo,userNo,sessionuser,bookingNo);
 		
 		model.addAttribute("map",map);
 		
@@ -145,22 +147,33 @@ public class SparringController {
 
 		String[] eventName = request.getParameterValues("eventName");
 
+		
 		sparringService.profileWrite(profileVo, eventName, recordVo);
-		
-		if(bookingNo == 0) {
-			
+		if(bookingNo == 0 && subnum ==0) {
+			System.out.println("대관 x 시합등록자"); //o
 			BBuyVo bBuyVo = sparringService.insertBBuy(bookingNo,subnum,userNo,profileVo);
-			bbuyno = bBuyVo.getB_buy_no();
 			
-			
+			int bbNo = bBuyVo.getB_buy_no();
+			return "redirect:/sparring/matchdetail?bbuyno="+bbNo+"&userno="+bbuyuser+"&bookingno="+0;
+		}else if(bookingNo == 0 && subnum == 1) { //x
+			System.out.println("대관 o 시합등록자 글의 신청자");
 			return "redirect:/sparring/matchdetail?bbuyno="+bbuyno+"&userno="+userNo;
-		}else {
-			return "redirect:/sparring/payment?bookingno="+bookingNo+"&userno="+userNo+"&profileno="+profileVo.getProfileNo()+"&subnum="+subnum+"&bbuyno="+bbuyno;
 			
-		}
+			
+			
+		}else if (bookingNo != 0 && subnum ==0){
+			System.out.println("대관 o 시합등록자");//O
+			return "redirect:/sparring/payment?bookingno="+bookingNo+"&userno="+userNo+"&profileno="+profileVo.getProfileNo()+"&subnum="+subnum+"&bbuyno="+bbuyno;
 		
+		}else if(bookingNo !=0 && subnum==1) {
+			System.out.println("대관 x 시합등록자 글의  신청자");
+			return "redirect:/sparring/payment?bookingno="+bookingNo+"&userno="+userNo+"&profileno="+profileVo.getProfileNo()+"&subnum="+subnum+"&bbuyno="+bbuyno;
+		
+		}else {
+			System.out.println("잘못된 페이지");
+			return "";
+		}
 	}
-
 	/** 결제하기 **/
 	@RequestMapping(value = "/payment", method = { RequestMethod.GET, RequestMethod.POST })
 	public String payment(@RequestParam(value = "bookingno", required = false, defaultValue = "0") int bookingNo,

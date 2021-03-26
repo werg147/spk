@@ -260,4 +260,16 @@
 	
 	</update>
 	
+	<select id="selectOneBBuyuser" parameterType="map" resultType="BBuyVo">
+	<![CDATA[
+			SELECT b_buy_no,
+			       user_no 
+			FROM bbuy
+			where booking_no = #{bookingNo}
+			and user_no = #{sessionuser}	
+	
+	
+	]]>
+	
+	</select>
 </mapper>

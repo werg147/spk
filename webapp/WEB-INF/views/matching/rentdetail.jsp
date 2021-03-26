@@ -277,7 +277,7 @@
 
 					</div>
 					<div id="hidden12">
-						<input type="hidden" name="bookingno" value="0">
+						
 					</div>
 					<input type="hidden" name="user_no" value="${authUser.user_no }">
 					<input type="text" name="subnum" value="${param.subnum }">

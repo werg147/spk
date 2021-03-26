@@ -318,10 +318,10 @@
 									<div class="product_insert_btn">
 										<c:choose>
 											<c:when test="${param.bookingno == 0 }">
-												<button id="info_subm" class="insert_btn" type="submit">매칭글 등록</button>
+												<button id="info_subm" class="insert_btn" type="submit">결제후 등록</button>
 											</c:when>
 											<c:otherwise>
-												<button id="info_subm" class="insert_btn" type="submit">결제후 등록</button>
+												<button id="info_subm" class="insert_btn" type="submit">매칭글 등록</button>
 											</c:otherwise>
 										</c:choose>
 										<a href=""><button class="product_delclose_btn">취소</button></a>

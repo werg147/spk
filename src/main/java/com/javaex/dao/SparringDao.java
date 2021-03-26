@@ -214,7 +214,7 @@ public class SparringDao {
 		
 		int count= sqlSession.update("booking.updateBooking",bookingNo);
 		
-		System.out.println("예약으로 변경되었습니다 : " + count);
+		System.out.println("예약대기중으로 변경되었습니다 : " + count);
 	}
 
 	public BBuyVo selectOnebbuy2(BBuyVo  bbuyVo) {
@@ -235,6 +235,25 @@ public class SparringDao {
 		
 		
 		sqlSession.update("bbuy.updateBBuy",bbuyVo);
+	}
+
+	public void updateBooking2(int bookingNo) {
+		System.out.println("[Dao] : updateBBuy");
+		
+		int count= sqlSession.update("booking.updateBooking2",bookingNo);
+		
+		System.out.println("예약중으로 변경되었습니다 : " + count);
+		
+	}
+
+	public BBuyVo selectOneBBuy(Map userMap) {
+		System.out.println("[Dao] : selectOneBBuy" );
+		
+		
+		
+		BBuyVo bbuyVo = sqlSession.selectOne("bbuy.selectOneBBuyuser",userMap);
+		
+		return bbuyVo;
 	}
 
 

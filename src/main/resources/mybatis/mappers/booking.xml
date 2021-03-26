@@ -40,7 +40,16 @@
 	<update id="updateBooking" parameterType="int">
 	<![CDATA[
 			update booking
-			set booking_state = '예약'
+			set booking_state = '예약대기중'
+			where booking_no = #{bookingNo}	
+	]]>
+	
+	
+	</update>
+	<update id="updateBooking2" parameterType="int">
+	<![CDATA[
+			update booking
+			set booking_state = '예약중'
 			where booking_no = #{bookingNo}	
 	]]>
 	
