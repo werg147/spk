@@ -31,14 +31,14 @@
 					<!--//content_delevery_product_header//-->
 					<div class="content_product_line"></div>
 
-					<!--추후 생길 탭의 위쪽 라인에 위치-->
+					<!--탭의 위쪽에 위치-->
 					<div class="regi_btn_site">
 						<a href="${pageContext.request.contextPath}/mypage/book/gymaddform">
 							<button type="button" class="regi_btn">체육관 등록</button>
 						</a>
 					</div>
 
-					<!-- <div>탭부분(다수 체육관 소유 시)</div> -->
+					<!-- 탭부분(다수 체육관 소유 시) pill형식으로 표시 -->
 					<div class="own_gym_tab">
 						<ul>
 						
@@ -63,33 +63,30 @@
 							<table>
 								<tr>
 									<td class="basic">체육관 이름</td>
-									<td colspan="2"><input class="input_text" type="text" name="gym_name"
+									<td colspan="3"><input class="input_text" type="text" name="gym_name"
 										value="${gymMap.gymVo.gym_name }"></td>
 								</tr>
 
 								<tr>
 									<td class="basic">체육관 주소</td>
-									<td colspan="2"><input class="input_text" type="text" name="gym_address"
+									<td colspan="3"><input class="input_text" type="text" name="gym_address"
 										value="${gymMap.gymVo.gym_address }"></td>
 								</tr>
 
 								<tr>
 									<td class="basic">체육관 전화번호</td>
-									<td colspan="2"><input class="input_text" type="text" name="gym_ph"
+									<td colspan="3"><input class="input_text" type="text" name="gym_ph"
 										value="${gymMap.gymVo.gym_ph }"></td>
 								</tr>
 
 								<tr class="input_plus">
 									<td>체육관 운영시간</td>
-									<td colspan="2"><textarea name="gym_time">${gymMap.gymVo.gym_time }</textarea></td>
+									<td colspan="3"><textarea name="gym_time">${gymMap.gymVo.gym_time }</textarea></td>
 								</tr>
 
 								<tr class="basic_chk">
 									<td>체육관 주 종목</td>
-									<td colspan="2"></td>
-								</tr>
-
-								<tr>
+									
 									<td class="basic_chk_padding"><c:choose>
 											<c:when test="${gymMap.gymVo.gym_event eq 'box' }">
 												<input id="box" type="radio" name="gym_event" value="box" checked="checked">
@@ -129,10 +126,7 @@
 
 								<tr class="basic_chk">
 									<td>체육관 편의시설</td>
-									<td colspan="2"></td>
-								</tr>
-
-								<tr>
+									
 									<td>
 										<c:forEach var="vo" items="${gymMap.conList}">
 											<c:choose>
@@ -181,10 +175,10 @@
 											</c:choose>
 										</c:forEach>
 									</td>
-
 								</tr>
 
 								<tr>
+									<td></td>
 									<td class="basic_chk_padding">
 										<c:forEach var="vo" items="${gymMap.conList}">
 											<c:choose>
@@ -237,13 +231,13 @@
 
 								<tr class="input_plus">
 									<td>공지사항</td>
-									<td colspan="2"><textarea name="gym_notice">${gymMap.gymVo.gym_notice }</textarea></td>
+									<td colspan="3"><textarea name="gym_notice">${gymMap.gymVo.gym_notice }</textarea></td>
 								</tr>
 
 
 								<tr>
 									<td class="basic">체육관 사진</td>
-									<td colspan="2"><input type="file"></td>
+									<td colspan="3"><input type="file"></td>
 									<!-- img태그 넣기 -->
 								</tr>
 
@@ -289,7 +283,7 @@
 		var gymNo = $("[name='gym_no']").val();
 		var gymArr = [];
 		
-		//jstl과 js 혼용
+		//각 체육관에서 체육관번호 뽑아서 배열에 넣기 (jstl과 js 혼용) 
 		<c:forEach var="vo" items="${gymMap.gymList}">
 			gymArr.push("${vo.gym_no}");
 		</c:forEach>
