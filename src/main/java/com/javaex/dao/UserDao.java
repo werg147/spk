@@ -15,8 +15,6 @@ public class UserDao {
 	
 	//로그인 -->회원정보 가져오기
 	public UserVo selectUser(UserVo uservo) {
-		System.out.println("selectUser: " + uservo.toString());
-		
 		return sqlSession.selectOne("user.selectUser", uservo);
 	}
 	

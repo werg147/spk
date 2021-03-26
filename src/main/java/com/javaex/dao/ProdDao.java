@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.javaex.vo.BuyProductVo;
 import com.javaex.vo.ColorsizeVo;
 import com.javaex.vo.ProdBuyForVo;
 import com.javaex.vo.ProdimgVo;
@@ -79,12 +80,12 @@ public class ProdDao {
 	}
 	
 	//배송상태 수정
-	public void delStateUpdate(ProdBuyForVo pvo) {
-		sqlSession.update("prod.delStateUpdate", pvo);
+	public void delStateUpdate(BuyProductVo bpvo) {
+		sqlSession.update("prod.delStateUpdate", bpvo);
 	}
 	
 	//택배사 운송장 정보입력(수정)
-	public void delinfoUpdate(ProdBuyForVo pvo) {
-		sqlSession.update("prod.delinfoUpdate", pvo);
+	public void delinfoUpdate(BuyProductVo bpvo) {
+		sqlSession.update("prod.delinfoUpdate", bpvo);
 	}
 }

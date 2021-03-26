@@ -31,7 +31,7 @@ public class UserController {
 	// 로그인하기
 	@RequestMapping(value = "/login", method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(@ModelAttribute UserVo uservo, HttpSession session) {
-		System.out.println("[cnt] 로그인하기" + uservo.toString());
+		System.out.println("[cnt] 로그인하기" + uservo.getUser_id()+ uservo.getPassword());
 
 		UserVo authUser = userservice.login(uservo);
 

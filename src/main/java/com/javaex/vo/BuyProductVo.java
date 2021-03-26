@@ -9,11 +9,12 @@ public class BuyProductVo {
 	private String buy_delivery;
 	private String buy_del_state;
 	private int count;
-
 	private String prod_name;
 	private int sell_no;
 	private int user_no;
-
+	
+	
+	
 	public BuyProductVo() {
 		super();
 	}

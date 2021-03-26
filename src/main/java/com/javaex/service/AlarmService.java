@@ -81,6 +81,7 @@ public class AlarmService {
 
 	}
 
+	/*
 	// 배송준비 중 알림 발송
 	public void deliveryReady(int buyprod_no) {
 
@@ -96,6 +97,8 @@ public class AlarmService {
 
 	}
 
+	 */
+	/*
 	// 배송시작
 	public void delStart(int buyprod_no) {
 
@@ -110,7 +113,7 @@ public class AlarmService {
 		aDao.insertProdAlarm(alarmVo);
 
 	}
-
+*/
 	// 베송완료
 	public void delcomplete(int buyprod_no) {
 

@@ -21,22 +21,17 @@ public class MainController {
 		return "main/index";
 	}
 
-	
-	// 에러400
-	@RequestMapping(value = "/error400", method = { RequestMethod.GET, RequestMethod.POST })
-	public String error400() {
-		System.out.println("[cnt]에러400");
-		return "main/error400";
-	}
 
-	// 에러400
+	
+	/*하단 추후 적용 예정*/
+	// 로그인 접근 오류
 	@RequestMapping(value = "/errorlogin", method = { RequestMethod.GET, RequestMethod.POST })
 	public String errorLogin() {
 		System.out.println("[cnt]로그인 접근 오류");
 		return "main/error_loginform";
 	}
 	
-	// 에러400
+	// 판매자 접근 오류
 	@RequestMapping(value = "/errorseller", method = { RequestMethod.GET, RequestMethod.POST })
 	public String errorSeller() {
 		System.out.println("[cnt]판매자 접근 오류");

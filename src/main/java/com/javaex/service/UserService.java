@@ -16,7 +16,6 @@ public class UserService {
 	
 	//로그인
 	public UserVo login(UserVo uservo) {
-		System.out.println("uservice login()");
 		return userdao.selectUser(uservo);
 	}
 	

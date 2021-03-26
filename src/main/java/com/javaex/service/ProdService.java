@@ -5,8 +5,13 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.javaex.dao.AlarmDao;
 import com.javaex.dao.ProdDao;
 import com.javaex.dao.UserDao;
+import com.javaex.vo.AlarmContentVo;
+import com.javaex.vo.AlarmVo;
+import com.javaex.vo.BuyProductVo;
 import com.javaex.vo.ColorsizeVo;
 import com.javaex.vo.ProdBuyForVo;
 import com.javaex.vo.ProdimgVo;
@@ -21,6 +26,12 @@ public class ProdService {
 	
 	@Autowired
 	private UserDao userdao;
+	
+	@Autowired
+	private AlarmDao aDao;
+	
+	AlarmContentVo alarmcVo = new AlarmContentVo();
+	AlarmVo alarmVo = new AlarmVo();
 	
 	//상품관리페이지
 	public List<ProductVo> prodList(UserVo authUser) {
@@ -187,37 +198,61 @@ public class ProdService {
 	public void delStart(int buyprod_no) {
 		System.out.println("[service] 배송상태 수정");
 
-		ProdBuyForVo pvo = new ProdBuyForVo();
-		pvo.setBuyprod_no(buyprod_no);
-		pvo.setBuy_del_state("배송준비중");
+		BuyProductVo bpvo = new BuyProductVo();
+		bpvo.setBuyprod_no(buyprod_no);
+		bpvo.setBuy_del_state("배송준비중");
 
-		proddao.delStateUpdate(pvo);
+		proddao.delStateUpdate(bpvo);
+		
+		
+		System.out.println("[Alarm Service]: payment_complete(AlarmVo aVo) 연결");
+		alarmVo = aDao.prodSelect(buyprod_no);
+		alarmVo.setAlarm_content(alarmcVo.getDelivery_ready());
+
+		System.out.println(alarmVo);
+		aDao.insertProdAlarm(alarmVo);
+
 
 	}
 	
 	//배송불가
-	public void delNo(ProdBuyForVo pvo) {
+	public void delNo(BuyProductVo bpvo) {
 		System.out.println("[service] 배송상태 수정");
 			
-		if(pvo.getBuy_del_state() !="배송중" && pvo.getBuy_del_state() != "배송완료") {
-			pvo.setBuy_del_state("판매불가");
-			proddao.delStateUpdate(pvo);
+		if(bpvo.getBuy_del_state() !="배송중" && bpvo.getBuy_del_state() != "배송완료") {
+			bpvo.setBuy_del_state("판매불가");
+			proddao.delStateUpdate(bpvo);
 		} else {
 			System.out.println("배송중이거나 배송완료된 상품으로 판매불가 전환이 불가합니다.");
 		}
+		
+		System.out.println("[Alarm Service]: payment_complete(AlarmVo aVo) 연결");
+		alarmVo = aDao.prodSelect(bpvo.getBuyprod_no());
+		alarmVo.setAlarm_content(alarmcVo.getDelivery_cancle() + alarmcVo.getRefund());
+
+		System.out.println(alarmVo);
+		aDao.insertProdAlarm(alarmVo);
 
 	}
 
 	//택배사 운송장 정보입력(수정)
-		public void delModify(ProdBuyForVo pvo) {
+		public void delModify(int[] buyprod_noArray, BuyProductVo bpvo) {
 			System.out.println("[service] 택배사 운송장 정보입력(수정)");
 			
-				List<ProdBuyForVo> pList = pvo.getPlist();
-				for(int i =0; i<pList.size(); i++) {
-					pvo.setBuyprod_no(pList.get(i).getBuyprod_no());
-					proddao.delinfoUpdate(pvo);
-					System.out.println("사이즈등록"+ i + "번째: " + pList.get(i));
-				}
+			for (int i=0; i<buyprod_noArray.length; i++) {
+				int buyprod_no = buyprod_noArray[i];
+				bpvo.setBuyprod_no(buyprod_no);
+				proddao.delinfoUpdate(bpvo);
+				
+				//알람
+				System.out.println("[Alarm Service]: delStart(AlarmVo aVo) 연결");
+				alarmVo = aDao.prodSelect(buyprod_no);
+				alarmVo.setAlarm_content(alarmcVo.getDelivery_ing());
+				System.out.println(alarmVo);
+				aDao.insertProdAlarm(alarmVo);
+
+			}
+			
 
 		}
 		

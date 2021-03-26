@@ -3,6 +3,8 @@ package com.javaex.vo;
 public class AlarmContentVo {
 
 	public String payment_complete = "<b>[결제완료]</b> 결제가 완료되었습니다.";
+	public String delivery_cancle = "<b>[배송불가]</b> 판매자의 요청으로 상품 결제가 취소되었습니다.";
+	public String refund = "결제수단에 따라 1~4일정도 소요됩니다. ";
 	public String delivery_ready = "<b>[배송준비 중]</b> 주문하신 상품의 배송을 준비 중 입니다.";
 	public String delivery_ing = "<b>[배송시작]</b> 주문하신 상품의 배송이 시작되었습니다.";
 	public String delivery_complete = "<b>[배송완료]</b> 주문하신 상품의 배송이 완료되었습니다.";
@@ -102,6 +104,23 @@ public class AlarmContentVo {
 
 	public void setMatching_complete(String matching_complete) {
 		this.matching_complete = matching_complete;
+	}
+
+	
+	public String getDelivery_cancle() {
+		return delivery_cancle;
+	}
+
+	public void setDelivery_cancle(String delivery_cancle) {
+		this.delivery_cancle = delivery_cancle;
+	}
+
+	public String getRefund() {
+		return refund;
+	}
+
+	public void setRefund(String refund) {
+		this.refund = refund;
 	}
 
 	@Override

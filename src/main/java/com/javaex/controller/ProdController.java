@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.javaex.service.ProdService;
+import com.javaex.vo.BuyProductVo;
 import com.javaex.vo.ProdBuyForVo;
 import com.javaex.vo.ProductVo;
 import com.javaex.vo.SellerVo;
@@ -131,20 +132,21 @@ public class ProdController {
 	
 	//배송불가
 	@RequestMapping(value = "/delno", method = { RequestMethod.GET, RequestMethod.POST })
-	public String delNo(@ModelAttribute ProdBuyForVo pvo) {
+	public String delNo(@ModelAttribute BuyProductVo bpvo) {
 		System.out.println("[cnt] 배송불가");
 		
-		prodservice.delNo(pvo);
+		prodservice.delNo(bpvo);
 		
 		return "redirect:/mypage/prod/delmanage";
 	}
 	
 	//택배사 운송장 정보입력(수정)
 	@RequestMapping(value = "/delmodify", method = { RequestMethod.GET, RequestMethod.POST })
-	public String delModify(@ModelAttribute ProdBuyForVo pvo) {
-		System.out.println("[cnt] 택배사 운송장 정보입력(수정)" + pvo);
-		prodservice.delModify(pvo);
+	public String delModify(@RequestParam("buyprod_no") int[] buyprod_noArray, @ModelAttribute BuyProductVo bpvo ) {
+		System.out.println("[cnt] 택배사 운송장 정보입력(수정)_buyprod_no" + buyprod_noArray[0]+buyprod_noArray[1]);
 		
+		prodservice.delModify(buyprod_noArray, bpvo);
+
 		return "redirect:/mypage/prod/delmanage";
 	}
 	
@@ -208,6 +210,6 @@ public class ProdController {
 	@RequestMapping(value = "/exam", method = { RequestMethod.GET, RequestMethod.POST })
 	public String exam() {
 
-		return "mypage/mypage_buy/buylist";
+		return "mypage/mypage_buy/mymatch";
 	}
 }
