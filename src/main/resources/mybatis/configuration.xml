@@ -26,6 +26,7 @@
 		<typeAlias alias="ReviewVo" type="com.javaex.vo.ReviewVo" /> <!-- 세림 ProductVo -->
 		<typeAlias alias="ReviewimgVo" type="com.javaex.vo.ReviewimgVo" /> <!-- 세림 ProdimgVo -->
 		<typeAlias alias="BuyProductVo" type="com.javaex.vo.BuyProductVo" />
+		<typeAlias alias="BuyListVo" type="com.javaex.vo.BuyListVo" />
 	</typeAliases>
 
 	<mappers>
@@ -44,6 +45,7 @@
 		<mapper resource="mybatis/mappers/gym.xml" /> <!-- 다현 -->
 		<mapper resource="mybatis/mappers/store.xml" /> <!-- 세림 -->
 		<mapper resource="mybatis/mappers/cart.xml" />
+		<mapper resource="mybatis/mappers/buylist.xml" />
 	</mappers>
 </configuration>
 

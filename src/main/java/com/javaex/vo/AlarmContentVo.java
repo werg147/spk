@@ -4,7 +4,7 @@ public class AlarmContentVo {
 
 	public String payment_complete = "<b>[결제완료]</b> 결제가 완료되었습니다.";
 	public String delivery_ready = "<b>[배송준비 중]</b> 주문하신 상품의 배송을 준비 중 입니다.";
-	public String delivery_ing = "<b>[배송 중]</b> 주문하신 상품을 고객님께 배송 중 입니다.";
+	public String delivery_ing = "<b>[배송시작]</b> 주문하신 상품의 배송이 시작되었습니다.";
 	public String delivery_complete = "<b>[배송완료]</b> 주문하신 상품의 배송이 완료되었습니다.";
 
 	public String match_registration = "[매칭대기 중] 매칭이 등록되었습니다.";

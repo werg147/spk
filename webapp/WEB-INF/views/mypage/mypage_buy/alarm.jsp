@@ -65,7 +65,7 @@
 					<!-- //반복리스트 -->
 
 					<form action="${pageContext.request.contextPath }/mypage/productBuy" method="get">
-						<input type="text" name="buy_no" value="1">
+						<input type="text" name="buy_no" value="4">
 						<button type="submit">주문하기</button>
 					</form>
 
