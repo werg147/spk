@@ -52,6 +52,13 @@ public class AlarmDao {
 
 		return sql.selectOne("alarm.prodSelect", buyprod_no);
 	}
+	
+	//판매자 user_no가져오기
+	public AlarmVo sellUsernoSelect(int sell_no) {
+		System.out.println("[Alarm Dao]: sellUsernoSelect(int sell_no) 실행");
+
+		return sql.selectOne("alarm.sellUsernoSelect", sell_no);
+	}
 
 	public void inserAlarmtoseller(AlarmVo alarmVo) {
 		System.out.println("[Alarm Dao]: inserAlarmtoseller()");
