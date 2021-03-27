@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.service.StoreService;
+import com.javaex.vo.BuyVo;
 import com.javaex.vo.ProdBuyForVo;
 import com.javaex.vo.ProductVo;
 import com.javaex.vo.QnaVo;
@@ -179,9 +179,25 @@ public class StoreController {
 	
 	//결제하기 클릭시 구매상품 인서트
 	@RequestMapping(value="/pay")
-	public String pay(@ModelAttribute ProdBuyForVo pbfVo) {
+	public String pay(@RequestParam("prod_no") String[] prod_noArray,
+					  @RequestParam("colorsize_no") int[] colorsize_noArray,
+					  @RequestParam("count") int[] countArray,
+					  @RequestParam("prod_price") int[] prod_priceArray,
+					  @ModelAttribute BuyVo buyVo, HttpSession session) {
 		System.out.println("[Controller] pay()");
-		System.out.println(pbfVo.toString());
+		
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		int user_no = authUser.getUser_no();
+		
+		buyVo.setUser_no(user_no);
+		
+		System.out.println("구매인서트 정보: " + buyVo.toString());
+		System.out.println("prod_no String[]: " + prod_noArray[0]);
+		System.out.println("colorsize_no int[]: " + colorsize_noArray[0]);
+		System.out.println("count int[]: " + countArray[0]);
+		System.out.println("prod_price int[]: " + prod_priceArray[0]);
+		
+		storeService.pay(prod_noArray,colorsize_noArray,countArray,prod_priceArray,buyVo);
 		
 		return "";
 	}

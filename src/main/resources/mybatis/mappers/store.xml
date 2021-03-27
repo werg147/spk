@@ -152,7 +152,8 @@
 		<![CDATA[
 			select user_phone,
 				   user_no,
-       			   address 
+       			   address,
+       			   user_name 
             from users
             where user_no = #{user_no}
 		]]>
@@ -243,25 +244,29 @@
 	<!-- 결제하기 폼 상품리스트-->
 	<select id="selectPayList" parameterType="int" resultType="ProductVo">
 		<![CDATA[
-			select p.prod_no,
+			select us.user_phone,
+				   us.user_name,
+                   p.prod_no,
                    p.prod_brand,
                    p.prod_name,
                    p.prod_price,
                    p.event_cate,
                    p.prod_img_savename,
                    ca.count,
-                   ca.cart_no
+                   p.colorsize_no
             from cart ca, users us , (select prod.prod_no,
                                              prod.prod_brand,
                                              prod.prod_name,
-                                            prod.prod_price,
+                                             prod.prod_price,
                                              prod.event_cate,
-                                             pimg.prod_img_savename
-                                      from product prod, (select prod_img_savename,
-                                                                 prod_no
-                                                          from prodimg
-                                                          where prod_img_type = 'main') pimg
-                                                          where prod.prod_no = pimg.prod_no) p
+                                             pimg.prod_img_savename,
+                                             co.colorsize_no
+                                      from product prod, colorsize co, (select prod_img_savename,
+                                                                               prod_no
+                                                                        from prodimg
+                                                                        where prod_img_type = 'main') pimg
+                                      where prod.prod_no = pimg.prod_no
+                                      and prod.prod_no = co.prod_no) p
             where ca.user_no = us.user_no
             and ca.prod_no = p.prod_no
             and us.user_no = #{user_no}
@@ -285,7 +290,44 @@
 		]]>
 	</delete>
 	
+	<!-- 결제하기 1.buy 인서트 -->
+	<insert id="insertBuy" parameterType="BuyVo">
+		<selectKey keyProperty="buy_no" resultType="Int" order="BEFORE">
+			select SEQ_BUY_NO.nextval from dual
+		</selectKey>
+		<![CDATA[
+			insert into buy
+            values(
+                #{buy_no},
+                #{user_no},
+                #{buy_address},
+                #{buy_ph},
+                sysdate,
+                #{buy_paytype},
+                #{buy_price},
+                '결제완료',
+                #{buy_name}
+            )
+		]]>
+	</insert>
 	
+	<!-- 결제하기 2.buyproduct 인서트 -->
+	<insert id="insertBp" parameterType="BuyProductVo">
+		<![CDATA[
+			insert into buyproduct
+            values(
+                SEQ_BUYPROD_NO.nextval,
+                #{prod_no},
+                #{colorsize_no},
+                null,
+                null,
+                '결제완료',
+                #{count},
+                #{buy_no},
+                #{buyprod_price}
+            )
+		]]>
+	</insert>
 	
    
 </mapper>

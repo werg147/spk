@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.javaex.vo.BuyProductVo;
+import com.javaex.vo.BuyVo;
 import com.javaex.vo.ColorsizeVo;
 import com.javaex.vo.ProdBuyForVo;
 import com.javaex.vo.ProductVo;
@@ -132,6 +134,22 @@ public class StoreDao {
 		System.out.println("[StoreDao] deletePay()");
 		
 		sqlSession.delete("store.deletePay", cart_no);
+	}
+	
+	//결제하기 1.buy 인서트
+	public void insertBuy(BuyVo buyVo) {
+		System.out.println("[StoreDao] insertBuy()");
+		
+		sqlSession.insert("store.insertBuy", buyVo);
+	}
+	
+	
+	//결제하기 2.buyproduct 인서트
+	public void insertBp(BuyProductVo bpVo) {
+		System.out.println("[StoreDao] insertBp()");
+		System.out.println(bpVo.toString());
+		
+		sqlSession.insert("store.insertBp", bpVo);
 	}
 	
 

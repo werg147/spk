@@ -56,7 +56,7 @@
 											</div>
 										</div>
 										<!-- 아이템 1개 -->
-										
+
 										<c:forEach items="${pmap.payList}" var="payVo">
 											<div class="box room payitem${payVo.cart_no}">
 												<ul class="list">
@@ -114,6 +114,12 @@
 													</li>
 												</ul>
 											</div>
+											
+											<input type="text"  class="list" name="prod_no" value="${payVo.prod_no}">
+											<input type="text"  class="list" name="prod_price" value="${payVo.prod_price}">
+											<input type="text" class="list" name="colorsize_no" value="${payVo.colorsize_no}">
+											<input type="text" class="list" name="count" value="${payVo.count}">
+											
 										</c:forEach>
 										<!-- 아이템 1개 END -->
 	
@@ -134,6 +140,7 @@
 									<div class="sf_address_item2">
 										<p class="sf_address_item2_text">${pmap.userVo.address}</p>
 										<a href="" class="sf_address_item2_fix">배송지 변경</a>
+										<input type="hidden" name="buy_address" value="${pmap.userVo.address}">
 									</div>
 								</div>
 							
@@ -147,6 +154,7 @@
 													<fmt:formatNumber type="number" maxFractionDigits="3" value="${pmap.total}" />
 												</span> 
 												<span class="won">원</span>
+												<input type="hidden" name="buy_price" value="${pmap.total}">
 											</dd>
 										</div>								
 										<div class="sf_amount">
@@ -181,7 +189,7 @@
 								<tr>
 									<th>카드결제</th>
 									<td class="table_card"><input id="" class="table_pay-radio0"
-										type="radio" name="b_buy_paytype" value="card">
+										type="radio" name="buy_paytype" value="card">
 										<div class="table_pay-radio_select">
 											<select name="" id="">
 												<option >카드선택</option>
@@ -193,19 +201,19 @@
 								</tr>
 								<tr>
 									<th>토스결제</th>
-									<td><input class="table_pay-radio" type="radio" name="b_buy_paytype"
+									<td><input class="table_pay-radio" type="radio" name="buy_paytype"
 										value="toss"> <img
 										src="${pageContext.request.contextPath }/upd/toss.png" alt="">
 									</td>
 								</tr>
 								<tr>
 									<th>카카오페이</th>
-									<td><input class="table_pay-radio" type="radio" name="b_buy_paytype"
+									<td><input class="table_pay-radio" type="radio" name="buy_paytype"
 										value="kakao"> kakao</td>
 								</tr>
 								<tr>
 									<th>휴대폰결제</th>
-									<td><input class="table_pay-radio" type="radio" name="b_buy_paytype"
+									<td><input class="table_pay-radio" type="radio" name="buy_paytype"
 										value="phone"> 휴대폰</td>
 		
 								</tr>
@@ -217,6 +225,10 @@
 								<button type="button" class="btn_form btn_buy" onclick="btn_click('buy');">결제하기</button>
 								<button type="button" class="btn_form btn_cancel" onclick="btn_click('cancel');">취소하기</button>
 							</div>
+							
+							<input type="hidden" name="buy_ph" value="${pmap.userVo.user_phone}">
+							<input type="hidden" name="buy_state" value="결제완료">
+							<input type="hidden" name="buy_name" value="${pmap.userVo.user_name}">
 						
 					</section>
 			</form>

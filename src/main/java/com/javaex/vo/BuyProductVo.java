@@ -9,18 +9,19 @@ public class BuyProductVo {
 	private String buy_delivery;
 	private String buy_del_state;
 	private int count;
+	private int buy_no;
+	private int buyprod_price;
 	private String prod_name;
 	private int sell_no;
 	private int user_no;
-	
-	
-	
+
 	public BuyProductVo() {
 		super();
 	}
 
 	public BuyProductVo(int buyprod_no, String prod_no, int colorsize_no, int buy_del_no, String buy_delivery,
-			String buy_del_state, int count, String prod_name, int sell_no, int user_no) {
+			String buy_del_state, int count, int buy_no, int buyprod_price, String prod_name, int sell_no,
+			int user_no) {
 		super();
 		this.buyprod_no = buyprod_no;
 		this.prod_no = prod_no;
@@ -29,6 +30,8 @@ public class BuyProductVo {
 		this.buy_delivery = buy_delivery;
 		this.buy_del_state = buy_del_state;
 		this.count = count;
+		this.buy_no = buy_no;
+		this.buyprod_price = buyprod_price;
 		this.prod_name = prod_name;
 		this.sell_no = sell_no;
 		this.user_no = user_no;
@@ -90,6 +93,22 @@ public class BuyProductVo {
 		this.count = count;
 	}
 
+	public int getBuy_no() {
+		return buy_no;
+	}
+
+	public void setBuy_no(int buy_no) {
+		this.buy_no = buy_no;
+	}
+
+	public int getBuyprod_price() {
+		return buyprod_price;
+	}
+
+	public void setBuyprod_price(int buyprod_price) {
+		this.buyprod_price = buyprod_price;
+	}
+
 	public String getProd_name() {
 		return prod_name;
 	}
@@ -118,8 +137,8 @@ public class BuyProductVo {
 	public String toString() {
 		return "BuyProductVo [buyprod_no=" + buyprod_no + ", prod_no=" + prod_no + ", colorsize_no=" + colorsize_no
 				+ ", buy_del_no=" + buy_del_no + ", buy_delivery=" + buy_delivery + ", buy_del_state=" + buy_del_state
-				+ ", count=" + count + ", prod_name=" + prod_name + ", sell_no=" + sell_no + ", user_no=" + user_no
-				+ "]";
+				+ ", count=" + count + ", buy_no=" + buy_no + ", buyprod_price=" + buyprod_price + ", prod_name="
+				+ prod_name + ", sell_no=" + sell_no + ", user_no=" + user_no + "]";
 	}
 
 }

@@ -14,7 +14,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.javaex.dao.AlarmDao;
 import com.javaex.dao.StoreDao;
+import com.javaex.vo.AlarmContentVo;
+import com.javaex.vo.AlarmVo;
+import com.javaex.vo.BuyProductVo;
+import com.javaex.vo.BuyVo;
 import com.javaex.vo.ColorsizeVo;
 import com.javaex.vo.ProdBuyForVo;
 import com.javaex.vo.ProductVo;
@@ -29,6 +34,13 @@ public class StoreService {
 	
 	@Autowired
 	private StoreDao storeDao;
+	
+	AlarmContentVo alarmcVo = new AlarmContentVo();
+
+	AlarmVo alarmVo = new AlarmVo();
+
+	@Autowired
+	private AlarmDao aDao;
 	
 	//storeList 가져오기
 	public List<ProductVo> storeList(String search) {
@@ -221,7 +233,7 @@ public class StoreService {
 	}
 	
 	
-	//바로결제하기 (카트 추가인서트)
+	//바로결제하기 클릭시 (카트 추가인서트)
 	public void addCart(ProdBuyForVo pbfVo) {
 		System.out.println("[Service] addCart()");
 		
@@ -254,7 +266,7 @@ public class StoreService {
 		return pmap;
 	}
 	
-	//결제하기 삭제
+	//결제폼 삭제
 	public int removePay(int cart_no, int user_no) {
 		System.out.println("[Service] remove()");
 		
@@ -265,7 +277,83 @@ public class StoreService {
 		return storeDao.selectTotal(user_no);
 	}
 	
+	//결제하기
+	public void pay(String[] prod_noArray, int[] colorsize_noArray, int[] countArray, int[] prod_priceArray, BuyVo buyVo) {
+		System.out.println("[Service] pay()");
+		
+		BuyProductVo bpVo = new BuyProductVo();
+		
+		//Buy 인서트
+		storeDao.insertBuy(buyVo);
+		int buy_no = buyVo.getBuy_no();
+		bpVo.setBuy_no(buy_no);
+		System.out.println("바이넘버가져오기: " + buy_no);
+		
+					
+		//BuyProduct 인서트
+		for(int i=0; i<prod_noArray.length; i++) {
+			String prod_no = prod_noArray[i];
+			bpVo.setProd_no(prod_no);
 	
-	
+			int colorsize_no = colorsize_noArray[i];
+			bpVo.setColorsize_no(colorsize_no);
+			
+			int count = countArray[i];
+			bpVo.setCount(count);
+			
+			int buyprod_price = prod_priceArray[i] * count;
+			bpVo.setBuyprod_price(buyprod_price);
+
+			storeDao.insertBp(bpVo);
+		}
+
+		//알람발송
+		List<AlarmVo> alarmList = aDao.prodSelectList(buy_no);
+
+		System.out.println("결제알람 발송 내용 서비스" + alarmList);
+
+		if (alarmList.size() > 1) {
+
+			alarmVo = alarmList.get(0);
+
+			System.out.println("상품 여러개 보내기" + alarmVo);
+
+			String name = alarmVo.getProd_name();
+
+			int num = alarmList.size() + 1;
+
+			String prod_name = name + " 외 " + num + "개";
+
+			alarmVo.setProd_name(prod_name);
+
+		} else {
+
+			alarmVo = alarmList.get(0);
+
+		}
+
+		// 구매자에게 보내는 알람
+		alarmVo.setAlarm_content(alarmcVo.getPayment_complete());
+
+		aDao.insertProdAlarm(alarmVo);
+
+		for (int i = 0; i < alarmList.size(); i++) {
+
+			alarmVo = alarmList.get(i);
+
+			int user_no = alarmList.get(i).getSell_no();
+
+			alarmList.get(i).setUser_no(user_no);
+
+		}
+
+		// 판매자에게 보내는 알람
+		alarmVo.setAlarm_content(alarmcVo.getPayment_complete());
+
+		System.out.println(alarmVo);
+
+		aDao.insertProdAlarm(alarmVo);
+		
+	}
 	
 }
