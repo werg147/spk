@@ -10,10 +10,26 @@
         <result column="sumwin" property="sumWin"/>
     </resultMap>
     
+    
+	<select id="selectBBUYSC" parameterType="int" resultType="BBuyVo">
+		<![CDATA[
+			select user_no
+			from bbuy
+			where b_buy_no = #{bbuyno}
+		
+		]]>
+		
+	</select>    
 	<insert id="insertBBuy" parameterType="BBuyVo">
+	
+			<selectKey keyProperty="b_buy_no" resultType="int" order="BEFORE">
+				select seq_bbuy_no.nextval
+				from dual
+			</selectKey>
+	
 	 <![CDATA[
 			insert into bbuy
-			values( seq_bbuy_no.nextval,
+			values( #{b_buy_no},
 			        #{user_no},
 			        #{booking_no},
 			        #{profile_no},

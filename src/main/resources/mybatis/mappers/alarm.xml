@@ -3,7 +3,82 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="alarm">
+	<select id="bbuyuserNo" parameterType="int" resultType="AlarmVo">
+		<![CDATA[
+		
+				select user_no
+				from bbuy
+				where b_buy_no = #{bbuyno}
+		
+		
+		]]>
+	
+	</select>
+	
+	
+	<insert id="insertMatchAlarm" parameterType="AlarmVo">
+		
+		<![CDATA[
+			INSERT INTO alarm VALUES(seq_alarm_no.nextval, 
+								0, 
+								#{user_no}, 
+								#{alarm_content},
+								sysdate, 
+								1,
+								#{alarm_title},
+								2
+								)	
+		
+		
+		]]>
+	
+	</insert>
 
+	<insert id="insertResistrar" parameterType="AlarmVo">
+		<![CDATA[
+			INSERT INTO alarm VALUES(seq_alarm_no.nextval, 
+								0, 
+								#{user_no}, 
+								#{alarm_content},
+								sysdate, 
+								1,
+								#{alarm_title},
+								2
+								)	
+		
+		
+		]]>
+	
+	</insert>
+
+	<insert id="inserAlarmtoseller" parameterType="AlarmVo">
+		<![CDATA[
+		INSERT INTO alarm VALUES(seq_alarm_no.nextval, 
+								0, 
+								#{user_no}, 
+								#{alarm_content},
+								sysdate, 
+								1,
+								#{alarm_title},
+								2
+								)
+								
+		
+		
+		]]>
+	
+	</insert>
+	<select id="selectSellno" parameterType="int" resultType="AlarmVo">
+	<![CDATA[
+		SELECT s.user_no,
+			   g.gym_name as  alarm_title
+		FROM BOOKING B  , gym g , seller s
+		WHERE B.BOOKING_NO = #{booking_no}
+		and b.gym_no = g.gym_no
+		and g.sell_no =  s.sell_no	
+	
+	]]>
+	</select>
 	<select id="selectAlarm" parameterType="int"
 		resultType="AlarmVo">
 		<![CDATA[

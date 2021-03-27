@@ -155,7 +155,7 @@
 												<c:if test="${authUser.user_no != null }">
 													<c:if test="${authUser.user_no != map.bBuyVo.user_no }">
 														<c:if test="${authUser.user_no != map.bbuyVoUser.user_no }">
-															<c:if test="${empty map.bBuyList[0] || map.bBuyList[0].b_buy_player_state eq '신청자' }">
+															
 																<c:choose>
 																	<c:when test="${map.bBuyVo.booking_no == 0 }">
 																		<a href="${pageContext.request.contextPath }/sparring/rent?subnum=1&bbuyno=${map.bBuyVo.b_buy_no}"><button class="dae_button_item2">
@@ -168,7 +168,7 @@
 																			</button></a>
 																	</c:otherwise>
 																</c:choose>
-															</c:if>
+															
 														</c:if>
 													</c:if>
 												</c:if>
@@ -289,7 +289,7 @@
 															<c:choose>
 																<c:when test="${map.bBuyVo.b_buy_state == null && map.bBuyVo.booking_no != 0}">
 																<div id="accept_pay_btn">
-																	<a href="${pageContext.request.contextPath }/sparring/accept?partneruserno=${map.bBuyList[0].user_no}&bookingNo=${map.bBuyVo.booking_no}&userNo=${map.bBuyVo.user_no}&bbuyno=${map.bBuyVo.b_buy_no}&mainnum=1&profileno=${map.bBuyVo.profile_no}"><button class="dae_button_item2">
+																	<a href="${pageContext.request.contextPath }/sparring/accept?partneruserno=${map.bBuyList[0].user_no}&bookingNo=${map.bBuyVo.booking_no}&userNo=${map.bBuyVo.user_no}&bbuyno=${map.bBuyVo.b_buy_no}&mainnum=1&profileno=${map.bBuyVo.profile_no}&mybbuyno=${map.bBuyList[0].b_buy_no}"><button class="dae_button_item2">
 																			<span class="dea_btn2">수락하고 결제하기</span>
 																		</button></a>
 																</div>
@@ -297,7 +297,7 @@
 																</c:when>
 																<c:otherwise>
 																<div id="accept_btn">
-																	<a href="${pageContext.request.contextPath }/sparring/accept?partneruserno=${map.bBuyList[0].user_no}&bookingNo=${map.bBuyVo.booking_no}&userNo=${map.bBuyVo.user_no}&bbuyno=${map.bBuyVo.b_buy_no}"><button class="dae_button_item2">
+																	<a href="${pageContext.request.contextPath }/sparring/accept?partneruserno=${map.bBuyList[0].user_no}&bookingNo=${map.bBuyVo.booking_no}&userNo=${map.bBuyVo.user_no}&bbuyno=${map.bBuyVo.b_buy_no}&mybbuyno=${map.bBuyList[0].b_buy_no}"><button class="dae_button_item2">
 																			<span class="dea_btn2">수락하기</span>
 																		</button></a>
 																</div>

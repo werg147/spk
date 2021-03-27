@@ -53,4 +53,29 @@ public class AlarmDao {
 		return sql.selectOne("alarm.prodSelect", buyprod_no);
 	}
 
+	public void inserAlarmtoseller(AlarmVo alarmVo) {
+		System.out.println("[Alarm Dao]: inserAlarmtoseller()");
+
+		sql.insert("alarm.inserAlarmtoseller",alarmVo);
+	}
+
+	public void insertResistrar(AlarmVo alarmVo) {
+		System.out.println("[Alarm Dao]: insertResistrar()");
+		
+		sql.insert("alarm.insertResistrar",alarmVo);
+		
+	}
+
+	public void insertMatchAlarm(AlarmVo alarmVo) {
+		System.out.println("[Alarm Dao]: insertcompetition()");
+		
+		sql.insert("alarm.insertMatchAlarm",alarmVo);
+	}
+
+	public AlarmVo bbuyuserNo(int bbuyno) {
+		System.out.println("[Alarm Dao]: bbuyuserNo()");
+		
+		return sql.selectOne("alarm.bbuyuserNo",bbuyno);
+	}
+
 }

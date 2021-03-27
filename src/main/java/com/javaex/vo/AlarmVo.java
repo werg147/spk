@@ -10,7 +10,7 @@ public class AlarmVo {
 	private int sell_no;
 	private String alarm_title;
 	private int buy_type;
-
+	
 	private String prod_name;
 
 	private String gym_name;

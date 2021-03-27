@@ -147,7 +147,16 @@ public class SparringController {
 		System.out.println("[Controller] : profileWrite");
 
 		String[] eventName = request.getParameterValues("eventName");
-
+		
+		/*
+		 알고리즘 테스트
+		
+		 * */
+		sparringService.algo(profileVo, recordVo);
+		return "";
+		
+		 
+		/*
 		//셀렉트키로 바로 profileNo 사용가능
 		sparringService.profileWrite(profileVo, eventName, recordVo);
 		
@@ -165,7 +174,10 @@ public class SparringController {
 			
 			//bbuyuser로 신청자에게 알람
 			
-			sparringService.insertBBuy2(userNo,profileVo.getProfileNo(),bookingNo);
+			sparringService.insertBBuy2(userNo,profileVo.getProfileNo(),bookingNo,bbuyuser);
+			
+			
+			//
 			
 			//bbuyno 통한  bookingno로 등록
 			return "redirect:/sparring/matchdetail?bbuyno="+bbuyno+"&userno="+bbuyuser+"&sessionuser="+userNo;
@@ -187,6 +199,7 @@ public class SparringController {
 			System.out.println("잘못된 페이지");
 			return "";
 		}
+		*/
 	}
 	/** 결제하기 **/
 	@RequestMapping(value = "/payment", method = { RequestMethod.GET, RequestMethod.POST })
@@ -233,7 +246,9 @@ public class SparringController {
 			sparringService.acceptPartner(partneruserno,bookingNo,bBuyVo, bbuyno,bookingNo,mybbuyno);
 			return "store/paymentCp";
 		}else {
-			sparringService.pay(bBuyVo,subnum,bbuyno);
+			
+			//관장알람 추가
+			sparringService.pay(bBuyVo,subnum,bbuyno,bookingNo);
 		
 			return "store/paymentCp";
 		}
@@ -295,7 +310,7 @@ public class SparringController {
 			 @RequestParam(value = "sessionuserno", required = false, defaultValue = "0") int sessionuserno) {
 		System.out.println("[Controller] : refuse()");
 		
-		sparringService.refuse(mybbuyNo);
+		sparringService.refuse(mybbuyNo,bookingNo,partnerUserNo);
 		
 		return "redirect:/sparring/matchdetail?bookingno="+bookingNo+"&userno="+userNo+"&bbuyno="+bbuyNo+"&sessionuser="+sessionuserno;
 	}
@@ -348,5 +363,14 @@ public class SparringController {
 	public void arl() {
 		System.out.println("arl 테스트입니다");
 		
+	}
+	
+	@RequestMapping(value = "/test01", method = { RequestMethod.GET, RequestMethod.POST })
+	public String test(@RequestParam(value= "bookingno", required=false , defaultValue="0") int  bookingno,
+						@RequestParam(value= "bbuyno", required=false , defaultValue="0") int  bbuyno) {
+		System.out.println("test");
+		sparringService.test(bbuyno);
+		
+		return "";
 	}
 }

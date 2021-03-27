@@ -1,6 +1,5 @@
 package com.javaex.dao;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.javaex.vo.AlarmVo;
 import com.javaex.vo.BBuyVo;
 import com.javaex.vo.BookingVo;
 import com.javaex.vo.ConvenienceVo;
@@ -330,6 +330,21 @@ public class SparringDao {
 		
 		sqlSession.update("bbuy.updatebbuyBack",bookingno);
 	}
+
+	public AlarmVo selectSellno(int bookingno) {
+		System.out.println("[Dao] :  selectSellno ");
+		
+		return sqlSession.selectOne("alarm.selectSellno", bookingno);
+		
+	}
+
+	public BBuyVo selectBBUYSC(int bbuyno) {
+		System.out.println("[Dao] :  selectBBUYSC ");
+		
+		 return sqlSession.selectOne("bbuy.selectBBUYSC",bbuyno);
+	}
+
+	
 
 
 }
