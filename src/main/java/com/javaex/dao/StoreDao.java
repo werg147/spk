@@ -152,5 +152,18 @@ public class StoreDao {
 		sqlSession.insert("store.insertBp", bpVo);
 	}
 	
+	//결제하기 3.cart 비우기
+	public void delCart(int user_no) {
+		System.out.println("[StoreDao] delCart()");
+		
+		sqlSession.delete("store.delCart", user_no);
+	}
+	
+	//결제하기 4.재고 개수 -1 (stock -1)
+	public void updateStock(BuyProductVo bpVo) {
+		System.out.println("[StoreDao] updateStock()");
+		
+		sqlSession.update("store.updateStock", bpVo);
+	}
 
 }

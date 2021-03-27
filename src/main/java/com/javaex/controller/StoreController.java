@@ -183,6 +183,7 @@ public class StoreController {
 					  @RequestParam("colorsize_no") int[] colorsize_noArray,
 					  @RequestParam("count") int[] countArray,
 					  @RequestParam("prod_price") int[] prod_priceArray,
+					  @RequestParam("stock") int[] stockArray,
 					  @ModelAttribute BuyVo buyVo, HttpSession session) {
 		System.out.println("[Controller] pay()");
 		
@@ -196,8 +197,9 @@ public class StoreController {
 		System.out.println("colorsize_no int[]: " + colorsize_noArray[0]);
 		System.out.println("count int[]: " + countArray[0]);
 		System.out.println("prod_price int[]: " + prod_priceArray[0]);
+		System.out.println("stock int[]: " + stockArray[0]);
 		
-		storeService.pay(prod_noArray,colorsize_noArray,countArray,prod_priceArray,buyVo);
+		storeService.pay(prod_noArray,colorsize_noArray,countArray,prod_priceArray,stockArray,buyVo);
 		
 		return "";
 	}

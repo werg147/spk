@@ -278,7 +278,7 @@ public class StoreService {
 	}
 	
 	//결제하기
-	public void pay(String[] prod_noArray, int[] colorsize_noArray, int[] countArray, int[] prod_priceArray, BuyVo buyVo) {
+	public void pay(String[] prod_noArray, int[] colorsize_noArray, int[] countArray, int[] prod_priceArray, int[] stockArray, BuyVo buyVo) {
 		System.out.println("[Service] pay()");
 		
 		BuyProductVo bpVo = new BuyProductVo();
@@ -303,13 +303,24 @@ public class StoreService {
 			
 			int buyprod_price = prod_priceArray[i] * count;
 			bpVo.setBuyprod_price(buyprod_price);
-
+			
+			int stock = stockArray[i];
+			bpVo.setStock(stock);
+			
+			//buyproduct 인서트
 			storeDao.insertBp(bpVo);
+			
+			//colorsize 업데이트
+			storeDao.updateStock(bpVo);
 		}
+		
+		//결제시 장바구니내역 삭제
+		storeDao.delCart(buyVo.getUser_no());
 
 		/*
 		//알람발송
 		List<AlarmVo> alarmList = aDao.prodSelectList(buy_no);
+		System.out.println("알림 바이넘버: " + buy_no);
 
 		System.out.println("결제알람 발송 내용 서비스" + alarmList);
 

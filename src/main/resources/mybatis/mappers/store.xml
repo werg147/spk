@@ -252,14 +252,16 @@
                    p.prod_img_savename,
                    ca.count,
                    ca.cart_no,
-                   p.colorsize_no
+                   p.colorsize_no,
+                   p.stock
             from cart ca, users us , (select prod.prod_no,
                                              prod.prod_brand,
                                              prod.prod_name,
                                              prod.prod_price,
                                              prod.event_cate,
                                              pimg.prod_img_savename,
-                                             co.colorsize_no
+                                             co.colorsize_no,
+                                             co.stock
                                       from product prod, colorsize co, (select prod_img_savename,
                                                                                prod_no
                                                                         from prodimg
@@ -330,5 +332,21 @@
 		]]>
 	</insert>
 	
+	<!-- 결제하기 3.cart 비우기 -->
+	<delete id="delCart" parameterType="int">
+		<![CDATA[
+			delete from cart
+			where user_no = #{user_no}
+		]]>
+	</delete>	
+	
+	<!-- 결제하기 4.재고 -1 -->
+	<update id="updateStock" parameterType="BuyProductVo">
+		<![CDATA[
+			update colorsize
+			set stock = #{stock} - 1
+			where prod_no = #{prod_no}
+		]]>
+	</update>
    
 </mapper>

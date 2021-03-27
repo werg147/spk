@@ -12,6 +12,7 @@ public class BuyProductVo {
 	private int buy_no;
 	private int buyprod_price;
 	private String prod_name;
+	private int stock;
 	private int sell_no;
 	private int user_no;
 
@@ -20,7 +21,7 @@ public class BuyProductVo {
 	}
 
 	public BuyProductVo(int buyprod_no, String prod_no, int colorsize_no, int buy_del_no, String buy_delivery,
-			String buy_del_state, int count, int buy_no, int buyprod_price, String prod_name, int sell_no,
+			String buy_del_state, int count, int buy_no, int buyprod_price, String prod_name, int stock, int sell_no,
 			int user_no) {
 		super();
 		this.buyprod_no = buyprod_no;
@@ -33,6 +34,7 @@ public class BuyProductVo {
 		this.buy_no = buy_no;
 		this.buyprod_price = buyprod_price;
 		this.prod_name = prod_name;
+		this.stock = stock;
 		this.sell_no = sell_no;
 		this.user_no = user_no;
 	}
@@ -133,12 +135,20 @@ public class BuyProductVo {
 		this.user_no = user_no;
 	}
 
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+
 	@Override
 	public String toString() {
 		return "BuyProductVo [buyprod_no=" + buyprod_no + ", prod_no=" + prod_no + ", colorsize_no=" + colorsize_no
 				+ ", buy_del_no=" + buy_del_no + ", buy_delivery=" + buy_delivery + ", buy_del_state=" + buy_del_state
 				+ ", count=" + count + ", buy_no=" + buy_no + ", buyprod_price=" + buyprod_price + ", prod_name="
-				+ prod_name + ", sell_no=" + sell_no + ", user_no=" + user_no + "]";
+				+ prod_name + ", stock=" + stock + ", sell_no=" + sell_no + ", user_no=" + user_no + "]";
 	}
 
 }

@@ -27,6 +27,7 @@ public class ProductVo {
 	private String prod_img_savename;
 	private int colorsize_no;
 	private String user_name;
+	private int stock;
 
 	private int count;
 	private int cart_no;
@@ -49,8 +50,8 @@ public class ProductVo {
 	public ProductVo(String prod_no, int sell_no, String prod_cate, String event_cate, String prod_name, int prod_price,
 			String prod_brand, String prod_desc, String prod_from, String prod_wash, String prod_qual,
 			String prod_detail, String prod_detail_img_name, String prod_detail_img_savename, String prod_date,
-			String prod_img_name, String prod_img_savename, int colorsize_no, String user_name, int count, int cart_no,
-			List<ProductVo> payList, List<ReviewVo> reList, List<QnaVo> qnaList, List<ProductVo> storeList,
+			String prod_img_name, String prod_img_savename, int colorsize_no, String user_name, int stock, int count,
+			int cart_no, List<ProductVo> payList, List<ReviewVo> reList, List<QnaVo> qnaList, List<ProductVo> storeList,
 			List<ProdimgVo> pimgList, List<ColorsizeVo> cssList) {
 		super();
 		this.prod_no = prod_no;
@@ -72,6 +73,7 @@ public class ProductVo {
 		this.prod_img_savename = prod_img_savename;
 		this.colorsize_no = colorsize_no;
 		this.user_name = user_name;
+		this.stock = stock;
 		this.count = count;
 		this.cart_no = cart_no;
 		this.payList = payList;
@@ -298,6 +300,14 @@ public class ProductVo {
 		this.user_name = user_name;
 	}
 
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+
 	@Override
 	public String toString() {
 		return "ProductVo [prod_no=" + prod_no + ", sell_no=" + sell_no + ", prod_cate=" + prod_cate + ", event_cate="
@@ -306,9 +316,9 @@ public class ProductVo {
 				+ prod_qual + ", prod_detail=" + prod_detail + ", prod_detail_img_name=" + prod_detail_img_name
 				+ ", prod_detail_img_savename=" + prod_detail_img_savename + ", prod_date=" + prod_date
 				+ ", prod_img_name=" + prod_img_name + ", prod_img_savename=" + prod_img_savename + ", colorsize_no="
-				+ colorsize_no + ", count=" + count + ", cart_no=" + cart_no + ", payList=" + payList + ", reList="
-				+ reList + ", qnaList=" + qnaList + ", storeList=" + storeList + ", pimgList=" + pimgList + ", cssList="
-				+ cssList + "]";
+				+ colorsize_no + ", user_name=" + user_name + ", stock=" + stock + ", count=" + count + ", cart_no="
+				+ cart_no + ", payList=" + payList + ", reList=" + reList + ", qnaList=" + qnaList + ", storeList="
+				+ storeList + ", pimgList=" + pimgList + ", cssList=" + cssList + "]";
 	}
 
 }

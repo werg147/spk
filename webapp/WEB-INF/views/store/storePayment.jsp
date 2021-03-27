@@ -120,6 +120,8 @@
 											<input type="text" class="list" name="colorsize_no" value="${payVo.colorsize_no}">
 											<input type="text" class="list" name="count" value="${payVo.count}">
 											
+											<input type="text" class="list" name="stock" value="${payVo.stock}">
+											
 										</c:forEach>
 										<!-- 아이템 1개 END -->
 	
@@ -225,10 +227,11 @@
 								<button type="button" class="btn_form btn_cancel" onclick="btn_click('cancel');">취소하기</button>
 							</div>
 							
-							<input type="hidden" name="buy_ph" value="${pmap.userVo.user_phone}">\
+							<input type="hidden" name="buy_ph" value="${pmap.userVo.user_phone}">
 							<input type="hidden" name="buy_price" value="${pmap.total}">
 							<input type="hidden" name="buy_state" value="결제완료">
 							<input type="hidden" name="buy_name" value="${pmap.userVo.user_name}">
+		
 						
 					</section>
 			</form>
