@@ -57,7 +57,7 @@
 			<img src="${pageContext.request.contextPath }/assets/image/마이페이지 남성_글러브.png"></a>
 		</div>
 		<div>
-			<a href="${pageContext.request.contextPath}/mypage_buy/alarm"> <img
+			<a href="${pageContext.request.contextPath}/mypage/alarm"> <img
 				src="${pageContext.request.contextPath }/assets/image/bell_2.png"></a>
 		</div>
 		<div>

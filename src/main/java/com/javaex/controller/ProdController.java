@@ -121,6 +121,8 @@ public class ProdController {
 		
 		return "mypage/mypage_prod/delivery_form";
 	}
+	
+
 
 	//배송준비중
 	@RequestMapping(value = "/delstatechange", method = { RequestMethod.GET, RequestMethod.POST })

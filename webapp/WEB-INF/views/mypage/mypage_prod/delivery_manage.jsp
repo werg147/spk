@@ -35,78 +35,97 @@
 						</div>
 					</div>
 					<!--//content_product_header//-->
-	
+
 					<div class="content_delevery_product_line"></div>
 					<div class="content_delevery_product_list">
-					
-					
-					<c:forEach items="${delList}" var="delvo">
-						<div class="delevery_list">
-							<div class="product_name">[${delvo.prod_brand}] ${delvo.prod_name}</div>
-							<div class="list_line"></div>
-							<div class="delevery_product_content">
-								<div>
-									<img
-										src="${pageContext.request.contextPath}/upload/${delvo.prod_img_savename}">
-								</div>
-								<div class="table_box">
-									<table class="delevery_insert_table">
-										<colgroup>
-											<col style="width: 150px">
-											<col style="width: 280px">
-										</colgroup>
-										<tr>
-											<td>주문번호</td>
-											<td>${delvo.buy_no}</td>
-										</tr>
-										<tr>
-											<td>상품품번</td>
-											<td>${delvo.prod_no}</td>
-										</tr>
-										<tr>
-											<td>색상 | 사이즈 | 개수</td>
-											<td id="sizeboxadd"><div>${delvo.color} | ${delvo.prod_size} | ${delvo.count}</div></td>
-										</tr>
-										<tr>
-											<td>카테고리</td>
-											<td>${delvo.prod_cate}</td>
-										</tr>
-										<tr>
-											<td>가격</td>
-											<td><fmt:formatNumber value="${delvo.buyprod_price}" pattern="#,###"/>원</td>
-										</tr>
-										<tr>
-											<td>판매일자</td>
-											<td>${delvo.buy_date}</td>
-										</tr>
-										<tr>
-											<td>배송상태</td>
-											<td>${delvo.buy_del_state}</td>
-										</tr>
-									</table>
-									<div class="delevery_product_content_btn">
-										<button class="product_delinfo_btn">
-											<a href="${pageContext.request.contextPath}/mypage/prod/delform?buy_no=${delvo.buy_no}&sell_no=${delvo.sell_no}">배송정보등록</a>
-										</button>
-										<button class="product_nosale_btn">
-											<a href="${pageContext.request.contextPath}/mypage/prod/delno?buyprod_no=${delvo.buyprod_no}&buy_del_state=${delvo.buy_del_state}">판매불가</a>
-										</button>
+
+
+						<c:forEach items="${delList}" var="delvo">
+							<div class="delevery_list">
+								<div class="product_name">[${delvo.prod_brand}]
+									${delvo.prod_name}</div>
+								<div class="list_line"></div>
+								<div class="delevery_product_content">
+									<div>
+										<img
+											src="${pageContext.request.contextPath}/upload/${delvo.prod_img_savename}">
 									</div>
+									<div class="table_box">
+										<table class="delevery_insert_table">
+											<colgroup>
+												<col style="width: 150px">
+												<col style="width: 280px">
+											</colgroup>
+											<tr>
+												<td>주문번호</td>
+												<td>${delvo.buy_no}</td>
+											</tr>
+											<tr>
+												<td>상품품번</td>
+												<td>${delvo.prod_no}</td>
+											</tr>
+											<tr>
+												<td>색상 | 사이즈 | 개수</td>
+												<td id="sizeboxadd"><div>${delvo.color}|
+														${delvo.prod_size} | ${delvo.count}</div></td>
+											</tr>
+											<tr>
+												<td>카테고리</td>
+												<td>${delvo.prod_cate}</td>
+											</tr>
+											<tr>
+												<td>가격</td>
+												<td><fmt:formatNumber value="${delvo.buyprod_price}"
+														pattern="#,###" />원</td>
+											</tr>
+											<tr>
+												<td>판매일자</td>
+												<td>${delvo.buy_date}</td>
+											</tr>
+											<tr>
+												<td>배송상태</td>
+												<td>${delvo.buy_del_state}</td>
+											</tr>
+										</table>
+										<div class="delevery_product_content_btn">
+											<c:choose>
+												<c:when test="${delvo.buy_del_state == '판매불가'}">
+												</c:when>
+												<c:when test="${delvo.buy_del_state == '결제완료'}">
+													<button class="product_delinfo_btn">
+														<a
+															href="${pageContext.request.contextPath}/mypage/prod/delform?buy_no=${delvo.buy_no}&sell_no=${delvo.sell_no}">배송정보등록
+														</a>
+													</button>
+													<button class="product_nosale_btn">
+														<a
+															href="${pageContext.request.contextPath}/mypage/prod/delno?buyprod_no=${delvo.buyprod_no}&buy_del_state=${delvo.buy_del_state}">판매불가</a>
+													</button>
+												</c:when>
+												<c:otherwise>
+													<button class="product_delinfo_btn">
+														<a
+															href="${pageContext.request.contextPath}/mypage/prod/delform?buy_no=${delvo.buy_no}&sell_no=${delvo.sell_no}">배송정보확인
+														</a>
+													</button>
+												</c:otherwise>
+											</c:choose>
+										</div>
+									</div>
+									<!--//table_box-->
 								</div>
-								<!--//table_box-->
+								<!--//delevery_product_content-->
 							</div>
-							<!--//delevery_product_content-->
-						</div>
-						<!--//list//-->
-					</c:forEach>
-						
+							<!--//list//-->
+						</c:forEach>
+
 
 					</div>
 					<!--//content_delevery_product_list-->
 					<div id="space"></div>
 				</div>
 				<!--//content_product//-->
-									
+
 			</div>
 			<!--//middle//-->
 			<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>

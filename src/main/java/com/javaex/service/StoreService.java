@@ -356,12 +356,10 @@ public class StoreService {
 
 			int user_no = alarmList.get(i).getSell_no();
 
-			alarmList.get(i).setUser_no(user_no);
+			aDao.insertProdAlarm(alarmVo);
 
 		}
 
-		// 판매자에게 보내는 알람
-		alarmVo.setAlarm_content(alarmcVo.getPayment_complete());
 
 		System.out.println(alarmVo);
 

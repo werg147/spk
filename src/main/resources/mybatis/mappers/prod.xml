@@ -69,6 +69,7 @@
 			where p.prod_no = i.prod_no
 			and i.prod_img_type = 'main'
 			and sell_no = #{sell_no}
+			order by prod_date asc
 		]]>
 	</select>
 	

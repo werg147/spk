@@ -20,14 +20,14 @@
 	<c:if test="${authUser.prod_type == 1}">
 		<ul id="side_menu_delivery">
 			<li class="title"><span class="menu">배송판매관리</span></li>
-			<li><a href="${pageContext.request.contextPath}/mypage/prod/prodmanageform"><span class="menu">사업자계정
-						관리</span><span class="arrow">></span></a></li>
 			<li><a href="${pageContext.request.contextPath}/mypage/prod"><span class="menu">상품관리</span><span
 					class="arrow">></span></a></li>
 			<li><a href="${pageContext.request.contextPath}/mypage/prod/delmanage"><span class="menu">배송관리</span><span
 					class="arrow">></span></a></li>
 			<li class="side_menu_last"><a href="./배송판매자_마이페이지_수익관리.html"><span
 					class="menu">수익관리</span><span class="arrow">></span></a></li>
+			<li><a href="${pageContext.request.contextPath}/mypage/prod/prodmanageform"><span class="menu">사업자계정
+						관리</span><span class="arrow">></span></a></li>		
 		</ul>
 	</c:if>
 	<c:if test="${authUser != null}">

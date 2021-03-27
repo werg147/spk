@@ -308,6 +308,9 @@ table {
 }
 
 /*버튼*/
+
+
+
 .delevery_product_content_btn .product_delinfo_btn {
 	border-radius: 5px;
 	color: #000000;
@@ -342,8 +345,9 @@ table {
 
 /*버튼 위치조절*/
 .delevery_list .delevery_product_content_btn {
-	width: 200px;
-	margin-left: 490px;
+	text-align: right;
+	width: 180px;
+	margin-left: 475px;
 	margin-bottom: 10px;
 }
 
@@ -529,6 +533,7 @@ table {
 
 /*버튼 위치조절*/
 .delevery_btn {
+	text-align : center;
 	margin: 120px 150px 100px 150px;
 }
 
@@ -987,10 +992,16 @@ table {
 
 /*삭제버튼*/
 .thumb>.close {
-	position: absolute;
 	border: solid 1px #dddfe1;
+	height : 25px;
+	margin-top : 0px;
+	padding-top: 0px;
 	background-color: white;
 	cursor: pointer;
+	font-size : 25px;
+	flex-direction: column;
+	align-items: flex-start;
+	
 }
 
 .thumb>.close:hover {

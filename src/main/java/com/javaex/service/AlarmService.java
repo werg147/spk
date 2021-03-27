@@ -61,6 +61,8 @@ public class AlarmService {
 		alarmVo.setAlarm_content(alarmcVo.getPayment_complete());
 
 		aDao.insertProdAlarm(alarmVo);
+		
+		
 
 		for (int i = 0; i < alarmList.size(); i++) {
 
@@ -69,15 +71,17 @@ public class AlarmService {
 			int user_no = alarmList.get(i).getSell_no();
 
 			alarmList.get(i).setUser_no(user_no);
+			
+			// 판매자에게 보내는 알람
+			alarmVo.setAlarm_content(alarmcVo.getPayment_complete());
+
+			System.out.println(alarmVo);
+
+			aDao.insertProdAlarm(alarmVo);
 
 		}
 
-		// 판매자에게 보내는 알람
-		alarmVo.setAlarm_content(alarmcVo.getPayment_complete());
 
-		System.out.println(alarmVo);
-
-		aDao.insertProdAlarm(alarmVo);
 
 	}
 

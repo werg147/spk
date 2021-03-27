@@ -55,7 +55,7 @@
 									</tr>
 									<tr>
 										<td class="basic">사업자 번호</td>
-										<td><input class="input_con" type="text" name="prod_business_no"
+										<td><input class="input_con" type="number" name="prod_business_no"
 											placeholder="번호를 입력해주세요"value="${sellervo.prod_business_no}">
 											<div class="seller_alert">'-'와 공백을 제외하고 입력해주세요. (예:
 												1231212345)</div></td>
@@ -80,7 +80,7 @@
 												<option value="카카오뱅크" ${sellervo.prod_sell_bank == '카카오뱅크' ? 'selected="selected"' : ''}>카카오뱅크</option>
 										</select>
 											<div class="account_input">
-												<input class="input_con" type="text" name="prod_sell_account"
+												<input class="input_con" type="number" name="prod_sell_account"
 													placeholder="계좌번호를 입력해주세요"value="${sellervo.prod_sell_account}">
 											</div>
 											<div class="seller_alert">'-'와 공백을 제외하고 입력해주세요. (예:
