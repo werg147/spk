@@ -26,6 +26,7 @@ public class ProductVo {
 	private String prod_img_name;
 	private String prod_img_savename;
 	private int colorsize_no;
+	private String user_name;
 
 	private int count;
 	private int cart_no;
@@ -48,7 +49,7 @@ public class ProductVo {
 	public ProductVo(String prod_no, int sell_no, String prod_cate, String event_cate, String prod_name, int prod_price,
 			String prod_brand, String prod_desc, String prod_from, String prod_wash, String prod_qual,
 			String prod_detail, String prod_detail_img_name, String prod_detail_img_savename, String prod_date,
-			String prod_img_name, String prod_img_savename, int colorsize_no, int count, int cart_no,
+			String prod_img_name, String prod_img_savename, int colorsize_no, String user_name, int count, int cart_no,
 			List<ProductVo> payList, List<ReviewVo> reList, List<QnaVo> qnaList, List<ProductVo> storeList,
 			List<ProdimgVo> pimgList, List<ColorsizeVo> cssList) {
 		super();
@@ -70,6 +71,7 @@ public class ProductVo {
 		this.prod_img_name = prod_img_name;
 		this.prod_img_savename = prod_img_savename;
 		this.colorsize_no = colorsize_no;
+		this.user_name = user_name;
 		this.count = count;
 		this.cart_no = cart_no;
 		this.payList = payList;
@@ -286,6 +288,14 @@ public class ProductVo {
 
 	public void setColorsize_no(int colorsize_no) {
 		this.colorsize_no = colorsize_no;
+	}
+
+	public String getUser_name() {
+		return user_name;
+	}
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
 	}
 
 	@Override

@@ -307,6 +307,7 @@ public class StoreService {
 			storeDao.insertBp(bpVo);
 		}
 
+		/*
 		//알람발송
 		List<AlarmVo> alarmList = aDao.prodSelectList(buy_no);
 
@@ -353,7 +354,7 @@ public class StoreService {
 		System.out.println(alarmVo);
 
 		aDao.insertProdAlarm(alarmVo);
-		
+		*/
 	}
 	
 }

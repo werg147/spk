@@ -244,15 +244,14 @@
 	<!-- 결제하기 폼 상품리스트-->
 	<select id="selectPayList" parameterType="int" resultType="ProductVo">
 		<![CDATA[
-			select us.user_phone,
-				   us.user_name,
-                   p.prod_no,
+			select p.prod_no,
                    p.prod_brand,
                    p.prod_name,
                    p.prod_price,
                    p.event_cate,
                    p.prod_img_savename,
                    ca.count,
+                   ca.cart_no,
                    p.colorsize_no
             from cart ca, users us , (select prod.prod_no,
                                              prod.prod_brand,
@@ -276,9 +275,11 @@
 	<!-- 결제하기 총액 -->
 	<select id="selectTotal" parameterType="int" resultType="int">
 		<![CDATA[
-			select sum(prod.prod_price * ca.count) as buy_price
-            from product prod, cart ca
-            where prod.prod_no = ca.prod_no
+			select sum(prod.prod_price * ca.count)
+			from product prod, cart ca, users us
+			where prod.prod_no = ca.prod_no
+			and ca.user_no = us.user_no
+			and us.user_no = #{user_no}
 		]]>
 	</select>
 	
