@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.javaex.vo.ColorsizeVo;
+import com.javaex.vo.ProdBuyForVo;
 import com.javaex.vo.ProductVo;
 import com.javaex.vo.QnaVo;
 import com.javaex.vo.QnaimgVo;
@@ -105,6 +106,12 @@ public class StoreDao {
 		sqlSession.insert("store.reviewimgInsert", reviewimgVo);
 	}	
 	
+	//바로결제하기 (카트 추가인서트)
+	public void insertCart(ProdBuyForVo pvfVo) {
+		System.out.println("[StoreDao] insertCart()");
+		
+		sqlSession.insert("store.insertCart", pvfVo);
+	}
 	
 	//결제폼 리스트
 	public List<ProductVo> selectPayList(int user_no) {

@@ -3,7 +3,7 @@ package com.javaex.vo;
 import java.util.List;
 
 public class ProdBuyForVo {
-	
+
 	private String prod_name;
 	private String prod_brand;
 	private int buyprod_no;
@@ -27,16 +27,17 @@ public class ProdBuyForVo {
 	private String prod_img_type;
 	private String buy_name;
 	private int buyprod_price;
+	private int user_no;
 
 	public ProdBuyForVo() {
 	}
-
 
 	public ProdBuyForVo(String prod_name, String prod_brand, int buyprod_no, String prod_no, String buy_address,
 			int buy_ph, int colorsize_no, int buy_del_no, String buy_delivery, String buy_del_state, int buy_price,
 			int count, int buy_no, String prod_size, String color, String prod_cate, String buy_date,
 			String buy_paytype, int sell_no, String prod_img_savename, String prod_img_type, String buy_name,
-			int buyprod_price) {
+			int buyprod_price, int user_no) {
+		super();
 		this.prod_name = prod_name;
 		this.prod_brand = prod_brand;
 		this.buyprod_no = buyprod_no;
@@ -60,14 +61,8 @@ public class ProdBuyForVo {
 		this.prod_img_type = prod_img_type;
 		this.buy_name = buy_name;
 		this.buyprod_price = buyprod_price;
-
+		this.user_no = user_no;
 	}
-
-
-
-
-
-
 
 	public String getProd_name() {
 		return prod_name;
@@ -241,26 +236,25 @@ public class ProdBuyForVo {
 		return buy_name;
 	}
 
-
-
 	public void setBuy_name(String buy_name) {
 		this.buy_name = buy_name;
 	}
-
-
 
 	public int getBuyprod_price() {
 		return buyprod_price;
 	}
 
-
-
-
-
 	public void setBuyprod_price(int buyprod_price) {
 		this.buyprod_price = buyprod_price;
 	}
 
+	public int getUser_no() {
+		return user_no;
+	}
+
+	public void setUser_no(int user_no) {
+		this.user_no = user_no;
+	}
 
 	@Override
 	public String toString() {
@@ -271,10 +265,7 @@ public class ProdBuyForVo {
 				+ ", prod_size=" + prod_size + ", color=" + color + ", prod_cate=" + prod_cate + ", buy_date="
 				+ buy_date + ", buy_paytype=" + buy_paytype + ", sell_no=" + sell_no + ", prod_img_savename="
 				+ prod_img_savename + ", prod_img_type=" + prod_img_type + ", buy_name=" + buy_name + ", buyprod_price="
-				+ buyprod_price + "]";
+				+ buyprod_price + ", user_no=" + user_no + "]";
 	}
 
-
-
-	
 }

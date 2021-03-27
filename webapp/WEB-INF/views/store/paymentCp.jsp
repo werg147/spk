@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>스파클링</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/store.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css">
 </head>
@@ -51,11 +51,13 @@
                 <button type="submit"><a href="../경환/buylist.html" style="font-size: 16px; color: #ffffff;">구매내역 보기</a></button>
             </div> 
             <div class="btn_pay">
-                <button type="submit"><a href="./storeList.html" style="font-size: 16px; color: #ffffff;">스토어 홈 가기</a></button>
+                <button type="submit"><a href="${pageContext.request.contextPath}/store/list" style="font-size: 16px; color: #ffffff;">스토어 홈 가기</a></button>
             </div>    
         </div> 
     </div><!--//container-->
 </div><!--//wrap-->
+
+
 
 <div class="wrap">
     <div class="container">

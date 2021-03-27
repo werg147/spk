@@ -227,6 +227,18 @@
 		]]>
 	</insert>
 	
+	<!-- 바로결제시 카트에 담기 -->
+	<insert id="insertCart" parameterType="ProdBuyForVo">
+		<![CDATA[
+			insert into cart
+            values(SEQ_CART_NO.nextval, 
+                   #{user_no}, 
+                   #{prod_no}, 
+                   #{colorsize_no}, 
+                   #{count}
+                   )
+		]]>
+	</insert>
 	
 	<!-- 결제하기 폼 상품리스트-->
 	<select id="selectPayList" parameterType="int" resultType="ProductVo">

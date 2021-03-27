@@ -942,6 +942,7 @@ element.style {
 
 .btn_area{
   padding-left: 368px;
+  padding-bottom: 150px;
 }
 
 .btn_pay{
@@ -965,9 +966,10 @@ element.style {
   text-align: center;
 }
 
+
+
 /*추천 매칭/상품 리스트*/
 .goods-add-product {
-  padding-top: 100px;
   position: relative;
 }
 
@@ -976,6 +978,7 @@ element.style {
   font-size: 13px;
   font-weight: 900;
   line-height: 1.8;
+  padding-bottom: 5px;
 }
 
 h3 {

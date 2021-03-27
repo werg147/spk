@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.dao.StoreDao;
 import com.javaex.vo.ColorsizeVo;
+import com.javaex.vo.ProdBuyForVo;
 import com.javaex.vo.ProductVo;
 import com.javaex.vo.QnaVo;
 import com.javaex.vo.QnaimgVo;
@@ -220,6 +221,12 @@ public class StoreService {
 	}
 	
 	
+	//바로결제하기 (카트 추가인서트)
+	public void addCart(ProdBuyForVo pbfVo) {
+		System.out.println("[Service] addCart()");
+		
+		storeDao.insertCart(pbfVo);
+	}
 	
 	//결제하기 폼
 	public Map<String,Object> payform(int user_no) {

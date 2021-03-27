@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.service.StoreService;
+import com.javaex.vo.ProdBuyForVo;
 import com.javaex.vo.ProductVo;
 import com.javaex.vo.QnaVo;
 import com.javaex.vo.ReviewVo;
@@ -128,12 +130,30 @@ public class StoreController {
 		return "";
 	}
 	
+	
+	//상품상세 -> 바로구매 클릭시
+	@RequestMapping(value="/paynow")
+	public String payNow(@ModelAttribute ProdBuyForVo pbfVo, HttpSession session) {
+		System.out.println("[Controller] payNow()");
+		
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		int user_no = authUser.getUser_no();
+		pbfVo.setUser_no(user_no);
+		
+		System.out.println(pbfVo);
+		//카트담기
+		storeService.addCart(pbfVo);
+		
+		return "redirect:/store/payform";
+	}
+	
 	//장바구니->상품결제페이지 (user_no넣어서 임시로 테스트)
 	@RequestMapping(value="/payform")
-	public String pay(Model model) {
+	public String payform(Model model, HttpSession session) {
 		System.out.println("[Controller] payform()");
 		
-		int user_no = 100;
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		int user_no = authUser.getUser_no();
 		
 		//상품정보,유저정보,총액 가져오기
 		Map<String,Object> pmap = storeService.payform(user_no);
@@ -154,10 +174,28 @@ public class StoreController {
 		int total = storeService.removePay(cart_no, user_no);
 		System.out.println(total);
 		
-		return total;
-		
+		return total;	
 	}
 	
+	//결제하기 클릭시 구매상품 인서트
+	@RequestMapping(value="/pay")
+	public String pay(@ModelAttribute ProdBuyForVo pbfVo) {
+		System.out.println("[Controller] pay()");
+		System.out.println(pbfVo.toString());
+		
+		return "";
+	}
+	
+	//상품결제완료 - 매칭추천
+	@RequestMapping(value="/stopcp")
+	public String stoPcp(HttpSession session ) {
+		System.out.println("[Controller] stopcp()");
+	
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		int user_no = authUser.getUser_no();
+		
+		return "store/paymentCp";
+	}
 	
 	
 	

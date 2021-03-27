@@ -153,7 +153,7 @@
 								</div>
 								
 								<input type="hidden" name="prod_no" value="${productVo.prod_no}">
-								<input type="hidden" name="colorsize_no" value="${productVo.cssList[0].colorsize_no}">								
+								<input type="hidden" name="colorsize_no" value="${productVo.cssList[0].colorsize_no}">							
 								
 							</form> <!-- 수량, 총 금액 form -->
 							
@@ -737,9 +737,8 @@
 	}
 	
 	
-	//session값 가져오기 --> 이 방식으로는 오류 Uncaught ReferenceError: $ is not defined
+
 	//일단 넘어가고 나중에 걸러주기로
-	var authuser = $("#authuser").val();
 	
 	function btn(){ 
 		
@@ -766,14 +765,14 @@
 	//form submit 두개
 	function btn_click(str){
 		if(str == "buy"){
-			console.log("바이 버튼");
-			document.proform.action='${pageContext.request.contextPath}/store/payform';
+			document.proform.action='${pageContext.request.contextPath}/store/paynow'
 		} else if(str == "cart"){
 			document.proform.action='${pageContext.request.contextPath}/mypage/gotoCart';
 		}
 		
 		document.proform.submit();
 	}
+
 	
 	
 	
