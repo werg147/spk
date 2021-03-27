@@ -145,7 +145,7 @@ public class ProdController {
 	//택배사 운송장 정보입력(수정)
 	@RequestMapping(value = "/delmodify", method = { RequestMethod.GET, RequestMethod.POST })
 	public String delModify(@RequestParam("buyprod_no") int[] buyprod_noArray, @ModelAttribute BuyProductVo bpvo ) {
-		System.out.println("[cnt] 택배사 운송장 정보입력(수정)_buyprod_no" + buyprod_noArray[0]+buyprod_noArray[1]);
+		System.out.println("[cnt] 택배사 운송장 정보입력(수정)_buyprod_no");
 		
 		prodservice.delModify(buyprod_noArray, bpvo);
 

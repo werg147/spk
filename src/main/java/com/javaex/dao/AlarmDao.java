@@ -45,10 +45,10 @@ public class AlarmDao {
 		return sql.selectList("alarm.prodSelectList", buy_no);
 	}
 
-	// 배송준비 중 - 리스트 가져오기
+	// 배송준비 중/ 배송불가 - 리스트 가져오기
 	public AlarmVo prodSelect(int buyprod_no) {
 
-		System.out.println("[Alarm Dao]: prodSelect(AlarmVo aVo) 실행");
+		System.out.println("[Alarm Dao]: prodSelect(AlarmVo aVo) 실행" + buyprod_no);
 
 		return sql.selectOne("alarm.prodSelect", buyprod_no);
 	}

@@ -4,7 +4,7 @@ public class AlarmContentVo {
 
 	public String payment_complete = "<b>[결제완료]</b> 결제가 완료되었습니다.";
 	public String delivery_cancle = "<b>[배송불가]</b> 판매자의 요청으로 상품 결제가 취소되었습니다.";
-	public String refund = "결제수단에 따라 1~4일정도 소요됩니다. ";
+	public String refund = "환불은 결제수단에 따라 1~4일정도 소요됩니다. ";
 	public String delivery_ready = "<b>[배송준비중]</b> 주문하신 상품의 배송을 준비 중 입니다.";
 	public String delivery_ing = "<b>[배송시작]</b> 주문하신 상품의 배송이 시작되었습니다.";
 	public String delivery_complete = "<b>[배송완료]</b> 주문하신 상품의 배송이 완료되었습니다.";

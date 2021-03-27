@@ -221,14 +221,18 @@ public class ProdService {
 			
 		if(bpvo.getBuy_del_state() !="배송중" && bpvo.getBuy_del_state() != "배송완료") {
 			bpvo.setBuy_del_state("판매불가");
+			System.out.println("배송불가" + bpvo);
 			proddao.delStateUpdate(bpvo);
 		} else {
 			System.out.println("배송중이거나 배송완료된 상품으로 판매불가 전환이 불가합니다.");
 		}
 		
-		System.out.println("[Alarm Service]: payment_complete(AlarmVo aVo) 연결");
-		alarmVo = aDao.prodSelect(bpvo.getBuyprod_no());
-		alarmVo.setAlarm_content(alarmcVo.getDelivery_cancle() + alarmcVo.getRefund());
+		System.out.println("[Alarm Service]: 배송불가");
+
+		AlarmVo alarmVo = aDao.prodSelect(bpvo.getBuyprod_no());
+		
+		alarmVo.setAlarm_title(alarmVo.getProd_name());
+		alarmVo.setAlarm_content(alarmcVo.getDelivery_cancle()  + "<br>"+ alarmcVo.getRefund());
 
 		System.out.println(alarmVo);
 		aDao.insertProdAlarm(alarmVo);

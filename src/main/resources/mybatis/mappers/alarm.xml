@@ -12,10 +12,10 @@
 		
 		
 		]]>
-	
+
 	</select>
-	
-	
+
+
 	<insert id="insertMatchAlarm" parameterType="AlarmVo">
 		
 		<![CDATA[
@@ -31,7 +31,7 @@
 		
 		
 		]]>
-	
+
 	</insert>
 
 	<insert id="insertResistrar" parameterType="AlarmVo">
@@ -48,7 +48,7 @@
 		
 		
 		]]>
-	
+
 	</insert>
 
 	<insert id="inserAlarmtoseller" parameterType="AlarmVo">
@@ -66,7 +66,7 @@
 		
 		
 		]]>
-	
+
 	</insert>
 	<select id="selectSellno" parameterType="int" resultType="AlarmVo">
 	<![CDATA[
@@ -79,8 +79,10 @@
 	
 	]]>
 	</select>
-	<select id="selectAlarm" parameterType="int"
-		resultType="AlarmVo">
+
+
+
+	<select id="selectAlarm" parameterType="int" resultType="AlarmVo">
 		<![CDATA[
 			SELECT  alarm_no,
 			        from_user_no,
@@ -97,8 +99,7 @@
 	</select>
 
 	<!-- 결제완료 -->
-	<select id="prodSelectList" parameterType="int"
-		resultType="AlarmVo">
+	<select id="prodSelectList" parameterType="int" resultType="AlarmVo">
 		<![CDATA[
 			SELECT  bp.prod_no,
 			        p.prod_name,
@@ -117,13 +118,14 @@
 		<![CDATA[
 			SELECT  bp.prod_no,
 			        p.prod_name,
+                    bp.buyprod_no,
 			        p.sell_no,
 			        b.user_no,
 			        bp.buy_del_state
 			FROM    buyproduct bp, product p, buy b
 			WHERE   bp.prod_no = p.prod_no
 			        and b.buy_no = bp.buy_no
-			        and b.buy_no = #{buy_no}
+                    and bp.buyprod_no = #{buyprod_no}
 		]]>
 	</select>
 
@@ -141,4 +143,12 @@
 		]]>
 	</insert>
 
+	<!-- 판매자 user_no찾기 -->
+	<select id="sellUsernoSelect" parameterType="int" resultType="AlarmVo">
+        <![CDATA[
+            select user_no
+            from seller
+            where sell_no = #{sell_no}
+        ]]>
+	</select>
 </mapper>
