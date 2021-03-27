@@ -319,52 +319,59 @@ public class StoreService {
 
 		
 		//알람발송
-		List<AlarmVo> alarmList = aDao.prodSelectList(buy_no);
-		System.out.println("알림 바이넘버: " + buy_no);
+        List<AlarmVo> alarmList = aDao.prodSelectList(buy_no);
+        System.out.println("알림 바이넘버: " + buy_no);
 
-		System.out.println("결제알람 발송 내용 서비스" + alarmList);
+        System.out.println("결제알람 발송 내용 서비스" + alarmList);
 
-		if (alarmList.size() > 1) {
+        if (alarmList.size() > 1) {
 
-			alarmVo = alarmList.get(0);
+            alarmVo = alarmList.get(0);
 
-			System.out.println("상품 여러개 보내기" + alarmVo);
+            System.out.println("상품 여러개 보내기" + alarmVo);
 
-			String name = alarmVo.getProd_name();
+            String name = alarmVo.getProd_name();
 
-			int num = alarmList.size() + 1;
+            int num = alarmList.size() + 1;
 
-			String prod_name = name + " 외 " + num + "개";
+            String prod_name = name + " 외 " + num + "개";
 
-			alarmVo.setProd_name(prod_name);
+            alarmVo.setProd_name(prod_name);
 
-		} else {
+            // 구매자에게 보내는 알람
+            alarmVo.setAlarm_content(alarmcVo.getPayment_complete());
 
-			alarmVo = alarmList.get(0);
+            aDao.insertProdAlarm(alarmVo);
 
-		}
-		
-		/*
-		// 구매자에게 보내는 알람
-		alarmVo.setAlarm_content(alarmcVo.getPayment_complete());
+        } else {
 
-		aDao.insertProdAlarm(alarmVo);
+            alarmVo = alarmList.get(0);
 
-		for (int i = 0; i < alarmList.size(); i++) {
+            // 구매자에게 보내는 알람
+            alarmVo.setAlarm_content(alarmcVo.getPayment_complete());
 
-			alarmVo = alarmList.get(i);
+            aDao.insertProdAlarm(alarmVo);
 
-			int user_no = alarmList.get(i).getSell_no();
-
-			aDao.insertProdAlarm(alarmVo);
-
-		}
+        }
 
 
-		System.out.println(alarmVo);
+        // 판매자에게 보내는 알람
+        for (int i = 0; i < alarmList.size(); i++) {
 
-		aDao.insertProdAlarm(alarmVo);
-		*/
+            alarmVo = alarmList.get(i);
+
+            String prod_name = alarmVo.getProd_name();
+            alarmVo.setProd_name(prod_name);
+
+            AlarmVo avo = aDao.sellUsernoSelect(alarmList.get(i).getSell_no());
+
+            alarmList.get(i).setUser_no(avo.getUser_no());
+
+            alarmVo.setAlarm_content(alarmcVo.getPayment_complete());
+
+            aDao.insertProdAlarm(alarmVo);
+
+        }
 	}
 	
 }

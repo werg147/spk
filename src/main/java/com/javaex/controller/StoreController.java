@@ -201,7 +201,10 @@ public class StoreController {
 		
 		storeService.pay(prod_noArray,colorsize_noArray,countArray,prod_priceArray,stockArray,buyVo);
 		
-		return "redirect:/store/stopcp";
+		int buy_no = buyVo.getBuy_no();
+		
+		
+		return "redirect:/store/stopcp?buy_no=" + buy_no ;
 	}
 	
 	//상품결제완료 - 매칭추천
