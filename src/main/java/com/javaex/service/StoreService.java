@@ -317,7 +317,7 @@ public class StoreService {
 		//결제시 장바구니내역 삭제
 		storeDao.delCart(buyVo.getUser_no());
 
-		/*
+		
 		//알람발송
 		List<AlarmVo> alarmList = aDao.prodSelectList(buy_no);
 		System.out.println("알림 바이넘버: " + buy_no);
@@ -343,7 +343,8 @@ public class StoreService {
 			alarmVo = alarmList.get(0);
 
 		}
-
+		
+		/*
 		// 구매자에게 보내는 알람
 		alarmVo.setAlarm_content(alarmcVo.getPayment_complete());
 

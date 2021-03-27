@@ -201,7 +201,7 @@ public class StoreController {
 		
 		storeService.pay(prod_noArray,colorsize_noArray,countArray,prod_priceArray,stockArray,buyVo);
 		
-		return "";
+		return "redirect:/store/stopcp";
 	}
 	
 	//상품결제완료 - 매칭추천
