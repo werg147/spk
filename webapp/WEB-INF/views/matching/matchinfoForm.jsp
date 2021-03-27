@@ -229,37 +229,10 @@
 											<td><label for="prod_cate">공식기록</label></td>
 										<tbody id="record_app">
 										<tr class="basic">
-											<td><label for="prod_cate">대회분류</label></td>
-											<td>
-												<div class="content_product_insert_select_box">
-													<select id="cham_cate" name="recordList[0].recordType">
-														<option selected>대회분류</option>
-														<option value="지역">지역</option>
-														<option value="전국">전국</option>
-														<option value="세계">세계</option>
-													</select>
-												</div>
-											</td>
-										</tr>
-										<!-- //공식기록 - 대회분류 -->
-
-										<tr class="basic">
-											<td><label for="prod_cate"></label></td>
-											<td><label for="cham_name">대회명</label></td>
-											<td>
-												<div class="content_product_insert_select_box">
-													<input type="text" id="cham_name" placeholder="대회명을 입력해주세요." name="recordList[0].recordName" >
-												</div>
-											</td>
-										</tr>
-										<!-- //공식기록 - 대회분류 -->
-
-										<tr class="basic">
-											<td><label for="prod_cate"></label></td>
 											<td><label for="prod_cate">종목</label></td>
 											<td>
-												<div class="content_product_insert_select_box">
-													<select id="even_cate" name="recordList[0].recordEvent">
+												<div id="conpro" class="content_product_insert_select_box">
+													<select data-num="0" class="even120 eveneven" id="even_cate" name="recordList[0].recordEvent">
 														<option selected>종목</option>
 														<option value="1">복싱</option>
 														<option value="2">킥복싱</option>
@@ -269,18 +242,42 @@
 												</div>
 											</td>
 										</tr>
-										<!-- //공식기록 - 종목 -->
+										<!-- //공식기록 - 대회분류 -->
+										<!-- //공식기록 - 대회분류 -->
+										
+										<tr class="basic">
+											<td><label for="prod_cate"></label></td>
+											<td><label for="prod_cate">대회분류</label></td>
+											<td>
+												<div class="content_product_insert_select_box">
+												
+													<select class="cham0" id="cham_cate" name="recordList[0].recordType">
+														<option selected>대회분류</option>
+														
+													</select>
+												</div>
+											</td>
+										</tr>
 
 										<tr class="basic">
+											<td><label for="prod_cate"></label></td>
+											<td><label for="cham_name">대회명</label></td>
+											<td>
+												<div class="content_product_insert_select_box">
+													<input id="" type="text" id="cham_name" placeholder="대회명을 입력해주세요." name="recordList[0].recordName" >
+												</div>
+											</td>
+										</tr>
+										<!-- //공식기록 - 종목 -->
+
+										<tr class="cham_year20" class="basic">
 											<td><label for="prod_cate"></label></td>
 											<td><label for="prod_cate">출전연도</label></td>
 											<td>
 												<div class="content_product_insert_select_box">
-													<select id="even_year" name="recordList[0].recordDate">
+													<select class="cham_year0" id="even_year" name="recordList[0].recordDate">
 														<option selected>출전연도</option>
-														<option value="2021">2021</option>
-														<option value="2020">2020</option>
-														<option value="2019">2019</option>
+														
 													</select>
 												</div>
 											</td>
@@ -289,14 +286,13 @@
 
 										<tr class="basic">
 											<td><label for="prod_cate"></label></td>
-											<td><label for="prod_cate">매치</label></td>
+											<td><label for="prod_cate">순위</label></td>
 											<td>
 												<div class="content_product_insert_select_box">
-													<select id="match_cate" name="recordList[0].recordMatch">
-														<option selected>매치</option>
-														<option value="일반매치">일반매치</option>
-														<option value="타이틀매치">타이틀매치</option>
-
+													<select class="cham_rank0" id="match_cate" name="recordList[0].recordMatch">
+														<option selected>순위</option>
+														
+													
 													</select>
 												</div>
 											</td>
@@ -370,6 +366,38 @@
 		  
 	
 	})
+	//공식기록 종목선택시 안에 내용바꾸기
+	
+		$("#record_app").on("click",".eveneven",function(){
+			$(".eveneven").change("click",function(){
+						
+				console.log("클릭");
+				var num = $(this).data("num");
+				var clas = '.even12'+num+'';
+				console.log(clas);
+				var event = $("option:selected",clas).val();
+				console.log(num);
+				console.log(event);
+				
+				
+				if(event == 1 || event ==2){
+					console.log("1 ,2");
+					
+					
+					cham1(num);
+				}else if(event == 3){
+					console.log("3");
+					
+					cham2(num);
+				}else if(event == 4){
+					console.log("4");
+					
+					cham3(num);
+				}
+					});
+		});
+	
+	
 	//스파링 5회 이상 체크
 	$(".ex_01").on("click",function(){
 		var spaFive = $('.ex_01:checked').val();
@@ -656,16 +684,31 @@
 			num+=1;
 		}
 		str = "";
-		str += '<tr class="basic">';
 		
+		
+		str += '<tr class="basic">';
+
+		str += '	<td><label for="prod_cate">종목</label></td>';
+		str += '	<td>';
+		str += '		<div class="content_product_insert_select_box">';
+		str += '			<select data-num="'+num+'" class="even12'+num+'  eveneven" id="even_cate" name="recordList['+num+'].recordEvent">';
+		str += '				<option selected>종목</option>';
+		str += '				<option value="1">복싱</option>';
+		str += '				<option value="2">킥복싱</option>';
+		str += '				<option value="3">종합격투기</option>';
+		str += '				<option value="4">주짓수</option>';
+		str += '			</select>';
+		str += '		</div>';
+		str += '	</td>';
+		str += '</tr>';
+		str += '<tr class="basic">';
+		str += '<td><label for="prod_cate"></label></td>';
 		str += '<td><label for="prod_cate">대회분류</label></td>';
 		str += '	<td>';
 		str += '		<div class="content_product_insert_select_box">';
-		str += '			<select id="cham_cate" name="recordList['+num+'].recordType">';
+		str += '			<select class="cham'+num+'" id="cham_cate" name="recordList['+num+'].recordType">';
 		str += '				<option selected>대회분류</option>';
-		str += '				<option value="지역">지역</option>';
-		str += '				<option value="전국">전국</option>';
-		str += '				<option value="세계">세계</option>';
+	
 		str += '			</select>';
 		str += '		</div>';
 		str += '	</td>';
@@ -679,44 +722,24 @@
 		str += '		</div>';
 		str += '	</td>';
 		str += '</tr>';
-		str += '<tr class="basic">';
-		str += '	<td><label for="prod_cate"></label></td>';
-		str += '	<td><label for="prod_cate">종목</label></td>';
-		str += '	<td>';
-		str += '		<div class="content_product_insert_select_box">';
-		str += '			<select id="even_cate" name="recordList['+num+'].recordEvent">';
-		str += '				<option selected>종목</option>';
-		str += '				<option value="1">복싱</option>';
-		str += '				<option value="2">킥복싱</option>';
-		str += '				<option value="3">종합격투기</option>';
-		str += '				<option value="4">주짓수</option>';
-		str += '			</select>';
-		str += '		</div>';
-		str += '	</td>';
-		str += '</tr>';
-		str += '	<tr class="basic">';
+		str += '	<tr class="cham_year2'+num+'" class="basic">';
 		str += '	<td><label for="prod_cate"></label></td>';
 		str += '	<td><label for="prod_cate">출전연도</label></td>';
 		str += '	<td>';
 		str += '	<div class="content_product_insert_select_box">';
-		str += '			<select id="even_year" name="recordList['+num+'].recordDate">';
-		str += '				<option selected>출전연도</option>';
-		str += '				<option value="2021">2021</option>';
-		str += '				<option value="2020">2020</option>';
-		str += '				<option value="2019">2019</option>';
+		str += '			<select class="cham_year'+num+'" id="even_year" name="recordList['+num+'].recordDate">';
+		str += '				<option  selected>출전연도</option>';
 		str += '			</select>';
 		str += '		</div>';
 		str += '	</td>';
 		str += '</tr>';
 		str += '<tr class="basic">';
 		str += '	<td><label for="prod_cate"></label></td>';
-		str += '	<td><label for="prod_cate">매치</label></td>';
+		str += '	<td><label for="prod_cate">순위</label></td>';
 		str += '	<td>';
 		str += '		<div class="content_product_insert_select_box">';
-		str += '			<select id="match_cate" name="recordList['+num+'].recordMatch">';
-		str += '				<option selected>매치</option>';
-		str += '				<option value="일반매치">일반매치</option>';
-		str += '				<option value="타이틀매치">타이틀매치</option>';
+		str += '			<select class="cham_rank'+num+'" id="match_cate" name="recordList['+num+'].recordMatch">';
+		str += '				<option  selected>순위</option>';
 		str += '			</select>';
 		str += '		</div>';
 		str += '	</td>';
@@ -727,5 +750,112 @@
 		
 		num+=1;
 	}
+	
+	/* 복싱,킥복싱 대회분류 cham1 */
+	
+	function cham1(num){
+		console.log("cham1");
+		
+		$(".cham"+num+"").html(" ");
+		
+		str="";
+		str += '<option selected>대회분류</option>';
+		str += '<option value="세계선수권대회">세계선수권대회</option>';
+		str += '<option value="아시아경기대회">아시아경기대회</option>';
+		str += '<option value="유니버시아드대회">유니버시아드대회</option>'
+		str += '<option value="아시아선수권대회">아시아선수권대회</option>';
+		str += '<option value="지역대회">지역대회</option>';
+		
+		$(".cham"+num+"").append(str);
+		
+		$(".cham_year2"+num+"").show();
+		$(".cham_year"+num+"").html(" ");
+		
+		str2 ="";
+		str2 +='<option selected>출전연도</option>';
+		str2 +='<option value="4년 주기 대회">4년 주기 대회</option>';
+		str2 +='<option value="3년 주기 대회">3년 주기 대회</option>';
+		str2 +='<option value="2년 주기 대회">2년 주기 대회</option>';
+		str2 +='<option value="1년 주기 대회">1년 주기 대회</option>';
+		
+		$(".cham_year"+num+"").append(str2);
+		
+		$(".cham_rank"+num+"").html(" ");
+		str3 ="";
+		str3 +='<option selected>순위</option>';
+		str3 +='<option value="일반매치">우승</option>';
+		str3 +='<option value="준우승">준우승</option>';
+		str3 +='<option value="4강">4강</option>';
+		str3 +='<option value="8강">8강</option>';
+		str3 +='<option value="16강">16강</option>';
+		$(".cham_rank"+num+"").append(str3);
+	}
+	
+/* 종합격투기 대회분류 cham1 */
+	
+	function cham3(num){
+		console.log("cham3");
+		
+		$(".cham"+num+"").html(" ");
+		
+		strA="";
+		strA += '<option selected>대회분류</option>';
+		strA += '<option value="세계수짓수선수권">세계주짓수선수권</option>';
+		strA += '<option value="비도복세계주짓수선수권">비도복세계주짓수선수권</option>';
+		strA += '<option value="팬암챔피언쉽">팬암챔피언쉽</option>'
+		strA += '<option value="유러피언챔피언">유러피언챔피언</option>';
+		strA += '<option value="IBJJF지역대회">IBJJF지역대회</option>';
+		strA += '<option value="KBJJF관련대회">KBJJF관련대회</option>';
+		strA += '<option value="지역대회">지역대회</option>';
+		
+		$(".cham"+num+"").append(strA);
+		
+		$(".cham_year2"+num+"").hide();
+		
+		
+		$(".cham_rank"+num+"").html(" ");
+		strA3 ="";
+		strA3 +='<option selected>순위</option>';
+		strA3 +='<option value="일반매치">우승</option>';
+		strA3 +='<option value="준우승">준우승</option>';
+		strA3 +='<option value="4강">4강</option>';
+		strA3 +='<option value="8강">8강</option>';
+		strA3 +='<option value="16강">16강</option>';
+		$(".cham_rank"+num+"").append(strA3);
+	}
+	
+	
+	/* 주짓수 대회분류 cham1 */
+	function cham2(num){
+		console.log("cham2");
+		
+		$(".cham"+num+"").html(" ");
+		
+		strA="";
+		strA += '<option selected>대회분류</option>';
+		strA += '<option value="UFC">UFC</option>';
+		strA += '<option value="벨라토르">벨라토르(Bellator MMA)</option>';
+		strA += '<option value="K-1">K-1</option>'
+		strA += '<option value="PRIDEFC">PRIDE FC</option>';
+		strA += '<option value="ROAD FC">ROAD FC</option>';
+		strA += '<option value="지역대회">지역대회</option>';
+	
+		
+		$(".cham"+num+"").append(strA);
+		
+		$(".cham_year2"+num+"").hide();
+		
+		
+		$(".cham_rank"+num+"").html(" ");
+		strA3 ="";
+		strA3 +='<option selected>순위</option>';
+		strA3 +='<option value="일반매치">우승</option>';
+		strA3 +='<option value="준우승">준우승</option>';
+		strA3 +='<option value="4강">4강</option>';
+		strA3 +='<option value="8강">8강</option>';
+		strA3 +='<option value="16강">16강</option>';
+		$(".cham_rank"+num+"").append(strA3);
+	}
+	
 	</script>
 </html>
