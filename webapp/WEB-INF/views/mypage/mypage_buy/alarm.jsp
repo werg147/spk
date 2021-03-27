@@ -83,11 +83,6 @@
 						<input type="text" name="buyprod_no" value="1">
 						<button type="submit">배송완료</button>
 					</form>
-					
-					<form action="${pageContext.request.contextPath }/mypage/delcomplete" method="get">
-						<input type="text" name="bbuy_no" value="1">
-						<button type="submit">수락하기</button>
-					</form>
 
 				</div>
 				<!-- //content -->

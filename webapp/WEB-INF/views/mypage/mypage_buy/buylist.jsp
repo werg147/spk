@@ -9,7 +9,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>알림</title>
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
+<title>구매내역</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/header.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/mypage_buy.css">
 </head>
@@ -50,7 +51,7 @@
 
 					<div class="sub_tmenu">
 						<ul>
-							<li class="sub_on"><a href="" class="t1_1"> <span>배송상품</span>
+							<li class="sub_on del"><a href="" class="t1_1"> <span>배송상품</span>
 							</a></li>
 
 							<li class="sub_on"><a href="" class="t1_1"> <span>매칭상품</span>
@@ -196,7 +197,7 @@
 
 						<div class="goods_pay_section">
 							<div class="goods_group">
-								<ul class="goods_group_list">
+								<ul class="goods_group_list test">
 									<li id="" class="goods_pay_item">
 										<div class="goods_item">
 											<a href="" class="goods_thumb"> <img src="${pageContext.request.contextPath}/assets/image/글러브.jpg" alt="파워글러브" width="90" height="90">
@@ -204,13 +205,13 @@
 
 											<div class="goods_info">
 												<a href="" class="goods">
-													<p class="name">${buyList.prod_name }</p>
+													<p class="name" name="name">${buyList.prod_name }</p>
 													<ul class="info">
-														<li><span class="blind">상품금액</span>${buyList.prod_price }원</li>
+														<li><span class="blind" name="price">상품금액</span>${buyList.prod_price }원</li>
 
-														<li class="date"><span class="blind">상품구매날짜</span>${buyList.buy_date }</li>
+														<li class="date"><span class="blind" name="date">상품구매날짜</span>${buyList.buy_date }</li>
 													</ul>
-												</a> <span class="state_statusName">${buyList.buy_del_state }</span>
+												</a> <span class="state_statusName" name="state">${buyList.buy_del_state }</span>
 												<p class="guide">배송이 완료되었습니다. 감사합니다.</p>
 											</div>
 										</div>
@@ -263,5 +264,17 @@
 	<!--//wrap-->
 
 </body>
+
+<script type="text/javascript">
+	console.log("콘솔")
+
+	$(function() {
+		$('.del').click(function() {
+			$('.test').fadeIn(1000);
+
+			console.log("성공");
+		})
+	});
+</script>
 
 </html>

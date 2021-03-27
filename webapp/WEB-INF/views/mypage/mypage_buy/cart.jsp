@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
-<title>알림</title>
+<title>장바구니</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/header.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/mypage_buy.css">
 
@@ -222,9 +222,7 @@
 	function price(priceAll) {
 		console.log(priceAll)
 
-		var str01 = '<span class="num">'
-				+ priceAll
-				+ '</span> <span class="won"></span> <span class="won">원</span>';
+		var str01 = '<span class="num">'+ priceAll+'</span> <span class="won"></span> <span class="won">원</span>';
 		$("#priceTotal").html(" ");
 		$("#priceTotal").append(str01);
 
