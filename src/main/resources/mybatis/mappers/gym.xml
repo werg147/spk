@@ -106,7 +106,7 @@
 			       #{booking_start}, 
 			       #{booking_end}, 
 			       #{booking_price}, 
-			       '대기중', 
+			       '대기', 
 			       sysdate)
 		]]>
 	</insert>

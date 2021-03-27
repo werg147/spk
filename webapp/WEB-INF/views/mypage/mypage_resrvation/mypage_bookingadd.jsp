@@ -76,7 +76,7 @@ body {
 							</tr>
 
 							<tr>
-								<td class="gap_info">(불러온 체육관 이름)</td>
+								<td class="gap_info">${gymVo.gym_name}</td>
 							</tr>
 
 							<tr>
@@ -84,7 +84,7 @@ body {
 							</tr>
 
 							<tr>
-								<td class="gap_info">(불러온 체육관 주소)</td>
+								<td class="gap_info">${gymVo.gym_address}</td>
 							</tr>
 
 							<tr>
@@ -92,16 +92,16 @@ body {
 							</tr>
 
 							<tr>
-								<td class="gap_info">(불러온 체육관 운영시간)</td>
+								<td class="gap_info">${gymVo.gym_time}</td>
 							</tr>
 
-							<tr>
+<!-- 							<tr>
 								<td class="gym_info_title gap">체육관 편의시설</td>
 							</tr>
 
 							<tr>
 								<td class="gap_info">(불러온 체육관 편의시설)</td>
-							</tr>
+							</tr> -->
 
 						</table>
 					</div>
@@ -123,6 +123,15 @@ body {
 	
 	<!-- ///////////////////////////////////////////////// -->
 	
+<%-- 	values(seq_booking_no.nextval, 
+       #{gym_no}, 
+       #{booking_date}, 
+       #{booking_start}, 
+       #{booking_end}, 
+       #{booking_price}, 
+       '대기중', 
+       sysdate) --%>
+			       
 	<!-- 날짜 등록 모달창 -->
 	<div class="modal fade" id="addModal">
 		<div class="modal-dialog">
@@ -132,30 +141,27 @@ body {
 					<h4 class="modal-title">대관 등록</h4>
 				</div>
 				
-				<form method="post" action="${pageContext.request.contextPath }/book/bookadd"> <!-- 대관등록 주소 추가 -->
+				<form method="post" action="${pageContext.request.contextPath }/mypage/book/bookadd"> <!-- 대관등록 주소 추가 -->
 					<div class="modal-body">
 						<div class="form-group">
 							<label class="form-text">날짜</label> 
+							&nbsp
 							<input id="addModalContent" type="text" name="booking_date" value="" >
 						</div>
 						<div class="form-group">
 							<label class="form-text">시간</label>
-							<select id="addModalContent" name="booking_start" value="" >
-								<option>시작시간</option>
-								<option>12:00</option>
-								<option>13:00</option>
-							</select>
+							&nbsp
+							<input id="addModalContent" type="text" name="booking_start" value="" placeholder="시작시간 ex)11:00">
 							&nbsp~&nbsp
-							<select id="addModalContent" name="booking_end" value="">
-								<option>종료시간</option>
-								<option>15:00</option>
-							</select>
+							<input id="addModalContent" type="text" name="booking_end" value="" placeholder="종료시간 ex)13:00">	
 						</div>
 						<div class="form-group">
 							<label class="form-text">요금</label>
+							&nbsp
 							<input id="addModalContent" type="text" name="booking_price" value="" >
 						</div>
 					</div>
+					<input type="hidden" name="gym_no" value="${gymVo.gym_no}">
 					<div class="modal-footer">
 						<button type="submit" class="btn" id="btnUpload">등록</button>
 					</div>

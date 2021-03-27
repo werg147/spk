@@ -29,7 +29,7 @@ public class GymService {
 	@Autowired
 	private UserDao userdao;
 	
-	//체육관 정보 불러오기
+	//모든 체육관 정보 불러오기
 	public Map<String, Object> gymInfo(int sellNo, int gymNo) {
 		System.out.println("[GymService] gymInfo()");
 		
@@ -45,6 +45,15 @@ public class GymService {
 		gymMap.put("conList", conList);
 		
 		return gymMap;
+	}
+	
+	//체육관 하나 정보 불러오기
+	public GymVo gymInfo(int gymNo) {
+		System.out.println("[GymService] gymInfo()");
+		
+		//GymVo gymVo = gymDao.gymSelectOne(gymNo);
+		
+		return gymDao.gymSelectOne(gymNo);
 	}
 	
 	//체육관 등록 (체육관, 체크박스값, 파일 등록)

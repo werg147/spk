@@ -85,10 +85,12 @@ public class GymController {
 	
 	//대관 등록폼
 	@RequestMapping(value="/bookaddform", method= {RequestMethod.GET , RequestMethod.POST})
-	public String bookAddForm(@RequestParam("gymno") int gymNo) {
+	public String bookAddForm(@RequestParam("gymno") int gymNo, Model model) {
 		System.out.println("[GymController] bookAddForm()");
 		
 		//대관 등록할 체육관 정보 불러오기
+		GymVo gymVo = gymService.gymInfo(gymNo);
+		model.addAttribute("gymVo", gymVo);
 		
 		return "mypage/mypage_resrvation/mypage_bookingadd";
 	}
@@ -96,12 +98,11 @@ public class GymController {
 	//대관 등록
 	@RequestMapping(value="/bookadd", method= {RequestMethod.GET , RequestMethod.POST})
 	public String bookAdd(@ModelAttribute BookingVo bookVo) {
-		System.out.println("[GymController] bookAdd()");
-		
 		System.out.println("[GymController] bookAdd()>>> "+bookVo);
-		//gymService.bookAdd(bookVo);
 		
-		return "";
+		gymService.bookAdd(bookVo);
+		
+		return "redirect:/mypage/book/bookaddform?gymno="+bookVo.getGym_no();
 	}
 	
 	//대관 관리 페이지
