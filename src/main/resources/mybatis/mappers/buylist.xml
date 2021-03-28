@@ -57,5 +57,38 @@
 			ORDER BY bb.b_buy_date desc
 		]]>
 	</select>
+	
+	<!-- 구매내역_배송상세 구매자정보 -->
+	<select id="selectBuy" parameterType="int" resultType="BuyVo">
+		<![CDATA[
+			select buy_no,
+    			   to_char(buy_date, 'YYYY-MM-DD') buy_date,
+    			   buy_name,
+     			   buy_ph,
+       			   buy_address
+			from buy
+			where buy_no = #{buy_no}
+		]]>
+	</select>
+	
+	<!-- 구매내역_배송상세 구매상품내역 -->
+	<select id="selectBuydel" parameterType="int" resultType="ProdBuyForVo">
+		<![CDATA[
+			select pimg.prod_img_savename,
+     			   prod.prod_brand,
+       			   prod.prod_name,
+      			   bp.prod_no,
+      			   bp.buyprod_price,
+      			   bp.count,
+      			   cs.color,
+      			   cs.prod_size
+			from buyproduct bp, product prod, prodimg pimg, colorsize cs
+			where bp.prod_no = prod.prod_no
+			and prod.prod_no = pimg.prod_no
+			and prod.prod_no = cs.prod_no
+			and pimg.prod_img_type = 'main'
+			and bp.buy_no = #{buy_no}
+		]]>
+	</select>
 
 </mapper>

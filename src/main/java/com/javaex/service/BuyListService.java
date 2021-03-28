@@ -1,6 +1,8 @@
 package com.javaex.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,8 @@ import com.javaex.dao.BuyListDao;
 import com.javaex.vo.BBuyVo;
 import com.javaex.vo.BookingVo;
 import com.javaex.vo.BuyListVo;
+import com.javaex.vo.BuyVo;
+import com.javaex.vo.ProdBuyForVo;
 
 @Service
 public class BuyListService {
@@ -35,6 +39,26 @@ public class BuyListService {
 		System.out.println("[BuyList Service]: bbuylist() 연결");
 
 		return blDao.selectBbuyList(user_no);
+	}
+	
+	//구매내역_배송상세페이지
+	public Map<String,Object> buydel(int buy_no) {
+		System.out.println("[BuyList Service] buydel()");
+		
+		//구매자 정보 가져오기
+		BuyVo buyVo = blDao.selectBuy(buy_no);
+		System.out.println(buyVo.toString());
+		
+		//구매상품 내역 가져오기
+		List<ProdBuyForVo> pbList = blDao.selectBuydel(buy_no);
+		System.out.println(pbList.toString());
+		
+		//map 담기
+		Map<String,Object> bmap = new HashMap<String,Object>();
+		bmap.put("buyVo", buyVo);
+		bmap.put("pbList", pbList);
+		
+		return bmap;
 	}
 
 }

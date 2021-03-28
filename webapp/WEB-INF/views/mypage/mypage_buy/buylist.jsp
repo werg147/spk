@@ -221,7 +221,7 @@
 											<div class="test_2">
 
 												<div class="button_item">
-													<a href="" class="state_button function _click"> <span>리뷰쓰기</span>
+													<a href="${pageContext.request.contextPath}/store/reviewForm" class="state_button function _click"> <span>리뷰쓰기</span>
 
 													</a>
 													<!-- 네이버페이 리뷰쓰기 참조 -->

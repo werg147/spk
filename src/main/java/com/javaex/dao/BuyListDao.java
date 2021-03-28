@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import com.javaex.vo.BBuyVo;
 import com.javaex.vo.BookingVo;
 import com.javaex.vo.BuyListVo;
+import com.javaex.vo.BuyVo;
+import com.javaex.vo.ProdBuyForVo;
 
 @Repository
 public class BuyListDao {
@@ -47,6 +49,20 @@ public class BuyListDao {
 		System.out.println("[BuyList Dao]: " + bbuyList.toString());
 
 		return bbuyList;
+	}
+	
+	//구매내역_배송상세 구매자정보
+	public BuyVo selectBuy(int buy_no) {
+		System.out.println("[BuyListDao] selectBuy()");
+		
+		return sql.selectOne("buylist.selectBuy", buy_no);
+	}
+	
+	//구매내역_배송상세 구매상품내역
+	public List<ProdBuyForVo> selectBuydel(int buy_no) {
+		System.out.println("[BuyListDao] selectBuydel()");
+		
+		return sql.selectList("buylist.selectBuydel", buy_no);
 	}
 
 }

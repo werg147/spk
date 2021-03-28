@@ -1,6 +1,7 @@
 package com.javaex.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -226,6 +227,20 @@ public class Mypage_buyController {
 
 		return "mypage/mypage_buy/buylist";
 
+	}
+	
+	//구매내역_배송상세페이지
+	@RequestMapping(value="/buydel")
+	public String buydel(@RequestParam("buy_no") int buy_no, Model model) {
+		System.out.println("[Controller] buydel()");
+		System.out.println("바이넘버: " + buy_no);
+		
+		Map<String,Object> bmap = blServ.buydel(buy_no);
+		System.out.println("맵: " + bmap);
+		
+		model.addAttribute("bmap", bmap);
+	
+		return "mypage/mypage_buy/buy_complete";
 	}
 
 }

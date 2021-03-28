@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 
@@ -11,6 +12,7 @@
 <title>알림</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/header.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/delivery.css">
+
 </head>
 
 <body>
@@ -34,63 +36,41 @@
 					<!--//content_delevery_product_header//-->
 
 					<div class="buy_info">
-						<div class="buy_content_delevery_num">주문번호 135648654123</div>
-						<div>구매일자 2020/08/31</div>
+						<div class="buy_content_delevery_num">주문번호 ${bmap.buyVo.buy_no}</div>
+						<div>구매일자 ${bmap.buyVo.buy_date}</div>
 					</div>
 					<div class="content_delevery_num_line"></div>
 					<div class="buy_delivery_info">
+					
+					<c:forEach items="${bmap.pbList}" var="pbVo">
 						<div class="buy_deleverymanage_list">
 							<div class="buy_delevery_product_content">
-								<div class="buy_delevery_product_content_img">
-									<img src="${pageContext.request.contextPath}/assets/image/글러브.jpg">
-								</div>
-								<div class="buy_deleverymanage_list1">
-									<table>
-										<tr>
-											<td>[에버레스트] 글러브</td>
-										</tr>
-										<tr>
-											<td>38,000원 | 블랙 1개</td>
-										</tr>
-									</table>
-									<div class="buy_delever_btn">
-										<div>배송준비중</div>
-										<button class="buy_delever_review_btn">배송조회</button>
-										<button class="buy_delever_review_btn">리뷰쓰기</button>
+									<div class="buy_delevery_product_content_img">
+										<img src="${pageContext.request.contextPath}/upload/${pbVo.prod_img_savename}">
 									</div>
-								</div>
+									<div class="buy_deleverymanage_list1">
+										<table>
+											<tr>
+												<td>[${pbVo.prod_brand}] ${pbVo.prod_name}</td>
+											</tr>
+											<tr>
+												<td><fmt:formatNumber value="${pbVo.buyprod_price}" pattern="#,###"/>원 | ${pbVo.color} ${pbVo.count}개</td>
+											</tr>
+										</table>
+										<div class="buy_delever_btn">
+											<div>배송준비중</div>
+											<button class="buy_delever_review_btn">배송조회</button>
+											<a href="${pageContext.request.contextPath}/store/reviewForm"><button class="buy_delever_review_btn">리뷰쓰기</button></a>
+										</div>
+									</div>
+							
 								<!--//buy_deleverymanage_list1-->
-
 							</div>
 							<!--//buy_delevery_product_content-->
-
-							<div class="buy_delevery_product_content">
-								<div class="buy_delevery_product_content_img">
-									<img src="${pageContext.request.contextPath}/assets/image/복싱복.jpg">
-								</div>
-								<div class="buy_deleverymanage_list1">
-									<table>
-										<tr>
-											<td>[아디다스] 복싱복</td>
-										</tr>
-										<tr>
-											<td>60,000원 | 블루95(M) | 2개</td>
-										</tr>
-									</table>
-									<div class="buy_delever_btn">
-										<div>배송완료</div>
-										<button class="buy_delever_review_btn">배송조회</button>
-										<button class="buy_delever_review_btn">리뷰쓰기</button>
-									</div>
-								</div>
-								<!--//buy_deleverymanage_list1-->
-
-							</div>
-							<!--//buy_delevery_product_content-->
-
 						</div>
 						<!--//list//-->
-
+					</c:forEach>
+						
 						<div class="delivery_info_personal">
 							<div class="delivery_info_header">
 								<div class="head">배송정보</div>
@@ -103,9 +83,9 @@
 									<div>주소</div>
 								</div>
 								<div class="delivery_info_content_title_re">
-									<div>오늘은 맑음</div>
-									<div>010-5568-7894</div>
-									<div>(12345) 서울 강남구 무지개가피었로 123 빨주노초아파트 501호</div>
+									<div>${bmap.buyVo.buy_name}</div>
+									<div>${bmap.buyVo.buy_ph}</div>
+									<div>${bmap.buyVo.buy_address}</div>
 								</div>
 							</div>
 						</div>
