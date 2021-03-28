@@ -111,6 +111,22 @@
 		]]>
 	</insert>
 	
+	<!-- 대관 리스트 불러오기 -->
+	<select id="bookSelectList" parameterType="int" resultType="BookingVo">
+		<![CDATA[ 
+			SELECT  booking_no,
+			        gym_no,
+			        booking_date,
+			        booking_start,
+			        booking_end,
+			        booking_price,
+			        booking_state,
+			        booking_reg_date
+			FROM booking
+			where gym_no = #{gym_no}
+		]]>
+	</select>
+	
 	<!-- ///////////////////////////////////////////////////////// -->
 	
 	<!-- 영훈 체육관 리스트 셀렉트 -->

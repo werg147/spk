@@ -158,7 +158,13 @@ public class GymService {
 	//대관 등록
 	public void bookAdd(BookingVo bookVo) {
 		System.out.println("[GymService] bookAdd()");
-		gymDao.bookInsert(bookVo);
+		gymDao.bookInsert(bookVo);	
+	}
+	
+	//대관 리스트 출력
+	public List<BookingVo> bookList(int gymno) {
+		System.out.println("[GymService] bookList()");
+		return gymDao.bookSelectList(gymno);
 		
 	}
 	

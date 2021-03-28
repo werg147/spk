@@ -176,9 +176,71 @@ body {
 
 <script type="text/javascript">
 
+	//체육관 번호
+	var gymno = "${gymVo.gym_no}";
+	console.log("체육관번호 "+gymno);
+	
+	var books = bookList(gymno);
+	console.log("제발"+books);
+	
+	
+	//대관 리스트
+	function bookList(gymno){
+		
+		var bookings = new Array();
+		var item = new Object;
+			
+		$.ajax({
+			url: "${pageContext.request.contextPath}/mypage/book/booklist",
+			type: "post",
+			//contentType : "application/json",
+			data : {gymno: gymno},
+				
+			dataType: "json",
+			success: function(bookList) {
+				console.log(bookList);
+				
+				for(var i=0; i<bookList.length; i++){ //시간(title), 날짜(start)
+		            var vo = bookList[i]
+					var tStart = vo.booking_start;
+		            var tEnd = vo.booking_end;
+		            var date = vo.booking_date;
+		            console.log(date);
+		            console.log(tStart);
+		            console.log(tEnd);
+		            
+		            item = {
+		            	title: tStart+"~"+tEnd,
+		            	start: date
+		            }
+		            
+		            bookings.push(item);
+				}
+				//books = JSON.stringify(bookings);
+				
+				//console.log(books);
+				//return books;
+				
+				console.log(bookings);
+
+			},
+			error : function(XHR, status, error) { 
+				console.error(status + " : " + error);
+			}
+
+		}); //ajax
+		
+		return JSON.stringify(bookings);
+		//return bookings;
+	} //bookList
+	
+
+	
+	////////////////////////////////////////////////
+
 	//달력
 	document.addEventListener('DOMContentLoaded', function() {
-
+		
 		var calendarEl = document.getElementById('calendar');
 
 		var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -209,24 +271,15 @@ body {
 			navLinks : false, // can click day/week names to navigate views
 			editable : true,
 			dayMaxEvents : true, // allow "more" link when too many events
-			events : [ {
-				title : 'All Day Event',
-				start : '2021-03-01'
-			}, {
-				title : 'Long Event',
-				start : '2021-03-07',
-				end : '2021-03-10'
-			}, {
-				groupId : 999,
-				title : 'Repeating Event',
-				start : '2021-03-09T16:00:00'
-			} ]
-		});
+		
+			events : bookList(gymno)
+				
+		});//calender
 
 		calendar.render();
-	});
+	});//document
 
-	
+	//successCallback(data)
 	
 	
 </script>

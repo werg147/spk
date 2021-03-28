@@ -80,4 +80,12 @@ public class GymDao {
 		System.out.println("[GymDao] bookInsert()");
 		sqlSession.insert("gym.bookInsert", bookVo);
 	}
+	
+	//대관 리스트 불러오기
+	public List<BookingVo> bookSelectList(int gymno) {
+		System.out.println("[GymDao] bookGetList()");
+		List<BookingVo> bList = sqlSession.selectList("gym.bookSelectList", gymno);
+		System.out.println("대관리스트 출력테스트> "+bList);
+		return bList;
+	}
 }

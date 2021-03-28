@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.service.GymService;
@@ -105,6 +106,17 @@ public class GymController {
 		return "redirect:/mypage/book/bookaddform?gymno="+bookVo.getGym_no();
 	}
 	
+	//대관 리스트 출력(ajax)
+	@ResponseBody
+	@RequestMapping(value="/booklist", method= {RequestMethod.GET , RequestMethod.POST})
+	public List<BookingVo> bookList(@RequestParam("gymno") int gymno) {
+		System.out.println("[GymController] booklist()>>> "+gymno);
+		
+		List<BookingVo> bookList = gymService.bookList(gymno);
+		
+		return bookList;
+	}
+	
 	//대관 관리 페이지
 	@RequestMapping(value="/bookmanage", method= {RequestMethod.GET , RequestMethod.POST})
 	public String bookManage() {
@@ -116,6 +128,8 @@ public class GymController {
 	public String profit() {
 		return "mypage/mypage_seller/seller_profit";
 	}
+	
+	
 	
 	/////////////////////////////////////////////////////////////////////
 	
