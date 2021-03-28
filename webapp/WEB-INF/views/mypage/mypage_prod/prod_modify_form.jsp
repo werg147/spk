@@ -135,7 +135,7 @@
 									<div>
 										<p>상세페이지 이미지등록</p>
 										<label class="input-file-button" for="input-file"></label>
-										<input type="file" name="detailfile" id="detailfile">
+										<input type="file" name="detailfile" id="detailfile" value="${prodvo.prod_detail_img_name}">
 									</div> <textarea id="prod_detail" name="prod_detail">${prodvo.prod_detail}</textarea>
 								</td>
 							</tr>
@@ -162,16 +162,11 @@
 </body>
 
 <script type="text/javascript">
-/*
-$("document").ready(function(){
 
-	let test = ${prodvo.prod_cate};
-	$("#prod_cate").val(test).prop("selected", true);
+$(document).ready(function(){
 
-	}
 
-});
-*/
+})
 
 
 var cssList = [];

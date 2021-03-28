@@ -31,7 +31,8 @@ public class ProductVo {
 
 	private int count;
 	private int cart_no;
-
+	private int sell_state;
+	
 	private List<ProductVo> payList;
 
 	private List<ReviewVo> reList;
@@ -47,12 +48,14 @@ public class ProductVo {
 	public ProductVo() {
 	}
 
+
+
 	public ProductVo(String prod_no, int sell_no, String prod_cate, String event_cate, String prod_name, int prod_price,
 			String prod_brand, String prod_desc, String prod_from, String prod_wash, String prod_qual,
 			String prod_detail, String prod_detail_img_name, String prod_detail_img_savename, String prod_date,
 			String prod_img_name, String prod_img_savename, int colorsize_no, String user_name, int stock, int count,
-			int cart_no, List<ProductVo> payList, List<ReviewVo> reList, List<QnaVo> qnaList, List<ProductVo> storeList,
-			List<ProdimgVo> pimgList, List<ColorsizeVo> cssList) {
+			int cart_no, int sell_state, List<ProductVo> payList, List<ReviewVo> reList, List<QnaVo> qnaList,
+			List<ProductVo> storeList, List<ProdimgVo> pimgList, List<ColorsizeVo> cssList) {
 		super();
 		this.prod_no = prod_no;
 		this.sell_no = sell_no;
@@ -76,6 +79,7 @@ public class ProductVo {
 		this.stock = stock;
 		this.count = count;
 		this.cart_no = cart_no;
+		this.sell_state = sell_state;
 		this.payList = payList;
 		this.reList = reList;
 		this.qnaList = qnaList;
@@ -83,6 +87,8 @@ public class ProductVo {
 		this.pimgList = pimgList;
 		this.cssList = cssList;
 	}
+
+
 
 	public String getProd_no() {
 		return prod_no;
@@ -308,6 +314,16 @@ public class ProductVo {
 		this.stock = stock;
 	}
 
+	
+	
+	public int getSell_state() {
+		return sell_state;
+	}
+
+	public void setSell_state(int sell_state) {
+		this.sell_state = sell_state;
+	}
+
 	@Override
 	public String toString() {
 		return "ProductVo [prod_no=" + prod_no + ", sell_no=" + sell_no + ", prod_cate=" + prod_cate + ", event_cate="
@@ -317,8 +333,8 @@ public class ProductVo {
 				+ ", prod_detail_img_savename=" + prod_detail_img_savename + ", prod_date=" + prod_date
 				+ ", prod_img_name=" + prod_img_name + ", prod_img_savename=" + prod_img_savename + ", colorsize_no="
 				+ colorsize_no + ", user_name=" + user_name + ", stock=" + stock + ", count=" + count + ", cart_no="
-				+ cart_no + ", payList=" + payList + ", reList=" + reList + ", qnaList=" + qnaList + ", storeList="
-				+ storeList + ", pimgList=" + pimgList + ", cssList=" + cssList + "]";
+				+ cart_no + ", sell_state=" + sell_state + ", payList=" + payList + ", reList=" + reList + ", qnaList="
+				+ qnaList + ", storeList=" + storeList + ", pimgList=" + pimgList + ", cssList=" + cssList + "]";
 	}
 
 }

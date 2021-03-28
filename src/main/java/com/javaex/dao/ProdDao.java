@@ -65,6 +65,12 @@ public class ProdDao {
 		return count;
 	}
 	
+	
+	//상품 삭제
+	public void prodSellStateUpdate(String prod_no) {
+		System.out.println("[Dao]상품판매상태변경" + prod_no);
+		sqlSession.update("prod.prodSellStateUpdate", prod_no);
+	}
 	//배송리스트 조회
 	public List<ProdBuyForVo> delmanageselectList(int sell_no){
 		System.out.println("[Dao]배송리스트 조회" + sell_no);
@@ -88,4 +94,6 @@ public class ProdDao {
 	public void delinfoUpdate(BuyProductVo bpvo) {
 		sqlSession.update("prod.delinfoUpdate", bpvo);
 	}
+	
+	
 }

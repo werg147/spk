@@ -62,19 +62,20 @@ public class ProdService {
 		//컬러사이즈 정보추가
 		List<ColorsizeVo> cssList = proddao.colorsizeSelectList(prod_no);
 		prodvo.setCssList(cssList);
-		System.out.println("[service] 상품정보 (사이즈추가 가져온 내용" + prodvo);
+		System.out.println("[service] 상품정보 (사이즈추가 가져온 내용" + cssList);
 		
 		//이미지정보 추가
 		List<ProdimgVo> pimgList = proddao.imgSelectList(prod_no);
 		prodvo.setPimgList(pimgList);
-		System.out.println("[service] 상품정보 (이미지추가 가져온 내용" + prodvo);
+		System.out.println("[service] 상품정보 (이미지추가 가져온 내용" + pimgList);
 		
 		return prodvo;
 	}
 	
 	//상품 삭제
-	public void prodRemove(String prodRemove) {
+	public void prodRemove(String prod_no) {
 		System.out.println("[service] 상품삭제하기");
+		proddao.prodSellStateUpdate(prod_no);
 		
 	}
 	

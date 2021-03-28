@@ -92,7 +92,7 @@
 										<div class="dropZone2">
 											<p>이미지를 끌어오세요</p>
 										</div>
-										<div style="width:400px; overflow-x: scroll;">
+										<div style="width: 400px; overflow-x: scroll;">
 											<div id="imgadd2"></div>
 										</div>
 									</div>
@@ -165,11 +165,11 @@
 </body>
 
 <script type="text/javascript">
-$(document).on('keyup', 'input[inputmode=numeric]', function(event) {
-	this.value = this.value.replace(/[^0-9]/g, ''); // 입력값이 숫자가 아니면 공백
-	this.value = this.value.replace(/,/g, ''); // ,값 공백처리
-	this.value = this.value.replace(/\B(?=(\d{3})+(?!\d))/g, ","); // 정규식을 이용해서 3자리 마다 , 추가 	
-});
+	$(document).on('keyup', 'input[inputmode=numeric]', function(event) {
+		this.value = this.value.replace(/[^0-9]/g, ''); // 입력값이 숫자가 아니면 공백
+		this.value = this.value.replace(/,/g, ''); // ,값 공백처리
+		this.value = this.value.replace(/\B(?=(\d{3})+(?!\d))/g, ","); // 정규식을 이용해서 3자리 마다 , 추가 	
+	});
 
 	var cssList = [];
 	var listnum = 0;
@@ -187,10 +187,9 @@ $(document).on('keyup', 'input[inputmode=numeric]', function(event) {
 	var uploadFiles1 = [];
 	var uploadFiles2 = [];
 
-	
 	var count1;
-	var minus =0;
-	
+	var minus = 0;
+
 	$(function() {
 		// 파일 드롭 다운
 		fileDropDown1();
@@ -256,7 +255,7 @@ $(document).on('keyup', 'input[inputmode=numeric]', function(event) {
 						+ '" title="'
 						+ escape(f.name)
 						+ '"/> \
-				<div class="close" data-idx="' + idx + '">삭제</div> \
+				<div class="close" data-idx="' + idx + '">x</div> \
 				</div>';
 
 				$("#imgadd1").append(div);
@@ -295,7 +294,7 @@ $(document).on('keyup', 'input[inputmode=numeric]', function(event) {
 		console.log("/////////////")
 
 		console.log(uploadFiles1)
-		minus ++;
+		minus++;
 		console.log("minus" + minus);
 
 		$target.parent().remove(); //프리뷰 삭제
@@ -512,8 +511,15 @@ $(document).on('keyup', 'input[inputmode=numeric]', function(event) {
 						//object.prod_name = prod_name;
 
 						//제품가격
-						var prod_price = $("[name='prod_price']").val();
 
+						function removeComma(str){
+							n = parseInt(str.replace(/,/g, ""));
+							return n;
+						}
+
+						var price = $("[name='prod_price']").val();
+						var prod_price = removeComma(price);
+						console.log(prod_price);
 						if (prod_price == null || prod_price == "") {
 							alert("제품가격을 입력해주세요.");
 							return false;
@@ -579,8 +585,7 @@ $(document).on('keyup', 'input[inputmode=numeric]', function(event) {
 						formData.append("detailfile",
 								$("input[name=detailfile]")[0].files[0]);
 
-						
-						var maincount = count1-minus;
+						var maincount = count1 - minus;
 						if (maincount > 1) {
 							console.log("대표이미지개수" + maincount);
 							alert("대표이미지는 한개만 등록가능합니다.");
