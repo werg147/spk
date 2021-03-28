@@ -72,6 +72,9 @@ public class BBuyVo {
 	
 	private String weightC;
 	
+	//레벨체크
+	private double rowLevel;
+	private double highLevel;
 	
 	public BBuyVo(int b_buy_no, int user_no, int booking_no, int profile_no, String b_buy_paytype, String b_buy_price, String b_buy_state,
 			String b_buy_player_state, String b_buy_date, String checkAll, String chkItem) {
@@ -98,6 +101,26 @@ public class BBuyVo {
 	
 
 
+
+
+	public double getRowLevel() {
+		return rowLevel;
+	}
+
+
+	public void setRowLevel(double rowLevel) {
+		this.rowLevel = rowLevel;
+	}
+
+
+	public double getHighLevel() {
+		return highLevel;
+	}
+
+
+	public void setHighLevel(double highLevel) {
+		this.highLevel = highLevel;
+	}
 
 
 	public String getBooking_state() {

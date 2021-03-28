@@ -40,7 +40,7 @@
 				<div class="sm_searching_item1">
 
 					<div class="sm_searching_item2_list2 ">
-						<a class="item2_list_a1" href="">
+						<a class="item2_list_a1" href="${pageContext.request.contextPath }/sparring/match?userno=${authUser.user_no}">
 							<div class="list1_btn2">
 								<div class="item2_list_a1_div">
 									<i class="fas fa-map-marker-alt"></i> 내게 맞는 매치 보기
@@ -111,7 +111,7 @@
 					<c:choose>
 						<c:when test="${vo.gym_img_savename == null}">
 							<img
-								class="card_img" src="${pageContext.request.contextPath}/upload/0.jpg" alt="">
+								class="card_img" src="${pageContext.request.contextPath}/upload/0.png" alt="">
 						</c:when>
 						<c:otherwise>
 							<img

@@ -32,10 +32,11 @@ public class SparringController {
 
 	// 스파링 리스트
 	@RequestMapping(value = "/match", method = { RequestMethod.GET, RequestMethod.POST })
-	public String match(Model model) {
+	public String match(Model model ,
+			 @RequestParam(value="userno", required=false, defaultValue="0")int userno) {
 		System.out.println("[Controller] : match()");
-		
-		List<BBuyVo> bBuyList = sparringService.match();
+		System.out.println("유저넘버 :" + userno);
+		List<BBuyVo> bBuyList = sparringService.match(userno);
 		model.addAttribute("bBuyList",bBuyList);
 		
 		return "matching/sparringList";
@@ -148,17 +149,16 @@ public class SparringController {
 
 		String[] eventName = request.getParameterValues("eventName");
 		
-		/*
-		 알고리즘 테스트
 		
-		 * */
-		sparringService.algo(profileVo, recordVo);
-		return "";
 		
 		 
-		/*
+		//sparringService.algo(profileVo, recordVo);
+		//return "";
+		
+		 
+		
 		//셀렉트키로 바로 profileNo 사용가능
-		sparringService.profileWrite(profileVo, eventName, recordVo);
+		sparringService.profileWrite(profileVo, eventName, recordVo,userNo);
 		
 		if(bookingNo == 0 &&selectbooking_no == 0 &&subnum ==0) {
 			System.out.println("대관 x 시합등록자");//0
@@ -199,7 +199,7 @@ public class SparringController {
 			System.out.println("잘못된 페이지");
 			return "";
 		}
-		*/
+		
 	}
 	/** 결제하기 **/
 	@RequestMapping(value = "/payment", method = { RequestMethod.GET, RequestMethod.POST })
@@ -231,19 +231,20 @@ public class SparringController {
 			@RequestParam(value="subnum",required=false,defaultValue="0")int subnum,
 			@RequestParam(value="bbuyno",required=false,defaultValue="0")int bbuyno,
 			@RequestParam(value="mainnum",required=false, defaultValue="0")int mainnum,
-			@RequestParam(value = "mybbuyno", required = false, defaultValue = "0") int mybbuyno
+			@RequestParam(value = "mybbuyno", required = false, defaultValue = "0") int mybbuyno,
+			@RequestParam(value="user_no", required = false, defaultValue = "0")int userNo
 						) {
 		System.out.println("[Controller] : pay()");
 		
 		System.out.println(bBuyVo);
 		if(mainnum == 1) {
 			sparringService.accept(partneruserno,bookingNo);
-			sparringService.acceptpay(bBuyVo, bbuyno,bookingNo);
+			sparringService.acceptpay(bBuyVo, bbuyno,bookingNo,userNo,partneruserno);
 			
 			return "store/paymentCp";
 		}else if(mainnum == 2){
 			
-			sparringService.acceptPartner(partneruserno,bookingNo,bBuyVo, bbuyno,bookingNo,mybbuyno);
+			sparringService.acceptPartner(partneruserno,bookingNo,bBuyVo, bbuyno,bookingNo,mybbuyno,userNo);
 			return "store/paymentCp";
 		}else {
 			
@@ -281,6 +282,7 @@ public class SparringController {
 			//대관 o시합등록자가 상대를 결정했을경우
 			
 			sparringService.accept(partnerUserNo,bookingNo);
+			sparringService.matching_competition(partnerUserNo,bookingNo);
 			return "redirect:/sparring/matchdetail?bookingno="+bookingNo+"&userno="+userNo+"&bbuyno="+bbuyNo;
 		}
 	}
@@ -288,10 +290,11 @@ public class SparringController {
 	//선택자가 거절
 	@RequestMapping(value = "/cancel", method = { RequestMethod.GET, RequestMethod.POST })
 	public String cancel(@RequestParam(value = "bbuyno", required = false, defaultValue = "0") int bbuyno,
-						@RequestParam(value = "bookingno", required = false, defaultValue = "0") int bookingno	) {
+						@RequestParam(value = "bookingno", required = false, defaultValue = "0") int bookingno,
+						@RequestParam(value = "userno", required = false, defaultValue = "0") int userNo) {
 		System.out.println("[Controller] : cancel()");
 		
-		sparringService.cancel(bbuyno,bookingno);
+		sparringService.cancel(bbuyno,bookingno,userNo);
 		
 		return "redirect:/";
 	}
@@ -365,12 +368,18 @@ public class SparringController {
 		
 	}
 	
-	@RequestMapping(value = "/test01", method = { RequestMethod.GET, RequestMethod.POST })
-	public String test(@RequestParam(value= "bookingno", required=false , defaultValue="0") int  bookingno,
-						@RequestParam(value= "bbuyno", required=false , defaultValue="0") int  bbuyno) {
-		System.out.println("test");
-		sparringService.test(bbuyno);
+	@RequestMapping(value = "/mymatch", method = { RequestMethod.GET, RequestMethod.POST })
+	public String mymatch(@RequestParam(value= "userno") int  userno) {
+		System.out.println("[Controller] : mymatch");
 		
-		return "";
+		if(userno == 0) {
+			System.out.println("잘못된 접근 표시");
+			return "";
+		}else {
+			sparringService.myMatch(userno);
+			return "mypage/mypage_buy/mymatch";
+			
+		}
+		
 	}
 }

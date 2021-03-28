@@ -84,7 +84,7 @@
 											<td colspan="2"><label for="prod_cate">매치불러오기</label></td>
 											<td>
 												<div class="">
-													<select  id="exer_cate">
+													<select class="sel1box" id="exer_cate">
 														<option selected>이전 매치</option>
 															<c:forEach items="${profileList}"  var="vo" varStatus="status">
 																<option id="before_item" data-no="${status.count}">${vo.profileDate}</option>
@@ -104,7 +104,7 @@
 											<td colspan="2"><label for="prod_cate">스파링종목</label></td>
 											<td>
 												<div id="spa_event1" class="">
-													<select id="exer_cate1" name="profileGymEvent">
+													<select class="sel1box" id="exer_cate1" name="profileGymEvent">
 														<option selected>종목 선택</option>
 														<option value="복싱">복싱</option>
 														<option value="킥복싱">킥복싱</option>
@@ -120,7 +120,7 @@
 											<td colspan="2"><label for="prod_cate">원하는 장소</label></td>
 											<td>
 												<div class="">
-													<button class="insert_btn_10">검색</button>
+													<input type="text" name="address" value="">
 												</div>
 											</td>
 										</tr>
@@ -132,7 +132,7 @@
 													<label for="day"></label><input id="exer_cata2" class="day_textbox" type="text" placeholder="21/03/08" name="day" value="">
 												</div>
 												<div class="">
-													<select id="exer_cate3" name="time">
+													<select class="sel1box" id="exer_cate3" name="time">
 														<option selected>시간선택</option>
 														<option value="9:00~12:00">9:00~12:00</option>
 														<option value="12:00~15:00">12:00~15:00</option>
@@ -154,10 +154,10 @@
 											<td colspan="2"><label for="prod_cate">주특기</label></td>
 											<td>
 												<div id="event_chked" class="chk_box">
-													<input type='checkbox' id="pro_chk" name='eventName' value='1' />복싱
-													<input type='checkbox' id="pro_chk" name='eventName' value='2' />킥복싱
-													<input type='checkbox' id="pro_chk" name='eventName' value='3' />종합격투기
-													<input type='checkbox' id="pro_chk" name='eventName' value='4' />주짓수
+													<input  type='checkbox' id="pro_chk" name='eventName' value='1' /><label >복싱</label>
+													<input  type='checkbox' id="pro_chk" name='eventName' value='2' /><label >킥복싱</label>
+													<input  type='checkbox' id="pro_chk" name='eventName' value='3' /><label >종합격투기</label>
+													<input  type='checkbox' id="pro_chk" name='eventName' value='4' /><label >주짓수</label>
 												</div>
 											</td>
 										</tr>
@@ -193,7 +193,7 @@
 												<div class="chk_box">
 													<input class="radio-value" type='radio' id="pro_chk" name='chk_major' value="no" />무
 													<input class="radio-value" type='radio' id="pro_chk" name='chk_major' value="yes"/>유
-													<input  id="major_info" type="text" id="prod_price" placeholder="전공을 입력해주세요." name="major" value="없음">
+													<input class="op1" id="major_info" type="text" id="prod_price" placeholder="전공을 입력해주세요." name="major" value="없음">
 												</div>
 											</td>
 										</tr>
@@ -203,8 +203,8 @@
 											<td colspan="2"><label for="exer_cate">최근운동</label></td>
 											<td>
 												<div class="content_product_insert_select_box">
-													<select id="exer_cate4" name="recentlyExer">
-														<option selected>최근운동</option>
+													<select class="sel1box" id="exer_cate4" name="recentlyExer">
+														<option  selected>최근운동</option>
 														<option  value="주 5회 이상">주 5회 이상</option>
 														<option  value="주 3회 이상">주 3회 이상</option>
 														<option  value="주 1회 이상">주 1회 이상</option>

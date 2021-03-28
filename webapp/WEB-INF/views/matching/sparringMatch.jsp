@@ -132,11 +132,11 @@
 											</c:forEach>
 											<!-- 대관 x -->
 											<c:if test="${map.bBuyVo.booking_no == 0}">
-												<p class="p_dae">원하는 장소 : 중랑구 상봉동</p>
+												<p class="p_dae">원하는 장소 : ${map.bBuyVo.b_buy_address}</p>
 											</c:if>
 											<!-- 대관 x end -->
 										</div>
-										<c:if test="${!map.bBuyList[0].booking_state eq '결제완료' }">
+										<c:if test="${map.booking_state eq '예약중' || map.booking_state eq '예약대기중' }">
 											<c:if test="${authUser.user_no != null }">
 												<c:if test="${map.booking_state eq '예약중' }">
 													<p id="conment_10">상대가 대관했거나 수락된 글 입니다</p>
@@ -155,7 +155,7 @@
 												<c:if test="${authUser.user_no != null }">
 													<c:if test="${authUser.user_no != map.bBuyVo.user_no }">
 														<c:if test="${authUser.user_no != map.bbuyVoUser.user_no }">
-															
+															<c:if test="${empty map.bBuyList[0]  || !map.bBuyList[0].b_buy_player_state eq '선택자' }">
 																<c:choose>
 																	<c:when test="${map.bBuyVo.booking_no == 0 }">
 																		<a href="${pageContext.request.contextPath }/sparring/rent?subnum=1&bbuyno=${map.bBuyVo.b_buy_no}"><button class="dae_button_item2">
@@ -168,6 +168,7 @@
 																			</button></a>
 																	</c:otherwise>
 																</c:choose>
+															</c:if>
 															
 														</c:if>
 													</c:if>
@@ -560,7 +561,7 @@
 							</a>
 						</div>
 						<div>
-							<a href="${pageContext.request.contextPath }/sparring/cancel?bbuyno=${ map.bBuyList[0].b_buy_no}&bookingno=${map.bBuyVo.booking_no}">
+							<a href="${pageContext.request.contextPath }/sparring/cancel?bbuyno=${ map.bBuyList[0].b_buy_no}&bookingno=${map.bBuyVo.booking_no}&userno=${map.bBuyVo.user_no}">
 								<button class="dae_button_item3">
 									<span class="dea_btn_3">취소하기</span>
 								</button>

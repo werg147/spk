@@ -5,10 +5,91 @@
 <mapper namespace="bbuy">
 	
 	
+	
 	 <resultMap type="map" id="scoreMap">
         <result column="sumscore" property="sumScore"/>
         <result column="sumwin" property="sumWin"/>
     </resultMap>
+	
+	<select id="selectOneUserVo" parameterType="int" resultType="UserVo">
+		<![CDATA[
+			select user_level
+			from users
+			where user_no = #{user_no}	
+			
+		]]>
+		
+	
+	
+	</select>
+	
+	
+	<select id="selecteListBBuySearchLevel" parameterType="BBuyVo" resultType="BBuyVo">
+	<![CDATA[
+
+			select b.b_buy_no,
+			       b.profile_no,
+			       b.user_no,
+			       p.nickname,
+			       p.career,
+			       b.b_buy_price,
+			       b.b_buy_player_state,
+			       b.b_buy_address,
+       			   b.b_buy_event,
+       			   b.b_buy_time,
+       			   b.b_buy_day,
+			       k.booking_no ,
+			       k.booking_date,
+			       k.booking_start,
+			       k.booking_end,
+			       k.gym_name,
+			       k.gym_address,
+			       k.gym_event,
+			       k.gym_img_savename,
+                   p.user_level
+			from bbuy b , (select p.profile_no,
+			                      p.user_no,
+			                      u.user_no,
+			                      p.career,
+			                      u.nickname,
+                                  u.user_level
+			               from profile p,users u
+			               where p.user_no = u.user_no)p,(select b.booking_no,
+			                                                     b.booking_start,
+			                                                     b.booking_end,
+			                                                     b.booking_date,
+			                                                     g.gym_name,
+			                                                     g.gym_address,
+			                                                     g.gym_event,
+			                                                     i.gym_img_savename,
+			                                                     i.gym_img_type
+			                                              from booking b , gym g ,gymImg i
+			                                              where b.gym_no = g.gym_no
+			                                              and g.gym_no = i.gym_no
+			                                              and i.gym_img_type = 'main')k
+			where b.profile_no = p.profile_no(+)
+			and b.booking_no = k.booking_no(+)
+			and b.b_buy_player_state = '시합등록자'
+            and (p.user_level >= #{rowLevel} and #{highLevel} >= p.user_level)
+			and not b.user_no =  #{user_no}
+			order by b_buy_no desc
+	
+	
+	]]>
+	
+	
+	
+	</select>
+	    
+    <update id="updateUserLevel" parameterType="UserVo">
+    <![CDATA[
+    	 update users
+ 		 set user_level = #{user_level}
+ 		 where user_no = #{user_no}
+    
+    
+    ]]>
+    </update>
     
     
 	<select id="selectBBUYSC" parameterType="int" resultType="BBuyVo">

@@ -74,11 +74,10 @@ public class SparringDao {
 
 	public List<EventVo> selectListEvent(int profileNo) {
 		// TODO Auto-generated method stub
-		System.out.println("[Dao] : selectListEvent");
+		//System.out.println("[Dao] : selectListEvent");
 		
 		List<EventVo> eventList = sqlSession.selectList("event.selectListEvent",profileNo);
 		
-		System.out.println("eventList :"+eventList);
 		
 		return eventList;
 	}
@@ -342,6 +341,26 @@ public class SparringDao {
 		System.out.println("[Dao] :  selectBBUYSC ");
 		
 		 return sqlSession.selectOne("bbuy.selectBBUYSC",bbuyno);
+	}
+
+	public void updateUserLevel(UserVo userVo) {
+		System.out.println("[Dao] :   updateUserLevel ");
+		
+		sqlSession.update("bbuy.updateUserLevel",userVo);
+	}
+
+	public List<BBuyVo> selectBBuyList(BBuyVo leVo) {
+		System.out.println("[Dao] :   selectBBuyList ");
+		
+		return sqlSession.selectList("bbuy.selecteListBBuySearchLevel",leVo);
+		
+	}
+
+	public UserVo selectOneUserVo(int userNo) {
+		System.out.println("[Dao] :  selectOneUserVo ");
+		
+		return sqlSession.selectOne("bbuy.selectOneUserVo",userNo);
+		
 	}
 
 	

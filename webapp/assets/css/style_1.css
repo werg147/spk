@@ -37,10 +37,16 @@
 /* sparring mach */
 /* search */
 .day_textbox {
-  width: 154px;
+  width: 168px;
+}
+.sel1box{
+	width : 173px;
 }
 .form_day_10 {
   margin-bottom: 10px;
+}
+.op1{
+	width : 110px;
 }
 .sm {
   border-bottom: 3px solid black;
@@ -312,6 +318,10 @@ input:-ms-input-placeholder {
   border: 1px solid rgba(0, 0, 0, 0.08);
 
   border-radius: 10px;
+}
+.card:hover {
+  box-shadow: 1px 1px 20px #ddd;
+  transition: 0.4s all;
 }
 .card1 {
   display: flex;

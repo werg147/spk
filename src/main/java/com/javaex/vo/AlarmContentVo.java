@@ -19,7 +19,8 @@ public class AlarmContentVo {
 
 	public String matching_accept = "<b>[매치진행중]</b> 매치신청이 수락되었습니다. 잔액을 결제해주세요.";
 	public String matching_refused = "<b>[매칭종료]</b> 매치신청이 거절되었습니다.";
-
+	public String matching_cancled = "<b>[매칭종료]</b> 매치신청이 취소되었습니다.";
+	
 	public String matching_complete = "<b>[매칭종료]</b> 매치가 종료되었습니다.";
 
 	public AlarmContentVo() {
@@ -45,6 +46,23 @@ public class AlarmContentVo {
 		this.matching_accept = matching_accept;
 		this.matching_refused = matching_refused;
 		this.matching_complete = matching_complete;
+	}
+	
+	
+	public String getPayment_complete_toSeller() {
+		return payment_complete_toSeller;
+	}
+
+	public void setPayment_complete_toSeller(String payment_complete_toSeller) {
+		this.payment_complete_toSeller = payment_complete_toSeller;
+	}
+
+	public String getMatching_cancled() {
+		return matching_cancled;
+	}
+
+	public void setMatching_cancled(String matching_cancled) {
+		this.matching_cancled = matching_cancled;
 	}
 
 	public String getPayment_complete() {

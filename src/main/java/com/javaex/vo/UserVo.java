@@ -13,7 +13,7 @@ public class UserVo {
 	private String address;
 	private String user_photo;
 	private int user_phone;
-	private int user_level;
+	private double user_level;
 	private String user_date;
 
 
@@ -157,12 +157,12 @@ public class UserVo {
 		this.user_phone = user_phone;
 	}
 
-	public int getUser_level() {
+	public double getUser_level() {
 		return user_level;
 	}
 
-	public void setUser_level(int user_level) {
-		this.user_level = user_level;
+	public void setUser_level(double userLevel) {
+		this.user_level = userLevel;
 	}
 
 	public String getUser_date() {
