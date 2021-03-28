@@ -200,7 +200,7 @@
 								<ul class="goods_group_list test">
 									<li id="" class="goods_pay_item">
 										<div class="goods_item">
-											<a href="" class="goods_thumb"> <img src="${pageContext.request.contextPath}/assets/image/글러브.jpg" alt="파워글러브" width="90" height="90">
+											<a href="${pageContext.request.contextPath }/mypage/제품상세페이지?buy_no=${buyList.buy_no}" class="goods_thumb"> <img src="${pageContext.request.contextPath}/assets/image/글러브.jpg" alt="파워글러브" width="90" height="90">
 											</a>
 
 											<div class="goods_info">
