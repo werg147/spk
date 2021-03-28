@@ -11,7 +11,8 @@
 			        p.prod_name,
 			        p.prod_price,
 			        b.buy_date,
-			        bp.buy_del_state
+			        bp.buy_del_state,
+			        b.buy_no
 			FROM    users u, product p, buyproduct bp, buy b
 			WHERE   u.user_no = b.user_no
 			        and b.buy_no = bp.buy_no

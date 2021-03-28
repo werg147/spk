@@ -204,7 +204,7 @@
 											</a>
 
 											<div class="goods_info">
-												<a href="" class="goods">
+												<a href="${pageContext.request.contextPath }/mypage/제품상세페이지?buy_no=${buyList.buy_no}" class="goods">
 													<p class="name" name="name">${buyList.prod_name }</p>
 													<ul class="info">
 														<li><span class="blind" name="price">상품금액</span>${buyList.prod_price }원</li>

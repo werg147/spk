@@ -76,26 +76,28 @@ public class Mypage_buyController {
 
 	/* 배송준비 중 알람 */
 	/*
-	@RequestMapping(value = "/delReady", method = { RequestMethod.GET, RequestMethod.POST })
-	public void delReady(@RequestParam("buyprod_no") int buyprod_no) {
-
-		aServ.deliveryReady(buyprod_no);
-
-		// 포워드 할 페이지
-
-	}
+	 * @RequestMapping(value = "/delReady", method = { RequestMethod.GET,
+	 * RequestMethod.POST }) public void delReady(@RequestParam("buyprod_no") int
+	 * buyprod_no) {
+	 * 
+	 * aServ.deliveryReady(buyprod_no);
+	 * 
+	 * // 포워드 할 페이지
+	 * 
+	 * }
 	 */
 	/* 배송시작 알람 */
 	/*
-	@RequestMapping(value = "/delStart", method = { RequestMethod.GET, RequestMethod.POST })
-	public void delStart(@RequestParam("buyprod_no") int buyprod_no) {
-
-		aServ.delStart(buyprod_no);
-
-		// 포워드 할 페이지
-
-	}
-*/
+	 * @RequestMapping(value = "/delStart", method = { RequestMethod.GET,
+	 * RequestMethod.POST }) public void delStart(@RequestParam("buyprod_no") int
+	 * buyprod_no) {
+	 * 
+	 * aServ.delStart(buyprod_no);
+	 * 
+	 * // 포워드 할 페이지
+	 * 
+	 * }
+	 */
 	/* 배송완료 알람 */
 	@RequestMapping(value = "/delcomplete", method = { RequestMethod.GET, RequestMethod.POST })
 	public void delcomplete(@RequestParam("buyprod_no") int buyprod_no) {
@@ -195,6 +197,12 @@ public class Mypage_buyController {
 		int user_no = authUser.getUser_no();
 
 		/* #1. 배송상품내역 */
+		BuyListVo buylistVo = new BuyListVo();
+
+		BuyVo buyVo = new BuyVo();
+
+		buylistVo.setBuy_no(buyVo.getBuy_no());
+
 		List<BuyListVo> buyList = blServ.buylist(user_no);
 
 		System.out.println("[BuyList Ctrl]: " + buyList.toString());
