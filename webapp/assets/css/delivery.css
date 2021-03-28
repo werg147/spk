@@ -972,10 +972,14 @@ table {
 
 .product_insert_content #imgadd1, .product_insert_content #imgadd2 {
 	display: flex;
-	width: 150px;
+	width: fit-content;
 	height: 150px;
 }
 
+#img_add_box{
+	width: 400px; 
+	overflow-x: scroll;
+}
 
 /*여기부터 자바스크립트 생성 css*/
 .thumb img {
@@ -985,26 +989,38 @@ table {
 
 .thumb {
 	display: flex;
-	width: 150px;
+	width: fit-content;
 	height: 150px;
-	margin-left: 20px;
+	margin-left: 10px;
 }
 
-/*삭제버튼*/
-.thumb>.close {
+/*컬러사이즈삭제버튼*/
+.close {
+	cursor: pointer;
+	border-left: solid 1px #dddfe1;
+	padding : 0px 3px 0px 3px;
+	width : fit-content;
+}
+.close:hover {
+	background: #d4d4d4;
+	text-decoration: none;
+}
+
+/*이미지삭제버튼*/
+.thumb>.imgclose {
 	border: solid 1px #dddfe1;
-	height : 25px;
-	margin-top : 0px;
-	padding-top: 0px;
+	padding: 0px 8px 8px 8px;
+	height : 26px;
 	background-color: white;
 	cursor: pointer;
 	font-size : 25px;
+	vertical-align : text-top;
 	flex-direction: column;
 	align-items: flex-start;
 	
 }
 
-.thumb>.close:hover {
+.thumb>.imgclose:hover {
 	background: #d4d4d4;
 	text-decoration: none;
 }
@@ -1029,7 +1045,7 @@ table {
 	width: fit-content;
 }
 
-.colorsizestocktab .thumb2 .close{
+.colorsizestocktab .thumb2 .imgclose{
 	font-size : 17px;
 	height :  fit-content;
 	padding-left: 5px;

@@ -67,6 +67,13 @@ public class UserController {
 		return "mypage/mypage_seller/seller_notice";
 	}
 
+	//회원정보입력 페이지열기
+	@RequestMapping(value = "/joininfo", method = { RequestMethod.GET, RequestMethod.POST })
+	public String joinInfo() {
+		System.out.println("[cnt]회원정보입력");
 
+		
+	return "main/joininfo";
+	}
 
 }

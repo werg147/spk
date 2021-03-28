@@ -1406,7 +1406,7 @@ element.style {
 
 .amount_view {
 	padding: 13px 20px 90px;
-	border-top: 10px solid #f4f4f4; -
+	border-top: 10px solid #f4f4f4;
 	-safe-area-inset-bottom: env(safe-area-inset-bottom);
 	padding-bottom: calc(90px + var(- -safe-area-inset-bottom));
 }
@@ -1571,6 +1571,20 @@ element.style {
 .add_btn:hover {
 	text-decoration: none;
 	color: #e60012;
+}
+
+.add_div_box #nickname, .add_div_box #user_id {
+	width: 400px;
+	height: 10px;
+	padding: 8px 6px;
+	margin-left : 5px;
+	margin-bottom: 10px;
+	border: 1px solid #dddfe1;
+	border-radius: 0px;
+}
+
+.add_div_box #user_photo{
+	border: none;
 }
 
 #hp #hp_title {
@@ -1932,5 +1946,10 @@ element.style {
 
 .basic .content_product_insert_select_box {
 	float: left;
+}
+
+#joinmiddle .content_bottom form{
+	margin-left : 17%;
+	
 }
 /* //matchinfo.html */

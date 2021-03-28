@@ -81,7 +81,9 @@
 										<div class="dropZone1">
 											<p>이미지를 끌어오세요</p>
 										</div>
-										<div id="imgadd1"></div>
+										<div id="img_add_box">
+											<div id="imgadd1"></div>
+										</div>
 									</div>
 								</td>
 							</tr>
@@ -92,12 +94,11 @@
 										<div class="dropZone2">
 											<p>이미지를 끌어오세요</p>
 										</div>
-										<div style="width: 400px; overflow-x: scroll;">
+										<div id="img_add_box">
 											<div id="imgadd2"></div>
 										</div>
 									</div>
 								</td>
-
 							</tr>
 							<tr class="sizecolor_div">
 								<td>색상 및 사이즈</td>
@@ -106,7 +107,7 @@
 									type="text" id="color" name="color"> <label
 									for="prod_size">사이즈</label> <input type="text" id="prod_size"
 									name="prod_size"> <label for="stock">재고</label> <input
-									type="text" id="stock" name="stock">
+									type="number" id="stock" name="stock">
 									<button id="sizecolor_btn" type="button">등록</button>
 									<div class="colorsizestocktab">
 										<div id="sizebox"></div>
@@ -187,8 +188,12 @@
 	var uploadFiles1 = [];
 	var uploadFiles2 = [];
 
-	var count1;
-	var minus = 0;
+	var count1 = 0;
+	var count2 = 0;
+	var minus1 = 0;
+	var minus2 = 0;
+	var colorminus = 0;
+	var listnum;
 
 	$(function() {
 		// 파일 드롭 다운
@@ -255,7 +260,7 @@
 						+ '" title="'
 						+ escape(f.name)
 						+ '"/> \
-				<div class="close" data-idx="' + idx + '">x</div> \
+				<div class="imgclose" data-idx="' + idx + '">X</div> \
 				</div>';
 
 				$("#imgadd1").append(div);
@@ -286,7 +291,7 @@
 		}
 	}
 
-	$("#imgadd1").on("click", ".close", function(e) {
+	$("#imgadd1").on("click", ".imgclose", function(e) {
 		var $target = $(e.target);
 		var idx = $target.attr('data-idx');
 		uploadFiles1[idx].upload = 'disable'; //삭제된 항목은 업로드하지 않기 위해 플래그 생성
@@ -294,8 +299,8 @@
 		console.log("/////////////")
 
 		console.log(uploadFiles1)
-		minus++;
-		console.log("minus" + minus);
+		minus1++;
+		console.log("minus" + minus1);
 
 		$target.parent().remove(); //프리뷰 삭제
 
@@ -362,7 +367,7 @@
 						+ '" title="'
 						+ escape(f.name)
 						+ '"/> \
-				<div class="close" data-idx="' + idx + '">x</div> \
+				<div class="imgclose" data-idx="' + idx + '">X</div> \
 				</div>';
 
 				$("#imgadd2").append(div);
@@ -393,7 +398,7 @@
 		}
 	}
 
-	$("#imgadd2").on("click", ".close", function(e) {
+	$("#imgadd2").on("click", ".imgclose", function(e) {
 		var $target = $(e.target);
 		var idx = $target.attr('data-idx');
 		uploadFiles2[idx].upload = 'disable'; //삭제된 항목은 업로드하지 않기 위해 플래그 생성
@@ -402,7 +407,8 @@
 		for (let i = 0; i < fileList2.length; i++) {
 			console.log(fileList2[i])
 		}
-
+		minus2++;
+		console.log("minus" + minus2);
 		$target.parent().remove(); //프리뷰 삭제
 
 	});
@@ -418,6 +424,23 @@
 		var color = $("#color").val();
 		var prod_size = $("#prod_size").val();
 		var stock = $("#stock").val();
+
+		if (color == null || color == "") {
+			alert("색상을 입력해주세요.");
+			return false;
+		}
+		if (prod_size == null || prod_size == "") {
+			alert("사이즈를 입력해주세요. (사이즈가 없는 상품은 free로 기재)");
+			return false;
+		}
+		if (stock == null || stock == "") {
+			alert("재고를 입력해주세요.");
+			return false;
+		}
+		if (stock < 1) {
+			alert("재고는 1개이상 입력해주세요.");
+			return false;
+		}
 
 		cssVo = {
 			color : color,
@@ -435,21 +458,24 @@
 		console.log("선택자추가");
 
 		listnum++;
+		console.log("색상추가개수" + listnum);
 	});
 
 	/*옵션의 삭제버튼 클릭할때 */
 	$(".colorsizestocktab").on("click", ".close", function() {
 		var $this = $(this);
-		var listnum = $this.data("listnum");
-		console.log(listnum);
+		listnum = $this.data("listnum");
 		deletedata(listnum);
+		console.log(listnum);
+		colorminus++
+		console.log("색상제거개수" + colorminus)
 	});
 
 	function add(color, prod_size, stock, listnum) {
 		var div = '<div class="thumb2" id="' +listnum+'">'
 		div += '<div> 색상: ' + color + ', 사이즈: ' + prod_size + ', 재고: ' + stock
 				+ '</div>'
-		div += '<div data-listnum="'+listnum+'" class="close">X</a>'
+		div += '<div data-listnum="'+listnum+'" class="close"><a>X</a>'
 		div += '</div>'
 		console.log("번호추가: " + listnum);
 		$("#sizebox").append(div);
@@ -512,7 +538,7 @@
 
 						//제품가격
 
-						function removeComma(str){
+						function removeComma(str) {
 							n = parseInt(str.replace(/,/g, ""));
 							return n;
 						}
@@ -582,13 +608,37 @@
 						formData.append("sell_no", sell_no);
 						//object.sell_no = sell_no;
 
+						var detailfile = $("input[name=detailfile]").val();
+						//파일 선택 필수
+						if (detailfile == null || detailfile == "") {
+							alert("상세페이지 이미지를 등록해주세요.");
+							return false;
+						}
+
 						formData.append("detailfile",
 								$("input[name=detailfile]")[0].files[0]);
 
-						var maincount = count1 - minus;
+						//대표이미지 개수 1개까지 등록가능
+						var maincount = count1 - minus1;
 						if (maincount > 1) {
 							console.log("대표이미지개수" + maincount);
 							alert("대표이미지는 한개만 등록가능합니다.");
+							return false;
+						}
+						if (maincount < 1) {
+							console.log("대표이미지개수" + maincount);
+							alert("대표이미지를 등록해주세요.");
+							return false;
+						}
+
+						//대표이미지 개수 1개이상 필수등록
+						var maincount2 = count2 - minus2;
+
+						//사이즈 등록필수알림
+						var colorcount = listnum - colorminus;
+						if (colorcount < 1) {
+							console.log("색상등록개수" + colorcount);
+							alert("색상 및 사이즈를 등록해주세요.");
 							return false;
 						}
 

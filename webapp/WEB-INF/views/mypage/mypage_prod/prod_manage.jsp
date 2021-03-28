@@ -91,7 +91,7 @@
 									</table>
 									<div class="product_content_btn">
 										<button class="product_modify_btn">
-											<a href="${pageContext.request.contextPath}/mypage/prod/prodmodify?prod_no=${prodvo.prod_no}">수정하기</a>
+											<a href="${pageContext.request.contextPath}/mypage/prod/prodmodifyform?prod_no=${prodvo.prod_no}">수정하기</a>
 										</button>
 										<button class="product_delete_btn">
 											<a href="${pageContext.request.contextPath}/mypage/prod/prodremove?prod_no=${prodvo.prod_no}">삭제하기</a>

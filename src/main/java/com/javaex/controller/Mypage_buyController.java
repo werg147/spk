@@ -26,6 +26,7 @@ import com.javaex.vo.BuyProductVo;
 import com.javaex.vo.BuyVo;
 import com.javaex.vo.CartInfoVo;
 import com.javaex.vo.CartVo;
+import com.javaex.vo.ProductVo;
 import com.javaex.vo.UserVo;
 
 @Controller
@@ -283,5 +284,16 @@ public class Mypage_buyController {
 
 		return "mypage/mypage_buy/buy_complete";
 	}
+	
+	//회원정보관리 페이지 열기
+	@RequestMapping(value = "/infoupdate", method = { RequestMethod.GET, RequestMethod.POST })
+	public String infoUpdate(HttpSession session) {
+		System.out.println("[cnt]회원정보수정");
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		
+	return "mypage/mypage_buy/info_update";
+	}
+
+	
 
 }

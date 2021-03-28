@@ -121,7 +121,8 @@
 			select prod_no,
 			       prod_img_no,
 			       prod_img_name,
-			       prod_img_savename
+			       prod_img_savename,
+			       prod_img_type
 			from prodimg
 			where prod_no = #{prod_no}
 		]]>

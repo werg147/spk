@@ -38,7 +38,7 @@
 					class="arrow">></span></a></li>
 			<li><a href="${pageContext.request.contextPath}/mypage/buylist"><span class="menu">구매내역</span><span
 					class="arrow">></span></a></li>
-			<li><a href="../mypage_buy/info_update.html"><span
+			<li><a href="${pageContext.request.contextPath}/mypage/infoupdate"><span
 					class="menu">회원정보관리</span><span class="arrow">></span></a></li>
 			<li class="side_menu_last"><a href="../mypage_buy/matchinfo.html"><span
 					class="menu">매칭프로필관리</span><span class="arrow">></span></a></li>

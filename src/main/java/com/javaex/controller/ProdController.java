@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.javaex.service.ProdService;
 import com.javaex.vo.BuyProductVo;
+import com.javaex.vo.ColorsizeVo;
 import com.javaex.vo.ProdBuyForVo;
+import com.javaex.vo.ProdimgVo;
 import com.javaex.vo.ProductVo;
 import com.javaex.vo.SellerVo;
 import com.javaex.vo.UserVo;
@@ -39,15 +41,25 @@ public class ProdController {
 		return "mypage/mypage_prod/prod_manage";
 	}
 	
-	//상품정보 수정하기
-	@RequestMapping(value = "/prodmodify", method = { RequestMethod.GET, RequestMethod.POST })
-	public String prodModify(@RequestParam ("prod_no") String prod_no,
+	//상품정보 수정하기 정보가져오기
+	@ResponseBody
+	@RequestMapping(value = "/prodModifyinfo", method = { RequestMethod.GET, RequestMethod.POST })
+	public ProductVo prodModifyinfo(@RequestParam ("prod_no") String prod_no,
 							  Model model){
 		System.out.println("[cnt]상품정보 수정하기" + prod_no);	
 		ProductVo prodvo = prodservice.selectPord(prod_no);
-		
+
+		return prodvo;
+	}
+	
+	//상품정보 수정하기 페이지
+	@RequestMapping(value = "/prodmodifyform", method = { RequestMethod.GET, RequestMethod.POST })
+	public String prodModifyForm(@RequestParam ("prod_no") String prod_no,
+							  Model model){
+		System.out.println("[cnt]상품정보 수정하기" + prod_no);	
+		ProductVo prodvo = prodservice.selectPord(prod_no);
 		model.addAttribute("prodvo", prodvo);
-		
+	
 		return "mypage/mypage_prod/prod_modify_form";
 	}
 
