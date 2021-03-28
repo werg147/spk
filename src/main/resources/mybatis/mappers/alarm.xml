@@ -9,15 +9,10 @@
 				select user_no
 				from bbuy
 				where b_buy_no = #{bbuyno}
-		
-		
 		]]>
-
 	</select>
 
-
-	<insert id="insertMatchAlarm" parameterType="AlarmVo">
-		
+	<insert id="insertMatchAlarm" parameterType="AlarmVo">		
 		<![CDATA[
 			INSERT INTO alarm VALUES(seq_alarm_no.nextval, 
 								0, 
@@ -27,11 +22,8 @@
 								1,
 								#{alarm_title},
 								2
-								)	
-		
-		
+								)		
 		]]>
-
 	</insert>
 
 	<insert id="insertResistrar" parameterType="AlarmVo">
@@ -44,11 +36,8 @@
 								1,
 								#{alarm_title},
 								2
-								)	
-		
-		
+								)		
 		]]>
-
 	</insert>
 
 	<insert id="inserAlarmtoseller" parameterType="AlarmVo">
@@ -66,8 +55,8 @@
 		
 		
 		]]>
-
 	</insert>
+
 	<select id="selectSellno" parameterType="int" resultType="AlarmVo">
 	<![CDATA[
 		SELECT s.user_no,
@@ -76,11 +65,8 @@
 		WHERE B.BOOKING_NO = #{booking_no}
 		and b.gym_no = g.gym_no
 		and g.sell_no =  s.sell_no	
-	
 	]]>
 	</select>
-
-
 
 	<select id="selectAlarm" parameterType="int" resultType="AlarmVo">
 		<![CDATA[

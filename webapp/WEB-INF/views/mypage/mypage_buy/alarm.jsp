@@ -53,7 +53,6 @@
 											<span><a class="Addr_goods" href="">${aList.gym_name }</a></span>
 										</c:otherwise>
 									</c:choose>
-
 									<p class="Notice_alarm">${aList.alarm_content }</p>
 								</div>
 							</div>

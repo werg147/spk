@@ -186,60 +186,101 @@ public class Mypage_buyController {
 
 	/* 구매내역 출력 */
 	/* #1. 배송상품내역 */
-	/* #2. 대관상품내역 */
-	/* #3. 매칭상품내역 */
 	@RequestMapping(value = "/buylist", method = { RequestMethod.GET, RequestMethod.POST })
 	public String buylist(Model model, HttpSession session) {
 
-		System.out.println("[Alarm Ctrl]: list 진입");
+		System.out.println("[BuyList Ctrl]: buylist 진입");
 
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 
 		int user_no = authUser.getUser_no();
 
-		/* #1. 배송상품내역 */
 		BuyListVo buylistVo = new BuyListVo();
 
 		BuyVo buyVo = new BuyVo();
 
 		buylistVo.setBuy_no(buyVo.getBuy_no());
 
+		/* #1. 배송상품내역 */
 		List<BuyListVo> buyList = blServ.buylist(user_no);
 
 		System.out.println("[BuyList Ctrl]: " + buyList.toString());
+
+		/* #1. 배송상품내역 */
+		model.addAttribute("BuyList", buyList);
+
+		return "mypage/mypage_buy/buylist";
+
+	}
+
+	/* #2. 대관상품내역 */
+	@RequestMapping(value = "/bookinglist", method = { RequestMethod.GET, RequestMethod.POST })
+	public String bookinglist(Model model, HttpSession session) {
+
+		System.out.println("[BuyList Ctrl]: bookinglist 진입");
+
+		UserVo authUser = (UserVo) session.getAttribute("authUser");
+
+		int user_no = authUser.getUser_no();
+
+		BuyListVo buylistVo = new BuyListVo();
+
+		BuyVo buyVo = new BuyVo();
+
+		buylistVo.setBuy_no(buyVo.getBuy_no());
 
 		/* #2. 대관상품내역 */
 		List<BookingVo> bookingList = blServ.bookinglist(user_no);
 
 		System.out.println("[BuyList Ctrl]: " + bookingList.toString());
 
+		/* #2. 대관상품내역 */
+		model.addAttribute("BookingList", bookingList);
+
+		return "mypage/mypage_buy/bookinglist";
+
+	}
+
+	/* #3. 매칭상품내역 */
+	@RequestMapping(value = "/matchinglist", method = { RequestMethod.GET, RequestMethod.POST })
+	public String matchinglist(Model model, HttpSession session) {
+
+		System.out.println("[BuyList Ctrl]: matchinglist 진입");
+
+		UserVo authUser = (UserVo) session.getAttribute("authUser");
+
+		int user_no = authUser.getUser_no();
+
+		BuyListVo buylistVo = new BuyListVo();
+
+		BuyVo buyVo = new BuyVo();
+
+		buylistVo.setBuy_no(buyVo.getBuy_no());
+
 		/* #3. 매칭상품내역 */
 		List<BBuyVo> bbuyList = blServ.bbuylist(user_no);
 
-		/* #1. 배송상품내역 */
-		model.addAttribute("BuyList", buyList);
-
-		/* #2. 대관상품내역 */
-		model.addAttribute("BookingList", bookingList);
+		System.out.println("[BuyList Ctrl]: " + bbuyList.toString());
 
 		/* #3. 매칭상품내역 */
 		model.addAttribute("BbuyList", bbuyList);
 
-		return "mypage/mypage_buy/buylist";
+		return "mypage/mypage_buy/matchinglist";
 
 	}
-	
-	//구매내역_배송상세페이지
-	@RequestMapping(value="/buydel")
+	/* //구매내역 출력 */
+
+	// 구매내역_배송상세페이지
+	@RequestMapping(value = "/buydel")
 	public String buydel(@RequestParam("buy_no") int buy_no, Model model) {
 		System.out.println("[Controller] buydel()");
 		System.out.println("바이넘버: " + buy_no);
-		
-		Map<String,Object> bmap = blServ.buydel(buy_no);
+
+		Map<String, Object> bmap = blServ.buydel(buy_no);
 		System.out.println("맵: " + bmap);
-		
+
 		model.addAttribute("bmap", bmap);
-	
+
 		return "mypage/mypage_buy/buy_complete";
 	}
 
