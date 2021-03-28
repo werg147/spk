@@ -207,7 +207,7 @@ public class StoreController {
 		return "redirect:/store/stopcp?buy_no=" + buy_no ;
 	}
 	
-	//상품결제완료 - 매칭추천
+	//상품결제완료 - 매칭추천 (종목 최빈값 찾는중)
 	@RequestMapping(value="/stopcp")
 	public String stoPcp(HttpSession session ) {
 		System.out.println("[Controller] stopcp()");
@@ -218,6 +218,12 @@ public class StoreController {
 		return "store/paymentCp";
 	}
 	
-	
+	//지도 api 테스트
+	@RequestMapping(value="/maptest")
+	public String maptest() {
+		System.out.println("[Controller] maptest()");
+		
+		return "store/mapTest";
+	}
 
 }
