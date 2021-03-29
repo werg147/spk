@@ -56,7 +56,7 @@
 							<li class="sub_on"><a href="${pageContext.request.contextPath}/mypage/bookinglist" class="t1_1"> <span>대관상품</span>
 							</a></li>
 
-							<li class="sub_on"><a href="" class="t1_1"> <span>매칭상품</span>
+							<li class="sub_on"><a href="${pageContext.request.contextPath}/mypage/matchinglist" class="t1_1"> <span>매칭상품</span>
 							</a></li>
 						</ul>
 					</div>
@@ -75,8 +75,8 @@
 								<ul class="goods_group_list test">
 									<li id="" class="goods_pay_item">
 										<div class="goods_item">
-											<a href="${pageContext.request.contextPath }/mypage/buydel?buy_no=${buyList.buy_no}" class="goods_thumb"> <img src="${pageContext.request.contextPath}/assets/image/글러브.jpg" alt="파워글러브"
-												width="90" height="90">
+											<a href="${pageContext.request.contextPath }/mypage/buydel?buy_no=${buyList.buy_no}" class="goods_thumb">
+											<img src="${pageContext.request.contextPath}/assets/image/글러브.jpg" alt="파워글러브" width="90" height="90">
 											</a>
 
 											<div class="goods_info">
@@ -87,7 +87,8 @@
 
 														<li class="date"><span class="blind" name="date">상품구매날짜</span>${buyList.buy_date }</li>
 													</ul>
-												</a> <span class="state_statusName" name="state">${buyList.buy_del_state }</span>
+												</a>
+												<span class="state_statusName" name="state">${buyList.buy_del_state }</span>
 												<p class="guide">배송이 완료되었습니다. 감사합니다.</p>
 											</div>
 										</div>

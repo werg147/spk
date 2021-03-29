@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.javaex.vo.BBuyVo;
+import com.javaex.vo.BookingCompleteVo;
 import com.javaex.vo.BookingVo;
 import com.javaex.vo.BuyListVo;
 import com.javaex.vo.BuyVo;
+import com.javaex.vo.MatchingCompleteVo;
 import com.javaex.vo.ProdBuyForVo;
 
 @Repository
@@ -45,24 +47,45 @@ public class BuyListDao {
 		System.out.println("[BuyList Dao]: selectBbuyList() 실행");
 
 		List<BBuyVo> bbuyList = sql.selectList("buylist.selectBBuyList", user_no);
+		
+		System.out.println(user_no);
 
 		System.out.println("[BuyList Dao]: " + bbuyList.toString());
 
 		return bbuyList;
 	}
-	
-	//구매내역_배송상세 구매자정보
+
+	// 구매내역_배송상세 구매자정보
 	public BuyVo selectBuy(int buy_no) {
 		System.out.println("[BuyListDao] selectBuy()");
-		
+
 		return sql.selectOne("buylist.selectBuy", buy_no);
 	}
-	
-	//구매내역_배송상세 구매상품내역
+
+	// 구매내역_배송상세 구매상품내역
 	public List<ProdBuyForVo> selectBuydel(int buy_no) {
 		System.out.println("[BuyListDao] selectBuydel()");
-		
+
 		return sql.selectList("buylist.selectBuydel", buy_no);
+	}
+
+	/* 구매내역_대관상세페이지(경환) */
+	public List<BookingCompleteVo> selectBookingCompleteVo(int booking_no) {
+
+		System.out.println("[BuyList_Buybooking Dao]: selectBookingCompleteVo 연결");
+
+		List<BookingCompleteVo> bkList = sql.selectList("buylist.selectBookingComplete", booking_no);
+
+		return bkList;
+	}
+
+	public List<MatchingCompleteVo> selectMatchingCompleteVo(int booking_no) {
+
+		System.out.println("[BuyList_Buymatching Dao]: selectMatchingCompleteVo 연결");
+
+		List<MatchingCompleteVo> mcList = sql.selectList("buylist.selectMatchingComplete", booking_no);
+
+		return mcList;
 	}
 
 }

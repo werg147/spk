@@ -76,18 +76,20 @@
 									<li id="" class="goods_pay_item">
 
 										<div class="goods_item">
-											<a href="" class="goods_thumb"> <img src="${pageContext.request.contextPath}/assets/image/마이페이지 남성_글러브.png" alt="강남체육관" width="90" height="90">
+											<a href="${pageContext.request.contextPath }/mypage/buybooking?booking_no=${bookingList.booking_no}" class="goods_thumb">
+											<img src="${pageContext.request.contextPath}/assets/image/마이페이지 남성_글러브.png" alt="강남체육관" width="90" height="90">
 											</a>
 
 											<div class="goods_info">
-												<a href="" class="goods">
+												<a href="${pageContext.request.contextPath }/mypage/buybooking?booking_no=${bookingList.booking_no}" class="goods">
 													<p class="name">${bookingList.gym_name }</p>
 													<ul class="info">
 														<li><span class="blind">상품금액</span> ${bookingList.booking_price }원</li>
 
 														<li class="date"><span class="blind">상품구매날짜</span> ${bookingList.booking_date }</li>
 													</ul>
-												</a> <span class="state_statusName">${bookingList.b_buy_state }</span>
+												</a>
+												<span class="state_statusName">${bookingList.b_buy_state }</span>
 												<p class="guide">
 													현재 ${bookingList.booking_state } 입니다.
 													<c:choose>

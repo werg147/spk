@@ -4,8 +4,29 @@
 
 <mapper namespace="buylist">
 
+	<resultMap id="resultMapMatchingCompleteVo"
+		type="MatchingCompleteVo">
+		<result column="user_no" property="user_no" />
+		<result column="user_name" property="user_name" />
+		<result column="nickname" property="nickname" />
+		<result column="user_photo" property="user_photo" />
+		<result column="booking_no" property="booking_no" />
+		<result column="b_buy_event" property="b_buy_event" />
+		<result column="b_buy_state" property="b_buy_state" />
+		<result column="b_buy_paytype" property="b_buy_paytype" />
+		<result column="b_buy_price" property="b_buy_price" />
+		<result column="b_buy_player_state"
+			property="b_buy_player_state" />
+		<result column="height" property="height" />
+		<result column="weight" property="weight" />
+		<result column="class" property="weight_class" />
+		<result column="booking_start" property="booking_start" />
+		<result column="booking_end" property="booking_end" />
+	</resultMap>
+
 	<!-- 배송상품 구매내역 -->
-	<select id="selectBuyList" parameterType="int" resultType="BuyListVo">
+	<select id="selectBuyList" parameterType="int"
+		resultType="BuyListVo">
 		<![CDATA[
 			SELECT  p.prod_detail_img_savename,
 			        p.prod_name,
@@ -23,12 +44,14 @@
 	</select>
 
 	<!-- 대관상품 구매내역 -->
-	<select id="selectBookingList" parameterType="int" resultType="BookingVo">
+	<select id="selectBookingList" parameterType="int"
+		resultType="BookingVo">
 		<![CDATA[
 			SELECT  gi.gym_img_savename,
 			        g.gym_name,
 			        b.booking_price,
 			        b.booking_date,
+			        b.booking_no,
 			        bb.b_buy_state,
 			        b.booking_state
 			FROM    users u, gym g, bbuy bb, booking b, gymimg gi
@@ -43,13 +66,15 @@
 	</select>
 
 	<!-- 매칭상품 구매내역 -->
-	<select id="selectBBuyList" parameterType="int" resultType="BBuyVo">
+	<select id="selectBBuyList" parameterType="int"
+		resultType="BBuyVo">
 		<![CDATA[
 			SELECT  gi.gym_img_savename,
 			        g.gym_name,
 			        bb.b_buy_price,
 			        bb.b_buy_date,
-			        bb.b_buy_player_state
+			        bb.b_buy_player_state,
+			        bb.b_buy_no
 			FROM    users u, gym g, gymimg gi, bbuy bb
 			WHERE   u.user_no = bb.user_no
 			        and g.gym_no = gi.gym_no
@@ -57,7 +82,7 @@
 			ORDER BY bb.b_buy_date desc
 		]]>
 	</select>
-	
+
 	<!-- 구매내역_배송상세 구매자정보 -->
 	<select id="selectBuy" parameterType="int" resultType="BuyVo">
 		<![CDATA[
@@ -70,9 +95,10 @@
 			where buy_no = #{buy_no}
 		]]>
 	</select>
-	
+
 	<!-- 구매내역_배송상세 구매상품내역 -->
-	<select id="selectBuydel" parameterType="int" resultType="ProdBuyForVo">
+	<select id="selectBuydel" parameterType="int"
+		resultType="ProdBuyForVo">
 		<![CDATA[
 			select pimg.prod_img_savename,
      			   prod.prod_brand,
@@ -88,6 +114,60 @@
 			and prod.prod_no = cs.prod_no
 			and pimg.prod_img_type = 'main'
 			and bp.buy_no = #{buy_no}
+		]]>
+	</select>
+
+	<!-- 구매내역_대관상세(경환) -->
+	<select id="selectBookingComplete" parameterType="int"
+		resultType="BookingCompleteVo">
+		<![CDATA[
+			SELECT  bk.booking_no,
+			        bk.booking_date,
+			        bk.booking_state,
+			        bk.booking_price,
+			        g.gym_name,
+			        gi.gym_img_savename,
+			        bb.b_buy_price,
+			        bb.b_buy_paytype,
+			        u.user_no,
+			        u.user_name
+			FROM    users u, booking bk, gym g, gymimg gi, bbuy bb
+			WHERE   bb.user_no = u.user_no
+			        and bk.booking_no = bb.booking_no
+			        and bk.gym_no = g.gym_no
+			        and gi.gym_no = g.gym_no
+			        and bk.booking_no = #{booking_no}
+		]]>
+	</select>
+
+	<!-- 구매내역_매치상세(경환) -->
+	<select id="selectMatchingComplete" parameterType="int"
+		resultMap="resultMapMatchingCompleteVo">
+		<![CDATA[
+			SELECT  u.user_no,
+			        u.user_name,
+			        u.nickname,
+			        u.user_photo,
+			        bb.booking_no,
+			        bb.b_buy_event,
+			        bb.b_buy_state,
+			        bb.b_buy_paytype,
+			        bb.b_buy_price,
+			        bb.b_buy_player_state,
+			        bb.b_buy_date,
+			        p.height,
+			        p.weight,
+			        e.class,
+			        bk.booking_start,
+			        bk.booking_end
+			FROM    bbuy bb, users u, profile p, event e, booking bk
+			WHERE   bb.booking_no = #{booking_no}
+			        and (bb.b_buy_player_state = '시합등록자' or bb.b_buy_player_state = '시합신청자')
+			        and bb.user_no = u.user_no
+			        and bb.profile_no = p.profile_no
+			        and p.profile_no = e.profile_no
+			        and bb.booking_no = bk.booking_no
+			        and not u.user_no = #{user_no}
 		]]>
 	</select>
 
