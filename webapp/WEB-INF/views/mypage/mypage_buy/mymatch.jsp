@@ -44,88 +44,153 @@
 
 
 					<!--반복 영역-->
-					<div class="match_list">
-						<table class="match_list_elnt">
-							<tr>
-								<td class="tr_img" rowspan="6"><img name="스파링장"
-									src="${pageContext.request.contextPath }/assets/image/스파링장.jpeg"></td>
-								<td class="bottom bold">&nbsp&nbsp(체육관 이름 불러오기)</td>
-								<td class="td_width img_left"><img class="match_img"
-									name="sending" src="../../../image/blue.png"></td>
-							</tr>
+					<c:forEach items="${bbuyList }" var="vo">
+					
+					<c:choose>
+							<c:when test="${vo.u_no == 0 || empty vo.u_no}">
+								<a href="${pageContext.request.contextPath }/sparring/matchdetail?bbuyno=${vo.b_buy_no}&userno=${authUser.user_no }&sessionuser=${authUser.user_no }&bookingno=${vo.booking_no}">	
+							</c:when>
+						<c:otherwise>
 
-							<tr>
-								<td class="td_width">&nbsp&nbsp날짜&nbsp/&nbsp시간 (각각 불러오기)</td>
-								<td></td>
-							</tr>
+								<a href="${pageContext.request.contextPath }/sparring/matchdetail?bbuyno=${vo.b_buy_no}&userno=${vo.u_no }&sessionuser=${authUser.user_no }&bookingno=${vo.booking_no}">
+						</c:otherwise>
+					</c:choose>
+						<div class="match_list">
+							<table class="match_list_elnt">
+								<tr>
+									<td class="tr_img" rowspan="6">
+									
+									<img class="tr_img" name="스파링장"
+										src="${pageContext.request.contextPath }/upload/${vo.gym_img_savename}"></td>
+									<c:choose>
+										<c:when test="${vo.gym_event == null }">
+											<td class="bottom bold">&nbsp&nbsp${vo.b_buy_address}</td>
+										</c:when>
+										<c:otherwise>
+										
+											<td class="bottom bold">&nbsp&nbsp${vo.gym_name}</td>
+										</c:otherwise>
+									</c:choose>
+									<td class="td_width img_left">
+									<c:choose>
+										<c:when test="${vo.b_buy_player_state eq '시합등록자' || vo.b_buy_player_state eq '시합결정자' }">
+											<img class="match_img"
+												name="sending" src="${pageContext.request.contextPath }/upload/red.png">
+										</c:when>
+										<c:otherwise>
+											<img class="match_img"
+												name="sending" src="${pageContext.request.contextPath }/upload/blue.png">
+										</c:otherwise>
+									</c:choose>
+												</td>
+								</tr>
+	
+								<tr>
+								<c:choose>
+										<c:when test="${vo.gym_event == null }">
+											<td class="td_width">&nbsp&nbsp${vo.b_buy_day}&nbsp/&nbsp${vo.b_buy_time}</td>
+										</c:when>
+										<c:otherwise>
+											<td class="td_width">&nbsp&nbsp${vo.booking_date}&nbsp/&nbsp${vo.booking_start} ~ ${vo.booking_end}</td>
+										</c:otherwise>
+								</c:choose>
+									<td></td>
+								</tr>
+	
+								<tr>
+									<c:choose>
+										<c:when test="${vo.gym_event == null }">
+											<td class="td_width">&nbsp&nbsp종목:&nbsp${vo.b_buy_event}</td>
+										</c:when>
+										<c:otherwise>
+											<td class="td_width">&nbsp&nbsp종목:&nbsp${vo.gym_event}</td>
+										</c:otherwise>
+									</c:choose>
+									<td></td>
+								</tr>
+	
+								<tr>
+									<td class="td_width bold">&nbsp&nbsp상대:
+									<c:forEach items="${vo.userList}" var="uservo">
+									${uservo.nickname }
+									</c:forEach>
+									
+									</td>
+									<td></td>
+								</tr>
+	
+								<tr>
+									<td class="td_width">&nbsp&nbsp${vo.b_buy_price } 
+									<c:choose>
+										<c:when test="${vo.b_buy_player_state eq '시합등록자' && empty vo.b_buy_price && vo.booking_no == 0}">
+											
+											<div>&nbsp&nbsp신청자를 기다리는 중입니다.</div>
+										</c:when>
+										<c:when test="${vo.b_buy_player_state eq '시합등록자' && empty vo.b_buy_price && vo.booking_no != 0}">
+											(${vo.booking_state})
+											<div>&nbsp&nbsp상대가 대관 후 대결을 신청하였습니다.</div>
+										</c:when>
+										<c:when test="${vo.b_buy_player_state eq '시합결정자' && !empty vo.b_buy_price && vo.booking_no != 0}">
+											(${vo.booking_state})
+											<div>&nbsp&nbsp상대와의 매칭이 성사되었습니다.</div>
+										</c:when>
+										<c:when test="${vo.b_buy_player_state eq '신청자' && empty vo.b_buy_price}">
+											
+											<div>&nbsp&nbsp대관 된 상대에게 매칭을 신청하였습니다.</div>
+										</c:when>
+										<c:when test="${vo.b_buy_player_state eq '신청자' && !empty vo.b_buy_price}">
+											(${vo.booking_state})
+											<div>&nbsp&nbsp상대에게 대관 후 매칭을 신청하였습니다.</div>
+										</c:when>
+										<c:when test="${vo.b_buy_player_state eq '선택자' && empty vo.b_buy_price}">
+											
+											<div>&nbsp&nbsp대관 된 상대가 수락하였습니다.</div>
+										</c:when>
+										<c:when test="${vo.b_buy_player_state eq '선택자' && !empty vo.b_buy_price}">
+											(${vo.booking_state})
+											<div>&nbsp&nbsp상대와의 매칭이 성사되었습니다.</div>
+										</c:when>
+										<c:when test="${vo.b_buy_player_state eq '탈락자'}">
+											
+											<div>&nbsp&nbsp상대와의 매칭이 거절되었습니다.</div>
+										</c:when>
+									</c:choose>
+									
+									
+									</td>
+									<td></td>
+								</tr>
+	
+								<tr>
+									<td class="td_width">&nbsp&nbsp
+									<c:choose>
+										<c:when test="${vo.b_buy_player_state eq '시합결정자' && !empty vo.b_buy_price && vo.booking_no != 0}">
 
-							<tr>
-								<td class="td_width">&nbsp&nbsp종목:&nbsp(불러오기)</td>
-								<td></td>
-							</tr>
+											<div class="status">완료</div>
 
-							<tr>
-								<td class="td_width bold">&nbsp&nbsp상대:&nbsp(불러오기)</td>
-								<td></td>
-							</tr>
-
-							<tr>
-								<td class="td_width">&nbsp&nbsp요금</td>
-								<td></td>
-							</tr>
-
-							<tr>
-								<td class="td_width">&nbsp&nbsp
-									<div class="status">매치상태표시</div>
-								</td>
-								<td></td>
-							</tr>
-
-						</table>
-					</div>
-					<!--//match_list (반복영역)-->
-
-					<!--반복 영역-->
-					<div class="match_list">
-						<table class="match_list_elnt">
-							<tr>
-								<td class="tr_img" rowspan="6"><img name="스파링장"
-									src="${pageContext.request.contextPath }/assets/image/스파링장.jpeg"></td>
-								<td class="bottom bold">&nbsp&nbsp어쩌구 스파링장</td>
-								<td class="td_width img_left"><img class="match_img"
-									name="sending"
-									src="${pageContext.request.contextPath }/assets/image/red.png"></td>
-							</tr>
-
-							<tr>
-								<td class="td_width">&nbsp&nbsp2021.03.10&nbsp/&nbsp13:00~15:00</td>
-								<td></td>
-							</tr>
-
-							<tr>
-								<td class="td_width">&nbsp&nbsp종목:&nbsp주짓수</td>
-								<td></td>
-							</tr>
-
-							<tr>
-								<td class="td_width bold">&nbsp&nbsp상대:&nbsp어쩌구불주먹</td>
-								<td></td>
-							</tr>
-
-							<tr>
-								<td class="td_width">&nbsp&nbsp50,000</td>
-								<td></td>
-							</tr>
-
-							<tr>
-								<td class="td_width">&nbsp&nbsp
-									<div class="status">수락</div>
-								</td>
-								<td></td>
-							</tr>
-
-						</table>
-					</div>
+										</c:when>
+										<c:when test="${vo.b_buy_player_state eq '선택자' && empty vo.b_buy_price}">
+											<div class="status">수락</div>
+											
+										</c:when>
+										
+										<c:when test=" ${vo.b_buy_player_state eq '탈락자'}" >
+											<div class="status">거절</div>
+									
+										</c:when>
+										
+										<c:otherwise>
+											<div class="status">대기</div>
+										</c:otherwise>
+									</c:choose>
+									</td>
+									<td></td>
+								</tr>
+	
+							</table>
+						</div>
+					</a>
+					</c:forEach>
 					<!--//match_list (반복영역)-->
 
 				</div>

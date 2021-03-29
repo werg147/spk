@@ -259,14 +259,8 @@
 											</td>
 										</tr>
 
-										<tr class="basic">
-											<td><label for="prod_cate"></label></td>
-											<td><label for="cham_name">대회명</label></td>
-											<td>
-												<div class="content_product_insert_select_box">
-													<input id="" type="text" id="cham_name0" placeholder="대회명을 입력해주세요." name="recordList[0].recordName" >
-												</div>
-											</td>
+										<tr id="cate_na0" class="basic ba01">
+											
 										</tr>
 										<!-- //공식기록 - 종목 -->
 
@@ -366,7 +360,28 @@
 		  
 	
 	})
-	//공식기록 종목선택시 안에 내용바꾸기
+	
+	$("#record_app").on("change","#cham_cate",function(){
+		 
+		var cham_01 = $(this).attr('class')
+		
+		 console.log(cham_01);
+		 
+		 var local=$("."+cham_01+" option:selected").val();
+		 var cat=$("."+cham_01+" option:selected").data("catena");
+		 $("#cate_na"+cat+"").html( " " );
+		
+		 console.log(local);
+		 console.log(cat);
+	
+		if(local == '지역대회'){
+			 catena(cat);
+			
+			
+		}
+		
+	});
+	
 	
 		$("#record_app").on("click",".eveneven",function(){
 			$(".eveneven").change("click",function(){
@@ -602,15 +617,28 @@
 		if(recordList[i].recordEvent == 1 || recordList[i].recordEvent == 2){
 			//복싱, 킥복싱
 			recordcham1(num,recordList[i],i);
+			
+			if(recordList[i].recordName != ''){
+				catena1(num,recordList[i])
+			}
+			
 		}else if (recordList[i].recordEvent = 3){
 			
 			//ufc
 			recordcham2(num,recordList[i],i);
 			
+			if(recordList[i].recordName != ''){
+				catena1(num,recordList[i])
+			}
+			
 		}else if (recordList[i].recordEvent = 4){
 			
 			//주짓수
 			recordcham3(num,recordList[i],i);
+			
+			if(recordList[i].recordName != ''){
+				catena1(num,recordList[i])
+			}
 			
 		}
 		
@@ -656,14 +684,8 @@
 		str += '		</div>';
 		str += '	</td>';
 		str += '</tr>';
-		str += '<tr class="basic">';
-		str += '	<td><label for="prod_cate"></label></td>';
-		str += '	<td><label for="prod_cate">대회명</label></td>';
-		str += '	<td>';
-		str += '		<div class="content_product_insert_select_box">';
-		str += '			<input type="text" id="cham_name'+num+'" placeholder="대회명을 입력해주세요." name="recordList['+num+'].recordName" >';
-		str += '		</div>';
-		str += '	</td>';
+		str += '<tr id="cate_na'+num+'" class="basic">';
+
 		str += '</tr>';
 		str += '	<tr class="cham_year2'+num+'" class="basic">';
 		str += '	<td><label for="prod_cate"></label></td>';
@@ -725,14 +747,8 @@ function comments2(num) {
 		str += '		</div>';
 		str += '	</td>';
 		str += '</tr>';
-		str += '<tr class="basic">';
-		str += '	<td><label for="prod_cate"></label></td>';
-		str += '	<td><label for="prod_cate">대회명</label></td>';
-		str += '	<td>';
-		str += '		<div class="content_product_insert_select_box">';
-		str += '			<input type="text" id="cham_name'+num+'" placeholder="대회명을 입력해주세요." name="recordList['+num+'].recordName" >';
-		str += '		</div>';
-		str += '	</td>';
+		str += '<tr id="cate_na'+num+'" class="basic">';
+
 		str += '</tr>';
 		str += '	<tr class="cham_year2'+num+'" class="basic">';
 		str += '	<td><label for="prod_cate"></label></td>';
@@ -771,12 +787,12 @@ function comments2(num) {
 		$(".cham"+num+"").html(" ");
 		
 		str="";
-		str += '<option selected>대회분류</option>';
-		str += '<option value="세계선수권대회">세계선수권대회</option>';
-		str += '<option value="아시아경기대회">아시아경기대회</option>';
-		str += '<option value="유니버시아드대회">유니버시아드대회</option>'
-		str += '<option value="아시아선수권대회">아시아선수권대회</option>';
-		str += '<option value="지역대회">지역대회</option>';
+		str += '<option data-catena="'+num+'" selected>대회분류</option>';
+		str += '<option data-catena="'+num+'" value="세계선수권대회">세계선수권대회</option>';
+		str += '<option data-catena="'+num+'" value="아시아경기대회">아시아경기대회</option>';
+		str += '<option data-catena="'+num+'" value="유니버시아드대회">유니버시아드대회</option>'
+		str += '<option data-catena="'+num+'" value="아시아선수권대회">아시아선수권대회</option>';
+		str += '<option  data-catena="'+num+'" value="지역대회">지역대회</option>';
 		
 		$(".cham"+num+"").append(str);
 		
@@ -811,14 +827,14 @@ function comments2(num) {
 		$(".cham"+num+"").html(" ");
 		
 		strA="";
-		strA += '<option selected>대회분류</option>';
-		strA += '<option value="세계수짓수선수권">세계주짓수선수권</option>';
-		strA += '<option value="비도복세계주짓수선수권">비도복세계주짓수선수권</option>';
-		strA += '<option value="팬암챔피언쉽">팬암챔피언쉽</option>'
-		strA += '<option value="유러피언챔피언">유러피언챔피언</option>';
-		strA += '<option value="IBJJF지역대회">IBJJF지역대회</option>';
-		strA += '<option value="KBJJF관련대회">KBJJF관련대회</option>';
-		strA += '<option value="지역대회">지역대회</option>';
+		strA += '<option data-catena="'+num+'" selected>대회분류</option>';
+		strA += '<option data-catena="'+num+'" value="세계수짓수선수권">세계주짓수선수권</option>';
+		strA += '<option data-catena="'+num+'" value="비도복세계주짓수선수권">비도복세계주짓수선수권</option>';
+		strA += '<option data-catena="'+num+'" value="팬암챔피언쉽">팬암챔피언쉽</option>'
+		strA += '<option data-catena="'+num+'" value="유러피언챔피언">유러피언챔피언</option>';
+		strA += '<option data-catena="'+num+'" value="IBJJF지역대회">IBJJF지역대회</option>';
+		strA += '<option data-catena="'+num+'" value="KBJJF관련대회">KBJJF관련대회</option>';
+		strA += '<option  data-catena="'+num+'" value="지역대회">지역대회</option>';
 		
 		$(".cham"+num+"").append(strA);
 		
@@ -844,13 +860,13 @@ function comments2(num) {
 		$(".cham"+num+"").html(" ");
 		
 		strA="";
-		strA += '<option selected>대회분류</option>';
-		strA += '<option value="UFC">UFC</option>';
-		strA += '<option value="벨라토르">벨라토르(Bellator MMA)</option>';
-		strA += '<option value="K-1">K-1</option>'
-		strA += '<option value="PRIDEFC">PRIDE FC</option>';
-		strA += '<option value="ROAD FC">ROAD FC</option>';
-		strA += '<option value="지역대회">지역대회</option>';
+		strA += '<option data-catena="'+num+'" selected>대회분류</option>';
+		strA += '<option data-catena="'+num+'" value="UFC">UFC</option>';
+		strA += '<option data-catena="'+num+'" value="벨라토르">벨라토르(Bellator MMA)</option>';
+		strA += '<option data-catena="'+num+'" value="K-1">K-1</option>'
+		strA += '<option data-catena="'+num+'" value="PRIDEFC">PRIDE FC</option>';
+		strA += '<option data-catena="'+num+'" value="ROAD FC">ROAD FC</option>';
+		strA += '<option  data-catena="'+num+'" value="지역대회">지역대회</option>';
 	
 		
 		$(".cham"+num+"").append(strA);
@@ -880,11 +896,11 @@ function comments2(num) {
 		
 		str="";
 		str += '<option selected>대회분류</option>';
-		str += '<option value="세계선수권대회">세계선수권대회</option>';
-		str += '<option value="아시아경기대회">아시아경기대회</option>';
-		str += '<option value="유니버시아드대회">유니버시아드대회</option>'
-		str += '<option value="아시아선수권대회">아시아선수권대회</option>';
-		str += '<option value="지역대회">지역대회</option>';
+		str += '<option data-catena="'+num+'" value="세계선수권대회">세계선수권대회</option>';
+		str += '<option data-catena="'+num+'" value="아시아경기대회">아시아경기대회</option>';
+		str += '<option data-catena="'+num+'" value="유니버시아드대회">유니버시아드대회</option>'
+		str += '<option data-catena="'+num+'" value="아시아선수권대회">아시아선수권대회</option>';
+		str += '<option  data-catena="'+num+'" value="지역대회">지역대회</option>';
 		
 		$(".cham"+num+"").append(str);
 		
@@ -930,13 +946,13 @@ function comments2(num) {
 		$(".cham"+num+"").html(" ");
 		
 		strA="";
-		strA += '<option selected>대회분류</option>';
-		strA += '<option value="UFC">UFC</option>';
-		strA += '<option value="벨라토르">벨라토르(Bellator MMA)</option>';
-		strA += '<option value="K-1">K-1</option>'
-		strA += '<option value="PRIDEFC">PRIDE FC</option>';
-		strA += '<option value="ROAD FC">ROAD FC</option>';
-		strA += '<option value="지역대회">지역대회</option>';
+		strA += '<option data-catena="'+num+'" selected>대회분류</option>';
+		strA += '<option data-catena="'+num+'" value="UFC">UFC</option>';
+		strA += '<option data-catena="'+num+'" value="벨라토르">벨라토르(Bellator MMA)</option>';
+		strA += '<option data-catena="'+num+'" value="K-1">K-1</option>'
+		strA += '<option data-catena="'+num+'" value="PRIDEFC">PRIDE FC</option>';
+		strA += '<option data-catena="'+num+'" value="ROAD FC">ROAD FC</option>';
+		strA += '<option data-catena="'+num+'" value="지역대회">지역대회</option>';
 	
 		
 		$(".cham"+num+"").append(strA);
@@ -972,14 +988,14 @@ function comments2(num) {
 		$(".cham"+num+"").html(" ");
 		
 		strA="";
-		strA += '<option selected>대회분류</option>';
-		strA += '<option value="세계수짓수선수권">세계주짓수선수권</option>';
-		strA += '<option value="비도복세계주짓수선수권">비도복세계주짓수선수권</option>';
-		strA += '<option value="팬암챔피언쉽">팬암챔피언쉽</option>'
-		strA += '<option value="유러피언챔피언">유러피언챔피언</option>';
-		strA += '<option value="IBJJF지역대회">IBJJF지역대회</option>';
-		strA += '<option value="KBJJF관련대회">KBJJF관련대회</option>';
-		strA += '<option value="지역대회">지역대회</option>';
+		strA += '<option data-catena="'+num+'" selected>대회분류</option>';
+		strA += '<option data-catena="'+num+'" value="세계수짓수선수권">세계주짓수선수권</option>';
+		strA += '<option data-catena="'+num+'" value="비도복세계주짓수선수권">비도복세계주짓수선수권</option>';
+		strA += '<option data-catena="'+num+'" value="팬암챔피언쉽">팬암챔피언쉽</option>'
+		strA += '<option data-catena="'+num+'" value="유러피언챔피언">유러피언챔피언</option>';
+		strA += '<option data-catena="'+num+'" value="IBJJF지역대회">IBJJF지역대회</option>';
+		strA += '<option data-catena="'+num+'" value="KBJJF관련대회">KBJJF관련대회</option>';
+		strA += '<option data-catena="'+num+'" value="지역대회">지역대회</option>';
 		
 		$(".cham"+num+"").append(strA);
 		
@@ -1001,6 +1017,40 @@ function comments2(num) {
 		$('.even12'+i+' option[value="'+recordVo.recordEvent+'"]').prop('selected', 'selected').change();
 		$('.cham_year'+i+' option[value="'+recordVo.recordDate+'"]').prop('selected', 'selected').change();
 		$('.cham_rank'+i+' option[value="'+recordVo.recordMatch+'"]').prop('selected', 'selected').change();
+		
+	}
+	
+	function catena(num){
+		
+		$("#cate_na"+num+"").html();
+		str = "";
+		str += '<td><label for="prod_cate"></label></td>';
+		str += '<td><label for="cham_name">대회명</label></td>';
+		str += '	<td>';
+		str += '	<div class="content_product_insert_select_box">';
+		str += '		<input id="" type="text" id="cham_name'+num+'" placeholder="대회명을 입력해주세요." name="recordList['+num+'].recordName" >';
+		str += '	</div>';
+		str += '</td>';
+		
+		$("#cate_na"+num+"").append(str);
+		
+	}
+	
+	function catena1(num,vo1){
+		
+		$("#cate_na"+num+"").html();
+		str = "";
+		str += '<td><label for="prod_cate"></label></td>';
+		str += '<td><label for="cham_name">대회명</label></td>';
+		str += '	<td>';
+		str += '	<div class="content_product_insert_select_box">';
+		str += '		<input id="" type="text" id="cham_name'+num+'" placeholder="대회명을 입력해주세요." name="recordList['+num+'].recordName" value="">';
+		str += '	</div>';
+		str += '</td>';
+		
+		$("#cate_na"+num+"").append(str);
+		
+		$('#cham_name'+i).val(vo1.recordName);
 		
 	}
 	

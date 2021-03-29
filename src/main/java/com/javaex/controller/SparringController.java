@@ -150,13 +150,6 @@ public class SparringController {
 		String[] eventName = request.getParameterValues("eventName");
 		
 		
-		
-		 
-		//sparringService.algo(profileVo, recordVo);
-		//return "";
-		
-		 
-		
 		//셀렉트키로 바로 profileNo 사용가능
 		sparringService.profileWrite(profileVo, eventName, recordVo,userNo);
 		
@@ -368,15 +361,24 @@ public class SparringController {
 		
 	}
 	
+	
+	
+	
+	
+	
+	/************마이매치 표시**********/
 	@RequestMapping(value = "/mymatch", method = { RequestMethod.GET, RequestMethod.POST })
-	public String mymatch(@RequestParam(value= "userno") int  userno) {
+	public String mymatch(@RequestParam(value= "userno" ,required = false,defaultValue = "0") int  userno,
+						  Model model) {
 		System.out.println("[Controller] : mymatch");
 		
 		if(userno == 0) {
 			System.out.println("잘못된 접근 표시");
 			return "";
 		}else {
-			sparringService.myMatch(userno);
+			List<BBuyVo> bList = sparringService.myMatch(userno);
+			
+			model.addAttribute("bbuyList",bList);
 			return "mypage/mypage_buy/mymatch";
 			
 		}

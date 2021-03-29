@@ -84,14 +84,20 @@ public class SparringService {
 		/*********** 공식기록 record 인서트 *********/
 		System.out.println("확인" + recordVo.getRecordList().get(0).getRecordName());
 
-		if (recordVo.getRecordList().get(0).getRecordName() != "") {
+		if (recordVo.getRecordList().get(0).getRecordType() != "") {
 			for (int i = 0; i < recordVo.getRecordList().size(); i++) {
 				System.out.println("??");
 				RecordVo rVo = recordVo.getRecordList().get(i);
 
 				// 받아온 profileNo 넣기
 				rVo.setProfileNo(profileNo);
-
+				
+				
+				if(rVo.getRecordName() == null) {
+					rVo.setRecordName(" ");
+				}
+				
+				
 				System.out.println(rVo.getRecordName());
 				sparringDao.insertRecord(rVo);
 
@@ -1286,11 +1292,43 @@ public class SparringService {
 		alarmDao.insertMatchAlarm(alarmVo);
 	}
 
-	public void myMatch(int userno) {
-	
-		
+	public List<BBuyVo> myMatch(int userno) {
+		System.out.println("[Service ] : myMatch");
+		System.out.println("유저넘버 : " + userno);
 			
-
+		List<BBuyVo> bList = sparringDao.selectBBuyList3(userno);
+		
+		for(int i = 0 ; i <bList.size(); i++) {
+			int bookingNo = bList.get(i).getBooking_no();
+			String player = bList.get(i).getB_buy_player_state();
+			
+			if(player.equals("신청자") || player.equals("선택자") || player.equals("탈락자")) {
+				System.out.println("내 상태 : " + player );
+				
+				List<UserVo> nList = sparringDao.selectListVictim(bookingNo);
+				
+				System.out.println("상대 : " + nList);
+				bList.get(i).setUserList(nList);
+				
+			}else if(player.equals("시합등록자") ||player.equals("시합결정자")) {
+				System.out.println("내 상태 : " + player);
+				List<UserVo> nList2 = sparringDao.selectListVictim2(bookingNo);
+				System.out.println("상대 : " + nList2);
+				bList.get(i).setUserList(nList2);
+			}
+			
+			BBuyVo bvo = sparringDao.selectBBuyuserno(bookingNo);
+			if(bvo != null) {
+				
+				bList.get(i).setU_no(bvo.getU_no());
+			}
+			
+		}
+		
+		System.out.println(bList);
+		
+		return bList;
+	
 	}
 
 	public double algo(ProfileVo profileVo, RecordVo recordVo) {

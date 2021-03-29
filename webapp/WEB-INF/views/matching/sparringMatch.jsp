@@ -280,7 +280,11 @@
 
 
 												<c:choose>
-													<c:when test="${ map.bBuyList[0].b_buy_player_state eq '선택자'}">
+													<c:when test="${map.booking_state eq '결제완료'}">
+														<p id="conment_10"></p>
+
+													</c:when>
+													<c:when test="${map.booking_state eq '예약중' ||map.booking_state eq '예약대기중' && map.bBuyList[0].b_buy_player_state eq '선택자'}">
 														<p id="conment_10">상대의 수락 및 결제를 기다리고 있습니다</p>
 
 													</c:when>

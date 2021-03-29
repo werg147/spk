@@ -207,45 +207,6 @@
 				<!-- card end -->
 				
 
-				<!-- card 1ex -->
-				<div class="card_container">
-					<div class="card">
-						<a class="card1" href="/view/matching/스파링신청서 상대가 없을경우.html.html">
-							<img class="card_img" src="/image/rent_no.jpg" alt="">
-							<div class="card_profile">
-								<div class="card_address">
-									<i class="fas fa-map-marker-alt address_icon"></i>
-
-									<div class="card_address_gimname">
-
-										<p>중랑구 상봉동</p>
-										<div class="user_text">13일 | 18:00~21:00</div>
-									</div>
-									<div class="card_address_kind">
-										<p>복싱</p>
-									</div>
-								</div>
-								<div class="card_user">
-									<div class="card_user_profil">
-										<div class="user_name">
-											<i class="fas fa-user"></i>방배동왕주먹
-										</div>
-										<div class="user_pro">
-											<i class="fas fa-star"></i> <span>${vo.career}</span>
-										</div>
-										<div class="user_skill">
-											주특기 <span>| 레슬링</span>
-										</div>
-									</div>
-									<div class="card_user_img"></div>
-								</div>
-
-							</div>
-						</a>
-
-					</div>
-				</div>
-				<!-- card end -->
 
 
 

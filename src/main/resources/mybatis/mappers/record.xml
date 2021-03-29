@@ -12,7 +12,7 @@
 			values( SEQ_RECORD_NO.nextval,
 					#{profileNo},
 					#{recordType},
-					#{recordName},
+					#{recordName,jdbcType=VARCHAR},
 					#{recordEvent},
 					#{recordDate},
 					#{recordMatch}

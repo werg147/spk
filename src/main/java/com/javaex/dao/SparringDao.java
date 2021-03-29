@@ -363,6 +363,33 @@ public class SparringDao {
 		
 	}
 
+	public List<BBuyVo> selectBBuyList3(int userno) {
+		System.out.println("[Dao] :  selectBBuyList3 ");
+		
+		return sqlSession.selectList("bbuy.selectBBuyList3",userno);
+	}
+
+	public List<UserVo> selectListVictim(int bookingNo) {
+		System.out.println("[Dao] :  selectListVictim ");
+		
+		return sqlSession.selectList("bbuy.selectListVictim",bookingNo);
+		
+	}
+
+	public List<UserVo> selectListVictim2(int bookingNo) {
+		System.out.println("[Dao] :  selectListVictim2");
+		
+		return sqlSession.selectList("bbuy.selectListVictim2",bookingNo);
+		
+	}
+
+	public BBuyVo selectBBuyuserno(int bookingNo) {
+		System.out.println("[Dao] :  selectBBuyuserno");
+		
+		return sqlSession.selectOne("bbuy.selectBBuyuserno",bookingNo);
+		
+	}
+
 	
 
 

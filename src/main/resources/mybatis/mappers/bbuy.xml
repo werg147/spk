@@ -253,6 +253,96 @@
 		]]>	
 
 	</select>
+	<select id="selectListVictim" parameterType="int" resultType="UserVo">
+	
+	<![CDATA[
+			select u.nickname
+            from bbuy b , users u
+            where b.user_no = u.user_no
+            and booking_no = #{bookingNo}
+            and (b.b_buy_player_state = '시합등록자' or b.b_buy_player_state = '시합결정자')		
+	
+	
+	]]>
+	
+	</select>
+	
+	<select id="selectBBuyuserno" parameterType="int" resultType="BBuyVo">
+	<![CDATA[
+		    select user_no as u_no
+            from bbuy
+            where booking_no = #{bookingNo}
+            and (b_buy_player_state = '시합결정자' or b_buy_player_state = '시합등록자')	
+	
+	]]>
+	
+	</select>
+	
+	<select id="selectListVictim2" parameterType="int" resultType="UserVo">
+	<![CDATA[
+				select u.nickname
+	            from bbuy b , users u
+	            where b.user_no = u.user_no
+	            and booking_no = #{boookingNo}
+	            and (b.b_buy_player_state = '신청자' or b.b_buy_player_state = '선택자')	
+	
+	]]>
+	
+	
+	
+	</select>
+	<select id="selectBBuyList3" parameterType="int" resultType="BBuyVo">
+		<![CDATA[
+				   select b.b_buy_no,
+			       b.profile_no,
+			       b.user_no,
+			       p.nickname,
+			       p.career,
+			       b.b_buy_price,
+			       b.b_buy_player_state,
+			       b.b_buy_address,
+       			   b.b_buy_event,
+       			   b.b_buy_time,
+       			   b.b_buy_day,
+			       k.booking_no ,
+			       k.booking_date,
+			       k.booking_start,
+			       k.booking_end,
+			       k.gym_name,
+			       k.gym_address,
+			       k.gym_event,
+			       k.gym_img_savename,
+                   k.booking_state
+			from bbuy b , (select p.profile_no,
+			                      p.user_no,
+			                      u.user_no,
+			                      p.career,
+			                      u.nickname
+			               from profile p,users u
+			               where p.user_no = u.user_no)p,(select b.booking_no,
+			                                                     b.booking_start,
+			                                                     b.booking_end,
+			                                                     b.booking_date,
+                                                                 b.booking_state,
+			                                                     g.gym_name,
+			                                                     g.gym_address,
+			                                                     g.gym_event,
+			                                                     i.gym_img_savename,
+			                                                     i.gym_img_type
+			                                              from booking b , gym g ,gymImg i
+			                                              where b.gym_no = g.gym_no
+			                                              and g.gym_no = i.gym_no
+			                                              and i.gym_img_type = 'main')k
+			where b.profile_no = p.profile_no(+)
+			and b.booking_no = k.booking_no(+)
+            and b.user_no = 5
+			order by b_buy_no desc		
+		
+		
+		
+		]]>
+	
+	</select>
 	<select id="selectOneBBuy" parameterType="BBuyVo" resultType="BBuyVo">
 		<![CDATA[
 			select  b.b_buy_no,

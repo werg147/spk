@@ -49,6 +49,9 @@ public class BBuyVo {
 	//RecordList
 	
 	List<RecordVo> recordList;
+	
+	//userList
+	List<UserVo> userList;
 	///
 	private String checkAll;
 	private String chkItem;
@@ -76,6 +79,9 @@ public class BBuyVo {
 	private double rowLevel;
 	private double highLevel;
 	
+	//상대 user_no
+	private int u_no;
+	
 	public BBuyVo(int b_buy_no, int user_no, int booking_no, int profile_no, String b_buy_paytype, String b_buy_price, String b_buy_state,
 			String b_buy_player_state, String b_buy_date, String checkAll, String chkItem) {
 		super();
@@ -101,6 +107,26 @@ public class BBuyVo {
 	
 
 
+	
+	
+	public int getU_no() {
+		return u_no;
+	}
+
+
+	public void setU_no(int u_no) {
+		this.u_no = u_no;
+	}
+
+
+	public List<UserVo> getUserList() {
+		return userList;
+	}
+
+
+	public void setUserList(List<UserVo> userList) {
+		this.userList = userList;
+	}
 
 
 	public double getRowLevel() {
