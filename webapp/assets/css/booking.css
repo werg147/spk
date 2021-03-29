@@ -83,7 +83,7 @@ a:hover {
   }
 
   .middle .content_seller {
-    width: 825px;
+    width: 800px;
     display: flex;
     flex-direction: column;
   }
@@ -662,5 +662,11 @@ a:hover {
     font-weight: bold;
     margin-top: 5px;
   }
+  
+  /* 달력 라이브러리 */
+  #calendar {
+	width: 760px;
+	margin: 40px 0px 40px 0px;
+}
   
 

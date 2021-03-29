@@ -16,6 +16,7 @@
 <!-- CSS -->
 <link href="${pageContext.request.contextPath }/assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
 
+
 <!-- 자바스크립트 -->
 <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/assets/bootstrap/js/bootstrap.js"></script>
@@ -25,26 +26,13 @@
 
 <!-- ////////////////////////////////////////// -->
 
-<style>
-body {
-	margin: 40px 10px;
-	padding: 0;
-	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-	font-size: 14px;
-}
-
-#calendar {
-	width: 800px;
-	margin: 40px 0px 40px 0px;
-}
-</style>
 </head>
 <body>
 	<div class="wrap">
 		<div class="container">
 			<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 			<!--//header//-->
-	<!--//header//-->
+
 		</div>
 	</div>
 	<!-- Header end -->

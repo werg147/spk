@@ -37,6 +37,7 @@
 			insert into seller (sell_no, 
 								  user_no, 
 								  book_type,
+								  prod_type,
 								  book_sell_name,
 								  book_com_name,
 								  book_business_no, 
@@ -47,6 +48,7 @@
 							VALUES(#{sell_no}, 
 								  #{user_no}, 
 								  #{book_type},
+								  0,
 								  #{book_sell_name},
 								  #{book_com_name}, 
 								  #{book_business_no}, 
@@ -65,6 +67,7 @@
 		<![CDATA[
 			insert into seller (sell_no, 
 								  user_no, 
+								  book_type,
 								  prod_type, 
 								  prod_sell_name,
 								  prod_com_name, 
@@ -75,6 +78,7 @@
 								  )
 			  	    VALUES(#{sell_no}, 
 						  #{user_no}, 
+						  0,
 						  #{prod_type}, 
 						  #{prod_sell_name}, 
 						  #{prod_com_name},
