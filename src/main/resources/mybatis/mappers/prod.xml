@@ -125,6 +125,7 @@
 			       prod_img_type
 			from prodimg
 			where prod_no = #{prod_no}
+			order by prod_img_type asc
 		]]>
 	</select>
 	

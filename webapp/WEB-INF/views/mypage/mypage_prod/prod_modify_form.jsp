@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -91,7 +93,13 @@
 											<p>이미지를 끌어오세요</p>
 										</div>
 										<div id="img_add_box">
-											<div id="imgadd1"></div>
+											<div id="imgadd1">
+												<div class="thumb" id ="${prodvo.pimgList[0].prod_img_no}">
+													<img src="${pageContext.request.contextPath}/upload/${prodvo.pimgList[0].prod_img_savename}">
+													<div class="imgaddclose" id="mainclose">X</div>
+												</div>
+											</div>
+
 										</div>
 									</div>
 								</td>
@@ -104,7 +112,17 @@
 											<p>이미지를 끌어오세요</p>
 										</div>
 										<div id="img_add_box">
-											<div id="imgadd2"></div>
+											<div id="imgadd2">
+											<c:forEach items="${pimgList}" var="ProdimgVo">
+												<c:if test="${ProdimgVo.prod_img_type != 'main'}">
+													<div class="thumb" id ="${ProdimgVo.prod_img_no}" >
+															<img src="${pageContext.request.contextPath}/upload/${ProdimgVo.prod_img_savename}">
+															<div class="imgaddclose" id="subclose${ProdimgVo.prod_img_no}">X</div>
+															<input value="${ProdimgVo.prod_img_no}" type="hidden" id="thumb_remove">
+														</div>
+													</c:if>
+											</c:forEach>
+											</div>
 										</div>
 									</div>
 								</td>
@@ -120,7 +138,7 @@
 									<button id="sizecolor_btn" type="button">등록</button>
 									<div class="colorsizestocktab">
 										<div id="sizebox"></div>
-										</div></td>
+									</div></td>
 
 							</tr>
 							<tr class="plus">
@@ -145,8 +163,7 @@
 									<div>
 										<p>상세페이지 이미지등록</p>
 										<label class="input-file-button" for="input-file"></label> <input
-											type="file" name="detailfile" id="detailfile"
-											value="${prodvo.prod_detail_img_name}">
+											type="file" name="detailfile" id="detailfile">
 									</div> <textarea id="prod_detail" name="prod_detail">${prodvo.prod_detail}</textarea>
 								</td>
 							</tr>
@@ -176,79 +193,116 @@
 </body>
 
 <script type="text/javascript">
-//가격표시
+var deleteList = [];
+var mainadded = 1;
+var subadded ='${fn:length(prodvo.pimgList)}'-1;
+console.log(subadded);
+
+//불러온 이미지 닫기
+$("#mainclose").on("click", function(){
+	console.log("mainimg close");
+	const div = document.getElementById('${prodvo.pimgList[0].prod_img_no}');
+	div.remove();
+	console.log('${prodvo.pimgList[0].prod_img_name}' +"지움");
+	
+	deleteList.push('${prodvo.pimgList[0].prod_img_no}');
+	console.log(deleteList);
+	
+	mainadded--;
+	
+});
+
+
+
+var imgnum =  $("#thumb_remove").val();
+
+
+//불러온 이미지 닫기
+$("#subclose"+imgnum).on("click", function(){
+	console.log("subimg close");
+	const div = document.getElementById(imgnum);
+	div.remove();
+	console.log(imgnum +"지움");
+	
+	
+	deleteList.push(imgnum);
+	console.log(deleteList);
+	
+	subadded--;
+});
+
+	//가격표시
 	$(document).on('keyup', 'input[inputmode=numeric]', function(event) {
 		this.value = this.value.replace(/[^0-9]/g, ''); // 입력값이 숫자가 아니면 공백
 		this.value = this.value.replace(/,/g, ''); // ,값 공백처리
 		this.value = this.value.replace(/\B(?=(\d{3})+(?!\d))/g, ","); // 정규식을 이용해서 3자리 마다 , 추가 	
 	});
-	
-	$(document).ready (function () { 
+
+	$(document).ready(function() {
 		console.log("페이지열림")
-		startLoadFile(); 
-		});
+		startLoadFile();
+	});
 
+	function startLoadFile() {
+		$
+				.ajax({
+					url : "${pageContext.request.contextPath}/mypage/prod/prodModifyinfo?prod_no=${prodvo.prod_no}",
+					type : 'GET',
+					dataType : 'json',
+					success : function(data) {
+						console.log(data)
+						createcolor(data.cssList);
 
-	function startLoadFile(){ 
-		$.ajax({
-			url: "${pageContext.request.contextPath}/mypage/prod/prodModifyinfo?prod_no=${prodvo.prod_no}", 
-			type: 'GET', 
-			dataType : 'json', 
-			success : function (data) {
-				console.log(data)
-				createcolor(data.cssList);
-				//createImages(data.pimgList);
-				} 
-		}); 
+						name = "detailfile"
+
+						$("#detailfile ")
+
+						//createImages(data.pimgList);
+					}
+				});
 	}
 
 	//컬러사이즈 불러오기
-	function createcolor(cssList) { 
+	function createcolor(cssList) {
 
-		for(let i=0; i<cssList.length; i++){
-		var color = cssList[i].color; 
-		var prod_size = cssList[i].prod_size; 
-		var stock = cssList[i].stock; 
-		
-		console.log(color, prod_size, stock, listnum)
-		cssVo = {
-			color : color,
-			prod_size : prod_size,
-			stock : stock
-		};
+		for (let i = 0; i < cssList.length; i++) {
+			var color = cssList[i].color;
+			var prod_size = cssList[i].prod_size;
+			var stock = cssList[i].stock;
 
-		console.log(cssVo);
+			console.log(color, prod_size, stock, listnum)
+			cssVo = {
+				color : color,
+				prod_size : prod_size,
+				stock : stock
+			};
 
-		add(color, prod_size, stock, listnum);
-		console.log("선택자추가");
+			console.log(cssVo);
 
-		cssList[listnum] = cssVo;
-		console.log(cssList);
-		console.log("선택자추가");
+			add(color, prod_size, stock, listnum);
+			console.log("선택자추가");
 
-		listnum++;
-		console.log("색상추가개수" + listnum);
+			cssList[listnum] = cssVo;
+			console.log(cssList);
+			console.log("선택자추가");
+
+			listnum++;
+			console.log("색상추가개수" + listnum);
 		}
 	}
-		
-	
+
 	//이미지불러오기 작업중
-	function createImages(pimgList) { 
-		if(pimgList.prod_img_type == main){
+	function createImages(pimgList) {
+		if (pimgList.prod_img_type == main) {
 			pimgList.prod_img_savename
 		} else {
-			for(let i=0; i<pimgList.length; i++){
-			
+			for (let i = 0; i < pimgList.length; i++) {
+
 			}
 
 		}
 
 	}
-
-
-
-	
-	
 
 	var cssList = [];
 	var listnum = 0;
@@ -697,7 +751,7 @@
 								$("input[name=detailfile]")[0].files[0]);
 
 						//대표이미지 개수 1개까지 등록가능
-						var maincount = count1 - minus1;
+						var maincount = count1 - minus1 + mainadded;
 						if (maincount > 1) {
 							console.log("대표이미지개수" + maincount);
 							alert("대표이미지는 한개만 등록가능합니다.");
@@ -710,7 +764,7 @@
 						}
 
 						//대표이미지 개수 1개이상 필수등록
-						var maincount2 = count2 - minus2;
+						var maincount2 = count2 - minus2 + subadded;
 
 						//사이즈 등록필수알림
 						var colorcount = listnum - colorminus;

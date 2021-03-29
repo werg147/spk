@@ -58,8 +58,10 @@ public class ProdController {
 							  Model model){
 		System.out.println("[cnt]상품정보 수정하기" + prod_no);	
 		ProductVo prodvo = prodservice.selectPord(prod_no);
+		List<ProdimgVo> pimgList = prodvo.getPimgList();
 		model.addAttribute("prodvo", prodvo);
-	
+		model.addAttribute("pimgList", pimgList);
+		
 		return "mypage/mypage_prod/prod_modify_form";
 	}
 
