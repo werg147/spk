@@ -10,8 +10,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/header.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/booking.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/header.css">
 
 <!-- CSS -->
 <link href="${pageContext.request.contextPath }/assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
@@ -35,7 +35,7 @@ body {
 
 #calendar {
 	width: 800px;
-	margin: 0 auto;
+	margin: 40px 0px 40px 0px;
 }
 </style>
 </head>
@@ -122,15 +122,7 @@ body {
 	<!--//wrap-->
 	
 	<!-- ///////////////////////////////////////////////// -->
-	
-<%-- 	values(seq_booking_no.nextval, 
-       #{gym_no}, 
-       #{booking_date}, 
-       #{booking_start}, 
-       #{booking_end}, 
-       #{booking_price}, 
-       '대기중', 
-       sysdate) --%>
+
 			       
 	<!-- 날짜 등록 모달창 -->
 	<div class="modal fade" id="addModal">
@@ -176,70 +168,87 @@ body {
 
 <script type="text/javascript">
 
+	//전역 변수(json을 받기 위한 데이터)
+	var events=[];
+	var bookingVo;
+	
 	//체육관 번호
 	var gymno = "${gymVo.gym_no}";
 	console.log("체육관번호 "+gymno);
 	
-	var books = bookList(gymno);
-	console.log("제발"+books);
+	console.log("함수밖 테스트"); //console.log로 배열 출력할 때 "문자열"+배열 이런 식으로 하면 [Object, Object]로 출력됨.
+	console.log(bookListF(gymno));
+	console.log(events);
 	
 	
 	//대관 리스트
-	function bookList(gymno){
+	function bookListF(gymno){
 		
-		var bookings = new Array();
-		var item = new Object;
+		//처음에 함수 안에 변수 선언했지만 안 씀.
+		//var bookings = new Array();
+		//var item; 
 			
 		$.ajax({
 			url: "${pageContext.request.contextPath}/mypage/book/booklist",
 			type: "post",
-			//contentType : "application/json",
+			//contentType : "application/json", 필요없음
 			data : {gymno: gymno},
 				
 			dataType: "json",
+			async: false, //함수 안팎에서 함수값을 출력했을 때 [{}] 이런 형태의 배열이 떠야 되는데 [] 이렇게 뜸. 
+						  //--> ajax는 기본상태가 비동기라서 일처리가 순서대로 안 됨. 그래서 값은 받았는데 제대로 표시가 안 되는 상태가 되는 거.
 			success: function(bookList) {
 				console.log(bookList);
 				
 				for(var i=0; i<bookList.length; i++){ //시간(title), 날짜(start)
-		            var vo = bookList[i]
-					var tStart = vo.booking_start;
-		            var tEnd = vo.booking_end;
-		            var date = vo.booking_date;
-		            console.log(date);
-		            console.log(tStart);
-		            console.log(tEnd);
+		       
+		            //var title = bookList[i].booking_start+"~"+bookList[i].booking_end;
+					//var start = bookList[i].booking_date;
+		            //console.log(start);
+		            //console.log(title);
+		            //위처럼 굳이 변수 선언해서 넣을 필요없이 아래처럼 바로 키:값 넣을 수 있음
 		            
-		            item = {
-		            	title: tStart+"~"+tEnd,
-		            	start: date
-		            }
+		            bookingVo = {
+		            	title : bookList[i].booking_start+"~"+bookList[i].booking_end,
+		            	start : bookList[i].booking_date
+		            };
 		            
-		            bookings.push(item);
+		            //배열 확인
+		            console.log(bookingVo);
+		            
+		            //배열 묶음
+		            events[i] = bookingVo;
+		            console.log("이벤트");
+		            console.log(events);
 				}
-				//books = JSON.stringify(bookings);
 				
-				//console.log(books);
-				//return books;
-				
-				console.log(bookings);
-
 			},
 			error : function(XHR, status, error) { 
 				console.error(status + " : " + error);
 			}
 
 		}); //ajax
-		
-		return JSON.stringify(bookings);
-		//return bookings;
-	} //bookList
-	
 
+		//함수 리턴값 있어야 달력에 이벤트 반영됨
+		return events;
+		
+		//return JSON.stringify(booksList); 따로 문자열로 만들지 않고 그냥 배열 상태로 리턴하면 됨.
+		//return bookings;
+		
+	} 
 	
+	//bookList
+	//console.log("events밖");
+	//console.log(events);
+	//console.log(events[0]);
+
+		
 	////////////////////////////////////////////////
 
+	
 	//달력
 	document.addEventListener('DOMContentLoaded', function() {
+		var events=[];
 		
 		var calendarEl = document.getElementById('calendar');
 
@@ -272,16 +281,20 @@ body {
 			editable : true,
 			dayMaxEvents : true, // allow "more" link when too many events
 		
-			events : bookList(gymno)
+			events : bookListF(gymno)
+			/* 이벤트는 아래와 같은 형태로 들어가야 됨.
+			events : [ {
+				title : 'title1',
+				start : '2021-03-01'
+			}]
+			*/
 				
 		});//calender
 
 		calendar.render();
+		
 	});//document
 
-	//successCallback(data)
-	
-	
 </script>
 
 </html>
