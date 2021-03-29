@@ -209,11 +209,11 @@ public class StoreController {
 	
 	//상품결제완료 - 매칭추천 (종목 최빈값 찾는중)
 	@RequestMapping(value="/stopcp")
-	public String stoPcp(HttpSession session ) {
+	public String stoPcp(HttpSession session, @RequestParam("buy_no") int buy_no) {
 		System.out.println("[Controller] stopcp()");
 	
-		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		int user_no = authUser.getUser_no();
+		System.out.println(buy_no);
+		storeService.stopcp(buy_no);
 		
 		return "store/paymentCp";
 	}

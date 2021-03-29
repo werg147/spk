@@ -4,44 +4,6 @@
 
 <mapper namespace= "store">
 
-	<resultMap id ="ProductVo" type="ProductVo">
-		<result column ="prod_no" property="prodNo"/>
-		<result column ="sell_no" property="sellNo"/>
-		<result column ="prod_cate" property="prodCate"/>
-		<result column ="event_cate" property="eventCate"/>
-		<result column ="prod_name" property="prodName"/>
-		<result column ="prod_price" property="prodPrice"/>
-		<result column ="prod_brand" property="prodBrand"/>
-		<result column ="prod_desc" property="prodDesc"/>
-		<result column ="prod_from" property="prodFrom"/>
-		<result column ="prod_wash" property="prodWash"/>
-		<result column ="prod_qual" property="prodQual"/>
-		<result column ="prod_detail" property="prodDetail"/>
-		<result column ="prod_detail_img_name" property="prodDetailImgName"/>
-		<result column ="prod_detail_img_savename" property="prodDetailImgSavename"/>
-		<result column ="prod_date" property="prodDate"/>
-	</resultMap>
-	
-	<resultMap id ="QnaVo" type="QnaVo">
-		<result column ="qna_no" property="qnaNo"/>
-		<result column ="prod_no" property="prodNo"/>
-		<result column ="qna_title" property="qnaTitle"/>
-		<result column ="qna_content" property="qnaContent"/>
-		<result column ="qna_date" property="qnaDate"/>
-		<result column ="Qna_type" property="QnaType"/>
-		<result column ="user_no" property="userNo"/>
-		<result column ="buy_no" property="buyNo"/>  
-	</resultMap>
-	
-	<resultMap id ="QnaimgVo" type="QnaimgVo">
-		<result column ="qna_img_no" property="qnaImgNo"/>
-		<result column ="qna_no" property="qnaNo"/>
-		<result column ="qna_img_name" property="qnaImgName"/>
-		<result column ="qna_img_savename" property="qnaImgSavename"/>
-		<result column ="qna_img_type" property="qnaImgType"/>
-	</resultMap>
-
-
 	<!-- storeList 우선 date 기준으로 뿌리기로.. -->
 	<select id="selectStoList" parameterType="String" resultType="ProductVo">
 		<![CDATA[
@@ -348,5 +310,17 @@
 			where prod_no = #{prod_no}
 		]]>
 	</update>
+   
+   <!-- 결제완료_매칭추천 1.구매상품리스트 -->
+   <select id="selectBuy" parameterType="int" resultType="ProdBuyForVo">
+   		<![CDATA[
+   			select prod.event_cate,
+       			   bp.count
+			from buyproduct bp, product prod
+			where bp.prod_no = prod.prod_no
+			and buy_no = #{buy_no}
+   		]]>
+   </select>
+   
    
 </mapper>

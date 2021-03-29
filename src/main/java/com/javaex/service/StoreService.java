@@ -4,6 +4,7 @@ import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -377,5 +378,49 @@ public class StoreService {
 
         }
 	}
+	
+	
+	//결제완료_매칭추천
+	public void stopcp(int buy_no) {
+		System.out.println("[Service] stopcp()");
+		
+		//1.구매상품 리스트
+		List<ProdBuyForVo> pbList = storeDao.selectBuy(buy_no);
+		System.out.println(pbList.toString());
+		
+		//스트링 배열
+		ArrayList<String> arr = new ArrayList<String>();
+		
+		//배열에 리스트_종목  담기
+		for(int i=0; i<pbList.size(); i++) {
+			arr.add(pbList.get(i).getEvent_cate());
+		}
+		
+		//String[] index = new String[pbList.size()];
+		/* 
+		for(int i=0; i<arr.size(); i++) {
+			if(arr.get(i) == arr.get(i+1)) {
+				
+			}
+		}
+		*/
+		
+		System.out.println(arr.get(0));
+		System.out.println(arr.get(1));
+		System.out.println(arr.get(2));
+		
+		System.out.println(arr.toString());
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	
 	
 }

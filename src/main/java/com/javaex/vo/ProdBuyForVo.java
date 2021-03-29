@@ -1,7 +1,5 @@
 package com.javaex.vo;
 
-import java.util.List;
-
 public class ProdBuyForVo {
 
 	private String prod_name;
@@ -28,6 +26,7 @@ public class ProdBuyForVo {
 	private String buy_name;
 	private int buyprod_price;
 	private int user_no;
+	private String event_cate;
 
 	public ProdBuyForVo() {
 	}
@@ -36,7 +35,7 @@ public class ProdBuyForVo {
 			int buy_ph, int colorsize_no, int buy_del_no, String buy_delivery, String buy_del_state, int buy_price,
 			int count, int buy_no, String prod_size, String color, String prod_cate, String buy_date,
 			String buy_paytype, int sell_no, String prod_img_savename, String prod_img_type, String buy_name,
-			int buyprod_price, int user_no) {
+			int buyprod_price, int user_no, String event_cate) {
 		super();
 		this.prod_name = prod_name;
 		this.prod_brand = prod_brand;
@@ -62,6 +61,7 @@ public class ProdBuyForVo {
 		this.buy_name = buy_name;
 		this.buyprod_price = buyprod_price;
 		this.user_no = user_no;
+		this.event_cate = event_cate;
 	}
 
 	public String getProd_name() {
@@ -256,6 +256,14 @@ public class ProdBuyForVo {
 		this.user_no = user_no;
 	}
 
+	public String getEvent_cate() {
+		return event_cate;
+	}
+
+	public void setEvent_cate(String event_cate) {
+		this.event_cate = event_cate;
+	}
+
 	@Override
 	public String toString() {
 		return "ProdBuyForVo [prod_name=" + prod_name + ", prod_brand=" + prod_brand + ", buyprod_no=" + buyprod_no
@@ -265,7 +273,7 @@ public class ProdBuyForVo {
 				+ ", prod_size=" + prod_size + ", color=" + color + ", prod_cate=" + prod_cate + ", buy_date="
 				+ buy_date + ", buy_paytype=" + buy_paytype + ", sell_no=" + sell_no + ", prod_img_savename="
 				+ prod_img_savename + ", prod_img_type=" + prod_img_type + ", buy_name=" + buy_name + ", buyprod_price="
-				+ buyprod_price + ", user_no=" + user_no + "]";
+				+ buyprod_price + ", user_no=" + user_no + ", event_cate=" + event_cate + "]";
 	}
 
 }

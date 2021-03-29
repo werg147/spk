@@ -166,4 +166,15 @@ public class StoreDao {
 		sqlSession.update("store.updateStock", bpVo);
 	}
 
+	
+	//결제완료_매칭추천 1.구매상품 리스트
+	public List<ProdBuyForVo> selectBuy(int buy_no) {
+		System.out.println("[StoreDao] selectBuy()");
+		System.out.println("다오"+ buy_no);
+		
+		return sqlSession.selectList("store.selectBuy", buy_no);
+	}
+	
+	
+	
 }
