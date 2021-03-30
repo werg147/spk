@@ -44,18 +44,41 @@
 	                        user_id,
 	                        password,
 	                        nickname,
-	                        user_date
+	                        user_date,
+	                        social
 	                        )
 	                VALUES(seq_user_no.nextval, 
 	                       #{user_id},
 	                       #{password},
 	                       #{nickname},
-	                        sysdate
+	                        sysdate,
+	                        'kakao'
 	                      )
 			]]>
 	</insert>
 
-
+	<insert id="naverInsert" parameterType="com.javaex.vo.UserVo">
+			<![CDATA[
+		insert into users (user_no, 
+	                        user_id,
+							user_name,
+							password,
+							nickname,
+							user_date,
+							gender,
+							social
+							)
+	                VALUES(seq_user_no.nextval, 
+	                       #{user_id},
+	                       #{user_name},
+	                       #{password},
+	                       #{nickname},
+	                        sysdate,
+	                        #{gender},
+	                        'naver'
+	                      )
+			]]>
+	</insert>
 
 
 

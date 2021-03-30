@@ -315,11 +315,11 @@ a:hover {
   background-color: white;
   font-size: 13px;
   padding: 3px 2px 3px 2px;
-  margin: 0px 15px 0px 15px;
+  margin: 0px 10px 0px 10px;
   text-decoration: none;
   border: 1px solid #dddfe1;
   width: 130px;
-  height: 30px;
+  height: 40px;
   cursor: pointer;
 }
 
@@ -331,7 +331,7 @@ a:hover {
 
 /* 버튼 위치조절 */
 .login_btn {
-  margin: 30px 100px 70px 50px;
+  margin: 30px 100px 20px 50px;
 }
 
 .login_header {
@@ -384,3 +384,12 @@ a:hover {
      color: #e60012;
   }
 
+.login_btn a{
+	margin-left : 5px;
+}
+
+/*회원가입 성별란*/
+.info_table .gender{
+	margin-left : 5px;
+	margin-bottom: 12px;
+}

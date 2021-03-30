@@ -31,7 +31,12 @@ public class UserDao {
 		return sqlSession.insert("user.kakaoInsert", uservo);
 	}
 	
-
+	//네이버 회원가입
+	public int naverInsert(UserVo uservo) {
+		System.out.println("[dao]네이버 회원가입" + uservo);
+		
+		return sqlSession.insert("user.naverInsert", uservo);
+	}
 	
 	//대관판매자 계정등록
 	public int sellerBookInsert(SellerVo sellervo) {

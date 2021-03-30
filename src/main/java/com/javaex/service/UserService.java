@@ -2,7 +2,6 @@ package com.javaex.service;
 
 import java.io.IOException;
 import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -12,14 +11,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javaex.dao.UserDao;
-import com.javaex.vo.KakaoUserInfo;
 import com.javaex.vo.KakaoVo;
-import com.javaex.vo.SellerVo;
+import com.javaex.vo.NaverVo;
+import com.javaex.vo.TokenVo;
 import com.javaex.vo.UserVo;
 
 @Service
@@ -62,10 +60,10 @@ public class UserService {
 				kokoaTokenRequest, String.class);
 
 		// Gson, Json simple, objectMapper
-		KakaoVo kakaovo = null;
+		TokenVo kakaovo = null;
 		ObjectMapper objectMapper = new ObjectMapper();
 		try {
-			kakaovo = objectMapper.readValue(response.getBody(), KakaoVo.class);
+			kakaovo = objectMapper.readValue(response.getBody(), TokenVo.class);
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {
@@ -90,10 +88,10 @@ public class UserService {
 
 		// Gson, Json simple, objectMapper
 		ObjectMapper objectMapper2 = new ObjectMapper();
-		KakaoUserInfo KakaoUserinfo = null;
+		KakaoVo KakaoUserinfo = null;
 
 		try {
-			KakaoUserinfo = objectMapper2.readValue(response2.getBody(), KakaoUserInfo.class);
+			KakaoUserinfo = objectMapper2.readValue(response2.getBody(), KakaoVo.class);
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {
@@ -105,12 +103,15 @@ public class UserService {
 		UUID uuidpassword = UUID.randomUUID();
 
 		UserVo uservo = new UserVo();
-		uservo.setUser_id(KakaoUserinfo.getId());
+		
+		String user_id = "kakao" + KakaoUserinfo.getId();
+		
+		uservo.setUser_id(user_id);
 		uservo.setPassword(uuidpassword.toString());
 		uservo.setNickname(KakaoUserinfo.getProperties().getNickname());
 
 		System.out.println("회원가입 여부확인");
-		int count = userdao.joinUserIdChechSelect(KakaoUserinfo.getId());
+		int count = userdao.joinUserIdChechSelect(user_id);
 
 		if (count == 1) {
 			userdao.selectUser(uservo);
@@ -120,5 +121,112 @@ public class UserService {
 			return uservo;
 		}
 	}
+	
+	//네이버 회원가입
+	public UserVo naverJoin(String code, String state) {
+		
+		
+		System.out.println("[service]네이버 회원가입");
+		RestTemplate rt = new RestTemplate();	
+		
+		// HttpHeaders 오브젝트 생성
+		HttpHeaders headers = new HttpHeaders();
+		//headers.add("Content-type", "json");
+		
+		// HttpBody 오브젝트 생성
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 
+		String key = "9ElAXUf0q0NhBnY7bqKl";
+		String client_secret = "sAPPTwOGRF";
+	
+
+		params.add("grant_type", "authorization_code");
+		params.add("client_id", key);
+		params.add("client_secret", client_secret);
+		params.add("code", code);
+		params.add("state", state);
+
+
+		
+		
+
+		// HttpHeaders, HttpBody 하나의 오브젝트에 담기
+		HttpEntity<MultiValueMap<String, String>> naverTokenRequest 
+		= new HttpEntity<>(params, headers);
+
+		// Http 요청하기 - post방식으로 그리고 response 변수의 응답을 받음
+		ResponseEntity<String> response = rt.exchange("https://nid.naver.com/oauth2.0/token", HttpMethod.POST,
+				naverTokenRequest, String.class);
+
+		// Gson, Json simple, objectMapper
+		TokenVo navervo = null;
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			navervo = objectMapper.readValue(response.getBody(), TokenVo.class);
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		
+		
+		System.out.println(navervo.getAccess_token());
+		
+		
+		
+		RestTemplate rt2 = new RestTemplate();
+
+		// HttpHeaders 오브젝트 생성
+		HttpHeaders headers2 = new HttpHeaders();
+		headers2.add("Authorization", "Bearer " + navervo.getAccess_token());
+
+		// HttpHeaders, HttpBody 하나의 오브젝트에 담기
+		HttpEntity<MultiValueMap<String, String>> naverTokenRequest2 = new HttpEntity<>(headers2);
+
+		// Http 요청하기 - post방식으로 그리고 response 변수의 응답을 받음
+		ResponseEntity<String> response2 = rt2.exchange("https://openapi.naver.com/v1/nid/me", HttpMethod.POST,
+				naverTokenRequest2, String.class);
+
+		// Gson, Json simple, objectMapper
+				ObjectMapper objectMapper2 = new ObjectMapper();
+				NaverVo naverUserinfo = null;
+
+				try {
+					naverUserinfo = objectMapper2.readValue(response2.getBody(), NaverVo.class);
+				} catch (JsonParseException e) {
+					e.printStackTrace();
+				} catch (JsonMappingException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		
+		
+				UUID uuidpassword = UUID.randomUUID();
+		
+				UserVo uservo = new UserVo();
+				
+				String user_id = "naver" + naverUserinfo.getResponse().getId();
+				uservo.setUser_id(user_id);
+				uservo.setPassword(uuidpassword.toString());
+				uservo.setNickname(naverUserinfo.getResponse().getNickname());
+				uservo.setGender(naverUserinfo.getResponse().getGender());
+				uservo.setUser_name(naverUserinfo.getResponse().getName());
+
+				System.out.println("회원가입 여부확인");
+				int count = userdao.joinUserIdChechSelect(user_id);
+		
+				if (count == 1) {
+					userdao.selectUser(uservo);
+					return uservo;
+				} else {
+					userdao.naverInsert(uservo);
+					return uservo;
+				}
+		
+		
+	}
 }

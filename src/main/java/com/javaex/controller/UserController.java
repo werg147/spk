@@ -24,8 +24,8 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javaex.service.UserService;
-import com.javaex.vo.KakaoUserInfo;
 import com.javaex.vo.KakaoVo;
+import com.javaex.vo.TokenVo;
 import com.javaex.vo.SellerVo;
 import com.javaex.vo.UserVo;
 
@@ -83,7 +83,7 @@ public class UserController {
 	}
 
 	//회원정보입력 페이지열기
-	@RequestMapping(value = "/joininfo", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/joinform", method = { RequestMethod.GET, RequestMethod.POST })
 	public String joinInfo() {
 		System.out.println("[cnt]회원정보입력");
 
@@ -100,17 +100,36 @@ public class UserController {
 		UserVo uservo = userservice.kakaoJoin(code);
 
 		
-		//if(uservo) {
+		//if() {
 			UserVo authUser = userservice.login(uservo);
 			
 			System.out.println("로그인성공");
 			System.out.println("로그인정보: " + authUser);
 			session.setAttribute("authUser", authUser);
 			
-			return "redirect:/";
+			//return "redirect:/";
 		//} else {
-		//	return "main/loginform";
+			return "redirect:/user/joininfo";
 		//}
 		
 	}
+	
+	//네이버 회원가입 가입 정보 받기
+	@RequestMapping(value = "/joinnaver", method = { RequestMethod.GET})
+	public String joinFormNaver(String code, String state) {
+
+		System.out.println("[cnt]네이버회원가입");
+		
+		System.out.println(code);
+		
+		userservice.naverJoin(code, state);
+		
+		return "redirect:/user/joininfo";
+	}
+	
+	
+
+	
+	//네이버 회원가입 여기부터 따옴
+	
 }

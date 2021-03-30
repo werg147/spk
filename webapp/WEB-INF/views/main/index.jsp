@@ -30,9 +30,17 @@
 				<div id="main_1">회원가입으로</div>
 				<div id="main_2">스파클링을 시작해보세요.</div>
 				<div id="main_3">
-					<a id="custom-login-btn" href="https://kauth.kakao.com/oauth/authorize?client_id=e90198f391392e46dc3459bec3b08f4b&redirect_uri=http://localhost:8088/Sparkling_/user/join&response_type=code"> <img
-						src="${pageContext.request.contextPath }/assets/image/kakao_login_medium_narrow.png">
-					</a>
+					<a id="custom-login-btn"
+						href="https://kauth.kakao.com/oauth/authorize?client_id=e90198f391392e46dc3459bec3b08f4b&redirect_uri=http://localhost:8088/Sparkling_/user/join&response_type=code">
+						<img
+						src="${pageContext.request.contextPath }/assets/image/kakao_login_medium.png">
+					</a> 
+					<a id="custom-login-btn"
+						href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=9ElAXUf0q0NhBnY7bqKl&state=state_String&redirect_uri=http://localhost:8088/Sparkling_/user/joinnaver">
+						<img
+						src="${pageContext.request.contextPath }/assets/image/네이버 아이디로 로그인_축약형_Green.PNG"
+						width="116">  
+					</a> 
 				</div>
 			</div>
 			<div class="space"></div>

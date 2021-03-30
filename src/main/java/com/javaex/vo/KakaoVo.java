@@ -2,71 +2,163 @@ package com.javaex.vo;
 
 public class KakaoVo {
 
-private String access_token;
-private String token_type;
-private String refresh_token;
-private String expires_in;
-private String scope;
-private String refresh_token_expires_in;
+	private String id;
+	private String connected_at;
+	private Properties properties;
+	private Kakao_account kakao_account;
 
+	public String getId() {
+		return id;
+	}
 
+	public void setId(String id) {
+		this.id = id;
+	}
 
-public KakaoVo() {
+	public String getConnected_at() {
+		return connected_at;
+	}
 
-}
-public KakaoVo(String access_token, String token_type, String refresh_token, String expires_in, String scope,
-		String refresh_token_expires_in) {
-	super();
-	this.access_token = access_token;
-	this.token_type = token_type;
-	this.refresh_token = refresh_token;
-	this.expires_in = expires_in;
-	this.scope = scope;
-	this.refresh_token_expires_in = refresh_token_expires_in;
-}
-public String getAccess_token() {
-	return access_token;
-}
-public void setAccess_token(String access_token) {
-	this.access_token = access_token;
-}
-public String getToken_type() {
-	return token_type;
-}
-public void setToken_type(String token_type) {
-	this.token_type = token_type;
-}
-public String getRefresh_token() {
-	return refresh_token;
-}
-public void setRefresh_token(String refresh_token) {
-	this.refresh_token = refresh_token;
-}
-public String getExpires_in() {
-	return expires_in;
-}
-public void setExpires_in(String expires_in) {
-	this.expires_in = expires_in;
-}
-public String getScope() {
-	return scope;
-}
-public void setScope(String scope) {
-	this.scope = scope;
-}
-public String getRefresh_token_expires_in() {
-	return refresh_token_expires_in;
-}
-public void setRefresh_token_expires_in(String refresh_token_expires_in) {
-	this.refresh_token_expires_in = refresh_token_expires_in;
-}
-@Override
-public String toString() {
-	return "KakaoVo [access_token=" + access_token + ", token_type=" + token_type + ", refresh_token=" + refresh_token
-			+ ", expires_in=" + expires_in + ", scope=" + scope + ", refresh_token_expires_in="
-			+ refresh_token_expires_in + "]";
-}
-	
+	public void setConnected_at(String connected_at) {
+		this.connected_at = connected_at;
+	}
 
-	
+	public Properties getProperties() {
+		return properties;
+	}
+
+	public void setProperties(Properties properties) {
+		this.properties = properties;
+	}
+
+	public Kakao_account getKakao_account() {
+		return kakao_account;
+	}
+
+	public void setKakao_account(Kakao_account kakao_account) {
+		this.kakao_account = kakao_account;
+	}
+
+	public class Properties {
+
+		private String nickname;
+		private String profile_image;
+		private String thumbnail_image;
+
+		public String getNickname() {
+			return nickname;
+		}
+
+		public void setNickname(String nickname) {
+			this.nickname = nickname;
+		}
+
+		public String getProfile_image() {
+			return profile_image;
+		}
+
+		public void setProfile_image(String profile_image) {
+			this.profile_image = profile_image;
+		}
+
+		public String getThumbnail_image() {
+			return thumbnail_image;
+		}
+
+		public void setThumbnail_image(String thumbnail_image) {
+			this.thumbnail_image = thumbnail_image;
+		}
+
+	}
+
+	public class Kakao_account {
+
+		private Boolean profile_needs_agreement;
+		private Profile profile;
+		private Boolean has_email;
+		private Boolean email_needs_agreement;
+		private Boolean has_gender;
+		private Boolean gender_needs_agreement;
+
+		public Boolean getProfile_needs_agreement() {
+			return profile_needs_agreement;
+		}
+
+		public void setProfile_needs_agreement(Boolean profile_needs_agreement) {
+			this.profile_needs_agreement = profile_needs_agreement;
+		}
+
+		public Profile getProfile() {
+			return profile;
+		}
+
+		public void setProfile(Profile profile) {
+			this.profile = profile;
+		}
+
+		public Boolean getHas_email() {
+			return has_email;
+		}
+
+		public void setHas_email(Boolean has_email) {
+			this.has_email = has_email;
+		}
+
+		public Boolean getEmail_needs_agreement() {
+			return email_needs_agreement;
+		}
+
+		public void setEmail_needs_agreement(Boolean email_needs_agreement) {
+			this.email_needs_agreement = email_needs_agreement;
+		}
+
+		public Boolean getHas_gender() {
+			return has_gender;
+		}
+
+		public void setHas_gender(Boolean has_gender) {
+			this.has_gender = has_gender;
+		}
+
+		public Boolean getGender_needs_agreement() {
+			return gender_needs_agreement;
+		}
+
+		public void setGender_needs_agreement(Boolean gender_needs_agreement) {
+			this.gender_needs_agreement = gender_needs_agreement;
+		}
+
+		public class Profile {
+
+			private String nickname;
+			private String thumbnail_image_url;
+			private String profile_image_url;
+
+			public String getNickname() {
+				return nickname;
+			}
+
+			public void setNickname(String nickname) {
+				this.nickname = nickname;
+			}
+
+			public String getThumbnail_image_url() {
+				return thumbnail_image_url;
+			}
+
+			public void setThumbnail_image_url(String thumbnail_image_url) {
+				this.thumbnail_image_url = thumbnail_image_url;
+			}
+
+			public String getProfile_image_url() {
+				return profile_image_url;
+			}
+
+			public void setProfile_image_url(String profile_image_url) {
+				this.profile_image_url = profile_image_url;
+			}
+
+		}
+	}
+
 }

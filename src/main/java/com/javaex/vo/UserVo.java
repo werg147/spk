@@ -15,6 +15,7 @@ public class UserVo {
 	private int user_phone;
 	private double user_level;
 	private String user_date;
+	private String gender;
 	
 
 	public UserVo() {
@@ -66,10 +67,12 @@ public class UserVo {
 		this.user_date = user_date;
 	}
 	
-	
+
+
 	public UserVo(int user_no, int sell_no, int prod_type, int book_type, String user_id, String user_name,
-			String password, String nickname, String address, String user_photo, int user_phone, int user_level,
-			String user_date) {
+			String password, String nickname, String address, String user_photo, int user_phone, double user_level,
+			String user_date, String gender) {
+		super();
 		this.user_no = user_no;
 		this.sell_no = sell_no;
 		this.prod_type = prod_type;
@@ -83,6 +86,7 @@ public class UserVo {
 		this.user_phone = user_phone;
 		this.user_level = user_level;
 		this.user_date = user_date;
+		this.gender = gender;
 	}
 
 	public int getUser_no() {
@@ -191,13 +195,22 @@ public class UserVo {
 		this.book_type = book_type;
 	}
 
+	
+	
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
 	@Override
 	public String toString() {
-		return "UserVo [user_no=" + user_no + ", sell_no=" + sell_no + ", user_id=" + user_id + ", user_name="
-				+ user_name + ", password=" + password + ", nickname=" + nickname + ", address=" + address
-				+ ", user_photo=" + user_photo + ", user_phone=" + user_phone + ", user_level=" + user_level
-				+ ", user_date=" + user_date + ", , prod_type=" + prod_type + ", book_type="
-				+ book_type + "]";
+		return "UserVo [user_no=" + user_no + ", sell_no=" + sell_no + ", prod_type=" + prod_type + ", book_type="
+				+ book_type + ", user_id=" + user_id + ", user_name=" + user_name + ", password=" + password
+				+ ", nickname=" + nickname + ", address=" + address + ", user_photo=" + user_photo + ", user_phone="
+				+ user_phone + ", user_level=" + user_level + ", user_date=" + user_date + ", gender=" + gender + "]";
 	}
 
 }

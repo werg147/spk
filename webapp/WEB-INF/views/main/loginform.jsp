@@ -49,7 +49,8 @@
 				<!-- //login_notice-->
 				<div class="loginform">
 					<!-- 입력폼 → 매칭프로필저장 -->
-					<form action="${pageContext.request.contextPath}/user/login" method="GET">
+					<form action="${pageContext.request.contextPath}/user/login"
+						method="GET">
 						<table class="login">
 							<colgroup>
 								<col style="width: 100px">
@@ -59,7 +60,8 @@
 								<td><label for="user_id">아이디</label></td>
 								<td>
 									<div class="content_product_insert_select_box">
-										<input type="text" id="user_id" placeholder="아이디를 입력해주세요." name="user_id">
+										<input type="text" id="user_id" placeholder="아이디를 입력해주세요."
+											name="user_id">
 									</div>
 								</td>
 							</tr>
@@ -77,14 +79,19 @@
 							<p>아이디와 비밀번호를 확인하고 다시 로그인해주세요</p>
 						</c:if>
 						<div class="login_btn">
-							<button type="submit" class="login_insert_btn">로그인</button>
 							<button class="join_btn">회원가입</button>
+							<button type="submit" class="login_insert_btn">로그인</button>
+							<a href="https://kauth.kakao.com/oauth/authorize?client_id=e90198f391392e46dc3459bec3b08f4b&redirect_uri=http://localhost:8088/Sparkling_/user/join&response_type=code">
+								<img
+								src="${pageContext.request.contextPath }/assets/image/kakao.png"
+								width="40">
+							</a> <a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=9ElAXUf0q0NhBnY7bqKl&state=state_String&redirect_uri=http://localhost:8088/Sparkling_/user/joinnaver"> <img
+								src="${pageContext.request.contextPath }/assets/image/네이버 아이디로 로그인_아이콘형_Green.PNG"
+								width="40">
+							</a>
 						</div>
 					</form>
 					<!-- //입력폼 → 주문하기 -->
-					<a id="custom-login-btn" href="https://kauth.kakao.com/oauth/authorize?client_id=e90198f391392e46dc3459bec3b08f4b&redirect_uri=http://localhost:8088/Sparkling_/user/join&response_type=code"> <img
-						src="${pageContext.request.contextPath }/assets/image/kakao_login_medium_narrow.png">
-					</a>
 				</div>
 				<!--//loginform-->
 			</div>

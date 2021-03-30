@@ -38,4 +38,26 @@ public class MainController {
 		return "main/error_seller_notice";
 	}
 
+	
+	//주소검색 api
+	@RequestMapping(value = "/address", method = { RequestMethod.GET})
+	public String addressSearch() {
+
+		System.out.println("[cnt]주소검색");
+		
+		return "main/Sample";
+		
+
+	}
+	
+	//주소검색 api
+	@RequestMapping(value = "/addressapi", method = { RequestMethod.GET})
+	public String addressApi() {
+
+		System.out.println("[cnt]주소검색");
+		
+		return "main/jusoPopup";
+		
+
+	}
 }
