@@ -82,6 +82,9 @@
 						</div>
 					</form>
 					<!-- //입력폼 → 주문하기 -->
+					<a id="custom-login-btn" href="https://kauth.kakao.com/oauth/authorize?client_id=e90198f391392e46dc3459bec3b08f4b&redirect_uri=http://localhost:8088/Sparkling_/user/join&response_type=code"> <img
+						src="${pageContext.request.contextPath }/assets/image/kakao_login_medium_narrow.png">
+					</a>
 				</div>
 				<!--//loginform-->
 			</div>

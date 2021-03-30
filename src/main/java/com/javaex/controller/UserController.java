@@ -1,16 +1,31 @@
 package com.javaex.controller;
 
+import java.io.IOException;
+import java.util.UUID;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javaex.service.UserService;
+import com.javaex.vo.KakaoUserInfo;
+import com.javaex.vo.KakaoVo;
 import com.javaex.vo.SellerVo;
 import com.javaex.vo.UserVo;
 
@@ -76,4 +91,26 @@ public class UserController {
 	return "main/joininfo";
 	}
 
+	//카카오 회원가입 가입 정보 받기
+	@RequestMapping(value = "/join", method = { RequestMethod.GET})
+	public String joinForm(String code, HttpSession session) {
+		
+		System.out.println("[cnt]카카오회원가입");
+		
+		UserVo uservo = userservice.kakaoJoin(code);
+
+		
+		//if(uservo) {
+			UserVo authUser = userservice.login(uservo);
+			
+			System.out.println("로그인성공");
+			System.out.println("로그인정보: " + authUser);
+			session.setAttribute("authUser", authUser);
+			
+			return "redirect:/";
+		//} else {
+		//	return "main/loginform";
+		//}
+		
+	}
 }

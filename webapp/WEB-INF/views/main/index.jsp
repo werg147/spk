@@ -25,11 +25,14 @@
 			<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 			<!--//header//-->
 
-			<div class="banner"><!-- 어딘가 있어서 자동적용되는 css..헤더아님 -->
+			<div class="banner">
+				<!-- 어딘가 있어서 자동적용되는 css..헤더아님 -->
 				<div id="main_1">회원가입으로</div>
 				<div id="main_2">스파클링을 시작해보세요.</div>
 				<div id="main_3">
-					<a href="">회원가입</a>하러가기
+					<a id="custom-login-btn" href="https://kauth.kakao.com/oauth/authorize?client_id=e90198f391392e46dc3459bec3b08f4b&redirect_uri=http://localhost:8088/Sparkling_/user/join&response_type=code"> <img
+						src="${pageContext.request.contextPath }/assets/image/kakao_login_medium_narrow.png">
+					</a>
 				</div>
 			</div>
 			<div class="space"></div>
@@ -357,5 +360,4 @@
 	<!--wrap-->
 
 </body>
-
 </html>

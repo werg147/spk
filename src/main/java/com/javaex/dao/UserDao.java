@@ -18,6 +18,21 @@ public class UserDao {
 		return sqlSession.selectOne("user.selectUser", uservo);
 	}
 	
+	
+	//카카오 회원정보 확인
+	public int joinUserIdChechSelect(String user_id) {
+		return sqlSession.insert("user.joinUserIdChechSelect", user_id);
+	}
+	
+	//카카오 회원가입
+	public int kakaoInsert(UserVo uservo) {
+		System.out.println("[dao]카카오 회원가입" + uservo);
+		
+		return sqlSession.insert("user.kakaoInsert", uservo);
+	}
+	
+
+	
 	//대관판매자 계정등록
 	public int sellerBookInsert(SellerVo sellervo) {
 		System.out.println("[service]대관계정등록" + sellervo);

@@ -15,7 +15,7 @@ public class UserVo {
 	private int user_phone;
 	private double user_level;
 	private String user_date;
-
+	
 
 	public UserVo() {
 	}

@@ -4,8 +4,9 @@
 <mapper namespace="user">
 
 
-	<!-- 회원정보 가져오기 세션-->
-	<select id="selectUser" parameterType="com.javaex.vo.UserVo" resultType="com.javaex.vo.UserVo">
+	<!-- 회원정보 가져오기 세션 -->
+	<select id="selectUser" parameterType="com.javaex.vo.UserVo"
+		resultType="com.javaex.vo.UserVo">
 		<![CDATA[
 			SELECT users.user_no,
 			       users.nickname,
@@ -18,21 +19,61 @@
 			and users.password = #{password}
 		]]>
 	</select>
-	
+
 	<select id="selectOneUserAddress" parameterType="int" resultType="UserVo">
 		<![CDATA[
 			select address
 			from users
 			where user_no = #{userNo}
 		]]>
-	
+
 	</select>
+
 	
+	<select id="joinUserIdChechSelect" parameterType="String">
+		<![CDATA[
+			SELECT user_id
+			FROM users
+			where user_id = #{user_id}
+		]]>
+	</select>
+
+	<insert id="kakaoInsert" parameterType="com.javaex.vo.UserVo">
+			<![CDATA[
+		insert into users (user_no, 
+	                        user_id,
+	                        password,
+	                        nickname,
+	                        user_date
+	                        )
+	                VALUES(seq_user_no.nextval, 
+	                       #{user_id},
+	                       #{password},
+	                       #{nickname},
+	                        sysdate
+	                      )
+			]]>
+	</insert>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	<insert id="sellerBookInsert" parameterType="com.javaex.vo.SellerVo">
-			<selectKey keyProperty="sell_no" resultType="int" order="BEFORE">
-				select seq_sell_no.nextval
-				from dual
-			</selectKey>
+		<selectKey keyProperty="sell_no" resultType="int" order="BEFORE">
+			select seq_sell_no.nextval
+			from dual
+		</selectKey>
 		<![CDATA[
 			insert into seller (sell_no, 
 								  user_no, 
@@ -58,12 +99,12 @@
 								  )
 		]]>
 	</insert>
-	
-		<insert id="sellerProdInsert" parameterType="com.javaex.vo.SellerVo">
-			<selectKey keyProperty="sell_no" resultType="int" order="BEFORE">
-				select seq_sell_no.nextval
-				from dual
-			</selectKey>
+
+	<insert id="sellerProdInsert" parameterType="com.javaex.vo.SellerVo">
+		<selectKey keyProperty="sell_no" resultType="int" order="BEFORE">
+			select seq_sell_no.nextval
+			from dual
+		</selectKey>
 		<![CDATA[
 			insert into seller (sell_no, 
 								  user_no, 
@@ -89,7 +130,7 @@
 						  )
 		]]>
 	</insert>
-	
+
 	<select id="sellerSelectOne" parameterType="int" resultType="com.javaex.vo.SellerVo">
 		<![CDATA[
 			select sell_no,
@@ -112,7 +153,7 @@
 			where sell_no = #{sell_no}
 		]]>
 	</select>
-	
+
 	<update id="prodSellerUpdate" parameterType="com.javaex.vo.SellerVo">
 		<![CDATA[
 			update seller
@@ -126,7 +167,7 @@
 			where sell_no = #{sell_no}	
 		]]>
 	</update>
-	
+
 	<update id="bookSellerUpdate" parameterType="com.javaex.vo.SellerVo">
 		<![CDATA[
 			update seller
@@ -140,7 +181,7 @@
 			where sell_no = #{sell_no}	
 			]]>
 	</update>
-	
+
 	<update id="sellerUpdate" parameterType="com.javaex.vo.SellerVo">
 		<![CDATA[
 			update seller
