@@ -112,6 +112,8 @@ public class StoreDao {
 	public void insertCart(ProdBuyForVo pvfVo) {
 		System.out.println("[StoreDao] insertCart()");
 		
+		System.out.println("뭐야"+pvfVo);
+		
 		sqlSession.insert("store.insertCart", pvfVo);
 	}
 	

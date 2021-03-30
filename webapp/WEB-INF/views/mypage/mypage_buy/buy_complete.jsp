@@ -72,6 +72,7 @@
 					</c:forEach>
 						
 						<div class="delivery_info_personal">
+						
 							<div class="delivery_info_header">
 								<div class="head">배송정보</div>
 								<div class="content_delevery_num_line"></div>
@@ -86,6 +87,24 @@
 									<div>${bmap.buyVo.buy_name}</div>
 									<div>${bmap.buyVo.buy_ph}</div>
 									<div>${bmap.buyVo.buy_address}</div>
+								</div>
+							</div>
+						</div>
+						<!--delivery_info_persondelevery_btnal-->
+						
+						<div class="delivery_info_personal">
+							<div class="delivery_info_header">
+								<div class="head">결제내역</div>
+								<div class="content_delevery_num_line"></div>
+							</div>
+							<div class="delivery_info_content">
+								<div class="delivery_info_content_title">
+									<div>결제방법</div>
+									<div>결제금액</div>
+								</div>
+								<div class="delivery_info_content_title_re">
+									<div>${bmap.buyVo.buy_paytype}</div>
+									<div><fmt:formatNumber value="${bmap.buyVo.buy_price}" pattern="#,###"/>원</div>
 								</div>
 							</div>
 						</div>

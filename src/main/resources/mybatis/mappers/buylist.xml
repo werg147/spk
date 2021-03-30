@@ -90,7 +90,9 @@
     			   to_char(buy_date, 'YYYY-MM-DD') buy_date,
     			   buy_name,
      			   buy_ph,
-       			   buy_address
+       			   buy_address,
+       			   buy_paytype,
+      			   buy_price
 			from buy
 			where buy_no = #{buy_no}
 		]]>

@@ -388,7 +388,7 @@ public class StoreService {
 		List<ProdBuyForVo> pbList = storeDao.selectBuy(buy_no);
 		System.out.println(pbList.toString());
 		
-		//스트링 배열
+		//스트링 배열 (쿼리문에서 count desc; --> 첫번째로 오는 종목이 최다종목
 		ArrayList<String> arr = new ArrayList<String>();
 		
 		//배열에 리스트_종목  담기
@@ -396,22 +396,10 @@ public class StoreService {
 			arr.add(pbList.get(i).getEvent_cate());
 		}
 		
-		//String[] index = new String[pbList.size()];
-		/* 
-		for(int i=0; i<arr.size(); i++) {
-			if(arr.get(i) == arr.get(i+1)) {
-				
-			}
-		}
-		*/
+		String event_cate = arr.get(0);
+		System.out.println(event_cate);
 		
-		System.out.println(arr.get(0));
-		System.out.println(arr.get(1));
-		System.out.println(arr.get(2));
-		
-		System.out.println(arr.toString());
-		
-		
+		//2.매칭리스트 가져오기
 		
 		
 		

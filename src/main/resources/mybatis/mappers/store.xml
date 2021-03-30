@@ -311,14 +311,16 @@
 		]]>
 	</update>
    
-   <!-- 결제완료_매칭추천 1.구매상품리스트 -->
+   <!-- 결제완료_매칭추천 1.구매상품 종목별 카운트 -->
    <select id="selectBuy" parameterType="int" resultType="ProdBuyForVo">
    		<![CDATA[
    			select prod.event_cate,
-       			   bp.count
-			from buyproduct bp, product prod
-			where bp.prod_no = prod.prod_no
-			and buy_no = #{buy_no}
+       			   sum(bp.count) as count
+		    from buyproduct bp, product prod
+		    where bp.prod_no = prod.prod_no
+			and bp.buy_no = #{buy_no}
+			group by prod.event_cate
+			order by sum(bp.count) desc
    		]]>
    </select>
    
