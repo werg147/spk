@@ -22,6 +22,7 @@ import com.javaex.vo.AlarmVo;
 import com.javaex.vo.BuyProductVo;
 import com.javaex.vo.BuyVo;
 import com.javaex.vo.ColorsizeVo;
+import com.javaex.vo.GymVo;
 import com.javaex.vo.ProdBuyForVo;
 import com.javaex.vo.ProductVo;
 import com.javaex.vo.QnaVo;
@@ -355,11 +356,6 @@ public class StoreService {
 
         }
 
-
-
-
-
-
         // 판매자에게 보내는 알람
         for (int i = 0; i < alarmList.size(); i++) {
 
@@ -380,8 +376,8 @@ public class StoreService {
 	}
 	
 	
-	//결제완료_매칭추천
-	public void stopcp(int buy_no) {
+	//상품 결제완료_매칭추천
+	public List<GymVo> stopcp(int buy_no) {
 		System.out.println("[Service] stopcp()");
 		
 		//1.구매상품 리스트
@@ -399,16 +395,20 @@ public class StoreService {
 		String event_cate = arr.get(0);
 		System.out.println(event_cate);
 		
-		//2.매칭리스트 가져오기
+		//2.대관매칭리스트 가져오기
+		List<GymVo> rentList = storeDao.selectRent(event_cate);
+		System.out.println("대관리스트: " + rentList.toString());
 		
-		
-		
-		
+		return rentList;
 		
 	}
 	
-	
-	
+	//대관 결제완료_상품추천
+	public List<ProductVo> rentpcp(String gym_event) {
+		System.out.println("[Service] rentpcp()");
+		
+		return storeDao.selectProd(gym_event);
+	}
 	
 	
 }

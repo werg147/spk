@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.javaex.vo.BuyProductVo;
 import com.javaex.vo.BuyVo;
 import com.javaex.vo.ColorsizeVo;
+import com.javaex.vo.GymVo;
 import com.javaex.vo.ProdBuyForVo;
 import com.javaex.vo.ProductVo;
 import com.javaex.vo.QnaVo;
@@ -169,7 +170,7 @@ public class StoreDao {
 	}
 
 	
-	//결제완료_매칭추천 1.구매상품 리스트
+	//상품 결제완료_매칭추천 1.구매상품 리스트
 	public List<ProdBuyForVo> selectBuy(int buy_no) {
 		System.out.println("[StoreDao] selectBuy()");
 		System.out.println("다오"+ buy_no);
@@ -177,6 +178,19 @@ public class StoreDao {
 		return sqlSession.selectList("store.selectBuy", buy_no);
 	}
 	
+	//상품 결제완료_매칭추천 2.대관매칭 리스트
+	public List<GymVo> selectRent(String event_cate) {
+		System.out.println("[StoreDao] selectRent()");
+		
+		return sqlSession.selectList("store.selectRent", event_cate);
+	}
+	
+	//대관 결제완료_상품추천
+	public List<ProductVo> selectProd(String gym_event) {
+		System.out.println("[StoreDao] selectProd()");
+		
+		return sqlSession.selectList("store.selectProd", gym_event);
+	}
 	
 	
 }

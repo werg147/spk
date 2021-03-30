@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.service.StoreService;
 import com.javaex.vo.BuyVo;
+import com.javaex.vo.GymVo;
 import com.javaex.vo.ProdBuyForVo;
 import com.javaex.vo.ProductVo;
 import com.javaex.vo.QnaVo;
@@ -210,24 +211,38 @@ public class StoreController {
 	
 	//상품결제완료 - 매칭추천
 	@RequestMapping(value="/stopcp")
-	public String stoPcp(HttpSession session, @RequestParam("buy_no") int buy_no) {
+	public String stoPcp(HttpSession session, Model model, @RequestParam("buy_no") int buy_no) {
 		System.out.println("[Controller] stopcp()");
 	
 		System.out.println(buy_no);
-		storeService.stopcp(buy_no);
+		List<GymVo> rentList = storeService.stopcp(buy_no);
+		
+		model.addAttribute("rentList", rentList);
+		//체육관 저장값이 한개밖에 없어서 jsp 임시로 [0]통일
 		
 		return "store/paymentCp";
 	}
 	
 	//대관결제완료 - 상품추천
 	@RequestMapping(value="/rentpcp")
-	public String rentPcp(HttpSession session) {
+	public String rentPcp(HttpSession session, Model model, @RequestParam("gym_event") String gym_event) {
 		System.out.println("[Controller] stopcp()");
 	
+		//파라미터로 종목 받아올 예정
+		System.out.println(gym_event);
+		List<ProductVo> prodList = storeService.rentpcp(gym_event);
 		
+		model.addAttribute("prodList", prodList);
 		
-		return "store/paymentCp";
+		return "store/rentCp";
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	//지도 api 테스트
 	@RequestMapping(value="/maptest")
