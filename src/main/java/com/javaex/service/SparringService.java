@@ -55,7 +55,7 @@ public class SparringService {
 			profileVo.setWord("잘 부탁드립니다");
 		}
 
-		sparringDao.insertProfile(profileVo);
+		sparringDao.insertProfile23(profileVo);
 		System.out.println("vo2 :" + profileVo);
 
 		// selectKey로 생성된 profileNo값 받기

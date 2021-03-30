@@ -321,7 +321,9 @@ public class SparringController {
 	@RequestMapping(value = "/api/selectdate", method = { RequestMethod.GET, RequestMethod.POST })
 	public Map<String, Object> selectDate(@RequestParam(value = "rownum") int rownum, @RequestParam(value = "userNo") int userNo) {
 		System.out.println("[Api Controller] : selectDate");
-
+		
+		System.out.println(rownum);
+		System.out.println(userNo);
 		return sparringService.selectDate(rownum, userNo);
 	}
 

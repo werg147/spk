@@ -51,10 +51,6 @@
 				<!-- content_notice end -->
 
 				<div class="content_mypage">
-
-
-
-
 					<div class="form2_container">
 
 						<div class="sparring_ex_box">
@@ -1096,27 +1092,6 @@ function comments2(num) {
 		
 		
 	}
-	/*
-	function catena1(num,vo1){
-		
-		$("#cate_na"+num+"").html();
-		str = "";
-		str += '<td><label for="prod_cate"></label></td>';
-		str += '<td><label for="cham_name">대회명</label></td>';
-		str += '	<td>';
-		str += '	<div class="content_product_insert_select_box">';
-		str += '		<input id="cham_name" type="text" placeholder="대회명을 입력해주세요." name="recordList['+num+'].recordName" value="">';
-		str += '	</div>';
-		str += '</td>';
-		
-		$("#cate_na"+num+"").append(str);
-		
-		console.log("리코드네임확인");
-		
-		console.log(vo1.recordName);
-		$('#cham_name'+num).val(vo1.recordName);
-		
-	}
-	*/
+	
 	</script>
 </html>

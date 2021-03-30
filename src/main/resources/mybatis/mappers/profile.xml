@@ -56,12 +56,37 @@
                  #{userNo},
                  #{height},
                  #{weight},
-                 #{career},
-                 #{major},
+                 #{career,jdbcType=VARCHAR},
+                 #{major,jdbcType=VARCHAR},
                  #{exp},
                  sysdate,
                  #{recentlyExer},
                  #{word},
+                 #{profileGymEvent,jdbcType=VARCHAR},
+                 #{day,jdbcType=VARCHAR},
+                 #{time,jdbcType=VARCHAR},
+                 #{address,jdbcType=VARCHAR}
+                 )      
+                 
+      ]]>
+   </insert>
+    <insert id="insertProfile23" parameterType="ProfileVo" >
+	   		<selectKey keyProperty="profileNo" resultType="int" order="BEFORE">
+				select SEQ_PROFILE_NO.nextval
+				from dual
+			</selectKey>
+      <![CDATA[
+         insert into profile
+         values( #{profileNo},
+                 #{userNo},
+                 #{height},
+                 #{weight},
+                 #{career},
+                 #{major},
+                 #{exp,jdbcType=VARCHAR},
+                 sysdate,
+                 #{recentlyExer,jdbcType=VARCHAR},
+                 #{word,jdbcType=VARCHAR},
                  #{profileGymEvent,jdbcType=VARCHAR},
                  #{day,jdbcType=VARCHAR},
                  #{time,jdbcType=VARCHAR},

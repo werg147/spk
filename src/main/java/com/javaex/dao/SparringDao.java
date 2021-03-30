@@ -396,6 +396,13 @@ public class SparringDao {
 		return sqlSession.selectOne("bbuy.selectGymType",bookingNo);
 	}
 
+	public void insertProfile23(ProfileVo profileVo) {
+		System.out.println("[Dao] : insertProfile23");
+			int count = sqlSession.insert("profile.insertProfile23",profileVo);
+		
+		System.out.println("profile"+count);
+	}
+
 	
 
 
