@@ -88,4 +88,10 @@ public class GymDao {
 		System.out.println("대관리스트 출력테스트> "+bList);
 		return bList;
 	}
+	
+	//대관 삭제
+	public void bookDelete(int bookno) {
+		System.out.println("[GymDao] bookDelete()");
+		sqlSession.delete("gym.bookDelete", bookno);
+	}
 }

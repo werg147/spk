@@ -345,7 +345,7 @@ a:hover {
 */
 .middle .booking_gym_info {
     font-size: 13px;
-    width: 800px;
+    width: 812px;
     margin-top: 20px;
     border: 1px #dddfe1 solid;
   }
@@ -361,12 +361,11 @@ a:hover {
 .middle .booking_gym_info .gym_info_img {
     width: 320px;
     height: 260px;
-    padding: 5px 10px 10px 10px;
+    padding: 10px 20px 10px 10px;
 }
 
 .middle .booking_gym_info .gap {
-    padding-bottom: 3px;
-    padding-top: 5px;
+    padding-top: 10px;
 }
 
 .middle .booking_gym_info .gap_info {
@@ -518,11 +517,12 @@ a:hover {
   }
 
   .middle .booking_list_elnt .gym_info .gym_info_detail {
-    margin: 90px 30px 0px 5px;
+    margin: 90px 10px 0px 0px;
+    width: 240px;
   }
 
   .middle .booking_list_elnt .gym_info .gym_info_btn_site {
-    margin: 190px 15px 0px 0px;
+    margin: 190px 0px 0px 0px;
   }
 
   .middle .booking_list_elnt .gym_info .gym_info_btn {
@@ -549,6 +549,10 @@ a:hover {
     border-radius: 0px;
   }
 
+  .middle .booking_manage {
+  	margin-bottom: 30px;
+  }
+  
   .middle .booking_manage .booking_manage_list {
     width: 100%;
     text-align: center;
@@ -665,7 +669,7 @@ a:hover {
   
   /* 달력 라이브러리 */
   #calendar {
-	width: 760px;
+	width: 810px;
 	margin: 40px 0px 40px 0px;
 }
   

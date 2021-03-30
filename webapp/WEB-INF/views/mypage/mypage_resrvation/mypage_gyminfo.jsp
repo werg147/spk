@@ -53,7 +53,8 @@
 
 					<!-- 대관 등록 버튼 -->
 					<div class="regi_btn_site">
-						<a href="${pageContext.request.contextPath}/mypage/book/gymaddform?gymno=${gymMap.gymVo.gym_no}"><button type="button" class="regi_btn">대관 등록</button></a>
+						<a href="${pageContext.request.contextPath}/mypage/book/bookaddform?gymno=${gymMap.gymVo.gym_no}">
+						<button type="button" class="regi_btn">대관 등록</button></a>
 					</div>
 
 					<!--체육관 정보-->
@@ -245,7 +246,7 @@
 
 							<div class="gym_regi_btn_site">
 								<button class="gym_regi_btn" type="submit">정보 수정</button>
-								<button class="gym_regi_btn" type="submit">체육관 삭제</button>
+								<button class="gym_regi_btn" type="button">체육관 삭제</button>
 							</div>
 
 						</form>

@@ -146,11 +146,49 @@
 						<button type="submit" class="btn" id="btnUpload">등록</button>
 					</div>
 				</form>
-				
-				
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
+	
+	<!-- 대관 정보 확인 및 삭제 모달창 -->
+	<div class="modal fade" id="delModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">대관 정보</h4>
+			</div>
+			
+			<form method="post" action="${pageContext.request.contextPath }/mypage/book/bookremove"> <!-- 대관등록 주소 추가 -->
+				<div class="modal-body">
+					<div class="form-group">
+						<label class="form-text">날짜</label> 
+						&nbsp
+						<input id="addModalContent" type="text" name="booking_date" value="" >
+					</div>
+					<div class="form-group">
+						<label class="form-text">시간</label>
+						&nbsp
+						<input id="addModalContent" type="text" name="booking_start" value="">
+						&nbsp~&nbsp
+						<input id="addModalContent" type="text" name="booking_end" value="">	
+					</div>
+					<div class="form-group">
+						<label class="form-text">요금</label>
+						&nbsp
+						<input id="addModalContent" type="text" name="booking_price" value="" >
+					</div>
+				</div>
+				<input type="hidden" name="booking_date" value="${gymVo.gym_no}">
+				<input type="hidden" name="booking_no" value="${gymVo.gym_no}">
+				<input type="hidden" name="gym_no" value="${gymVo.gym_no}">
+				<div class="modal-footer">
+					<button type="submit" class="btn" id="btnUpload">삭제</button>
+				</div>
+			</form>
+			 </div><!-- /.modal-content -->
+		 </div><!-- /.modal-dialog -->
+ 	 </div><!-- /.modal -->
 	
 </body>
 
@@ -269,13 +307,18 @@
 			editable : true,
 			dayMaxEvents : true, // allow "more" link when too many events
 		
-			events : bookListF(gymno)
+			events : bookListF(gymno),
 			/* 이벤트는 아래와 같은 형태로 들어가야 됨.
 			events : [ {
 				title : 'title1',
 				start : '2021-03-01'
 			}]
 			*/
+			eventColor : "#e60012",
+			eventClick: function() {
+				//$("#delModal").modal();
+				alert("테스트");
+			}
 				
 		});//calender
 

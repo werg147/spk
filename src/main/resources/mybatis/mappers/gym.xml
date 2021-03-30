@@ -124,8 +124,17 @@
 			        booking_reg_date
 			FROM booking
 			where gym_no = #{gym_no}
+			order by booking_date asc
 		]]>
 	</select>
+	
+	<!-- 대관 삭제 -->
+	<delete id="bookDelete" parameterType="int">
+		<![CDATA[ 
+			delete from booking
+			where booking_no=#{booking_no}
+		]]>
+	</delete>
 	
 	<!-- ///////////////////////////////////////////////////////// -->
 	

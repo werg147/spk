@@ -42,22 +42,24 @@
 							</div>
 
 							<div class="gym_info_title">
-								<div class="gym_info_title_no">체육관이름</div>
+								<div class="gym_info_title_no">체육관 이름</div>
 								<br>
 								<div class="gym_info_title_no">체육관 주소</div>
 							</div>
 
 							<div class="gym_info_detail">
-								<div>1111111체육관</div>
+								<div>${gymVo.gym_name }</div>
 								<br>
-								<div>00시 00구 00로 00 00빌딩 2층</div>
+								<div>${gymVo.gym_address }</div>
 							</div>
 
 							<div class="gym_info_btn_site">
-								<button class="gym_info_btn"
-									type="button">체육관 정보</button>
-								<a href="${pageContext.request.contextPath }/mypage/book/bookaddform"><button class="gym_info_btn" type="button">대관
-									등록</button></a>
+								<a href="${pageContext.request.contextPath }/mypage/book/gym?no=${gymVo.sell_no }&gymno=${gymVo.gym_no}">
+								<button class="gym_info_btn" type="button">체육관 정보</button>
+								</a>
+								<a href="${pageContext.request.contextPath }/mypage/book/bookaddform?gymno=${gymVo.gym_no }">
+									<button class="gym_info_btn" type="button">대관 등록</button>
+								</a>
 							</div>
 						</div>
 						<!--//gym_info-->
@@ -67,7 +69,7 @@
 					<!--기간 필터-->
 					<div class="time_filter">
 						<input type="text" placeholder="기간필터"> ~ <input type="text" placeholder="기간필터">
-						<img name="calender" src="달력아이콘">
+						<!-- <img name="calender" src="달력아이콘"> -->
 					</div>
 
 
@@ -76,41 +78,38 @@
 						<table class="booking_manage_list">
 							<thead>
 								<tr>
-									<th>체육관 이름</th>
-									<th>일시/요금</th>
+									<th>날짜</th>
+									<th>시간</th>
+									<th>요금</th>
 									<th>상태</th>
+									<th>예약자명</th>
 									<th>관리</th>
 								</tr>
 							</thead>
 							<tbody>
 								<!--반복영역-->
-								<tr>
-									<td>1111111체육관</td>
-									<td>1.11/50,000</td>
-									<td>예약중</td>
-									<td>삭제 및 수정 불가</td>
-								</tr>
-								<!--//반복-->
+								<c:forEach var="vo" items="${gymVo.bookingList }">
+									<tr>
+										<td>${vo.booking_date }</td>
+										<td>${vo.booking_start }~${vo.booking_end }</td>
+										<td>${vo.booking_price }</td>
+										<td>${vo.booking_state }</td>
+										<td></td>
+										
+										<td>
+											<c:if test="${vo.booking_state eq '대기'}">
+												<a href="${pageContext.request.contextPath }/mypage/book/bookremove?bookno=${vo.booking_no }&gymno=${gymVo.gym_no}">
+													<button class="booking_manage_btn" type="button">삭제</button>
+												</a>
+											</c:if>
+										</td>
+									</tr>
+								</c:forEach> <!-- //반복 영역 -->
 
-								<tr>
-									<td>1111111체육관</td>
-									<td>1.11/50,000</td>
-									<td>예약중</td>
-									<td>삭제 및 수정 불가</td>
-								</tr>
-								<tr>
-									<td>1111111체육관</td>
-									<td>1.11/50,000</td>
-									<td>대기중</td>
-									<td>
-										<button onclick="location.href='예약판매자8_마이페이지_예약수정.html'" class="booking_manage_btn"
-											type="button">수정</button>
-									</td>
-								</tr>
 							</tbody>
 						</table>
-					</div>
-					<!--//booking_manage-->
+					</div> <!--//booking_manage-->
+					
 				</div>
 				</div>
 				<!--//middle-->

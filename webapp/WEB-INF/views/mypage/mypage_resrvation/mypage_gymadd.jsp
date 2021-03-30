@@ -33,54 +33,53 @@
 							<table>
 								<tr>
 									<td class="basic">체육관 이름</td>
-									<td colspan="2"><input class="input_text" type="text" name="gym_name"> 
+									<td colspan="4"><input class="input_text" type="text" name="gym_name"> 
 									<!-- 테스트용 사업자번호 --><input type="hidden" name="sell_no" value="${authUser.sell_no }"></td>
 								</tr>
 
 								<tr>
 									<td class="basic">체육관 주소</td>
-									<td colspan="2"><input class="input_text" type="text" name="gym_address"></td>
+									<td colspan="4"><input class="input_text" type="text" name="gym_address"></td>
 								</tr>
 
 								<tr>
 									<td class="basic">체육관 전화번호</td>
-									<td colspan="2"><input class="input_text" type="text" name="gym_ph"></td>
+									<td colspan="4"><input class="input_text" type="text" name="gym_ph"></td>
 								</tr>
 
 								<tr class="input_plus">
 									<td>체육관 운영시간</td>
-									<td colspan="2"><textarea name="gym_time"></textarea></td>
+									<td colspan="4"><textarea name="gym_time"></textarea></td>
 								</tr>
 
 								<tr class="basic_chk">
 									<td>체육관 주 종목</td>
-									<td colspan="2"></td>
-								</tr>
 
-								<tr>
+								
 									<td class="basic_chk_padding">
-										<input id="box" type="radio" name="gym_event" value="box"> <label for="box">복싱/킥복싱</label>
+										<input id="box" type="radio" name="gym_event" value="복싱"> <label for="box">복싱</label>
 									</td>
 									<td class="basic_chk_padding">
-										<input id="jiu" type="radio" name="gym_event" value="jiu"> <label for="jiu">주짓수</label>
+										<input id="box" type="radio" name="gym_event" value="킥복싱"> <label for="box">킥복싱</label>
 									</td>
 									<td class="basic_chk_padding">
-										<input id="mma" type="radio" name="gym_event" value="mma"> <label for="mma">종합격투기</label>
+										<input id="jiu" type="radio" name="gym_event" value="주짓수"> <label for="jiu">주짓수</label>
+									</td>
+									<td class="basic_chk_padding">
+										<input id="mma" type="radio" name="gym_event" value="종합격투기"> <label for="mma">종합격투기</label>
 									</td>
 								</tr>
 
 								<tr class="basic_chk">
 									<td>체육관 편의시설</td>
-									<td colspan="2"></td>
-								</tr>
 
-								<tr>
 									<td><input id="park" type="checkbox" name="conve" value="park"> <label for="park">주차장</label></td>
 									<td><input id="shower" type="checkbox" name="conve" value="shower"> <label for="shower">샤워실</label></td>
-									<td><input id="towel" type="checkbox" name="conve" value="towel"> <label for="towel">수건</label></td>
+									<td colspan="2"><input id="towel" type="checkbox" name="conve" value="towel"> <label for="towel">수건</label></td>
 								</tr>
 
 								<tr>
+									<td></td>
 									<td class="basic_chk_padding">
 										<input id="locker" type="checkbox" name="conve" value="locker"> <label for="locker">락커</label>
 									</td>

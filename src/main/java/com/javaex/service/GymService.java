@@ -161,6 +161,24 @@ public class GymService {
 		gymDao.bookInsert(bookVo);	
 	}
 	
+	//대관 관리 페이지 (체육관 정보 + 대관 등록 정보 리스트)
+	public GymVo bookManage(int gymno) {
+		System.out.println("[GymService] bookAddForm()");
+		
+		GymVo gymVo = gymDao.gymSelectOne(gymno);
+		List<BookingVo> bookList = gymDao.bookSelectList(gymno);
+		
+		System.out.println("[서비스] 체육관> "+gymVo);
+		System.out.println("[서비스] 대관목록> "+bookList);
+		
+		if(bookList != null) {
+			gymVo.setBookingList(bookList);
+		}
+		
+		
+		return gymVo;
+	}
+	
 	//대관 리스트 출력
 	public List<BookingVo> bookList(int gymno) {
 		System.out.println("[GymService] bookList()");
@@ -168,6 +186,12 @@ public class GymService {
 		
 	}
 	
+	//대관 삭제
+	public void bookRemove(int bookno) {
+		System.out.println("[GymService] bookRemove()");
+		
+		gymDao.bookDelete(bookno);
+	}
 	/////////////////////////////////////////////////
 	
 	//대관판매자계정등록

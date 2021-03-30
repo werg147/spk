@@ -40,6 +40,8 @@ public class GymController {
 		
 		//세션으로 사업자 번호 int sellNo 받아서 사업자만 접근 가능하게 만들기
 		
+		//사이드 메뉴에서 들어갈 때 체육관 번호 없으면 어떻게 할지
+		
 		model.addAttribute("gymMap", gymService.gymInfo(sellNo, gymNo));
 		/*
 		GymVo gymVo = gymService.gymInfo(gymno);
@@ -84,7 +86,9 @@ public class GymController {
 		return "redirect:/mypage/book/gym?no="+sellNo+"&gymno="+gymNo;
 	}
 	
-	//대관 등록폼
+	//체육관 삭제
+	
+	//대관 등록 페이지
 	@RequestMapping(value="/bookaddform", method= {RequestMethod.GET , RequestMethod.POST})
 	public String bookAddForm(@RequestParam("gymno") int gymNo, Model model) {
 		System.out.println("[GymController] bookAddForm()");
@@ -117,9 +121,30 @@ public class GymController {
 		return bookList;
 	}
 	
+	//대관 삭제
+	@RequestMapping(value="/bookremove", method= {RequestMethod.GET , RequestMethod.POST})
+	public String bookRemove(@RequestParam("bookno") int bookno, @RequestParam("gymno") int gymno) {
+		System.out.println("[GymController] bookRemove()>>> "+bookno+"/"+gymno);
+		
+		gymService.bookRemove(bookno);
+		
+		return "redirect:/mypage/book/bookmanage?gymno="+gymno;
+	}
+	
 	//대관 관리 페이지
 	@RequestMapping(value="/bookmanage", method= {RequestMethod.GET , RequestMethod.POST})
-	public String bookManage() {
+	public String bookManage(@RequestParam("gymno") int gymno, Model model) {
+		System.out.println("[GymController] bookManage()>>> "+gymno);
+		
+		GymVo gymVo = gymService.bookManage(gymno);
+		model.addAttribute("gymVo", gymVo);
+		
+		return "mypage/mypage_resrvation/mypage_bookinglist";
+	}
+	
+	//테스트
+	@RequestMapping(value="/qqq", method= {RequestMethod.GET , RequestMethod.POST})
+	public String qqq() {
 		return "mypage/mypage_resrvation/mypage_bookinglist";
 	}
 	
