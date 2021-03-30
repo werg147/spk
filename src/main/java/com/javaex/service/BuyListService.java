@@ -29,18 +29,16 @@ public class BuyListService {
 		return blDao.selectBuyList(user_no);
 	}
 
-	public List<BookingVo> bookinglist(int user_no) {
+	public List<BuyListVo> bookinglist(int user_no) {
 
 		System.out.println("[BuyList Service]: bookinglist() 연결");
 
 		return blDao.selectBookingList(user_no);
 	}
 
-	public List<BBuyVo> bbuylist(int user_no) {
+	public List<BuyListVo> bbuylist(int user_no) {
 
 		System.out.println("[BuyList Service]: bbuylist() 연결");
-		
-		System.out.println(user_no);
 
 		return blDao.selectBbuyList(user_no);
 	}
@@ -73,12 +71,11 @@ public class BuyListService {
 		return blDao.selectBookingCompleteVo(booking_no);
 	}
 
-	/* 구매내역_매치상세페이지(경환) */
-	public List<MatchingCompleteVo> buymatching(int booking_no) {
+	public MatchingCompleteVo buymatching(MatchingCompleteVo mcVo) {
 
 		System.out.println("[BuyList_Buymatching Service]: buymatching 연결");
 
-		return blDao.selectMatchingCompleteVo(booking_no);
+		return blDao.selectMatchingCompleteVo(mcVo);
 	}
 
 }

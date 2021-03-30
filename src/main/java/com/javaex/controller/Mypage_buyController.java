@@ -227,17 +227,17 @@ public class Mypage_buyController {
 
 		BuyListVo buylistVo = new BuyListVo();
 
-		BuyVo buyVo = new BuyVo();
+		BookingVo bkVo = new BookingVo();
 
-		buylistVo.setBuy_no(buyVo.getBuy_no());
-
-		/* #2. 대관상품내역 */
-		List<BookingVo> bookingList = blServ.bookinglist(user_no);
-
-		System.out.println("[BuyList Ctrl]: " + bookingList.toString());
+		buylistVo.setBooking_no(bkVo.getBooking_no());
 
 		/* #2. 대관상품내역 */
-		model.addAttribute("BookingList", bookingList);
+		List<BuyListVo> buyList = blServ.bookinglist(user_no);
+
+		System.out.println("[BuyList Ctrl]: " + buyList.toString());
+
+		/* #2. 대관상품내역 */
+		model.addAttribute("BookingList", buyList);
 
 		return "mypage/mypage_buy/bookinglist";
 
@@ -255,17 +255,19 @@ public class Mypage_buyController {
 
 		BuyListVo buylistVo = new BuyListVo();
 
-		BuyVo buyVo = new BuyVo();
+		BBuyVo bbuyVo = new BBuyVo();
 
-		buylistVo.setBuy_no(buyVo.getBuy_no());
-
-		/* #3. 매칭상품내역 */
-		List<BBuyVo> bbuyList = blServ.bbuylist(user_no);
-
-		System.out.println("[BuyList Ctrl]: " + bbuyList.toString());
+		buylistVo.setB_buy_no(bbuyVo.getB_buy_no());
 
 		/* #3. 매칭상품내역 */
-		model.addAttribute("BbuyList", bbuyList);
+		List<BuyListVo> buyList = blServ.bbuylist(user_no);
+
+		System.out.println("[BuyList Ctrl]: " + buyList.toString());
+
+		/* #3. 매칭상품내역 */
+		model.addAttribute("BbuyList", buyList);
+
+		System.out.println(user_no);
 
 		return "mypage/mypage_buy/matchinglist";
 
@@ -315,7 +317,8 @@ public class Mypage_buyController {
 
 	/* 구매내역_매치상세페이지(경환) */
 	@RequestMapping(value = "/buymatching", method = { RequestMethod.GET, RequestMethod.POST })
-	public String buymatching(@RequestParam("booking_no") int booking_no, Model model, HttpSession session) {
+	public String buymatching(@ModelAttribute MatchingCompleteVo mcVo, @RequestParam("booking_no") int booking_no,
+			Model model, HttpSession session) {
 
 		System.out.println("[BuyList_buymatching Ctrl]: buymatching 진입");
 
@@ -323,15 +326,16 @@ public class Mypage_buyController {
 
 		int user_no = authUser.getUser_no();
 
-		MatchingCompleteVo mcVo = new MatchingCompleteVo();
-
 		mcVo.setUser_no(user_no);
 
 		mcVo.setBooking_no(booking_no);
 
-		List<MatchingCompleteVo> mcList = blServ.buymatching(booking_no);
+		mcVo = blServ.buymatching(mcVo);
 
-		model.addAttribute("MatchingList", mcList);
+		model.addAttribute("MatchingList", mcVo);
+
+		System.out.println(user_no);
+		System.out.println(booking_no);
 
 		return "mypage/mypage_buy/matching_complete";
 

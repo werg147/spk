@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -11,10 +10,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>구매내역</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/header.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/mypage_buy.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/header.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/mypage_buy.css">
 </head>
 
 <body>
@@ -53,19 +50,13 @@
 
 					<div class="sub_tmenu">
 						<ul>
-							<li class="sub_on"><a
-								href="${pageContext.request.contextPath}/mypage/buylist"
-								class="t1_1"> <span>배송상품</span>
+							<li class="sub_on"><a href="${pageContext.request.contextPath}/mypage/buylist" class="t1_1"> <span>배송상품</span>
 							</a></li>
 
-							<li class="sub_on"><a
-								href="${pageContext.request.contextPath}/mypage/bookinglist"
-								class="t1_1"> <span>대관상품</span>
+							<li class="sub_on"><a href="${pageContext.request.contextPath}/mypage/bookinglist" class="t1_1"> <span>대관상품</span>
 							</a></li>
 
-							<li class="sub_on"><a
-								href="${pageContext.request.contextPath}/mypage/matchinglist"
-								class="t1_1"> <span>매칭상품</span>
+							<li class="sub_on"><a href="${pageContext.request.contextPath}/mypage/matchinglist" class="t1_1"> <span>매칭상품</span>
 							</a></li>
 						</ul>
 					</div>
@@ -85,24 +76,17 @@
 									<li id="" class="goods_pay_item">
 
 										<div class="goods_item">
-											<a
-												href="${pageContext.request.contextPath }/mypage/buymatching?booking_no=${bbuyList.b_buy_no}"
-												class="goods_thumb"> <img
-												src="${pageContext.request.contextPath}/assets/image/마이페이지 남성_글러브.png"
-												alt="강남체육관" width="90" height="90">
+											<a href="${pageContext.request.contextPath }/mypage/buymatching?booking_no=${bbuyList.booking_no}" class="goods_thumb"> <img
+												src="${pageContext.request.contextPath}/assets/image/마이페이지 남성_글러브.png" alt="강남체육관" width="90" height="90">
 											</a>
 
 											<div class="goods_info">
-												<a
-													href="${pageContext.request.contextPath }/mypage/buymatching?booking_no=${bbuyList.b_buy_no}"
-													class="goods">
+												<a href="${pageContext.request.contextPath }/mypage/buymatching?booking_no=${bbuyList.booking_no}" class="goods">
 													<p class="name">${bbuyList.gym_name }</p>
 													<ul class="info">
-														<li><span class="blind">상품금액</span>
-															${bbuyList.b_buy_price }원</li>
+														<li><span class="blind">상품금액</span> ${bbuyList.b_buy_price }원</li>
 
-														<li class="date"><span class="blind">상품구매날짜</span>
-															${bbuyList.b_buy_date }</li>
+														<li class="date"><span class="blind">상품구매날짜</span> ${bbuyList.b_buy_date }</li>
 													</ul>
 												</a> <span class="state_statusName">${bbuyList.b_buy_player_state }</span>
 												<p class="guide">매칭이 종료되었습니다. 감사합니다</p>

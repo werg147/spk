@@ -4,8 +4,7 @@
 
 <mapper namespace="buylist">
 
-	<resultMap id="resultMapMatchingCompleteVo"
-		type="MatchingCompleteVo">
+	<resultMap id="resultMapMatchingCompleteVo" type="MatchingCompleteVo">
 		<result column="user_no" property="user_no" />
 		<result column="user_name" property="user_name" />
 		<result column="nickname" property="nickname" />
@@ -15,8 +14,7 @@
 		<result column="b_buy_state" property="b_buy_state" />
 		<result column="b_buy_paytype" property="b_buy_paytype" />
 		<result column="b_buy_price" property="b_buy_price" />
-		<result column="b_buy_player_state"
-			property="b_buy_player_state" />
+		<result column="b_buy_player_state" property="b_buy_player_state" />
 		<result column="height" property="height" />
 		<result column="weight" property="weight" />
 		<result column="class" property="weight_class" />
@@ -25,8 +23,7 @@
 	</resultMap>
 
 	<!-- 배송상품 구매내역 -->
-	<select id="selectBuyList" parameterType="int"
-		resultType="BuyListVo">
+	<select id="selectBuyList" parameterType="int" resultType="BuyListVo">
 		<![CDATA[
 			SELECT  p.prod_detail_img_savename,
 			        p.prod_name,
@@ -44,8 +41,7 @@
 	</select>
 
 	<!-- 대관상품 구매내역 -->
-	<select id="selectBookingList" parameterType="int"
-		resultType="BookingVo">
+	<select id="selectBookingList" parameterType="int" resultType="BookingVo">
 		<![CDATA[
 			SELECT  gi.gym_img_savename,
 			        g.gym_name,
@@ -66,15 +62,15 @@
 	</select>
 
 	<!-- 매칭상품 구매내역 -->
-	<select id="selectBBuyList" parameterType="int"
-		resultType="BBuyVo">
+	<select id="selectBBuyList" parameterType="int" resultType="BBuyVo">
 		<![CDATA[
 			SELECT  gi.gym_img_savename,
 			        g.gym_name,
 			        bb.b_buy_price,
 			        bb.b_buy_date,
 			        bb.b_buy_player_state,
-			        bb.b_buy_no
+			        bb.b_buy_no,
+			        bb.booking_no
 			FROM    users u, gym g, gymimg gi, bbuy bb
 			WHERE   u.user_no = bb.user_no
 			        and g.gym_no = gi.gym_no
@@ -90,17 +86,14 @@
     			   to_char(buy_date, 'YYYY-MM-DD') buy_date,
     			   buy_name,
      			   buy_ph,
-       			   buy_address,
-       			   buy_paytype,
-      			   buy_price
+       			   buy_address
 			from buy
 			where buy_no = #{buy_no}
 		]]>
 	</select>
 
 	<!-- 구매내역_배송상세 구매상품내역 -->
-	<select id="selectBuydel" parameterType="int"
-		resultType="ProdBuyForVo">
+	<select id="selectBuydel" parameterType="int" resultType="ProdBuyForVo">
 		<![CDATA[
 			select pimg.prod_img_savename,
      			   prod.prod_brand,
@@ -120,8 +113,7 @@
 	</select>
 
 	<!-- 구매내역_대관상세(경환) -->
-	<select id="selectBookingComplete" parameterType="int"
-		resultType="BookingCompleteVo">
+	<select id="selectBookingComplete" parameterType="int" resultType="BookingCompleteVo">
 		<![CDATA[
 			SELECT  bk.booking_no,
 			        bk.booking_date,
@@ -143,8 +135,7 @@
 	</select>
 
 	<!-- 구매내역_매치상세(경환) -->
-	<select id="selectMatchingComplete" parameterType="int"
-		resultMap="resultMapMatchingCompleteVo">
+	<select id="selectMatchingComplete" parameterType="int" resultMap="resultMapMatchingCompleteVo">
 		<![CDATA[
 			SELECT  u.user_no,
 			        u.user_name,

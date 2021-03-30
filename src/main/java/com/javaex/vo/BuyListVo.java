@@ -13,13 +13,15 @@ public class BuyListVo {
 	private int user_no;
 	private int buy_no;
 	private int prod_no;
+	private int booking_no;
+	private int b_buy_no;
 
 	public BuyListVo() {
 		super();
 	}
 
 	public BuyListVo(String prod_detail_img_savename, String prod_name, int prod_price, String buy_date,
-			String buy_del_state, int user_no, int buy_no, int prod_no) {
+			String buy_del_state, int user_no, int buy_no, int prod_no, int booking_no, int b_buy_no) {
 		super();
 		this.prod_detail_img_savename = prod_detail_img_savename;
 		this.prod_name = prod_name;
@@ -29,6 +31,8 @@ public class BuyListVo {
 		this.user_no = user_no;
 		this.buy_no = buy_no;
 		this.prod_no = prod_no;
+		this.booking_no = booking_no;
+		this.b_buy_no = b_buy_no;
 	}
 
 	public String getProd_detail_img_savename() {
@@ -95,11 +99,28 @@ public class BuyListVo {
 		this.prod_no = prod_no;
 	}
 
+	public int getBooking_no() {
+		return booking_no;
+	}
+
+	public void setBooking_no(int booking_no) {
+		this.booking_no = booking_no;
+	}
+
+	public int getB_buy_no() {
+		return b_buy_no;
+	}
+
+	public void setB_buy_no(int b_buy_no) {
+		this.b_buy_no = b_buy_no;
+	}
+
 	@Override
 	public String toString() {
 		return "BuyListVo [prod_detail_img_savename=" + prod_detail_img_savename + ", prod_name=" + prod_name
 				+ ", prod_price=" + prod_price + ", buy_date=" + buy_date + ", buy_del_state=" + buy_del_state
-				+ ", user_no=" + user_no + ", buy_no=" + buy_no + ", prod_no=" + prod_no + "]";
+				+ ", user_no=" + user_no + ", buy_no=" + buy_no + ", prod_no=" + prod_no + ", booking_no=" + booking_no
+				+ ", b_buy_no=" + b_buy_no + "]";
 	}
 
 }

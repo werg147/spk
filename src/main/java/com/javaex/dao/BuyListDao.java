@@ -31,24 +31,22 @@ public class BuyListDao {
 		return buyList;
 	}
 
-	public List<BookingVo> selectBookingList(int user_no) {
+	public List<BuyListVo> selectBookingList(int user_no) {
 
 		System.out.println("[BuyList Dao]: selectBookingList() 실행");
 
-		List<BookingVo> bookingList = sql.selectList("buylist.selectBookingList", user_no);
+		List<BuyListVo> bookingList = sql.selectList("buylist.selectBookingList", user_no);
 
 		System.out.println("[BuyList Dao]: " + bookingList.toString());
 
 		return bookingList;
 	}
 
-	public List<BBuyVo> selectBbuyList(int user_no) {
+	public List<BuyListVo> selectBbuyList(int user_no) {
 
 		System.out.println("[BuyList Dao]: selectBbuyList() 실행");
 
-		List<BBuyVo> bbuyList = sql.selectList("buylist.selectBBuyList", user_no);
-		
-		System.out.println(user_no);
+		List<BuyListVo> bbuyList = sql.selectList("buylist.selectBBuyList", user_no);
 
 		System.out.println("[BuyList Dao]: " + bbuyList.toString());
 
@@ -79,13 +77,12 @@ public class BuyListDao {
 		return bkList;
 	}
 
-	public List<MatchingCompleteVo> selectMatchingCompleteVo(int booking_no) {
+	public MatchingCompleteVo selectMatchingCompleteVo(MatchingCompleteVo mcVo) {
 
-		System.out.println("[BuyList_Buymatching Dao]: selectMatchingCompleteVo 연결");
+		System.out.println("[BuyList_Buybooking Dao]: selectBookingCompleteVo 연결");
 
-		List<MatchingCompleteVo> mcList = sql.selectList("buylist.selectMatchingComplete", booking_no);
+		return sql.selectOne("buylist.selectMatchingComplete", mcVo);
 
-		return mcList;
 	}
 
 }
