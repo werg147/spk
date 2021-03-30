@@ -97,9 +97,23 @@ public class SparringService {
 					rVo.setRecordName(" ");
 				}
 				
+				if(rVo.getRecordType().equals("대회분류")) {
+					rVo.setRecordType("");
+				}
 				
+				if(rVo.getRecordDate().equals("출전연도")) {
+					rVo.setRecordDate("");
+				}
+				
+				if(rVo.getRecordMatch().equals("순위")) {
+					rVo.setRecordMatch("");
+				}
+				
+				if(!rVo.getRecordEvent().equals("종목")) {
+					
 				System.out.println(rVo.getRecordName());
 				sparringDao.insertRecord(rVo);
+				}
 
 			}
 		}
@@ -153,6 +167,8 @@ public class SparringService {
 		pMap.put("profileVo", profileVo);
 		pMap.put("eventList", eventList);
 		pMap.put("recordList", recordList);
+		
+		System.out.println(recordList);
 		return pMap;
 	}
 
@@ -397,15 +413,18 @@ public class SparringService {
 			sparringDao.insertBBuy(bBuyVo);
 
 			/** 관장에게 알람 **/
-
+			
 			AlarmVo alarmVo = sparringDao.selectSellno(booking_no);
 			System.out.println(alarmVo.getUser_no());
 			System.out.println(alarmVo.getAlarm_title());
 
 			AlarmContentVo alVo = new AlarmContentVo();
+			
 			alarmVo.setAlarm_content(alVo.getGym_reservation());
-			alarmDao.inserAlarmtoseller(alarmVo);
-
+			
+			System.out.println("셀넘버 :" + alarmVo.getSell_no());
+			alarmDao.inserAlarmtoseller(alarmVo); //o
+			
 			/* 시합등록자에게 알람 */
 			BBuyVo bbuyVo = sparringDao.selectBBUYSC(bBuyVo.getB_buy_no());
 			int UN = bbuyVo.getUser_no();
@@ -827,6 +846,7 @@ public class SparringService {
 		// 해당 bookingNo를 결제한다
 
 		map.put("bBuyVo", vo);
+		
 		return map;
 	}
 
@@ -1815,5 +1835,16 @@ public class SparringService {
 
 		}
 		return  userLevel;
+	}
+
+	public String gymType(int bookingNo) {
+		System.out.println("[gymType] :  gymType");
+		
+		BBuyVo bbuyVo = sparringDao.selectGymType(bookingNo);
+		
+		System.out.println("종목은?" + bbuyVo.getGym_event());
+		
+		String event = bbuyVo.getGym_event();
+		return event;
 	}
 }

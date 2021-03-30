@@ -319,6 +319,10 @@ input:-ms-input-placeholder {
 
   border-radius: 10px;
 }
+
+.record_ti{
+  color: #e60012;
+}
 .card:hover {
   box-shadow: 1px 1px 20px #ddd;
   transition: 0.4s all;

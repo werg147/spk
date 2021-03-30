@@ -1,5 +1,7 @@
 package com.javaex.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.javaex.service.SparringService;
 import com.javaex.vo.BBuyVo;
 import com.javaex.vo.BookingVo;
-
 import com.javaex.vo.GymImgVo;
 import com.javaex.vo.GymVo;
 import com.javaex.vo.ProfileVo;
@@ -216,7 +217,8 @@ public class SparringController {
 		model.addAttribute("map",map);
 		return "matching/payment";
 	}
-	/**결제**/
+	/**결제
+	 * @throws UnsupportedEncodingException **/
 	@RequestMapping(value = "/pay", method = { RequestMethod.GET, RequestMethod.POST })
 	public String pay(@ModelAttribute BBuyVo bBuyVo,
 			@RequestParam(value="partneruserno", required = false, defaultValue = "0")int partneruserno,
@@ -226,26 +228,29 @@ public class SparringController {
 			@RequestParam(value="mainnum",required=false, defaultValue="0")int mainnum,
 			@RequestParam(value = "mybbuyno", required = false, defaultValue = "0") int mybbuyno,
 			@RequestParam(value="user_no", required = false, defaultValue = "0")int userNo
-						) {
+						) throws UnsupportedEncodingException {
 		System.out.println("[Controller] : pay()");
 		
 		System.out.println(bBuyVo);
+		
+		String event_cate = sparringService.gymType(bookingNo);
+		String encodedParam = URLEncoder.encode(event_cate, "UTF-8");
 		if(mainnum == 1) {
 			sparringService.accept(partneruserno,bookingNo);
 			sparringService.acceptpay(bBuyVo, bbuyno,bookingNo,userNo,partneruserno);
 			
-			return "store/paymentCp";
+			
 		}else if(mainnum == 2){
 			
 			sparringService.acceptPartner(partneruserno,bookingNo,bBuyVo, bbuyno,bookingNo,mybbuyno,userNo);
-			return "store/paymentCp";
+			
 		}else {
 			
 			//관장알람 추가
 			sparringService.pay(bBuyVo,subnum,bbuyno,bookingNo);
 		
-			return "store/paymentCp";
 		}
+		return "redirect:/store/rentpcp?gym_event="+encodedParam;
 	}
 	
 	//수락하기버튼

@@ -19,7 +19,7 @@
 								#{user_no}, 
 								#{alarm_content},
 								sysdate, 
-								1,
+								#{sell_no},
 								#{alarm_title},
 								2
 								)		
@@ -33,10 +33,10 @@
 								#{user_no}, 
 								#{alarm_content},
 								sysdate, 
-								1,
+								#{sell_no},
 								#{alarm_title},
 								2
-								)		
+								)
 		]]>
 	</insert>
 
@@ -47,7 +47,7 @@
 								#{user_no}, 
 								#{alarm_content},
 								sysdate, 
-								1,
+								#{sell_no},
 								#{alarm_title},
 								2
 								)
@@ -60,6 +60,7 @@
 	<select id="selectSellno" parameterType="int" resultType="AlarmVo">
 	<![CDATA[
 		SELECT s.user_no,
+			   s.sell_no,
 			   g.gym_name as  alarm_title
 		FROM BOOKING B  , gym g , seller s
 		WHERE B.BOOKING_NO = #{booking_no}

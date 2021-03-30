@@ -390,6 +390,12 @@ public class SparringDao {
 		
 	}
 
+	public BBuyVo selectGymType(int bookingNo) {
+		System.out.println("[Dao] :  selectGymType");
+		
+		return sqlSession.selectOne("bbuy.selectGymType",bookingNo);
+	}
+
 	
 
 

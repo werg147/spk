@@ -361,38 +361,44 @@
 	
 	})
 	
-	$("#record_app").on("change","#cham_cate",function(){
+	$("#record_app").on("change","#cham_cate",function (){
 		 
 		var cham_01 = $(this).attr('class')
 		
-		 console.log(cham_01);
+		
 		 
 		 var local=$("."+cham_01+" option:selected").val();
 		 var cat=$("."+cham_01+" option:selected").data("catena");
 		 $("#cate_na"+cat+"").html( " " );
 		
-		 console.log(local);
-		 console.log(cat);
+		
 	
 		if(local == '지역대회'){
+			
 			 catena(cat);
+			
 			
 			
 		}
 		
 	});
 	
+
+	
 	
 		$("#record_app").on("click",".eveneven",function(){
 			$(".eveneven").change("click",function(){
 						
-				console.log("클릭");
 				var num = $(this).data("num");
 				var clas = '.even12'+num+'';
-				console.log(clas);
+				
+				//종목이 바뀌면 다시 대회이름을 지워줘야함
+				$("#cate_na"+num+"").html(" ");
+				
 				var event = $("option:selected",clas).val();
-				console.log(num);
-				console.log(event);
+				console.log("종목선택")
+				console.log(event);			
+				
 				
 				
 				if(event == 1 || event ==2){
@@ -408,15 +414,18 @@
 					console.log("4");
 					
 					cham3(num);
+				}else if(event == '종목'){
+					reback(num);
+					
 				}
-					});
+			});
 		});
 	
 	
 	//스파링 5회 이상 체크
 	$(".ex_01").on("click",function(){
 		var spaFive = $('.ex_01:checked').val();
-		console.log(spaFive); 
+	
 		
 		if(spaFive == 'no'){
 			$(".con_match").hide();
@@ -446,7 +455,7 @@
 	$('.radio-value').on('click', function() {
 
     var valueCheck = $('.radio-value:checked').val(); // 체크된 Radio 버튼의 값을 가져옵니다.
-	console.log(valueCheck);
+
     if ( valueCheck == 'no' ) {
         $('#major_info').attr('disabled', true); // 과일 종류를 입력하는 input 을 활성화합니다.
         
@@ -461,7 +470,7 @@
 	
 	
 	$("#form_submit").on("submit", function() {
-		console.log("확인");
+		
 		console.log($("#exer_cate1 option:selected").val());
 		if($("#exer_cate1 option:selected").val() == "종목 선택"){
 			alert("스파링종목을 선택해주세요");
@@ -545,16 +554,29 @@
 
 					//dataType : "json",
 					success : function(pMap) { //성공시
-						console.log(pMap.profileVo);
-						console.log(pMap.profileVo.recentlyExer);
-						
+				
 						/* 프로필 */
 						$("#height_info").val(pMap.profileVo.height);
 						$("#weight_info").val(pMap.profileVo.weight);
 						$("#major_info").val(pMap.profileVo.major);
+						
+						
+						
+						if(pMap.profileVo.career == '프로'){
+							
+						$("input:radio[name='career']:radio[value='프로']").prop('checked', true);
+						
+						}else if(pMap.profileVo.career == '아마추어'){
+							$("input:radio[name='career']:radio[value='아마추어']").prop('checked', true);
+						}
+						
+						
+						
 						if(pMap.profileVo.major != ""){
 							$("input:radio[name='chk_major']:radio[value='yes']").prop('checked', true);
+							
 						}
+						
 						
 						
 						$("#exer_sparring_info").val(pMap.profileVo.exp);
@@ -603,7 +625,7 @@
 	
 	function record(recordList) {
 		
-		console.log("값이있음");
+		console.log("레코드");
 		$("#record_app").html(" ");
 		var listSize = $(recordList).length;
 		
@@ -614,12 +636,24 @@
 		for(var i=0; i < listSize; i++){
 		comments(num);
 			
+		var rname= recordList[i].recordName;
+		console.log("레코드네임");
+		console.log(rname);
+		
+		if(recordList[i].recordName == '' || recordList[i].recordDate == null || recordList[i].recordType == null || recordList[i].recordMatch == null){
+			
+		}else{
+			
+		
 		if(recordList[i].recordEvent == 1 || recordList[i].recordEvent == 2){
 			//복싱, 킥복싱
 			recordcham1(num,recordList[i],i);
 			
-			if(recordList[i].recordName != ''){
-				catena1(num,recordList[i])
+			if(recordList[i].recordName != ' '){
+				console.log("복싱,킥복싱 있음");
+				
+				$('#cham_name'+num).val(recordList[i].recordName);
+			
 			}
 			
 		}else if (recordList[i].recordEvent = 3){
@@ -627,8 +661,9 @@
 			//ufc
 			recordcham2(num,recordList[i],i);
 			
-			if(recordList[i].recordName != ''){
-				catena1(num,recordList[i])
+			if(recordList[i].recordName != ' '){
+				$('#cham_name'+num).val(recordList[i].recordName);
+				
 			}
 			
 		}else if (recordList[i].recordEvent = 4){
@@ -636,12 +671,14 @@
 			//주짓수
 			recordcham3(num,recordList[i],i);
 			
-			if(recordList[i].recordName != ''){
-				catena1(num,recordList[i])
+			if(recordList[i].recordName != ' '){
+				$('#cham_name'+num).val(recordList[i].recordName);
+				
 			}
 			
 		}
 		
+		}
 		
 
 
@@ -777,6 +814,29 @@ function comments2(num) {
 		$("#record_app").append(str);
 		
 		
+	}
+	
+	//종목선택
+	function reback(num){
+		$(".cham"+num+"").html(" ");
+		
+		str="";
+		str += '<option data-catena="'+num+'" selected>대회분류</option>';
+		
+		$(".cham"+num+"").append(str);
+		
+		$(".cham_year"+num+"").html(" ");
+		
+		str2 ="";
+		str2 +='<option selected>출전연도</option>';
+		
+		$(".cham_year"+num+"").append(str2);
+		
+		$(".cham_rank"+num+"").html(" ");
+		str3 ="";
+		str3 +='<option selected>순위</option>';
+		
+		$(".cham_rank"+num+"").append(str3);
 	}
 	
 	/* 복싱,킥복싱 대회분류 cham1 */
@@ -1022,20 +1082,21 @@ function comments2(num) {
 	
 	function catena(num){
 		
-		$("#cate_na"+num+"").html();
+		$("#cate_na"+num+"").html(" ");
 		str = "";
 		str += '<td><label for="prod_cate"></label></td>';
 		str += '<td><label for="cham_name">대회명</label></td>';
 		str += '	<td>';
 		str += '	<div class="content_product_insert_select_box">';
-		str += '		<input id="" type="text" id="cham_name'+num+'" placeholder="대회명을 입력해주세요." name="recordList['+num+'].recordName" >';
+		str += '		<input  type="text" id="cham_name'+num+'" placeholder="대회명을 입력해주세요." name="recordList['+num+'].recordName" >';
 		str += '	</div>';
 		str += '</td>';
 		
 		$("#cate_na"+num+"").append(str);
 		
+		
 	}
-	
+	/*
 	function catena1(num,vo1){
 		
 		$("#cate_na"+num+"").html();
@@ -1044,15 +1105,18 @@ function comments2(num) {
 		str += '<td><label for="cham_name">대회명</label></td>';
 		str += '	<td>';
 		str += '	<div class="content_product_insert_select_box">';
-		str += '		<input id="" type="text" id="cham_name'+num+'" placeholder="대회명을 입력해주세요." name="recordList['+num+'].recordName" value="">';
+		str += '		<input id="cham_name" type="text" placeholder="대회명을 입력해주세요." name="recordList['+num+'].recordName" value="">';
 		str += '	</div>';
 		str += '</td>';
 		
 		$("#cate_na"+num+"").append(str);
 		
-		$('#cham_name'+i).val(vo1.recordName);
+		console.log("리코드네임확인");
+		
+		console.log(vo1.recordName);
+		$('#cham_name'+num).val(vo1.recordName);
 		
 	}
-	
+	*/
 	</script>
 </html>

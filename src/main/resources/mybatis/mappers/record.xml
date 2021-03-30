@@ -11,11 +11,11 @@
 			insert into record
 			values( SEQ_RECORD_NO.nextval,
 					#{profileNo},
-					#{recordType},
+					#{recordType,jdbcType=VARCHAR},
 					#{recordName,jdbcType=VARCHAR},
-					#{recordEvent},
-					#{recordDate},
-					#{recordMatch}
+					#{recordEvent,jdbcType=VARCHAR},
+					#{recordDate,jdbcType=VARCHAR},
+					#{recordMatch,jdbcType=VARCHAR}
 			)	  	
 	  	]]>
 	  

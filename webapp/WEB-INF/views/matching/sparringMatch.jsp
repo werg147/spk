@@ -109,25 +109,31 @@
 											<p>${map.bBuyVo.weight}kg</p>
 											<p>전공: ${map.bBuyVo.major}</p>
 											<!-- 경력 for문 -->
-											<c:forEach items="${map.bBuyVo.recordList }" var="recordvo">
-												<p>${recordvo.recordType}</p>
-												<p>${recordvo.recordDate}
-													<c:choose>
-														<c:when test="${recordvo.recordEvent == 1 }">
+											<c:forEach items="${map.bBuyVo.recordList }" var="recordvo" varStatus="status">
+
+												<c:if test="${!empty recordvo.recordType &&!empty recordvo.recordEvent &&!empty recordvo.recordMatch}">
+													<br>
+													<p class="record_ti">${status.count}번째공식기록</p>
+													<p>
+														<c:choose>
+															<c:when test="${recordvo.recordEvent == 1 }">
                                             				복싱
                                             			</c:when>
-														<c:when test="${recordvo.recordEvent == 2 }">
+															<c:when test="${recordvo.recordEvent == 2 }">
                                             				,킥복싱
                                             			</c:when>
-														<c:when test="${recordvo.recordEvent == 3 }">
+															<c:when test="${recordvo.recordEvent == 3 }">
                                             				,종합격투기
                                             			</c:when>
-														<c:when test="${recordvo.recordEvent == 4 }">
+															<c:when test="${recordvo.recordEvent == 4 }">
                                             				,주짓수
                                             		</c:when>
-													</c:choose>
-													${recordvo.recordName}
-												</p>
+														</c:choose>
+													</p>
+													<p>${recordvo.recordType}</p>
+													<p>${recordvo.recordDate}${recordvo.recordName}</p>
+													<p>${recordvo.recordMatch}</p>
+												</c:if>
 
 											</c:forEach>
 											<!-- 대관 x -->
@@ -169,7 +175,7 @@
 																	</c:otherwise>
 																</c:choose>
 															</c:if>
-															
+
 														</c:if>
 													</c:if>
 												</c:if>
@@ -253,24 +259,30 @@
 													<!-- 경력 for문 -->
 
 													<c:forEach items="${map.bBuyList[0].recordList }" var="recordvo">
-														<p>${recordvo.recordType}</p>
-														<p>${recordvo.recordDate}
-															<c:choose>
-																<c:when test="${recordvo.recordEvent == 1 }">
+
+														<c:if test="${!empty recordvo.recordType &&!empty recordvo.recordEvent &&!empty recordvo.recordMatch}">
+															<br>
+															<p class="record_ti">${status.count}번째공식기록</p>
+															<p>
+																<c:choose>
+																	<c:when test="${recordvo.recordEvent == 1 }">
                                             				복싱
+                                            			</c:when>
+																	<c:when test="${recordvo.recordEvent == 2 }">
+                                            				,킥복싱
+                                            			</c:when>
+																	<c:when test="${recordvo.recordEvent == 3 }">
+                                            				,종합격투기
+                                            			</c:when>
+																	<c:when test="${recordvo.recordEvent == 4 }">
+                                            				,주짓수
                                             		</c:when>
-																<c:when test="${recordvo.recordEvent == 2 }">
-                                            				킥복싱
-                                            		</c:when>
-																<c:when test="${recordvo.recordEvent == 3 }">
-                                            				종합격투기
-                                            		</c:when>
-																<c:when test="${recordvo.recordEvent == 4 }">
-                                            				주짓수
-                                            		</c:when>
-															</c:choose>
-															${recordvo.recordName}
-														</p>
+																</c:choose>
+															</p>
+															<p>${recordvo.recordType}</p>
+															<p>${recordvo.recordDate}${recordvo.recordName}</p>
+															<p>${recordvo.recordMatch}</p>
+														</c:if>
 
 													</c:forEach>
 													<!-- 대관 x -->
@@ -278,45 +290,47 @@
 													<!-- 대관 x end -->
 												</div>
 
+												<c:if test="${authUser.user_no == param.userno || !map.bBuyList[0].b_buy_player_state eq '선택자' }">
+													<c:choose>
+														<c:when test="${map.booking_state eq '결제완료'}">
+															<p id="conment_10"></p>
 
-												<c:choose>
-													<c:when test="${map.booking_state eq '결제완료'}">
-														<p id="conment_10"></p>
+														</c:when>
+														<c:when test="${map.booking_state eq '예약대기중' && map.bBuyList[0].b_buy_player_state eq '선택자'}">
+															<p id="conment_10">상대의 수락 및 결제를 기다리고 있습니다</p>
 
-													</c:when>
-													<c:when test="${map.booking_state eq '예약중' ||map.booking_state eq '예약대기중' && map.bBuyList[0].b_buy_player_state eq '선택자'}">
-														<p id="conment_10">상대의 수락 및 결제를 기다리고 있습니다</p>
+														</c:when>
 
-													</c:when>
-													<c:otherwise>
-														<c:if test="${authUser.user_no == param.userno }">
+														<c:otherwise>
+															<c:if test="${authUser.user_no == param.userno }">
 
-															<c:choose>
-																<c:when test="${map.bBuyVo.b_buy_state == null && map.bBuyVo.booking_no != 0}">
-																<div id="accept_pay_btn">
-																	<a href="${pageContext.request.contextPath }/sparring/accept?partneruserno=${map.bBuyList[0].user_no}&bookingNo=${map.bBuyVo.booking_no}&userNo=${map.bBuyVo.user_no}&bbuyno=${map.bBuyVo.b_buy_no}&mainnum=1&profileno=${map.bBuyVo.profile_no}&mybbuyno=${map.bBuyList[0].b_buy_no}"><button class="dae_button_item2">
-																			<span class="dea_btn2">수락하고 결제하기</span>
-																		</button></a>
-																</div>
-																		
-																</c:when>
-																<c:otherwise>
-																<div id="accept_btn">
-																	<a href="${pageContext.request.contextPath }/sparring/accept?partneruserno=${map.bBuyList[0].user_no}&bookingNo=${map.bBuyVo.booking_no}&userNo=${map.bBuyVo.user_no}&bbuyno=${map.bBuyVo.b_buy_no}&mybbuyno=${map.bBuyList[0].b_buy_no}"><button class="dae_button_item2">
-																			<span class="dea_btn2">수락하기</span>
-																		</button></a>
-																</div>
-																		
-																</c:otherwise>
-															</c:choose>
+																<c:choose>
+																	<c:when test="${map.bBuyVo.b_buy_state == null && map.bBuyVo.booking_no != 0}">
+																		<div id="accept_pay_btn">
+																			<a href="${pageContext.request.contextPath }/sparring/accept?partneruserno=${map.bBuyList[0].user_no}&bookingNo=${map.bBuyVo.booking_no}&userNo=${map.bBuyVo.user_no}&bbuyno=${map.bBuyVo.b_buy_no}&mainnum=1&profileno=${map.bBuyVo.profile_no}&mybbuyno=${map.bBuyList[0].b_buy_no}"><button class="dae_button_item2">
+																					<span class="dea_btn2">수락하고 결제하기</span>
+																				</button></a>
+																		</div>
+
+																	</c:when>
+																	<c:otherwise>
+																		<div id="accept_btn">
+																			<a href="${pageContext.request.contextPath }/sparring/accept?partneruserno=${map.bBuyList[0].user_no}&bookingNo=${map.bBuyVo.booking_no}&userNo=${map.bBuyVo.user_no}&bbuyno=${map.bBuyVo.b_buy_no}&mybbuyno=${map.bBuyList[0].b_buy_no}"><button class="dae_button_item2">
+																					<span class="dea_btn2">수락하기</span>
+																				</button></a>
+																		</div>
+
+																	</c:otherwise>
+																</c:choose>
 																<div id="refuse_btn">
 																	<a href="${pageContext.request.contextPath }/sparring/refuse?mybbuyno=${map.bBuyList[0].b_buy_no}&partneruserno=${map.bBuyList[0].user_no}&bookingNo=${map.bBuyVo.booking_no}&userNo=${map.bBuyVo.user_no}&bbuyno=${map.bBuyVo.b_buy_no}&sessionuserno=${authUser.user_no}"><button class="dae_button_item3">
 																			<span class="dea_btn2">거절하기</span>
-																	</button></a>
+																		</button></a>
 																</div>
-														</c:if>
-													</c:otherwise>
-												</c:choose>
+															</c:if>
+														</c:otherwise>
+													</c:choose>
+												</c:if>
 
 
 											</div>
@@ -368,7 +382,7 @@
 					<!--  -->
 				</div>
 			</section>
-			
+
 			<!-- post_host end-->
 			<!-- detail -->
 			<c:if test="${!empty map.gAVo}">
@@ -588,11 +602,11 @@
 		<!--//footer//-->
 	</div>
 	</div>
-	<input id="bookingno" data-bookingno="${map.bBuyVo.booking_no }" type="" name ="" value="">
-	<input id="userno" data-userno="${map.bBuyVo.user_no }" type="" name ="" value="">
-	<input id="bbuyno" data-bbuyno="${map.bBuyVo.b_buy_no }" type="" name ="" value="">
-	<input id="profileno" data-profileno="${map.bBuyVo.profile_no }" type="" name ="" value="">
-	<input id="sessionuser" data-sessionuser="${authUser.user_no}" type="" name ="" value="">
+	<input id="bookingno" data-bookingno="${map.bBuyVo.booking_no }" type="" name="" value="">
+	<input id="userno" data-userno="${map.bBuyVo.user_no }" type="" name="" value="">
+	<input id="bbuyno" data-bbuyno="${map.bBuyVo.b_buy_no }" type="" name="" value="">
+	<input id="profileno" data-profileno="${map.bBuyVo.profile_no }" type="" name="" value="">
+	<input id="sessionuser" data-sessionuser="${authUser.user_no}" type="" name="" value="">
 	<script>
 		var mySwiper = new Swiper('.swiper-container', {
 			slidesPerView : 2,
