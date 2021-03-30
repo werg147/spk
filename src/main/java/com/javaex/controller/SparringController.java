@@ -99,7 +99,8 @@ public class SparringController {
 			@RequestParam(value ="bbuyno" , required = false, defaultValue="0") int bbuyno,
 			@RequestParam(value="subnum",required=false,defaultValue="0")int subNum,
 			@RequestParam(value="bbuyuser",required=false,defaultValue="0")int bbuyuser,
-			@RequestParam(value="selectbooking_no",required=false,defaultValue="0")int selectbooking_no) {
+			@RequestParam(value="selectbooking_no",required=false,defaultValue="0")int selectbooking_no,
+			@RequestParam(value="join",required=false,defaultValue="0")int join) {
 		System.out.println("[Controller] : profileWriteForm()");
 	
 		
@@ -145,7 +146,8 @@ public class SparringController {
 							   @RequestParam(value="subnum",required=false,defaultValue="0")int subnum,
 							   @RequestParam(value="bbuyno",required=false,defaultValue="0")int bbuyno,
 							   @RequestParam(value="bbuyuser",required=false,defaultValue="0")int bbuyuser,
-							   @RequestParam(value="selectbooking_no",required=false,defaultValue="0")int selectbooking_no) {
+							   @RequestParam(value="selectbooking_no",required=false,defaultValue="0")int selectbooking_no,
+							   @RequestParam(value="join",required=false,defaultValue="0")int join) {
 		System.out.println("[Controller] : profileWrite");
 
 		String[] eventName = request.getParameterValues("eventName");
@@ -189,7 +191,10 @@ public class SparringController {
 			
 			return "redirect:/sparring/payment?bookingno="+selectbooking_no+"&userno="+userNo+"&profileno="+profileVo.getProfileNo()+"&subnum="+subnum+"&bbuyno="+bbuyno;
 		
-		}else {
+		}else if(join == 1){
+			System.out.println("회원가입");
+			return "redirect:/";
+		}else{
 			System.out.println("잘못된 페이지");
 			return "";
 		}

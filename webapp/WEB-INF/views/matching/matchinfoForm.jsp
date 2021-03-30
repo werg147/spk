@@ -319,6 +319,7 @@
 									<input id="session_user_no" type="text" name="userNo" value="${authUser.user_no}">
 									<input type="text" name="subnum" value="${param.subnum}">
 									<input type="text" name="selectbooking_no" value="${param.selectbooking_no}">
+									<input type="text" name="join" value="${param.join}">
 									<c:if test="${param.booking_no != 0}">
 										<input type="text" name="bookingno" value="${param.booking_no}">
 										<input type="text" name="bbuyno" value="${param.bbuyno}">

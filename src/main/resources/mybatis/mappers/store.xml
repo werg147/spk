@@ -311,7 +311,7 @@
 		]]>
 	</update>
    
-   <!-- 결제완료_매칭추천 1.구매상품 종목별 카운트 -->
+   <!-- 상품 결제완료_매칭추천 1.구매상품 종목별 카운트 -->
    <select id="selectBuy" parameterType="int" resultType="ProdBuyForVo">
    		<![CDATA[
    			select prod.event_cate,
@@ -323,6 +323,45 @@
 			order by sum(bp.count) desc
    		]]>
    </select>
+   
+   <!-- 상품 결제완료_매칭추천 2.대관매칭 리스트 -->
+   <select id="selectRent" parameterType="String" resultType="GymVo">
+   		<![CDATA[
+   			select gimg.gym_img_savename as gymImgSavename,
+       			   g.gym_no,
+       			   g.gym_name,
+       			   g.gym_event,
+       			   avg(bk.booking_price) as money
+			from gym g, gymimg gimg, booking bk
+			where g.gym_no = bk.gym_no
+			and g.gym_no = gimg.gym_no
+			and gimg.gym_img_type = 'main'
+			and g.gym_event = #{event_cate}
+			group by gimg.gym_img_savename, g.gym_no, g.gym_name, bk.booking_date, g.gym_event
+			order by bk.booking_date desc
+   		]]>
+   </select>
+   
+   <!-- 대관 결제완료 상품추천리스트 -->
+   <select id="selectProd" parameterType="String" resultType="ProductVo">
+   		<![CDATA[
+   			select pimg.prod_img_savename,
+       			   prod.prod_no,
+			       prod.prod_brand,
+			       prod.prod_name,
+       			   prod.prod_price,
+       			   prod.event_cate
+			from product prod, prodimg pimg
+			where prod.prod_no = pimg.prod_no
+			and pimg.prod_img_type = 'main'
+			and prod.event_cate = #{gym_event}
+			order by prod.prod_date desc
+   		]]>
+   </select>
+   
+   
+   
+   
    
    
 </mapper>

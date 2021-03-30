@@ -64,7 +64,7 @@
     <div class="container">
         <!--추천상품 리스트-->
         <div class="goods-add-product">
-            <h3 class="goods-add-product-title">운동 할 체육관은 정해졌나요? ${rentList[0].gym_event} 관련 체육관 보러가기</h3>
+            <h3 class="goods-add-product-title">체육관 갈 준비는 다 되셨나요? ${prodList[0].event_cate} 관련 상품 보러가기</h3>
 
             <div class="goods-add-product-wrapper __slide-wrapper" data-slide-item="5">
                 <button class="goods-add-product-move goods-add-product-move-left __slide-go-left">왼쪽으로 슬라이드 이동</button>
@@ -73,62 +73,63 @@
                     <ul class="goods-add-product-list __slide-mover">
                     
                     
-                        <li class="goods-add-product-item2 __slide-item">
+                    <!-- 저장값이 1개밖에 없어서 임시로 [0]통일 -->
+                        <li class="goods-add-product-item __slide-item">
                             <div class="goods-add-product-item-figure">
                             <a href="" target="_blank">
-                                <img src="${pageContext.request.contextPath}/upload/${rentList[0].gymImgSavename}" class="goods-add-product-item-image">
+                                <img src="${pageContext.request.contextPath}/upload/${prodList[0].prod_img_savename}" class="goods-add-product-item-image">
                             </a>
                             </div>
                             <div class="goods-add-product-item-content">
                                 <div class="goods-add-product-item-content-wrapper">
-                                    <p class="goods-add-product-item-name">${rentList[0].gym_name}</p>
-                                    <p class="goods-add-product-item-price"><fmt:formatNumber value="${rentList[0].money}" pattern="#,###"/>원</p>
+                                    <p class="goods-add-product-item-name">[${prodList[0].prod_brand}] ${prodList[0].prod_name}</p>
+                                    <p class="goods-add-product-item-price"><fmt:formatNumber value="${prodList[0].prod_price}" pattern="#,###"/>원</p>
                                 </div>
                             </div>
-                            <input type="hidden" name="prod_no" value="${rentList[0].gym_no}">
+                            <input type="hidden" name="prod_no" value="${prodList[0].prod_no}">
                         </li>
-                        <li class="goods-add-product-item2 __slide-item">
+                        <li class="goods-add-product-item __slide-item">
                             <div class="goods-add-product-item-figure">
                             <a href="" target="_blank">
-                                <img src="${pageContext.request.contextPath}/upload/${rentList[0].gymImgSavename}" class="goods-add-product-item-image">
+                                <img src="${pageContext.request.contextPath}/upload/${prodList[1].prod_img_savename}" class="goods-add-product-item-image">
                             </a>
                             </div>
                             <div class="goods-add-product-item-content">
                                 <div class="goods-add-product-item-content-wrapper">
-                                    <p class="goods-add-product-item-name">${rentList[0].gym_name}</p>
-                                    <p class="goods-add-product-item-price"><fmt:formatNumber value="${rentList[0].money}" pattern="#,###"/>원</p>
+                                    <p class="goods-add-product-item-name">[${prodList[1].prod_brand}] ${prodList[1].prod_name}</p>
+                                    <p class="goods-add-product-item-price"><fmt:formatNumber value="${prodList[1].prod_price}" pattern="#,###"/>원</p>
                                 </div>
                             </div>
-                            <input type="hidden" name="prod_no" value="${rentList[0].gym_no}">
+                            <input type="hidden" name="prod_no" value="${prodList[1].prod_no}">
                         </li>
-                        <li class="goods-add-product-item2 __slide-item">
+                        <li class="goods-add-product-item __slide-item">
                             <div class="goods-add-product-item-figure">
                             <a href="" target="_blank">
-                                <img src="${pageContext.request.contextPath}/upload/${rentList[0].gymImgSavename}" class="goods-add-product-item-image">
+                                <img src="${pageContext.request.contextPath}/upload/${prodList[2].prod_img_savename}" class="goods-add-product-item-image">
                             </a>
                             </div>
                             <div class="goods-add-product-item-content">
                                 <div class="goods-add-product-item-content-wrapper">
-                                    <p class="goods-add-product-item-name">${rentList[0].gym_name}</p>
-                                    <p class="goods-add-product-item-price"><fmt:formatNumber value="${rentList[0].money}" pattern="#,###"/>원</p>
+                                    <p class="goods-add-product-item-name">[${prodList[2].prod_brand}] ${prodList[2].prod_name}</p>
+                                    <p class="goods-add-product-item-price"><fmt:formatNumber value="${prodList[2].prod_price}" pattern="#,###"/>원</p>
                                 </div>
                             </div>
-                            <input type="hidden" name="prod_no" value="${rentList[0].gym_no}">
+                            <input type="hidden" name="prod_no" value="${prodList[2].prod_no}">
                         </li>
-                        <li class="goods-add-product-item2 __slide-item">
+                        <li class="goods-add-product-item __slide-item">
                             <div class="goods-add-product-item-figure">
                             <a href="" target="_blank">
-                                <img src="${pageContext.request.contextPath}/upload/${rentList[0].gymImgSavename}" class="goods-add-product-item-image">
+                                <img src="${pageContext.request.contextPath}/upload/${prodList[3].prod_img_savename}" class="goods-add-product-item-image">
                             </a>
                             </div>
                             <div class="goods-add-product-item-content">
                                 <div class="goods-add-product-item-content-wrapper">
-                                    <p class="goods-add-product-item-name">${rentList[0].gym_name}</p>
-                                    <p class="goods-add-product-item-price"><fmt:formatNumber value="${rentList[0].money}" pattern="#,###"/>원</p>
+                                    <p class="goods-add-product-item-name">[${prodList[3].prod_brand}] ${prodList[3].prod_name}</p>
+                                    <p class="goods-add-product-item-price"><fmt:formatNumber value="${prodList[3].prod_price}" pattern="#,###"/>원</p>
                                 </div>
                             </div>
-                            <input type="hidden" name="prod_no" value="${rentList[0].gym_no}">
-                        </li>
+                            <input type="hidden" name="prod_no" value="${prodList[3].prod_no}">
+                        </li> 
                        
                                      
                     </ul>
