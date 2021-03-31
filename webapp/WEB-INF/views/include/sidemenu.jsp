@@ -24,7 +24,7 @@
 					class="arrow">></span></a></li>
 			<li><a href="${pageContext.request.contextPath}/mypage/prod/delmanage"><span class="menu">배송관리</span><span
 					class="arrow">></span></a></li>
-			<li><a href="./배송판매자_마이페이지_수익관리.html"><span
+			<li><a href="${pageContext.request.contextPath}/user/profit"><span
 					class="menu">수익관리</span><span class="arrow">></span></a></li>
 			<li class="side_menu_last"><a href="${pageContext.request.contextPath}/mypage/prod/prodmanageform"><span class="menu">사업자계정
 						관리</span><span class="arrow">></span></a></li>		
@@ -38,6 +38,8 @@
 					class="arrow">></span></a></li>
 			<li><a href="${pageContext.request.contextPath}/mypage/buylist"><span class="menu">구매내역</span><span
 					class="arrow">></span></a></li>
+			<li><a href=""><span class="menu">내 매치보기</span><span
+					class="arrow">></span></a></li>		
 			<li><a href="${pageContext.request.contextPath}/mypage/infoupdate"><span
 					class="menu">회원정보관리</span><span class="arrow">></span></a></li>
 			<li class="side_menu_last"><a href="../mypage_buy/matchinfo.html"><span

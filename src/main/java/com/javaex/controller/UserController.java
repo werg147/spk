@@ -79,8 +79,22 @@ public class UserController {
 	public String notice() {
 		System.out.println("[cnt] 판매자 계정등록 공지페이지");
 
+		
 		return "mypage/mypage_seller/seller_notice";
+		
 	}
+	
+	//수익관리페이지
+	@RequestMapping(value = "/profit", method = { RequestMethod.GET, RequestMethod.POST })
+	public String profit() {
+		System.out.println("[cnt] 판매자 수익 페이지");
+	
+		
+		
+		return "mypage/mypage_seller/seller_profit";
+	}
+	
+	
 
 	// 회원정보입력 페이지열기
 	@RequestMapping(value = "/joinform", method = { RequestMethod.GET, RequestMethod.POST })
@@ -153,4 +167,7 @@ public class UserController {
 		
 		return "";
 	}
+	
+	
+
 }
