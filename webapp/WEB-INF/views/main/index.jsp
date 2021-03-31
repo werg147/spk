@@ -39,7 +39,7 @@
 						href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=9ElAXUf0q0NhBnY7bqKl&state=state_String&redirect_uri=http://localhost:8088/Sparkling_/user/joinnaver">
 						<img
 						src="${pageContext.request.contextPath }/assets/image/네이버 아이디로 로그인_축약형_Green.PNG"
-						width="116">  
+						width="113">  
 					</a> 
 				</div>
 			</div>

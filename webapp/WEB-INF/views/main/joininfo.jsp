@@ -55,19 +55,19 @@
 										<td rowspan="4" id="info_imgbox"><img
 											src="${pageContext.request.contextPath}/assets/image/마이페이지 남성_글러브.png"></td>
 										<td>이름</td>
+										<td><input type="text" id="user_name" name="user_name"
+											placeholder="이름을 입력해주세요."></td>
+									</tr>
+									<tr class="infotite">
+										<td>닉네임</td>
 										<td><input type="text" id="nickname" name="nickname"
 											placeholder="닉네임을 입력해주세요."></td>
 									</tr>
 									<tr class="infotite">
-										<td>닉네임</td>
-										<td><input type="text" id="user_id" name="user_id"
-											placeholder="아이디를 입력해주세요."></td>
-									</tr>
-									<tr class="infotite">
 										<td>성별</td>
-										<td><input class="gender" type="radio" name="gender"
-											value="M" checked="checked"> <label>남성</label> <input
-											class="gender" type="radio" name="gender" value="F"><label>여성</label>
+										<td><input id="M" class="gender" type="radio" name="gender"
+											value="M" checked="checked"> <label for="M">남성</label> <input  id="F"
+											class="gender" type="radio" name="gender" value="F"><label for="F">여성</label>
 										<td>
 									</tr>
 									<tr id="wideinfo">
@@ -106,7 +106,7 @@
 												<input type="text" id="lastadd" name="juso"
 													placeholder="나머지주소를 입력해주세요."> <input type="hidden"
 													id="sample4_jibunAddress" placeholder="지번주소"> <input
-													type="hidden" id="sample4_detailAddress" placeholder="상세주소">
+													type="hidden" id="addressdetail" placeholder="상세주소">
 												<input type="hidden" id="sample4_extraAddress"
 													placeholder="참고항목"> <span id="guide"
 													style="color: #999; display: none"></span>
@@ -216,14 +216,14 @@
 	});
 
 	$(".insert_btn").on("click", function() {
+		var user_name = $("[name='user_name']").val();
+		if (user_name == null || user_name == "") {
+			alert("이름을 입력해주세요.");
+			return false;
+		}
 		var nickname = $("[name='nickname']").val();
 		if (nickname == null || nickname == "") {
 			alert("닉네임을 입력해주세요.");
-			return false;
-		}
-		var user_id = $("[name='user_id']").val();
-		if (user_id == null || user_id == "") {
-			alert("아이디를 입력해주세요.");
 			return false;
 		}
 
@@ -234,6 +234,7 @@
 		var ph = $("[name='user_ph']").val();
 		var user_ph = removeComma(ph);
 		if (user_ph == null || user_ph == "") {
+			console.log(user_ph);
 			alert("전화번호를 입력해주세요.");
 			return false;
 		}
@@ -246,7 +247,8 @@
 			alert("주소를 입력해주세요.");
 			return false;
 		}
-
+		return false;
+		event.preventDefault();
 	});
 </script>
 

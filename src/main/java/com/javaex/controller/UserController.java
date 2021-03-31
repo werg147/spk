@@ -46,7 +46,7 @@ public class UserController {
 	// 로그인하기
 	@RequestMapping(value = "/login", method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(@ModelAttribute UserVo uservo, HttpSession session) {
-		System.out.println("[cnt] 로그인하기" + uservo.getUser_id()+ uservo.getPassword());
+		System.out.println("[cnt] 로그인하기" + uservo.getUser_id() + uservo.getPassword());
 
 		UserVo authUser = userservice.login(uservo);
 
@@ -82,54 +82,54 @@ public class UserController {
 		return "mypage/mypage_seller/seller_notice";
 	}
 
-	//회원정보입력 페이지열기
+	// 회원정보입력 페이지열기
 	@RequestMapping(value = "/joinform", method = { RequestMethod.GET, RequestMethod.POST })
 	public String joinInfo() {
 		System.out.println("[cnt]회원정보입력");
 
-		
-	return "main/joininfo";
+		return "main/joininfo";
 	}
 
-	//카카오 회원가입 가입 정보 받기
-	@RequestMapping(value = "/join", method = { RequestMethod.GET})
-	public String joinForm(String code, HttpSession session) {
-		
+	// 카카오 회원가입 가입 정보 받기
+	@RequestMapping(value = "/join", method = { RequestMethod.GET })
+	public String joinForm(String code, HttpSession session, Model model) {
+
 		System.out.println("[cnt]카카오회원가입");
-		
+
 		UserVo uservo = userservice.kakaoJoin(code);
 
-		
-		//if() {
+		if (uservo.getAddress() != null) {
 			UserVo authUser = userservice.login(uservo);
-			
+
 			System.out.println("로그인성공");
 			System.out.println("로그인정보: " + authUser);
 			session.setAttribute("authUser", authUser);
+
 			
-			//return "redirect:/";
-		//} else {
+			return "redirect:/";
+
+		} else {
+			
+			model.addAttribute("uservo", uservo);
+			
 			return "redirect:/user/joininfo";
-		//}
-		
+		}
+
 	}
-	
-	//네이버 회원가입 가입 정보 받기
-	@RequestMapping(value = "/joinnaver", method = { RequestMethod.GET})
+
+	// 네이버 회원가입 가입 정보 받기
+	@RequestMapping(value = "/joinnaver", method = { RequestMethod.GET })
 	public String joinFormNaver(String code, String state) {
 
 		System.out.println("[cnt]네이버회원가입");
-		
+
 		System.out.println(code);
-		
+
 		userservice.naverJoin(code, state);
-		
+
 		return "redirect:/user/joininfo";
 	}
-	
-	
 
-	
-	//네이버 회원가입 여기부터 따옴
-	
+	// 네이버 회원가입 여기부터 따옴
+
 }

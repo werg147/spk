@@ -2018,7 +2018,7 @@ element.style {
 
 /*프로필 사진 변경하기 버튼*/
 
-.info_table #nickname, .info_table #user_id {
+.info_table #nickname, .info_table #user_name {
 	width: 400px;
 	height: 10px;
 	padding: 8px 6px;

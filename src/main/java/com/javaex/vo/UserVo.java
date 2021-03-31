@@ -12,7 +12,7 @@ public class UserVo {
 	private String nickname;
 	private String address;
 	private String user_photo;
-	private int user_phone;
+	private String user_phone;
 	private double user_level;
 	private String user_date;
 	private String gender;
@@ -39,7 +39,7 @@ public class UserVo {
 
 
 	public UserVo(int user_no, String user_id, String user_name, String password, String nickname,
-			String address, String user_photo, int user_phone, int user_level, String user_date) {
+			String address, String user_photo, String user_phone, int user_level, String user_date) {
 		this.user_no = user_no;
 		this.user_id = user_id;
 		this.user_name = user_name;
@@ -53,7 +53,7 @@ public class UserVo {
 	}
 
 	public UserVo(int user_no, int sell_no, String user_id, String user_name, String password, String nickname,
-			String address, String user_photo, int user_phone, int user_level, String user_date) {
+			String address, String user_photo, String user_phone, int user_level, String user_date) {
 		this.user_no = user_no;
 		this.sell_no = sell_no;
 		this.user_id = user_id;
@@ -70,7 +70,7 @@ public class UserVo {
 
 
 	public UserVo(int user_no, int sell_no, int prod_type, int book_type, String user_id, String user_name,
-			String password, String nickname, String address, String user_photo, int user_phone, double user_level,
+			String password, String nickname, String address, String user_photo, String user_phone, double user_level,
 			String user_date, String gender) {
 		super();
 		this.user_no = user_no;
@@ -153,11 +153,11 @@ public class UserVo {
 		this.user_photo = user_photo;
 	}
 
-	public int getUser_phone() {
+	public String getUser_phone() {
 		return user_phone;
 	}
 
-	public void setUser_phone(int user_phone) {
+	public void setUser_phone(String user_phone) {
 		this.user_phone = user_phone;
 	}
 
