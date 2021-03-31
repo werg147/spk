@@ -9,9 +9,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>store</title>
+    <link href="${pageContext.request.contextPath }/assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/store.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css">
-    <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>   
+    <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>  
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
 </head>
 
 <body class="proBody" onload="init();">
@@ -112,11 +114,11 @@
 									<dd class="desc">
 										<div class="countpm">
 											<span class="count">
-												<button type="button" class="btn down on" value=" - " onclick="del();">
+												<button type="button" class="btnmp down on" value=" - " onclick="del();">
 													<img src="${pageContext.request.contextPath}/assets/image/store_img/ico_minu.jpg">
 											    </button> 
 												<input type="text" class="amount read_only" name="count" value="1" size="3" onchange="change();">
-												<button type="button" class="btn up on" value=" + " onclick="add();">
+												<button type="button" class="btnmp up on" value=" + " onclick="add();">
 													<img src="${pageContext.request.contextPath}/assets/image/store_img/ico_plus.jpg">
 												</button>
 											</span>
@@ -144,16 +146,14 @@
 									<!--장바구니, 바로구매 버튼-->
 									<div class="group_btn">
 										<div class="view_function">
-											<button type="button" class="btn_form btn_buy"
-											onclick="btn_click('buy');" style="font-size: 16px; color: #ffffff;">바로 구매</button> 
-											<button type="button" class="btn_form btn_cart"
-											onclick="btn_click('cart');" style="font-size: 16px; color: #C51212;">장바구니</button>
+											<button type="button" class="btn_form btn_buy">바로 구매</button> 
+											<button type="button" class="btn_form btn_cart">장바구니</button>
 										</div> 
 									</div>
 								</div>
 								
-								<input type="hidden" name="prod_no" value="${productVo.prod_no}">
-								<input type="hidden" name="colorsize_no" value="${productVo.cssList[0].colorsize_no}">							
+								<input type="hidden" class="prod_no" name="prod_no" value="${productVo.prod_no}">
+								<input type="hidden" class="colorsize_no" name="colorsize_no" value="${productVo.cssList[0].colorsize_no}">							
 								
 							</form> <!-- 수량, 총 금액 form -->
 							
@@ -457,7 +457,7 @@
 							
 							<p class="btnArea after">
 								<a href="${pageContext.request.contextPath}/store/reviewForm?prodNo=${param.prodNo}">
-									<span class="bhs_button" style="line-height:30px; width:130px;">후기쓰기</span>
+									<span class="bhs_button">후기쓰기</span>
 								</a>
 							</p>
 
@@ -608,7 +608,7 @@
 
 								<p class="btnArea after">
 									<a href="${pageContext.request.contextPath}/store/qnaForm?prodNo=${param.prodNo}">
-										<span class="bhs_button" onclick="javascript:btn()" style="line-height:30px; width:130px;">상품문의</span>
+										<span class="bhs_button">상품문의</span>
 									</a>
 								</p>
 
@@ -669,6 +669,30 @@
 
 	</div><!--//container-->
 </div><!--//wrap-->
+
+
+<!-- 장바구니 모달창 -->
+	<div class="modal fade" id="modal">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-body">
+				
+					<div id="mtext">
+						<p class="m_message">장바구니에 상품이 담겼습니다.</p>
+					</div>
+			
+				</div>
+				<div class="m_footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">계속 쇼핑하기</button>
+					<button id="goCart" type="button" class="btn btn-primary">장바구니 가기</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
 
 
 </body>
@@ -763,6 +787,7 @@
 	
 	
 	//form submit 두개
+	<!--
 	function btn_click(str){
 		if(str == "buy"){
 			document.proform.action='${pageContext.request.contextPath}/store/paynow'
@@ -772,7 +797,85 @@
 		
 		document.proform.submit();
 	}
-
+	-->
+	
+	//장바구니 클릭시 cart insert --> 장바구니/계속쇼핑 버튼
+	$(document).ready(function(){
+		$(".btn_cart").on("click", function(){
+			
+			//버튼 클릭 테스트
+			console.log("장바구니 버튼 클릭");
+			
+			event.preventDefault();
+			
+			var formData = new FormData();
+			console.log(formData);
+			
+			//상품번호, 옵션번호, 개수
+			var prod_no = $("[name='prod_no']").val();
+			var colorsize_no = $("[name='colorsize_no']").val();
+			var count = document.proform.count.value;
+			console.log(prod_no);
+			console.log(colorsize_no);
+			console.log(count);
+			
+			//formData에 키-값 넣기
+			formData.append('prod_no', prod_no);
+			formData.append('colorsize_no', colorsize_no);
+			formData.append('count', count);
+			
+			//formData 값 확인 함수
+			//console.log("formData 값 확인 - 했음")
+			/* 
+			for (var key of formData.keys()) {
+	  			console.log(key);
+			}
+	
+			for (var value of formData.values()) {
+	 			 console.log(value);
+			}
+			*/
+			
+			var url = "${pageContext.request.contextPath}/mypage/cart";
+			
+			//formData값 보내기 --> 카트 인서트
+			$.ajax({
+				
+				url : "${pageContext.request.contextPath}/mypage/gotoCart",		
+				data : formData,
+				contentType : false,
+				processData : false,
+				type : 'post',
+				
+				success : function(){
+					//장바구니/계속쇼핑
+					console.log("모달 창 호출");
+					
+					//모달 창 호출
+					$("#modal").modal();
+	                
+					$("#goCart").on("click", function(){
+						//장바구니가기 클릭시 페이지이동
+						$(location).attr('href',url);
+					});
+	
+					
+				},
+				error : function(XHR, status, error) {
+					console.error(status + " : " + error);
+				}
+			});
+			
+			
+			
+		});
+		
+	});
+	
+	
+	
+	
+	
 	
 	
 	
