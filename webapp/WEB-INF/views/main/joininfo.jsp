@@ -43,7 +43,7 @@
 					<!-- //line -->
 
 					<div class="content_bottom">
-						<form>
+						<form id="sellForm" action="${pageContext.request.contextPath}/user/joininfowrite" method="GET">
 							<div class="info_table">
 								<table class="join">
 									<colgroup>
@@ -56,11 +56,11 @@
 											src="${pageContext.request.contextPath}/assets/image/마이페이지 남성_글러브.png"></td>
 										<td>이름</td>
 										<td><input type="text" id="user_name" name="user_name"
-											placeholder="이름을 입력해주세요."></td>
+											value="${uservo.user_name}" placeholder="이름을 입력해주세요."></td>
 									</tr>
 									<tr class="infotite">
 										<td>닉네임</td>
-										<td><input type="text" id="nickname" name="nickname"
+										<td><input type="text" id="nickname" name="nickname" value="${uservo.nickname}"
 											placeholder="닉네임을 입력해주세요."></td>
 									</tr>
 									<tr class="infotite">
@@ -83,33 +83,35 @@
 										<td colspan="2" id="hp_content">
 											<div id="add_hp">
 												<div id="hp_content1">
-													<input type="text" id="user_ph" name="user_phone"
+													<input type="text" id="user_ph" name="user_phone" value="${uservo.user_phone}
 														placeholder="전화번호" inputmode="ph">
 												</div>
 											</div>
 										</td>
 									</tr>
 									<tr id="address">
-										<td id="address_title"><label for="address">주소</label></td>
+										<td id="address_title"><label for="searchaddress">주소</label></td>
 										<td colspan="2" id="address_content">
 											<div id="add_search">
 												<div id="address_content1">
 													<input type="hidden" id="confmKey" name="confmKey" value="">
-													<input type="text" id=sample4_postcode name="post"
-														placeholder="우편번호"> <input type="text"
-														id="sample4_roadAddress" name="roadAddress"
-														placeholder="도로명주소">
+													<div class="da">
+														<input type="text" id=sample4_postcode name="post"
+															placeholder="우편번호">
+													</div>
+													<div class="da">
+														<input type="text" id="sample4_roadAddress"
+															name="roadAddress" value="" placeholder="도로명주소">
+													</div>
 												</div>
 												<button type="button" id="search_btn">검색하기</button>
 											</div>
 											<div id="address_content2">
-												<input type="text" id="lastadd" name="juso"
+												<input type="text" id="addressdetail" name="addressdetail"
 													placeholder="나머지주소를 입력해주세요."> <input type="hidden"
 													id="sample4_jibunAddress" placeholder="지번주소"> <input
-													type="hidden" id="addressdetail" placeholder="상세주소">
-												<input type="hidden" id="sample4_extraAddress"
-													placeholder="참고항목"> <span id="guide"
-													style="color: #999; display: none"></span>
+													type="hidden" id="sample4_extraAddress" placeholder="참고항목">
+												<span id="guide" style="color: #999; display: none"></span>
 											</div>
 										</td>
 									</tr>
@@ -145,6 +147,18 @@
 
 
 <script type="text/javascript">
+	$("document").ready(function() {
+
+		$('#sample4_postcode').attr('disabled', true);
+		$('#sample4_roadAddress').attr('disabled', true);
+
+	});
+
+	$(".da").on("click", function() {
+		sample4_execDaumPostcode();
+
+	});
+
 	$("#search_btn").on("click", function() {
 		sample4_execDaumPostcode();
 	});
@@ -219,7 +233,7 @@
 		this.value = this.value.replace(/\B(?=(\d{4})+(?!\d))/g, "-"); // 정규식을 이용해서 3자리 마다 , 추가 	
 	});
 
-	$(".insert_btn").on("click", function() {
+	$("#sellForm").on("submit", function() {
 		var user_name = $("[name='user_name']").val();
 		if (user_name == null || user_name == "") {
 			alert("이름을 입력해주세요.");
@@ -246,13 +260,25 @@
 			n = parseInt(str.replace(/,/g, ""));
 			return n;
 		}
-		var address = $("[name='address']").val();
-		if (address == null || address == "") {
-			alert("주소를 입력해주세요.");
+		var roadAddress = $("[name='roadAddress']").val();
+		if (roadAddress == null || roadAddress == "") {
+			alert("주소를 검색해주세요.");
 			return false;
 		}
-		return false;
-		event.preventDefault();
+
+		var addressdetail = $("[name='addressdetail']").val();
+		if (addressdetail == null || addressdetail == "") {
+			alert("나머지주소를 입력해주세요.");
+			return false;
+		}
+
+		var user_photo = $("input[name=user_photo]").val();
+		//파일 선택 필수
+		if (user_photo == null || user_photo == "") {
+			alert("프로필이미지를 등록해주세요.");
+			return false;
+		}
+
 	});
 </script>
 

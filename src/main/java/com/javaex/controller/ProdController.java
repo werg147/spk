@@ -1,6 +1,8 @@
 package com.javaex.controller;
 import java.util.List;
 import javax.servlet.http.HttpSession;
+
+import org.apache.ibatis.session.AutoMappingBehavior;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -184,6 +186,8 @@ public class ProdController {
 	public String prodSellerAdd(@ModelAttribute SellerVo sellervo, HttpSession session) {
 		System.out.println("[cnt] 배송판매자 계정 등록");
 
+		
+		
 		prodservice.sellerProdAdd(sellervo);
 		System.out.println("돌아옴");
 
@@ -211,7 +215,9 @@ public class ProdController {
 
 	// 배송판매자 대관 계정 수정
 	@RequestMapping(value = "/prodsellermodify", method = { RequestMethod.GET, RequestMethod.POST })
-	public String prodSellerModify(@ModelAttribute SellerVo sellervo, HttpSession session) {
+	public String prodSellerModify(@RequestParam("roadAddress") String roadAddress,
+			@RequestParam("addressdetail") String addressdetail,
+			@ModelAttribute SellerVo sellervo, HttpSession session) {
 		System.out.println("[cnt] 배송판매자 계정 수정" + sellervo);
 
 		prodservice.prodSellerModify(sellervo);

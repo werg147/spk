@@ -145,6 +145,12 @@ public class UserController {
 		}
 	}
 
-	// 네이버 회원가입 여기부터 따옴
-
+	// 회원가입 후 회원정보입력
+	@RequestMapping(value = "/joininfowrite", method = { RequestMethod.GET })
+	public String joininfoWrite(@ModelAttribute UserVo uservo) {
+		System.out.println("[cnt]회원가입 후 회원정보입력" + uservo);
+		
+		
+		return "";
+	}
 }

@@ -264,6 +264,9 @@ public class ProdService {
 		
 	//배송판매자계정등록
 	public void sellerProdAdd(SellerVo sellervo) {
+		String prod_sell_address = sellervo.getRoadAddress() + sellervo.getAddressdetail();
+		sellervo.setProd_sell_address(prod_sell_address);
+		
 		userdao.sellerProdInsert(sellervo);
 	}
 	
@@ -275,6 +278,10 @@ public class ProdService {
 	
 	//배송판매자 계정 수정
 	public void prodSellerModify(SellerVo sellervo) {
+		String prod_sell_address = sellervo.getRoadAddress() + sellervo.getAddressdetail();
+		sellervo.setProd_sell_address(prod_sell_address);
+
+		
 		userdao.prodSellerUpdate(sellervo);
 	}
 	

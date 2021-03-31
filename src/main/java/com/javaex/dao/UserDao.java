@@ -40,12 +40,12 @@ public class UserDao {
 	
 	//대관판매자 계정등록
 	public int sellerBookInsert(SellerVo sellervo) {
-		System.out.println("[service]대관계정등록" + sellervo);
+		System.out.println("[dao]대관계정등록" + sellervo);
 		return sqlSession.insert("user.sellerBookInsert", sellervo);
 	}
 	//배송판매자 계정등록
 	public int sellerProdInsert(SellerVo sellervo) {
-		System.out.println("[service]배송계정등록" + sellervo);
+		System.out.println("[dao]배송계정등록" + sellervo);
 		return sqlSession.insert("user.sellerProdInsert", sellervo);
 	}
 	
