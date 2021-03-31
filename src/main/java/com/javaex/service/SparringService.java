@@ -38,7 +38,7 @@ public class SparringService {
 	@Autowired
 	AlarmDao alarmDao;
 
-	public void profileWrite(ProfileVo profileVo, String[] eventName, RecordVo recordVo, int userNo) {
+	public int profileWrite(ProfileVo profileVo, String[] eventName, RecordVo recordVo, int userNo) {
 		System.out.println("[Service] : profileWrite()");
 		/********* 프로필 인스트 **********/
 		System.out.println("vo :" + profileVo);
@@ -125,7 +125,9 @@ public class SparringService {
 		
 		userVo.setUser_no(userNo);
 		userVo.setUser_level(userLevel);
-		sparringDao.updateUserLevel(userVo);
+		int count = sparringDao.updateUserLevel(userVo);
+		
+		return count;
 	}
 
 	// 처음 프로필을 들어갈때 날짜정보를 뿌려줘야하기때문에 날짜만 빼온다
@@ -1846,5 +1848,97 @@ public class SparringService {
 		
 		String event = bbuyVo.getGym_event();
 		return event;
+	}
+
+	public void profileWrite(ProfileVo profileVo) {
+		
+
+		String major = profileVo.getMajor();
+		System.out.println("major" + major);
+		if (major == null) {
+			profileVo.setMajor("없음");
+		}
+		String word = profileVo.getWord();
+		System.out.println("word" + word);
+		if (word == null || word == "") {
+			profileVo.setWord("잘 부탁드립니다");
+		}
+
+		sparringDao.insertProfile23(profileVo);
+		System.out.println("vo2 :" + profileVo);
+		
+
+
+		/********* 주종목(주특기) event 인서트 ********/
+		
+		int profileNo = profileVo.getProfileNo();
+		List<EventVo> eList = profileVo.getEventList();
+		for (int i = 0; i < eList.size(); i++) {
+
+		
+			System.out.println(eList.get(i));
+
+			EventVo eventVo = new EventVo();
+
+			eventVo.setProfileNo(profileNo);
+			eventVo.setEventName(eList.get(i).getEventName());
+
+			sparringDao.insertEvent(eventVo);
+
+		}
+		
+		/*********** 공식기록 record 인서트 *********/
+		
+		List<RecordVo> rList = profileVo.getRecordList();
+		if (rList.get(0).getRecordType() != "") {
+			for (int i = 0; i < rList.size(); i++) {
+				System.out.println("??");
+				RecordVo rVo = rList.get(i);
+				
+				System.out.println(rVo);
+				// 받아온 profileNo 넣기
+				rVo.setProfileNo(profileNo);
+				
+				
+				if(rVo.getRecordName() == null) {
+					rVo.setRecordName(" ");
+				}
+				
+				if(rVo.getRecordType().equals("대회분류")) {
+					rVo.setRecordType("");
+				}
+				
+				if(rVo.getRecordDate().equals("출전연도")) {
+					rVo.setRecordDate("");
+				}
+				
+				if(rVo.getRecordMatch().equals("순위")) {
+					rVo.setRecordMatch("");
+				}
+				
+				if(!rVo.getRecordEvent().equals("종목")) {
+					
+				System.out.println(rVo.getRecordName());
+				sparringDao.insertRecord(rVo);
+				}
+
+			}
+		}
+		
+		RecordVo recordVo = new RecordVo();
+		recordVo.setRecordList(rList);
+		
+		
+		/**알고리즘 넣기***/
+		double userLevel = algo(profileVo, recordVo);
+		
+		UserVo userVo = new UserVo();
+		
+		userVo.setUser_no(profileVo.getUserNo());
+		userVo.setUser_level(userLevel);
+		int count = sparringDao.updateUserLevel(userVo);
+		
+		
+		
 	}
 }

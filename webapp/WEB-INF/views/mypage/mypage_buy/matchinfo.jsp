@@ -44,7 +44,7 @@
 					<div class="content_bottom">
 					<div id="form_submit" class="content_bottom">
 						<!-- 입력폼 → 매칭프로필저장 -->
-						<form class="form_box_12" action="${pageContext.request.contextPath}/mypage/write" method="get">
+						<form id="profile_form" class="form_box_12" action="" method="get">
 								
 
 									<table class="insert_matcingInfo">
@@ -234,14 +234,9 @@
 										
 	
 									<div class="product_insert_btn">
-										<c:choose> 
-											<c:when test="${param.bookingno == 0 }">
-												<button id="info_subm" class="insert_btn" type="submit">결제후 등록</button>
-											</c:when>
-											<c:otherwise>
-												<button id="info_subm" class="insert_btn" type="submit">매칭글 등록</button>
-											</c:otherwise>
-										</c:choose>
+										
+										<button id="info_subm" class="insert_btn" type="submit">등록</button>
+										
 										<a href=""><button class="product_delclose_btn">취소</button></a>
 									</div>
 									<!-- //product_insert_btn -->
@@ -393,7 +388,12 @@ if ( valueCheck == 'no' ) {
 
 
 
-$("#form_submit").on("submit", function() {
+$("#profile_form").on("submit", function() {
+	event.preventDefault();
+	console.log("확인 123");
+	
+	var eventValue = new Array();
+	var major12 = "";
 	
 	console.log($("#exer_cate1 option:selected").val());
 	if($("#exer_cate1 option:selected").val() == "종목 선택"){
@@ -416,6 +416,21 @@ $("#form_submit").on("submit", function() {
 	if(eventName2 == null){
 		alert("주특기를 1개 이상 체크해주세요");
 		return false;
+	}else{
+		var	event_num = 0 ;
+		$("[name='eventName']:checked").each(function(e){
+			
+			eventname= $(this).val();
+			eVo = {
+					eventName : eventname
+			}
+			eventValue[event_num] =eVo;
+			
+			event_num ++ ;	
+		});
+			
+			
+			
 	}
 	
 	if($("#height_info").val() == ""){
@@ -440,6 +455,8 @@ $("#form_submit").on("submit", function() {
 		if($('#major_info').val()==""){
 			alert("전공을 입력해주세요")
 			return false;
+		}else{
+			major12 = $('#major_info').val();
 		}
 		
 	}
@@ -453,8 +470,90 @@ $("#form_submit").on("submit", function() {
 		alert("실전 스파링횟수를 적어주세요");
 		return false;
 	}
+	var height = $("#height_info").val();
+	
+	var weight = $("#weight_info").val();
 	
 	
+	var career = $("input:radio[name='career']:checked").val();
+	
+	
+	var recentlyExer = $("#exer_cate4 option:selected").val();
+	var sessionUserNo = $("#session_user_no").val();
+	
+	
+	var recordList12 = new Array();  
+	if(num == 0){
+		var recordEvent1 = $('select[name="recordList[0].recordEvent"]').val();
+		var recordType1 = $('select[name="recordList[0].recordType"]').val();
+		var recordDate1 = $('select[name="recordList[0].recordDate"]').val();
+		var recordMatch1 = $('select[name="recordList[0].recordMatch"]').val();
+		var recordName1 = $('input[name="recordList[0].recordName"]').val();
+		
+		
+	
+		var reVo = {
+				recordEvent : recordEvent1,
+				recordType : recordType1,
+				recordDate : recordDate1,
+				recordMatch : recordMatch1,
+				recordName : recordName1
+		}
+		
+		recordList12[0] = reVo;
+	}else{
+		
+	
+		for(var i = 0; i<num; i++){
+			var recordEvent1 = $('select[name="recordList['+i+'].recordEvent"]').val();
+			var recordType1 = $('select[name="recordList['+i+'].recordType"]').val();
+			var recordDate1 = $('select[name="recordList['+i+'].recordDate"]').val();
+			var recordMatch1 = $('select[name="recordList['+i+'].recordMatch"]').val();
+			var recordName1 = $('input[name="recordList['+i+'].recordName"]').val();
+			
+			
+		
+			var reVo = {
+					recordEvent : recordEvent1,
+					recordType : recordType1,
+					recordDate : recordDate1,
+					recordMatch : recordMatch1,
+					recordName : recordName1
+			}
+			
+			recordList12[i] = reVo;
+			
+		}
+	}
+	
+	var pVo = {};
+	pVo.height = height;
+	pVo.weight = weight;
+	pVo.career = career;
+	pVo.recentlyExer = recentlyExer;
+	pVo.recordList = recordList12;
+	pVo.eventList = eventValue;
+	pVo.userNo = sessionUserNo;
+	console.log(JSON.stringify(pVo));
+
+		$.ajax({
+			url : "${pageContext.request.contextPath }/mypage/api/write", //컨트롤러의 url과 파라미터
+			type : "post", // 겟 포스트
+			contentType : "application/json",
+			data : JSON.stringify(pVo),
+			
+			//dataType : "json",
+			success : function() { //성공시
+				alert("프로필 등록이 되었습니다");
+			},
+			error : function(XHR, status, error) { //실패
+				console.error(status + " : " + error);
+			}
+		});
+		
+		
+
+
 });
 /* 버튼클릭시 date_no값 받아와서 날짜 얻어내기 */
 $("#exer_cate").change("click",function(){

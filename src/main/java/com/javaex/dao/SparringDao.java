@@ -343,10 +343,10 @@ public class SparringDao {
 		 return sqlSession.selectOne("bbuy.selectBBUYSC",bbuyno);
 	}
 
-	public void updateUserLevel(UserVo userVo) {
+	public int updateUserLevel(UserVo userVo) {
 		System.out.println("[Dao] :   updateUserLevel ");
 		
-		sqlSession.update("bbuy.updateUserLevel",userVo);
+		return sqlSession.update("bbuy.updateUserLevel",userVo);
 	}
 
 	public List<BBuyVo> selectBBuyList(BBuyVo leVo) {

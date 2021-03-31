@@ -11,7 +11,7 @@
 			insert into record
 			values( SEQ_RECORD_NO.nextval,
 					#{profileNo},
-					#{recordType,jdbcType=VARCHAR},
+					#{recordType},
 					#{recordName,jdbcType=VARCHAR},
 					#{recordEvent,jdbcType=VARCHAR},
 					#{recordDate,jdbcType=VARCHAR},
