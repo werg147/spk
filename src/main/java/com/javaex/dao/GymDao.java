@@ -37,6 +37,16 @@ public class GymDao {
 		return gymVo;
 	}
 	
+	//최근 체육관 번호 불러오기
+	public GymVo gymNoSelectOne(int sellNo) {
+		System.out.println("[GymDao] gymNoSelectOne()");
+		
+		GymVo vo = sqlSession.selectOne("gym.gymNoSelectOne", sellNo);
+		//System.out.println("테스트 체육관 번호 "+vo);
+		
+		return vo;
+	}
+	
 	//체육관 등록
 	public void gymInsert(GymVo gymVo) {
 		System.out.println("[GymDao] gymInsert()");

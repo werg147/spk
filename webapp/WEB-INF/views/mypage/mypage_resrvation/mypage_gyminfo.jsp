@@ -64,61 +64,73 @@
 							<table>
 								<tr>
 									<td class="basic">체육관 이름</td>
-									<td colspan="3"><input class="input_text" type="text" name="gym_name"
+									<td colspan="4"><input class="input_text" type="text" name="gym_name"
 										value="${gymMap.gymVo.gym_name }"></td>
 								</tr>
 
 								<tr>
 									<td class="basic">체육관 주소</td>
-									<td colspan="3"><input class="input_text" type="text" name="gym_address"
+									<td colspan="4"><input class="input_text" type="text" name="gym_address"
 										value="${gymMap.gymVo.gym_address }"></td>
 								</tr>
 
 								<tr>
 									<td class="basic">체육관 전화번호</td>
-									<td colspan="3"><input class="input_text" type="text" name="gym_ph"
+									<td colspan="4"><input class="input_text" type="text" name="gym_ph"
 										value="${gymMap.gymVo.gym_ph }"></td>
 								</tr>
 
 								<tr class="input_plus">
 									<td>체육관 운영시간</td>
-									<td colspan="3"><textarea name="gym_time">${gymMap.gymVo.gym_time }</textarea></td>
+									<td colspan="4"><textarea name="gym_time">${gymMap.gymVo.gym_time }</textarea></td>
 								</tr>
 
 								<tr class="basic_chk">
 									<td>체육관 주 종목</td>
 									
 									<td class="basic_chk_padding"><c:choose>
-											<c:when test="${gymMap.gymVo.gym_event eq 'box' }">
-												<input id="box" type="radio" name="gym_event" value="box" checked="checked">
-												<label for="box">복싱/킥복싱</label>
+											<c:when test="${gymMap.gymVo.gym_event eq '복싱' }">
+												<input id="box" type="radio" name="gym_event" value="복싱" checked="checked">
+												<label for="box">복싱</label>
 											</c:when>
 											<c:otherwise>
-												<input id="box" type="radio" name="gym_event" value="box">
-												<label for="box">복싱/킥복싱</label>
+												<input id="box" type="radio" name="gym_event" value="복싱">
+												<label for="box">복싱</label>
+											</c:otherwise>
+										</c:choose>
+									</td>
+									
+									<td class="basic_chk_padding"><c:choose>
+											<c:when test="${gymMap.gymVo.gym_event eq '킥복싱' }">
+												<input id="kbox" type="radio" name="gym_event" value="킥복싱" checked="checked">
+												<label for="kbox">킥복싱</label>
+											</c:when>
+											<c:otherwise>
+												<input id="kbox" type="radio" name="gym_event" value="킥복싱">
+												<label for="kbox">킥복싱</label>
 											</c:otherwise>
 										</c:choose>
 									</td>
 
 									<td class="basic_chk_padding"><c:choose>
-											<c:when test="${gymMap.gymVo.gym_event eq 'jiu' }">
-												<input id="jiu" type="radio" name="gym_event" value="jiu" checked="checked">
+											<c:when test="${gymMap.gymVo.gym_event eq '주짓수' }">
+												<input id="jiu" type="radio" name="gym_event" value="주짓수" checked="checked">
 												<label for="jiu">주짓수</label>
 											</c:when>
 											<c:otherwise>
-												<input id="jiu" type="radio" name="gym_event" value="jiu">
+												<input id="jiu" type="radio" name="gym_event" value="주짓수">
 												<label for="jiu">주짓수</label>
 											</c:otherwise>
 										</c:choose>
 									</td>
 
 									<td class="basic_chk_padding"><c:choose>
-											<c:when test="${gymMap.gymVo.gym_event eq 'mma' }">
-												<input id="mma" type="radio" name="gym_event" value="mma" checked="checked">
+											<c:when test="${gymMap.gymVo.gym_event eq '종합격투기' }">
+												<input id="mma" type="radio" name="gym_event" value="종합격투기" checked="checked">
 												<label for="mma">종합격투기</label>
 											</c:when>
 											<c:otherwise>
-												<input id="mma" type="radio" name="gym_event" value="mma">
+												<input id="mma" type="radio" name="gym_event" value="종합격투기">
 												<label for="mma">종합격투기</label>
 											</c:otherwise>
 										</c:choose>
@@ -160,7 +172,7 @@
 											</c:choose>
 										</c:forEach>
 									</td>
-									<td>
+									<td colspan="2">
 										<c:forEach var="vo" items="${gymMap.conList}">
 											<c:choose>
 											
@@ -232,7 +244,7 @@
 
 								<tr class="input_plus">
 									<td>공지사항</td>
-									<td colspan="3"><textarea name="gym_notice">${gymMap.gymVo.gym_notice }</textarea></td>
+									<td colspan="4"><textarea name="gym_notice">${gymMap.gymVo.gym_notice }</textarea></td>
 								</tr>
 
 

@@ -133,7 +133,13 @@
 							&nbsp
 							<input id="addModalContent" type="text" name="booking_start" value="" placeholder="시작시간 ex)11:00">
 							&nbsp~&nbsp
-							<input id="addModalContent" type="text" name="booking_end" value="" placeholder="종료시간 ex)13:00">	
+							<!-- <input id="addModalContent" type="text" name="booking_end" value="" placeholder="종료시간 ex)13:00"> -->
+						<select id="startTime" name="booking_end">
+						    <c:forEach var="i"  begin="9" end="17">
+						        <option value="${i}">${i>9?i:'0'}${i>9?'':i}</option>
+						    </c:forEach>
+						</select>	
+						
 						</div>
 						<div class="form-group">
 							<label class="form-text">요금</label>
@@ -171,7 +177,8 @@
 						&nbsp
 						<input id="addModalContent" type="text" name="booking_start" value="">
 						&nbsp~&nbsp
-						<input id="addModalContent" type="text" name="booking_end" value="">	
+						<input id="addModalContent" type="text" name="booking_end" value="">
+						
 					</div>
 					<div class="form-group">
 						<label class="form-text">요금</label>

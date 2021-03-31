@@ -12,6 +12,7 @@
 			        gym_name
 			FROM gym
 			where sell_no = #{sellNo}
+			order by gym_no desc
 		]]>
 	</select>
 	
@@ -29,6 +30,21 @@
 			        gym_date
 			FROM gym
 			where gym_no = #{gymNo}
+		]]>
+	</select>
+	
+	<!-- 최근 체육관 번호 불러오기 -->
+	<select id="gymNoSelectOne" parameterType="Int" resultType="GymVo">
+		<![CDATA[ 
+			SELECT  rownum,
+			        n.gym_no,
+			        n.sell_no
+			FROM (SELECT  gym_no,
+			              sell_no
+				  FROM gym
+				  where sell_no=#{sell_no}
+				  order by gym_no desc) n
+			where rownum=1
 		]]>
 	</select>
 	

@@ -9,7 +9,7 @@
 			<li class="title"><span class="menu">예약판매관리</span></li>
 			<li><a href="${pageContext.request.contextPath}/mypage/book/bookmanageform"><span class="menu">사업자계정
 						관리</span><span class="arrow">></span></a></li>
-			<li><a href="${pageContext.request.contextPath}/mypage/book/gym?no=${authUser.sell_no}"><span
+			<li><a href="${pageContext.request.contextPath}/mypage/book/gyminfo?no=${authUser.sell_no}"><span
 					class="menu">체육관관리</span><span class="arrow">></span></a></li>
 			<li><a href="${pageContext.request.contextPath}/mypage/book/bookmanage?"><span class="menu">대관관리</span><span
 					class="arrow">></span></a></li>

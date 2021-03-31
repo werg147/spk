@@ -56,6 +56,13 @@ public class GymService {
 		return gymDao.gymSelectOne(gymNo);
 	}
 	
+	//최근에 저장한 체육관 번호 불러오기
+	public GymVo gymNo(int sellNo) {
+		System.out.println("[GymService] gymNo() "+sellNo);
+		
+		return gymDao.gymNoSelectOne(sellNo);
+	}
+	
 	//체육관 등록 (체육관, 체크박스값, 파일 등록)
 	public void gymAdd(GymVo gymVo, List<String> conve, MultipartFile file) {
 		System.out.println("[GymService] gymAdd()");

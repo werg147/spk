@@ -60,7 +60,7 @@
 										<input id="box" type="radio" name="gym_event" value="복싱"> <label for="box">복싱</label>
 									</td>
 									<td class="basic_chk_padding">
-										<input id="box" type="radio" name="gym_event" value="킥복싱"> <label for="box">킥복싱</label>
+										<input id="kbox" type="radio" name="gym_event" value="킥복싱"> <label for="kbox">킥복싱</label>
 									</td>
 									<td class="basic_chk_padding">
 										<input id="jiu" type="radio" name="gym_event" value="주짓수"> <label for="jiu">주짓수</label>
@@ -93,14 +93,14 @@
 
 								<tr class="input_plus">
 									<td>공지사항</td>
-									<td colspan="2"><textarea name="gym_notice"></textarea></td>
+									<td colspan="4"><textarea name="gym_notice"></textarea></td>
 								</tr>
 
 
 
 								<tr>
 									<td class="basic">체육관 사진</td>
-									<td colspan="2"><input type="file" name="file"></td>
+									<td colspan="3"><input type="file" name="file"></td>
 								</tr>
 
 							</table>
