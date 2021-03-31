@@ -119,15 +119,30 @@ public class UserController {
 
 	// 네이버 회원가입 가입 정보 받기
 	@RequestMapping(value = "/joinnaver", method = { RequestMethod.GET })
-	public String joinFormNaver(String code, String state) {
+	public String joinFormNaver(String code, String state, HttpSession session, Model model) {
 
 		System.out.println("[cnt]네이버회원가입");
 
 		System.out.println(code);
 
-		userservice.naverJoin(code, state);
+		UserVo uservo = userservice.naverJoin(code, state);
 
-		return "redirect:/user/joininfo";
+		if (uservo.getAddress() != null) {
+			UserVo authUser = userservice.login(uservo);
+
+			System.out.println("로그인성공");
+			System.out.println("로그인정보: " + authUser);
+			session.setAttribute("authUser", authUser);
+
+			
+			return "redirect:/";
+
+		} else {
+			
+			model.addAttribute("uservo", uservo);
+			
+			return "redirect:/user/joininfo";
+		}
 	}
 
 	// 네이버 회원가입 여기부터 따옴

@@ -65,9 +65,10 @@
 									</tr>
 									<tr class="infotite">
 										<td>성별</td>
-										<td><input id="M" class="gender" type="radio" name="gender"
-											value="M" checked="checked"> <label for="M">남성</label> <input  id="F"
-											class="gender" type="radio" name="gender" value="F"><label for="F">여성</label>
+										<td><input id="M" class="gender" type="radio"
+											name="gender" value="M" checked="checked"> <label
+											for="M">남성</label> <input id="F" class="gender" type="radio"
+											name="gender" value="F"><label for="F">여성</label>
 										<td>
 									</tr>
 									<tr id="wideinfo">
@@ -76,14 +77,14 @@
 										</td>
 
 									</tr>
-									
+
 									<tr id="hp">
 										<td id="hp_title"><label for="hp">전화번호</label></td>
 										<td colspan="2" id="hp_content">
 											<div id="add_hp">
 												<div id="hp_content1">
-													<input type="text" id="user_ph" placeholder="전화번호"
-														inputmode="ph">
+													<input type="text" id="user_ph" name="user_phone"
+														placeholder="전화번호" inputmode="ph">
 												</div>
 											</div>
 										</td>
@@ -99,8 +100,7 @@
 														id="sample4_roadAddress" name="roadAddress"
 														placeholder="도로명주소">
 												</div>
-												<button type="button" id="search_btn"
-													onclick="sample4_execDaumPostcode()">검색하기</button>
+												<button type="button" id="search_btn">검색하기</button>
 											</div>
 											<div id="address_content2">
 												<input type="text" id="lastadd" name="juso"
@@ -145,6 +145,10 @@
 
 
 <script type="text/javascript">
+	$("#search_btn").on("click", function() {
+		sample4_execDaumPostcode();
+	});
+
 	function sample4_execDaumPostcode() {
 		new daum.Postcode(
 				{
