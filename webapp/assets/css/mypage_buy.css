@@ -10,6 +10,7 @@
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
+	display: flex;
 }
 
 .content .alarm_header {
@@ -1999,17 +2000,14 @@ element.style {
 	background-color: black;
 }
 
-
-*{border : 1px, solid, black;
+* {
+	border: 1px, solid, black;
 }
-
-
 
 /*매칭프로필테이블 프로필 이미지박스*/
 #info_imgbox {
 	text-align: center;
 }
-
 
 /*매칭프로필 테이블 프로필 믹네임 프로필바꾸기 박스*/
 .info_table {
@@ -2017,7 +2015,6 @@ element.style {
 }
 
 /*프로필 사진 변경하기 버튼*/
-
 .info_table #nickname, .info_table #user_name {
 	width: 400px;
 	height: 10px;
@@ -2032,11 +2029,11 @@ element.style {
 	border: none;
 }
 
-.info_table table{
-	margin-top : 70px;
+.info_table table {
+	margin-top: 70px;
 }
 
-#wideinfo{
+#wideinfo {
 	height: 50px;
 }
 

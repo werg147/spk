@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 
@@ -9,9 +11,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
 <title>알림</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/header.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/mypage_buy.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/assets/css/header.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/assets/css/mypage_buy.css">
 </head>
 
 <body>
@@ -46,7 +52,8 @@
 									<c:choose>
 										<c:when test="${aList.buy_type == 1 }">
 											<span class="Kind_goods">배송상품</span>
-											<span><a class="Addr_goods" href="${pageContext.request.contextPath }/WEB-INF/views/mypage/mypage_buy/buylist">${aList.alarm_title}</a></span>
+											<span><a class="Addr_goods"
+												href="${pageContext.request.contextPath }/WEB-INF/views/mypage/mypage_buy/buylist">${aList.alarm_title}</a></span>
 										</c:when>
 										<c:otherwise>
 											<span class="Kind_goods">매칭상품</span>
@@ -62,26 +69,6 @@
 					</div>
 					<!--//alram_list-->
 					<!-- //반복리스트 -->
-
-					<form action="${pageContext.request.contextPath }/mypage/productBuy" method="get">
-						<input type="text" name="buy_no" value="1">
-						<button type="submit">주문하기</button>
-					</form>
-
-					<form action="${pageContext.request.contextPath }/mypage/delReady" method="get">
-						<input type="text" name="buyprod_no" value="1">
-						<button type="submit">배송준비 중</button>
-					</form>
-
-					<form action="${pageContext.request.contextPath }/mypage/delStart" method="get">
-						<input type="text" name="buyprod_no" value="1">
-						<button type="submit">배송시작</button>
-					</form>
-
-					<form action="${pageContext.request.contextPath }/mypage/delcomplete" method="get">
-						<input type="text" name="buyprod_no" value="1">
-						<button type="submit">배송완료</button>
-					</form>
 
 				</div>
 				<!-- //content -->
@@ -99,5 +86,9 @@
 	<!--//wrap-->
 
 </body>
+
+<script type="text/javascript">
+	
+</script>
 
 </html>
