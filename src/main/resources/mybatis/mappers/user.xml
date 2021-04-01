@@ -19,6 +19,22 @@
 			and users.password = #{password}
 		]]>
 	</select>
+	
+		<!-- 회원정보 가져오기 sns로그인 -->
+	<select id="selectSocialUser" parameterType="String" resultType="com.javaex.vo.UserVo">
+		<![CDATA[
+			SELECT users.user_no,
+			       users.nickname,
+				   seller.sell_no,
+				   seller.book_type,
+				   seller.prod_type
+			FROM users left outer JOIN seller
+			on seller.user_no = users.user_no
+			where users.user_id = #{user_id}
+		]]>
+	</select>
+	
+	
 
 	<select id="selectOneUserAddress" parameterType="int" resultType="UserVo">
 		<![CDATA[
@@ -30,7 +46,7 @@
 	</select>
 
 
-	<select id="joinUserIdChechSelect" parameterType="String">
+	<select id="joinUserIdChechSelect" parameterType="String" resultType="com.javaex.vo.UserVo">
 		<![CDATA[
 			SELECT user_id
 			FROM users
@@ -66,8 +82,7 @@
 	<insert id="naverInsert" parameterType="com.javaex.vo.UserVo">
 		<selectKey keyProperty="user_no" resultType="int" order="BEFORE">
 			select seq_user_no.nextval
-			from
-			dual
+			from dual
 		</selectKey>
 			<![CDATA[
 		insert into users (user_no, 
@@ -94,21 +109,27 @@
 
 
 	<!-- 회원정보입력 -->
-	<update id="joininfoUPdate">
+	<update id="joininfoUPdate" parameterType="com.javaex.vo.UserVo">
 		<![CDATA[
 			UPDATE users 
 			SET user_name= #{user_name},
 			    nickname=#{nickname},
-			    address=#{address},
+			    roadAddress=#{roadAddress},
+			    addressdetail=#{addressdetail},
 			    user_photo=#{user_photo},
 			    user_phone=#{user_phone},
-			    user_name=#{user_name},
 			    gender=#{gender}
 			where user_no = #{user_no}    
 		]]>
 	</update>
 
-
+	
+	<delete id="joinDelete" parameterType="int">
+		<![CDATA[
+			DELETE FROM users 
+			WHERE user_no = #{user_no}
+		]]>
+	</delete>
 
 
 

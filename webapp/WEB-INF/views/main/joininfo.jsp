@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>알림</title>
+<title>회원정보입력</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/assets/css/header.css">
 <link rel="stylesheet"
@@ -54,7 +54,7 @@
 										<col style="width: 600px">
 									</colgroup>
 									<tr class="infotite">
-										<td rowspan="4" id="info_imgbox"><img
+										<td rowspan="4" id="info_imgbox"><img id="preview"
 											src="${pageContext.request.contextPath}/assets/image/마이페이지 남성_글러브.png"></td>
 										<td>이름</td>
 										<td><input type="text" id="user_name" name="user_name"
@@ -68,7 +68,7 @@
 									<tr class="infotite">
 										<td>성별</td>
 										<td><c:choose>
-												<c:when test="${uservo.gender}">
+												<c:when test="${uservo.gender == 'F'}">
 													<input id="M" class="gender" type="radio" name="gender"
 														value="M">
 													<label for="M">남성</label>
@@ -135,9 +135,9 @@
 							<input type="hidden" name="user_no" value="${uservo.user_no}">
 							<!--match_table-->
 							<div class="info_update_btn">
-								<button class="insert_btn" type="submit">저장</button>
-								<a href="${pageContext.request.contextPath}"><button
-										class="delclose_btn">취소</button></a>
+								<button class="insert_btn" type="submit">회원가입하기</button>
+								<a href="${pageContext.request.contextPath}/user/joincancle?user_no=${uservo.user_no}"><button
+										class="delclose_btn" type="button">취소</button></a>
 							</div>
 						</form>
 					</div>
@@ -163,6 +163,24 @@
 
 
 <script type="text/javascript">
+
+
+$('#user_photo').change(function(){
+    setImageFromFile(this, '#preview');
+});
+
+function setImageFromFile(input, expression) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $(expression).attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+
+
 	$("#sample4_postcode").on("click", function() {
 		sample4_execDaumPostcode();
 

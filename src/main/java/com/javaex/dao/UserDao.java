@@ -19,10 +19,18 @@ public class UserDao {
 	}
 	
 	
-	//카카오 회원정보 확인
-	public int joinUserIdChechSelect(String user_id) {
-		return sqlSession.insert("user.joinUserIdChechSelect", user_id);
+	//로그인 소셜 회원정보 가져오기
+	public UserVo joinSocialUserIdChechSelect(String user_id) {
+		System.out.println("[dao]로그인 정보가져오기" + user_id);	
+		return sqlSession.selectOne("user.selectSocialUser", user_id);
 	}
+	
+	//회원정보 확인
+	public UserVo joinUserIdChechSelect(String user_id) {
+		System.out.println("[dao]회원가입 여부확인" + user_id);	
+		return sqlSession.selectOne("user.joinUserIdChechSelect", user_id);
+	}
+
 	
 	//카카오 회원가입
 	public int kakaoInsert(UserVo uservo) {
@@ -39,7 +47,13 @@ public class UserDao {
 	//회원가입 회원정보 입력
 	public int joininfoUPdate(UserVo uservo) {
 		System.out.println("[dao]회원가입 회원정보입력" + uservo);		
-		return sqlSession.insert("user.joininfoUPdate", uservo);
+		return sqlSession.update("user.joininfoUPdate", uservo);
+	}
+	
+	//회원가입 취소
+	public int joinDelete(int user_no) {
+		System.out.println("[dao]회원가입 취소" + user_no);	
+		return sqlSession.delete("user.joinDelete",user_no);
 	}
 	
 	//대관판매자 계정등록

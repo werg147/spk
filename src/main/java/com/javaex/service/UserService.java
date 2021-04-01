@@ -36,6 +36,7 @@ public class UserService {
 	public UserVo login(UserVo uservo) {
 		return userdao.selectUser(uservo);
 	}
+	
 
 	// 카카오 회원가입
 	public UserVo kakaoJoin(String code) {
@@ -109,43 +110,47 @@ public class UserService {
 		UUID uuidpassword = UUID.randomUUID();
 
 		UserVo uservo = new UserVo();
-		
+
 		String user_id = "kakao" + KakaoUserinfo.getId();
-		
+
 		uservo.setUser_id(user_id);
 		uservo.setPassword(uuidpassword.toString());
 		uservo.setNickname(KakaoUserinfo.getProperties().getNickname());
 
-		System.out.println("회원가입 여부확인");
-		int count = userdao.joinUserIdChechSelect(user_id);
+		UserVo uvo = userdao.joinUserIdChechSelect(user_id);
+		System.out.println(uvo);
 
-		if (count == 1) {
-			userdao.selectUser(uservo);
-			return uservo;
-		} else {
+
+		System.out.println("회원가입 여부확인: " );
+
+		if (uvo == null) {		
+			System.out.println("회원가입 안 회원");
 			userdao.kakaoInsert(uservo);
-			uservo.setUser_no(uservo.getUser_no());
+			uservo.setUser_no(uservo.getUser_no());		
 			return uservo;
+
+		} else {
+			System.out.println("회원가입 한 회원" + uservo.getUser_id());
+			
+			return userdao.joinSocialUserIdChechSelect(uservo.getUser_id());
 		}
 	}
-	
-	//네이버 회원가입
+
+	// 네이버 회원가입
 	public UserVo naverJoin(String code, String state) {
-		
-		
+
 		System.out.println("[service]네이버 회원가입");
-		RestTemplate rt = new RestTemplate();	
-		
+		RestTemplate rt = new RestTemplate();
+
 		// HttpHeaders 오브젝트 생성
 		HttpHeaders headers = new HttpHeaders();
-		//headers.add("Content-type", "json");
-		
+		// headers.add("Content-type", "json");
+
 		// HttpBody 오브젝트 생성
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 
 		String key = "9ElAXUf0q0NhBnY7bqKl";
 		String client_secret = "sAPPTwOGRF";
-	
 
 		params.add("grant_type", "authorization_code");
 		params.add("client_id", key);
@@ -153,13 +158,8 @@ public class UserService {
 		params.add("code", code);
 		params.add("state", state);
 
-
-		
-		
-
 		// HttpHeaders, HttpBody 하나의 오브젝트에 담기
-		HttpEntity<MultiValueMap<String, String>> naverTokenRequest 
-		= new HttpEntity<>(params, headers);
+		HttpEntity<MultiValueMap<String, String>> naverTokenRequest = new HttpEntity<>(params, headers);
 
 		// Http 요청하기 - post방식으로 그리고 response 변수의 응답을 받음
 		ResponseEntity<String> response = rt.exchange("https://nid.naver.com/oauth2.0/token", HttpMethod.POST,
@@ -178,12 +178,8 @@ public class UserService {
 			e.printStackTrace();
 		}
 
-		
-		
 		System.out.println(navervo.getAccess_token());
-		
-		
-		
+
 		RestTemplate rt2 = new RestTemplate();
 
 		// HttpHeaders 오브젝트 생성
@@ -198,77 +194,88 @@ public class UserService {
 				naverTokenRequest2, String.class);
 
 		// Gson, Json simple, objectMapper
-				ObjectMapper objectMapper2 = new ObjectMapper();
-				NaverVo naverUserinfo = null;
+		ObjectMapper objectMapper2 = new ObjectMapper();
+		NaverVo naverUserinfo = null;
 
-				try {
-					naverUserinfo = objectMapper2.readValue(response2.getBody(), NaverVo.class);
-				} catch (JsonParseException e) {
-					e.printStackTrace();
-				} catch (JsonMappingException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-		
-		
-				UUID uuidpassword = UUID.randomUUID();
-		
-				UserVo uservo = new UserVo();
-				
-				String user_id = "naver" + naverUserinfo.getResponse().getId();
-				uservo.setUser_id(user_id);
-				uservo.setPassword(uuidpassword.toString());
-				uservo.setNickname(naverUserinfo.getResponse().getNickname());
-				uservo.setGender(naverUserinfo.getResponse().getGender());
-				uservo.setUser_name(naverUserinfo.getResponse().getName());
+		try {
+			naverUserinfo = objectMapper2.readValue(response2.getBody(), NaverVo.class);
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-				System.out.println("회원가입 여부확인");
-				int count = userdao.joinUserIdChechSelect(user_id);
-		
-				if (count == 1) {
-					userdao.selectUser(uservo);
-					return uservo;
-				} else {
-					userdao.naverInsert(uservo);
-					uservo.setUser_no(uservo.getUser_no());
-					return uservo;
-				}		
-	}
-	
-	//회원가입-회원정보입력
-	public void joininfoWrite(UserVo uservo, MultipartFile profilphoto) {
-		
-		System.out.println("[service]회원가입 회원정보입력");
-		
-		
-		//db 저장할 정보 수집
-		String saveDir = "C:\\javaStudy\\upload";
+		UUID uuidpassword = UUID.randomUUID();
+
+		UserVo uservo = new UserVo();
+
+		String user_id = "naver" + naverUserinfo.getResponse().getId();
+		uservo.setUser_id(user_id);
+		uservo.setPassword(uuidpassword.toString());
+		uservo.setNickname(naverUserinfo.getResponse().getNickname());
+		uservo.setGender(naverUserinfo.getResponse().getGender());
+		uservo.setUser_name(naverUserinfo.getResponse().getName());
+
+
+		UserVo uvo = userdao.joinSocialUserIdChechSelect(user_id);
+		System.out.println(uvo);
+
+		System.out.println("회원가입 여부확인: " );
+
+		if (uvo == null) {		
+			System.out.println("회원가입 안 회원");
+			userdao.naverInsert(uservo);
+			uservo.setUser_no(uservo.getUser_no());		
+			return uservo;
+
+		} else {
+			System.out.println("회원가입 한 회원" + uservo.getUser_id());
 			
-		//오리지널 파일이름
+			return userdao.joinSocialUserIdChechSelect(uservo.getUser_id());
+		}
+	}
+
+	// 회원가입-회원정보입력
+	public void joininfoWrite(UserVo uservo, MultipartFile profilphoto) {
+
+		System.out.println("[service]회원가입 회원정보입력");
+
+		// db 저장할 정보 수집
+		String saveDir = "C:\\javaStudy\\upload";
+
+		// 오리지널 파일이름
 		String orgName = profilphoto.getOriginalFilename();
 
-		//확장자
+		// 확장자
 		String exName = orgName.substring(orgName.lastIndexOf("."));
 
-		//서버 저장 파일 이름
+		// 서버 저장 파일 이름
 		String saveName = System.currentTimeMillis() + UUID.randomUUID().toString() + exName;
 		System.out.println("saveName" + saveName);
-		
-		//서버 파일 패스 --> 저장경로
+
+		// 서버 파일 패스 --> 저장경로
 		String filePath = saveDir + "\\" + saveName;
-		
-		//서버하드디스크 파일저장
+
+		// 서버하드디스크 파일저장
 		try {
 			profilphoto.transferTo(new File(filePath));
 			uservo.setUser_photo(saveName);
-			
-			userdao.joininfoUPdate(uservo);
-			
-		} catch(IOException e) {
+
+			int count = userdao.joininfoUPdate(uservo);
+			System.out.println("회원가입_회원정보입력 성공건수 : " + count);
+		} catch (IOException e) {
 			e.printStackTrace();
-			
+
 		}
 
+	}
+
+	// 회원가입 취소
+	public int joinCancle(int user_no) {
+		System.out.println("[service]회원가입 취소");
+
+		return userdao.joinDelete(user_no);
 	}
 }

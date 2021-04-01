@@ -80,22 +80,17 @@ public class UserController {
 	public String notice() {
 		System.out.println("[cnt] 판매자 계정등록 공지페이지");
 
-		
 		return "mypage/mypage_seller/seller_notice";
-		
+
 	}
-	
-	//수익관리페이지
+
+	// 수익관리페이지
 	@RequestMapping(value = "/profit", method = { RequestMethod.GET, RequestMethod.POST })
 	public String profit() {
 		System.out.println("[cnt] 판매자 수익 페이지");
-	
-		
-		
+
 		return "mypage/mypage_seller/seller_profit";
 	}
-	
-	
 
 	// 회원정보입력 페이지열기
 	@RequestMapping(value = "/joinform", method = { RequestMethod.GET, RequestMethod.POST })
@@ -113,21 +108,25 @@ public class UserController {
 
 		UserVo uservo = userservice.kakaoJoin(code);
 
-		if (uservo.getAddress() != null) {
-			UserVo authUser = userservice.login(uservo);
+		System.out.println("회원정보" + uservo);
+
+		if (uservo.getPassword() == "" || uservo.getPassword() == null) {
+
+			UserVo authUser = uservo;
 
 			System.out.println("로그인성공");
 			System.out.println("로그인정보: " + authUser);
 			session.setAttribute("authUser", authUser);
 
-			
 			return "redirect:/";
 
 		} else {
-			
+
 			model.addAttribute("uservo", uservo);
-			
+			System.out.println("페이지 전달내용" + uservo);
+
 			return "main/joininfo";
+
 		}
 
 	}
@@ -142,39 +141,50 @@ public class UserController {
 
 		UserVo uservo = userservice.naverJoin(code, state);
 
-		if (uservo.getAddress() != null) {
-			UserVo authUser = userservice.login(uservo);
+		System.out.println("회원정보" + uservo);
+
+		if (uservo.getPassword() == "" || uservo.getPassword() == null) {
+
+			UserVo authUser = uservo;
 
 			System.out.println("로그인성공");
 			System.out.println("로그인정보: " + authUser);
 			session.setAttribute("authUser", authUser);
 
-			
 			return "redirect:/";
 
 		} else {
-			
+
 			model.addAttribute("uservo", uservo);
-			
+			System.out.println("페이지 전달내용" + uservo);
+
 			return "main/joininfo";
+
 		}
 	}
 
 	// 회원가입 후 회원정보입력
-	@RequestMapping(value = "/joininfowrite", method = { RequestMethod.GET, RequestMethod.POST})
-	public String joininfoWrite(@ModelAttribute UserVo uservo, 
-								@RequestParam("profilphoto") MultipartFile profilphoto) {
+	@RequestMapping(value = "/joininfowrite", method = { RequestMethod.GET, RequestMethod.POST })
+	public String joininfoWrite(@ModelAttribute UserVo uservo, @RequestParam("profilphoto") MultipartFile profilphoto) {
 		System.out.println("[cnt]회원가입 후 회원정보입력" + uservo);
-		
+
 		String address = uservo.getRoadAddress() + uservo.getAddressdetail();
-		uservo.setAddress(address);	
+		uservo.setAddress(address);
 		userservice.joininfoWrite(uservo, profilphoto);
-		
+
 		int user_no = uservo.getUser_no();
-		
-		return "sparring/writeForm?join=1&user_no=" +user_no;
+
+		return "redirect:/sparring/writeForm?join=1&user_no=" + user_no;
 	}
-	
-	
+
+	// 회원가입 취소하기
+	@RequestMapping(value = "/joincancle", method = { RequestMethod.GET, RequestMethod.POST })
+	public String joinCancle(@RequestParam("user_no") int user_no) {
+		System.out.println("[cnt]회원가입 취소" + user_no);
+		int count = userservice.joinCancle(user_no);
+		System.out.println("회원가입취소 개수: " + count);
+
+		return "redirect:/";
+	}
 
 }
