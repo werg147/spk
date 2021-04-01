@@ -32,7 +32,7 @@
 	<div class="wrap">
 		<div class="container">
 		
-				<form name="proform" method="get" class="sf_form form_20">
+				<form action="${pageContext.request.contextPath}/store/pay" name="proform" method="get" class="sf_form form_20">
 				
 					<div class="sm">
 						<h1 class="sm_title">주문서</h1>
@@ -115,12 +115,12 @@
 												</ul>
 											</div>
 											
-											<input type="text"  class="list" name="prod_no" value="${payVo.prod_no}">
-											<input type="text"  class="list" name="prod_price" value="${payVo.prod_price}">
-											<input type="text" class="list" name="colorsize_no" value="${payVo.colorsize_no}">
-											<input type="text" class="list" name="count" value="${payVo.count}">
+											<input type="hidden" class="list" name="prod_no" value="${payVo.prod_no}">
+											<input type="hidden" class="list" name="prod_price" value="${payVo.prod_price}">
+											<input type="hidden" class="list" name="colorsize_no" value="${payVo.colorsize_no}">
+											<input type="hidden" class="list" name="count" value="${payVo.count}">
 											
-											<input type="text" class="list" name="stock" value="${payVo.stock}">
+											<input type="hidden" class="list" name="stock" value="${payVo.stock}">
 											
 										</c:forEach>
 										<!-- 아이템 1개 END -->
@@ -140,9 +140,9 @@
 										<i class="modal_icon fas fa-map-marker-alt"></i>배송지
 									</h3>
 									<div class="sf_address_item2">
-										<p class="sf_address_item2_text">${pmap.userVo.address}</p>
+										<p class="sf_address_item2_text">${pmap.userVo.roadAddess}</p>
 										<a href="" class="sf_address_item2_fix">배송지 변경</a>
-										<input type="hidden" name="buy_address" value="${pmap.userVo.address}">
+										<input type="hidden" name="buy_address" value="${pmap.userVo.roadAddess}">
 									</div>
 								</div>
 							
@@ -223,8 +223,8 @@
 							
 							
 							<div class="btn_payment">
-								<button type="button" class="btn_form btn_buy" onclick="btn_click('buy');">결제하기</button>
-								<button type="button" class="btn_form btn_cancel" onclick="btn_click('cancel');">취소하기</button>
+								<button type="submit" class="btn_form btn_buy">결제하기</button>
+								<button type="button" class="btn_form btn_cancel"><a href="${pageContext.request.contextPath}/store/list" style="color: #fff">쇼핑하기</a></button>
 							</div>
 							
 							<input type="hidden" name="buy_ph" value="${pmap.userVo.user_phone}">
@@ -306,17 +306,29 @@
 	}
 	
 	
-	//form submit 두개
-	function btn_click(str){
-		if(str == "buy"){
-			document.proform.action='${pageContext.request.contextPath}/store/pay'
-		} else if(str == "cancel"){
-			document.proform.action='${pageContext.request.contextPath}/store/payform'
-		}
+	/* //form submit 두개
+	$(".btn_form").on("click",function(){
 		
-		document.proform.submit();
-	}
+		var buy = $(".btn_buy").val();
+		var cancel = $(".btn_cancel").val();
+		console.log(buy);
+		console.log(cancel);
+		
+		var btn_buy = "buy";
+		var btn_cancel = "cancel";
+		console.log(btn_cancel);
+		var url = '${pageContext.request.contextPath}/store/list';
+		
+		if(cancel == btn_cancel){
+			console.log("캔슬버튼");
+			//document.proform.action='${pageContext.request.contextPath}/store/pay'
+			//document.proform.submit();
+		} else if(buy == btn_buy){
+			console.log("바이버튼")
+			//$(location).attr('href',url);
+		}
 	
+	}); */
 	
 
 

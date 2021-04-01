@@ -56,7 +56,9 @@
 							<span class="position">
 									<span class="price"><fmt:formatNumber value="${productVo.prod_price}" pattern="#,###"/><span class="won">원</span></span>
 									<div>
-										<span class="not_login">로그인 후, 적립혜택이 제공됩니다.</span>
+										<c:if test="${empty authUser.user_no}">
+											<span class="not_login">로그인 후, 적립혜택이 제공됩니다.</span>
+										</c:if>
 									</div>
 							</span>
 						</div>
@@ -97,16 +99,45 @@
 								<!-- 수량, 총 금액 form -->
 								<form name="proform" method="get">
 								
-								<!--색상 (있을때)--><!--사이즈(없을때)--> 		
+								<!--색상 한개일때	
 								<dl class="list fst">
 									<dt class="tit">색상</dt> <dd class="desc">${productVo.cssList[0].color}</dd>
 								</dl> 
-	
+								-->
+								
+								<dl class="list fst">
+									<dt class="tit">색상</dt> 
+									<dd class="desc">
+										<select class="prod_color">
+											<option selected>선택하기</option>
+											<option>빨강</option>
+											<option>파랑</option>
+											<option>블랙</option>
+										</select>
+									</dd>
+								</dl>
 							
+								<!-- 사이즈 한개일때 
 								<dl class="list">
-									<dt class="tit">사이즈</dt> <!----> <dd class="desc">${productVo.cssList[0].prod_size}</dd>
+									<dt class="tit">사이즈</dt> <dd class="desc">${productVo.cssList[0].prod_size}</dd>
+								</dl>
+								-->	
+							
+								<dl class="list fst">
+									<dt class="tit">사이즈</dt> 
+									<dd class="desc">
+										<select class="prod_size">
+											<option selected>선택하기</option>
+											<option>S</option>
+											<option>M</option>
+											<option>L</option>
+											<option>XL</option>
+										</select>
+									</dd>
 								</dl>
 								
+							
+								<!-- 수량 한개일때 
 								<dl class="list">
 									<dt class="tit">
 										수량 : <input type=hidden name="prod_price" value="${productVo.prod_price}">
@@ -122,13 +153,12 @@
 													<img src="${pageContext.request.contextPath}/assets/image/store_img/ico_plus.jpg">
 												</button>
 											</span>
-										</div>
-										
+										</div>										
 									</dd>
 								</dl>
 			
 								<div class="price_total">
-									<!--총 금액-->
+									<!--총 금액
 									<div class="total">
 										<div class="price">
 											<strong class="tit totit">총 상품금액 :</strong> 
@@ -136,14 +166,185 @@
 											<span class="num"><input type="text" class="num" name="sum" size="11" readonly></span> <span class="won">원</span></span>
 										</div> 
 										<p class="txt_point">
-											<span class="ico">적립</span> 
-											<span class="no_login"> 
-												<span>로그인 후, 적립혜택 제공</span>
-											</span>
+											<c:if test="${empty authUser.user_no}">
+												<span class="ico">적립</span> 
+												<span class="no_login"> 
+													<span>로그인 후, 적립혜택 제공</span>
+												</span>
+											</c:if>
+											
 										</p>
 									</div>
+									-->
+									<!--장바구니, 바로구매 버튼--><!--
+									<div class="group_btn">
+										<div class="view_function">
+											<button type="button" class="btn_form btn_buy">바로 구매</button> 
+											<button type="button" class="btn_form btn_cart">장바구니</button>
+										</div> 
+									</div>
+								</div>
+								
+								<input type="hidden" class="prod_no" name="prod_no" value="${productVo.prod_no}">
+								<input type="hidden" class="colorsize_no" name="colorsize_no" value="${productVo.cssList[0].colorsize_no}">
+								
+								<div class="price_total">
+									
+									
+									<div class="total">
+										<div class="price">
+											<strong class="tit totit">총 상품금액 :</strong> 
+											<span class="sum">
+											<span class="num"><input type="text" class="num" name="sum" size="11" readonly></span> <span class="won">원</span></span>
+										</div> 
+										<p class="txt_point">
+											<c:if test="${empty authUser.user_no}">
+												<span class="ico">적립</span> 
+												<span class="no_login"> 
+													<span>로그인 후, 적립혜택 제공</span>
+												</span>
+											</c:if>
+											
+										</p>
+									</div>
+									
+									
+									<div class="group_btn">
+										<div class="view_function">
+											<button type="button" class="btn_form btn_buy">바로 구매</button> 
+											<button type="button" class="btn_form btn_cart">장바구니</button>
+										</div> 
+									</div>
+								</div>
+								
+								<input type="hidden" class="prod_no" name="prod_no" value="${productVo.prod_no}">
+								<input type="hidden" class="colorsize_no" name="colorsize_no" value="${productVo.cssList[0].colorsize_no}">							
+															
+								
+								-->
+								
+								
+								
+								<!-- 셀렉박스 선택 후 생기는 영역 -->
+										
+								<div id="cartPut">
+
+									
+									<div class="list_goods">
+										<ul class="list">
+											<li class="on">
+												<span class="btn_position on">
+													<button type="button" class="btn_del">
+														<span class="txt">x</span>
+													</button>
+												</span> 
+												<span class="name">[에버라스트] 복싱 백글러브</span>
+												<div class="option">
+												
+													<dl class="list">
+														<dt class="tit_op">
+															<input type=hidden name="prod_price" value="${productVo.prod_price}">
+														</dt> 
+														<dd class="desc">
+															<div class="countpm">
+																<span class="count">
+																	<button type="button" class="btnmp down on" value=" - " onclick='count("minus")'>
+																		<img src="${pageContext.request.contextPath}/assets/image/store_img/ico_minu.jpg">
+																    </button> 
+																	<span class="amountt read_only" id="result">1</span>
+																	<button type="button" class="btnmp up on" value=" + " onclick='count("plus")'>
+																		<img src="${pageContext.request.contextPath}/assets/image/store_img/ico_plus.jpg">
+																	</button>
+																</span>
+															</div>										
+														</dd>
+													</dl>
+													
+													
+														
+													<div class="total">
+														<div class="price">
+										
+															<span class="sum">
+															<span class="num"><input type="text" class="num" name="sum" size="11" readonly></span> <span class="won">원</span></span>
+														</div> 
+														
+													</div>
+												
+													
+												</div>
+											</li>
+											<!-- 
+											<li class="on">
+												<span class="btn_position on">
+													<button type="button" class="btn_del">
+														<span class="txt">x</span>
+													</button>
+												</span> 
+												<span class="name">[에버라스트] 복싱 백글러브</span>
+												<div class="option">
+												
+													<dl class="list">
+														<dt class="tit_op">
+															<input type=hidden name="prod_price" value="${productVo.prod_price}">
+														</dt> 
+														<dd class="desc">
+															<div class="countpm">
+																<span class="count">
+																	<button type="button" class="btnmp down on" value=" - " onclick='count("minus")'>
+																		<img src="${pageContext.request.contextPath}/assets/image/store_img/ico_minu.jpg">
+																    </button> 
+																	<span class="amountt read_only" id="result">0</span>
+																	<button type="button" class="btnmp up on" value=" + " onclick='count("plus")'>
+																		<img src="${pageContext.request.contextPath}/assets/image/store_img/ico_plus.jpg">
+																	</button>
+																</span>
+															</div>										
+														</dd>
+													</dl>
+													
+													
+														
+													<div class="total">
+														<div class="price">
+										
+															<span class="sum">
+															<span class="num"><input type="text" class="num" name="sum" size="11" readonly></span> <span class="won">원</span></span>
+														</div> 
+														
+													</div>
+												
+												 
+												</div>
+											</li>
+											-->	
+											
+										</ul>
+									</div>
+								</div> <!--cartPut-->
 		
-									<!--장바구니, 바로구매 버튼-->
+								
+								<div class="price_total">
+									
+									
+									<div class="total">
+										<div class="price">
+											<strong class="tit totit">총 상품금액 :</strong> 
+											<span class="sum">
+											<span class="num"><input type="text" class="num" name="sum" size="11" readonly></span> <span class="won">원</span></span>
+										</div> 
+										<p class="txt_point">
+											<c:if test="${empty authUser.user_no}">
+												<span class="ico">적립</span> 
+												<span class="no_login"> 
+													<span>로그인 후, 적립혜택 제공</span>
+												</span>
+											</c:if>
+											
+										</p>
+									</div>
+									
+									
 									<div class="group_btn">
 										<div class="view_function">
 											<button type="button" class="btn_form btn_buy">바로 구매</button> 
@@ -155,81 +356,11 @@
 								<input type="hidden" class="prod_no" name="prod_no" value="${productVo.prod_no}">
 								<input type="hidden" class="colorsize_no" name="colorsize_no" value="${productVo.cssList[0].colorsize_no}">							
 								
+					
 							</form> <!-- 수량, 총 금액 form -->
 							
 					</div>
 
-
-
-						<!--상품선택
-						<div id="cartPut">
-							<div class="goods_info">
-								<dl class="list fst">
-									<dt class="tit">선택 상품</dt> 
-									
-									<dd class="desc">
-									
-										<select id="prod_cate">
-											<option selected>선택하기</option>
-											<option>펀치킹 레드</option>
-											<option>펀치킹 화이트</option>
-											<option>펀치킹 블랙</option>
-										</select>
-									</dd>
-									
-								</dl>
-							</div>
-							
-							선택된 상품
-							<div class="list_goods">
-								<ul class="list">
-									<li class="on">
-										<span class="btn_position on">
-											<button type="button" class="btn_del">
-												<span class="txt">x</span>
-											</button>
-										</span> 
-										<span class="name">[에버라스트] 복싱 백글러브</span>
-										<div class="option">
-											<span class="count">
-												<button type="button" class="btn down on">-</button> 
-												<input type="number" readonly="readonly" onfocus="this.blur()" class="inp"> 
-												<button type="button" class="btn up on">+</button>
-											</span> <span class="price">
-												<span class="dc_price">153,600원</span>
-											</span>
-										</div>
-									</li>
-								</ul>
-							</div>
-						</div>--> <!--cartPut-->
-
-						<!--
-						<div class="price_total">
-							<총 금액
-							<div class="total">
-								<div class="price">
-									<strong class="tit">총 상품금액 :</strong> 
-									<span class="sum">
-									<span class="num">153,600</span> <span class="won">원</span></span>
-								</div> 
-								<p class="txt_point">
-									<span class="ico">적립</span> 
-									<span class="no_login"> 
-										<span>로그인 후, 적립혜택 제공</span>
-									</span>
-								</p>
-							</div>
-
-							장바구니, 바로구매 버튼
-							<div class="group_btn">
-								<div class="view_function">
-									<button type="button" class="btn btn_buy"><a href="../영훈/결제하기.html" style="font-size: 16px; color: #ffffff;">바로 구매</a></button> 
-									<button type="button" class="btn btn_cart"><a href="../경환/cart.html" style="font-size: 16px; color: #C51212;">장바구니</a></button>
-								</div> 
-							</div>
-						</div>
-						-->
 					</div> <!--goods_area-->
 			</div> <!--id sectionView-->
 		</div> <!--//section_view-->
@@ -693,7 +824,7 @@
 	</div>
 	<!-- /.modal -->
 
-
+<input type="hidden" name="user_no" value="${authUser.user_no}">
 
 </body>
 
@@ -764,10 +895,21 @@
 
 	//일단 넘어가고 나중에 걸러주기로
 	
-	function btn(){ 
+	$(".bhs_button").on("click",function(){
 		
-		alert('로그인 후 작성 가능합니다.'); 
-	}
+		var user_no = $("[name='user_no']").val();
+		console.log(user_no);
+		
+		if(user_no == null){
+			alert('로그인 후 작성 가능합니다.'); 
+		} else {
+			console.log("로그인했음");
+		}
+		
+	});
+		
+		
+	
 
 	//맨 위로 가기 버튼
 	$(function(){
@@ -786,7 +928,6 @@
 		});
 	
 	
-	//form submit 두개
 	<!--
 	function btn_click(str){
 		if(str == "buy"){
@@ -800,81 +941,104 @@
 	-->
 	
 	//장바구니 클릭시 cart insert --> 장바구니/계속쇼핑 버튼
-	$(document).ready(function(){
-		$(".btn_cart").on("click", function(){
+	$(".btn_cart").on("click", function(){
+		
+		//버튼 클릭 테스트
+		console.log("장바구니 버튼 클릭");
+		
+		event.preventDefault();
+		
+		var formData = new FormData();
+		console.log(formData);
+		
+		//상품번호, 옵션번호, 개수
+		var prod_no = $("[name='prod_no']").val();
+		var colorsize_no = $("[name='colorsize_no']").val();
+		var count = document.proform.count.value;
+		console.log(prod_no);
+		console.log(colorsize_no);
+		console.log(count);
+		
+		//formData에 키-값 넣기
+		formData.append('prod_no', prod_no);
+		formData.append('colorsize_no', colorsize_no);
+		formData.append('count', count);
+		
+		//formData 값 확인 함수
+		//console.log("formData 값 확인 - 했음")
+		/* 
+		for (var key of formData.keys()) {
+  			console.log(key);
+		}
+
+		for (var value of formData.values()) {
+ 			 console.log(value);
+		}
+		*/
+		
+		var url = "${pageContext.request.contextPath}/mypage/cart";
+		
+		//formData값 보내기 --> 카트 인서트
+		$.ajax({
 			
-			//버튼 클릭 테스트
-			console.log("장바구니 버튼 클릭");
+			url : "${pageContext.request.contextPath}/mypage/gotoCart",		
+			data : formData,
+			contentType : false,
+			processData : false,
+			type : 'post',
 			
-			event.preventDefault();
-			
-			var formData = new FormData();
-			console.log(formData);
-			
-			//상품번호, 옵션번호, 개수
-			var prod_no = $("[name='prod_no']").val();
-			var colorsize_no = $("[name='colorsize_no']").val();
-			var count = document.proform.count.value;
-			console.log(prod_no);
-			console.log(colorsize_no);
-			console.log(count);
-			
-			//formData에 키-값 넣기
-			formData.append('prod_no', prod_no);
-			formData.append('colorsize_no', colorsize_no);
-			formData.append('count', count);
-			
-			//formData 값 확인 함수
-			//console.log("formData 값 확인 - 했음")
-			/* 
-			for (var key of formData.keys()) {
-	  			console.log(key);
-			}
-	
-			for (var value of formData.values()) {
-	 			 console.log(value);
-			}
-			*/
-			
-			var url = "${pageContext.request.contextPath}/mypage/cart";
-			
-			//formData값 보내기 --> 카트 인서트
-			$.ajax({
+			success : function(){
+				//장바구니/계속쇼핑
+				console.log("모달 창 호출");
 				
-				url : "${pageContext.request.contextPath}/mypage/gotoCart",		
-				data : formData,
-				contentType : false,
-				processData : false,
-				type : 'post',
+				//모달 창 호출
+				$("#modal").modal();
+                
+				$("#goCart").on("click", function(){
+					//장바구니가기 클릭시 페이지이동
+					$(location).attr('href',url);
+				});
+
 				
-				success : function(){
-					//장바구니/계속쇼핑
-					console.log("모달 창 호출");
-					
-					//모달 창 호출
-					$("#modal").modal();
-	                
-					$("#goCart").on("click", function(){
-						//장바구니가기 클릭시 페이지이동
-						$(location).attr('href',url);
-					});
-	
-					
-				},
-				error : function(XHR, status, error) {
-					console.error(status + " : " + error);
-				}
-			});
-			
-			
-			
-		});
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+		});		
 		
 	});
+		
 	
 	
+	//바로구매 클릭시
+	$(".btn_buy").on("click",function(){
+		document.proform.action='${pageContext.request.contextPath}/store/paynow'
+		document.proform.submit();
+	});
+
+	
+	function count(type)  {
+		  // 결과를 표시할 element
+		  const resultElement = document.getElementById('result');
+		  
+		  // 현재 화면에 표시된 값
+		  let number = resultElement.innerText;
+		  
+		  // 더하기/빼기
+		  if(type === 'plus') {
+		    number = parseInt(number) + 1;
+		  }else if(type === 'minus')  {
+			  if(number>1){
+				number = parseInt(number) - 1;  
+			  }    	
+		  }
+		  
+		  // 결과 출력
+		  resultElement.innerText = number;
+		}
 	
 	
+
 	
 	
 	

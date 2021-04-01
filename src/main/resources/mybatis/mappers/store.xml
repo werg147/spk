@@ -19,6 +19,7 @@
             from product prod, prodimg pimg
             where prod.prod_no = pimg.prod_no
             and pimg.prod_img_type = 'main'
+            and prod.sell_state = 1
          ]]>
             <if test="  value != null and value !=''  ">
             	and prod.prod_name like '%' || #{search} || '%'
@@ -114,7 +115,8 @@
 		<![CDATA[
 			select user_phone,
 				   user_no,
-       			   address,
+       			   roadAddess,
+       			   addressdetail,
        			   user_name 
             from users
             where user_no = #{user_no}
