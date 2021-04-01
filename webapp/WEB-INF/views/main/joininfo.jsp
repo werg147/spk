@@ -43,7 +43,9 @@
 					<!-- //line -->
 
 					<div class="content_bottom">
-						<form id="sellForm" action="${pageContext.request.contextPath}/user/joininfowrite" method="GET">
+						<form id="sellForm"
+							action="${pageContext.request.contextPath}/user/joininfowrite"
+							enctype="multipart/form-data" method="post">
 							<div class="info_table">
 								<table class="join">
 									<colgroup>
@@ -60,20 +62,34 @@
 									</tr>
 									<tr class="infotite">
 										<td>닉네임</td>
-										<td><input type="text" id="nickname" name="nickname" value="${uservo.nickname}"
-											placeholder="닉네임을 입력해주세요."></td>
+										<td><input type="text" id="nickname" name="nickname"
+											value="${uservo.nickname}" placeholder="닉네임을 입력해주세요."></td>
 									</tr>
 									<tr class="infotite">
 										<td>성별</td>
-										<td><input id="M" class="gender" type="radio"
-											name="gender" value="M" checked="checked"> <label
-											for="M">남성</label> <input id="F" class="gender" type="radio"
-											name="gender" value="F"><label for="F">여성</label>
+										<td><c:choose>
+												<c:when test="${uservo.gender}">
+													<input id="M" class="gender" type="radio" name="gender"
+														value="M">
+													<label for="M">남성</label>
+													<input id="F" class="gender" type="radio" name="gender"
+														value="F" checked="checked">
+													<label for="F">여성</label>
+												</c:when>
+												<c:otherwise>
+													<input id="M" class="gender" type="radio" name="gender"
+														value="M" checked="checked">
+													<label for="M">남성</label>
+													<input id="F" class="gender" type="radio" name="gender"
+														value="F">
+													<label for="F">여성</label>
+												</c:otherwise>
+											</c:choose>
 										<td>
 									</tr>
 									<tr id="wideinfo">
 										<td colspan="2">프로필 사진 넣기 <input type="file"
-											name="user_photo" id="user_photo">
+											name="profilphoto" id="user_photo">
 										</td>
 
 									</tr>
@@ -83,8 +99,9 @@
 										<td colspan="2" id="hp_content">
 											<div id="add_hp">
 												<div id="hp_content1">
-													<input type="text" id="user_ph" name="user_phone" value="${uservo.user_phone}
-														placeholder="전화번호" inputmode="ph">
+													<input type="text" id="user_ph" name="user_phone"
+														value="${uservo.user_phone}" placeholder="전화번호"
+														maxlength="13">
 												</div>
 											</div>
 										</td>
@@ -95,14 +112,12 @@
 											<div id="add_search">
 												<div id="address_content1">
 													<input type="hidden" id="confmKey" name="confmKey" value="">
-													<div class="da">
-														<input type="text" id=sample4_postcode name="post"
-															placeholder="우편번호">
-													</div>
-													<div class="da">
-														<input type="text" id="sample4_roadAddress"
-															name="roadAddress" value="" placeholder="도로명주소">
-													</div>
+
+													<input type="text" id=sample4_postcode name="post"
+														placeholder="우편번호" readonly> <input type="text"
+														id="sample4_roadAddress" name="roadAddress" value=""
+														placeholder="도로명주소" readonly>
+
 												</div>
 												<button type="button" id="search_btn">검색하기</button>
 											</div>
@@ -117,6 +132,7 @@
 									</tr>
 								</table>
 							</div>
+							<input type="hidden" name="user_no" value="${uservo.user_no}">
 							<!--match_table-->
 							<div class="info_update_btn">
 								<button class="insert_btn" type="submit">저장</button>
@@ -147,14 +163,11 @@
 
 
 <script type="text/javascript">
-	$("document").ready(function() {
-
-		$('#sample4_postcode').attr('disabled', true);
-		$('#sample4_roadAddress').attr('disabled', true);
+	$("#sample4_postcode").on("click", function() {
+		sample4_execDaumPostcode();
 
 	});
-
-	$(".da").on("click", function() {
+	$("#sample4_roadAddress").on("click", function() {
 		sample4_execDaumPostcode();
 
 	});
@@ -226,14 +239,28 @@
 	//주소 api
 
 	///////////////////////////
+	$(document)
+			.on(
+					"keyup",
+					"#user_ph",
+					function() {
+						$(this)
+								.val(
+										$(this)
+												.val()
+												.replace(/[^0-9]/g, "")
+												.replace(
+														/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,
+														"$1-$2-$3").replace(
+														"--", "-"));
+					});
 
-	$(document).on('keyup', 'input[inputmode=ph]', function(event) {
-		this.value = this.value.replace(/[^0-9]/g, ''); // 입력값이 숫자가 아니면 공백
-		this.value = this.value.replace(/-/g, ''); // ,값 공백처리
-		this.value = this.value.replace(/\B(?=(\d{4})+(?!\d))/g, "-"); // 정규식을 이용해서 3자리 마다 , 추가 	
-	});
+	function removeComma(str) {
+		n = str.replace(/-/gi, "");
+		return n;
+	}
 
-	$("#sellForm").on("submit", function() {
+	$(".insert_btn").on("click", function() {
 		var user_name = $("[name='user_name']").val();
 		if (user_name == null || user_name == "") {
 			alert("이름을 입력해주세요.");
@@ -245,21 +272,6 @@
 			return false;
 		}
 
-		function removeComma(str) {
-			n = parseInt(str.replace(/-/g, ""));
-			return n;
-		}
-		var ph = $("[name='user_ph']").val();
-		var user_ph = removeComma(ph);
-		if (user_ph == null || user_ph == "") {
-			console.log(user_ph);
-			alert("전화번호를 입력해주세요.");
-			return false;
-		}
-		function removeComma(str) {
-			n = parseInt(str.replace(/,/g, ""));
-			return n;
-		}
 		var roadAddress = $("[name='roadAddress']").val();
 		if (roadAddress == null || roadAddress == "") {
 			alert("주소를 검색해주세요.");
@@ -272,13 +284,26 @@
 			return false;
 		}
 
-		var user_photo = $("input[name=user_photo]").val();
+		var profilphoto = $("input[name=profilphoto]").val();
 		//파일 선택 필수
-		if (user_photo == null || user_photo == "") {
+		if (profilphoto == null || profilphoto == "") {
 			alert("프로필이미지를 등록해주세요.");
 			return false;
 		}
 
+		var ph = $("[name='user_phone']").val();
+		var user_phone = removeComma(ph);
+		if (user_phone == null || user_phone == "") {
+			console.log(user_phone);
+			alert("전화번호를 입력해주세요.");
+			return false;
+		}
+		if (user_phone.length < 11) {
+			alert("전화번호를 확인해주세요.");
+			return false;
+		}
+
+		$("[name='user_phone']").val(user_phone);
 	});
 </script>
 

@@ -1,6 +1,10 @@
 package com.javaex.service;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -11,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -118,6 +124,7 @@ public class UserService {
 			return uservo;
 		} else {
 			userdao.kakaoInsert(uservo);
+			uservo.setUser_no(uservo.getUser_no());
 			return uservo;
 		}
 	}
@@ -224,9 +231,44 @@ public class UserService {
 					return uservo;
 				} else {
 					userdao.naverInsert(uservo);
+					uservo.setUser_no(uservo.getUser_no());
 					return uservo;
-				}
+				}		
+	}
+	
+	//회원가입-회원정보입력
+	public void joininfoWrite(UserVo uservo, MultipartFile profilphoto) {
+		
+		System.out.println("[service]회원가입 회원정보입력");
 		
 		
+		//db 저장할 정보 수집
+		String saveDir = "C:\\javaStudy\\upload";
+			
+		//오리지널 파일이름
+		String orgName = profilphoto.getOriginalFilename();
+
+		//확장자
+		String exName = orgName.substring(orgName.lastIndexOf("."));
+
+		//서버 저장 파일 이름
+		String saveName = System.currentTimeMillis() + UUID.randomUUID().toString() + exName;
+		System.out.println("saveName" + saveName);
+		
+		//서버 파일 패스 --> 저장경로
+		String filePath = saveDir + "\\" + saveName;
+		
+		//서버하드디스크 파일저장
+		try {
+			profilphoto.transferTo(new File(filePath));
+			uservo.setUser_photo(saveName);
+			
+			userdao.joininfoUPdate(uservo);
+			
+		} catch(IOException e) {
+			e.printStackTrace();
+			
+		}
+
 	}
 }

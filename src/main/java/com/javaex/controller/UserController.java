@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -126,7 +127,7 @@ public class UserController {
 			
 			model.addAttribute("uservo", uservo);
 			
-			return "redirect:/user/joininfo";
+			return "main/joininfo";
 		}
 
 	}
@@ -155,17 +156,23 @@ public class UserController {
 			
 			model.addAttribute("uservo", uservo);
 			
-			return "redirect:/user/joininfo";
+			return "main/joininfo";
 		}
 	}
 
 	// 회원가입 후 회원정보입력
-	@RequestMapping(value = "/joininfowrite", method = { RequestMethod.GET })
-	public String joininfoWrite(@ModelAttribute UserVo uservo) {
+	@RequestMapping(value = "/joininfowrite", method = { RequestMethod.GET, RequestMethod.POST})
+	public String joininfoWrite(@ModelAttribute UserVo uservo, 
+								@RequestParam("profilphoto") MultipartFile profilphoto) {
 		System.out.println("[cnt]회원가입 후 회원정보입력" + uservo);
 		
+		String address = uservo.getRoadAddress() + uservo.getAddressdetail();
+		uservo.setAddress(address);	
+		userservice.joininfoWrite(uservo, profilphoto);
 		
-		return "";
+		int user_no = uservo.getUser_no();
+		
+		return "sparring/writeForm?join=1&user_no=" +user_no;
 	}
 	
 	

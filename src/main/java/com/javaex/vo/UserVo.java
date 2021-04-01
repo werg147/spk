@@ -16,7 +16,8 @@ public class UserVo {
 	private double user_level;
 	private String user_date;
 	private String gender;
-	
+	private String addressdetail;
+	private String roadAddress;
 
 	public UserVo() {
 	}
@@ -69,9 +70,10 @@ public class UserVo {
 	
 
 
+
 	public UserVo(int user_no, int sell_no, int prod_type, int book_type, String user_id, String user_name,
 			String password, String nickname, String address, String user_photo, String user_phone, double user_level,
-			String user_date, String gender) {
+			String user_date, String gender, String addressdetail, String roadAddress) {
 		super();
 		this.user_no = user_no;
 		this.sell_no = sell_no;
@@ -87,6 +89,8 @@ public class UserVo {
 		this.user_level = user_level;
 		this.user_date = user_date;
 		this.gender = gender;
+		this.addressdetail = addressdetail;
+		this.roadAddress = roadAddress;
 	}
 
 	public int getUser_no() {
@@ -205,12 +209,30 @@ public class UserVo {
 		this.gender = gender;
 	}
 
+	
+	public String getAddressdetail() {
+		return addressdetail;
+	}
+
+	public void setAddressdetail(String addressdetail) {
+		this.addressdetail = addressdetail;
+	}
+
+	public String getRoadAddress() {
+		return roadAddress;
+	}
+
+	public void setRoadAddress(String roadAddress) {
+		this.roadAddress = roadAddress;
+	}
+
 	@Override
 	public String toString() {
 		return "UserVo [user_no=" + user_no + ", sell_no=" + sell_no + ", prod_type=" + prod_type + ", book_type="
 				+ book_type + ", user_id=" + user_id + ", user_name=" + user_name + ", password=" + password
 				+ ", nickname=" + nickname + ", address=" + address + ", user_photo=" + user_photo + ", user_phone="
-				+ user_phone + ", user_level=" + user_level + ", user_date=" + user_date + ", gender=" + gender + "]";
+				+ user_phone + ", user_level=" + user_level + ", user_date=" + user_date + ", gender=" + gender
+				+ ", addressdetail=" + addressdetail + ", roadAddress=" + roadAddress + "]";
 	}
 
 }

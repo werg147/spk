@@ -26,16 +26,20 @@ public class UserDao {
 	
 	//카카오 회원가입
 	public int kakaoInsert(UserVo uservo) {
-		System.out.println("[dao]카카오 회원가입" + uservo);
-		
+		System.out.println("[dao]카카오 회원가입" + uservo);		
 		return sqlSession.insert("user.kakaoInsert", uservo);
 	}
 	
 	//네이버 회원가입
 	public int naverInsert(UserVo uservo) {
-		System.out.println("[dao]네이버 회원가입" + uservo);
-		
+		System.out.println("[dao]네이버 회원가입" + uservo);		
 		return sqlSession.insert("user.naverInsert", uservo);
+	}
+	
+	//회원가입 회원정보 입력
+	public int joininfoUPdate(UserVo uservo) {
+		System.out.println("[dao]회원가입 회원정보입력" + uservo);		
+		return sqlSession.insert("user.joininfoUPdate", uservo);
 	}
 	
 	//대관판매자 계정등록

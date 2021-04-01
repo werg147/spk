@@ -29,7 +29,7 @@
 
 	</select>
 
-	
+
 	<select id="joinUserIdChechSelect" parameterType="String">
 		<![CDATA[
 			SELECT user_id
@@ -38,7 +38,13 @@
 		]]>
 	</select>
 
+	<!-- 카카오 회원가입 -->
 	<insert id="kakaoInsert" parameterType="com.javaex.vo.UserVo">
+		<selectKey keyProperty="user_no" resultType="int" order="BEFORE">
+			select seq_user_no.nextval
+			from
+			dual
+		</selectKey>
 			<![CDATA[
 		insert into users (user_no, 
 	                        user_id,
@@ -47,7 +53,7 @@
 	                        user_date,
 	                        social
 	                        )
-	                VALUES(seq_user_no.nextval, 
+	                VALUES(#{user_no}, 
 	                       #{user_id},
 	                       #{password},
 	                       #{nickname},
@@ -56,8 +62,13 @@
 	                      )
 			]]>
 	</insert>
-
+	<!-- 네이버 회원가입 -->
 	<insert id="naverInsert" parameterType="com.javaex.vo.UserVo">
+		<selectKey keyProperty="user_no" resultType="int" order="BEFORE">
+			select seq_user_no.nextval
+			from
+			dual
+		</selectKey>
 			<![CDATA[
 		insert into users (user_no, 
 	                        user_id,
@@ -68,7 +79,7 @@
 							gender,
 							social
 							)
-	                VALUES(seq_user_no.nextval, 
+	                VALUES(#{user_no},
 	                       #{user_id},
 	                       #{user_name},
 	                       #{password},
@@ -82,7 +93,20 @@
 
 
 
-
+	<!-- 회원정보입력 -->
+	<update id="joininfoUPdate">
+		<![CDATA[
+			UPDATE users 
+			SET user_name= #{user_name},
+			    nickname=#{nickname},
+			    address=#{address},
+			    user_photo=#{user_photo},
+			    user_phone=#{user_phone},
+			    user_name=#{user_name},
+			    gender=#{gender}
+			where user_no = #{user_no}    
+		]]>
+	</update>
 
 
 
@@ -95,7 +119,8 @@
 	<insert id="sellerBookInsert" parameterType="com.javaex.vo.SellerVo">
 		<selectKey keyProperty="sell_no" resultType="int" order="BEFORE">
 			select seq_sell_no.nextval
-			from dual
+			from
+			dual
 		</selectKey>
 		<![CDATA[
 			insert into seller (sell_no, 
@@ -126,7 +151,8 @@
 	<insert id="sellerProdInsert" parameterType="com.javaex.vo.SellerVo">
 		<selectKey keyProperty="sell_no" resultType="int" order="BEFORE">
 			select seq_sell_no.nextval
-			from dual
+			from
+			dual
 		</selectKey>
 		<![CDATA[
 			insert into seller (sell_no, 
