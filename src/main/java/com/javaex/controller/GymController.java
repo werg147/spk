@@ -1,6 +1,7 @@
 package com.javaex.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -42,8 +43,9 @@ public class GymController {
 		//사이드 메뉴에서 들어갈 때 sellNo만 받아서 최근 gymNo를 불러옴
 		GymVo vo = gymService.gymNo(sellNo);
 		
-		if(vo == null) {
-			return "";
+		//등록된 체육관이 없을 경우
+		if(vo == null) { 
+			return "mypage/mypage_resrvation/mypage_notgym";
 		}
 		
 		int gymNo = vo.getGym_no();
@@ -104,10 +106,14 @@ public class GymController {
 	
 	//체육관 삭제
 	@RequestMapping(value="/gymremove", method= {RequestMethod.GET , RequestMethod.POST})
-	public String gymRemove() {
-		System.out.println("[GymController] gymRemove()");
+	public String gymRemove(@RequestParam("no") int sellNo,
+							@RequestParam("gymno") int gymNo) {
+		System.out.println("[GymController] gymRemove() "+sellNo+" / "+gymNo);
 		
-		return "";
+		//삭제정책 : 체육관 삭제하면 대관 등록한 거 다 삭제할지 대관 등록된 거 있으면 삭제 못하게 할지
+		//테이블삭제 순서 con --> gym
+		
+		return "redirect:/mypage/book/gyminfo?no="+sellNo;
 	}
 	
 	//대관 등록 페이지
@@ -153,13 +159,35 @@ public class GymController {
 		return "redirect:/mypage/book/bookmanage?gymno="+gymno;
 	}
 	
+	//대관 관리 페이지 경유지
+	@RequestMapping(value="/bookinfo", method= {RequestMethod.GET , RequestMethod.POST})
+	public String bookinfo(@RequestParam("no") int sellNo, HttpSession session) {
+		System.out.println("[GymController] bookinfo()>>> "+sellNo);
+		
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+
+		GymVo vo = gymService.gymNo(sellNo);
+		
+		/*대관 등록된 체육관이 없을 경우
+		if(vo == null) { 
+			return "";
+		}
+		*/
+		int gymNo = vo.getGym_no();
+		
+		return "redirect:/mypage/book/bookmanage?no="+sellNo+"&gymno="+gymNo;
+	}
+	
 	//대관 관리 페이지
 	@RequestMapping(value="/bookmanage", method= {RequestMethod.GET , RequestMethod.POST})
-	public String bookManage(@RequestParam("gymno") int gymno, Model model) {
-		System.out.println("[GymController] bookManage()>>> "+gymno);
+	public String bookManage(@RequestParam("no") int sellNo,
+			                 @RequestParam("gymno") int gymno, Model model) {
+		System.out.println("[GymController] bookManage()>>> "+sellNo+" / "+gymno);
 		
-		GymVo gymVo = gymService.bookManage(gymno);
-		model.addAttribute("gymVo", gymVo);
+		// gymList + gymVo
+		Map<String, Object> bookMap = gymService.bookManage(sellNo, gymno);
+		
+		model.addAttribute("bookMap", bookMap);
 		
 		return "mypage/mypage_resrvation/mypage_bookinglist";
 	}

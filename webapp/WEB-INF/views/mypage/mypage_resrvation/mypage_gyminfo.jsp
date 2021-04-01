@@ -258,7 +258,9 @@
 
 							<div class="gym_regi_btn_site">
 								<button class="gym_regi_btn" type="submit">정보 수정</button>
-								<button class="gym_regi_btn" type="button">체육관 삭제</button>
+								<a href="${pageContext.request.contextPath}/mypage/book/gymremove?no=${vo.sell_no}&gymno=${vo.gym_no}">
+									<button class="gym_regi_btn" type="button">체육관 삭제</button>
+								</a>
 							</div>
 
 						</form>
@@ -315,7 +317,6 @@
 				$("#tab"+gymNo).css("background", "#e60012");
 			}
 		} 
-
 	}
 
 </script>

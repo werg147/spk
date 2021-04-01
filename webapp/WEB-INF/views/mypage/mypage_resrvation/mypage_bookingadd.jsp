@@ -18,6 +18,7 @@
 
 
 <!-- 자바스크립트 -->
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/assets/bootstrap/js/bootstrap.js"></script>
 
@@ -121,7 +122,7 @@
 					<h4 class="modal-title">대관 등록</h4>
 				</div>
 				
-				<form method="post" action="${pageContext.request.contextPath }/mypage/book/bookadd"> <!-- 대관등록 주소 추가 -->
+				<form method="post" action="${pageContext.request.contextPath }/mypage/book/bookadd">
 					<div class="modal-body">
 						<div class="form-group">
 							<label class="form-text">날짜</label> 
@@ -131,15 +132,11 @@
 						<div class="form-group">
 							<label class="form-text">시간</label>
 							&nbsp
-							<input id="addModalContent" type="text" name="booking_start" value="" placeholder="시작시간 ex)11:00">
+							<!-- <input id="addModalContent" type="text" name="booking_start" value="" placeholder="시작시간 ex)11:00"> -->
+							<select name="booking_start" id="booking_start" class="form-control bmg-hrs-mins-input"></select>
 							&nbsp~&nbsp
 							<!-- <input id="addModalContent" type="text" name="booking_end" value="" placeholder="종료시간 ex)13:00"> -->
-						<select id="startTime" name="booking_end">
-						    <c:forEach var="i"  begin="9" end="17">
-						        <option value="${i}">${i>9?i:'0'}${i>9?'':i}</option>
-						    </c:forEach>
-						</select>	
-						
+							<select name="booking_end" id="booking_end" class="form-control bmg-hrs-mins-input"></select>
 						</div>
 						<div class="form-group">
 							<label class="form-text">요금</label>
@@ -156,50 +153,42 @@
 		</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
 	
-	<!-- 대관 정보 확인 및 삭제 모달창 -->
-	<div class="modal fade" id="delModal">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">대관 정보</h4>
-			</div>
-			
-			<form method="post" action="${pageContext.request.contextPath }/mypage/book/bookremove"> <!-- 대관등록 주소 추가 -->
-				<div class="modal-body">
-					<div class="form-group">
-						<label class="form-text">날짜</label> 
-						&nbsp
-						<input id="addModalContent" type="text" name="booking_date" value="" >
-					</div>
-					<div class="form-group">
-						<label class="form-text">시간</label>
-						&nbsp
-						<input id="addModalContent" type="text" name="booking_start" value="">
-						&nbsp~&nbsp
-						<input id="addModalContent" type="text" name="booking_end" value="">
-						
-					</div>
-					<div class="form-group">
-						<label class="form-text">요금</label>
-						&nbsp
-						<input id="addModalContent" type="text" name="booking_price" value="" >
-					</div>
-				</div>
-				<input type="hidden" name="booking_date" value="${gymVo.gym_no}">
-				<input type="hidden" name="booking_no" value="${gymVo.gym_no}">
-				<input type="hidden" name="gym_no" value="${gymVo.gym_no}">
-				<div class="modal-footer">
-					<button type="submit" class="btn" id="btnUpload">삭제</button>
-				</div>
-			</form>
-			 </div><!-- /.modal-content -->
-		 </div><!-- /.modal-dialog -->
- 	 </div><!-- /.modal -->
-	
 </body>
 
 <script type="text/javascript">
+
+	//대관 시작 시간 bmg_monday_start_hour
+	let $selectStar = jQuery("#booking_start");
+
+	for (let hr = 0; hr < 24; hr++) {
+	
+	  let hrStr = hr.toString().padStart(2, "0") + ":";
+	
+	  let val = hrStr + "00";
+	  $selectStar.append('<option val="' + val + '">' + val + '</option>');
+	
+	  val = hrStr + "30";
+	  $selectStar.append('<option val="' + val + '">' + val + '</option>')
+
+	}
+	
+	//대관 종료 시간
+ 	let $selectEnd = jQuery("#booking_end");
+
+	for (let hr = 0; hr < 24; hr++) {
+	
+	  let hrStr = hr.toString().padStart(2, "0") + ":";
+	
+	  let val = hrStr + "00";
+	  $selectEnd.append('<option val="' + val + '">' + val + '</option>');
+	
+	  val = hrStr + "30";
+	  $selectEnd.append('<option val="' + val + '">' + val + '</option>')
+
+	} 
+	
+
+	////////////////대관 리스트 출력///////////////////////
 
 	//전역 변수(json을 받기 위한 데이터)
 	var events=[];

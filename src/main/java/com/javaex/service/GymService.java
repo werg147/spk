@@ -167,10 +167,14 @@ public class GymService {
 		gymDao.bookInsert(bookVo);
 	}
 
-	// 대관 관리 페이지 (체육관 정보 + 대관 등록 정보 리스트)
-	public GymVo bookManage(int gymno) {
+	// 대관 관리 페이지 (체육관 리스트 + 체육관 정보 + 대관 등록 정보 리스트)
+	public Map<String, Object> bookManage(int sellNo, int gymno) {
 		System.out.println("[GymService] bookAddForm()");
 
+		// 소유 체육관
+		List<GymVo> gymList = gymDao.gymSelectList(sellNo);
+		
+		//체육관 정보 + 대관 목록
 		GymVo gymVo = gymDao.gymSelectOne(gymno);
 		List<BookingVo> bookList = gymDao.bookSelectList(gymno);
 
@@ -180,8 +184,12 @@ public class GymService {
 		if (bookList != null) {
 			gymVo.setBookingList(bookList);
 		}
+		
+		Map<String, Object> bookMap = new HashMap<String, Object>();
+		bookMap.put("gymList", gymList);
+		bookMap.put("gymVo", gymVo);
 
-		return gymVo;
+		return bookMap;
 	}
 
 	// 대관 리스트 출력

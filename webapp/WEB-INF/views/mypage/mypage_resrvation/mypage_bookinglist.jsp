@@ -7,6 +7,12 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/header.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/booking.css">
+
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/flatpickr/flatpickr.min.css">
+
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/flatpickr/flatpickr.js"></script>
+
 </head>
 <body>
 	<div class="wrap">
@@ -34,6 +40,18 @@
 					<!--//content_delevery_product_header//-->
 					<div class="content_product_line"></div>
 
+					<!-- 탭부분(다수 체육관 소유 시) pill형식으로 표시 -->
+					<div class="own_gym_tab">
+						<ul>
+						
+						<c:forEach var="vo" items="${bookMap.gymList }">
+							<a href="${pageContext.request.contextPath}/mypage/book/bookmanage?no=${vo.sell_no}&gymno=${vo.gym_no}">
+							<input type="hidden" name="gym_no" value="${vo.gym_no}">
+							<li id="tab${vo.gym_no}">${vo.gym_name }</li></a>
+						</c:forEach>
+						</ul>										
+					</div>
+					
 					<!--체육관 정보(불러옴)-->
 					<div class="booking_list_elnt">
 						<div class="gym_info">
@@ -48,16 +66,16 @@
 							</div>
 
 							<div class="gym_info_detail">
-								<div>${gymVo.gym_name }</div>
+								<div>${bookMap.gymVo.gym_name }</div>
 								<br>
-								<div>${gymVo.gym_address }</div>
+								<div>${bookMap.gymVo.gym_address }</div>
 							</div>
 
 							<div class="gym_info_btn_site">
-								<a href="${pageContext.request.contextPath }/mypage/book/gym?no=${gymVo.sell_no }&gymno=${gymVo.gym_no}">
+								<a href="${pageContext.request.contextPath }/mypage/book/gym?no=${bookMap.gymVo.sell_no }&gymno=${bookMap.gymVo.gym_no}">
 								<button class="gym_info_btn" type="button">체육관 정보</button>
 								</a>
-								<a href="${pageContext.request.contextPath }/mypage/book/bookaddform?gymno=${gymVo.gym_no }">
+								<a href="${pageContext.request.contextPath }/mypage/book/bookaddform?gymno=${bookMap.gymVo.gym_no }">
 									<button class="gym_info_btn" type="button">대관 등록</button>
 								</a>
 							</div>
@@ -67,9 +85,14 @@
 					<!--//booking_list_elnt (반복영역)-->
 
 					<!--기간 필터-->
-					<div class="time_filter">
-						<input type="text" placeholder="기간필터"> ~ <input type="text" placeholder="기간필터">
-						<!-- <img name="calender" src="달력아이콘"> -->
+					<div class="time_filter input-group date" data-provide="datepicker">
+						<!-- <input type="text" placeholder="기간필터"> -->
+						<!-- 시작시 기본 날짜 설정은 value를 이용 -->
+						<input type="text" name="peri_start" class="selector flatpickr flatpickr-input" placeholder="기간설정">
+						&nbsp~&nbsp
+						<!-- <input type="text" id="datePicker" class="form-control" value="2021-04-01"> -->
+						<input type="text" name="peri_end" class="selector flatpickr flatpickr-input" placeholder="기간설정">
+						<button id="test" name="" type="button">조회하기</button>
 					</div>
 
 
@@ -88,7 +111,7 @@
 							</thead>
 							<tbody>
 								<!--반복영역-->
-								<c:forEach var="vo" items="${gymVo.bookingList }">
+								<c:forEach var="vo" items="${bookMap.gymVo.bookingList }">
 									<tr>
 										<td>${vo.booking_date }</td>
 										<td>${vo.booking_start }~${vo.booking_end }</td>
@@ -98,7 +121,7 @@
 										
 										<td>
 											<c:if test="${vo.booking_state eq '대기'}">
-												<a href="${pageContext.request.contextPath }/mypage/book/bookremove?bookno=${vo.booking_no }&gymno=${gymVo.gym_no}">
+												<a href="${pageContext.request.contextPath }/mypage/book/bookremove?bookno=${vo.booking_no }&gymno=${bookMap.gymVo.gym_no}">
 													<button class="booking_manage_btn" type="button">삭제</button>
 												</a>
 											</c:if>
@@ -120,4 +143,66 @@
 		</div>
 		<!--//wrap-->
 </body>
+
+<script type="text/javascript">
+
+	//url에서 파라미터값 가져오는 함수 --> getParameterByName('함수명');
+	function getParameterByName(name) {
+	    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+	    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+	        results = regex.exec(location.search);
+	    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	}
+	
+	//체육관 버튼 색변경 이벤트 유지
+	window.onload=function(){
+		
+		var paramNo = getParameterByName('gymno');
+		var gymNo = $("[name='gym_no']").val();
+		var gymArr = [];
+		
+		//각 체육관에서 체육관번호 뽑아서 배열에 넣기 (jstl과 js 혼용) 
+		<c:forEach var="vo" items="${bookMap.gymList}">
+			gymArr.push("${vo.gym_no}");
+		</c:forEach>
+		
+		console.log("체육관번호 배열 "+gymArr);
+		
+		//색 유지
+ 		for(var i=0; i<gymArr.length; i++){
+		
+			gymNo = gymArr[i];
+			console.log("체육관번호 "+gymNo);
+			
+			if(gymNo == paramNo){
+				console.log("색변경");
+				$("#tab"+gymNo).css("color", "#ffffff");
+				$("#tab"+gymNo).css("background", "#e60012");
+			}
+		} 
+	}
+	
+	
+	////////////////////////////////////////////////////
+	
+	//기간필터 날짜 선택(플랫피커)
+	$(".selector").flatpickr({
+		dateFormat: "Y-m-d",
+		minDate:"today"
+	});
+	
+ 	$("#test").on("click", function(){
+		var st = $("[name='peri_start']").val();
+		var en = $("[name='peri_end']").val();
+		
+		console.log(st);
+		console.log(en);
+		
+		alert(st+"~"+en);
+ 	});
+
+		 
+
+</script>
+
 </html>

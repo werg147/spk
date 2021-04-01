@@ -34,7 +34,8 @@
 								<tr>
 									<td class="basic">체육관 이름</td>
 									<td colspan="4"><input class="input_text" type="text" name="gym_name"> 
-									<!-- 테스트용 사업자번호 --><input type="hidden" name="sell_no" value="${authUser.sell_no }"></td>
+									<!-- 사업자번호 숨김 -->
+									<input type="hidden" name="sell_no" value="${authUser.sell_no }"></td>
 								</tr>
 
 								<tr>

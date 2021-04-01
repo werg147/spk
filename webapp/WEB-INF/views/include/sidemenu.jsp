@@ -11,7 +11,7 @@
 						관리</span><span class="arrow">></span></a></li>
 			<li><a href="${pageContext.request.contextPath}/mypage/book/gyminfo?no=${authUser.sell_no}"><span
 					class="menu">체육관관리</span><span class="arrow">></span></a></li>
-			<li><a href="${pageContext.request.contextPath}/mypage/book/bookmanage?"><span class="menu">대관관리</span><span
+			<li><a href="${pageContext.request.contextPath}/mypage/book/bookinfo?no=${authUser.sell_no}"><span class="menu">대관관리</span><span
 					class="arrow">></span></a></li>
 			<li class="side_menu_last"><a href="${pageContext.request.contextPath}/mypage/book/profit"><span
 					class="menu">수익관리</span><span class="arrow">></span></a></li>
