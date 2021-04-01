@@ -94,6 +94,7 @@
 										<!-- 대관없이 매칭글시에만 보임-->
 										<!-- 종목선택 -->
 										
+										<c:if test="${join == 0 }">
 										<c:if test="${bookingno == 0}">
 										<c:if test="${selectbooking_no == 0}">
 										<tr class="basic">
@@ -141,6 +142,7 @@
 												</div>
 											</td>
 										</tr>
+										</c:if>
 										</c:if>
 										</c:if>
 										<!-- 원하는 시간 입력 end -->
@@ -261,16 +263,7 @@
 										<!-- //공식기록 - 종목 -->
 
 										<tr class="cham_year20" class="basic">
-											<td><label for="prod_cate"></label></td>
-											<td><label for="prod_cate">출전연도</label></td>
-											<td>
-												<div class="content_product_insert_select_box">
-													<select class="cham_year0" id="even_year" name="recordList[0].recordDate">
-														<option selected>출전연도</option>
-														
-													</select>
-												</div>
-											</td>
+
 										</tr>
 										<!-- //공식기록 - 출전연도 -->
 
@@ -300,7 +293,9 @@
 									</div>
 									<!-- //공식기록 추가 -->
 									<!-- //공식기록 추가 -->
-									<label class="coment_title" for="word">상대에게 한마디</label><input class="coment_one" type="text" name="word">
+									<c:if test="${join == 0 }">
+										<label class="coment_title" for="word">상대에게 한마디</label><input class="coment_one" type="text" name="word">
+									</c:if>
 										
 	
 									<div class="product_insert_btn">
@@ -308,18 +303,30 @@
 											<c:when test="${param.bookingno == 0 }">
 												<button id="info_subm" class="insert_btn" type="submit">결제후 등록</button>
 											</c:when>
+											<c:when test="${join == 1 }">
+												<button id="info_subm" class="insert_btn" type="submit">매치회원등록</button>
+											</c:when>
 											<c:otherwise>
 												<button id="info_subm" class="insert_btn" type="submit">매칭글 등록</button>
 											</c:otherwise>
 										</c:choose>
-										<a href=""><button class="product_delclose_btn">취소</button></a>
+										
+										<c:choose>
+											<c:when test = "${join == 1}">
+												<a href="${pageContext.request.contextPath}/"><button class="product_delclose_btn" type="button" >스토어만 이용하기</button></a>
+											</c:when>
+											<c:otherwise>
+												<a href="${pageContext.request.contextPath}/sparring/match"><button class="product_delclose_btn" type="button" >취소</button></a>
+											
+											</c:otherwise>
+										</c:choose>
 									</div>
 									<!-- //product_insert_btn -->
 									<!-- session값 생겨도 히든으로 표시할 것 아이작스에서 쓰고있음 -->
 									<input id="session_user_no" type="text" name="userNo" value="${authUser.user_no}">
 									<input type="text" name="subnum" value="${param.subnum}">
 									<input type="text" name="selectbooking_no" value="${param.selectbooking_no}">
-									<input type="text" name="join" value="${param.join}">
+									<input type="text" name="join" value="${join}">
 									<c:if test="${param.booking_no != 0}">
 										<input type="text" name="bookingno" value="${param.booking_no}">
 										<input type="text" name="bbuyno" value="${param.bbuyno}">
@@ -367,15 +374,14 @@
 		 var local=$("."+cham_01+" option:selected").val();
 		 var cat=$("."+cham_01+" option:selected").data("catena");
 		 $("#cate_na"+cat+"").html( " " );
-		
+		 $(".cham_year2"+cat+"").html(" ");
 		
 	
-		if(local == '지역대회'){
-			
+		if(local == '지역대회'){		
 			 catena(cat);
-			
-			
-			
+		}
+		if(local == '세계선수권대회'){
+			cateyear(cat);
 		}
 		
 	});
@@ -1092,6 +1098,29 @@ function comments2(num) {
 		$("#cate_na"+num+"").append(str);
 		
 		
+	}
+	function cateyear(num){
+		
+		$(".cham_year2"+num+"").html(" ");
+		
+		str = "";
+		
+		str += '<td><label for="prod_cate"></label></td>';
+		str += '<td><label for="prod_cate" >출전연도</label></td>';
+		str += '<td>';
+		str += '	<div class="content_product_insert_select_box">';
+		str += '		<select class="cham_year'+num+'" id="even_year" name="recordList['+num+'].recordDate">';
+		str += '			<option selected>출전연도</option>';	
+		str += '			<option value="4년 주기 대회">4년 주기 대회</option>';
+		str += '			<option value="3년 주기 대회">3년 주기 대회</option>';
+		str += '			<option value="2년 주기 대회">2년 주기 대회</option>';
+		str += '			<option value="1년 주기 대회">1년 주기 대회</option>';
+		
+		str += '		</select>';
+		str += '	</div>';
+		str += '</td>';
+		
+		$(".cham_year2"+num+"").append(str);
 	}
 	
 	</script>

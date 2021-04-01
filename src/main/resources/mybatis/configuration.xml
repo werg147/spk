@@ -11,6 +11,7 @@
 		<typeAlias alias="ProfileVo" type="com.javaex.vo.ProfileVo" /> <!-- 영훈 SparringVo -->
 		<typeAlias alias="EventVo" type="com.javaex.vo.EventVo" /> <!-- 영훈 SparringVo -->
 		<typeAlias alias="RecordVo" type="com.javaex.vo.RecordVo" /> <!-- 영훈 SparringVo -->
+		<typeAlias alias="MatchScoreVo" type="com.javaex.vo.MatchScoreVo" /> <!-- 영훈 SparringVo -->
 		<typeAlias alias="AlarmVo" type="com.javaex.vo.AlarmVo" />
 		<typeAlias alias="GymVo" type="com.javaex.vo.GymVo" /> <!-- 다현 GymVo -->
 		<typeAlias alias="ConVo" type="com.javaex.vo.ConVo" /> <!-- 다현 ConVo -->

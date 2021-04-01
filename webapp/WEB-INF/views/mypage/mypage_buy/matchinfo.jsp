@@ -191,16 +191,7 @@
 										<!-- //공식기록 - 종목 -->
 
 										<tr class="cham_year20" class="basic">
-											<td><label for="prod_cate"></label></td>
-											<td><label for="prod_cate" >출전연도</label></td>
-											<td>
-												<div class="content_product_insert_select_box">
-													<select class="cham_year0" id="even_year" name="recordList[0].recordDate">
-														<option selected>출전연도</option>
-														
-													</select>
-												</div>
-											</td>
+											
 										</tr>
 										<!-- //공식기록 - 출전연도 -->
 
@@ -289,21 +280,22 @@ $("#record_app").on("change","#cham_cate",function (){
 	 var local=$("."+cham_01+" option:selected").val();
 	 var cat=$("."+cham_01+" option:selected").data("catena");
 	 $("#cate_na"+cat+"").html( " " );
-	
+	 $(".cham_year2"+cat+"").html(" ");
+	 console.log(local);
 	
 
 	if(local == '지역대회'){
 		
 		 catena(cat);
 		
-		
-		
 	}
 	
+	if(local == '세계선수권대회'){
+		cateyear(cat);
+	}
 });
 
-
-
+	
 
 	$("#record_app").on("click",".eveneven",function(){
 		$(".eveneven").change("click",function(){
@@ -737,7 +729,7 @@ function comments(num) {
 	str += '<td><label for="prod_cate">대회분류</label></td>';
 	str += '	<td>';
 	str += '		<div class="content_product_insert_select_box">';
-	str += '			<select class="cham'+num+'" id="cham_cate" name="recordList['+num+'].recordType">';
+	str += '			<select data-yearno="'+num+'" class="cham'+num+'" id="cham_cate" name="recordList['+num+'].recordType">';
 	str += '				<option selected>대회분류</option>';
 
 	str += '			</select>';
@@ -747,16 +739,7 @@ function comments(num) {
 	str += '<tr id="cate_na'+num+'" class="ba01">';
 
 	str += '</tr>';
-	str += '	<tr class="cham_year2'+num+'" class="basic">';
-	str += '	<td><label for="prod_cate"></label></td>';
-	str += '	<td><label for="prod_cate">출전연도</label></td>';
-	str += '	<td>';
-	str += '	<div class="content_product_insert_select_box">';
-	str += '			<select class="cham_year'+num+'" id="even_year" name="recordList['+num+'].recordDate">';
-	str += '				<option  selected>출전연도</option>';
-	str += '			</select>';
-	str += '		</div>';
-	str += '	</td>';
+	str += '<tr class="cham_year2'+num+'" class="basic">';
 	str += '</tr>';
 	str += '<tr class="basic">';
 	str += '	<td><label for="prod_cate"></label></td>';
@@ -810,16 +793,7 @@ function comments2(num) {
 	str += '<tr id="cate_na'+num+'" class="ba01">';
 
 	str += '</tr>';
-	str += '	<tr class="cham_year2'+num+'" class="basic">';
-	str += '	<td><label for="prod_cate"></label></td>';
-	str += '	<td><label for="prod_cate">출전연도</label></td>';
-	str += '	<td>';
-	str += '	<div class="content_product_insert_select_box">';
-	str += '			<select class="cham_year'+num+'" id="even_year" name="recordList['+num+'].recordDate">';
-	str += '				<option  selected>출전연도</option>';
-	str += '			</select>';
-	str += '		</div>';
-	str += '	</td>';
+	str += '<tr class="cham_year2'+num+'" class="basic">';
 	str += '</tr>';
 	str += '<tr class="basic">';
 	str += '	<td><label for="prod_cate"></label></td>';
@@ -880,16 +854,7 @@ function cham1(num){
 	$(".cham"+num+"").append(str);
 	
 	$(".cham_year2"+num+"").show();
-	$(".cham_year"+num+"").html(" ");
-	
-	str2 ="";
-	str2 +='<option selected>출전연도</option>';
-	str2 +='<option value="4년 주기 대회">4년 주기 대회</option>';
-	str2 +='<option value="3년 주기 대회">3년 주기 대회</option>';
-	str2 +='<option value="2년 주기 대회">2년 주기 대회</option>';
-	str2 +='<option value="1년 주기 대회">1년 주기 대회</option>';
-	
-	$(".cham_year"+num+"").append(str2);
+
 	
 	$(".cham_rank"+num+"").html(" ");
 	str3 ="";
@@ -988,16 +953,7 @@ function recordcham1(num,recordVo,i){
 	$(".cham"+num+"").append(str);
 	
 	$(".cham_year2"+num+"").show();
-	$(".cham_year"+num+"").html(" ");
-	
-	str2 ="";
-	str2 +='<option selected>출전연도</option>';
-	str2 +='<option value="4년 주기 대회">4년 주기 대회</option>';
-	str2 +='<option value="3년 주기 대회">3년 주기 대회</option>';
-	str2 +='<option value="2년 주기 대회">2년 주기 대회</option>';
-	str2 +='<option value="1년 주기 대회">1년 주기 대회</option>';
-	
-	$(".cham_year"+num+"").append(str2);
+
 	
 	$(".cham_rank"+num+"").html(" ");
 	str3 ="";
@@ -1086,13 +1042,7 @@ function recordcham3(num,recordVo,i){
 	
 	
 	$(".cham_rank"+num+"").html(" ");
-	strA3 ="";
-	strA3 +='<option selected>순위</option>';
-	strA3 +='<option value="우승">우승</option>';
-	strA3 +='<option value="준우승">준우승</option>';
-	strA3 +='<option value="4강">4강</option>';
-	strA3 +='<option value="8강">8강</option>';
-	strA3 +='<option value="16강">16강</option>';
+	
 	$(".cham_rank"+num+"").append(strA3);
 	
 	$("#cham_name"+i).val(recordVo.recordName);
@@ -1111,13 +1061,37 @@ function catena(num){
 	str += '<td><label for="cham_name">대회명</label></td>';
 	str += '	<td>';
 	str += '	<div class="content_product_insert_select_box">';
-	str += '		<input  type="text" id="cham_name'+num+'" placeholder="대회명을 입력해주세요." name="recordList['+num+'].recordName" >';
+	str += '		<input class="cate_cham_name" type="text" id="cham_name'+num+'" placeholder="대회명을 입력해주세요." name="recordList['+num+'].recordName" >';
 	str += '	</div>';
 	str += '</td>';
 	
 	$("#cate_na"+num+"").append(str);
 	
 	
+}
+
+function cateyear(num){
+	
+	$(".cham_year2"+num+"").html(" ");
+	
+	str = "";
+	
+	str += '<td><label for="prod_cate"></label></td>';
+	str += '<td><label for="prod_cate" >출전연도</label></td>';
+	str += '<td>';
+	str += '	<div class="content_product_insert_select_box">';
+	str += '		<select class="cham_year'+num+'" id="even_year" name="recordList['+num+'].recordDate">';
+	str += '			<option selected>출전연도</option>';	
+	str += '			<option value="4년 주기 대회">4년 주기 대회</option>';
+	str += '			<option value="3년 주기 대회">3년 주기 대회</option>';
+	str += '			<option value="2년 주기 대회">2년 주기 대회</option>';
+	str += '			<option value="1년 주기 대회">1년 주기 대회</option>';
+	
+	str += '		</select>';
+	str += '	</div>';
+	str += '</td>';
+	
+	$(".cham_year2"+num+"").append(str);
 }
 
 </script>

@@ -1046,7 +1046,7 @@ input:-ms-input-placeholder {
 
 .post_host_item2 {
   width: 445px;
-  height: 520px;
+
   padding-bottom: 30px;
   margin-top: -15px;
   border: 1px solid rgb(216, 216, 216);
@@ -1117,6 +1117,10 @@ input:-ms-input-placeholder {
 }
 
 /* host_item3 */
+
+.psh{
+	height:430px;
+}
 .post_host_item_victim {
   width: 450px;
   text-align: center;

@@ -604,4 +604,55 @@
 	]]>
 	
 	</select>
+	<select id="selectOnePartnerBBuy" parameterType="BBuyVo" resultType="BBuyVo">
+	<![CDATA[
+		 select b.b_buy_no,
+		 		k.booking_date,
+	        	k.booking_start,
+	        	k.booking_end,
+	        	g.gym_name,
+	        	g.gym_address,
+	        	u.nickname,
+	        	u.user_photo,
+	        	u.user_no
+		 from bbuy b , booking k , gym g , users u
+		 where not b.user_no = #{user_no}
+		 and not b.b_buy_player_state = '대기자'
+		 and not b.b_buy_player_state = '탈락자'
+		 and b.booking_no = #{booking_no}
+		 and b.booking_no = k.booking_no
+		 and k.gym_no = g.gym_no
+		 and u.user_no = b.user_no
+	
+	]]>
+	
+	</select>
+	
+	<insert id="insertMatchScore" parameterType="MatchScoreVo" >
+	<![CDATA[
+		insert into matchscore
+		 values(SEQ_MATCHSCORE_NO.nextval,
+		 #{user_no},
+		 #{score},
+		 #{win},
+		 #{lose},
+		 #{b_buy_no},
+		 #{matchAttri}
+		 )	
+	]]>
+	
+	</insert>
+	
+	<select id="selectListMatchScore" parameterType="int" resultType="MatchScoreVo">
+	<![CDATA[
+		select score,
+		        win,
+		        matchAttri
+		 from matchscore
+		 where user_no = #{userNo}
+	
+	]]>
+	
+	
+	</select>
 </mapper>

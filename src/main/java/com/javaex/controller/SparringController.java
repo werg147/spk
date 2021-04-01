@@ -21,6 +21,7 @@ import com.javaex.vo.BBuyVo;
 import com.javaex.vo.BookingVo;
 import com.javaex.vo.GymImgVo;
 import com.javaex.vo.GymVo;
+import com.javaex.vo.MatchScoreVo;
 import com.javaex.vo.ProfileVo;
 import com.javaex.vo.RecordVo;
 
@@ -114,6 +115,7 @@ public class SparringController {
 			model.addAttribute("profileList", profileList);
 			model.addAttribute("bookingno", bookingno);
 			model.addAttribute("selectbooking_no",selectbooking_no);
+			model.addAttribute("join",join);
 			return "matching/matchinfoForm";
 		}
 	}
@@ -152,11 +154,11 @@ public class SparringController {
 
 		String[] eventName = request.getParameterValues("eventName");
 		
-		
+		System.out.println("join =" + join);
 		//셀렉트키로 바로 profileNo 사용가능
 		sparringService.profileWrite(profileVo, eventName, recordVo,userNo);
 		
-		if(bookingNo == 0 &&selectbooking_no == 0 &&subnum ==0) {
+		if(join ==0 &&bookingNo == 0 &&selectbooking_no == 0 &&subnum ==0) {
 			System.out.println("대관 x 시합등록자");//0
 			BBuyVo bBuyVo = sparringService.insertBBuy(bookingNo,subnum,userNo,profileVo);
 			
@@ -165,7 +167,7 @@ public class SparringController {
 			return "redirect:/sparring/matchdetail?bbuyno="+bbNo+"&userno="+userNo+"&sessionuser="+userNo;
 		
 		
-		}else if(bookingNo != 0 &&selectbooking_no == 0 && subnum == 1) { 
+		}else if(join ==0 && bookingNo != 0 &&selectbooking_no == 0 && subnum == 1) { 
 			System.out.println("대관 o 시합등록자 글의 신청자");
 			
 			//bbuyuser로 신청자에게 알람
@@ -180,13 +182,13 @@ public class SparringController {
 			
 			
 			
-		}else if (bookingNo == 0 &&selectbooking_no != 0 && subnum ==0){
+		}else if ( join ==0 && bookingNo == 0 &&selectbooking_no != 0 && subnum ==0){
 			System.out.println("대관 o 시합등록자");//0
 			return "redirect:/sparring/payment?bookingno="+selectbooking_no+"&userno="+userNo+"&profileno="+profileVo.getProfileNo()+"&subnum="+subnum;
 		
 			
 			
-		}else if(bookingNo == 0&&selectbooking_no !=0 && subnum==1) {
+		}else if(join ==0 && bookingNo == 0&&selectbooking_no !=0 && subnum==1) {
 			System.out.println("대관 x 시합등록자 글의  신청자");
 			
 			return "redirect:/sparring/payment?bookingno="+selectbooking_no+"&userno="+userNo+"&profileno="+profileVo.getProfileNo()+"&subnum="+subnum+"&bbuyno="+bbuyno;
@@ -396,4 +398,27 @@ public class SparringController {
 		}
 		
 	}
+	
+	/*********스파링 평가 페이지 *********/
+	@RequestMapping(value = "/evaluate", method = { RequestMethod.GET, RequestMethod.POST })
+	public String sparringEva(@ModelAttribute BBuyVo bbuyVo,Model model) {
+		System.out.println("[Controller] : sparringEva");
+		//bbuyno는 스코어매치를 만들때에 필요
+		//booking_no와  user_no는 상대찾기
+		
+		BBuyVo bVo = sparringService.sparringEva(bbuyVo);
+		
+		model.addAttribute("bbuyVo",bVo);
+		return"/matching/sparringEva";
+	}
+	@RequestMapping(value = "/evawrite", method = { RequestMethod.GET, RequestMethod.POST })
+	public String evaWrite(@ModelAttribute MatchScoreVo matchScoreVo) {
+		System.out.println("[Controller] : evaWrite");
+		System.out.println(matchScoreVo);
+		
+		sparringService.evaWrite(matchScoreVo);
+		
+		return "";
+	}
+	
 }

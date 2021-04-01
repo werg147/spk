@@ -67,6 +67,7 @@ public class BBuyVo {
 	//matchScore
 	
 	private int scoreCount; //스파클링 이용횟수(결과작성)
+	
 	private int rate;//승률
 	private int sumScore;
 	private int sumWin;
@@ -479,16 +480,16 @@ public class BBuyVo {
 
 	@Override
 	public String toString() {
-		return "BBuyVo [b_buy_no=" + b_buy_no + ", user_no=" + user_no + ", booking_no=" + booking_no + ", profile_no="
-				+ profile_no + ", b_buy_paytype=" + b_buy_paytype + ", b_buy_price=" + b_buy_price + ", b_buy_state="
-				+ b_buy_state + ", b_buy_player_state=" + b_buy_player_state + ", b_buy_date=" + b_buy_date
-				+ ", b_buy_address=" + b_buy_address + ", b_buy_event=" + b_buy_event + ", b_buy_time=" + b_buy_time
-				+ ", b_buy_day=" + b_buy_day + ", nickname=" + nickname + ", career=" + career + ", gym_name="
-				+ gym_name + ", gym_address=" + gym_address + ", gym_event=" + gym_event + ", gym_img_savename="
-				+ gym_img_savename + ", addressHalf=" + addressHalf + ", booking_date=" + booking_date
-				+ ", booking_start=" + booking_start + ", booking_end=" + booking_end + ", eventList=" + eventList
-				+ ", checkAll=" + checkAll + ", chkItem=" + chkItem + ", price=" + price + ", subNum=" + subNum
-				+ ", scoreCount=" + scoreCount + ", rate=" + rate + "]";
+		return "BBuyVo [b_buy_no=" + b_buy_no + ", user_no=" + user_no + ", booking_no=" + booking_no + ", profile_no=" + profile_no + ", b_buy_paytype="
+				+ b_buy_paytype + ", b_buy_price=" + b_buy_price + ", b_buy_state=" + b_buy_state + ", b_buy_player_state=" + b_buy_player_state
+				+ ", b_buy_date=" + b_buy_date + ", b_buy_address=" + b_buy_address + ", b_buy_event=" + b_buy_event + ", b_buy_time=" + b_buy_time
+				+ ", b_buy_day=" + b_buy_day + ", nickname=" + nickname + ", career=" + career + ", user_photo=" + user_photo + ", word=" + word + ", height="
+				+ height + ", weight=" + weight + ", major=" + major + ", gym_name=" + gym_name + ", gym_address=" + gym_address + ", gym_event=" + gym_event
+				+ ", gym_img_savename=" + gym_img_savename + ", addressHalf=" + addressHalf + ", booking_date=" + booking_date + ", booking_start="
+				+ booking_start + ", booking_end=" + booking_end + ", booking_state=" + booking_state + ", eventList=" + eventList + ", recordList="
+				+ recordList + ", userList=" + userList + ", checkAll=" + checkAll + ", chkItem=" + chkItem + ", price=" + price + ", subNum=" + subNum
+				+ ", scoreCount=" + scoreCount + ", rate=" + rate + ", sumScore=" + sumScore + ", sumWin=" + sumWin + ", weightC=" + weightC + ", rowLevel="
+				+ rowLevel + ", highLevel=" + highLevel + ", u_no=" + u_no + "]";
 	}
 
 

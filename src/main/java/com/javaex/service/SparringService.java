@@ -22,6 +22,7 @@ import com.javaex.vo.DayVo;
 import com.javaex.vo.EventVo;
 import com.javaex.vo.GymImgVo;
 import com.javaex.vo.GymVo;
+import com.javaex.vo.MatchScoreVo;
 import com.javaex.vo.ProfileVo;
 import com.javaex.vo.RecordVo;
 import com.javaex.vo.UserVo;
@@ -82,9 +83,9 @@ public class SparringService {
 		}
 
 		/*********** 공식기록 record 인서트 *********/
-		System.out.println("확인" + recordVo.getRecordList().get(0).getRecordName());
+		System.out.println("확인" + recordVo.getRecordList().get(0));
 
-		if (recordVo.getRecordList().get(0).getRecordType() != "") {
+		if (recordVo.getRecordList().get(0) != null) {
 			for (int i = 0; i < recordVo.getRecordList().size(); i++) {
 				System.out.println("??");
 				RecordVo rVo = recordVo.getRecordList().get(i);
@@ -94,23 +95,31 @@ public class SparringService {
 				
 				
 				if(rVo.getRecordName() == null) {
+					System.out.println("네임");
 					rVo.setRecordName(" ");
 				}
 				
 				if(rVo.getRecordType().equals("대회분류")) {
+					System.out.println("대회분류");
 					rVo.setRecordType("");
 				}
 				
+				if(rVo.getRecordDate() == null) {
+					System.out.println("출전연도 null");
+					rVo.setRecordDate("");
+				}
 				if(rVo.getRecordDate().equals("출전연도")) {
+					System.out.println("출전연도");
 					rVo.setRecordDate("");
 				}
 				
 				if(rVo.getRecordMatch().equals("순위")) {
+					System.out.println("순위");
 					rVo.setRecordMatch("");
 				}
 				
 				if(!rVo.getRecordEvent().equals("종목")) {
-					
+					System.out.println("종목");
 				System.out.println(rVo.getRecordName());
 				sparringDao.insertRecord(rVo);
 				}
@@ -119,7 +128,7 @@ public class SparringService {
 		}
 		
 		/**알고리즘 넣기***/
-		double userLevel = algo(profileVo, recordVo);
+		double userLevel = algo(profileVo, recordVo,userNo);
 		
 		UserVo userVo = new UserVo();
 		
@@ -312,13 +321,33 @@ public class SparringService {
 			System.out.println(i + "=" + year + "." + month + "." + day + "." + today);
 
 			/*********** 변경할수있음 **************/
-			// 이렇게하는 이유는 검색을 03월 이렇게 되는데 month는 그냥 3 이기때문
+			
+			// day가 1일일경우 숫자상 1로 찍히기 때문에 10보다 작은수는 0을 붙여 01 02 식으로바꿔준다
+			String dayString = "";
+			
 			String date = "";
+			
+			// 이렇게하는 이유는 검색을 03월 이렇게 되는데 month는 그냥 3 이기때문
 			if (month < 10) {
-				date = year + ".0" + month + "." + day;
+				if(day <10) {
+					dayString = "0"+day;
+					
+					date = year + ".0" + month + "." + dayString;
+				}else {
+					
+					date = year + ".0" + month + "." + day;
+				}
 			} else {
-				date = year + "." + month + "." + day;
+				if(day <10) {
+					dayString = "0"+day;
+					
+					date = year + ".0" + month + "." + dayString;
+				}else {
+					
+					date = year + "." + month + "." + day;
+				}
 			}
+			
 			DayVo dayVo = new DayVo(year, month, day, today, date);
 			
 			
@@ -1353,7 +1382,7 @@ public class SparringService {
 	
 	}
 
-	public double algo(ProfileVo profileVo, RecordVo recordVo) {
+	public double algo(ProfileVo profileVo, RecordVo recordVo, int userNo) {
 		System.out.println("algo");
 		double userLevel = 0;
 		
@@ -1428,9 +1457,89 @@ public class SparringService {
 		}
 		
 		System.out.println(userLevel);
+		double matchLevel = matchScoreLevel(userNo);
+		
+		userLevel += matchLevel;
 		
 		return userLevel;
 	}
+	
+	public double matchScoreLevel(int userNo) {
+		
+		
+		double halfResult = 0;
+		double count = 0;
+		double result = 0;
+		//먼저 MatchScore를 List로 가져온다
+		List<MatchScoreVo> mScoreList = sparringDao.selectListMatchScore(userNo);
+		System.out.println("mScoreList =" + mScoreList);
+		if(!mScoreList.isEmpty()) {
+			
+			for(int i = 0; i < mScoreList.size(); i++) {
+				MatchScoreVo mScoreVo = mScoreList.get(i);
+				//스파링수에 비해 이긴수를 구한다
+				double score = mScoreVo.getScore();
+				double win = mScoreVo.getWin();
+				String matchAttri = mScoreVo.getMatchAttri();
+				
+				
+				double winExp = Math.round((win / score)*100.0)/100.0;
+			
+				
+				if(matchAttri.equals("물")) {
+					halfResult += 0.9;
+				}else if(matchAttri.equals("불")) {
+					halfResult += 1.0;
+				}else if(matchAttri.equals("핵")) {
+					halfResult += 1.1;
+				}
+				
+				System.out.println("halfResult =" + halfResult);
+				
+				count++;
+			}
+			halfResult =  Math.round((halfResult / count)*100.0)/100.0;
+			
+			System.out.println("halfResult /= count" +halfResult);
+			
+			//퍼센트로 곱하기 위해 100을 곱해준다
+			
+			halfResult = halfResult * 100;
+			
+			//총 스파일 전적에 따라 부여되는 값 
+			if(1<= count && count <=5) {
+				result = 0.5* halfResult;
+			}else if(5 < count && count <=10) {
+				result = 1 * halfResult;
+			}else if(10 < count && count <=15) {
+				result = 2 * halfResult;
+			}else if(15 < count && count <=20) {
+				result = 3 * halfResult;
+			}else if(20 < count && count <=30) {
+				result = 4 * halfResult;
+			}else if(30 < count && count <=40) {
+				result = 6 * halfResult;
+			}else if(40 < count && count <=50) {
+				result = 8 * halfResult;
+			}else if(50 < count && count <=60) {
+				result =  10 * halfResult;
+			}else if(60 < count && count <=70) {
+				result =  12 * halfResult;
+			}else if(70 < count && count <=80) {
+				result =  14 * halfResult;
+			}else if(80 < count && count <=90) {
+				result =  16 * halfResult;
+			}else if(90 < count && count <=100) {
+				result =  18 * halfResult;
+			}else if(100 <= count) {
+				result =  20 * halfResult;
+			}
+			System.out.println("Match SCORE result = "+ result);
+		}
+		
+		return result;
+	}
+	
 
 	public int boxkickbox(String recordDate, String recordMatch, String recordType) {
 
@@ -1930,15 +2039,35 @@ public class SparringService {
 		
 		
 		/**알고리즘 넣기***/
-		double userLevel = algo(profileVo, recordVo);
+		int userNo = profileVo.getUserNo();
+		double userLevel = algo(profileVo, recordVo, userNo);
+		
 		
 		UserVo userVo = new UserVo();
 		
-		userVo.setUser_no(profileVo.getUserNo());
+		userVo.setUser_no(userNo);
 		userVo.setUser_level(userLevel);
 		int count = sparringDao.updateUserLevel(userVo);
 		
 		
+		
+	}
+
+	public BBuyVo sparringEva(BBuyVo bbuyVo) {
+		System.out.println("[Service] : sparringEva");
+		
+		
+		//내가 아닌 상대를 구하는 Dao
+		BBuyVo bVo = sparringDao.selectOnePartnerBBuy(bbuyVo);
+		System.out.println(bVo);
+		
+		return bVo;
+	}
+
+	public void evaWrite(MatchScoreVo matchScoreVo) {
+		System.out.println("[Service] : evaWrite");
+		
+		sparringDao.insertMatchScore(matchScoreVo);
 		
 	}
 }

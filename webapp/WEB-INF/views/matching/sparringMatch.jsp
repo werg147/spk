@@ -161,7 +161,7 @@
 												<c:if test="${authUser.user_no != null }">
 													<c:if test="${authUser.user_no != map.bBuyVo.user_no }">
 														<c:if test="${authUser.user_no != map.bbuyVoUser.user_no }">
-															<c:if test="${empty map.bBuyList[0]  || !map.bBuyList[0].b_buy_player_state eq '선택자' }">
+															<c:if test="${empty map.bBuyList[0]  || !map.bBuyList[0].b_buy_player_state ne '선택자' }">
 																<c:choose>
 																	<c:when test="${map.bBuyVo.booking_no == 0 }">
 																		<a href="${pageContext.request.contextPath }/sparring/rent?subnum=1&bbuyno=${map.bBuyVo.b_buy_no}"><button class="dae_button_item2">
@@ -258,7 +258,7 @@
 													<p>전공: ${map.bBuyList[0].major}</p>
 													<!-- 경력 for문 -->
 
-													<c:forEach items="${map.bBuyList[0].recordList }" var="recordvo">
+													<c:forEach items="${map.bBuyList[0].recordList }" var="recordvo" varStatus="status">
 
 														<c:if test="${!empty recordvo.recordType &&!empty recordvo.recordEvent &&!empty recordvo.recordMatch}">
 															<br>
@@ -339,7 +339,7 @@
 								</c:when>
 								<c:otherwise>
 									<div class="post_host_item2">
-
+										<div class="psh">
 										<div id="no_here_box">
 											<div>
 												<img id="no_select_here_img" alt="" src="${pageContext.request.contextPath }/upload/glove.jpg">
@@ -347,6 +347,7 @@
 											<div>
 												<h1 id="no_select_here">신청자가 없습니다</h1>
 											</div>
+										</div>
 										</div>
 									</div>
 								</c:otherwise>

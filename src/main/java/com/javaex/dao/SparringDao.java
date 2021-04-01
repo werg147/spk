@@ -14,6 +14,7 @@ import com.javaex.vo.ConvenienceVo;
 import com.javaex.vo.EventVo;
 import com.javaex.vo.GymImgVo;
 import com.javaex.vo.GymVo;
+import com.javaex.vo.MatchScoreVo;
 import com.javaex.vo.ProfileVo;
 import com.javaex.vo.RecordVo;
 import com.javaex.vo.UserVo;
@@ -401,6 +402,28 @@ public class SparringDao {
 			int count = sqlSession.insert("profile.insertProfile23",profileVo);
 		
 		System.out.println("profile"+count);
+	}
+
+	public BBuyVo selectOnePartnerBBuy(BBuyVo bbuyVo) {
+		System.out.println("[Dao] : selectOnePartnerBBuy");
+		
+		return sqlSession.selectOne("bbuy.selectOnePartnerBBuy",bbuyVo);
+		
+	}
+
+	public void insertMatchScore(MatchScoreVo matchScoreVo) {
+		System.out.println("[Dao] : insertMatchScore");
+		
+		int count = sqlSession.insert("bbuy.insertMatchScore",matchScoreVo);
+		
+		System.out.println(count);
+	}
+
+	public List<MatchScoreVo> selectListMatchScore(int userNo) {
+		System.out.println("[Dao] : selectListMatchScore");
+		
+		return sqlSession.selectList("bbuy.selectListMatchScore",userNo);
+		
 	}
 
 	
