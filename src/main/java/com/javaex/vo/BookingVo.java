@@ -24,7 +24,12 @@ public class BookingVo {
 	private int user_no;
 	/* bbuy */
 	private String b_buy_state;
-
+	
+	
+	/* users */
+	
+	private String user_name1;
+	private String user_name2;
 	public BookingVo() {
 	}
 
@@ -75,6 +80,23 @@ public class BookingVo {
 		this.gym_img_no = gym_img_no;
 		this.user_no = user_no;
 		this.b_buy_state = b_buy_state;
+	}
+	
+	
+	public String getUser_name1() {
+		return user_name1;
+	}
+
+	public void setUser_name1(String user_name1) {
+		this.user_name1 = user_name1;
+	}
+
+	public String getUser_name2() {
+		return user_name2;
+	}
+
+	public void setUser_name2(String user_name2) {
+		this.user_name2 = user_name2;
 	}
 
 	public String getGym_event() {

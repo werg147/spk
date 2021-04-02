@@ -75,7 +75,7 @@
                     
                         <li class="goods-add-product-item2 __slide-item">
                             <div class="goods-add-product-item-figure">
-                            <a href="" target="_blank">
+                            <a href="${pageContext.request.contextPath}/sparring/rentdetail?gymNo=${rentList[0].gym_no}" target="_blank">
                                 <img src="${pageContext.request.contextPath}/upload/${rentList[0].gymImgSavename}" class="goods-add-product-item-image">
                             </a>
                             </div>
@@ -89,45 +89,45 @@
                         </li>
                         <li class="goods-add-product-item2 __slide-item">
                             <div class="goods-add-product-item-figure">
-                            <a href="" target="_blank">
-                                <img src="${pageContext.request.contextPath}/upload/${rentList[0].gymImgSavename}" class="goods-add-product-item-image">
+                            <a href="${pageContext.request.contextPath}/sparring/rentdetail?gymNo=${rentList[1].gym_no}" target="_blank">
+                                <img src="${pageContext.request.contextPath}/upload/${rentList[1].gymImgSavename}" class="goods-add-product-item-image">
                             </a>
                             </div>
                             <div class="goods-add-product-item-content">
                                 <div class="goods-add-product-item-content-wrapper">
-                                    <p class="goods-add-product-item-name">${rentList[0].gym_name}</p>
-                                    <p class="goods-add-product-item-price"><fmt:formatNumber value="${rentList[0].money}" pattern="#,###"/>원</p>
+                                    <p class="goods-add-product-item-name">${rentList[1].gym_name}</p>
+                                    <p class="goods-add-product-item-price"><fmt:formatNumber value="${rentList[1].money}" pattern="#,###"/>원</p>
                                 </div>
                             </div>
-                            <input type="hidden" name="prod_no" value="${rentList[0].gym_no}">
+                            <input type="hidden" name="prod_no" value="${rentList[1].gym_no}">
                         </li>
                         <li class="goods-add-product-item2 __slide-item">
                             <div class="goods-add-product-item-figure">
-                            <a href="" target="_blank">
-                                <img src="${pageContext.request.contextPath}/upload/${rentList[0].gymImgSavename}" class="goods-add-product-item-image">
+                            <a href="${pageContext.request.contextPath}/sparring/rentdetail?gymNo=${rentList[2].gym_no}" target="_blank">
+                                <img src="${pageContext.request.contextPath}/upload/${rentList[2].gymImgSavename}" class="goods-add-product-item-image">
                             </a>
                             </div>
                             <div class="goods-add-product-item-content">
                                 <div class="goods-add-product-item-content-wrapper">
-                                    <p class="goods-add-product-item-name">${rentList[0].gym_name}</p>
-                                    <p class="goods-add-product-item-price"><fmt:formatNumber value="${rentList[0].money}" pattern="#,###"/>원</p>
+                                    <p class="goods-add-product-item-name">${rentList[2].gym_name}</p>
+                                    <p class="goods-add-product-item-price"><fmt:formatNumber value="${rentList[2].money}" pattern="#,###"/>원</p>
                                 </div>
                             </div>
-                            <input type="hidden" name="prod_no" value="${rentList[0].gym_no}">
+                            <input type="hidden" name="prod_no" value="${rentList[2].gym_no}">
                         </li>
                         <li class="goods-add-product-item2 __slide-item">
                             <div class="goods-add-product-item-figure">
-                            <a href="" target="_blank">
-                                <img src="${pageContext.request.contextPath}/upload/${rentList[0].gymImgSavename}" class="goods-add-product-item-image">
+                            <a href="${pageContext.request.contextPath}/sparring/rentdetail?gymNo=${rentList[3].gym_no}" target="_blank">
+                                <img src="${pageContext.request.contextPath}/upload/${rentList[3].gymImgSavename}" class="goods-add-product-item-image">
                             </a>
                             </div>
                             <div class="goods-add-product-item-content">
                                 <div class="goods-add-product-item-content-wrapper">
-                                    <p class="goods-add-product-item-name">${rentList[0].gym_name}</p>
-                                    <p class="goods-add-product-item-price"><fmt:formatNumber value="${rentList[0].money}" pattern="#,###"/>원</p>
+                                    <p class="goods-add-product-item-name">${rentList[3].gym_name}</p>
+                                    <p class="goods-add-product-item-price"><fmt:formatNumber value="${rentList[3].money}" pattern="#,###"/>원</p>
                                 </div>
                             </div>
-                            <input type="hidden" name="prod_no" value="${rentList[0].gym_no}">
+                            <input type="hidden" name="prod_no" value="${rentList[3].gym_no}">
                         </li>
                        
                                      

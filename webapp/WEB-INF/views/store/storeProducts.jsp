@@ -99,12 +99,12 @@
 								<!-- 수량, 총 금액 form -->
 								<form name="proform" method="get">
 								
-								<!--색상 한개일때	
+								<!--색상 한개일때-->	
 								<dl class="list fst">
 									<dt class="tit">색상</dt> <dd class="desc">${productVo.cssList[0].color}</dd>
 								</dl> 
-								-->
 								
+								<!--  
 								<dl class="list fst">
 									<dt class="tit">색상</dt> 
 									<dd class="desc">
@@ -116,13 +116,14 @@
 										</select>
 									</dd>
 								</dl>
-							
-								<!-- 사이즈 한개일때 
+								-->
+								
+								<!-- 사이즈 한개일때 -->	
 								<dl class="list">
 									<dt class="tit">사이즈</dt> <dd class="desc">${productVo.cssList[0].prod_size}</dd>
 								</dl>
-								-->	
-							
+								
+								<!--  
 								<dl class="list fst">
 									<dt class="tit">사이즈</dt> 
 									<dd class="desc">
@@ -135,9 +136,9 @@
 										</select>
 									</dd>
 								</dl>
-								
+								-->
 							
-								<!-- 수량 한개일때 
+								<!-- 수량 한개일때 -->
 								<dl class="list">
 									<dt class="tit">
 										수량 : <input type=hidden name="prod_price" value="${productVo.prod_price}">
@@ -158,7 +159,7 @@
 								</dl>
 			
 								<div class="price_total">
-									<!--총 금액
+									<!--총 금액-->
 									<div class="total">
 										<div class="price">
 											<strong class="tit totit">총 상품금액 :</strong> 
@@ -175,8 +176,8 @@
 											
 										</p>
 									</div>
-									-->
-									<!--장바구니, 바로구매 버튼--><!--
+									
+									<!--장바구니, 바로구매 버튼-->
 									<div class="group_btn">
 										<div class="view_function">
 											<button type="button" class="btn_form btn_buy">바로 구매</button> 
@@ -190,7 +191,7 @@
 								
 								<div class="price_total">
 									
-									
+									<!-- 
 									<div class="total">
 										<div class="price">
 											<strong class="tit totit">총 상품금액 :</strong> 
@@ -219,13 +220,13 @@
 								
 								<input type="hidden" class="prod_no" name="prod_no" value="${productVo.prod_no}">
 								<input type="hidden" class="colorsize_no" name="colorsize_no" value="${productVo.cssList[0].colorsize_no}">							
-															
-								
-								-->
+								 -->							
 								
 								
 								
-								<!-- 셀렉박스 선택 후 생기는 영역 -->
+								
+								
+								<!-- 셀렉박스 선택 후 생기는 영역
 										
 								<div id="cartPut">
 
@@ -274,6 +275,7 @@
 													
 												</div>
 											</li>
+											 -->
 											<!-- 
 											<li class="on">
 												<span class="btn_position on">
@@ -317,13 +319,13 @@
 												 
 												</div>
 											</li>
-											-->	
+											
 											
 										</ul>
 									</div>
-								</div> <!--cartPut-->
+								</div> -->	<!--cartPut-->
 		
-								
+								<!--  
 								<div class="price_total">
 									
 									
@@ -355,7 +357,7 @@
 								
 								<input type="hidden" class="prod_no" name="prod_no" value="${productVo.prod_no}">
 								<input type="hidden" class="colorsize_no" name="colorsize_no" value="${productVo.cssList[0].colorsize_no}">							
-								
+								-->
 					
 							</form> <!-- 수량, 총 금액 form -->
 							
@@ -772,18 +774,6 @@
 				</div> <!--.goods_view_board #goods_board-->
 			</div> <!--class="goods_view_board" id="goods_board"-->
 
-
-
-
-
-
-
-
-
-
-
-
-
 			
 		</div> <!--layout_wrap goods_view_area-->
 		
@@ -824,7 +814,7 @@
 	</div>
 	<!-- /.modal -->
 
-<input type="hidden" name="user_no" value="${authUser.user_no}">
+	<input type="hidden" name="user_no" value="${authUser.user_no}">
 
 </body>
 
@@ -940,6 +930,18 @@
 	}
 	-->
 	
+	
+	
+	/*
+	if(color === '선택하기' || prod_size === '선택하기'){
+		//셀렉값이 부족할때
+		alert('옵션을 선택해주세요.'); 
+		return;
+	} else{
+	*/
+	
+	
+	
 	//장바구니 클릭시 cart insert --> 장바구니/계속쇼핑 버튼
 	$(".btn_cart").on("click", function(){
 		
@@ -955,18 +957,28 @@
 		var prod_no = $("[name='prod_no']").val();
 		var colorsize_no = $("[name='colorsize_no']").val();
 		var count = document.proform.count.value;
+		//var count = $("#result").text();
 		console.log(prod_no);
 		console.log(colorsize_no);
 		console.log(count);
 		
+		//셀렉값 넣기
+		//var color = $(".prod_color").val();
+		//console.log(color);
+		//var prod_size = $(".prod_size").val();
+		//console.log(prod_size);
+		
+		
 		//formData에 키-값 넣기
 		formData.append('prod_no', prod_no);
 		formData.append('colorsize_no', colorsize_no);
+		//formData.append('color', color);
+		//formData.append('prod_size', prod_size);
 		formData.append('count', count);
 		
 		//formData 값 확인 함수
 		//console.log("formData 값 확인 - 했음")
-		/* 
+		/*
 		for (var key of formData.keys()) {
   			console.log(key);
 		}
@@ -977,34 +989,45 @@
 		*/
 		
 		var url = "${pageContext.request.contextPath}/mypage/cart";
-		
-		//formData값 보내기 --> 카트 인서트
-		$.ajax({
 			
-			url : "${pageContext.request.contextPath}/mypage/gotoCart",		
-			data : formData,
-			contentType : false,
-			processData : false,
-			type : 'post',
-			
-			success : function(){
-				//장바구니/계속쇼핑
-				console.log("모달 창 호출");
+			//formData값 보내기 --> 카트 인서트
+			$.ajax({
 				
-				//모달 창 호출
-				$("#modal").modal();
-                
-				$("#goCart").on("click", function(){
-					//장바구니가기 클릭시 페이지이동
-					$(location).attr('href',url);
-				});
+				url : "${pageContext.request.contextPath}/mypage/gotoCart",		
+				data : formData,
+				contentType : false,
+				processData : false,
+				type : 'post',
+				
+				success : function(){
+					
+					//셀렉박스 선택하기로 초기화
+					//color = $(".prod_color").val("선택하기");
+					//prod_size = $(".prod_size").val("선택하기");
+					
+					//선택한 상품 리스트 보여주기
+					
+					
+					//장바구니/계속쇼핑
+					console.log("모달 창 호출");
+					
+					//모달 창 호출
+					$("#modal").modal();
+	                
+					$("#goCart").on("click", function(){
+						//장바구니가기 클릭시 페이지이동
+						$(location).attr('href',url);
+					});
 
-				
-			},
-			error : function(XHR, status, error) {
-				console.error(status + " : " + error);
-			}
-		});		
+					
+				},
+				error : function(XHR, status, error) {
+					console.error(status + " : " + error);
+				}
+			});		
+			
+		
+
 		
 	});
 		

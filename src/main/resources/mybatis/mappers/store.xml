@@ -115,7 +115,7 @@
 		<![CDATA[
 			select user_phone,
 				   user_no,
-       			   roadAddess,
+       			   roadaddress,
        			   addressdetail,
        			   user_name 
             from users

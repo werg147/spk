@@ -148,7 +148,7 @@ public class StoreController {
 		return "redirect:/store/payform";
 	}
 	
-	//장바구니->상품결제페이지 (user_no넣어서 임시로 테스트)
+	//장바구니->상품결제페이지
 	@RequestMapping(value="/payform")
 	public String payform(Model model, HttpSession session) {
 		System.out.println("[Controller] payform()");

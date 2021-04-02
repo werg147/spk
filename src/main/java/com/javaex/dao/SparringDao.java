@@ -150,7 +150,7 @@ public class SparringDao {
 	}
 
 	public UserVo selectAddressUser(int userNo) {
-		System.out.println("[Dao] : selectOneUser()");
+		System.out.println("[Dao] : selectAddressUser()");
 		
 		return sqlSession.selectOne("user.selectOneUserAddress",userNo);
 		

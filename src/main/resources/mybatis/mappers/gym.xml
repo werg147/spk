@@ -200,4 +200,16 @@
 			where gym_no = #{gymNo}		
 		]]>
 	</select>
+	
+	<!-- 대관 리스트 예약자 연결 -->
+	<select id="selectBBuyUser" parameterType="int" resultType="BBuyVo">
+		<![CDATA[
+			 select u.user_name
+			 from bbuy b , users u
+			 where b.user_no = u.user_no
+			 and b.booking_no = #{booking_no}
+			 and b.b_buy_state = '결제완료'	
+		]]>
+	</select>
+	
 </mapper>

@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.javaex.vo.BBuyVo;
 import com.javaex.vo.BookingVo;
 import com.javaex.vo.ConVo;
 import com.javaex.vo.GymImgVo;
@@ -103,5 +104,12 @@ public class GymDao {
 	public void bookDelete(int bookno) {
 		System.out.println("[GymDao] bookDelete()");
 		sqlSession.delete("gym.bookDelete", bookno);
+	}
+
+	public List<BBuyVo> selectBBuyUser(int bookNo) {
+		System.out.println("[GymDao] selectBBuyUser");
+		
+		return sqlSession.selectList("gym.selectBBuyUser",bookNo);
+		
 	}
 }
