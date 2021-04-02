@@ -273,7 +273,7 @@
 	
 
 	
-
+	<!-- 수익관리 - 배송 -->
 	<select id="prodProfitExceptSelect" parameterType="com.javaex.vo.ProfitVo" resultType="com.javaex.vo.ProfitVo">
 		<![CDATA[
 			SELECT  b.buy_date,
@@ -350,6 +350,82 @@
 		]]>	
 	</select>
 	
+	<!-- 수익관리 - 대관 -->
+	<select id="bookProfitExceptSelect" parameterType="com.javaex.vo.ProfitVo" resultType="com.javaex.vo.ProfitVo">
+		<![CDATA[
+			SELECT  b.buy_date,
+			        bb.b_buy_price,
+			        g.sell_no,
+			        SUM(b_buy_price) OVER(
+			        ORDER BY sell_no
+			        ROWS BETWEEN UNBOUNDED PRECEDING
+			        AND CURRENT ROW
+			    ) AS total
+			FROM bbuy bb, booking b, gym g, (select to_char(add_months(sysdate,-1),'yyyy-mm') || '-01'  as monthstart, 
+			                                        to_char(TRUNC(LAST_DAY(ADD_MONTHS(SYSDATE, -1)))+0.99999421,'YYYY-MM-DD') AS monthend FROM DUAL) d
+			where bb.booking_no=b.booking_no
+			and b.gym_no = g.gym_no
+			and sell_no = #{sell_no}
+			and bb.b_buy_date BETWEEN d.monthstart and d.monthend
+		]]>	
+	</select>
+
+	<select id="bookProfitPossibleSelect" parameterType="com.javaex.vo.ProfitVo" resultType="com.javaex.vo.ProfitVo">
+		<![CDATA[
+			SELECT  bb.b_buy_date,
+			        bb.b_buy_price,
+			        g.sell_no,
+			        SUM(b_buy_price) OVER(
+			        ORDER BY sell_no
+			        ROWS BETWEEN UNBOUNDED PRECEDING
+			        AND CURRENT ROW
+			    ) AS total
+			FROM bbuy bb, booking b, gym g, (select to_char(add_months(sysdate,-1),'yyyy-mm') || '-01'  as monthstart, 
+			                                        to_char(TRUNC(LAST_DAY(ADD_MONTHS(SYSDATE, -1)))+0.99999421,'YYYY-MM-DD') AS monthend FROM DUAL) d
+			where bb.booking_no=b.booking_no
+			and b.gym_no = g.gym_no
+			and sell_no = #{sell_no}
+			and bb.b_buy_date BETWEEN d.monthstart and #{peri_end}
+		]]>	
+	</select>
 	
+	<select id="bookProfitCompleteSelect" parameterType="com.javaex.vo.ProfitVo" resultType="com.javaex.vo.ProfitVo">
+		<![CDATA[
+			SELECT  bb.b_buy_date,
+			        bb.b_buy_price,
+			        g.sell_no,
+			        SUM(b_buy_price) OVER(
+			        ORDER BY sell_no
+			        ROWS BETWEEN UNBOUNDED PRECEDING
+			        AND CURRENT ROW
+			    ) AS total
+			FROM bbuy bb, booking b, gym g, (select to_char(add_months(sysdate,-1),'yyyy-mm') || '-01'  as monthstart, 
+			                                        to_char(TRUNC(LAST_DAY(ADD_MONTHS(SYSDATE, -1)))+0.99999421,'YYYY-MM-DD') AS monthend FROM DUAL) d
+			where bb.booking_no=b.booking_no
+			and b.gym_no = g.gym_no
+			and sell_no = #{sell_no}
+			and bb.b_buy_date BETWEEN #{peri_start} and d.monthend
+		]]>	
+	</select>
+
+	<select id="bookProfitTotalSelect" parameterType="com.javaex.vo.ProfitVo" resultType="com.javaex.vo.ProfitVo">
+		<![CDATA[
+			SELECT  bb.b_buy_date,
+			        bb.b_buy_price,
+			        g.sell_no,
+			        SUM(b_buy_price) OVER(
+			        ORDER BY sell_no
+			        ROWS BETWEEN UNBOUNDED PRECEDING
+			        AND CURRENT ROW
+			    ) AS total
+			FROM bbuy bb, booking b, gym g, (select to_char(add_months(sysdate,-1),'yyyy-mm') || '-01'  as monthstart, 
+			                                              to_char(TRUNC(LAST_DAY(ADD_MONTHS(SYSDATE, -1)))+0.99999421,'YYYY-MM-DD') AS monthend FROM DUAL) d
+			where bb.booking_no=b.booking_no
+			and b.gym_no = g.gym_no
+			and sell_no = #{sell_no}
+			and bb.b_buy_date BETWEEN #{peri_start} and #{peri_end}
+		]]>	
+	</select>
+
 </mapper>
 

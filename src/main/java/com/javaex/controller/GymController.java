@@ -33,6 +33,18 @@ public class GymController {
 	public String gymInfoPath(@RequestParam("no") int sellNo,
 						  HttpSession session,
 						  Model model) { 
+		
+		//세션에서 user_no   구한다 --> 서비스getGymInfo()에 전달
+		//mypage/mypage_resrvation/mypage_gyminfo
+		//
+		/*
+		 * getGymInfo(no){
+		 *   // 체유관리스트  4개
+		 *   // 0번째 짐 상세정보 = 리스트에서 0 상세조회
+		 *   
+		 * }   
+		 */
+
 		//사업자번호를 조건으로 체육관을 리스트로 가져온 후 각탭에 체육관 번호 넣기
 		System.out.println("[GymController] gymInfoPath()");
 		
