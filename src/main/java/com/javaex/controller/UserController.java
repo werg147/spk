@@ -168,7 +168,7 @@ public class UserController {
 	public String joininfoWrite(@ModelAttribute UserVo uservo, @RequestParam("profilphoto") MultipartFile profilphoto) {
 		System.out.println("[cnt]회원가입 후 회원정보입력" + uservo);
 
-		String address = uservo.getRoadAddress() + uservo.getAddressdetail();
+		String address = uservo.getRoadaddress() + uservo.getAddressdetail();
 		uservo.setAddress(address);
 		userservice.joininfoWrite(uservo, profilphoto);
 

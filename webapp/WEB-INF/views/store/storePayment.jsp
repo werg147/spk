@@ -140,9 +140,9 @@
 										<i class="modal_icon fas fa-map-marker-alt"></i>배송지
 									</h3>
 									<div class="sf_address_item2">
-										<p class="sf_address_item2_text">${pmap.userVo.roadAddess}</p>
+										<p class="sf_address_item2_text">${pmap.userVo.roadaddress}</p>
 										<a href="" class="sf_address_item2_fix">배송지 변경</a>
-										<input type="hidden" name="buy_address" value="${pmap.userVo.roadAddess}">
+										<input type="hidden" name="buy_address" value="${pmap.userVo.roadaddress}">
 									</div>
 								</div>
 							

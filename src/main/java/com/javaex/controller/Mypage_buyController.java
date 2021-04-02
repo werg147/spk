@@ -185,6 +185,7 @@ public class Mypage_buyController {
 		return "redirect:/mypage/cart";
 
 	}
+	
 
 	/* 구매내역 출력 */
 	/* #1. 배송상품내역 */
