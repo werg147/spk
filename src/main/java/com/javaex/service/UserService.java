@@ -280,25 +280,25 @@ public class UserService {
 
 		if("prod".equals(profitvo.getType())) {
 		List<ProfitVo> profitExpectList = userdao.prodProfitExceptSelect(profitvo);
-		
+		System.out.println("1");
 		int expectLastno = profitExpectList.size()-1;
-		int except = profitExpectList.get(expectLastno).getTotal();
-		profitvo.setTotal(except);
+		int expect = profitExpectList.get(expectLastno).getTotal();
+		profitvo.setExpect(expect);
 		
 		List<ProfitVo> profitPosibleList = userdao.prodProfitPossibleSelect(profitvo);
-		
+		System.out.println("2");
 		int possibleLastno = profitPosibleList.size()-1;
 		int possible = profitExpectList.get(possibleLastno).getTotal();
 		profitvo.setPossible(possible);
 		
 		List<ProfitVo> profitCompleteList = userdao.prodProfitCompleteSelect(profitvo);
-		
+		System.out.println("3");
 		int completeLastno = profitCompleteList.size()-1;
 		int complete = profitExpectList.get(completeLastno).getTotal();
 		profitvo.setComplete(complete);
 		
 		List<ProfitVo> profitTotalList = userdao.prodProfitTotalSelect(profitvo);
-		
+		System.out.println("4");
 		int totalLastno = profitTotalList.size()-1;
 		int total = profitExpectList.get(totalLastno).getTotal();
 		profitvo.setTotal(total);

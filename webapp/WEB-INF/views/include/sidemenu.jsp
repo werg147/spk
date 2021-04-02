@@ -38,7 +38,7 @@
 					class="arrow">></span></a></li>
 			<li><a href="${pageContext.request.contextPath}/mypage/buylist"><span class="menu">구매내역</span><span
 					class="arrow">></span></a></li>
-			<li><a href="${pageContext.request.contextPath}/mypage/matchinfo?userno=${authUser.user_no}"><span class="menu">내 매치보기</span><span
+			<li><a href="${pageContext.request.contextPath }/sparring/mymatch?userno=${authUser.user_no}"><span class="menu">내 매치보기</span><span
 					class="arrow">></span></a></li>		
 			<li><a href="${pageContext.request.contextPath}/mypage/infoupdate"><span
 					class="menu">회원정보관리</span><span class="arrow">></span></a></li>
