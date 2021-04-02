@@ -106,7 +106,7 @@ public class SparringService {
 				
 				if(rVo.getRecordDate() == null) {
 					System.out.println("출전연도 null");
-					rVo.setRecordDate("");
+					rVo.setRecordDate(" ");
 				}
 				if(rVo.getRecordDate().equals("출전연도")) {
 					System.out.println("출전연도");

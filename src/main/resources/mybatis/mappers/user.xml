@@ -38,7 +38,7 @@
 
 	<select id="selectOneUserAddress" parameterType="int" resultType="UserVo">
 		<![CDATA[
-			select address
+			select roadaddress
 			from users
 			where user_no = #{userNo}
 		]]>
