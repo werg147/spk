@@ -342,7 +342,7 @@
 			                                              and i.gym_img_type = 'main')k
 			where b.profile_no = p.profile_no(+)
 			and b.booking_no = k.booking_no(+)
-            and b.user_no = 5
+            and b.user_no = #{userno}
 			order by b_buy_no desc		
 		
 		
