@@ -23,6 +23,8 @@ public class BBuyVo {
 	private String nickname;
 	private String career;
 	private String user_photo;
+	private String user_name;
+	private String user_name2;
 	//profile
 	private String word;
 	private String height;
@@ -110,6 +112,26 @@ public class BBuyVo {
 
 	
 	
+	public String getUser_name2() {
+		return user_name2;
+	}
+
+
+	public void setUser_name2(String user_name2) {
+		this.user_name2 = user_name2;
+	}
+
+
+	public String getUser_name() {
+		return user_name;
+	}
+
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+
+
 	public int getU_no() {
 		return u_no;
 	}

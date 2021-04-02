@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.dao.GymDao;
 import com.javaex.dao.UserDao;
+import com.javaex.vo.BBuyVo;
 import com.javaex.vo.BookingVo;
 import com.javaex.vo.ConVo;
 import com.javaex.vo.GymImgVo;
@@ -178,12 +179,37 @@ public class GymService {
 		GymVo gymVo = gymDao.gymSelectOne(gymno);
 		List<BookingVo> bookList = gymDao.bookSelectList(gymno);
 
+	
 		System.out.println("[서비스] 체육관> " + gymVo);
 		System.out.println("[서비스] 대관목록> " + bookList);
 
 		if (bookList != null) {
 			gymVo.setBookingList(bookList);
 		}
+		for(int i = 0 ; i < bookList.size(); i++) {
+			int bookNo = bookList.get(i).getBooking_no();
+			BookingVo bVo = bookList.get(i);
+			
+			
+			List<BBuyVo> bbuyList= gymDao.selectBBuyUser(bookNo);
+			if(!bbuyList.isEmpty()) {
+			for(int j = 0 ; j <bbuyList.size(); j++) {
+				if(bVo.getUser_name1() == null) {
+					
+					bVo.setUser_name1(bbuyList.get(j).getUser_name());  
+				}else if(bVo.getUser_name2() == null) {
+					bVo.setUser_name2(bbuyList.get(j).getUser_name());  
+				}
+					
+			}
+				
+			}
+			
+			
+		}
+		
+		
+		
 		
 		Map<String, Object> bookMap = new HashMap<String, Object>();
 		bookMap.put("gymList", gymList);

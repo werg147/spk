@@ -117,7 +117,12 @@
 										<td>${vo.booking_start }~${vo.booking_end }</td>
 										<td>${vo.booking_price }</td>
 										<td>${vo.booking_state }</td>
-										<td></td>
+										<td>${vo.user_name1}
+										<c:if test="${vo.user_name2 ne null }">
+										/ ${vo.user_name2}
+										</c:if>
+											
+										</td>
 										
 										<td>
 											<c:if test="${vo.booking_state eq '대기'}">
