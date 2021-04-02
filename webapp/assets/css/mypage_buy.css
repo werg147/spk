@@ -1,5 +1,24 @@
 @charset "UTF-8";
 
+.wrap .container #paging {
+	margin: 0px auto;
+	width: 310px;
+}
+
+.wrap .container #paging ul {
+	margin: 10px 5px 10px 5px;
+}
+
+.wrap .container #paging ul>li {
+	float: left;
+	margin: 0px 8px 0px 8px;
+}
+
+.wrap .container #paging ul>li.active {
+	font-size: 14px;
+	font-weight: bold;
+}
+
 .middle {
 	display: flex;
 	overflow: hidden;
@@ -228,8 +247,7 @@ ol, ul {
 	top: 18px;
 	width: 12px;
 	height: 8px;
-	background: url(https://res.kurly.com/pc/ico/2008/ico_down_12x8.svg)
-		no-repeat 0 0;
+	background: url(https://res.kurly.com/pc/ico/2008/ico_down_12x8.svg) no-repeat 0 0;
 	background-size: 12px 8px;
 }
 
@@ -450,8 +468,7 @@ img, fieldset {
 	margin-bottom: 5px;
 	color: #a5a5a5;
 	font-size: 11px;
-	font-family: Helvetica, '나눔고딕', NanumGothic, '맑은고딕', MalgunGothic, '돋움',
-		Dotum, sans-serif;
+	font-family: Helvetica, '나눔고딕', NanumGothic, '맑은고딕', MalgunGothic, '돋움', Dotum, sans-serif;
 }
 
 .goods_pay_item .seller_item .inner>* {
@@ -543,10 +560,8 @@ img, fieldset {
 	border: 1px solid #dddfe1;
 	border-radius: 0px;
 	cursor: pointer;
-	background-image: linear-gradient(45deg, transparent 50%, gray 50%),
-		linear-gradient(135deg, gray 50%, transparent 50%);
-	background-position: calc(100% - 20px) calc(1em + 2px),
-		calc(100% - 15px) calc(1em + 2px), calc(100% - .5em) .5em;
+	background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%);
+	background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), calc(100% - .5em) .5em;
 	background-size: 5px 5px, 5px 5px, 1.5em 1.5em;
 	background-repeat: no-repeat;
 	float: left;
@@ -584,8 +599,7 @@ input {
 	display: inline-block;
 	text-align: start;
 	appearance: textfield;
-	background-color: -internal-light-dark(rgb(255, 255, 255),
-		rgb(59, 59, 59));
+	background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
 	-webkit-rtl-ordering: logical;
 	cursor: text;
 	margin: 0em;
@@ -593,8 +607,7 @@ input {
 	padding: 1px 2px;
 	border-width: 2px;
 	border-style: inset;
-	border-color: -internal-light-dark(rgb(118, 118, 118),
-		rgb(133, 133, 133));
+	border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
 	border-image: initial;
 }
 
@@ -835,8 +848,7 @@ dd {
 }
 
 .only_pc .box.room .tit .ico {
-	background-image:
-		url(https://res.kurly.com/pc/service/cart/2009/ico_room_v2.svg?v=1);
+	background-image: url(https://res.kurly.com/pc/service/cart/2009/ico_room_v2.svg?v=1);
 	background-color: transparent;
 	background-repeat: no-repeat;
 	background-size: 30px 30px;
@@ -851,8 +863,7 @@ dd {
 }
 
 .box.room .tit .ico {
-	background-image:
-		url(https://res.kurly.com/mobile/service/cart/2009/ico_room.svg);
+	background-image: url(https://res.kurly.com/mobile/service/cart/2009/ico_room.svg);
 	background-color: transparent;
 	background-repeat: no-repeat;
 	background-size: 24px 24px;
@@ -970,8 +981,7 @@ dd {
 }
 
 element.style {
-	background-image:
-		url(https://img-cf.kurly.com/shop/data/goods/1614755639814i0.jpg);
+	background-image: url(https://img-cf.kurly.com/shop/data/goods/1614755639814i0.jpg);
 }
 
 form {
@@ -1088,8 +1098,7 @@ form {
 }
 
 .only_pc .stamper .btn.minus.off {
-	background-image:
-		url(https://res.kurly.com/pc/service/common/2009/ico_minus.svg);
+	background-image: url(https://res.kurly.com/pc/service/common/2009/ico_minus.svg);
 }
 
 .only_pc .stamper .btn.minus, .only_pc .stamper .btn.minus.off {
@@ -1100,13 +1109,11 @@ form {
 }
 
 .only_pc .stamper .btn.minus {
-	background-image:
-		url(https://res.kurly.com/pc/service/common/2009/ico_minus_on.svg);
+	background-image: url(https://res.kurly.com/pc/service/common/2009/ico_minus_on.svg);
 }
 
 .stamper .btn.minus.off {
-	background-image:
-		url(https://res.kurly.com/mobile/service/cart/2010/ico_minus.svg);
+	background-image: url(https://res.kurly.com/mobile/service/cart/2010/ico_minus.svg);
 }
 
 .stamper .btn.minus, .stamper .btn.minus.off {
@@ -1122,8 +1129,7 @@ form {
 }
 
 .stamper .btn.minus {
-	background-image:
-		url(https://res.kurly.com/mobile/service/cart/2010/ico_minus_on.svg);
+	background-image: url(https://res.kurly.com/mobile/service/cart/2010/ico_minus_on.svg);
 }
 
 .stamper .btn {
@@ -1140,8 +1146,7 @@ form {
 }
 
 .only_pc .stamper .btn.minus.off {
-	background-image:
-		url(https://res.kurly.com/pc/service/common/2009/ico_minus.svg);
+	background-image: url(https://res.kurly.com/pc/service/common/2009/ico_minus.svg);
 }
 
 .only_pc .stamper .btn.minus, .only_pc .stamper .btn.minus.off {
@@ -1152,13 +1157,11 @@ form {
 }
 
 .only_pc .stamper .btn.minus {
-	background-image:
-		url(https://res.kurly.com/pc/service/common/2009/ico_minus_on.svg);
+	background-image: url(https://res.kurly.com/pc/service/common/2009/ico_minus_on.svg);
 }
 
 .stamper .btn.minus.off {
-	background-image:
-		url(https://res.kurly.com/mobile/service/cart/2010/ico_minus.svg);
+	background-image: url(https://res.kurly.com/mobile/service/cart/2010/ico_minus.svg);
 }
 
 .stamper .btn.minus, .stamper .btn.minus.off {
@@ -1174,8 +1177,7 @@ form {
 }
 
 .stamper .btn.minus {
-	background-image:
-		url(https://res.kurly.com/mobile/service/cart/2010/ico_minus_on.svg);
+	background-image: url(https://res.kurly.com/mobile/service/cart/2010/ico_minus_on.svg);
 }
 
 .stamper .btn {
@@ -1251,8 +1253,7 @@ input[type="number" i] {
 }
 
 .only_pc .stamper .btn.plus {
-	background-image:
-		url(https://res.kurly.com/pc/service/common/2009/ico_plus_on.svg);
+	background-image: url(https://res.kurly.com/pc/service/common/2009/ico_plus_on.svg);
 }
 
 .only_pc .stamper .btn {
@@ -1270,8 +1271,7 @@ input[type="number" i] {
 .stamper .btn.plus {
 	float: right;
 	margin-left: -1px;
-	background-image:
-		url(https://res.kurly.com/mobile/service/cart/2010/ico_plus_on.svg);
+	background-image: url(https://res.kurly.com/mobile/service/cart/2010/ico_plus_on.svg);
 }
 
 .stamper .btn {
@@ -1295,8 +1295,7 @@ input[type="number" i] {
 	padding: 0;
 	margin-top: -13px;
 	border: 0;
-	background-image:
-		url(https://res.kurly.com/pc/service/cart/2007/ico_delete.svg);
+	background-image: url(https://res.kurly.com/pc/service/cart/2007/ico_delete.svg);
 	background-color: transparent;
 	background-repeat: no-repeat;
 	background-size: 30px 30px;
@@ -1312,8 +1311,7 @@ input[type="number" i] {
 	height: 56px;
 	padding: 22px 24px;
 	border: 0;
-	background-image:
-		url(https://res.kurly.com/mobile/service/cart/2007/ico_delete.svg);
+	background-image: url(https://res.kurly.com/mobile/service/cart/2007/ico_delete.svg);
 	background-color: transparent;
 	background-repeat: no-repeat;
 	background-size: 12px 12px;
@@ -1356,8 +1354,7 @@ element.style {
 	font-size: 16px;
 	line-height: 20px;
 	letter-spacing: -.3px;
-	background-image:
-		url(https://res.kurly.com/pc/service/cart/2007/ico_location.svg);
+	background-image: url(https://res.kurly.com/pc/service/cart/2007/ico_location.svg);
 	background-color: transparent;
 	background-repeat: no-repeat;
 	background-size: 20px 20px;
@@ -1711,8 +1708,7 @@ element.style {
 	cursor: pointer;
 }
 
-.info_update_btn .insert_btn:hover, .info_update_btn .delclose_btn:hover
-	{
+.info_update_btn .insert_btn:hover, .info_update_btn .delclose_btn:hover {
 	background: #d4d4d4;
 	text-decoration: none;
 }
@@ -1865,8 +1861,7 @@ element.style {
 	text-align: center;
 }
 
-.large div input, .product_insert_btn .insert_btn, .product_insert_btn .product_delclose_btn
-	{
+.large div input, .product_insert_btn .insert_btn, .product_insert_btn .product_delclose_btn {
 	border-radius: 0px;
 	color: #000000;
 	background-color: white;
@@ -1880,8 +1875,7 @@ element.style {
 	cursor: pointer;
 }
 
-.input-file-button:hover, .product_insert_btn .insert_btn:hover,
-	.product_insert_btn .product_delclose_btn:hover {
+.input-file-button:hover, .product_insert_btn .insert_btn:hover, .product_insert_btn .product_delclose_btn:hover {
 	background: #d4d4d4;
 	text-decoration: none;
 }

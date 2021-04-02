@@ -47,21 +47,23 @@ public class Mypage_buyController {
 	@Autowired
 	public BuyListService blServ;
 
-	/* 알람 리스트 */
+	/* 알람 + 페이징 */
 	@RequestMapping(value = "/alarm", method = { RequestMethod.GET, RequestMethod.POST })
-	public String list(Model model, HttpSession session) {
+	public String alarm(@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
+			@RequestParam(value = "crtPage", required = false, defaultValue = "1") int crtPage, Model model,
+			HttpSession session) {
 
-		System.out.println("[Alarm Ctrl]: list 진입");
+		System.out.println("[Alarm Ctrl]: alarm 진입");
 
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 
 		int user_no = authUser.getUser_no();
 
-		List<AlarmVo> aList = aServ.list(user_no);
+		Map<String, Object> pMap = aServ.pMap(keyword, crtPage, user_no);
 
-		System.out.println("[Alarm Ctrl]: " + aList.toString());
+		System.out.println("[Alarm Ctrl]: " + pMap);
 
-		model.addAttribute("AlarmList", aList);
+		model.addAttribute("pMap", pMap);
 
 		return "mypage/mypage_buy/alarm";
 
@@ -185,12 +187,12 @@ public class Mypage_buyController {
 		return "redirect:/mypage/cart";
 
 	}
-	
 
 	/* 구매내역 출력 */
 	/* #1. 배송상품내역 */
 	@RequestMapping(value = "/buylist", method = { RequestMethod.GET, RequestMethod.POST })
-	public String buylist(Model model, HttpSession session) {
+	public String buylist(Model model, HttpSession session,
+			@RequestParam(value = "buy_no", required = false, defaultValue = "1") int buy_no) {
 
 		System.out.println("[BuyList Ctrl]: buylist 진입");
 

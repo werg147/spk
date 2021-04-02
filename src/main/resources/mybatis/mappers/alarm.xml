@@ -5,7 +5,6 @@
 <mapper namespace="alarm">
 	<select id="bbuyuserNo" parameterType="int" resultType="AlarmVo">
 		<![CDATA[
-		
 				select user_no
 				from bbuy
 				where b_buy_no = #{bbuyno}
@@ -50,10 +49,7 @@
 								#{sell_no},
 								#{alarm_title},
 								2
-								)
-								
-		
-		
+								)		
 		]]>
 	</insert>
 
@@ -67,22 +63,6 @@
 		and b.gym_no = g.gym_no
 		and g.sell_no =  s.sell_no	
 	]]>
-	</select>
-
-	<select id="selectAlarm" parameterType="int" resultType="AlarmVo">
-		<![CDATA[
-			SELECT  alarm_no,
-			        from_user_no,
-			        to_user_no,
-			        alarm_content,
-			        alarm_date,
-			        sell_no,
-			        alarm_title,
-			        buy_type
-			FROM    alarm
-			WHERE   to_user_no = #{user_no}
-			order by alarm_date desc
-		]]>
 	</select>
 
 	<!-- 결제완료 -->
@@ -137,5 +117,72 @@
             from seller
             where sell_no = #{sell_no}
         ]]>
+	</select>
+
+	<select id="selectAlarmList" parameterType="map" resultType="AlarmVo">
+		<![CDATA[
+			SELECT  r.rNum,
+			        r.alarm_no,
+			        r.froM_user_no,
+			        r.to_user_no,
+			        r.alarm_content,
+			        r.alarm_date,
+			        r.sell_no,
+			        r.alarm_title,
+			        r.buy_type,
+			        r.user_no,
+			        r.buy_no,
+			        r.b_buy_no,
+        			r.booking_no
+			FROM    (SELECT  ROWNUM rNum,
+			                 a.alarm_no,
+			                 a.from_user_no,
+			                 a.to_user_no,
+			                 a.alarm_content,
+			                 a.alarm_date,
+			                 a.sell_no,
+			                 a.alarm_title,
+			                 a.buy_type,
+			                 a.user_no,
+			                 a.buy_no,
+			                 a.b_buy_no,
+                 			a.booking_no
+			         FROM    (SELECT  a.alarm_no,
+			                          a.from_user_no,
+			                          a.to_user_no,
+			                          a.alarm_content,
+			                          a.alarm_date,
+			                          a.sell_no,
+			                          a.alarm_title,
+			                          a.buy_type,
+			                          u.user_no,
+			                          b.buy_no,
+			                          bb.b_buy_no,
+                          			  bb.booking_no
+			                  FROM    alarm a, users u, buy b, bbuy bb
+			                  WHERE   a.to_user_no = u.user_no
+			                  		  and b.user_no = u.user_no
+			                  		  and bb.user_no = u.user_no
+			                  		  and to_user_no = #{user_no}
+  		]]>
+		<if test="keyword != null and keyword != ''">
+			and title like '%' || #{keyword} || '%'
+		</if>
+  		<![CDATA[
+			                  ORDER BY alarm_no desc)a)r
+			WHERE   r.rNum >= #{startNum}
+					and r.rNum <= #{endNum}
+		]]>
+	</select>
+
+	<select id="selectTotalCnt" parameterType="String" resultType="int">
+		<![CDATA[
+			SELECT  count(*)
+			FROM    alarm
+			WHERE   to_user_no = #{user_no}
+		]]>
+		<if test="value != null and value != ''">
+			and alarm_title like '%' || #{keyword} || '%'
+		</if>
 	</select>
 </mapper>

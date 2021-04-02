@@ -10,7 +10,7 @@ public class AlarmVo {
 	private int sell_no;
 	private String alarm_title;
 	private int buy_type;
-	
+
 	private String prod_name;
 
 	private String gym_name;
@@ -26,6 +26,8 @@ public class AlarmVo {
 	private int user_no;
 	private int buy_no;
 	private String prod_no;
+	private int b_buy_no;
+	private int booking_no;
 
 	private int prod_type;
 	private int book_type;
@@ -34,13 +36,33 @@ public class AlarmVo {
 		super();
 	}
 
-	public AlarmVo(int sell_no, String prod_name, String buy_del_state, int user_no, String prod_no) {
+	public AlarmVo(int alarm_no, int from_user_no, int to_user_no, String alarm_content, String alarm_date, int sell_no,
+			String alarm_title, int buy_type, String prod_name, String gym_name, String booking_state, String buy_state,
+			String buy_del_state, String b_buy_player_state, String b_buy_state, int user_no, int buy_no,
+			String prod_no, int b_buy_no, int booking_no, int prod_type, int book_type) {
 		super();
+		this.alarm_no = alarm_no;
+		this.from_user_no = from_user_no;
+		this.to_user_no = to_user_no;
+		this.alarm_content = alarm_content;
+		this.alarm_date = alarm_date;
 		this.sell_no = sell_no;
+		this.alarm_title = alarm_title;
+		this.buy_type = buy_type;
 		this.prod_name = prod_name;
+		this.gym_name = gym_name;
+		this.booking_state = booking_state;
+		this.buy_state = buy_state;
 		this.buy_del_state = buy_del_state;
+		this.b_buy_player_state = b_buy_player_state;
+		this.b_buy_state = b_buy_state;
 		this.user_no = user_no;
+		this.buy_no = buy_no;
 		this.prod_no = prod_no;
+		this.b_buy_no = b_buy_no;
+		this.booking_no = booking_no;
+		this.prod_type = prod_type;
+		this.book_type = book_type;
 	}
 
 	public int getAlarm_no() {
@@ -89,6 +111,22 @@ public class AlarmVo {
 
 	public void setSell_no(int sell_no) {
 		this.sell_no = sell_no;
+	}
+
+	public String getAlarm_title() {
+		return alarm_title;
+	}
+
+	public void setAlarm_title(String alarm_title) {
+		this.alarm_title = alarm_title;
+	}
+
+	public int getBuy_type() {
+		return buy_type;
+	}
+
+	public void setBuy_type(int buy_type) {
+		this.buy_type = buy_type;
 	}
 
 	public String getProd_name() {
@@ -155,30 +193,6 @@ public class AlarmVo {
 		this.user_no = user_no;
 	}
 
-	public int getProd_type() {
-		return prod_type;
-	}
-
-	public void setProd_type(int prod_type) {
-		this.prod_type = prod_type;
-	}
-
-	public int getBook_type() {
-		return book_type;
-	}
-
-	public void setBook_type(int book_type) {
-		this.book_type = book_type;
-	}
-
-	public String getAlarm_title() {
-		return alarm_title;
-	}
-
-	public void setAlarm_title(String alarm_title) {
-		this.alarm_title = alarm_title;
-	}
-
 	public int getBuy_no() {
 		return buy_no;
 	}
@@ -195,12 +209,36 @@ public class AlarmVo {
 		this.prod_no = prod_no;
 	}
 
-	public int getBuy_type() {
-		return buy_type;
+	public int getB_buy_no() {
+		return b_buy_no;
 	}
 
-	public void setBuy_type(int buy_type) {
-		this.buy_type = buy_type;
+	public void setB_buy_no(int b_buy_no) {
+		this.b_buy_no = b_buy_no;
+	}
+
+	public int getBooking_no() {
+		return booking_no;
+	}
+
+	public void setBooking_no(int booking_no) {
+		this.booking_no = booking_no;
+	}
+
+	public int getProd_type() {
+		return prod_type;
+	}
+
+	public void setProd_type(int prod_type) {
+		this.prod_type = prod_type;
+	}
+
+	public int getBook_type() {
+		return book_type;
+	}
+
+	public void setBook_type(int book_type) {
+		this.book_type = book_type;
 	}
 
 	@Override
@@ -210,8 +248,8 @@ public class AlarmVo {
 				+ ", alarm_title=" + alarm_title + ", buy_type=" + buy_type + ", prod_name=" + prod_name + ", gym_name="
 				+ gym_name + ", booking_state=" + booking_state + ", buy_state=" + buy_state + ", buy_del_state="
 				+ buy_del_state + ", b_buy_player_state=" + b_buy_player_state + ", b_buy_state=" + b_buy_state
-				+ ", user_no=" + user_no + ", buy_no=" + buy_no + ", prod_no=" + prod_no + ", prod_type=" + prod_type
-				+ ", book_type=" + book_type + "]";
+				+ ", user_no=" + user_no + ", buy_no=" + buy_no + ", prod_no=" + prod_no + ", b_buy_no=" + b_buy_no
+				+ ", booking_no=" + booking_no + ", prod_type=" + prod_type + ", book_type=" + book_type + "]";
 	}
 
 }
