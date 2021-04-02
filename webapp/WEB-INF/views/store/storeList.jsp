@@ -11,6 +11,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/store.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css">
+    <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>  
    
 </head>
 
@@ -45,15 +46,14 @@
             <option value="1">복싱</option>
             <option value="2">킥복싱</option>
             <option value="3">주짓수</option>
-            <option value="4">종합격투기</option>
           </select>
         </div>
 
         <div class="ico_cate">
-          <span class="tit" id="on">전체보기</span>
-          <span class="tit">운동용품</span>
-          <span class="tit">의류</span>
-          <span class="tit">잡화</span>
+          <span class="tit all" id="on">전체보기</span>
+          <span class="tit 운동용품">운동용품</span>
+          <span class="tit 의류">의류</span>
+          <span class="tit 잡화">잡화</span>
         </div>
         
         <!-- 스토어 검색 -->
@@ -154,7 +154,37 @@
 
 <script type="text/javascript">
 
-
+	//키워드 셀렉시 해당 prod_cate 리스트 뿌리기 (서치랑 동일)
+	$(".ico_cate").on("click",".tit",function(){
+		//클릭테스트
+		console.log("카테고리 클릭");
+		
+		var url = "${pageContext.request.contextPath}/store/list"
+		var urlh = "${pageContext.request.contextPath}/store/list?prod_cate="
+		var urlc = "${pageContext.request.contextPath}/store/list?"
+		var urlg = "${pageContext.request.contextPath}/store/list"
+			
+			
+		if($(this).val() === '전체보기'){
+			console.log("전체보기 인식");
+			$(location).attr('href',url);
+				
+		} else if($(this).val() === '운동용품'){
+			console.log("운동용품 인식");
+			
+		} else if($(this).val() === '의류'){
+			console.log("의류 인식");
+			
+		} else if($(this).val() === '잡화'){
+			console.log("잡화 인식");
+		}
+						
+		
+		
+		
+		
+		
+	});
 
 </script>
 
