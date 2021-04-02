@@ -8,7 +8,6 @@ public class ProfitVo {
 	private String monthend;
 	private String type;
 	private int total;
-	
 	private int complete;
 	private int possible;
 	private int expect;

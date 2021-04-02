@@ -285,9 +285,9 @@ public class UserService {
 		int expect = profitExpectList.get(expectLastno).getTotal();
 		profitvo.setExpect(expect);
 		
-		List<ProfitVo> profitPosibleList = userdao.prodProfitPossibleSelect(profitvo);
+		List<ProfitVo> profitPossibleList = userdao.prodProfitPossibleSelect(profitvo);
 		System.out.println("2");
-		int possibleLastno = profitPosibleList.size()-1;
+		int possibleLastno = profitPossibleList.size()-1;
 		int possible = profitExpectList.get(possibleLastno).getTotal();
 		profitvo.setPossible(possible);
 		
