@@ -332,19 +332,19 @@ public class SparringService {
 				if(day <10) {
 					dayString = "0"+day;
 					
-					date = year + ".0" + month + "." + dayString;
+					date = year + "-0" + month + "-" + dayString;
 				}else {
 					
-					date = year + ".0" + month + "." + day;
+					date = year + "-0" + month + "-" + day;
 				}
 			} else {
 				if(day <10) {
 					dayString = "0"+day;
 					
-					date = year + ".0" + month + "." + dayString;
+					date = year + "-0" + month + "-" + dayString;
 				}else {
 					
-					date = year + "." + month + "." + day;
+					date = year + "-" + month + "-" + day;
 				}
 			}
 			

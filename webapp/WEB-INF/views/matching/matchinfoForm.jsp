@@ -323,8 +323,17 @@
 									</div>
 									<!-- //product_insert_btn -->
 									<!-- session값 생겨도 히든으로 표시할 것 아이작스에서 쓰고있음 -->
-									<input id="session_user_no" type="text" name="userNo" value="${authUser.user_no}">
+									
+									<c:choose>
+									<c:when test="${join == 1 }">
+									
 									<input type="text" name="userNo" value="${param.user_no}">
+									</c:when>
+									<c:otherwise>
+									
+									<input id="session_user_no" type="text" name="userNo" value="${authUser.user_no}">
+									</c:otherwise>
+									</c:choose>
 									<input type="text" name="subnum" value="${param.subnum}">
 									<input type="text" name="selectbooking_no" value="${param.selectbooking_no}">
 									<input type="text" name="join" value="${join}">
