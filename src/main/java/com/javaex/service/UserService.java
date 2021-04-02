@@ -1,10 +1,8 @@
 package com.javaex.service;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.util.List;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -16,13 +14,13 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javaex.dao.UserDao;
 import com.javaex.vo.KakaoVo;
 import com.javaex.vo.NaverVo;
+import com.javaex.vo.ProfitVo;
 import com.javaex.vo.TokenVo;
 import com.javaex.vo.UserVo;
 
@@ -36,7 +34,6 @@ public class UserService {
 	public UserVo login(UserVo uservo) {
 		return userdao.selectUser(uservo);
 	}
-	
 
 	// 카카오 회원가입
 	public UserVo kakaoJoin(String code) {
@@ -120,18 +117,17 @@ public class UserService {
 		UserVo uvo = userdao.joinUserIdChechSelect(user_id);
 		System.out.println(uvo);
 
+		System.out.println("회원가입 여부확인: ");
 
-		System.out.println("회원가입 여부확인: " );
-
-		if (uvo == null) {		
+		if (uvo == null) {
 			System.out.println("회원가입 안 회원");
 			userdao.kakaoInsert(uservo);
-			uservo.setUser_no(uservo.getUser_no());		
+			uservo.setUser_no(uservo.getUser_no());
 			return uservo;
 
 		} else {
 			System.out.println("회원가입 한 회원" + uservo.getUser_id());
-			
+
 			return userdao.joinSocialUserIdChechSelect(uservo.getUser_id());
 		}
 	}
@@ -218,21 +214,20 @@ public class UserService {
 		uservo.setGender(naverUserinfo.getResponse().getGender());
 		uservo.setUser_name(naverUserinfo.getResponse().getName());
 
-
 		UserVo uvo = userdao.joinSocialUserIdChechSelect(user_id);
 		System.out.println(uvo);
 
-		System.out.println("회원가입 여부확인: " );
+		System.out.println("회원가입 여부확인: ");
 
-		if (uvo == null) {		
+		if (uvo == null) {
 			System.out.println("회원가입 안 회원");
 			userdao.naverInsert(uservo);
-			uservo.setUser_no(uservo.getUser_no());		
+			uservo.setUser_no(uservo.getUser_no());
 			return uservo;
 
 		} else {
 			System.out.println("회원가입 한 회원" + uservo.getUser_id());
-			
+
 			return userdao.joinSocialUserIdChechSelect(uservo.getUser_id());
 		}
 	}
@@ -278,4 +273,42 @@ public class UserService {
 
 		return userdao.joinDelete(user_no);
 	}
+
+	// 수익조회
+	public ProfitVo profitSearch(ProfitVo profitvo) {
+		System.out.println("[service]수익조회");
+
+		if("prod".equals(profitvo.getType())) {
+		List<ProfitVo> profitExpectList = userdao.prodProfitExceptSelect(profitvo);
+		
+		int expectLastno = profitExpectList.size()-1;
+		int except = profitExpectList.get(expectLastno).getTotal();
+		profitvo.setTotal(except);
+		
+		List<ProfitVo> profitPosibleList = userdao.prodProfitPossibleSelect(profitvo);
+		
+		int possibleLastno = profitPosibleList.size()-1;
+		int possible = profitExpectList.get(possibleLastno).getTotal();
+		profitvo.setPossible(possible);
+		
+		List<ProfitVo> profitCompleteList = userdao.prodProfitCompleteSelect(profitvo);
+		
+		int completeLastno = profitCompleteList.size()-1;
+		int complete = profitExpectList.get(completeLastno).getTotal();
+		profitvo.setComplete(complete);
+		
+		List<ProfitVo> profitTotalList = userdao.prodProfitTotalSelect(profitvo);
+		
+		int totalLastno = profitTotalList.size()-1;
+		int total = profitExpectList.get(totalLastno).getTotal();
+		profitvo.setTotal(total);
+		
+		return profitvo;
+		} else {
+		
+			
+			return profitvo;
+		}
+	}
+
 }

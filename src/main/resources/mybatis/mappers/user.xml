@@ -135,8 +135,6 @@
 
 
 
-
-
 	<insert id="sellerBookInsert" parameterType="com.javaex.vo.SellerVo">
 		<selectKey keyProperty="sell_no" resultType="int" order="BEFORE">
 			select seq_sell_no.nextval
@@ -272,5 +270,86 @@
 			where user_no = #{user_no}	
 		]]>
 	</update>
+	
+
+	
+
+	<select id="prodProfitExceptSelect" parameterType="com.javaex.vo.ProfitVo" resultType="com.javaex.vo.ProfitVo">
+		<![CDATA[
+			SELECT  b.buy_date,
+			        bp.buyprod_price,
+			        p.sell_no,
+			        SUM(buyprod_price) OVER(
+			        ORDER BY sell_no
+			        ROWS BETWEEN UNBOUNDED PRECEDING
+			        AND CURRENT ROW
+			    ) AS total
+			FROM buyproduct bp, buy b, product p, (select to_char(add_months(sysdate,-1),'yyyy-mm') || '-01'  as monthstart, 
+			       to_char(TRUNC(LAST_DAY(ADD_MONTHS(SYSDATE, -1)))+0.99999421,'YYYY-MM-DD') AS monthend FROM DUAL) d
+			where bp.buy_no=b.buy_no
+			and bp.prod_no=p.prod_no
+			and sell_no = #{sell_no}
+			and b.buy_date BETWEEN d.monthstart and d.monthend
+		]]>	
+	</select>
+
+	<select id="prodProfitPossibleSelect" parameterType="com.javaex.vo.ProfitVo" resultType="com.javaex.vo.ProfitVo">
+		<![CDATA[
+			SELECT  b.buy_date,
+			        bp.buyprod_price,
+			        p.sell_no,
+			        SUM(buyprod_price) OVER(
+			        ORDER BY sell_no
+			        ROWS BETWEEN UNBOUNDED PRECEDING
+			        AND CURRENT ROW
+			    ) AS total
+			FROM buyproduct bp, buy b, product p, (select to_char(add_months(sysdate,-1),'yyyy-mm') || '-01'  as monthstart, 
+			       to_char(TRUNC(LAST_DAY(ADD_MONTHS(SYSDATE, -1)))+0.99999421,'YYYY-MM-DD') AS monthend FROM DUAL) d
+			where bp.buy_no=b.buy_no
+			and bp.prod_no=p.prod_no
+			and sell_no = #{sell_no}
+			and b.buy_date BETWEEN d.monthstart and #{peri_end}
+		]]>	
+	</select>
+	
+		<select id="prodProfitCompleteSelect" parameterType="com.javaex.vo.ProfitVo" resultType="com.javaex.vo.ProfitVo">
+		<![CDATA[
+			SELECT  b.buy_date,
+			        bp.buyprod_price,
+			        p.sell_no,
+			        SUM(buyprod_price) OVER(
+			        ORDER BY sell_no
+			        ROWS BETWEEN UNBOUNDED PRECEDING
+			        AND CURRENT ROW
+			    ) AS total
+			FROM buyproduct bp, buy b, product p, (select to_char(add_months(sysdate,-1),'yyyy-mm') || '-01'  as monthstart, 
+			       to_char(TRUNC(LAST_DAY(ADD_MONTHS(SYSDATE, -1)))+0.99999421,'YYYY-MM-DD') AS monthend FROM DUAL) d
+			where bp.buy_no=b.buy_no
+			and bp.prod_no=p.prod_no
+			and sell_no = #{sell_no}
+			and b.buy_date BETWEEN #{peri_start} and d.monthend
+		]]>	
+	</select>
+	
+		<select id="prodProfitTotalSelect" parameterType="com.javaex.vo.ProfitVo" resultType="com.javaex.vo.ProfitVo">
+		<![CDATA[
+			SELECT  b.buy_date,
+			        bp.buyprod_price,
+			        p.sell_no,
+			        SUM(buyprod_price) OVER(
+			        ORDER BY sell_no
+			        ROWS BETWEEN UNBOUNDED PRECEDING
+			        AND CURRENT ROW
+			    ) AS total
+			FROM buyproduct bp, buy b, product p, (select to_char(add_months(sysdate,-1),'yyyy-mm') || '-01'  as monthstart, 
+			       to_char(TRUNC(LAST_DAY(ADD_MONTHS(SYSDATE, -1)))+0.99999421,'YYYY-MM-DD') AS monthend FROM DUAL) d
+			where bp.buy_no=b.buy_no
+			and bp.prod_no=p.prod_no
+			and sell_no = #{sell_no}
+			and b.buy_date BETWEEN #{peri_start} and #{peri_end}
+		]]>	
+	</select>
+	
+	
 </mapper>
 

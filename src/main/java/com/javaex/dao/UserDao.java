@@ -1,9 +1,12 @@
 package com.javaex.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.javaex.vo.ProfitVo;
 import com.javaex.vo.SellerVo;
 import com.javaex.vo.UserVo;
 
@@ -85,5 +88,25 @@ public class UserDao {
 	//판매자 계정 정보가져오기
 	public SellerVo sellerSelectOne(int sell_no) {
 		return sqlSession.selectOne("user.sellerSelectOne", sell_no);
+	}
+
+	//배송상품 출금예정수익확인
+	public List<ProfitVo> prodProfitExceptSelect(ProfitVo profitvo) {
+		return sqlSession.selectList("user.prodProfitExceptSelect", profitvo);
+	}
+	
+	//배송상품 출금가능익확인
+	public List<ProfitVo> prodProfitPossibleSelect(ProfitVo profitvo) {
+		return sqlSession.selectList("user.prodProfitPossibleSelect", profitvo);
+	}
+	
+	//배송상품 출금완료수익확인
+	public List<ProfitVo> prodProfitCompleteSelect(ProfitVo profitvo) {
+		return sqlSession.selectList("user.prodProfitCompleteSelect", profitvo);
+	}
+	
+	//배송상품 총누적수익확인
+	public List<ProfitVo> prodProfitTotalSelect(ProfitVo profitvo) {
+		return sqlSession.selectList("user.prodProfitTotalSelect", profitvo);
 	}
 }

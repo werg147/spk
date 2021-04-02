@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,6 +27,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javaex.service.UserService;
 import com.javaex.vo.KakaoVo;
+import com.javaex.vo.ProfitVo;
 import com.javaex.vo.TokenVo;
 import com.javaex.vo.SellerVo;
 import com.javaex.vo.UserVo;
@@ -84,13 +86,7 @@ public class UserController {
 
 	}
 
-	// 수익관리페이지
-	@RequestMapping(value = "/profit", method = { RequestMethod.GET, RequestMethod.POST })
-	public String profit() {
-		System.out.println("[cnt] 판매자 수익 페이지");
 
-		return "mypage/mypage_seller/seller_profit";
-	}
 
 	// 회원정보입력 페이지열기
 	@RequestMapping(value = "/joinform", method = { RequestMethod.GET, RequestMethod.POST })
@@ -168,7 +164,7 @@ public class UserController {
 	public String joininfoWrite(@ModelAttribute UserVo uservo, @RequestParam("profilphoto") MultipartFile profilphoto) {
 		System.out.println("[cnt]회원가입 후 회원정보입력" + uservo);
 
-		String address = uservo.getRoadAddress() + uservo.getAddressdetail();
+		String address = uservo.getRoadaddress() + uservo.getAddressdetail();
 		uservo.setAddress(address);
 		userservice.joininfoWrite(uservo, profilphoto);
 
@@ -186,5 +182,26 @@ public class UserController {
 
 		return "redirect:/";
 	}
+	
+	// 수익관리페이지
+	@RequestMapping(value = "/profit", method = { RequestMethod.GET, RequestMethod.POST })
+	public String profit(@RequestParam("type") String type, Model model) {
+		System.out.println("[cnt] 판매자 수익 페이지");
+			
+		model.addAttribute("type", type);
+		return "mypage/mypage_seller/seller_profit";
+	}
 
+	
+	// 수익조회
+	@ResponseBody
+	@RequestMapping(value = "/profitsearch", method = { RequestMethod.GET, RequestMethod.POST })
+	public ProfitVo profitSearch(@ModelAttribute ProfitVo profitvo) {
+		System.out.println("[cnt] 판매자 수익 조회" + profitvo);
+		
+		ProfitVo profit = userservice.profitSearch(profitvo);
+		
+		System.out.println("수익조회결과: " + profit);
+		return profit;
+	}
 }

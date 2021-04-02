@@ -227,6 +227,9 @@ public class ProdController {
 		System.out.println("[cnt] 배송판매자 계정 수정완료" + sellervo);
 		return "redirect:/mypage/prod";
 	}
+	
+
+	
 
 	// 드롭다운 예제파일 실행
 	@RequestMapping(value = "/exam", method = { RequestMethod.GET, RequestMethod.POST })

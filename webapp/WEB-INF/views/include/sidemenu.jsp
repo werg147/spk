@@ -13,7 +13,7 @@
 					class="menu">체육관관리</span><span class="arrow">></span></a></li>
 			<li><a href="${pageContext.request.contextPath}/mypage/book/bookinfo?no=${authUser.sell_no}"><span class="menu">대관관리</span><span
 					class="arrow">></span></a></li>
-			<li class="side_menu_last"><a href="${pageContext.request.contextPath}/mypage/book/profit"><span
+			<li class="side_menu_last"><a href="${pageContext.request.contextPath}/user/profit?type=book"><span
 					class="menu">수익관리</span><span class="arrow">></span></a></li>
 		</ul>
 	</c:if>
@@ -24,7 +24,7 @@
 					class="arrow">></span></a></li>
 			<li><a href="${pageContext.request.contextPath}/mypage/prod/delmanage"><span class="menu">배송관리</span><span
 					class="arrow">></span></a></li>
-			<li><a href="${pageContext.request.contextPath}/user/profit"><span
+			<li><a href="${pageContext.request.contextPath}/user/profit?type=prod"><span
 					class="menu">수익관리</span><span class="arrow">></span></a></li>
 			<li class="side_menu_last"><a href="${pageContext.request.contextPath}/mypage/prod/prodmanageform"><span class="menu">사업자계정
 						관리</span><span class="arrow">></span></a></li>		

@@ -1185,3 +1185,32 @@ table {
 #space {
 	height : 100px;
 }
+
+/*버튼*/
+.profit_search_btn {
+	border-radius: 5px;
+	color: #000000;
+	font-size: 12px;
+	background: #e3e3e3;
+	padding: 3px 2px 3px 2px;
+	text-decoration: none;
+	border: 0px;
+	width: 70px;
+	height: 28px;
+	margin-left: 20px;
+	cursor: pointer;
+}
+
+.profit_search_btn:hover {
+	background: #d4d4d4;
+	text-decoration: none;
+}
+/*버튼 여기까지*/
+.duration_serach{
+display: 	flex;
+justify-content: flex-end;
+}
+.time_filter{
+	width: 350px;
+	display: flex;
+}
