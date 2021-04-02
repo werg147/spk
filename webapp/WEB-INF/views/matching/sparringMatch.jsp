@@ -161,7 +161,7 @@
 												<c:if test="${authUser.user_no != null }">
 													<c:if test="${authUser.user_no != map.bBuyVo.user_no }">
 														<c:if test="${authUser.user_no != map.bbuyVoUser.user_no }">
-															<c:if test="${empty map.bBuyList[0]  || !map.bBuyList[0].b_buy_player_state ne '선택자' }">
+															<c:if test="${empty map.bBuyList[0]  || map.bBuyList[0].b_buy_player_state ne '선택자' }">
 																<c:choose>
 																	<c:when test="${map.bBuyVo.booking_no == 0 }">
 																		<a href="${pageContext.request.contextPath }/sparring/rent?subnum=1&bbuyno=${map.bBuyVo.b_buy_no}"><button class="dae_button_item2">
