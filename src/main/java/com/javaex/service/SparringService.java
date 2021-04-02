@@ -454,7 +454,7 @@ public class SparringService {
 			alarmVo.setAlarm_content(alVo.getGym_reservation());
 			
 			System.out.println("셀넘버 :" + alarmVo.getSell_no());
-			alarmDao.inserAlarmtoseller(alarmVo); //o
+			alarmDao.inserbookingAlarm(alarmVo); //o
 			
 			/* 시합등록자에게 알람 */
 			BBuyVo bbuyVo = sparringDao.selectBBUYSC(bBuyVo.getB_buy_no());
@@ -463,7 +463,7 @@ public class SparringService {
 			alarmVo.setUser_no(UN);
 			alarmVo.setAlarm_content(alVo.getPayment_complete());
 
-			alarmDao.insertResistrar(alarmVo);
+			alarmDao.inserbookingAlarm(alarmVo);
 
 			/***/
 
@@ -494,13 +494,13 @@ public class SparringService {
 			alVo.setAlarm_content(alarmContentVo.payment_complete);
 			alVo.setUser_no(uNo);
 
-			alarmDao.insertMatchAlarm(alVo);
+			alarmDao.inserbookingAlarm(alVo);
 
 			/**/
 			AlarmVo sellVo = sparringDao.selectSellno(booking_no);
 			sellVo.setAlarm_content(alarmContentVo.gym_reservation);
 
-			alarmDao.insertMatchAlarm(sellVo);
+			alarmDao.inserbookingAlarm(sellVo);
 
 		}
 
@@ -1237,7 +1237,7 @@ public class SparringService {
 		alVo.setAlarm_content(alarmContentVo.payment_complete);
 		
 		alVo.setUser_no(userNo);
-		alarmDao.insertMatchAlarm(alVo);
+		alarmDao.inserbookingAlarm(alVo);
 		/******/
 		/*****등록자에게 알람발송 매치가 성사되었습니다 ****/
 		
@@ -1251,7 +1251,7 @@ public class SparringService {
 		/**시설관리에게 알람발송 예약된 대관상품의 결제가 완료되었습니다**/
 		alVo = sparringDao.selectSellno(bookingNo);
 		alVo.setAlarm_content(alarmContentVo.booking_payment_complete02);
-		alarmDao.insertMatchAlarm(alVo);
+		alarmDao.inserbookingAlarm(alVo);
 	}
 
 	public void acceptPartner(int partneruserno, int bookingNo, BBuyVo bBuyVo, int bbuyno, int bookingNo2, int mybbuyno, int userNo) {
@@ -1298,11 +1298,16 @@ public class SparringService {
 		
 		alVo.setUser_no(userNo);
 		alarmDao.insertMatchAlarm(alVo);
+		
+		/****신청자에게 결제완료****/
+		alVo.setAlarm_content(alarmContentVo.payment_complete);
+		alVo.setUser_no(userNo);
+		alarmDao.inserbookingAlarm(alVo);
 		/**시설관리에게 알람발송 예약된 대관상품의 결제가 완료되었습니다**/
 		
 		alVo = sparringDao.selectSellno(bookingNo);
 		alVo.setAlarm_content(alarmContentVo.booking_payment_complete01);
-		alarmDao.insertMatchAlarm(alVo);
+		alarmDao.inserbookingAlarm(alVo);
 
 	}
 
@@ -1348,6 +1353,8 @@ public class SparringService {
 		System.out.println("유저넘버 : " + userno);
 			
 		List<BBuyVo> bList = sparringDao.selectBBuyList3(userno);
+		
+		System.out.println(bList);
 		
 		for(int i = 0 ; i <bList.size(); i++) {
 			int bookingNo = bList.get(i).getBooking_no();

@@ -112,4 +112,10 @@ public class AlarmDao {
 		return sql.selectOne("alarm.selectTotalCnt", keyword);
 	}
 
+	public void inserbookingAlarm(AlarmVo alarmVo) {
+		System.out.println("[Alarm Dao]: inserbookingAlarm");
+		
+		sql.insert("alarm.inserbookingAlarm",alarmVo);
+	}
+
 }
