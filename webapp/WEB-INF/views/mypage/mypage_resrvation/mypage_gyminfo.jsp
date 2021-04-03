@@ -268,6 +268,7 @@
 					<!--//gym_regi_form-->
 				</div>
 				<!-- //content_seller -->
+				
 			</div>
 			<!--//middle-->
 

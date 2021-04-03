@@ -93,7 +93,8 @@ public class GymController {
 	@RequestMapping(value="/gymadd", method= {RequestMethod.GET , RequestMethod.POST})
 	public String gymAdd(@ModelAttribute GymVo gymVo,
 					@RequestParam("conve") List<String> conve,
-					@RequestParam(value="file", required=false) MultipartFile file,
+					@RequestParam("file1") MultipartFile mainfile,
+					@RequestParam("file2") MultipartFile subfile,
 					HttpSession session) {
 		System.out.println("[GymController] gymAdd()");
 		System.out.println(gymVo);
@@ -109,7 +110,7 @@ public class GymController {
 		if(bookType == 1) {			
 			gymVo.setSell_no(sellNo);
 			
-			gymService.gymAdd(gymVo, conve, file);
+			gymService.gymAdd(gymVo, conve, mainfile, subfile);
 		}
 		int gymNo = gymVo.getGym_no();
 		

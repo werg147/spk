@@ -67,6 +67,18 @@
 		]]>
 	</insert>
 	
+	<!-- 체육관 이미지 등록 -->
+	<insert id="gimgInsert" parameterType="GymImgVo">
+		<![CDATA[ 
+		insert into gymimg
+		values(seq_gymimg_no.nextval, 
+		       #{gym_no}, 
+		       #{gym_img_savename}, 
+		       #{gym_img_name}, 
+		       #{gym_img_type})
+		]]>
+	</insert>
+	
 	<!-- 체육관별로 편의시설 불러오기 -->
 	<select id="conSelectList" parameterType="int" resultType="ConVo">
 		<![CDATA[ 
@@ -99,18 +111,6 @@
 			and con_name = #{con_name}
 		]]>
 	</update>
-	
-	<!-- 체육관 이미지 등록 -->
-	<insert id="gimgInsert" parameterType="GymImgVo">
-		<![CDATA[ 
-		insert into gymimg
-		values(seq_gymimg_no.nextval, 
-		       #{gym_no}, 
-		       #{gym_img_savename}, 
-		       #{gym_img_name}, 
-		       'main')
-		]]>
-	</insert>
 	
 	<!-- 대관 등록 / 부킹번호 체육관번호 날짜 시작 종료 요금 상태 -->
 	<insert id="bookInsert" parameterType="BookingVo">
