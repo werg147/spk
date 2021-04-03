@@ -146,7 +146,7 @@
 				if (profit != null) {
 					alert("성공");
 
-					var total = profit.total;
+					var total = profit.whole;
 					var complete = profit.complete;
 					var possible = profit.possible;
 					var expect = profit.expect;

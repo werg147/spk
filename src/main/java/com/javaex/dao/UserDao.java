@@ -106,7 +106,7 @@ public class UserDao {
 	}
 	
 	//배송상품 총누적수익확인
-	public List<ProfitVo> prodProfitTotalSelect(ProfitVo profitvo) {
-		return sqlSession.selectList("user.prodProfitTotalSelect", profitvo);
+	public List<ProfitVo> prodProfitWholeSelect(ProfitVo profitvo) {
+		return sqlSession.selectList("user.prodProfitWholeSelect", profitvo);
 	}
 }

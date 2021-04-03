@@ -86,13 +86,13 @@ public class ProdDao {
 	}
 	
 	//배송상태 수정
-	public void delStateUpdate(BuyProductVo bpvo) {
-		sqlSession.update("prod.delStateUpdate", bpvo);
+	public int delStateUpdate(ProdBuyForVo pbfvo) {
+		return sqlSession.update("prod.delStateUpdate", pbfvo);
 	}
 	
 	//택배사 운송장 정보입력(수정)
-	public void delinfoUpdate(BuyProductVo bpvo) {
-		sqlSession.update("prod.delinfoUpdate", bpvo);
+	public int delinfoUpdate(ProdBuyForVo pbfvo) {
+		return sqlSession.update("prod.delinfoUpdate", pbfvo);
 	}
 	
 	

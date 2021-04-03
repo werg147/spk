@@ -298,17 +298,23 @@
 			SELECT  b.buy_date,
 			        bp.buyprod_price,
 			        p.sell_no,
+                    startday,
+                    yesterday,
 			        SUM(buyprod_price) OVER(
 			        ORDER BY sell_no
 			        ROWS BETWEEN UNBOUNDED PRECEDING
 			        AND CURRENT ROW
 			    ) AS total
 			FROM buyproduct bp, buy b, product p, (select to_char(add_months(sysdate,-1),'yyyy-mm') || '-01'  as monthstart, 
-			       to_char(TRUNC(LAST_DAY(ADD_MONTHS(SYSDATE, -1)))+0.99999421,'YYYY-MM-DD') AS monthend FROM DUAL) d
+			       to_char(TRUNC(LAST_DAY(ADD_MONTHS(SYSDATE, -1)))+0.99999421,'YYYY-MM-DD') AS monthend,
+                   to_char(TRUNC(SYSDATE, 'MM')) as startday,
+                   to_char(sysdate-1,'yyyy-mm-dd') as yesterday,
+                   to_char(sysdate,'yyyy-mm-dd') as today
+                   FROM DUAL) d
 			where bp.buy_no=b.buy_no
 			and bp.prod_no=p.prod_no
 			and sell_no = #{sell_no}
-			and b.buy_date BETWEEN d.monthstart and #{peri_end}
+			and b.buy_date >= startday and b.buy_date < today
 		]]>	
 	</select>
 	
@@ -331,7 +337,7 @@
 		]]>	
 	</select>
 	
-		<select id="prodProfitTotalSelect" parameterType="com.javaex.vo.ProfitVo" resultType="com.javaex.vo.ProfitVo">
+		<select id="prodProfitWholeSelect" parameterType="com.javaex.vo.ProfitVo" resultType="com.javaex.vo.ProfitVo">
 		<![CDATA[
 			SELECT  b.buy_date,
 			        bp.buyprod_price,
@@ -346,7 +352,7 @@
 			where bp.buy_no=b.buy_no
 			and bp.prod_no=p.prod_no
 			and sell_no = #{sell_no}
-			and b.buy_date BETWEEN #{peri_start} and #{peri_end}
+			and b.buy_date >= #{peri_start} and b.buy_date <= #{peri_end}
 		]]>	
 	</select>
 	

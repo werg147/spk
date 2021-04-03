@@ -293,15 +293,16 @@ public class UserService {
 		
 		List<ProfitVo> profitCompleteList = userdao.prodProfitCompleteSelect(profitvo);
 		System.out.println("3");
+
 		int completeLastno = profitCompleteList.size()-1;
 		int complete = profitExpectList.get(completeLastno).getTotal();
 		profitvo.setComplete(complete);
 		
-		List<ProfitVo> profitTotalList = userdao.prodProfitTotalSelect(profitvo);
+		List<ProfitVo> profitWholeList = userdao.prodProfitWholeSelect(profitvo);
 		System.out.println("4");
-		int totalLastno = profitTotalList.size()-1;
-		int total = profitExpectList.get(totalLastno).getTotal();
-		profitvo.setTotal(total);
+		int wholeLastno = profitWholeList.size()-1;
+		int whole = profitWholeList.get(wholeLastno).getTotal();
+		profitvo.setWhole(whole);
 		
 		return profitvo;
 		} else {

@@ -11,7 +11,9 @@ public class ProfitVo {
 	private int complete;
 	private int possible;
 	private int expect;
+	private int whole;
 	private int sell_no;
+	
 	
 	public ProfitVo() {
 	}
@@ -31,6 +33,25 @@ public class ProfitVo {
 		this.complete = complete;
 		this.possible = possible;
 		this.expect = expect;
+		this.sell_no = sell_no;
+	}
+
+
+
+
+	public ProfitVo(String peri_start, String peri_end, String monthstart, String monthend, String type, int total,
+			int complete, int possible, int expect, int whole, int sell_no) {
+		super();
+		this.peri_start = peri_start;
+		this.peri_end = peri_end;
+		this.monthstart = monthstart;
+		this.monthend = monthend;
+		this.type = type;
+		this.total = total;
+		this.complete = complete;
+		this.possible = possible;
+		this.expect = expect;
+		this.whole = whole;
 		this.sell_no = sell_no;
 	}
 
@@ -141,11 +162,25 @@ public class ProfitVo {
 
 
 
+	public int getWhole() {
+		return whole;
+	}
+
+
+
+
+	public void setWhole(int whole) {
+		this.whole = whole;
+	}
+
+
+
+
 	@Override
 	public String toString() {
 		return "ProfitVo [peri_start=" + peri_start + ", peri_end=" + peri_end + ", monthstart=" + monthstart
 				+ ", monthend=" + monthend + ", type=" + type + ", total=" + total + ", complete=" + complete
-				+ ", possible=" + possible + ", expect=" + expect + ", sell_no=" + sell_no + "]";
+				+ ", possible=" + possible + ", expect=" + expect + ", whole=" + whole + ", sell_no=" + sell_no + "]";
 	}
 	
 	

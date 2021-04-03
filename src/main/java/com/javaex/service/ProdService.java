@@ -5,7 +5,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.javaex.dao.AlarmDao;
 import com.javaex.dao.ProdDao;
 import com.javaex.dao.UserDao;
@@ -14,6 +13,7 @@ import com.javaex.vo.AlarmVo;
 import com.javaex.vo.BuyProductVo;
 import com.javaex.vo.ColorsizeVo;
 import com.javaex.vo.ProdBuyForVo;
+import com.javaex.vo.ProdNoVo;
 import com.javaex.vo.ProdimgVo;
 import com.javaex.vo.ProductVo;
 import com.javaex.vo.SellerVo;
@@ -196,41 +196,52 @@ public class ProdService {
 	}
 	
 	//배송준비중
-	public void delStart(int buyprod_no) {
+	public int delStart(ProdBuyForVo pvo) {
 		System.out.println("[service] 배송상태 수정");
 
-		BuyProductVo bpvo = new BuyProductVo();
-		bpvo.setBuyprod_no(buyprod_no);
-		bpvo.setBuy_del_state("배송준비중");
+		List<ProdNoVo> buyprod_nolist = pvo.getBuyprod_nolist();
+		
+		int num = buyprod_nolist.size();
+		int count = 0;
+		for(int i=0; i<num; i++) {
+			int buyprod_no = buyprod_nolist.get(i).getBuyprod_no();
+			
+			pvo.setBuyprod_no(buyprod_no);
+			pvo.setBuy_del_state("배송준비중");
 
-		proddao.delStateUpdate(bpvo);
+			count = proddao.delStateUpdate(pvo);
+		}
+		
 		
 		
 		System.out.println("[Alarm Service]: payment_complete(AlarmVo aVo) 연결");
+		int buyprod_no = buyprod_nolist.get(0).getBuyprod_no();
+		
 		alarmVo = aDao.prodSelect(buyprod_no);
 		alarmVo.setAlarm_content(alarmcVo.getDelivery_ready());
 
 		System.out.println(alarmVo);
 		aDao.insertProdAlarm(alarmVo);
 
-
+		
+		return count;
 	}
 	
 	//배송불가
-	public void delNo(BuyProductVo bpvo) {
+	public void delNo(ProdBuyForVo pbfvo) {
 		System.out.println("[service] 배송상태 수정");
 			
-		if(bpvo.getBuy_del_state() !="배송중" && bpvo.getBuy_del_state() != "배송완료") {
-			bpvo.setBuy_del_state("판매불가");
-			System.out.println("배송불가" + bpvo);
-			proddao.delStateUpdate(bpvo);
+		if(pbfvo.getBuy_del_state() !="배송중" && pbfvo.getBuy_del_state() != "배송완료") {
+			pbfvo.setBuy_del_state("판매불가");
+			System.out.println("배송불가" + pbfvo);
+			proddao.delStateUpdate(pbfvo);
 		} else {
 			System.out.println("배송중이거나 배송완료된 상품으로 판매불가 전환이 불가합니다.");
 		}
 		
 		System.out.println("[Alarm Service]: 배송불가");
 
-		AlarmVo alarmVo = aDao.prodSelect(bpvo.getBuyprod_no());
+		AlarmVo alarmVo = aDao.prodSelect(pbfvo.getBuyprod_no());
 		
 		alarmVo.setAlarm_title(alarmVo.getProd_name());
 		alarmVo.setAlarm_content(alarmcVo.getDelivery_cancle()  + "<br>"+ alarmcVo.getRefund());
@@ -241,13 +252,18 @@ public class ProdService {
 	}
 
 	//택배사 운송장 정보입력(수정)
-		public void delModify(int[] buyprod_noArray, BuyProductVo bpvo) {
+		public int delModify(ProdBuyForVo pbfvo) {
 			System.out.println("[service] 택배사 운송장 정보입력(수정)");
 			
-			for (int i=0; i<buyprod_noArray.length; i++) {
-				int buyprod_no = buyprod_noArray[i];
-				bpvo.setBuyprod_no(buyprod_no);
-				proddao.delinfoUpdate(bpvo);
+			
+			int count = 0;
+			
+			
+			List<ProdNoVo> buyprod_nolist = pbfvo.getBuyprod_nolist();
+			for (int i=0; i<buyprod_nolist.size(); i++) {
+				int buyprod_no = buyprod_nolist.get(i).getBuyprod_no();
+				pbfvo.setBuyprod_no(buyprod_no);
+				count = proddao.delinfoUpdate(pbfvo);
 				
 				//알람
 				System.out.println("[Alarm Service]: delStart(AlarmVo aVo) 연결");
@@ -258,7 +274,7 @@ public class ProdService {
 
 			}
 			
-
+			return count;
 		}
 		
 		

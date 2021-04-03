@@ -131,6 +131,7 @@ public class ProdController {
 
 		List<ProdBuyForVo> delList = prodservice.delform(pvo);
 		ProdBuyForVo delfound = delList.get(0);
+
 		model.addAttribute("delList", delList);
 		model.addAttribute("delfound", delfound);
 		System.out.println("[cnt] 배송정보 보기" + delfound + delList);
@@ -139,33 +140,34 @@ public class ProdController {
 	}
 	
 
-
+	
 	//배송준비중
+	@ResponseBody
 	@RequestMapping(value = "/delstatechange", method = { RequestMethod.GET, RequestMethod.POST })
-	public String delstart(@RequestParam("buyprod_no") int buyprod_no) {
-		System.out.println("[cnt] 배송준비중");
-		prodservice.delStart(buyprod_no);
-		return "redirect:/mypage/prod/delmanage";
+	public int delstart(@RequestBody  ProdBuyForVo pbfvo) {
+		System.out.println("[cnt] 배송준비중" + pbfvo);
+		System.out.println(pbfvo.getBuyprod_nolist());
+
+		return prodservice.delStart(pbfvo);
 	}
 	
 	//배송불가
 	@RequestMapping(value = "/delno", method = { RequestMethod.GET, RequestMethod.POST })
-	public String delNo(@ModelAttribute BuyProductVo bpvo) {
+	public String delNo(@ModelAttribute ProdBuyForVo pbfvo) {
 		System.out.println("[cnt] 배송불가");
 		
-		prodservice.delNo(bpvo);
+		prodservice.delNo(pbfvo);
 		
 		return "redirect:/mypage/prod/delmanage";
 	}
 	
 	//택배사 운송장 정보입력(수정)
+	@ResponseBody
 	@RequestMapping(value = "/delmodify", method = { RequestMethod.GET, RequestMethod.POST })
-	public String delModify(@RequestParam("buyprod_no") int[] buyprod_noArray, @ModelAttribute BuyProductVo bpvo ) {
-		System.out.println("[cnt] 택배사 운송장 정보입력(수정)_buyprod_no");
+	public int delModify(@RequestBody ProdBuyForVo pbfvo) {
+		System.out.println("[cnt] 택배사 운송장 정보입력(수정)" + pbfvo);
 		
-		prodservice.delModify(buyprod_noArray, bpvo);
-
-		return "redirect:/mypage/prod/delmanage";
+		return prodservice.delModify(pbfvo);
 	}
 	
 
