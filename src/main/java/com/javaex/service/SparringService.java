@@ -1376,9 +1376,11 @@ public class SparringService {
 			}
 			
 			BBuyVo bvo = sparringDao.selectBBuyuserno(bookingNo);
+			
 			if(bvo != null) {
 				
 				bList.get(i).setU_no(bvo.getU_no());
+				bList.get(i).setB_buy_no(bvo.getB_buy_no());
 			}
 			
 		}

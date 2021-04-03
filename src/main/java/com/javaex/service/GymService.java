@@ -1,6 +1,7 @@
 package com.javaex.service;
 
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
@@ -19,6 +20,7 @@ import com.javaex.vo.BookingVo;
 import com.javaex.vo.ConVo;
 import com.javaex.vo.GymImgVo;
 import com.javaex.vo.GymVo;
+import com.javaex.vo.ProdimgVo;
 import com.javaex.vo.SellerVo;
 
 @Service
@@ -65,7 +67,9 @@ public class GymService {
 	}
 
 	// 체육관 등록 (체육관, 체크박스값, 파일 등록)
-	public void gymAdd(GymVo gymVo, List<String> conve, MultipartFile file) {
+	public void gymAdd(GymVo gymVo, List<String> conve,
+					MultipartFile mainfile,
+					MultipartFile subfile) {
 		System.out.println("[GymService] gymAdd()");
 
 		String con;
@@ -79,6 +83,7 @@ public class GymService {
 		System.out.println("체육관번호>>> " + gymNo);
 
 		// 주변시설 데이터 6가지를 전부 넣은 후
+		// (먼저 0 다 넣는 게 아니라 유무에 따라 0, 1 넣는 걸로 수정 필요)
 		ConVo conVo1 = new ConVo(gymNo, "주차장");
 		ConVo conVo2 = new ConVo(gymNo, "샤워실");
 		ConVo conVo3 = new ConVo(gymNo, "수건");
@@ -124,7 +129,8 @@ public class GymService {
 			}
 		}
 
-		// 체육관 이미지 처리
+		/////////////////////////////체육관 이미지 처리
+		/*
 		System.out.println("[file original name] --> " + file.getOriginalFilename());
 
 		///// DB에 저장할 파일정보 수집/////
@@ -159,7 +165,56 @@ public class GymService {
 
 		GymImgVo gimgVo = new GymImgVo(gymNo, imgFile, orgName);
 		gymDao.gimgInsert(gimgVo);
+		*/
 
+		try {
+			// 메인파일 저장
+			String mainfilePath = "C:\\javaStudy\\upload"; // 설정파일로 뺀다.
+			String mainfileOriginName = mainfile.getOriginalFilename();
+
+			System.out.println("기존 파일명 : " + mainfileOriginName);
+
+			String mainsavename = System.currentTimeMillis() + UUID.randomUUID().toString() + mainfileOriginName; // 파일명
+			String mainfileFullPath = mainfilePath + "/" + mainsavename; // 파일 전체 경로
+			System.out.println("originalFilename:" + mainsavename + ", fileFullPath:" + mainfileFullPath);
+
+			System.out.println("메인이미지 등록");
+			GymImgVo gimgVo = new GymImgVo();
+			gimgVo.setGym_img_savename(mainsavename);
+			gimgVo.setGym_img_name(mainfileOriginName);
+			gimgVo.setGym_img_type("main");
+			System.out.println("메인이미지 등록 체육관번호" + gymNo);
+			gimgVo.setGym_no(gymNo);
+
+			System.out.println("[service]체육관이미지등록 출발" + gimgVo);
+			gymDao.gimgInsert(gimgVo);
+			
+			// 서브파일 저장
+			String subfilePath = "C:\\javaStudy\\upload"; // 설정파일로 뺀다.
+			String subfileOriginName = mainfile.getOriginalFilename();
+
+			System.out.println("기존 파일명 : " + subfileOriginName);
+
+			String subsavename = System.currentTimeMillis() + UUID.randomUUID().toString() + subfileOriginName; // 파일명
+			String subfileFullPath = subfilePath + "/" + subsavename; // 파일 전체 경로
+			System.out.println("originalFilename:" + subsavename + ", fileFullPath:" + subfileFullPath);
+
+			System.out.println("메인이미지 등록");
+			GymImgVo gimgVo2 = new GymImgVo();
+			gimgVo2.setGym_img_savename(subsavename);
+			gimgVo2.setGym_img_name(subfileOriginName);
+			gimgVo2.setGym_img_type("main");
+			System.out.println("메인이미지 등록 체육관번호" + gymNo);
+			gimgVo2.setGym_no(gymNo);
+
+			System.out.println("[service]체육관이미지등록 출발" + gimgVo);
+			gymDao.gimgInsert(gimgVo);
+
+		} catch (Exception e) {
+			System.out.println("postTempFile_ERROR======>");
+
+			e.printStackTrace();
+		}
 	}
 
 	// 대관 등록

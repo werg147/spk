@@ -54,7 +54,12 @@
 					<!--//content_delevery_product_header//-->
 					<div class="content_product_line"></div>
 
-
+					<!-- 대관 관리 버튼 -->
+					<div class="regi_btn_site">
+						<a href="${pageContext.request.contextPath}/mypage/book/bookinfo?no=${gymVo.sell_no }&gymno=${gymVo.gym_no}">
+						<button type="button" class="regi_btn">대관 관리</button></a>
+					</div>
+					
 					<!--체육관 불러오기-->
 					<div class="booking_gym_info">
 						<table class="booking_gym_table">

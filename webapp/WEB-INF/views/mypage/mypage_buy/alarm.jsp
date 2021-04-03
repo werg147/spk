@@ -41,7 +41,7 @@
 					<!-- 반복리스트 -->
 					<div class="alram_list">
 
-						<c:forEach items="${requestScope.pMap.alarmList }" var="aList">
+						<c:forEach items="${requestScope.AlarmList }" var="aList">
 							<div class="alarm_content">
 								<h3 class="Order_date">${aList.alarm_date }</h3>
 								<div class="Box_alarm">
@@ -50,12 +50,17 @@
 											<span class="Kind_goods">배송상품</span>
 											<span><a class="Addr_goods" href="${pageContext.request.contextPath }/mypage/buydel?buy_no=${aList.buy_no}">${aList.alarm_title}</a></span>
 										</c:when>
-										<c:otherwise>
+										<c:when test="${aList.buy_type == 2 }">
 											<span class="Kind_goods">매칭상품</span>
-											<span><a class="Addr_goods" href="${pageContext.request.contextPath }/mypage/buylist?b_buy_no=${aList.b_buy_no}">${aList.gym_name }</a></span>
-										</c:otherwise>
+											<span><a class="Addr_goods" href="${pageContext.request.contextPath }/mypage/buymatching?booking_no=${aList.b_buy_no}">${aList.alarm_title }</a></span>
+										</c:when>
+										<c:when test="${aList.buy_type == 3 }">
+											<span class="Kind_goods">대관상품</span>
+											<span><a class="Addr_goods" href="${pageContext.request.contextPath }/mypage/buybooking?booking_no=${aList.booking_no}">${aList.alarm_title }</a></span>
+										</c:when>
 									</c:choose>
 									<p class="Notice_alarm">${aList.alarm_content }</p>
+									<!-- <a href="${pageContext.request.contextPath }/mypage/상대평가?b_buy_no=${aList.b_buy_no}">상대를 평가해보세요.</a> -->
 								</div>
 							</div>
 						</c:forEach>
@@ -70,24 +75,6 @@
 
 			</div>
 			<!--//middle-->
-
-			<div id="paging">
-				<ul>
-					<c:if test="${pMap.prev == true }">
-						<li><a href="${pageContext.request.contextPath }/mypage/alarm?crtPage=${pMap.startPageBtnNo - 1}&keyword=${param.keyword}">◀</a></li>
-					</c:if>
-
-					<c:forEach begin="${pMap.startPageBtnNo }" end="${pMap.endPageBtnNo }" step="1" var="page">
-						<li><a href="${pageContext.request.contextPath }/mypage/alarm?crtPage=${page}&keyword=${param.keyword}">${page}</a></li>
-					</c:forEach>
-
-					<c:if test="${pMap.next == true }">
-						<li><a href="${pageContext.request.contextPath }/mypage/alarm?crtPage=${pMap.endPageBtnNo + 1}&keyword=${param.keyword}">▶</a></li>
-					</c:if>
-				</ul>
-
-				<div class="clear"></div>
-			</div>
 
 			<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 			<!--//footer//-->

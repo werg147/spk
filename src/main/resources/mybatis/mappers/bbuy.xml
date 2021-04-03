@@ -276,7 +276,8 @@
 	
 	<select id="selectBBuyuserno" parameterType="int" resultType="BBuyVo">
 	<![CDATA[
-		    select user_no as u_no
+		    select user_no as u_no,
+		    	   b_buy_no
             from bbuy
             where booking_no = #{bookingNo}
             and (b_buy_player_state = '시합결정자' or b_buy_player_state = '시합등록자')	

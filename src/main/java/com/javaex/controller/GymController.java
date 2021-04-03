@@ -33,6 +33,18 @@ public class GymController {
 	public String gymInfoPath(@RequestParam("no") int sellNo,
 						  HttpSession session,
 						  Model model) { 
+		
+		//세션에서 user_no   구한다 --> 서비스getGymInfo()에 전달
+		//mypage/mypage_resrvation/mypage_gyminfo
+		//
+		/*
+		 * getGymInfo(no){
+		 *   // 체유관리스트  4개
+		 *   // 0번째 짐 상세정보 = 리스트에서 0 상세조회
+		 *   
+		 * }   
+		 */
+
 		//사업자번호를 조건으로 체육관을 리스트로 가져온 후 각탭에 체육관 번호 넣기
 		System.out.println("[GymController] gymInfoPath()");
 		
@@ -81,7 +93,8 @@ public class GymController {
 	@RequestMapping(value="/gymadd", method= {RequestMethod.GET , RequestMethod.POST})
 	public String gymAdd(@ModelAttribute GymVo gymVo,
 					@RequestParam("conve") List<String> conve,
-					@RequestParam(value="file", required=false) MultipartFile file,
+					@RequestParam("file1") MultipartFile mainfile,
+					@RequestParam("file2") MultipartFile subfile,
 					HttpSession session) {
 		System.out.println("[GymController] gymAdd()");
 		System.out.println(gymVo);
@@ -97,7 +110,7 @@ public class GymController {
 		if(bookType == 1) {			
 			gymVo.setSell_no(sellNo);
 			
-			gymService.gymAdd(gymVo, conve, file);
+			gymService.gymAdd(gymVo, conve, mainfile, subfile);
 		}
 		int gymNo = gymVo.getGym_no();
 		

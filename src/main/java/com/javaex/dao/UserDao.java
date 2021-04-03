@@ -106,7 +106,28 @@ public class UserDao {
 	}
 	
 	//배송상품 총누적수익확인
-	public List<ProfitVo> prodProfitWholeSelect(ProfitVo profitvo) {
-		return sqlSession.selectList("user.prodProfitWholeSelect", profitvo);
+	public List<ProfitVo> prodProfitTotalSelect(ProfitVo profitvo) {
+		return sqlSession.selectList("user.prodProfitTotalSelect", profitvo);
+	}
+	
+	//수익관리 - 대관
+	//대관상품 출금예정수익확인
+	public List<ProfitVo> bookProfitExceptSelect(ProfitVo profitvo) {
+		return sqlSession.selectList("user.bookProfitExceptSelect", profitvo);
+	}
+	
+	//대관상품 출금가능익확인
+	public List<ProfitVo> bookProfitPossibleSelect(ProfitVo profitvo) {
+		return sqlSession.selectList("user.bookProfitPossibleSelect", profitvo);
+	}
+	
+	//대관상품 출금완료수익확인
+	public List<ProfitVo> bookProfitCompleteSelect(ProfitVo profitvo) {
+		return sqlSession.selectList("user.bookProfitCompleteSelect", profitvo);
+	}
+	
+	//대관상품 총누적수익확인
+	public List<ProfitVo> bookProfitTotalSelect(ProfitVo profitvo) {
+		return sqlSession.selectList("user.bookProfitTotalSelect", profitvo);
 	}
 }

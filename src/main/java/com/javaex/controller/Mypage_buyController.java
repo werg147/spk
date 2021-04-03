@@ -47,23 +47,21 @@ public class Mypage_buyController {
 	@Autowired
 	public BuyListService blServ;
 
-	/* 알람 + 페이징 */
+	/* 알람 리스트 */
 	@RequestMapping(value = "/alarm", method = { RequestMethod.GET, RequestMethod.POST })
-	public String alarm(@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
-			@RequestParam(value = "crtPage", required = false, defaultValue = "1") int crtPage, Model model,
-			HttpSession session) {
+	public String list(Model model, HttpSession session) {
 
-		System.out.println("[Alarm Ctrl]: alarm 진입");
+		System.out.println("[Alarm Ctrl]: list 진입");
 
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 
 		int user_no = authUser.getUser_no();
 
-		Map<String, Object> pMap = aServ.pMap(keyword, crtPage, user_no);
+		List<AlarmVo> aList = aServ.list(user_no);
 
-		System.out.println("[Alarm Ctrl]: " + pMap);
+		System.out.println("[Alarm Ctrl]: " + aList.toString());
 
-		model.addAttribute("pMap", pMap);
+		model.addAttribute("AlarmList", aList);
 
 		return "mypage/mypage_buy/alarm";
 

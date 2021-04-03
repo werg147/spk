@@ -1,30 +1,9 @@
 @charset "UTF-8";
 
 /***********공통*****************/
-body,
-div,
-ul,
-li,
-dl,
-dt,
-ol,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-input,
-fieldset,
-legend,
-p,
-select,
-table,
-th,
-td,
-tr,
-textarea,
-button,
+body, div, ul, li, dl, dt, ol, h1, h2,
+h3, h4, h5, h6, input, fieldset, legend, p,
+select, table, th, td, tr, textarea, button,
 form {
   margin: 0;
   padding: 0;
@@ -83,7 +62,7 @@ a:hover {
   }
 
   .middle .content_seller {
-    width: 800px;
+    width: 815px;
     display: flex;
     flex-direction: column;
   }
@@ -228,6 +207,7 @@ a:hover {
   .middle .own_gym_tab li {
   	border-radius: 10px;
   	padding-top: 10px;
+  	margin-top: 3px;
   	margin-right: 10px;
   	float:left; 
 	display: table; 
@@ -248,7 +228,7 @@ a:hover {
   /******체육관 등록******/
   .middle .gym_regi_form {
     font-size: 16px;
-    height: 1000px;
+   /*  height: 2000px; */
     margin-top: 20px;
   }
 
@@ -295,6 +275,7 @@ a:hover {
 
     .middle .gym_regi_form .gym_regi_btn_site {
         text-align: center;
+        margin-bottom: 50px;
     }
 
     .middle .gym_regi_form .gym_regi_btn{
@@ -692,5 +673,29 @@ a:hover {
 	width: 810px;
 	margin: 40px 0px 40px 0px;
 }
-  
+
+/* 체육관등록 이미지 드롭다운 */
+.gym_insert_div_img .dropZone1, .gym_insert_div_img .dropZone2 {
+	display: flex;
+	outline: 1px dashed #878787;
+	outline-offset: -10px;
+	text-align: center;
+	vertical-align: middle;
+	transition: all .15s ease-in-out;
+	width: 180px;
+	height: 180px;
+	background-color: #E3E3E3;
+	margin-bottom: 5px;
+	flex-wrap: wrap;
+	margin: 5px 30px 30px 5px;
+}
+
+/* .gym_insert_div_img td>div, .dropZone1, .dropZone2 {
+	display: flex;
+} */
+ 
+
+#space2 {
+	margin-bottom: 50px;
+}
 

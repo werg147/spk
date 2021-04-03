@@ -951,7 +951,7 @@ table {
 }
 
 .product_insert_div_img .dropZone1, .product_insert_div_img .dropZone2 {
-	dispaly: flex;
+	display: flex;
 	outline: 1px dashed #878787;
 	outline-offset: -10px;
 	text-align: center;
