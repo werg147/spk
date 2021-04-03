@@ -40,7 +40,7 @@
 					<!-- //line -->
 
 					<!-- 입력폼 → 주문하기 -->
-					<form action="${pageContext.request.contextPath }/mypage/order" method="get">
+					<form action="${pageContext.request.contextPath }/store/payform" method="get">
 
 						<div id="cartItemList" class="only_pc">
 

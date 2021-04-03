@@ -137,7 +137,7 @@ public class AlarmService {
 
 		System.out.println("[Alarm Service]: " + crtPage + "(crtPage)");
 
-		int listCnt = 5;
+		int listCnt = 10;
 
 		crtPage = (crtPage > 0) ? crtPage : (crtPage = 1);
 

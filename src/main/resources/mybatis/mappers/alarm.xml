@@ -3,25 +3,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="alarm">
+
 	<insert id="inserbookingAlarm" parameterType="AlarmVo">
-	<![CDATA[
-			INSERT INTO alarm VALUES(seq_alarm_no.nextval, 
-								0, 
-								#{user_no}, 
-								#{alarm_content},
-								sysdate, 
-								#{sell_no},
-								#{alarm_title},
-								3
-								)			
-	
-	]]>
-	
-	
-	
+		<![CDATA[
+				INSERT INTO alarm VALUES(seq_alarm_no.nextval, 
+									0, 
+									#{user_no}, 
+									#{alarm_content},
+									sysdate, 
+									#{sell_no},
+									#{alarm_title},
+									3
+									)			
+		
+		]]>
 	</insert>
-	
-	
+
 	<select id="bbuyuserNo" parameterType="int" resultType="AlarmVo">
 		<![CDATA[
 				select user_no
@@ -138,6 +135,22 @@
         ]]>
 	</select>
 
+	<select id="selectAlarm" parameterType="int" resultType="AlarmVo">
+		<![CDATA[
+			SELECT  alarm_no,
+			        from_user_no,
+			        to_user_no,
+			        alarm_content,
+			        alarm_date,
+			        sell_no,
+			        alarm_title,
+			        buy_type
+			FROM    alarm
+			WHERE   to_user_no = #{user_no}
+			order by alarm_date desc
+		]]>
+	</select>
+
 	<select id="selectAlarmList" parameterType="map" resultType="AlarmVo">
 		<![CDATA[
 			SELECT  r.rNum,
@@ -165,7 +178,7 @@
 			                 a.user_no,
 			                 a.buy_no,
 			                 a.b_buy_no,
-                 			a.booking_no
+                 			 a.booking_no
 			         FROM    (SELECT  a.alarm_no,
 			                          a.from_user_no,
 			                          a.to_user_no,
