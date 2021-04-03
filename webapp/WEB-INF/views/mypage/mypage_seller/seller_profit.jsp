@@ -68,20 +68,18 @@
 					</form>
 					<table id="profit_table">
 						<colgroup>
-							<col style="width: 250px">
-							<col style="width: 350px">
-							<col style="width: 200px">
+							<col style="width: 400px">
+							<col style="width: 400px">
 						</colgroup>
 						<tr>
-							<td colspan="2">기간내 누적 수익금</td>
+							<td>기간내 누적 수익금</td>
 							<td id="total">0원</td>
 						</tr>
 						<tr>
-							<td colspan="2">출금 완료 수익금</td>
+							<td>출금 완료 수익금</td>
 							<td id="complete">0원</td>
 						</tr>
 						<tr>
-							<td rowspan="2">보유 수익금</td>
 							<td>출금 가능 수익금</td>
 							<td id="possible">0원</td>
 						</tr>

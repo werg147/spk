@@ -386,12 +386,16 @@
 			        ROWS BETWEEN UNBOUNDED PRECEDING
 			        AND CURRENT ROW
 			    ) AS total
-			FROM bbuy bb, booking b, gym g, (select to_char(add_months(sysdate,-1),'yyyy-mm') || '-01'  as monthstart, 
-			                                        to_char(TRUNC(LAST_DAY(ADD_MONTHS(SYSDATE, -1)))+0.99999421,'YYYY-MM-DD') AS monthend FROM DUAL) d
+			FROM buyproduct bp, buy b, product p, (select to_char(add_months(sysdate,-1),'yyyy-mm') || '-01'  as monthstart, 
+			       to_char(TRUNC(LAST_DAY(ADD_MONTHS(SYSDATE, -1)))+0.99999421,'YYYY-MM-DD') AS monthend,
+                   to_char(TRUNC(SYSDATE, 'MM')) as startday,
+                   to_char(sysdate-1,'yyyy-mm-dd') as yesterday,
+                   to_char(sysdate,'yyyy-mm-dd') as today
+                   FROM DUAL) d
 			where bb.booking_no=b.booking_no
 			and b.gym_no = g.gym_no
 			and sell_no = #{sell_no}
-			and bb.b_buy_date BETWEEN d.monthstart and #{peri_end}
+			and bb.b_buy_date >= startday and bb.b_buy_date < today
 		]]>	
 	</select>
 	
