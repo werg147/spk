@@ -251,13 +251,28 @@ a:hover {
 }
 
 .footer{
-  background-color:  #f2f2f2;
   width: 100%;
-  height: 100px;
+  height: fit-content;
   text-align : center;
-  font-size: 30px;
+  font-size: 15px;
+  margin-top : 150px;
+  padding-top: 15px;
+  padding-bottom: 30px;
+  display: flex;
+  justify-content: space-around;
+  
 }
 
+
+.footer div{
+	padding : 0px 25px 0px 25px;
+	border-right: 1px #dddfe1 solid;
+}
+
+#footer	{
+	border: none;
+}
+	
 
 /*로그인 페이지 추가*/
 /*타이틀 리스트 구분줄*/
