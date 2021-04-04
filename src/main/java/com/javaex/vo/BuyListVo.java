@@ -3,6 +3,7 @@ package com.javaex.vo;
 public class BuyListVo {
 
 	private String prod_detail_img_savename;
+	private String prod_img_savename;
 	private String prod_name;
 	private int prod_price;
 
@@ -20,10 +21,11 @@ public class BuyListVo {
 		super();
 	}
 
-	public BuyListVo(String prod_detail_img_savename, String prod_name, int prod_price, String buy_date,
-			String buy_del_state, int user_no, int buy_no, int prod_no, int booking_no, int b_buy_no) {
+	public BuyListVo(String prod_detail_img_savename, String prod_img_savename, String prod_name, int prod_price,
+			String buy_date, String buy_del_state, int user_no, int buy_no, int prod_no, int booking_no, int b_buy_no) {
 		super();
 		this.prod_detail_img_savename = prod_detail_img_savename;
+		this.prod_img_savename = prod_img_savename;
 		this.prod_name = prod_name;
 		this.prod_price = prod_price;
 		this.buy_date = buy_date;
@@ -41,6 +43,14 @@ public class BuyListVo {
 
 	public void setProd_detail_img_savename(String prod_detail_img_savename) {
 		this.prod_detail_img_savename = prod_detail_img_savename;
+	}
+
+	public String getProd_img_savename() {
+		return prod_img_savename;
+	}
+
+	public void setProd_img_savename(String prod_img_savename) {
+		this.prod_img_savename = prod_img_savename;
 	}
 
 	public String getProd_name() {
@@ -117,10 +127,10 @@ public class BuyListVo {
 
 	@Override
 	public String toString() {
-		return "BuyListVo [prod_detail_img_savename=" + prod_detail_img_savename + ", prod_name=" + prod_name
-				+ ", prod_price=" + prod_price + ", buy_date=" + buy_date + ", buy_del_state=" + buy_del_state
-				+ ", user_no=" + user_no + ", buy_no=" + buy_no + ", prod_no=" + prod_no + ", booking_no=" + booking_no
-				+ ", b_buy_no=" + b_buy_no + "]";
+		return "BuyListVo [prod_detail_img_savename=" + prod_detail_img_savename + ", prod_img_savename="
+				+ prod_img_savename + ", prod_name=" + prod_name + ", prod_price=" + prod_price + ", buy_date="
+				+ buy_date + ", buy_del_state=" + buy_del_state + ", user_no=" + user_no + ", buy_no=" + buy_no
+				+ ", prod_no=" + prod_no + ", booking_no=" + booking_no + ", b_buy_no=" + b_buy_no + "]";
 	}
 
 }

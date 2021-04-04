@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -10,10 +9,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>배송정보입력</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/header.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/delivery.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/header.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/delivery.css">
 </head>
 <body>
 
@@ -38,7 +35,7 @@
 
 					<div class="reservation_info">
 						<div class="buy_content_delevery_num">대관번호 ${requestScope.BookingList[0].booking_no}</div>
-						<div>대관일자  ${requestScope.BookingList[0].booking_date}</div>
+						<div>대관일자 ${requestScope.BookingList[0].booking_date}</div>
 					</div>
 					<div class="content_delevery_num_line"></div>
 					<div class="buy_delivery_info">
@@ -47,7 +44,7 @@
 						<div class="buy_deleverymanage_list">
 							<div class="buy_delevery_product_content">
 								<div class="buy_delevery_product_content_img">
-									<img src="../../../image/img/rental.jpeg">
+									<img src="${pageContext.request.contextPath}/upload/${requestScope.BookingList[0].gym_img_savename}">
 								</div>
 								<div class="buy_deleverymanage_list1">
 									<table>
@@ -92,7 +89,9 @@
 					<!--//delivery_info-->
 
 					<div class="go_back">
-						<button class="go_back_btn"><a href="${pageContext.request.contextPath }/mypage/bookinglist?user_no=${requestScope.BookingList[0].user_no}">구매목록보기</a></button>
+						<button class="go_back_btn">
+							<a href="${pageContext.request.contextPath }/mypage/bookinglist?user_no=${requestScope.BookingList[0].user_no}">구매목록보기</a>
+						</button>
 					</div>
 				</div>
 				<!--//content_product//-->
