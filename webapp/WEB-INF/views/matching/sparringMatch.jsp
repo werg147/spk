@@ -69,7 +69,7 @@
 							<div class="post_host_item2">
 								<div class="post_host_item2_1">
 									<div class="post_host_imgbox">
-										<img src="${pageContext.request.contextPath }/upload/${map.bBuyVo.user_photo }.jpg" alt="">
+										<img src="${pageContext.request.contextPath }/upload/${map.bBuyVo.user_photo }" alt="">
 
 									</div>
 									<div class="post_host_spa-profile">
@@ -219,8 +219,8 @@
 								<c:when test="${map.bBuyList[0]!= null}">
 									<div class="post_host_item2">
 										<div class="post_host_item2_1">
-											<div class="post_host_imgbox">
-												<img src="${pageContext.request.contextPath }/upload/${map.bBuyList[0].user_photo}.jpg" alt="">
+											<div id="img_post" class="post_host_imgbox">
+												<img src="${pageContext.request.contextPath }/upload/${map.bBuyList[0].user_photo}" alt="">
 
 											</div>
 											<div id="spac_pro" class="post_host_spa-profile">
@@ -570,6 +570,7 @@
 				<!-- 버튼 -->
 			</c:if>
 			<div id="dae_footer">
+			<c:if test="${map.booking_state ne '결제완료' }">
 				<c:if test="${map.bBuyList[0].b_buy_player_state eq '선택자' && map.bBuyList[0].user_no == authUser.user_no }">
 					<div class="dae_foo">
 						<div>
@@ -587,7 +588,7 @@
 							</a>
 						</div>
 				</c:if>
-
+				</c:if>
 				<div>
 					<a href="${pageContext.request.contextPath }/">
 						<button class="dae_button_item3">
@@ -603,11 +604,11 @@
 		<!--//footer//-->
 	</div>
 	</div>
-	<input id="bookingno" data-bookingno="${map.bBuyVo.booking_no }" type="" name="" value="">
-	<input id="userno" data-userno="${map.bBuyVo.user_no }" type="" name="" value="">
-	<input id="bbuyno" data-bbuyno="${map.bBuyVo.b_buy_no }" type="" name="" value="">
-	<input id="profileno" data-profileno="${map.bBuyVo.profile_no }" type="" name="" value="">
-	<input id="sessionuser" data-sessionuser="${authUser.user_no}" type="" name="" value="">
+	<input id="bookingno" data-bookingno="${map.bBuyVo.booking_no }" type="hidden" name="" value="">
+	<input id="userno" data-userno="${map.bBuyVo.user_no }" type="hidden" name="" value="">
+	<input id="bbuyno" data-bbuyno="${map.bBuyVo.b_buy_no }" type="hidden" name="" value="">
+	<input id="profileno" data-profileno="${map.bBuyVo.profile_no }" type="hidden" name="" value="">
+	<input id="sessionuser" data-sessionuser="${authUser.user_no}" type="hidden" name="" value="">
 	<script>
 		var mySwiper = new Swiper('.swiper-container', {
 			slidesPerView : 2,
@@ -711,8 +712,15 @@
 
 	});
 	function addprofile(bbuyVo) {
+		
+		
+		
 		var recordlength = $(bbuyVo.recordList).length;
-
+		
+		$("#img_post").html(" ");
+		str2 = "";
+		str2 = '<img src="${pageContext.request.contextPath }/upload/'+bbuyVo.user_photo+'" alt="">';
+		$("#img_post").append(str2);	
 		$("#spac_profile2").html(" ");
 
 		console.log(recordlength);

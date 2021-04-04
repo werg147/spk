@@ -169,14 +169,9 @@ public class SparringController {
 		
 		}else if(join ==0 && bookingNo != 0 &&selectbooking_no == 0 && subnum == 1) { 
 			System.out.println("대관 o 시합등록자 글의 신청자");
-			
-			//bbuyuser로 신청자에게 알람
-			
+
 			sparringService.insertBBuy2(userNo,profileVo.getProfileNo(),bookingNo,bbuyuser);
-			
-			
-			//
-			
+
 			//bbuyno 통한  bookingno로 등록
 			return "redirect:/sparring/matchdetail?bbuyno="+bbuyno+"&userno="+bbuyuser+"&sessionuser="+userNo;
 			

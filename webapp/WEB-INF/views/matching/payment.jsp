@@ -245,14 +245,14 @@
 					
 						<input type="text" name="profile_no" value="${param.profileno}"> 
 					
-					<input type="text" name="user_no" value="${param.userno}"> 
-					<input type="text" name="b_buy_price" value="${map.bookingVo.booking_price/2}">
-					<input type="text" name="booking_no" value="${map.bookingVo.booking_no }">
-					<input type="text" name="subnum" value="${param.subnum }">
-					<input type="text" name="bbuyno" value="${param.bbuyno }">
-					<input type="text" name="mainnum" value="${param.mainnum }">
-					<input type="text" name="partneruserno" value="${param.partneruserno }">
-					<input type="text" name="mybbuyno" value="${param.mybbuyno}">
+					<input type="hidden" name="user_no" value="${param.userno}"> 
+					<input type="hidden" name="b_buy_price" value="${map.bookingVo.booking_price/2}">
+					<input type="hidden" name="booking_no" value="${map.bookingVo.booking_no }">
+					<input type="hidden" name="subnum" value="${param.subnum }">
+					<input type="hidden" name="bbuyno" value="${param.bbuyno }">
+					<input type="hidden" name="mainnum" value="${param.mainnum }">
+					<input type="hidden" name="partneruserno" value="${param.partneruserno }">
+					<input type="hidden" name="mybbuyno" value="${param.mybbuyno}">
 				</section>
 			</form>
 			

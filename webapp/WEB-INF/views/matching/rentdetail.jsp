@@ -280,9 +280,9 @@
 						
 					</div>
 					<input type="hidden" name="user_no" value="${authUser.user_no }">
-					<input type="text" name="subnum" value="${param.subnum }">
+					<input type="hidden" name="subnum" value="${param.subnum }">
 					
-					<input type="text" name="bbuyno" value="${param.bbuyno }">
+					<input type="hidden" name="bbuyno" value="${param.bbuyno }">
 				</form>
 				<!-- 버튼 end -->
 			</section>

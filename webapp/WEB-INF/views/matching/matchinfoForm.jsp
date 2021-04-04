@@ -334,13 +334,13 @@
 									<input id="session_user_no" type="text" name="userNo" value="${authUser.user_no}">
 									</c:otherwise>
 									</c:choose>
-									<input type="text" name="subnum" value="${param.subnum}">
-									<input type="text" name="selectbooking_no" value="${param.selectbooking_no}">
-									<input type="text" name="join" value="${join}">
+									<input type="hidden" name="subnum" value="${param.subnum}">
+									<input type="hidden" name="selectbooking_no" value="${param.selectbooking_no}">
+									<input type="hidden" name="join" value="${join}">
 									<c:if test="${param.booking_no != 0}">
-										<input type="text" name="bookingno" value="${param.booking_no}">
-										<input type="text" name="bbuyno" value="${param.bbuyno}">
-										<input type="text" name="bbuyuser" value="${param.bbuyuser }">
+										<input type="hidden" name="bookingno" value="${param.booking_no}">
+										<input type="hidden" name="bbuyno" value="${param.bbuyno}">
+										<input type="hidden" name="bbuyuser" value="${param.bbuyuser }">
 									</c:if>
 									
 								</form>

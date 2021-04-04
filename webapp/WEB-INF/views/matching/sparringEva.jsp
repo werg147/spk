@@ -100,9 +100,9 @@
 							</div>
 						</div>
 						
-							<input type="text" name="b_buy_no" value="${bbuyVo.b_buy_no}"> 
-							<input type="text" name="user_no" value="${bbuyVo.user_no}"> 
-							<input class="attri_0" type="text" name="matchAttri" value="">
+							<input type="hidden" name="b_buy_no" value="${bbuyVo.b_buy_no}"> 
+							<input type="hidden" name="user_no" value="${bbuyVo.user_no}"> 
+							<input class="attri_0" type="hidden" name="matchAttri" value="">
 						
 					</form>
 

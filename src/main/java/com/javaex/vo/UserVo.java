@@ -17,8 +17,9 @@ public class UserVo {
 	private String user_date;
 	private String gender;
 	private String addressdetail;
+	private String roadAddress;
 	private String roadaddress;
-
+	
 	public UserVo() {
 	}
 
@@ -218,12 +219,22 @@ public class UserVo {
 		this.addressdetail = addressdetail;
 	}
 
+	
+
 	public String getRoadaddress() {
 		return roadaddress;
 	}
 
 	public void setRoadaddress(String roadaddress) {
 		this.roadaddress = roadaddress;
+	}
+
+	public String getRoadAddress() {
+		return roadAddress;
+	}
+
+	public void setRoadAddress(String roadAddress) {
+		this.roadAddress = roadAddress;
 	}
 
 	@Override
