@@ -19,7 +19,7 @@ public class SellerVo {
 	private int prod_sell_account;
 	private String prod_com_name;
 	private String addressdetail;
-	private String roadAddress;
+	private String roadaddress;
 
 	public SellerVo() {
 	}
@@ -49,7 +49,7 @@ public class SellerVo {
 	public SellerVo(int sell_no, int user_no, int book_type, int prod_type, String book_sell_name, String book_com_name,
 			int book_business_no, String book_sell_address, String book_sell_bank, int book_sell_account,
 			String prod_sell_name, int prod_business_no, String prod_sell_address, String prod_sell_bank,
-			int prod_sell_account, String prod_com_name, String addressdetail, String roadAddress) {
+			int prod_sell_account, String prod_com_name, String addressdetail, String roadaddress) {
 		super();
 		this.sell_no = sell_no;
 		this.user_no = user_no;
@@ -68,7 +68,7 @@ public class SellerVo {
 		this.prod_sell_account = prod_sell_account;
 		this.prod_com_name = prod_com_name;
 		this.addressdetail = addressdetail;
-		this.roadAddress = roadAddress;
+		this.roadaddress = roadaddress;
 	}
 
 	public int getSell_no() {
@@ -207,12 +207,13 @@ public class SellerVo {
 		this.addressdetail = addressdetail;
 	}
 
-	public String getRoadAddress() {
-		return roadAddress;
+
+	public String getRoadaddress() {
+		return roadaddress;
 	}
 
-	public void setRoadAddress(String roadAddress) {
-		this.roadAddress = roadAddress;
+	public void setRoadaddress(String roadaddress) {
+		this.roadaddress = roadaddress;
 	}
 
 	@Override
@@ -224,7 +225,7 @@ public class SellerVo {
 				+ ", prod_sell_name=" + prod_sell_name + ", prod_business_no=" + prod_business_no
 				+ ", prod_sell_address=" + prod_sell_address + ", prod_sell_bank=" + prod_sell_bank
 				+ ", prod_sell_account=" + prod_sell_account + ", prod_com_name=" + prod_com_name + ", addressdetail="
-				+ addressdetail + ", roadAddress=" + roadAddress + "]";
+				+ addressdetail + ", roadaddress=" + roadaddress + "]";
 	}
 
 }

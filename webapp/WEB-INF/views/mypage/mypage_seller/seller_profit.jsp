@@ -142,7 +142,7 @@
 				console.log(profit);
 
 				if (profit != null) {
-					alert("성공");
+
 
 					var total = profit.total;
 					var complete = profit.complete;

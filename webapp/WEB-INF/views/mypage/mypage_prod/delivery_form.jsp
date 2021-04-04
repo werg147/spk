@@ -290,12 +290,11 @@
 									type : 'post',
 									success : function(count) {
 										if (count > 0) {
-											alert("성공");
 
 											window.location.href = "http://localhost:8088/Sparkling_/mypage/prod/delmanage";
 
 										} else {
-											alert("실패");
+											alert("배송정보등록에 실패했습니다.");
 											location.reload();
 										}
 									}
@@ -352,12 +351,12 @@
 									type : 'post',
 									success : function(count) {
 										if (count > 0) {
-											alert("성공");
+
 
 											window.location.href = "http://localhost:8088/Sparkling_/mypage/prod/delmanage";
 
 										} else {
-											alert("실패");
+											alert("배송정보등록에 실패했습니다.");
 											location.reload();
 										}
 									}

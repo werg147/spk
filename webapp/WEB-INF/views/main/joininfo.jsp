@@ -115,7 +115,7 @@
 
 													<input type="text" id=sample4_postcode name="post"
 														placeholder="우편번호" readonly> <input type="text"
-														id="sample4_roadAddress" name="roadAddress" value=""
+														id="sample4_roadAddress" name="roadaddress" value=""
 														placeholder="도로명주소" readonly>
 
 												</div>
@@ -290,8 +290,8 @@ function setImageFromFile(input, expression) {
 			return false;
 		}
 
-		var roadAddress = $("[name='roadAddress']").val();
-		if (roadAddress == null || roadAddress == "") {
+		var roadaddress = $("[name='roadaddress']").val();
+		if (roadaddress == null || roadaddress == "") {
 			alert("주소를 검색해주세요.");
 			return false;
 		}

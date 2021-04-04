@@ -46,12 +46,12 @@
 							<c:when test="${authUser.book_type == 0}">
 								<form id="addForm"
 									action="${pageContext.request.contextPath}/mypage/prod/prodselleradd"
-									method="get">
+									method="post">
 							</c:when>
 							<c:otherwise>
 								<form id="addForm"
 									action="${pageContext.request.contextPath}/mypage/prod/prodsellermodify"
-									method="get">
+									method="post">
 									<input type="hidden" name="sell_no" value="${authUser.sell_no}">
 							</c:otherwise>
 						</c:choose>
@@ -89,7 +89,7 @@
 												</div>
 												<div class="da">
 													<input type="text" id="sample4_roadAddress"
-														name="roadAddress" placeholder="도로명주소" value="" readonly>
+														name="roadaddress" placeholder="도로명주소" value="" readonly>
 												</div>
 											</div>
 											<button type="button" id="search_btn">검색하기</button>
@@ -229,7 +229,7 @@
 
 		var no = $("[name='prod_business_no']").val();
 
-		var roadAddress = $("[name='roadAddress']").val();
+		var roadaddress = $("[name='roadaddress']").val();
 
 		var addressdetail = $("[name='addressdetail']").val();
 
@@ -237,7 +237,7 @@
 
 		var acc = $("[name='prod_sell_account']").val();
 
-		var formArr = new Array(name, comName, no, roadAddress, addressdetail, bank, acc);
+		var formArr = new Array(name, comName, no, roadaddress, addressdetail, bank, acc);
 
 		for (var i = 0; i < formArr.length; i++) {
 			if (!formArr[i]) {

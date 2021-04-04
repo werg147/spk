@@ -290,7 +290,7 @@ public class GymService {
 
 	// 대관판매자계정등록
 	public void bookSellerAdd(SellerVo sellervo) {
-		String book_sell_address = sellervo.getRoadAddress() + sellervo.getAddressdetail();
+		String book_sell_address = sellervo.getRoadaddress() + sellervo.getAddressdetail();
 		sellervo.setBook_sell_address(book_sell_address);
 
 		userdao.sellerBookInsert(sellervo);
@@ -303,7 +303,7 @@ public class GymService {
 
 	// 대관 판매자 계정 수정
 	public void bookSellerModify(SellerVo sellervo) {
-		String book_sell_address = sellervo.getRoadAddress() + sellervo.getAddressdetail();
+		String book_sell_address = sellervo.getRoadaddress() + sellervo.getAddressdetail();
 		sellervo.setBook_sell_address(book_sell_address);
 
 		userdao.bookSellerUpdate(sellervo);

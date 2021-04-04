@@ -114,7 +114,7 @@
 			UPDATE users 
 			SET user_name= #{user_name},
 			    nickname=#{nickname},
-			    roadAddress=#{roadAddress},
+			    roadAddress=#{roadaddress},
 			    addressdetail=#{addressdetail},
 			    user_photo=#{user_photo},
 			    user_phone=#{user_phone},
