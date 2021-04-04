@@ -25,16 +25,17 @@
 	<!-- 배송상품 구매내역 -->
 	<select id="selectBuyList" parameterType="int" resultType="BuyListVo">
 		<![CDATA[
-			SELECT  p.prod_detail_img_savename,
+			SELECT  pi.prod_img_savename,
 			        p.prod_name,
 			        p.prod_price,
 			        b.buy_date,
 			        bp.buy_del_state,
 			        b.buy_no
-			FROM    users u, product p, buyproduct bp, buy b
+			FROM    users u, product p, buyproduct bp, buy b, prodimg pi
 			WHERE   u.user_no = b.user_no
 			        and b.buy_no = bp.buy_no
 			        and bp.prod_no = p.prod_no
+			        and p.prod_no = pi.prod_no
 			        and u.user_no = #{user_no}
 			ORDER BY b.buy_date desc
 		]]>

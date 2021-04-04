@@ -81,7 +81,7 @@
 
 															<div class="goods">
 
-																<a href="" class="thumb" style="background-image: url(${pageContext.request.contextPath}/assets/image/글러브.jpg);"> 상품이미지 </a>
+																<img class="thumb" src="${pageContext.request.contextPath}/upload/${cList.prod_img_savename }">
 																<!-- //thumb -->
 
 																<div class="price">
@@ -222,7 +222,9 @@
 	function price(priceAll) {
 		console.log(priceAll)
 
-		var str01 = '<span class="num">'+ priceAll+'</span> <span class="won"></span> <span class="won">원</span>';
+		var str01 = '<span class="num">'
+				+ priceAll
+				+ '</span> <span class="won"></span> <span class="won">원</span>';
 		$("#priceTotal").html(" ");
 		$("#priceTotal").append(str01);
 

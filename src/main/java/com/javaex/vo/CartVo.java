@@ -9,6 +9,7 @@ public class CartVo {
 	private int count;
 
 	private String prod_detail_img_savename;
+	private String prod_img_savename;
 	private String prod_name;
 	private int prod_price;
 
@@ -20,7 +21,8 @@ public class CartVo {
 	}
 
 	public CartVo(int cart_no, int user_no, String prod_no, int colorsize_no, int count,
-			String prod_detail_img_savename, String prod_name, int prod_price, String prod_size, String color) {
+			String prod_detail_img_savename, String prod_img_savename, String prod_name, int prod_price,
+			String prod_size, String color) {
 		super();
 		this.cart_no = cart_no;
 		this.user_no = user_no;
@@ -28,6 +30,7 @@ public class CartVo {
 		this.colorsize_no = colorsize_no;
 		this.count = count;
 		this.prod_detail_img_savename = prod_detail_img_savename;
+		this.prod_img_savename = prod_img_savename;
 		this.prod_name = prod_name;
 		this.prod_price = prod_price;
 		this.prod_size = prod_size;
@@ -82,6 +85,14 @@ public class CartVo {
 		this.prod_detail_img_savename = prod_detail_img_savename;
 	}
 
+	public String getProd_img_savename() {
+		return prod_img_savename;
+	}
+
+	public void setProd_img_savename(String prod_img_savename) {
+		this.prod_img_savename = prod_img_savename;
+	}
+
 	public String getProd_name() {
 		return prod_name;
 	}
@@ -118,8 +129,8 @@ public class CartVo {
 	public String toString() {
 		return "CartVo [cart_no=" + cart_no + ", user_no=" + user_no + ", prod_no=" + prod_no + ", colorsize_no="
 				+ colorsize_no + ", count=" + count + ", prod_detail_img_savename=" + prod_detail_img_savename
-				+ ", prod_name=" + prod_name + ", prod_price=" + prod_price + ", prod_size=" + prod_size + ", color="
-				+ color + "]";
+				+ ", prod_img_savename=" + prod_img_savename + ", prod_name=" + prod_name + ", prod_price=" + prod_price
+				+ ", prod_size=" + prod_size + ", color=" + color + "]";
 	}
 
 }
