@@ -87,6 +87,7 @@
 									</div>
 								</td>
 							</tr>
+							<!-- 
 							<tr class="product_insert_div_img">
 								<td>추가이미지</td>
 								<td class="img_td">
@@ -100,6 +101,7 @@
 									</div>
 								</td>
 							</tr>
+							 -->
 							<tr class="sizecolor_div">
 								<td>색상 및 사이즈</td>
 
@@ -154,10 +156,11 @@
 				<!--//delivery_info-->
 			</div>
 			<!--//content_product//-->
+			<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
+			<!--//footer//-->
 		</div>
 		<!--//middle//-->
-		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
-		<!--//footer//-->
+
 	</div>
 	<!--//container//-->
 	</div>
@@ -632,7 +635,7 @@
 						}
 
 						//대표이미지 개수 1개이상 필수등록
-						var maincount2 = count2 - minus2;
+						//var maincount2 = count2 - minus2;
 
 						//사이즈 등록필수알림
 						var colorcount = listnum - colorminus;

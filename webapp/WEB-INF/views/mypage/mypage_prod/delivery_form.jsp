@@ -55,8 +55,7 @@
 												</tr>
 												<tr>
 													<td>상품품번</td>
-													<td>${delvo.prod_no}
-													</td>
+													<td>${delvo.prod_no}</td>
 												</tr>
 												<tr>
 													<td>색상 | 사이즈 | 개수</td>
@@ -203,10 +202,11 @@
 				</form>
 			</div>
 			<!--//content_product//-->
+			<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
+			<!--//footer//-->
 		</div>
 		<!--//middle//-->
-		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
-		<!--//footer//-->
+
 	</div>
 	<!--//container//-->
 	</div>

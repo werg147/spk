@@ -408,3 +408,7 @@ a:hover {
 	margin-left : 5px;
 	margin-bottom: 12px;
 }
+
+#main_2 strong {
+	color: #e60012;
+}

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html>
@@ -94,8 +94,9 @@
 										</div>
 										<div id="img_add_box">
 											<div id="imgadd1">
-												<div class="thumb" id ="${prodvo.pimgList[0].prod_img_no}">
-													<img src="${pageContext.request.contextPath}/upload/${prodvo.pimgList[0].prod_img_savename}">
+												<div class="thumb" id="${prodvo.pimgList[0].prod_img_no}">
+													<img
+														src="${pageContext.request.contextPath}/upload/${prodvo.pimgList[0].prod_img_savename}">
 													<div class="imgaddclose" id="mainclose">X</div>
 												</div>
 											</div>
@@ -113,15 +114,18 @@
 										</div>
 										<div id="img_add_box">
 											<div id="imgadd2">
-											<c:forEach items="${pimgList}" var="ProdimgVo">
-												<c:if test="${ProdimgVo.prod_img_type != 'main'}">
-													<div class="thumb" id ="${ProdimgVo.prod_img_no}" >
-															<img src="${pageContext.request.contextPath}/upload/${ProdimgVo.prod_img_savename}">
-															<div class="imgaddclose" id="subclose${ProdimgVo.prod_img_no}">X</div>
-															<input value="${ProdimgVo.prod_img_no}" type="hidden" id="thumb_remove">
+												<c:forEach items="${pimgList}" var="ProdimgVo">
+													<c:if test="${ProdimgVo.prod_img_type != 'main'}">
+														<div class="thumb" id="${ProdimgVo.prod_img_no}">
+															<img
+																src="${pageContext.request.contextPath}/upload/${ProdimgVo.prod_img_savename}">
+															<div class="imgaddclose"
+																id="subclose${ProdimgVo.prod_img_no}">X</div>
+															<input value="${ProdimgVo.prod_img_no}" type="hidden"
+																id="thumb_remove">
 														</div>
 													</c:if>
-											</c:forEach>
+												</c:forEach>
 											</div>
 										</div>
 									</div>
@@ -177,14 +181,17 @@
 							</button>
 						</div>
 					</form>
+
 				</div>
 				<!--//delivery_info-->
+
 			</div>
 			<!--//content_product//-->
+			<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
+			<!--//footer//-->
 		</div>
 		<!--//middle//-->
-		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
-		<!--//footer//-->
+
 	</div>
 	<!--//container//-->
 	</div>
@@ -193,43 +200,42 @@
 </body>
 
 <script type="text/javascript">
-var deleteList = [];
-var mainadded = 1;
-var subadded ='${fn:length(prodvo.pimgList)}'-1;
-console.log(subadded);
+	var deleteList = [];
+	var mainadded = 1;
+	var subadded = '${fn:length(prodvo.pimgList)}' - 1;
+	console.log(subadded);
 
-//불러온 이미지 닫기
-$("#mainclose").on("click", function(){
-	console.log("mainimg close");
-	const div = document.getElementById('${prodvo.pimgList[0].prod_img_no}');
-	div.remove();
-	console.log('${prodvo.pimgList[0].prod_img_name}' +"지움");
-	
-	deleteList.push('${prodvo.pimgList[0].prod_img_no}');
-	console.log(deleteList);
-	
-	mainadded--;
-	
-});
+	//불러온 이미지 닫기
+	$("#mainclose").on(
+			"click",
+			function() {
+				console.log("mainimg close");
+				const div = document
+						.getElementById('${prodvo.pimgList[0].prod_img_no}');
+				div.remove();
+				console.log('${prodvo.pimgList[0].prod_img_name}' + "지움");
 
+				deleteList.push('${prodvo.pimgList[0].prod_img_no}');
+				console.log(deleteList);
 
+				mainadded--;
 
-var imgnum =  $("#thumb_remove").val();
+			});
 
+	var imgnum = $("#thumb_remove").val();
 
-//불러온 이미지 닫기
-$("#subclose"+imgnum).on("click", function(){
-	console.log("subimg close");
-	const div = document.getElementById(imgnum);
-	div.remove();
-	console.log(imgnum +"지움");
-	
-	
-	deleteList.push(imgnum);
-	console.log(deleteList);
-	
-	subadded--;
-});
+	//불러온 이미지 닫기
+	$("#subclose" + imgnum).on("click", function() {
+		console.log("subimg close");
+		const div = document.getElementById(imgnum);
+		div.remove();
+		console.log(imgnum + "지움");
+
+		deleteList.push(imgnum);
+		console.log(deleteList);
+
+		subadded--;
+	});
 
 	//가격표시
 	$(document).on('keyup', 'input[inputmode=numeric]', function(event) {
