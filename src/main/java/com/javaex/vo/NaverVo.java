@@ -6,43 +6,7 @@ public class NaverVo {
 	private String message;
 	private response response;
 
-	public NaverVo() {
-	}
-
-	public NaverVo(String resultcode, String message, com.javaex.vo.NaverVo.response response) {
-		this.resultcode = resultcode;
-		this.message = message;
-		this.response = response;
-	}
-
-	public String getResultcode() {
-		return resultcode;
-	}
-
-	public void setResultcode(String resultcode) {
-		this.resultcode = resultcode;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-	public response getResponse() {
-		return response;
-	}
-
-	public void setResponse(response response) {
-		this.response = response;
-	}
-
-	@Override
-	public String toString() {
-		return "NaverVo [resultcode=" + resultcode + ", message=" + message + ", response=" + response + "]";
-	}
+	
 
 	public class response {
 		private String id;
@@ -98,5 +62,43 @@ public class NaverVo {
 		}
 
 	}
+	public NaverVo() {
+	}
+
+	public NaverVo(String resultcode, String message, com.javaex.vo.NaverVo.response response) {
+		this.resultcode = resultcode;
+		this.message = message;
+		this.response = response;
+	}
+
+	public String getResultcode() {
+		return resultcode;
+	}
+
+	public void setResultcode(String resultcode) {
+		this.resultcode = resultcode;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public response getResponse() {
+		return response;
+	}
+
+	public void setResponse(response response) {
+		this.response = response;
+	}
+
+	@Override
+	public String toString() {
+		return "NaverVo [resultcode=" + resultcode + ", message=" + message + ", response=" + response + "]";
+	}
+
 
 }

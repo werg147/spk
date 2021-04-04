@@ -87,7 +87,7 @@
 									</div>
 								</td>
 							</tr>
-							<!-- 
+						
 							<tr class="product_insert_div_img">
 								<td>추가이미지</td>
 								<td class="img_td">
@@ -101,7 +101,7 @@
 									</div>
 								</td>
 							</tr>
-							 -->
+							
 							<tr class="sizecolor_div">
 								<td>색상 및 사이즈</td>
 
@@ -234,6 +234,7 @@
 			for (var i = 0; i < files.length; i++) {
 				files[i].mainsub = 'main' + files[i].name;
 				var file1 = files[i];
+				
 				console.log(file1);
 				count1 = uploadFiles1.push(file1); //업로드 목록에 추가
 				console.log('count' + count1);
