@@ -1,14 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/header.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/booking.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/assets/css/header.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/assets/css/booking.css">
 
-<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
 
 </head>
 <body>
@@ -32,22 +36,25 @@
 
 					<!--등록폼-->
 					<div class="gym_regi_form">
-						<form action="${pageContext.request.contextPath }/mypage/book/gymadd" method="post" enctype="multipart/form-data">
+						<form
+							action="${pageContext.request.contextPath }/mypage/book/gymadd"
+							method="post" enctype="multipart/form-data">
 							<table id="space2">
 								<tr>
 									<td class="basic">체육관 이름</td>
-									<td colspan="4"><input class="input_text" type="text" name="gym_name"> 
-									<!-- 사업자번호 숨김 -->
-									<input type="hidden" name="sell_no" value="${authUser.sell_no }"></td>
+									<td colspan="4"><input class="input_text" type="text"
+										name="gym_name"> <!-- 사업자번호 숨김 --> <input
+										type="hidden" name="sell_no" value="${authUser.sell_no }"></td>
 								</tr>
-								
-								
+
+
 								<tr>
 									<td class="basic">체육관 주소</td>
-									<td colspan="4"><input class="input_text" type="text" name="gym_address"></td>
+									<td colspan="4"><input class="input_text" type="text"
+										name="gym_address"></td>
 								</tr>
-								
-<!-- 								 <tr id="address">
+
+								<!-- 								 <tr id="address">
 									<td id="address_title" class="basic"><label for="searchaddress">주소</label></td>
 									<td colspan="4" id="address_content">
 										<div id="add_search">
@@ -74,7 +81,8 @@
 
 								<tr>
 									<td class="basic">체육관 전화번호</td>
-									<td colspan="4"><input class="input_text" type="text" name="gym_ph"></td>
+									<td colspan="4"><input class="input_text" type="text"
+										name="gym_ph"></td>
 								</tr>
 
 								<tr class="input_plus">
@@ -85,57 +93,60 @@
 								<tr class="basic_chk">
 									<td>체육관 주 종목</td>
 
-								
-									<td class="basic_chk_padding">
-										<input id="box" type="radio" name="gym_event" value="복싱"> <label for="box">복싱</label>
+
+									<td class="basic_chk_padding"><input id="box" type="radio"
+										name="gym_event" value="복싱"> <label for="box">복싱</label>
 									</td>
-									<td class="basic_chk_padding">
-										<input id="kbox" type="radio" name="gym_event" value="킥복싱"> <label for="kbox">킥복싱</label>
+									<td class="basic_chk_padding"><input id="kbox"
+										type="radio" name="gym_event" value="킥복싱"> <label
+										for="kbox">킥복싱</label></td>
+									<td class="basic_chk_padding"><input id="jiu" type="radio"
+										name="gym_event" value="주짓수"> <label for="jiu">주짓수</label>
 									</td>
-									<td class="basic_chk_padding">
-										<input id="jiu" type="radio" name="gym_event" value="주짓수"> <label for="jiu">주짓수</label>
-									</td>
-									<td class="basic_chk_padding">
-										<input id="mma" type="radio" name="gym_event" value="종합격투기"> <label for="mma">종합격투기</label>
+									<td class="basic_chk_padding"><input id="mma" type="radio"
+										name="gym_event" value="종합격투기"> <label for="mma">종합격투기</label>
 									</td>
 								</tr>
 
 								<tr class="basic_chk">
 									<td>체육관 편의시설</td>
 
-									<td><input id="park" type="checkbox" name="conve" value="park"> <label for="park">주차장</label></td>
-									<td><input id="shower" type="checkbox" name="conve" value="shower"> <label for="shower">샤워실</label></td>
-									<td colspan="2"><input id="towel" type="checkbox" name="conve" value="towel"> <label for="towel">수건</label></td>
+									<td><input id="park" type="checkbox" name="conve"
+										value="park"> <label for="park">주차장</label></td>
+									<td><input id="shower" type="checkbox" name="conve"
+										value="shower"> <label for="shower">샤워실</label></td>
+									<td colspan="2"><input id="towel" type="checkbox"
+										name="conve" value="towel"> <label for="towel">수건</label></td>
 								</tr>
 
 								<tr>
 									<td></td>
-									<td class="basic_chk_padding">
-										<input id="locker" type="checkbox" name="conve" value="locker"> <label for="locker">락커</label>
-									</td>
-									<td class="basic_chk_padding">
-										<input id="glove" type="checkbox" name="conve" value="glove"> <label for="glove">글러브</label>
-									</td>
-									<td class="basic_chk_padding" colspan="2">
-										<input id="wear" type="checkbox" name="conve" value="wear"> <label for="wear">운동복</label>
-									</td>
+									<td class="basic_chk_padding"><input id="locker"
+										type="checkbox" name="conve" value="locker"> <label
+										for="locker">락커</label></td>
+									<td class="basic_chk_padding"><input id="glove"
+										type="checkbox" name="conve" value="glove"> <label
+										for="glove">글러브</label></td>
+									<td class="basic_chk_padding" colspan="2"><input id="wear"
+										type="checkbox" name="conve" value="wear"> <label
+										for="wear">운동복</label></td>
 								</tr>
 
 								<tr class="input_plus">
 									<td>공지사항</td>
 									<td colspan="4"><textarea name="gym_notice"></textarea></td>
 								</tr>
-								
- 								<tr>
+
+								<tr>
 									<td class="basic">체육관 대표사진</td>
 									<td colspan="4"><input type="file" name="file1"></td>
-								</tr> 
-								
-								 <tr>
+								</tr>
+
+								<tr>
 									<td class="basic">체육관 추가사진</td>
 									<td colspan="4"><input type="file" name="file2"></td>
-								</tr> 
-								
+								</tr>
+
 								<!-- 
 								<tr class="gym_insert_div_img">
 									<td>대표이미지</td>
@@ -165,20 +176,21 @@
 								</tr>
 								 -->
 							</table>
-							
-							
+
+
 							<div class="gym_regi_btn_site">
 								<button class="gym_regi_btn" type="submit">체육관 등록</button>
 							</div>
 
-						</form> <!-- //form -->
+						</form>
+						<!-- //form -->
 					</div>
 					<!--//gym_regi_form-->
 					<div id="space"></div>
 				</div>
 			</div>
 			<!--//middle-->
-			
+
 			<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 			<!--//footer//-->
 		</div>
@@ -186,5 +198,68 @@
 	</div>
 	<!--//wrap-->
 </body>
+
+<script type="text/javascript">
+	$(".gym_regi_btn").on("click", function() {
+
+		//주종목 체크여부
+
+		var gym_event = $("input:radio[name='gym_event']").is(":checked");
+		if (gym_event == false) {
+			alert("주종목을 선택해주세요.");
+			return false;
+		}
+
+		//체육관이름
+		var gym_name = $("[name='gym_name']").val();
+		if (gym_name == null || gym_name == "") {
+			alert("체육관이름을 입력해주세요.");
+			return false;
+		}
+
+		//체육관주소
+		var gym_address = $("[name='gym_address']").val();
+		if (gym_address == null || gym_address == "") {
+			alert("체육관주소를 입력해주세요.");
+			return false;
+		}
+
+		//체육관 전화번호
+		var gym_ph = $("[name='gym_ph']").val();
+		if (gym_ph == null || gym_ph == "") {
+			alert("체육관 전화번호를 입력해주세요.");
+			return false;
+		}
+
+		//체육관 운영시간
+		var gym_time = $("[name='gym_time']").val();
+		if (gym_time == null || gym_time == "") {
+			alert("체육관 운영시간을 입력해주세요.");
+			return false;
+		}
+
+		//체육관 공지사항
+		var gym_notice = $("[name='gym_notice']").val();
+		if (gym_notice == null || gym_notice == "") {
+			alert("체육관 공지사항을 입력해주세요.");
+			return false;
+		}
+
+		var file1 = $("input[name=file1]").val();
+		//파일 선택 필수
+		if (file1 == null || file1 == "") {
+			alert("체육관 대표사진을 등록해주세요.");
+			return false;
+		}
+
+		var file2 = $("input[name=file2]").val();
+		//파일 선택 필수
+		if (file2 == null || file2 == "") {
+			alert("체육관 추가사진을 등록해주세요.");
+			return false;
+		}
+
+	});
+</script>
 
 </html>

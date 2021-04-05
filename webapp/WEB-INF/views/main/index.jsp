@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,128 +60,100 @@
 			<!-- Mach Card -->
 			<section class="mach-card">
 				<!-- card 1ex -->
+				<c:forEach items="${bBuyList}" var="vo">
+				<a href="${pageContext.request.contextPath }/sparring/matchdetail?bbuyno=${vo.b_buy_no}&userno=${vo.user_no}&sessionuser=${authUser.user_no}&bookingno=${vo.booking_no}">
+				<!-- 
+				 <a href="${pageContext.request.contextPath }/sparring/matchdetail?bbuyno=${vo.b_buy_no}&userno=${vo.user_no}">
+				 -->
 				<div class="card_container">
 					<div class="card">
-						<a class="card1" href="/view/matching/스파링신청서.html"> <img
-							class="card_img"
-							src="${pageContext.request.contextPath }/assets/image/img/search.jpg"
-							alt="">
-							<div class="card_profile">
-								<div class="card_address">
-									<i class="fas fa-map-marker-alt address_icon"></i>
-									<div class="card_address_gimname">
-										<p>상봉동 팀파이터</p>
-										<div class="user_text">13일 | 18:00~21:00</div>
-									</div>
-									<div class="card_address_kind">
-										<p>복싱</p>
-									</div>
-								</div>
-								<div class="card_user">
-									<div class="card_user_profil">
-										<div class="user_name">
-											<i class="fas fa-user"></i>방배동왕주먹
-										</div>
-										<div class="user_pro">
-											<i class="fas fa-star"></i> <span>프로</span>
-										</div>
-										<div class="user_skill">
-											주특기 <span>| 레슬링</span>
-										</div>
-									</div>
-									<div class="card_user_img"></div>
-								</div>
-								<div class="card_price">
-									<div class="card_price_1person">20,000원</div>
-									<div class="card_price_2person">40,000원/2인</div>
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-				<!-- card end -->
-				<!-- card 1ex -->
-				<div class="card_container">
-					<div class="card">
-						<a class="card1" href="/view/matching/스파링신청서.html"> <img
-							class="card_img"
-							src="${pageContext.request.contextPath }/assets/image/img/search.jpg"
-							alt="">
+					<c:choose>
+						<c:when test="${vo.gym_img_savename == null}">
+							<img
+								class="card_img" src="${pageContext.request.contextPath}/upload/0.png" alt="">
+						</c:when>
+						<c:otherwise>
+							<img
+								class="card_img" src="${pageContext.request.contextPath}/upload/${vo.gym_img_savename}" alt="">
+						</c:otherwise>
+					</c:choose>
 							<div class="card_profile">
 								<div class="card_address">
 									<i class="fas fa-map-marker-alt address_icon"></i>
 
 									<div class="card_address_gimname">
+									<c:choose>
+						<c:when test="${vo.gym_name == null}">
+										<p>${vo.b_buy_address} 장소미정</p>
+										<div class="user_text">${vo.b_buy_day} | ${vo.b_buy_time}</div>
+							
+						</c:when>
+						<c:otherwise>
+							<p>${vo.addressHalf} ${vo.gym_name}</p>
+							<div class="user_text">${vo.booking_date} | ${vo.booking_start }~${vo.booking_end }</div>
+						</c:otherwise>
+					</c:choose>
 
-										<p>상봉동 팀파이터</p>
-										<div class="user_text">13일 | 18:00~21:00</div>
+										
 									</div>
 									<div class="card_address_kind">
-										<p>복싱</p>
+									<c:choose>
+										<c:when test="${vo.gym_event==null}">
+											<p>${vo.b_buy_event}</p>
+										</c:when>
+										<c:otherwise>
+											<p>${vo.gym_event }</p>
+										</c:otherwise>
+									</c:choose>
 									</div>
 								</div>
 								<div class="card_user">
 									<div class="card_user_profil">
 										<div class="user_name">
-											<i class="fas fa-user"></i>방배동왕주먹
+											<i class="fas fa-user"></i>${vo.nickname}
 										</div>
 										<div class="user_pro">
-											<i class="fas fa-star"></i> <span>프로</span>
+											<i class="fas fa-star"></i> <span>${vo.career}</span>
 										</div>
 										<div class="user_skill">
-											주특기 <span>| 레슬링</span>
+											주특기 | 
+											<span>
+											<c:forEach items="${vo.eventList }" var="eventvo">
+												<c:choose>
+													<c:when test="${eventvo.eventName == 1}">
+														복싱
+													</c:when>
+													<c:when test="${eventvo.eventName == 2}">
+														킥복싱
+													</c:when>
+													<c:when test="${eventvo.eventName == 3}">
+														종합격투기
+													</c:when>
+													<c:when test="${eventvo.eventName == 4}">
+														주짓수
+													</c:when>
+												</c:choose>
+											</c:forEach>
+											
+											</span>
 										</div>
 									</div>
 									<div class="card_user_img"></div>
 								</div>
+								<!--  
+								<div class="card_reser">예약중</div>
+								-->
 								<div class="card_price">
-									<div class="card_price_1person">20,000원</div>
-									<div class="card_price_2person">40,000원/2인</div>
-								</div>
-							</div> <!--//card_profile-->
-						</a>
-					</div>
-					<!--//card-->
-				</div>
-				<!--//card_container-->
-				<!-- card end -->
-				<!-- card 1ex -->
-				<div class="card_container">
-					<div class="card">
-						<a class="card1" href="/view/matching/스파링신청서.html"> <img
-							class="card_img"
-							src="${pageContext.request.contextPath }/assets/image/img/search.jpg"
-							alt="">
-							<div class="card_profile">
-								<div class="card_address">
-									<i class="fas fa-map-marker-alt address_icon"></i>
-
-									<div class="card_address_gimname">
-
-										<p>상봉동 팀파이터</p>
-										<div class="user_text">13일 | 18:00~21:00</div>
-									</div>
-									<div class="card_address_kind">
-										<p>복싱</p>
-									</div>
-								</div>
-								<div class="card_user">
-									<div class="card_user_profil">
-										<div class="user_name">
-											<i class="fas fa-user"></i>방배동왕주먹
-										</div>
-										<div class="user_pro">
-											<i class="fas fa-star"></i> <span>프로</span>
-										</div>
-										<div class="user_skill">
-											주특기 <span>| 레슬링</span>
-										</div>
-									</div>
-									<div class="card_user_img"></div>
-								</div>
-								<div class="card_price">
-									<div class="card_price_1person">20,000원</div>
-									<div class="card_price_2person">40,000원/2인</div>
+									<c:if test="${vo.b_buy_price !=null}">
+									<div class="card_price_1person">
+										<fmt:formatNumber type="number"
+												maxFractionDigits="3"
+												value="${vo.b_buy_price}" />원</div>
+									<div class="card_price_2person">
+										<fmt:formatNumber type="number"
+												maxFractionDigits="3"
+												value="${vo.b_buy_price * 2}" />원/2인</div>
+									</c:if>
 
 								</div>
 							</div>
@@ -188,54 +161,10 @@
 
 					</div>
 				</div>
+				</a>
+				</c:forEach>
 				<!-- card end -->
-				<!-- card 1ex -->
-				<div class="card_container">
-					<div class="card">
-						<a class="card1" href="/view/matching/스파링신청서 상대가 없을경우.html.html">
-							<img class="card_img"
-							src="${pageContext.request.contextPath }/assets/image/rent_no.jpg"
-							alt="">
-							<div class="card_profile">
-								<div class="card_address">
-									<i class="fas fa-map-marker-alt address_icon"></i>
-
-									<div class="card_address_gimname">
-
-										<p>장소미정</p>
-										<div class="user_text">13일 | 18:00~21:00</div>
-									</div>
-									<div class="card_address_kind">
-										<p>복싱</p>
-									</div>
-								</div>
-								<div class="card_user">
-									<div class="card_user_profil">
-										<div class="user_name">
-											<i class="fas fa-user"></i>방배동왕주먹
-										</div>
-										<div class="user_pro">
-											<i class="fas fa-star"></i> <span>프로</span>
-										</div>
-										<div class="user_skill">
-											주특기 <span>| 레슬링</span>
-										</div>
-
-									</div>
-									<div class="card_user_img"></div>
-								</div>
-								<div class="card_price">
-
-									<div class="card_price_1person">20,000원</div>
-									<div class="card_price_2person">40,000원/2인</div>
-
-								</div>
-							</div> <!--//card_profile-->
-						</a>
-					</div>
-					<!--//card-->
-				</div>
-				<!--//card_container-->
+				
 				<!-- card end -->
 			</section>
 			<!-- Mach Card end -->

@@ -191,7 +191,7 @@ public class GymService {
 			
 			// 서브파일 저장
 			String subfilePath = "C:\\javaStudy\\upload"; // 설정파일로 뺀다.
-			String subfileOriginName = mainfile.getOriginalFilename();
+			String subfileOriginName = subfile.getOriginalFilename();
 
 			System.out.println("기존 파일명 : " + subfileOriginName);
 
@@ -203,7 +203,7 @@ public class GymService {
 			GymImgVo gimgVo2 = new GymImgVo();
 			gimgVo2.setGym_img_savename(subsavename);
 			gimgVo2.setGym_img_name(subfileOriginName);
-			gimgVo2.setGym_img_type("main");
+			gimgVo2.setGym_img_type("sub");
 			System.out.println("메인이미지 등록 체육관번호" + gymNo);
 			gimgVo2.setGym_no(gymNo);
 

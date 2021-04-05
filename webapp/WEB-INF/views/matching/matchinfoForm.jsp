@@ -327,7 +327,7 @@
 									<c:choose>
 									<c:when test="${join == 1 }">
 									
-									<input type="text" name="userNo" value="${param.user_no}">
+									<input type="hidden" name="userNo" value="${param.user_no}">
 									</c:when>
 									<c:otherwise>
 									

@@ -108,7 +108,7 @@ public class SparringController {
 		// 유저no는 현재 대관하기에서 세션값 으로 쓸 임의의 번호를 보내고 있음 지워야댐
 		if (userNo == 0) {
 			// 사용자가 없음 잘못된 접근 메인으로
-			return "";
+			return "redirect:/errorlogin";
 		} else {
 			List<ProfileVo> profileList = sparringService.profileWriteForm(userNo);
 			
