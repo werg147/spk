@@ -68,26 +68,26 @@
                         </ul> -->
 
 					<!-- 배송구매내역 반복리스트 -->
-					<c:forEach items="${requestScope.BuyList }" var="buyList">
+				
 
 						<div class="goods_pay_section">
 							<div class="goods_group">
 								<ul class="goods_group_list test">
 									<li id="" class="goods_pay_item">
 										<div class="goods_item">
-											<a href="${pageContext.request.contextPath }/mypage/buydel?buy_no=${buyList.buy_no}" class="goods_thumb"> <img
-												src="${pageContext.request.contextPath}/upload/${buyList.prod_img_savename }" width="90" height="90">
+											<a href="${pageContext.request.contextPath }/mypage/buydel?buy_no=${requestScope.BuyList[0].buy_no}" class="goods_thumb"> <img
+												src="${pageContext.request.contextPath}/upload/${requestScope.BuyList[0].prod_img_savename }" width="90" height="90">
 											</a>
 
 											<div class="goods_info">
-												<a href="${pageContext.request.contextPath }/mypage/buydel?buy_no=${buyList.buy_no}" class="goods">
-													<p class="name" name="name">${buyList.prod_name }</p>
+												<a href="${pageContext.request.contextPath }/mypage/buydel?buy_no=${requestScope.BuyList[0].buy_no}" class="goods">
+													<p class="name" name="name">${requestScope.BuyList[0].prod_name }</p>
 													<ul class="info">
-														<li><span class="blind" name="price">상품금액</span>${buyList.prod_price }원</li>
+														<li><span class="blind" name="price">상품금액</span>${requestScope.BuyList[0].prod_price }원</li>
 
-														<li class="date"><span class="blind" name="date">상품구매날짜</span>${buyList.buy_date }</li>
+														<li class="date"><span class="blind" name="date">상품구매날짜</span>2021-04-04 14:22:51.0</li>
 													</ul>
-												</a> <span class="state_statusName" name="state">${buyList.buy_del_state }</span>
+												</a> <span class="state_statusName" name="state">${requestScope.BuyList[0].buy_del_state }</span>
 												<p class="guide">배송이 완료되었습니다. 감사합니다.</p>
 											</div>
 										</div>
@@ -121,7 +121,7 @@
 
 						</div>
 
-					</c:forEach>
+					
 					<!-- //배송구매내역 반복리스트 -->
 
 				</div>

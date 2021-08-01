@@ -14,7 +14,7 @@
 	</welcome-file-list>
 
 
-	
+	<!-- 
 	<error-page>
 		<error-code>400</error-code>
 		<location>/WEB-INF/views/main/error400.jsp</location>
@@ -28,7 +28,7 @@
 		<error-code>500</error-code>
 		<location>/WEB-INF/views/main/error500.jsp</location>
 	</error-page>
-	 
+	  -->
 
 	<!-- DispatChServlet Mapping : Front Controller 등록 -->
 	<servlet>

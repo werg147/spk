@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.javaex.vo.CartVo;
+import com.javaex.vo.ProdBuyForVo;
 import com.javaex.vo.UserVo;
 
 @Repository
@@ -43,12 +44,19 @@ public class CartDao {
 		return sql.delete("cart.removeCartList", cart_no);
 	}
 
-	public void gotoCart(CartVo cartVo) {
+	public int gotoCart(CartVo cartVo) {
 
 		System.out.println("[Cart Dao]: gotoCart 연결");
 
-		sql.insert("cart.gotoCart", cartVo);
+		return sql.insert("cart.gotoCart", cartVo);
 
+	}
+	
+	//colorsize_no 가져오기
+	public int selectCno(CartVo cartVo) {
+		System.out.println("[Cart Dao] selectCno()");
+		
+		return sql.selectOne("cart.selectCno", cartVo);
 	}
 
 }

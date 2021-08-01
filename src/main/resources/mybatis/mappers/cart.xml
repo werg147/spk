@@ -20,6 +20,7 @@
 			WHERE   c.prod_no = p.prod_no
 			        and c.colorsize_no = cs.colorsize_no
 			        and p.prod_no = pi.prod_no
+			        and pi.prod_img_type = 'main'
 			        and c.user_no = #{user_no}
 		]]>
 	</select>
@@ -53,5 +54,16 @@
 			INSERT INTO cart VALUES(seq_cart_no.nextval, #{user_no}, #{prod_no}, #{colorsize_no}, #{count})
 		]]>
 	</insert>
+	
+	<!--셀렉옵션으로 colorsize_no 가져오기 -->
+	<select id="selectCno" parameterType="CartVo" resultType="int">
+		<![CDATA[
+			select colorsize_no
+			from colorsize
+			where prod_no = #{prod_no}
+			and color = #{color}
+			and prod_size = #{prod_size}
+		]]>
+	</select>
 
 </mapper>

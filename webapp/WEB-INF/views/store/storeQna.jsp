@@ -10,6 +10,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/store.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css">
+    <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
+    <script src = "${pageContext.request.contextPath }/assets/ckeditor/ckeditor.js"></script>
 </head>
 
 <body>
@@ -110,7 +112,7 @@
 		            
 		            <!--입력란-->
 		            <div>
-		                <textarea class="textarea_size" name="qna_content" value=""></textarea>
+		                <textarea id="textarea_size" class="textarea_size" name="qna_content" value=""></textarea>
 		            </div>
 		        
 		    
@@ -136,4 +138,13 @@
 </div><!--//wrap-->
 
 </body>
+
+<script type="text/javascript">
+	
+	CKEDITOR.replace('textarea_size',{filebrowserUploadUrl:'C:\\javastudy\\upload'});
+
+
+
+</script>
+
 </html>

@@ -166,6 +166,8 @@
 			
 			
 		if($(this).val() === '전체보기'){
+			var test = $(this).val();
+			console.log(test);
 			console.log("전체보기 인식");
 			$(location).attr('href',url);
 				

@@ -59,11 +59,13 @@
 
 									<!-- 반복리스트 -->
 									<div id="cartList">
-										<c:forEach items="${cartInfoVo.cList }" var="cList">
-											<div class="box room Cartitem${cList.cart_no }">
-
-												<ul class="list">
-
+									
+									
+									
+										<c:forEach items="${cartInfoVo.cList}" var="cVo">	
+											<div class="box room Cartitem${cVo.cart_no}">
+											
+												<ul class="list">	
 													<li>
 														<div class="item">
 
@@ -73,7 +75,7 @@
 
 															<div class="name">
 																<div class="inner_name">
-																	<a href="" class="package">${cList.prod_name }, ${cList.prod_size }, ${cList.color }</a>
+																	<a href="" class="package">${cVo.prod_name }, ${cVo.prod_size }, ${cVo.color }</a>
 																	<div class="info"></div>
 																</div>
 															</div>
@@ -81,13 +83,13 @@
 
 															<div class="goods">
 
-																<img class="thumb" src="${pageContext.request.contextPath}/upload/${cList.prod_img_savename }">
+																<img class="thumb" src="${pageContext.request.contextPath}/upload/${cVo.prod_img_savename }">
 																<!-- //thumb -->
 
 																<div class="price">
 																	<div class="in_price">
-																		<span class="selling">${cList.prod_price } <span class="won">원</span>
-																		</span> <span class="cart_count">${cList.count } <span class="won">EA</span>
+																		<span class="selling">${cVo.prod_price } <span class="won">원</span>
+																		</span> <span class="cart_count">${cVo.count } <span class="won">EA</span>
 																		</span>
 																	</div>
 																</div>
@@ -96,17 +98,16 @@
 															</div>
 															<!-- //goods -->
 
-															<button type="button" class="btn_delete" data-no="${cList.cart_no }" data-userno=${cList.user_no }>상품삭제</button>
+															<button type="button" class="btn_delete" data-no="${cVo.cart_no }" data-userno=${cVo.user_no }>상품삭제</button>
 															<!-- //btn_delete -->
 
 														</div> <!-- //item -->
-
 													</li>
-
 												</ul>
 
 											</div>
 										</c:forEach>
+										
 									</div>
 									<!-- //box room -->
 									<!-- //반복리스트 -->
@@ -119,7 +120,7 @@
 										<div class="cart_delivery">
 											<h3 class="tit">배송지</h3>
 											<div class="address">
-												<p class="addr">${cList.buy_address}</p>
+												<p class="addr">서울시 서초구 강남대로 405</p>
 												<a href="" class="btn_default">배송지 변경</a>
 											</div>
 										</div>
@@ -204,8 +205,10 @@
 			dataType : "json",
 			success : function(priceAll) {
 				console.log(priceAll);
-
-				$(".Cartitem" + no).html(" ");
+				
+				//성공시 리스트에서 삭제
+				console.log("성공 삭제")
+				$(".Cartitem"+no).remove();
 
 				price(priceAll);
 

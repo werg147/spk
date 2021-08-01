@@ -43,7 +43,7 @@
 
 						<c:forEach items="${requestScope.AlarmList }" var="aList">
 							<div class="alarm_content">
-								<h3 class="Order_date">${aList.alarm_date }</h3>
+								<h3 class="Order_date">2021-04-04 14:22:51.0</h3>
 								<div class="Box_alarm">
 									<c:choose>
 										<c:when test="${aList.buy_type == 1 }">

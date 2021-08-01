@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +29,7 @@ import com.javaex.vo.BuyVo;
 import com.javaex.vo.CartInfoVo;
 import com.javaex.vo.CartVo;
 import com.javaex.vo.MatchingCompleteVo;
+import com.javaex.vo.ProdBuyForVo;
 import com.javaex.vo.UserVo;
 
 @Controller
@@ -132,6 +134,8 @@ public class Mypage_buyController {
 		System.out.println("ctrl: " + userVo);
 		System.out.println("ctrl: " + list);
 		System.out.println("ctrl: " + total);
+		
+		System.out.println("vo확인:" + cartInfoVo);
 
 		// model.addAttribute("cartInfoVo", list);
 		model.addAttribute("cartInfoVo", cartInfoVo);
@@ -158,31 +162,22 @@ public class Mypage_buyController {
 	}
 
 	/* 장바구니에 담기 */
+	@ResponseBody
 	@RequestMapping(value = "/gotoCart", method = { RequestMethod.GET, RequestMethod.POST })
-	public String gotoCart(@RequestParam("prod_no") String prod_no, @RequestParam("colorsize_no") int colorsize_no,
-			@RequestParam("count") int count, HttpSession session, @ModelAttribute CartVo cartVo) {
+	public int gotoCart(HttpSession session, @RequestBody List<ProdBuyForVo> prodList, @ModelAttribute CartVo cartVo) {
 
 		System.out.println("[Cart Ctrl]: gotoCart 진입");
-
+		System.out.println(prodList);
+		
+		//user_no
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
-
 		int user_no = authUser.getUser_no();
-
 		cartVo.setUser_no(user_no);
+		
+		//prod_no,color,prod_size로 colorsize_no조회
+		int success = cServ.getCno(prodList, user_no);
 
-		cartVo.setProd_no(prod_no);
-		// cartVo.setProd_no("1");
-
-		cartVo.setColorsize_no(colorsize_no);
-		// cartVo.setColorsize_no(1);
-
-		cartVo.setCount(count);
-
-		System.out.println(cartVo);
-
-		cServ.gotoCart(cartVo);
-
-		return "redirect:/mypage/cart";
+		return success;
 
 	}
 

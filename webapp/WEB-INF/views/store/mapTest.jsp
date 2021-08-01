@@ -40,11 +40,11 @@
 		<p style="margin-top:-12px">
 		    <em class="link">
 		        <a href="javascript:void(0);" onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
-		            혹시 주소 결과가 잘못 나오는 경우에는 여기에 제보해주세요.
+		            <!-- 혹시 주소 결과가 잘못 나오는 경우에는 여기에 제보해주세요. -->
 		        </a>
 		    </em>
 		</p>
-		<div id="map" style="width:100%;height:350px;"></div>
+		<div id="map" style="width:70%;height:350px;"></div>
 		
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=301083c755fd8c3be91c51b314f886f3&libraries=services"></script>
 		<script>

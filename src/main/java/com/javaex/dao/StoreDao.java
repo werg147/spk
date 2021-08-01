@@ -39,12 +39,27 @@ public class StoreDao {
 		return sqlSession.selectOne("selectProduct", prod_no);
 	}
 	
-	//상품 상세페이지 옵션리스트
-	public List<ColorsizeVo> selectCsList(String prod_no) {
-		System.out.println("[StoreDao] selectCsList()");
+	/*
+	 * //상품 상세페이지 옵션리스트 public List<ColorsizeVo> selectCsList(String prod_no) {
+	 * System.out.println("[StoreDao] selectCsList()");
+	 * 
+	 * return sqlSession.selectList("store.selectCsList", prod_no); }
+	 */
+
+	//2-1. color 중복제거 리스트
+	public List<ColorsizeVo> selectColor(String prod_no) {
+		System.out.println("[StoreDao] selectColor()");
 		
-		return sqlSession.selectList("store.selectCsList", prod_no);
+		return sqlSession.selectList("selectColor", prod_no);
 	}
+	
+	//2-2. prod_size 중복제거 리스트
+	public List<ColorsizeVo> selectProdsize(String prod_no) {
+		System.out.println("[StoreDao] selectProdsize()");
+		
+		return sqlSession.selectList("store.selectProdsize", prod_no);
+	}
+	
 	
 	//상품 상세페이지 리뷰리스트
 	public List<ReviewVo> selectReList(String prod_no) {

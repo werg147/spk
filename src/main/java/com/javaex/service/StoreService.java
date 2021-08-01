@@ -60,9 +60,18 @@ public class StoreService {
 		ProductVo productVo = storeDao.selectProduct(prod_no);
 		System.out.println("상품정보: " + productVo.toString());
 		
-		//2. 상품옵션 리스트
-		List<ColorsizeVo> cssList = storeDao.selectCsList(prod_no);
-		System.out.println("상품옵션 리스트: " + cssList.toString());
+		/*
+		 * //2. 상품옵션 리스트 List<ColorsizeVo> cssList = storeDao.selectCsList(prod_no);
+		 * System.out.println("상품옵션 리스트: " + cssList.toString());
+		 */
+		
+		//2-1. color 중복제거 리스트
+		List<ColorsizeVo> color = storeDao.selectColor(prod_no);
+		System.out.println("컬러 리스트: " + color.toString());
+		
+		//2-2. prod_size 중복제거 리스트
+		List<ColorsizeVo> size = storeDao.selectProdsize(prod_no);
+		System.out.println("사이즈 리스트: " + size.toString());
 		
 		//3. 리뷰게시글 리스트
 		List<ReviewVo> reList = storeDao.selectReList(prod_no);
@@ -73,7 +82,9 @@ public class StoreService {
 		System.out.println("문의게시글: " + qnaList.toString());
 		
 		//묶기
-		productVo.setCssList(cssList);
+		//productVo.setCssList(cssList);
+		productVo.setCssList(color);
+		productVo.setSizeList(size);
 		productVo.setReList(reList);
 		productVo.setQnaList(qnaList);
 		

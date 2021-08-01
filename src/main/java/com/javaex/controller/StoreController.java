@@ -3,17 +3,22 @@ package com.javaex.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.javaex.service.CartService;
 import com.javaex.service.StoreService;
 import com.javaex.vo.BuyVo;
 import com.javaex.vo.GymVo;
@@ -29,6 +34,9 @@ public class StoreController {
 	
 	@Autowired
 	private StoreService storeService;
+	
+	@Autowired
+	public CartService cServ;
 	
 	//스토어 상품 리스트
 	@RequestMapping(value="/list")
@@ -133,19 +141,18 @@ public class StoreController {
 	
 	
 	//상품상세 -> 바로구매 클릭시
+	@ResponseBody
 	@RequestMapping(value="/paynow")
-	public String payNow(@ModelAttribute ProdBuyForVo pbfVo, HttpSession session) {
+	public int payNow(@RequestBody List<ProdBuyForVo> prodList , HttpSession session) {
 		System.out.println("[Controller] payNow()");
 		
 		UserVo authUser = (UserVo)session.getAttribute("authUser");
 		int user_no = authUser.getUser_no();
-		pbfVo.setUser_no(user_no);
 		
-		System.out.println(pbfVo);
-		//카트담기
-		storeService.addCart(pbfVo);
+		//prod_no,color,prod_size로 colorsize_no조회
+		int success = cServ.getCno(prodList, user_no);
 		
-		return "redirect:/store/payform";
+		return success;
 	}
 	
 	//장바구니->상품결제페이지
@@ -238,8 +245,15 @@ public class StoreController {
 	}
 	
 	
-	
-	
+	//문의하기 파일첨부2
+	@RequestMapping(value="/qna/imgupload")
+	public String imgupload(HttpServletRequest request,HttpServletResponse response, 
+							MultipartHttpServletRequest multiFile, @RequestParam MultipartFile upload) throws Exception {
+		System.out.println("qna 이미지업로드");
+		
+		
+		return "";
+	}
 	
 	
 	
